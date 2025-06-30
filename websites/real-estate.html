@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>נדל"ן פרמיום - השקעות נדל"ן יוקרתיות | מומחי השקעה ונכסי יוקרה</title>
+    <meta name="description" content="נדל"ן פרמיום - מומחי השקעות נדל"ן יוקרתיות. דירות יוקרה, וילות, נכסי השקעה ומשרדים מהשורה הראשונה עם ייעוץ מקצועי ושירות VIP.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #e94560;
+            --luxury-gold: #c9b037;
+            --platinum: #e5e4e2;
+            --text-dark: #0f0f23;
+            --text-light: #6c7293;
+            --background: #ffffff;
+            --surface: #f8f9fa;
+            --gradient-luxury: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #e94560 100%);
+            --gradient-gold: linear-gradient(135deg, #c9b037 0%, #ffd700 100%);
+            --gradient-platinum: linear-gradient(135deg, #e5e4e2 0%, #ffffff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--background);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(26, 26, 46, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(26, 26, 46, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-luxury);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.6)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="cityscape" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="4" height="15" x="2" y="5" fill="rgba(201,176,55,0.1)"/><rect width="3" height="12" x="7" y="8" fill="rgba(233,69,96,0.08)"/><rect width="5" height="18" x="12" y="2" fill="rgba(26,26,46,0.12)"/><circle cx="10" cy="2" r="1" fill="rgba(201,176,55,0.2)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23cityscape)"/></svg>');
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="buildings" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><rect width="6" height="20" x="5" y="10" fill="rgba(201,176,55,0.08)" opacity="0.5"><animate attributeName="height" values="20;22;20" dur="8s" repeatCount="indefinite"/></rect><rect width="4" height="15" x="15" y="15" fill="rgba(233,69,96,0.06)" opacity="0.4"><animate attributeName="height" values="15;18;15" dur="10s" repeatCount="indefinite"/></rect><rect width="8" height="25" x="22" y="5" fill="rgba(26,26,46,0.1)" opacity="0.6"><animate attributeName="height" values="25;28;25" dur="12s" repeatCount="indefinite"/></rect></pattern></defs><rect width="100%" height="100%" fill="url(%23buildings)"/></svg>');
+            opacity: 0.7;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+        }
+
+        .premium-badge {
+            display: inline-block;
+            background: var(--gradient-gold);
+            color: var(--text-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 32px rgba(201, 176, 55, 0.4);
+            animation: premiumGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes premiumGlow {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 8px 32px rgba(201, 176, 55, 0.4);
+            }
+            50% { 
+                transform: scale(1.05); 
+                box-shadow: 0 12px 48px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        .investment-highlights {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .highlight:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .highlight h4 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--luxury-gold);
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .highlight p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-luxury {
+            background: var(--gradient-gold);
+            color: var(--text-dark);
+        }
+
+        .btn-premium {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(201, 176, 55, 0.5);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(201, 176, 55, 0.4);
+        }
+
+        /* Properties Section */
+        .properties {
+            padding: 6rem 0;
+            background: var(--surface);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .section-title p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            letter-spacing: 0.3px;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 60px rgba(26, 26, 46, 0.15);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .property-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-luxury);
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 80px rgba(26, 26, 46, 0.25);
+        }
+
+        .property-card:hover::after {
+            opacity: 1;
+        }
+
+        .property-image {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .property-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+        }
+
+        .property-card:nth-child(1) .property-placeholder { 
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+        }
+        .property-card:nth-child(2) .property-placeholder { 
+            background: linear-gradient(135deg, #c9b037, #ffd700);
+        }
+        .property-card:nth-child(3) .property-placeholder { 
+            background: linear-gradient(135deg, #e94560, #ff6b8a);
+        }
+        .property-card:nth-child(4) .property-placeholder { 
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+        }
+        .property-card:nth-child(5) .property-placeholder { 
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+        }
+        .property-card:nth-child(6) .property-placeholder { 
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gradient-gold);
+            color: var(--text-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .property-content {
+            padding: 2rem;
+        }
+
+        .property-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .property-title {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .property-location {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .property-features {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .feature i {
+            color: var(--accent-color);
+        }
+
+        .property-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .view-property-btn {
+            background: var(--gradient-luxury);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            letter-spacing: 0.5px;
+        }
+
+        .view-property-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(26, 26, 46, 0.4);
+        }
+
+        /* Calculator Section */
+        .calculator {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .calculator-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--gradient-luxury);
+            padding: 3rem;
+            border-radius: 25px;
+            color: white;
+            box-shadow: 0 20px 60px rgba(26, 26, 46, 0.3);
+        }
+
+        .calculator h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .calc-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-group label {
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .calc-group input,
+        .calc-group select {
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            font-family: 'Heebo', Arial, sans-serif;
+        }
+
+        .calc-btn {
+            grid-column: 1 / -1;
+            background: var(--gradient-gold);
+            color: var(--text-dark);
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 176, 55, 0.4);
+        }
+
+        .calc-result {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .calc-result h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-item:last-child {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background: var(--surface);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(26, 26, 46, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(26, 26, 46, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(26, 26, 46, 0.2);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-luxury);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 32px rgba(26, 26, 46, 0.3);
+        }
+
+        .service-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .service-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 5rem 0;
+            background: var(--text-dark);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--luxury-gold);
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(26, 26, 46, 0.15);
+        }
+
+        .contact-info h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(26, 26, 46, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 12px 40px rgba(26, 26, 46, 0.2);
+        }
+
+        .contact-item i {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-luxury);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+        }
+
+        .contact-form {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(26, 26, 46, 0.15);
+        }
+
+        .contact-form h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid rgba(26, 26, 46, 0.2);
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Heebo', Arial, sans-serif;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--gradient-luxury);
+            color: white;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(26, 26, 46, 0.4);
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 70px;
+            height: 70px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            animation: realEstateFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes realEstateFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            33% { transform: translateY(-10px) scale(1.05); }
+            66% { transform: translateY(5px) scale(0.95); }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .investment-highlights {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 350px;
+                justify-content: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .property-card {
+                margin: 0 10px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                left: 20px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.7rem;
+            }
+
+            .logo {
+                font-size: 1.6rem;
+            }
+
+            .calculator-container {
+                padding: 2rem;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="container">
+            <div class="nav">
+                <a href="#" class="logo" data-editable="logo">PREMIUM REAL ESTATE</a>
+                <ul class="nav-links">
+                    <li><a href="#home">בית</a></li>
+                    <li><a href="#properties">נכסים</a></li>
+                    <li><a href="#calculator">מחשבון</a></li>
+                    <li><a href="#services">שירותים</a></li>
+                    <li><a href="#contact">צור קשר</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="premium-badge">
+                    <i class="fas fa-crown"></i>
+                    מומחי השקעות נדל"ן יוקרתיות
+                </div>
+                <h1 data-editable="hero-title">נדל"ן פרמיום</h1>
+                <p class="subtitle" data-editable="hero-subtitle">השקעות נדל"ן חכמות • נכסי יוקרה • ייעוץ מקצועי ברמה עולמית</p>
+                
+                <div class="investment-highlights">
+                    <div class="highlight">
+                        <h4>₪50M+</h4>
+                        <p>נכסים בניהול</p>
+                    </div>
+                    <div class="highlight">
+                        <h4>500+</h4>
+                        <p>לקוחות מרוצים</p>
+                    </div>
+                    <div class="highlight">
+                        <h4>15%</h4>
+                        <p>תשואה ממוצעת</p>
+                    </div>
+                    <div class="highlight">
+                        <h4>12</h4>
+                        <p>שנות ניסיון</p>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#properties" class="btn btn-luxury">
+                        <i class="fas fa-building"></i>
+                        צפו בנכסים פרמיום
+                    </a>
+                    <a href="https://wa.me/972500000000" class="btn btn-premium" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        ייעוץ VIP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section id="properties" class="properties">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="properties-title">נכסי פרמיום נבחרים</h2>
+                <p data-editable="properties-description">מבחר נכסי יוקרה ונכסי השקעה מהשורה הראשונה במיקומים המבוקשים ביותר</p>
+            </div>
+
+            <div class="properties-grid">
+                <div class="property-card">
+                    <div class="property-image">
+                        <div class="property-placeholder">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="property-badge">למכירה</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price" data-editable="property-1-price">₪8,500,000</div>
+                        <h3 class="property-title" data-editable="property-1-title">פנטהאוס יוקרה במגדל עזריאלי</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span data-editable="property-1-location">תל אביב, מרכז</span>
+                        </div>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>5 חדרים</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i>
+                                <span>3 אמבטיות</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>250 מ"ר</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-car"></i>
+                                <span>2 חניות</span>
+                            </div>
+                        </div>
+                        <p class="property-description">פנטהאוס יוקרתי עם נוף פנורמי לים ולעיר. עיצוב אדריכלי מיוחד, טכנולוגיות חכמות ומרפסת גג פרטית.</p>
+                        <button class="view-property-btn">צפה בפרטים</button>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="property-image">
+                        <div class="property-placeholder">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="property-badge">להשכרה</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price" data-editable="property-2-price">₪25,000/חודש</div>
+                        <h3 class="property-title" data-editable="property-2-title">וילה יוקרתית בהרצליה פיתוח</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span data-editable="property-2-location">הרצליה פיתוח, מרכז</span>
+                        </div>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>6 חדרים</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i>
+                                <span>4 אמבטיות</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>400 מ"ר</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-swimming-pool"></i>
+                                <span>בריכה</span>
+                            </div>
+                        </div>
+                        <p class="property-description">וילה מפוארת עם בריכה פרטית, גן מעוצב ומרחבים נדיבים. קרוב לחוף הים ולמרכזי קניות יוקרתיים.</p>
+                        <button class="view-property-btn">צפה בפרטים</button>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="property-image">
+                        <div class="property-placeholder">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="property-badge">השקעה</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price" data-editable="property-3-price">₪4,200,000</div>
+                        <h3 class="property-title" data-editable="property-3-title">משרדים יוקרתיים במתחם הבורסה</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span data-editable="property-3-location">רמת גן, מרכז</span>
+                        </div>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-building"></i>
+                                <span>קומה 15</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-users"></i>
+                                <span>50 עובדים</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>180 מ"ר</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-car"></i>
+                                <span>6 חניות</span>
+                            </div>
+                        </div>
+                        <p class="property-description">משרדים מתקדמים במיקום פרימיום עם תשתיות טכנולוגיות מתקדמות. תשואה גבוהה ויציבה.</p>
+                        <button class="view-property-btn">צפה בפרטים</button>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="property-image">
+                        <div class="property-placeholder">
+                            <i class="fas fa-city"></i>
+                        </div>
+                        <div class="property-badge">חדש</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price" data-editable="property-4-price">₪6,800,000</div>
+                        <h3 class="property-title" data-editable="property-4-title">דירת גן יוקרתית בשכונת נווה צדק</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span data-editable="property-4-location">נווה צדק, תל אביב</span>
+                        </div>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>4 חדרים</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i>
+                                <span>2 אמבטיות</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>200 מ"ר</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-tree"></i>
+                                <span>גן 80 מ"ר</span>
+                            </div>
+                        </div>
+                        <p class="property-description">דירת גן מעוצבת בשכונה ההיסטורית. שילוב מושלם של קסם ישן ונוחות מודרנית.</p>
+                        <button class="view-property-btn">צפה בפרטים</button>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="property-image">
+                        <div class="property-placeholder">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="property-badge">יוקרה</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price" data-editable="property-5-price">₪12,000,000</div>
+                        <h3 class="property-title" data-editable="property-5-title">אחוזה פרטית בכפר שמריהו</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span data-editable="property-5-location">כפר שמריהו, מרכז</span>
+                        </div>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>8 חדרים</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i>
+                                <span>5 אמבטיות</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>600 מ"ר</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-leaf"></i>
+                                <span>דונם קרקע</span>
+                            </div>
+                        </div>
+                        <p class="property-description">אחוזה מפוארת על דונם שלם עם בריכה אולימפית, מגרש טניס וגן עצי פרי מבוגרים.</p>
+                        <button class="view-property-btn">צפה בפרטים</button>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="property-image">
+                        <div class="property-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="property-badge">תשואה גבוהה</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price" data-editable="property-6-price">₪15,000,000</div>
+                        <h3 class="property-title" data-editable="property-6-title">קומפלקס השקעה בירושלים</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span data-editable="property-6-location">ירושלים, מרכז</span>
+                        </div>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-building"></i>
+                                <span>12 יחידות</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-percentage"></i>
+                                <span>8% תשואה</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>800 מ"ר</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-calendar"></i>
+                                <span>חדש</span>
+                            </div>
+                        </div>
+                        <p class="property-description">בניין השקעה חדש עם 12 יחידות דיור יוקרתיות. תשואה יציבה ומבוססת במיקום פרימיום.</p>
+                        <button class="view-property-btn">צפה בפרטים</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="calculator">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="calculator-title">מחשבון השקעה נדל"ן</h2>
+                <p data-editable="calculator-description">חשבו את התשואה הצפויה וההחזר החודשי על ההשקעה הנדל"נית שלכם</p>
+            </div>
+
+            <div class="calculator-container">
+                <h3>מחשבון השקעה ומשכנתא</h3>
+                <form class="calc-grid" id="investmentCalc">
+                    <div class="calc-group">
+                        <label for="propertyValue">שווי הנכס (₪)</label>
+                        <input type="number" id="propertyValue" placeholder="5,000,000" required>
+                    </div>
+                    <div class="calc-group">
+                        <label for="downPayment">מקדמה (%)</label>
+                        <select id="downPayment" required>
+                            <option value="">בחר אחוז</option>
+                            <option value="25">25%</option>
+                            <option value="30">30%</option>
+                            <option value="50">50%</option>
+                            <option value="75">75%</option>
+                            <option value="100">100% - מזומן</option>
+                        </select>
+                    </div>
+                    <div class="calc-group">
+                        <label for="interestRate">ריבית שנתית (%)</label>
+                        <select id="interestRate" required>
+                            <option value="">בחר ריבית</option>
+                            <option value="3.5">3.5% - ריבית נמוכה</option>
+                            <option value="4.0">4.0% - ריבית ממוצעת</option>
+                            <option value="4.5">4.5% - ריבית גבוהה</option>
+                            <option value="5.0">5.0% - ריבית מסחרית</option>
+                        </select>
+                    </div>
+                    <div class="calc-group">
+                        <label for="loanPeriod">תקופת משכנתא (שנים)</label>
+                        <select id="loanPeriod" required>
+                            <option value="">בחר תקופה</option>
+                            <option value="15">15 שנים</option>
+                            <option value="20">20 שנים</option>
+                            <option value="25">25 שנים</option>
+                            <option value="30">30 שנים</option>
+                        </select>
+                    </div>
+                    <div class="calc-group">
+                        <label for="monthlyRent">שכירות חודשית צפויה (₪)</label>
+                        <input type="number" id="monthlyRent" placeholder="15,000" required>
+                    </div>
+                    <div class="calc-group">
+                        <label for="expenses">הוצאות חודשיות (₪)</label>
+                        <input type="number" id="expenses" placeholder="2,000" required>
+                    </div>
+                    <button type="submit" class="calc-btn">
+                        <i class="fas fa-calculator"></i>
+                        חשב השקעה
+                    </button>
+                </form>
+
+                <div class="calc-result" id="calcResult">
+                    <h4>תוצאות החישוב:</h4>
+                    <div class="result-item">
+                        <span>מקדמה נדרשת:</span>
+                        <span id="downPaymentAmount">₪0</span>
+                    </div>
+                    <div class="result-item">
+                        <span>סכום משכנתא:</span>
+                        <span id="loanAmount">₪0</span>
+                    </div>
+                    <div class="result-item">
+                        <span>החזר חודשי:</span>
+                        <span id="monthlyPayment">₪0</span>
+                    </div>
+                    <div class="result-item">
+                        <span>הכנסה נטו חודשית:</span>
+                        <span id="netIncome">₪0</span>
+                    </div>
+                    <div class="result-item">
+                        <span>תשואה שנתית על השקעה:</span>
+                        <span id="roi">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="services-title">השירותים שלנו</h2>
+                <p data-editable="services-description">שירותי נדל"ן מקיפים ומקצועיים לכל צרכי ההשקעה והמכירה שלכם</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4 data-editable="service-1-title">חיפוש נכסים</h4>
+                    <p data-editable="service-1-description">מצאנו עבורכם את הנכס המושלם לפי הקריטריונים והתקציב שלכם עם ליווי מקצועי צמוד.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 data-editable="service-2-title">ייעוץ השקעות</h4>
+                    <p data-editable="service-2-description">ייעוץ מקצועי להשקעות נדל"ן חכמות עם ניתוח שוק מעמיק ותחזיות תשואה מדויקות.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4 data-editable="service-3-title">ליווי עסקות</h4>
+                    <p data-editable="service-3-description">ליווי מלא בתהליך הקנייה או המכירה מהשלב הראשון ועד לחתימה הסופית.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h4 data-editable="service-4-title">ניהול נכסים</h4>
+                    <p data-editable="service-4-description">ניהול מקצועי של נכסי ההשכרה שלכם כולל איתור דיירים, גביית שכירות ותחזוקה.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h4 data-editable="service-5-title">ייעוץ משפטי</h4>
+                    <p data-editable="service-5-description">ייעוץ משפטי מתמחה בנדל"ן לוודא שהעסקה שלכם מבוצעת בצורה חוקית ובטוחה.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h4 data-editable="service-6-title">ייעוץ מס</h4>
+                    <p data-editable="service-6-description">ייעוץ מס מתקדם לאופטימיזציה מסויה של עסקאות נדל"ן וחיסכון משמעותי במסים.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 data-editable="stat-1-number">₪2B+</h3>
+                    <p data-editable="stat-1-label">שווי עסקאות</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-editable="stat-2-number">500+</h3>
+                    <p data-editable="stat-2-label">עסקאות מוצלחות</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-editable="stat-3-number">15%</h3>
+                    <p data-editable="stat-3-label">תשואה ממוצעת</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-editable="stat-4-number">100%</h3>
+                    <p data-editable="stat-4-label">שביעות רצון</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="contact-title">צרו קשר</h2>
+                <p data-editable="contact-description">נשמח לעזור לכם למצוא את ההשקעה הנדל"נית המושלמת</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>פרטי קשר</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>טלפון</strong>
+                            <p data-editable="phone">050-0000000</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>אימייל</strong>
+                            <p data-editable="email">info@premium-realestate.co.il</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>כתובת</strong>
+                            <p data-editable="address">מגדל עזריאלי, תל אביב</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <strong>WhatsApp VIP</strong>
+                            <p data-editable="whatsapp">050-0000000</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>שעות פעילות</strong>
+                            <p>א'-ה': 8:00-19:00<br>ו': 9:00-14:00<br>ש': לפי תיאום</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>בקשה לייעוץ השקעה</h3>
+                    <form id="investmentForm">
+                        <div class="form-group">
+                            <label for="name">שם מלא</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">טלפון</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">אימייל</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="propertyType">סוג נכס מעניין</label>
+                            <select id="propertyType" name="propertyType" required>
+                                <option value="">בחרו סוג נכס</option>
+                                <option value="apartment">דירה</option>
+                                <option value="penthouse">פנטהאוס</option>
+                                <option value="villa">וילה</option>
+                                <option value="office">משרדים</option>
+                                <option value="commercial">מסחרי</option>
+                                <option value="investment">נכס השקעה</option>
+                                <option value="land">קרקע</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">תקציב (₪)</label>
+                            <select id="budget" name="budget" required>
+                                <option value="">בחרו טווח תקציב</option>
+                                <option value="1-3M">₪1-3 מיליון</option>
+                                <option value="3-5M">₪3-5 מיליון</option>
+                                <option value="5-10M">₪5-10 מיליון</option>
+                                <option value="10-20M">₪10-20 מיליון</option>
+                                <option value="20M+">מעל ₪20 מיליון</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="purpose">מטרת הרכישה</label>
+                            <select id="purpose" name="purpose" required>
+                                <option value="">בחרו מטרה</option>
+                                <option value="living">מגורים</option>
+                                <option value="investment">השקעה</option>
+                                <option value="business">עסקי</option>
+                                <option value="vacation">נופש</option>
+                                <option value="combination">שילוב</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeline">לוח זמנים</label>
+                            <select id="timeline" name="timeline" required>
+                                <option value="">בחרו לוח זמנים</option>
+                                <option value="immediate">מיידי</option>
+                                <option value="1-3months">1-3 חודשים</option>
+                                <option value="3-6months">3-6 חודשים</option>
+                                <option value="6-12months">6-12 חודשים</option>
+                                <option value="flexible">גמיש</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">פרטים נוספים</label>
+                            <textarea id="message" name="message" placeholder="ספרו לנו על הדרישות והציפיות שלכם..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            שלחו בקשה לייעוץ VIP
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/972500000000" class="whatsapp-float" target="_blank" title="WhatsApp VIP">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 נדל"ן פרמיום. כל הזכויות שמורות. | עוצב על ידי WebMaster Pro</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(26, 26, 46, 0.2)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(26, 26, 46, 0.1)';
+            }
+        });
+
+        // View property buttons functionality
+        document.querySelectorAll('.view-property-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('פרטי הנכס יוצגו בקרוב. לפרטים נוספים אנא פנו אלינו בטלפון או WhatsApp.');
+            });
+        });
+
+        // Investment Calculator
+        document.getElementById('investmentCalc').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const propertyValue = parseFloat(document.getElementById('propertyValue').value);
+            const downPaymentPercent = parseFloat(document.getElementById('downPayment').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+            const loanPeriod = parseInt(document.getElementById('loanPeriod').value);
+            const monthlyRent = parseFloat(document.getElementById('monthlyRent').value);
+            const expenses = parseFloat(document.getElementById('expenses').value);
+            
+            if (propertyValue && downPaymentPercent && interestRate && loanPeriod && monthlyRent && expenses) {
+                // Calculate down payment
+                const downPaymentAmount = propertyValue * (downPaymentPercent / 100);
+                
+                // Calculate loan amount
+                const loanAmount = propertyValue - downPaymentAmount;
+                
+                // Calculate monthly payment (if not 100% cash)
+                let monthlyPayment = 0;
+                if (downPaymentPercent < 100) {
+                    const monthlyRate = interestRate / 100 / 12;
+                    const numPayments = loanPeriod * 12;
+                    monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+                }
+                
+                // Calculate net monthly income
+                const netIncome = monthlyRent - expenses - monthlyPayment;
+                
+                // Calculate annual ROI
+                const annualNetIncome = netIncome * 12;
+                const roi = (annualNetIncome / downPaymentAmount) * 100;
+                
+                // Display results
+                document.getElementById('downPaymentAmount').textContent = '₪' + Math.round(downPaymentAmount).toLocaleString();
+                document.getElementById('loanAmount').textContent = '₪' + Math.round(loanAmount).toLocaleString();
+                document.getElementById('monthlyPayment').textContent = '₪' + Math.round(monthlyPayment).toLocaleString();
+                document.getElementById('netIncome').textContent = '₪' + Math.round(netIncome).toLocaleString();
+                document.getElementById('roi').textContent = roi.toFixed(1) + '%';
+                
+                document.getElementById('calcResult').style.display = 'block';
+            }
+        });
+
+        // Investment form submission
+        document.getElementById('investmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Create WhatsApp message
+            const message = `🏢 בקשה לייעוץ השקעה נדל"ן - נדל"ן פרמיום:
+
+👤 שם: ${data.name}
+📞 טלפון: ${data.phone}
+📧 אימייל: ${data.email}
+🏠 סוג נכס: ${data.propertyType}
+💰 תקציב: ${data.budget}
+🎯 מטרה: ${data.purpose}
+📅 לוח זמנים: ${data.timeline}
+📝 פרטים נוספים: ${data.message || 'לא צוין'}
+
+מעוניין בייעוץ השקעה מקצועי 🏆`;
+            
+            const whatsappUrl = `https://wa.me/972500000000?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            alert('הבקשה נשלחה בהצלחה! מומחה השקעות יחזור אליכם תוך שעות ספורות.');
+            this.reset();
+        });
+
+        // Property cards entrance animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.property-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px) scale(0.95)';
+            card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Stats counter animation
+        function animateCounter(element, target) {
+            let current = 0;
+            const isPercentage = element.textContent.includes('%');
+            const isMoney = element.textContent.includes('₪');
+            const targetNum = parseInt(element.textContent.replace(/[^\d]/g, ''));
+            
+            const increment = targetNum / 60;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= targetNum) {
+                    current = targetNum;
+                    clearInterval(timer);
+                }
+                
+                let displayValue = Math.floor(current);
+                if (isMoney && displayValue >= 1000000000) {
+                    displayValue = '₪' + (displayValue / 1000000000).toFixed(0) + 'B+';
+                } else if (isMoney && displayValue >= 1000000) {
+                    displayValue = '₪' + (displayValue / 1000000).toFixed(0) + 'M+';
+                } else if (displayValue >= 1000) {
+                    displayValue = displayValue.toLocaleString();
+                    if (isPercentage) displayValue += '%';
+                    else if (isMoney) displayValue = '₪' + displayValue;
+                    else displayValue += '+';
+                } else {
+                    if (isPercentage) displayValue += '%';
+                    else if (isMoney) displayValue = '₪' + displayValue;
+                    else displayValue += '+';
+                }
+                
+                element.textContent = displayValue;
+            }, 25);
+        }
+
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumber = entry.target.querySelector('h3');
+                    animateCounter(statNumber);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.stat-item').forEach(item => {
+            statsObserver.observe(item);
+        });
+
+        // Building animation particles
+        function createBuildingParticle() {
+            const buildings = ['🏢', '🏬', '🏦', '🏨', '🏪'];
+            const particle = buildings[Math.floor(Math.random() * buildings.length)];
+            
+            const element = document.createElement('div');
+            element.textContent = particle;
+            element.style.position = 'absolute';
+            element.style.left = Math.random() * 100 + '%';
+            element.style.top = '100%';
+            element.style.fontSize = Math.random() * 15 + 20 + 'px';
+            element.style.pointerEvents = 'none';
+            element.style.transition = 'all 15s linear';
+            element.style.zIndex = '1';
+            
+            document.querySelector('.hero').appendChild(element);
+            
+            setTimeout(() => {
+                element.style.top = '-100px';
+                element.style.transform = 'translateX(' + (Math.random() * 100 - 50) + 'px) rotate(' + (Math.random() * 60 - 30) + 'deg)';
+                element.style.opacity = '0';
+            }, 100);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 15000);
+        }
+
+        // Create building particles periodically
+        setInterval(createBuildingParticle, 4000);
+
+        // Property card hover effects
+        document.querySelectorAll('.property-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'white';
+            });
+        });
+    </script>
+</body>
+</html>
