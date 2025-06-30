@@ -1,0 +1,40 @@
+{
+  "name": "webmaster-pro-fullstack",
+  "version": "3.0.0",
+  "description": "WebMaster Pro - Complete Website Builder Platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "setup": "cd backend && npm install && node setup.js",
+    "test": "cd backend && npm test",
+    "install-backend": "cd backend && npm install",
+    "build": "echo 'No build step required for static frontend'",
+    "lint": "cd backend && npm run lint",
+    "format": "cd backend && npm run format"
+  },
+  "keywords": [
+    "website-builder",
+    "visual-editor",
+    "cms",
+    "fullstack",
+    "nodejs",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "WebMaster Pro Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/webmaster-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/webmaster-pro/issues"
+  },
+  "homepage": "https://github.com/your-username/webmaster-pro#readme",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
