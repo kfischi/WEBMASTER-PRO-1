@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קליניקת יופי פרמיום - רפואה אסתטית מתקדמת | מגדל עזריאלי תל אביב</title>
+    <meta name="description" content="קליניקת יופי פרמיום - מרכז רפואה אסתטית מתקדמת במגדל עזריאלי. בוטוקס, לייזר פרקציונלי, פילינג יהלום וטיפולי היפו ברמה עולמית.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Playfair+Display:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #d4af37;
+            --secondary-color: #f8f8ff;
+            --accent-color: #b8860b;
+            --luxury-gold: #ffd700;
+            --deep-gold: #b8860b;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --background: #ffffff;
+            --surface: #fafafa;
+            --gradient-luxury: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #b8860b 100%);
+            --gradient-premium: linear-gradient(135deg, #f8f8ff 0%, #e6e6fa 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--background);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-luxury);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="luxury" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="rgba(212,175,55,0.1)"><animate attributeName="r" values="2;4;2" dur="4s" repeatCount="indefinite"/></circle><circle cx="10" cy="40" r="1" fill="rgba(255,215,0,0.08)"><animate attributeName="r" values="1;3;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="40" cy="10" r="1.5" fill="rgba(184,134,11,0.09)"><animate attributeName="r" values="1.5;3.5;1.5" dur="5s" repeatCount="indefinite"/></circle></pattern></defs><rect width="100%" height="100%" fill="url(%23luxury)"/></svg>');
+            opacity: 0.7;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: glow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+        }
+
+        .luxury-badge {
+            display: inline-block;
+            background: var(--gradient-luxury);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
+            animation: luxuryPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes luxuryPulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
+            }
+            50% { 
+                transform: scale(1.05); 
+                box-shadow: 0 12px 48px rgba(255, 215, 0, 0.4);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        .premium-features {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .premium-feature {
+            background: rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .premium-feature:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .premium-feature i {
+            font-size: 2rem;
+            color: var(--luxury-gold);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-luxury {
+            background: var(--gradient-luxury);
+            color: white;
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(212, 175, 55, 0.5);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Treatments Section */
+        .treatments {
+            padding: 6rem 0;
+            background: var(--gradient-premium);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .section-title p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            letter-spacing: 0.3px;
+        }
+
+        .treatments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .treatment-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 60px rgba(212, 175, 55, 0.15);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .treatment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-luxury);
+        }
+
+        .treatment-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-luxury);
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .treatment-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 80px rgba(212, 175, 55, 0.25);
+        }
+
+        .treatment-card:hover::after {
+            opacity: 1;
+        }
+
+        .treatment-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-luxury);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+            position: relative;
+        }
+
+        .treatment-icon::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: var(--gradient-luxury);
+            border-radius: 28px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: iconGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes iconGlow {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+        }
+
+        .treatment-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .treatment-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .treatment-card p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .treatment-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .treatment-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .treatment-features li {
+            padding: 0.8rem 0;
+            color: var(--text-light);
+            position: relative;
+            padding-right: 2rem;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .treatment-features li:last-child {
+            border-bottom: none;
+        }
+
+        .treatment-features li::before {
+            content: '✨';
+            position: absolute;
+            right: 0;
+            font-size: 1.2rem;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+        }
+
+        .book-treatment-btn {
+            background: var(--gradient-luxury);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            letter-spacing: 0.5px;
+        }
+
+        .book-treatment-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Technology Section */
+        .technology {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--gradient-premium);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .tech-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+        }
+
+        .tech-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-luxury);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
+        }
+
+        .tech-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .tech-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        /* Results Section */
+        .results {
+            padding: 5rem 0;
+            background: var(--text-dark);
+            color: white;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .result-item {
+            padding: 2rem;
+        }
+
+        .result-item h3 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--luxury-gold);
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .result-item p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 0;
+            background: var(--gradient-premium);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .clinic-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .clinic-features li {
+            padding: 1rem 0;
+            color: var(--text-dark);
+            position: relative;
+            padding-right: 2.5rem;
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        .clinic-features li::before {
+            content: '👑';
+            position: absolute;
+            right: 0;
+            font-size: 1.3rem;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            background: var(--gradient-luxury);
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .clinic-image {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, var(--surface) 0%, #f0f0f0 100%);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--primary-color);
+            border: 3px solid white;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: var(--gradient-premium);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.15);
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .contact-item i {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-luxury);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+        }
+
+        .contact-form {
+            background: var(--gradient-premium);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.15);
+        }
+
+        .contact-form h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Heebo', Arial, sans-serif;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--gradient-luxury);
+            color: white;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 70px;
+            height: 70px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            animation: luxuryFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes luxuryFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.1); }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .premium-features {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .treatments-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 350px;
+                justify-content: center;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .treatments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .treatment-card {
+                padding: 2rem;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                left: 20px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.7rem;
+            }
+
+            .logo {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="container">
+            <div class="nav">
+                <a href="#" class="logo" data-editable="logo">PREMIUM CLINIC</a>
+                <ul class="nav-links">
+                    <li><a href="#home">בית</a></li>
+                    <li><a href="#treatments">טיפולים</a></li>
+                    <li><a href="#technology">טכנולוגיה</a></li>
+                    <li><a href="#about">אודות</a></li>
+                    <li><a href="#contact">צור קשר</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="luxury-badge">
+                    <i class="fas fa-crown"></i>
+                    מגדל עזריאלי • תל אביב
+                </div>
+                <h1 data-editable="hero-title">קליניקת יופי<br>פרמיום</h1>
+                <p class="subtitle" data-editable="hero-subtitle">רפואה אסתטית מתקדמת • טכנולוגיות עילית • תוצאות יוצאות דופן</p>
+                
+                <div class="premium-features">
+                    <div class="premium-feature">
+                        <i class="fas fa-user-md"></i>
+                        <div>רופאים מומחים</div>
+                    </div>
+                    <div class="premium-feature">
+                        <i class="fas fa-certificate"></i>
+                        <div>טכנולוגיה מתקדמת</div>
+                    </div>
+                    <div class="premium-feature">
+                        <i class="fas fa-award"></i>
+                        <div>איכות פרמיום</div>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-luxury">
+                        <i class="fas fa-calendar-alt"></i>
+                        קבעי ייעוץ ללא התחייבות
+                    </a>
+                    <a href="https://wa.me/972500000000" class="btn btn-outline" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp VIP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Treatments Section -->
+    <section id="treatments" class="treatments">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="treatments-title">הטיפולים האסתטיים שלנו</h2>
+                <p data-editable="treatments-description">טכנולוגיות חדשניות ושיטות טיפול מתקדמות לחידוש העור והיופי הטבעי</p>
+            </div>
+
+            <div class="treatments-grid">
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <h3 data-editable="treatment-1-title">בוטוקס פרמיום</h3>
+                    <p data-editable="treatment-1-description">טיפולי בוטוקס מתקדמים עם החומרים האיכותיים ביותר לצמצום קמטים והחלקת הפנים.</p>
+                    <div class="treatment-price" data-editable="treatment-1-price">החל מ-₪1,200</div>
+                    <ul class="treatment-features">
+                        <li>בוטוקס איכות פרמיום</li>
+                        <li>טכניקה מתקדמת ללא כאב</li>
+                        <li>תוצאות טבעיות ויפות</li>
+                        <li>אחריות מלאה לתוצאה</li>
+                        <li>מעקב רפואי צמוד</li>
+                    </ul>
+                    <button class="book-treatment-btn">קבעי טיפול</button>
+                </div>
+
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 data-editable="treatment-2-title">לייזר פרקציונלי</h3>
+                    <p data-editable="treatment-2-description">טכנולוגיית לייזר מהמתקדמות בעולם לחידוש העור, צמצום נקבוביות וטיפול בצלקות.</p>
+                    <div class="treatment-price" data-editable="treatment-2-price">החל מ-₪1,800</div>
+                    <ul class="treatment-features">
+                        <li>לייזר CO2 מתקדם</li>
+                        <li>חידוש עור מהפכני</li>
+                        <li>צמצום נקבוביות וקמטים</li>
+                        <li>תוצאות מיידיות</li>
+                        <li>ללא זמן החלמה ארוך</li>
+                    </ul>
+                    <button class="book-treatment-btn">קבעי טיפול</button>
+                </div>
+
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 data-editable="treatment-3-title">פילינג יהלום</h3>
+                    <p data-editable="treatment-3-description">פילינג יהלום מיקרו-דרמברייזן לקילוף עדין של העור וחשיפת שכבות צעירות וזוהרות.</p>
+                    <div class="treatment-price" data-editable="treatment-3-price">החל מ-₪800</div>
+                    <ul class="treatment-features">
+                        <li>טכנולוגיית יהלום מקורית</li>
+                        <li>קילוף עדין ויעיל</li>
+                        <li>מתאים לכל סוגי העור</li>
+                        <li>ללא כאב או אי נוחות</li>
+                        <li>תוצאות מיידיות</li>
+                    </ul>
+                    <button class="book-treatment-btn">קבעי טיפול</button>
+                </div>
+
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <h3 data-editable="treatment-4-title">טיפולי היפו</h3>
+                    <p data-editable="treatment-4-description">טכנולוגיית HIFU מתקדמת להרמת העור ומיצוק הפנים ללא ניתוח.</p>
+                    <div class="treatment-price" data-editable="treatment-4-price">החל מ-₪2,500</div>
+                    <ul class="treatment-features">
+                        <li>הרמת עור ללא ניתוח</li>
+                        <li>טכנולוגיית HIFU מתקדמת</li>
+                        <li>מיצוק הפנים והצוואר</li>
+                        <li>תוצאות מתמשכות</li>
+                        <li>ללא זמן החלמה</li>
+                    </ul>
+                    <button class="book-treatment-btn">קבעי טיפול</button>
+                </div>
+
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3 data-editable="treatment-5-title">חומרי מילוי</h3>
+                    <p data-editable="treatment-5-description">חומרי מילוי איכותיים להוספת נפח לשפתיים, לחיים ותיקון קווי הפנים.</p>
+                    <div class="treatment-price" data-editable="treatment-5-price">החל מ-₪1,500</div>
+                    <ul class="treatment-features">
+                        <li>חומרי מילוי פרמיום</li>
+                        <li>תוצאות טבעיות</li>
+                        <li>שפתיים ולחיים מלאות</li>
+                        <li>תיקון קווי הפנים</li>
+                        <li>מיומנות וניסיון רב</li>
+                    </ul>
+                    <button class="book-treatment-btn">קבעי טיפול</button>
+                </div>
+
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 data-editable="treatment-6-title">חבילות פינוק VIP</h3>
+                    <p data-editable="treatment-6-description">חבילות טיפולים משולבות במחיר מיוחד עם חוויית יוקרה מלאה.</p>
+                    <div class="treatment-price" data-editable="treatment-6-price">החל מ-₪3,500</div>
+                    <ul class="treatment-features">
+                        <li>שילוב מספר טיפולים</li>
+                        <li>חוויית יוקרה מלאה</li>
+                        <li>הנחה משמעותית</li>
+                        <li>יעוץ אישי מקיף</li>
+                        <li>מעקב ארוך טווח</li>
+                    </ul>
+                    <button class="book-treatment-btn">קבעי טיפול</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="technology">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="technology-title">הטכנולוגיות המתקדמות שלנו</h2>
+                <p data-editable="technology-description">ציוד רפואי מהמתקדם בעולם לתוצאות מיטביות ובטוחות</p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h4>טכנולוגיית AI</h4>
+                    <p>בינה מלאכותית לתכנון טיפולים מותאמים אישית</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h4>מיקרוסקופ דיגיטלי</h4>
+                    <p>ניתוח מדויק של מצב העור ותכנון הטיפול</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-thermometer-half"></i>
+                    </div>
+                    <h4>קירור מתקדם</h4>
+                    <p>מערכות קירור לנוחות מרבית בזמן הטיפול</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>בטיחות מרבית</h4>
+                    <p>פרוטוקולי בטיחות מחמירים וציוד מאושר FDA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results">
+        <div class="container">
+            <div class="results-grid">
+                <div class="result-item">
+                    <h3 data-editable="result-1-number">5,000+</h3>
+                    <p data-editable="result-1-label">לקוחות מרוצות</p>
+                </div>
+                <div class="result-item">
+                    <h3 data-editable="result-2-number">98%</h3>
+                    <p data-editable="result-2-label">שביעות רצון</p>
+                </div>
+                <div class="result-item">
+                    <h3 data-editable="result-3-number">15</h3>
+                    <p data-editable="result-3-label">שנות ניסיון</p>
+                </div>
+                <div class="result-item">
+                    <h3 data-editable="result-4-number">100%</h3>
+                    <p data-editable="result-4-label">בטיחות טיפול</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 data-editable="about-title">אודות הקליניקה</h2>
+                    <p data-editable="about-description-1">קליניקת יופי פרמיום הינה מרכז רפואה אסתטית מוביל הממוקם במגדל עזריאלי שבתל אביב. אנו מתמחים בטיפולים אסתטיים מתקדמים תוך שימוש בטכנולוגיות הכי חדשניות ומתקדמות בעולם.</p>
+                    <p data-editable="about-description-2">הצוות הרפואי שלנו מורכב מרופאים מומחים בעלי ניסיון רב ויוקרתי בתחום הרפואה האסתטית. אנו מתחייבים לספק שירות ברמה הגבוהה ביותר עם תוצאות יוצאות דופן.</p>
+                    
+                    <ul class="clinic-features">
+                        <li data-editable="feature-1">מיקום יוקרתי במגדל עזריאלי</li>
+                        <li data-editable="feature-2">צוות רופאים מומחים מהשורה הראשונה</li>
+                        <li data-editable="feature-3">ציוד רפואי מהמתקדם בעולם</li>
+                        <li data-editable="feature-4">סטנדרטי בטיחות מחמירים</li>
+                        <li data-editable="feature-5">חוויית לקוח פרמיום מלאה</li>
+                    </ul>
+                </div>
+                
+                <div class="about-image">
+                    <div class="clinic-image">
+                        <i class="fas fa-clinic-medical"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="contact-title">צרי קשר</h2>
+                <p data-editable="contact-description">קבעי ייעוץ ללא התחייבות עם הרופאים המומחים שלנו</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>פרטי קשר</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>טלפון</strong>
+                            <p data-editable="phone">052-0000000</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>אימייל</strong>
+                            <p data-editable="email">info@premium-clinic.co.il</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>כתובת</strong>
+                            <p data-editable="address">מגדל עזריאלי, תל אביב</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <strong>WhatsApp VIP</strong>
+                            <p data-editable="whatsapp">050-0000000</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>שעות פעילות</strong>
+                            <p>א'-ה': 9:00-19:00<br>ו': 9:00-14:00<br>ש': לפי תיאום</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>קבעי ייעוץ ללא התחייבות</h3>
+                    <form id="consultationForm">
+                        <div class="form-group">
+                            <label for="name">שם מלא</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">טלפון</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">אימייל</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">גיל</label>
+                            <select id="age" name="age" required>
+                                <option value="">בחרי גיל</option>
+                                <option value="18-25">18-25</option>
+                                <option value="26-35">26-35</option>
+                                <option value="36-45">36-45</option>
+                                <option value="46-55">46-55</option>
+                                <option value="56+">56+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="treatment">סוג הטיפול המעניין</label>
+                            <select id="treatment" name="treatment" required>
+                                <option value="">בחרי טיפול</option>
+                                <option value="botox">בוטוקס פרמיום</option>
+                                <option value="laser">לייזר פרקציונלי</option>
+                                <option value="peeling">פילינג יהלום</option>
+                                <option value="hifu">טיפולי היפו</option>
+                                <option value="fillers">חומרי מילוי</option>
+                                <option value="vip">חבילות VIP</option>
+                                <option value="consultation">ייעוץ כללי</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">האם עברת טיפולים אסתטיים בעבר?</label>
+                            <select id="experience" name="experience" required>
+                                <option value="">בחרי תשובה</option>
+                                <option value="yes">כן</option>
+                                <option value="no">לא</option>
+                                <option value="some">מעט</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">ספרי לנו על הציפיות שלך</label>
+                            <textarea id="message" name="message" placeholder="מה התוצאה שאת מחפשת להשיג?"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-crown"></i>
+                            קבעי ייעוץ VIP
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/972500000000" class="whatsapp-float" target="_blank" title="WhatsApp VIP">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 קליניקת יופי פרמיום. כל הזכויות שמורות. | עוצב על ידי WebMaster Pro</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(212, 175, 55, 0.2)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(212, 175, 55, 0.1)';
+            }
+        });
+
+        // Book treatment buttons functionality
+        document.querySelectorAll('.book-treatment-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelector('#contact').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Consultation form submission
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Create WhatsApp message
+            const message = `🌟 בקשה לייעוץ VIP - קליניקת יופי פרמיום:
+
+👤 שם: ${data.name}
+📞 טלפון: ${data.phone}
+📧 אימייל: ${data.email}
+🎂 גיל: ${data.age}
+💎 טיפול מעניין: ${data.treatment}
+🔬 ניסיון קודם: ${data.experience}
+💭 ציפיות: ${data.message || 'לא צוין'}
+
+מעוניינת בקביעת ייעוץ ללא התחייבות 🏆`;
+            
+            const whatsappUrl = `https://wa.me/972500000000?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            alert('הבקשה נשלחה בהצלחה! אנו נחזור אליך תוך 24 שעות לתיאום הייעוץ.');
+            this.reset();
+        });
+
+        // Treatment cards entrance animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.treatment-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px) scale(0.95)';
+            card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Results counter animation
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 60;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                const suffix = element.textContent.replace(/[\d,]/g, '');
+                element.textContent = Math.floor(current).toLocaleString() + suffix;
+            }, 25);
+        }
+
+        const resultsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const resultNumber = entry.target.querySelector('h3');
+                    const text = resultNumber.textContent;
+                    const number = parseInt(text.replace(/\D/g, ''));
+                    if (number > 0) {
+                        animateCounter(resultNumber, number);
+                    }
+                    resultsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.result-item').forEach(item => {
+            resultsObserver.observe(item);
+        });
+
+        // Luxury floating particles effect
+        function createLuxuryParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = 'rgba(212, 175, 55, 0.6)';
+            particle.style.borderRadius = '50%';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = '100%';
+            particle.style.pointerEvents = 'none';
+            particle.style.transition = 'all 8s linear';
+            particle.style.boxShadow = '0 0 10px rgba(212, 175, 55, 0.8)';
+            
+            document.querySelector('.hero').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.style.top = '-20px';
+                particle.style.transform = 'translateX(' + (Math.random() * 200 - 100) + 'px)';
+                particle.style.opacity = '0';
+            }, 100);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 8000);
+        }
+
+        // Create luxury particles periodically
+        setInterval(createLuxuryParticle, 1500);
+
+        // Premium hover effects for treatment cards
+        document.querySelectorAll('.treatment-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8f8ff 100%)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'white';
+            });
+        });
+    </script>
+</body>
+</html>
