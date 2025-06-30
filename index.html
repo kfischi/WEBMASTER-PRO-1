@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebMaster Pro - גלריית אתרים עסקיים מקצועיים</title>
+    <meta name="description" content="11 אתרים עסקיים מקצועיים ברמה עולמית. אסתטיקה רפואית, עורכי דין, מאמני כושר ועוד. מוכן למכירה מיידית!">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="WebMaster Pro - 11 אתרים מקצועיים ב-₪26,900">
+    <meta property="og:description" content="גלריית אתרים עסקיים ברמה עולמית עם אדיטור ויזואלי מתקדם">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://webmaster-pro-system.netlify.app">
+    
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-light: #a0aec0;
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --border-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Assistant', 'Heebo', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Animation */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            background: var(--success-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 30px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--warning-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 50%, #e6f3ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .cta-button {
+            background: var(--glass-bg);
+            color: white;
+            padding: 15px 30px;
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .cta-button.primary {
+            background: var(--success-gradient);
+            border: none;
+        }
+
+        /* Search & Filter */
+        .controls {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .search-filter-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: var(--success-gradient);
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* Gallery */
+        .gallery {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .website-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .website-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .card-header {
+            padding: 25px;
+            position: relative;
+        }
+
+        .card-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .card-price {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: var(--warning-gradient);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .card-features li {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-features li i {
+            color: #4ade80;
+            width: 16px;
+        }
+
+        .card-actions {
+            padding: 0 25px 25px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Badge Styles */
+        .premium-badge {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1a1a;
+        }
+
+        .popular-badge {
+            background: var(--secondary-gradient);
+        }
+
+        .new-badge {
+            background: var(--success-gradient);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-stat {
+            text-align: center;
+        }
+
+        .footer-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--warning-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .footer-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .header-stats {
+                display: none;
+            }
+            
+            .search-filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                min-width: auto;
+            }
+            
+            .websites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-stats {
+                gap: 30px;
+            }
+        }
+
+        /* Loading Animation */
+        .website-card {
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-code"></i>
+                WebMaster Pro
+            </a>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-number">11</span>
+                    <span class="stat-label">אתרים</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">₪26,900</span>
+                    <span class="stat-label">ערך כולל</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">מוכן</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">🚀 WebMaster Pro</h1>
+        <p class="hero-subtitle">
+            11 אתרים עסקיים מקצועיים ברמה עולמית עם אדיטור ויזואלי מתקדם<br>
+            מוכן למכירה מיידית - הכנסות של ₪26,900 מחכות לך!
+        </p>
+        <div class="hero-cta">
+            <a href="#gallery" class="cta-button primary">
+                <i class="fas fa-eye"></i>
+                צפה בגלריה
+            </a>
+            <a href="/editor.html" class="cta-button">
+                <i class="fas fa-edit"></i>
+                פתח אדיטור
+            </a>
+        </div>
+    </section>
+
+    <!-- Search & Filter Controls -->
+    <section class="controls">
+        <div class="search-filter-container">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="חפש אתר לפי שם, תחום או תכונה..." id="searchInput">
+            </div>
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-category="all">הכל</button>
+                <button class="filter-tab" data-category="medical">רפואה</button>
+                <button class="filter-tab" data-category="business">עסקי</button>
+                <button class="filter-tab" data-category="lifestyle">לייף סטייל</button>
+                <button class="filter-tab" data-category="premium">פרמיום</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+        <div class="websites-grid" id="websitesGrid">
+            <!-- Website Cards will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-stats">
+                <div class="footer-stat">
+                    <span class="footer-stat-number">11</span>
+                    <span class="footer-stat-label">אתרים מקצועיים</span>
+                </div>
+                <div class="footer-stat">
+                    <span class="footer-stat-number">₪26,900</span>
+                    <span class="footer-stat-label">ערך כולל</span>
+                </div>
+                <div class="footer-stat">
+                    <span class="footer-stat-number">9</span>
+                    <span class="footer-stat-label">תחומים עסקיים</span>
+                </div>
+                <div class="footer-stat">
+                    <span class="footer-stat-number">100%</span>
+                    <span class="footer-stat-label">רמה עולמית</span>
+                </div>
+            </div>
+            <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות. בניית אתרים ברמה עולמית.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Website Data
+        const websites = [
+            {
+                id: 'dr-michal-rosen',
+                title: 'ד"ר מיכל רוזן',
+                category: 'medical',
+                price: 2800,
+                description: 'אתר מקצועי לרופאת עור ורפואה אסתטית עם מערכת הזמנות מתקדמת',
+                features: [
+                    'מערכת הזמנות אונליין',
+                    'גלריית טיפולים',
+                    'מידע רפואי מפורט',
+                    'אזור לקוחות מוגן',
+                    'אינטגרציה לוואטסאפ'
+                ],
+                badge: 'popular',
+                filename: 'dr-michal-rosen.html'
+            },
+            {
+                id: 'fitness-coach',
+                title: 'דני פיט - מאמן כושר',
+                category: 'lifestyle',
+                price: 2200,
+                description: 'אתר דינמי למאמן כושר אישי עם מחשבון BMI ותכניות אימון',
+                features: [
+                    'מחשבון BMI פונקציונלי',
+                    'תכניות אימון מותאמות',
+                    'גלריית הצלחות',
+                    'הזמנת אימון אישי',
+                    'טיפים תזונתיים'
+                ],
+                badge: 'new',
+                filename: 'fitness-coach.html'
+            },
+            {
+                id: 'yoga-studio',
+                title: 'סטודיו אוהם - יוגה',
+                category: 'lifestyle',
+                price: 1900,
+                description: 'אתר רגוע ומרגיע לסטודיו יוגה עם אווירה מדיטטיבית',
+                features: [
+                    'לוח שיעורים אינטראקטיבי',
+                    'הרשמה לשיעורים',
+                    'מדיטציות מודרכות',
+                    'חנות אקססוריז',
+                    'עקרונות יוגה'
+                ],
+                badge: null,
+                filename: 'yoga-studio.html'
+            },
+            {
+                id: 'nutritionist',
+                title: 'ד"ר שרה כהן - תזונאית',
+                category: 'medical',
+                price: 2400,
+                description: 'אתר מקצועי לתזונאית קלינית עם מחשבון קלוריות',
+                features: [
+                    'מחשבון קלוריות מתקדם',
+                    'תפריטים מותאמים',
+                    'מעקב משקל',
+                    'מאמרי תזונה',
+                    'ייעוץ אונליין'
+                ],
+                badge: 'popular',
+                filename: 'nutritionist.html'
+            },
+            {
+                id: 'law-firm',
+                title: 'משרד ברקוביץ - עו"ד',
+                category: 'business',
+                price: 2500,
+                description: 'אתר מקצועי למשרד עורכי דין עם 6 תחומי התמחות',
+                features: [
+                    '6 תחומי התמחות',
+                    'ייעוץ משפטי ראשוני',
+                    'סטטיסטיקות הצלחה',
+                    'תיקי לקוחות',
+                    'ליווי משפטי מלא'
+                ],
+                badge: null,
+                filename: 'law-firm.html'
+            },
+            {
+                id: 'accountant',
+                title: 'רינה לוי - חשבת שכר',
+                category: 'business',
+                price: 2000,
+                description: 'אתר צבעוני לחשבת שכר עם מחשבון שכר פונקציונלי',
+                features: [
+                    'מחשבון שכר נקי',
+                    'שירותי הייטק',
+                    'דיווחים ממוחשבים',
+                    'ייעוץ מס',
+                    'שירות אישי'
+                ],
+                badge: null,
+                filename: 'accountant.html'
+            },
+            {
+                id: 'beauty-salon',
+                title: 'מספרה BELLA',
+                category: 'lifestyle',
+                price: 1700,
+                description: 'אתר יופי מרהיב למספרה עם גלריית עבודות',
+                features: [
+                    '6 שירותי יופי',
+                    'גלריית עבודות',
+                    'קביעת תור אונליין',
+                    'מחירים תחרותיים',
+                    'עיצוב צבעוני'
+                ],
+                badge: null,
+                filename: 'beauty-salon.html'
+            },
+            {
+                id: 'tutor',
+                title: 'ד"ר רונית לוי - מורה פרטית',
+                category: 'business',
+                price: 2100,
+                description: 'אתר חינוכי למורה פרטית עם מחשבון עלות שיעורים',
+                features: [
+                    'מחשבון עלות שיעורים',
+                    '6 מקצועות',
+                    'שיעור ניסיון חינם',
+                    'הצלחות תלמידים',
+                    'גישה אישית'
+                ],
+                badge: null,
+                filename: 'tutor.html'
+            },
+            {
+                id: 'aesthetic-clinic',
+                title: 'קליניקת יופי פרמיום',
+                category: 'medical',
+                price: 3200,
+                description: 'אתר יוקרתי לקליניקת אסתטיקה רפואית מתקדמת',
+                features: [
+                    '6 טיפולים מתקדמים',
+                    'עיצוב יוקרתי',
+                    'ייעוץ VIP',
+                    'טכנולוגיה מתקדמת',
+                    'מיקום פרמיום'
+                ],
+                badge: 'premium',
+                filename: 'aesthetic-clinic.html'
+            },
+            {
+                id: 'multibrawn',
+                title: 'מולטיבראון - נופש ואירועים',
+                category: 'lifestyle',
+                price: 2300,
+                description: 'אתר יוקרתי לחברת נופש ואירועים עם גלריה מרהיבה',
+                features: [
+                    '6 סוגי אירועים',
+                    'גלריה תלת-ממדית',
+                    'הזמנת אירועים',
+                    'חבילות יוקרה',
+                    'שירות VIP'
+                ],
+                badge: null,
+                filename: 'multibrawn.html'
+            },
+            {
+                id: 'real-estate',
+                title: 'נדל"ן פרמיום',
+                category: 'premium',
+                price: 2700,
+                description: 'אתר יוקרתי לחברת נדל"ן עם מחשבון השקעות',
+                features: [
+                    '6 נכסי יוקרה',
+                    'מחשבון השקעה',
+                    'ייעוץ נדל"ן',
+                    'נכסים ב-₪15M+',
+                    'שירות פרמיום'
+                ],
+                badge: 'premium',
+                filename: 'real-estate.html'
+            }
+        ];
+
+        // DOM Elements
+        const websitesGrid = document.getElementById('websitesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+
+        // Render websites
+        function renderWebsites(websitesToRender = websites) {
+            websitesGrid.innerHTML = '';
+            
+            websitesToRender.forEach((website, index) => {
+                const card = document.createElement('div');
+                card.className = 'website-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                const badgeHtml = website.badge ? 
+                    `<div class="card-category ${website.badge}-badge">${getBadgeText(website.badge)}</div>` : 
+                    `<div class="card-category">${getCategoryText(website.category)}</div>`;
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-price">₪${website.price.toLocaleString()}</div>
+                        ${badgeHtml}
+                        <h3 class="card-title">${website.title}</h3>
+                        <p class="card-description">${website.description}</p>
+                        <ul class="card-features">
+                            ${website.features.map(feature => `
+                                <li><i class="fas fa-check"></i> ${feature}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="card-actions">
+                        <a href="/websites/${website.filename}" target="_blank" class="action-btn btn-primary">
+                            <i class="fas fa-eye"></i>
+                            צפה באתר
+                        </a>
+                        <a href="/editor.html?website=${website.id}" class="action-btn btn-secondary">
+                            <i class="fas fa-edit"></i>
+                            עריכה
+                        </a>
+                    </div>
+                `;
+                
+                websitesGrid.appendChild(card);
+            });
+        }
+
+        // Helper functions
+        function getBadgeText(badge) {
+            const badges = {
+                'premium': '👑 פרמיום',
+                'popular': '🔥 פופולרי',
+                'new': '✨ חדש'
+            };
+            return badges[badge] || '';
+        }
+
+        function getCategoryText(category) {
+            const categories = {
+                'medical': '🏥 רפואה',
+                'business': '💼 עסקי',
+                'lifestyle': '🌟 לייף סטייל',
+                'premium': '👑 פרמיום'
+            };
+            return categories[category] || category;
+        }
+
+        // Search functionality
+        function handleSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.filter-tab.active').dataset.category;
+            
+            let filteredWebsites = websites;
+            
+            // Filter by category
+            if (activeCategory !== 'all') {
+                filteredWebsites = filteredWebsites.filter(website => 
+                    website.category === activeCategory || 
+                    (activeCategory === 'premium' && website.badge === 'premium')
+                );
+            }
+            
+            // Filter by search term
+            if (searchTerm) {
+                filteredWebsites = filteredWebsites.filter(website =>
+                    website.title.toLowerCase().includes(searchTerm) ||
+                    website.description.toLowerCase().includes(searchTerm) ||
+                    website.features.some(feature => feature.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            renderWebsites(filteredWebsites);
+        }
+
+        // Filter functionality
+        function handleFilter(event) {
+            if (event.target.classList.contains('filter-tab')) {
+                // Remove active class from all tabs
+                filterTabs.forEach(tab => tab.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                event.target.classList.add('active');
+                
+                // Filter websites
+                handleSearch();
+            }
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', handleSearch);
+        document.querySelector('.filter-tabs').addEventListener('click', handleFilter);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderWebsites();
+            console.log('🚀 WebMaster Pro גלריה נטענה בהצלחה!');
+            console.log('📊 11 אתרים מקצועיים זמינים');
+            console.log('💰 ערך כולל: ₪26,900');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
