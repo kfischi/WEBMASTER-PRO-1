@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - Ultimate Visual Editor</title>
+    <title>WebMaster Pro - Ultimate Editor עם האתרים האמיתיים</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -88,7 +88,7 @@
             padding: 8px 15px;
             font-size: 14px;
             color: #333;
-            min-width: 200px;
+            min-width: 250px;
             outline: none;
             transition: all 0.3s ease;
         }
@@ -133,7 +133,7 @@
 
         /* Left Sidebar */
         .left-sidebar {
-            width: 300px;
+            width: 320px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-right: 1px solid rgba(255, 255, 255, 0.2);
@@ -171,7 +171,9 @@
         .pages-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .page-item {
@@ -197,6 +199,22 @@
             border-color: #667eea;
         }
 
+        .page-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .page-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .page-description {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
         .page-controls {
             display: flex;
             gap: 5px;
@@ -210,6 +228,7 @@
             padding: 4px 8px;
             border-radius: 4px;
             transition: all 0.3s ease;
+            font-size: 12px;
         }
 
         .page-controls button:hover {
@@ -645,17 +664,6 @@
             border-left-color: #fed330;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .left-sidebar, .right-panel {
-                display: none;
-            }
-            
-            .main-editor {
-                margin-top: 60px;
-            }
-        }
-
         /* Loading Animation */
         .loading {
             display: none;
@@ -711,6 +719,17 @@
             outline: 3px solid #26de81 !important;
             background: rgba(38, 222, 129, 0.1) !important;
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .left-sidebar, .right-panel {
+                display: none;
+            }
+            
+            .main-editor {
+                margin-top: 60px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -722,23 +741,23 @@
             </div>
             <div class="project-info">
                 <h2>WebMaster Pro</h2>
-                <p>Ultimate Visual Editor</p>
+                <p>Ultimate Editor - 11 אתרים מקצועיים</p>
             </div>
         </div>
 
         <div class="header-controls">
             <select class="website-selector" id="websiteSelector">
                 <option value="">בחר אתר לעריכה</option>
-                <option value="dr-michal-rosen">ד"ר מיכל רוזן - אסתטיקה רפואית (₪2,800)</option>
-                <option value="fitness-co">דני פיט - מאמן כושר (₪2,200)</option>
-                <option value="yoga-studio">סטודיו אוהם - יוגה (₪1,900)</option>
-                <option value="nutritionist">ד"ר שרה כהן - תזונאית (₪2,400)</option>
-                <option value="law-firm">משרד ברקוביץ - עו"ד (₪2,500)</option>
+                <option value="dr-michal-rosen">ד"ר מיכל רוזן - רפואה אסתטית (₪2,800)</option>
+                <option value="fitness-coach">דני פיט - מאמן כושר (₪2,200)</option>
+                <option value="yoga-studio">סטודיו אוהם - יוגה ומדיטציה (₪1,900)</option>
+                <option value="nutritionist">ד"ר שרה כהן - תזונאית קלינית (₪2,400)</option>
+                <option value="law-firm">משרד ברקוביץ - עורכי דין (₪2,500)</option>
                 <option value="accountant">רינה לוי - חשבת שכר (₪2,000)</option>
-                <option value="beauty-salon">מספרה BELLA - יופי (₪1,700)</option>
+                <option value="beauty-salon">מספרה BELLA - יופי ועיצוב (₪1,700)</option>
                 <option value="tutor">ד"ר רונית לוי - מורה פרטית (₪2,100)</option>
                 <option value="aesthetic-clinic">קליניקת יופי פרמיום (₪3,200)</option>
-                <option value="multibrawn">מולטיבראון - נופש (₪2,300)</option>
+                <option value="multibrawn">מולטיבראון - נופש ואירועים (₪2,300)</option>
                 <option value="real-estate">נדל"ן פרמיום (₪2,700)</option>
             </select>
 
@@ -775,46 +794,26 @@
             <div class="sidebar-section">
                 <div class="section-title">
                     <i class="fas fa-copy"></i>
-                    ניהול דפים
+                    דפי האתר (<span id="pageCount">0</span>)
                 </div>
                 <div class="pages-list" id="pagesList">
-                    <div class="page-item active">
-                        <span>עמוד הבית</span>
-                        <div class="page-controls">
-                            <button title="ערוך"><i class="fas fa-edit"></i></button>
-                            <button title="שכפל"><i class="fas fa-copy"></i></button>
-                            <button title="מחק"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="page-item">
-                        <span>אודות</span>
-                        <div class="page-controls">
-                            <button title="ערוך"><i class="fas fa-edit"></i></button>
-                            <button title="שכפל"><i class="fas fa-copy"></i></button>
-                            <button title="מחק"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="page-item">
-                        <span>שירותים</span>
-                        <div class="page-controls">
-                            <button title="ערוך"><i class="fas fa-edit"></i></button>
-                            <button title="שכפל"><i class="fas fa-copy"></i></button>
-                            <button title="מחק"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="page-item">
-                        <span>צור קשר</span>
-                        <div class="page-controls">
-                            <button title="ערוך"><i class="fas fa-edit"></i></button>
-                            <button title="שכפל"><i class="fas fa-copy"></i></button>
-                            <button title="מחק"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
+                    <!-- Pages will be loaded dynamically -->
                 </div>
                 <button class="add-page-btn" onclick="addNewPage()">
                     <i class="fas fa-plus"></i>
                     הוסף דף חדש
                 </button>
+            </div>
+
+            <!-- Website Info -->
+            <div class="sidebar-section">
+                <div class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    פרטי האתר
+                </div>
+                <div id="websiteInfo">
+                    <p style="color: #666; font-size: 14px;">בחר אתר לצפייה בפרטים</p>
+                </div>
             </div>
 
             <!-- Components Library -->
@@ -850,27 +849,27 @@
                     </div>
                     <div class="component-item" onclick="addComponent('form')">
                         <i class="fas fa-envelope"></i>
-                        <span>טופס</span>
-                    </div>
-                    <div class="component-item" onclick="addComponent('map')">
-                        <i class="fas fa-map"></i>
-                        <span>מפה</span>
-                    </div>
-                    <div class="component-item" onclick="addComponent('testimonials')">
-                        <i class="fas fa-quote-right"></i>
-                        <span>המלצות</span>
+                        <span>טופס יצירת קשר</span>
                     </div>
                     <div class="component-item" onclick="addComponent('pricing')">
                         <i class="fas fa-tags"></i>
                         <span>מחירון</span>
                     </div>
-                    <div class="component-item" onclick="addComponent('team')">
-                        <i class="fas fa-users"></i>
-                        <span>צוות</span>
+                    <div class="component-item" onclick="addComponent('testimonials')">
+                        <i class="fas fa-quote-right"></i>
+                        <span>המלצות</span>
                     </div>
                     <div class="component-item" onclick="addComponent('blog')">
                         <i class="fas fa-blog"></i>
                         <span>בלוג</span>
+                    </div>
+                    <div class="component-item" onclick="addComponent('map')">
+                        <i class="fas fa-map"></i>
+                        <span>מפה</span>
+                    </div>
+                    <div class="component-item" onclick="addComponent('faq')">
+                        <i class="fas fa-question"></i>
+                        <span>שאלות נפוצות</span>
                     </div>
                 </div>
             </div>
@@ -883,25 +882,25 @@
                 </div>
                 <div class="media-upload" onclick="uploadMedia()">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <p>גרור קבצים כאן או לחץ להעלאה</p>
-                    <small>תמונות, וידאו, או מסמכים</small>
+                    <p>גרור קבצים כאן</p>
+                    <small>תמונות, וידאו או מסמכים</small>
                 </div>
                 <div class="media-grid" id="mediaGrid">
-                    <div class="media-item" onclick="selectMedia('image1')">
-                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop" alt="תמונה 1">
-                        <small>תמונה 1</small>
+                    <div class="media-item" onclick="selectMedia('medical1')">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=300&h=200&fit=crop" alt="רפואה">
+                        <small>רפואה</small>
                     </div>
-                    <div class="media-item" onclick="selectMedia('image2')">
-                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=200&fit=crop" alt="תמונה 2">
-                        <small>תמונה 2</small>
+                    <div class="media-item" onclick="selectMedia('fitness1')">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop" alt="כושר">
+                        <small>כושר</small>
                     </div>
-                    <div class="media-item" onclick="selectMedia('image3')">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop" alt="תמונה 3">
-                        <small>תמונה 3</small>
+                    <div class="media-item" onclick="selectMedia('yoga1')">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop" alt="יוגה">
+                        <small>יוגה</small>
                     </div>
-                    <div class="media-item" onclick="selectMedia('image4')">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop" alt="תמונה 4">
-                        <small>תמונה 4</small>
+                    <div class="media-item" onclick="selectMedia('business1')">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop" alt="עסקי">
+                        <small>עסקי</small>
                     </div>
                 </div>
             </div>
@@ -947,7 +946,7 @@
             <div class="property-group">
                 <div class="property-title">
                     <i class="fas fa-edit"></i>
-                    מאפיני אלמנט
+                    עריכת אלמנט
                 </div>
                 <div class="form-group">
                     <label>טקסט</label>
@@ -956,6 +955,10 @@
                 <div class="form-group">
                     <label>קישור (URL)</label>
                     <input type="url" class="form-control" id="elementLink" placeholder="https://" oninput="updateElementLink(this.value)">
+                </div>
+                <div class="form-group">
+                    <label>Alt Text (תמונות)</label>
+                    <input type="text" class="form-control" id="elementAlt" placeholder="תיאור התמונה" oninput="updateElementAlt(this.value)">
                 </div>
             </div>
 
@@ -969,39 +972,37 @@
                     <label>פונט</label>
                     <select class="form-control" id="fontFamily" onchange="updateFontFamily(this.value)">
                         <option value="inherit">ברירת מחדל</option>
-                        <option value="Arial, sans-serif">Arial</option>
                         <option value="'Segoe UI', sans-serif">Segoe UI</option>
+                        <option value="Arial, sans-serif">Arial</option>
                         <option value="'Helvetica Neue', sans-serif">Helvetica</option>
                         <option value="'Times New Roman', serif">Times</option>
                         <option value="Georgia, serif">Georgia</option>
-                        <option value="'Courier New', monospace">Courier</option>
+                        <option value="'Assistant', sans-serif">Assistant (עברית)</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>גודל פונט: <span id="fontSizeValue">16px</span></label>
-                    <input type="range" class="range-input" min="12" max="72" value="16" id="fontSize" oninput="updateFontSize(this.value)">
+                    <input type="range" class="range-input" min="10" max="72" value="16" id="fontSize" oninput="updateFontSize(this.value)">
                 </div>
                 <div class="form-group">
-                    <label>משקל פונט</label>
-                    <div class="button-group">
-                        <button class="style-btn" onclick="toggleFontWeight('normal')">רגיל</button>
-                        <button class="style-btn" onclick="toggleFontWeight('bold')">עבה</button>
-                    </div>
+                    <label>גובה שורה: <span id="lineHeightValue">1.5</span></label>
+                    <input type="range" class="range-input" min="1" max="3" step="0.1" value="1.5" id="lineHeight" oninput="updateLineHeight(this.value)">
                 </div>
                 <div class="form-group">
                     <label>סגנון פונט</label>
                     <div class="button-group">
-                        <button class="style-btn" onclick="toggleFontStyle('normal')">רגיל</button>
+                        <button class="style-btn" onclick="toggleFontWeight('normal')">רגיל</button>
+                        <button class="style-btn" onclick="toggleFontWeight('bold')">עבה</button>
                         <button class="style-btn" onclick="toggleFontStyle('italic')">נטוי</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Colors -->
+            <!-- Colors & Styling -->
             <div class="property-group">
                 <div class="property-title">
                     <i class="fas fa-palette"></i>
-                    צבעים
+                    צבעים ועיצוב
                 </div>
                 <div class="form-group">
                     <label>צבע טקסט</label>
@@ -1039,17 +1040,17 @@
                     <label>עיגול פינות: <span id="borderRadiusValue">5px</span></label>
                     <input type="range" class="range-input" min="0" max="50" value="5" id="borderRadius" oninput="updateBorderRadius(this.value)">
                 </div>
+                <div class="form-group">
+                    <label>שקיפות: <span id="opacityValue">100%</span></label>
+                    <input type="range" class="range-input" min="0" max="100" value="100" id="opacity" oninput="updateOpacity(this.value)">
+                </div>
             </div>
 
             <!-- Effects -->
             <div class="property-group">
                 <div class="property-title">
                     <i class="fas fa-magic"></i>
-                    אפקטים
-                </div>
-                <div class="form-group">
-                    <label>שקיפות: <span id="opacityValue">100%</span></label>
-                    <input type="range" class="range-input" min="0" max="100" value="100" id="opacity" oninput="updateOpacity(this.value)">
+                    אפקטים מתקדמים
                 </div>
                 <div class="form-group">
                     <label>צל</label>
@@ -1059,25 +1060,33 @@
                         <button class="style-btn" onclick="toggleShadow('large')">גדול</button>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>אנימציה</label>
+                    <div class="button-group">
+                        <button class="style-btn" onclick="addAnimation('fadeIn')">Fade In</button>
+                        <button class="style-btn" onclick="addAnimation('slideUp')">Slide Up</button>
+                        <button class="style-btn" onclick="addAnimation('bounce')">Bounce</button>
+                    </div>
+                </div>
             </div>
 
-            <!-- AI Suggestions -->
+            <!-- AI Tools -->
             <div class="property-group">
                 <div class="property-title">
                     <i class="fas fa-robot"></i>
-                    הצעות AI
+                    כלי AI מתקדמים
                 </div>
-                <button class="action-btn" onclick="aiOptimize()" style="width: 100%; margin-bottom: 10px;">
+                <button class="action-btn" onclick="aiOptimizeElement()" style="width: 100%; margin-bottom: 10px;">
                     <i class="fas fa-magic"></i>
-                    אופטימיזציה אוטומטית
+                    אופטימיזציה חכמה
                 </button>
-                <button class="action-btn success" onclick="aiGenerateContent()" style="width: 100%; margin-bottom: 10px;">
+                <button class="action-btn success" onclick="aiGenerateText()" style="width: 100%; margin-bottom: 10px;">
                     <i class="fas fa-pen"></i>
-                    יצירת תוכן
+                    יצירת תוכן AI
                 </button>
-                <button class="action-btn warning" onclick="aiColorScheme()" style="width: 100%;">
+                <button class="action-btn warning" onclick="aiSuggestColors()" style="width: 100%;">
                     <i class="fas fa-palette"></i>
-                    צבעים חכמים
+                    הצעת צבעים חכמה
                 </button>
             </div>
         </div>
@@ -1090,18 +1099,23 @@
 
     <div class="ai-chat" id="aiChat">
         <div class="ai-header">
-            <span>🤖 AI Assistant</span>
+            <span>🤖 AI Assistant Pro</span>
             <button onclick="toggleAI()" style="background: none; border: none; color: white; cursor: pointer;">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         <div class="ai-messages" id="aiMessages">
             <div style="background: #f0f0f0; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
-                שלום! אני כאן לעזור לך לבנות אתר מהמם. מה תרצה לעשות היום?
+                שלום! אני כאן לעזור לך לעצב את האתר המושלם. אני יכול לעזור עם:
+                <br>• יצירת תוכן מקצועי
+                <br>• הצעת צבעים ועיצוב
+                <br>• אופטימיזציה לקיצורי דרך
+                <br>• הוספת רכיבים חדשים
+                <br><br>מה תרצה לעשות היום?
             </div>
         </div>
         <div class="ai-input-area">
-            <input type="text" class="ai-input" id="aiInput" placeholder="שאל משהו...">
+            <input type="text" class="ai-input" id="aiInput" placeholder="שאל אותי משהו...">
             <button class="ai-send" onclick="sendAIMessage()">
                 <i class="fas fa-paper-plane"></i>
             </button>
@@ -1111,7 +1125,7 @@
     <!-- Loading -->
     <div class="loading" id="loading">
         <div class="spinner"></div>
-        <p>טוען...</p>
+        <p>טוען את האתר המקצועי...</p>
     </div>
 
     <!-- Notification -->
@@ -1124,86 +1138,241 @@
         let currentWebsite = null;
         let selectedElement = null;
         let currentDevice = 'desktop';
+        let currentPage = 'home';
         let zoomLevel = 100;
         let undoStack = [];
         let redoStack = [];
         let aiActive = false;
 
-        // Website Data
-        const websites = {
+        // Professional Websites Data - All 11 websites with realistic multi-page structure
+        const professionalWebsites = {
             'dr-michal-rosen': {
+                id: 'dr-michal-rosen',
                 name: 'ד"ר מיכל רוזן',
-                category: 'אסתטיקה רפואית',
+                category: 'רפואה אסתטית',
                 price: 2800,
-                file: 'websites/dr-michal-rosen.html'
+                businessName: 'ד"ר מיכל רוזן',
+                phone: '052-1234567',
+                email: 'info@dr-michal-rosen.co.il',
+                address: 'רחוב הרצל 45, תל אביב',
+                description: 'מומחית ברפואה אסתטית ובטיפולי יופי מתקדמים',
+                colors: { primary: '#667eea', secondary: '#764ba2' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'דף ראשי עם מידע כללי' },
+                    { id: 'treatments', name: 'טיפולים', description: 'כל הטיפולים והשירותים' },
+                    { id: 'about', name: 'אודות', description: 'על הרופאה והקליניקה' },
+                    { id: 'gallery', name: 'גלריה', description: 'תמונות לפני ואחרי' },
+                    { id: 'contact', name: 'צור קשר', description: 'פרטי יצירת קשר והזמנה' }
+                ],
+                features: ['בוטוקס', 'חומצה היאלורונית', 'לייזר פרקציונלי', 'פילינג כימי']
             },
-            'fitness-co': {
+            'fitness-coach': {
+                id: 'fitness-coach',
                 name: 'דני פיט',
                 category: 'מאמן כושר',
                 price: 2200,
-                file: 'websites/fitness-co.html'
+                businessName: 'דני פיט - Personal Training',
+                phone: '054-1234567',
+                email: 'danny@fitness.co.il',
+                address: 'מכון כושר פרמיום, תל אביב',
+                description: 'מאמן כושר אישי מוסמך - הגשמת חלומות הכושר שלך',
+                colors: { primary: '#4facfe', secondary: '#00f2fe' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'מידע על השירותים' },
+                    { id: 'programs', name: 'תוכניות אימון', description: 'תוכניות מותאמות אישית' },
+                    { id: 'nutrition', name: 'תזונה', description: 'ייעוץ תזונתי ותפריטים' },
+                    { id: 'calculator', name: 'מחשבון BMI', description: 'כלי לחישוב מדד מסת גוף' },
+                    { id: 'contact', name: 'צור קשר', description: 'הזמנת אימון ויצירת קשר' }
+                ],
+                features: ['אימונים אישיים', 'תוכניות תזונה', 'מעקב התקדמות', 'מחשבון BMI']
             },
             'yoga-studio': {
+                id: 'yoga-studio',
                 name: 'סטודיו אוהם',
-                category: 'יוגה',
+                category: 'יוגה ומדיטציה',
                 price: 1900,
-                file: 'websites/yoga-studio.html'
+                businessName: 'סטודיו אוהם',
+                phone: '052-3456789',
+                email: 'info@yoga-studio.co.il',
+                address: 'רחוב הנחל 12, תל אביב',
+                description: 'מרחב של שלווה, איזון ותנועה מודעת בלב העיר',
+                colors: { primary: '#a8edea', secondary: '#fed6e3' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'ברוכים הבאים לסטודיו' },
+                    { id: 'classes', name: 'שיעורים', description: 'סוגי שיעורים ולוחות זמנים' },
+                    { id: 'teachers', name: 'המורים', description: 'הכירו את צוות המורים' },
+                    { id: 'philosophy', name: 'פילוסופיה', description: 'הגישה שלנו ליוגה' },
+                    { id: 'contact', name: 'צור קשר', description: 'הרשמה ליעצור קשר' }
+                ],
+                features: ['האטה יוגה', 'וינייסה פלו', 'מדיטציה', 'שיעורים פרטיים']
             },
             'nutritionist': {
+                id: 'nutritionist',
                 name: 'ד"ר שרה כהן',
-                category: 'תזונאית',
+                category: 'תזונאית קלינית',
                 price: 2400,
-                file: 'websites/nutritionist.html'
+                businessName: 'ד"ר שרה כהן - תזונה קלינית',
+                phone: '052-4567890',
+                email: 'info@nutritionist.co.il',
+                address: 'רחוב ויצמן 25, רמת השרון',
+                description: 'תזונאית קלינית מוסמכת עם התמחות בהרזיה בריאה',
+                colors: { primary: '#43e97b', secondary: '#38f9d7' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'ברוכים הבאים למרפאה' },
+                    { id: 'services', name: 'שירותים', description: 'ייעוץ ותוכניות תזונה' },
+                    { id: 'calculator', name: 'מחשבון קלוריות', description: 'חישוב צרכים קלוריים' },
+                    { id: 'tips', name: 'טיפים', description: 'טיפים לתזונה בריאה' },
+                    { id: 'contact', name: 'צור קשר', description: 'קביעת תור וייעוץ' }
+                ],
+                features: ['ייעוץ תזונתי', 'תפריטים אישיים', 'מעקב תזונתי', 'מחשבון קלוריות']
             },
             'law-firm': {
+                id: 'law-firm',
                 name: 'משרד ברקוביץ',
-                category: 'עו"ד',
+                category: 'עורכי דין',
                 price: 2500,
-                file: 'websites/law-firm.html'
+                businessName: 'ברקוביץ ושות\' - עורכי דין',
+                phone: '03-1234567',
+                email: 'info@law-firm.co.il',
+                address: 'מגדל עזריאלי, תל אביב',
+                description: 'משרד עורכי דין מוביל עם ניסיון רב שנים בתחומים מגוונים',
+                colors: { primary: '#667db6', secondary: '#0082c8' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'מידע כללי על המשרד' },
+                    { id: 'fields', name: 'תחומי התמחות', description: '6 תחומי התמחות עיקריים' },
+                    { id: 'team', name: 'הצוות', description: 'עורכי הדין והמומחים' },
+                    { id: 'cases', name: 'תיקים מובילים', description: 'הצלחות וניסיון' },
+                    { id: 'contact', name: 'צור קשר', description: 'יעוץ ראשוני וקביעת פגישה' }
+                ],
+                features: ['דיני משפחה', 'דיני נדל"ן', 'דיני חברות', 'דיני עבודה', 'ליטיגציה', 'ייעוץ משפטי']
             },
             'accountant': {
+                id: 'accountant',
                 name: 'רינה לוי',
                 category: 'חשבת שכר',
                 price: 2000,
-                file: 'websites/accountant.html'
+                businessName: 'רינה לוי - שירותי שכר וחשבונאות',
+                phone: '08-9998887',
+                email: 'rina@payroll.co.il',
+                address: 'רחוב הרצל 30, ראשון לציון',
+                description: 'שירותי שכר וחשבונאות מקצועיים לעסקים קטנים ובינוניים',
+                colors: { primary: '#f093fb', secondary: '#f5576c' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'שירותי שכר וחשבונאות' },
+                    { id: 'services', name: 'שירותים', description: 'כל השירותים המקצועיים' },
+                    { id: 'calculator', name: 'מחשבון שכר', description: 'חישוב שכר נטו מברוטו' },
+                    { id: 'documents', name: 'מסמכים', description: 'טפסים ומסמכים נדרשים' },
+                    { id: 'contact', name: 'צור קשר', description: 'יעוץ וקביעת פגישה' }
+                ],
+                features: ['ניהול שכר', 'דיווחים לרשויות', 'ייעוץ מס', 'הכנת דוחות']
             },
             'beauty-salon': {
+                id: 'beauty-salon',
                 name: 'מספרה BELLA',
-                category: 'יופי',
+                category: 'יופי ועיצוב שיער',
                 price: 1700,
-                file: 'websites/beauty-salon.html'
+                businessName: 'BELLA - סלון יופי ועיצוב שיער',
+                phone: '054-7890123',
+                email: 'info@bella-salon.co.il',
+                address: 'רחוב דיזנגוף 45, תל אביב',
+                description: 'סלון יופי מוביל עם הטכנולוגיות והטרנדים העדכניים ביותר',
+                colors: { primary: '#fa709a', secondary: '#fee140' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'ברוכות הבאות לסלון' },
+                    { id: 'services', name: 'שירותים', description: 'כל שירותי היופי והעיצוב' },
+                    { id: 'gallery', name: 'גלריה', description: 'עבודות ותסרוקות מדהימות' },
+                    { id: 'team', name: 'הצוות', description: 'הכירו את המעצבות' },
+                    { id: 'contact', name: 'צור קשר', description: 'קביעת תור ויצירת קשר' }
+                ],
+                features: ['תסרוקות ועיצוב', 'צבעים וגוונים', 'טיפולי שיער', 'מניקור ופדיקור']
             },
             'tutor': {
+                id: 'tutor',
                 name: 'ד"ר רונית לוי',
                 category: 'מורה פרטית',
                 price: 2100,
-                file: 'websites/tutor.html'
+                businessName: 'ד"ר רונית לוי - הוראה פרטית',
+                phone: '052-8901234',
+                email: 'ronit@tutor.co.il',
+                address: 'רמת גן',
+                description: 'מורה פרטית מנוסה עם דוקטורט בחינוך, התמחות במתמטיקה ואנגלית',
+                colors: { primary: '#667eea', secondary: '#764ba2' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'הוראה פרטית מקצועית' },
+                    { id: 'subjects', name: 'מקצועות', description: 'מתמטיקה, אנגלית ועוד' },
+                    { id: 'method', name: 'השיטה', description: 'גישת ההוראה הייחודית' },
+                    { id: 'success', name: 'סיפורי הצלחה', description: 'תלמידים שהצליחו' },
+                    { id: 'contact', name: 'צור קשר', description: 'קביעת שיעור ניסיון' }
+                ],
+                features: ['מתמטיקה', 'אנגלית', 'פיזיקה', 'הכנה לבגרות']
             },
             'aesthetic-clinic': {
+                id: 'aesthetic-clinic',
                 name: 'קליניקת יופי פרמיום',
-                category: 'אסתטיקה',
+                category: 'אסתטיקה רפואית',
                 price: 3200,
-                file: 'websites/aesthetic-clinic.html'
+                businessName: 'Premium Aesthetics Clinic',
+                phone: '052-0000000',
+                email: 'info@premium-clinic.co.il',
+                address: 'מגדל עזריאלי, תל אביב',
+                description: 'מרכז רפואה אסתטית מתקדמת לחידוש העור והיופי הטבעי',
+                colors: { primary: '#667eea', secondary: '#764ba2' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'מרכז אסתטיקה פרמיום' },
+                    { id: 'treatments', name: 'טיפולים', description: '6 שירותים מתקדמים' },
+                    { id: 'gallery', name: 'לפני ואחרי', description: 'תוצאות מרשימות' },
+                    { id: 'blog', name: 'בלוג', description: 'מאמרים מקצועיים' },
+                    { id: 'reviews', name: 'המלצות', description: 'דעות לקוחות מרוצים' },
+                    { id: 'contact', name: 'צור קשר', description: 'יעוץ והזמנה' }
+                ],
+                features: ['בוטוקס פרמיום', 'לייזר פרקציונלי', 'פילינג יהלום', 'טיפולי היפו']
             },
             'multibrawn': {
+                id: 'multibrawn',
                 name: 'מולטיבראון',
-                category: 'נופש',
+                category: 'נופש ואירועים',
                 price: 2300,
-                file: 'websites/multibrawn.html'
+                businessName: 'מולטיבראון - נופש ואירועים VIP',
+                phone: '052-1111111',
+                email: 'info@multibrawn.co.il',
+                address: 'רחוב הירקון 100, תל אביב',
+                description: 'חברה מובילה בתחום הנופש והאירועים עם שירות VIP ויעדים יוקרתיים',
+                colors: { primary: '#4facfe', secondary: '#00f2fe' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'נופש ואירועים יוקרתיים' },
+                    { id: 'destinations', name: 'יעדי נופש', description: 'יעדים בארץ ובחו"ל' },
+                    { id: 'events', name: 'ארגון אירועים', description: 'אירועים פרטיים ועסקיים' },
+                    { id: 'packages', name: 'חבילות VIP', description: 'חבילות יוקרה מיוחדות' },
+                    { id: 'contact', name: 'צור קשר', description: 'תכנון הנסיעה המושלמת' }
+                ],
+                features: ['נופש יוקרתי', 'ארגון אירועים', 'חבילות VIP', 'יעדים בינלאומיים']
             },
             'real-estate': {
+                id: 'real-estate',
                 name: 'נדל"ן פרמיום',
-                category: 'נדל"ן',
+                category: 'נדל"ן יוקרה',
                 price: 2700,
-                file: 'websites/real-estate.html'
+                businessName: 'Premium Real Estate',
+                phone: '052-2222222',
+                email: 'info@real-estate-premium.co.il',
+                address: 'רחוב רוטשילד 50, תל אביב',
+                description: 'חברת נדל"ן מובילה המתמחה בנכסי פרמיום ויוקרה באזורי הביקוש',
+                colors: { primary: '#667db6', secondary: '#0082c8' },
+                pages: [
+                    { id: 'home', name: 'עמוד הבית', description: 'נדל"ן יוקרה ופרמיום' },
+                    { id: 'properties', name: 'נכסים', description: 'דירות ובתים יוקרתיים' },
+                    { id: 'areas', name: 'אזורים', description: 'אזורי הביקוש המובילים' },
+                    { id: 'services', name: 'שירותים', description: 'שירותי נדל"ן מקצועיים' },
+                    { id: 'contact', name: 'צור קשר', description: 'יעוץ מקצועי ללא התחייבות' }
+                ],
+                features: ['נכסי יוקרה', 'ייעוץ השקעות', 'הערכות נכסים', 'ליווי משפטי']
             }
         };
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             setupEventListeners();
-            loadDefaultWebsite();
-            showNotification('ברוך הבא ל-WebMaster Pro! בחר אתר להתחלת העריכה.', 'success');
+            showNotification('🚀 WebMaster Pro נטען! בחר אתר מהרשימה למעלה להתחלת העריכה.', 'success');
         });
 
         function setupEventListeners() {
@@ -1222,72 +1391,155 @@
                 }
             });
 
-            // Auto-save
+            // Auto-save every 30 seconds
             setInterval(autoSave, 30000);
         }
 
-        // Website Loading
+        // Website Loading with realistic pages structure
         function loadWebsite(websiteId) {
-            if (!websites[websiteId]) {
-                showNotification('אתר לא נמצא', 'error');
+            if (!professionalWebsites[websiteId]) {
+                showNotification('אתר לא נמצא במערכת', 'error');
                 return;
             }
 
             showLoading(true);
             currentWebsite = websiteId;
+            currentPage = 'home';
 
-            // Create demo HTML for now (in real app, load from file)
-            const demoHTML = createDemoHTML(websites[websiteId]);
+            const website = professionalWebsites[websiteId];
+            
+            // Load the real website content (this would normally load from the websites/ folder)
+            loadWebsiteContent(website);
+            
+            // Update pages list
+            updatePagesList(website.pages);
+            
+            // Update website info
+            updateWebsiteInfo(website);
+            
+            showLoading(false);
+            showNotification(`✅ אתר ${website.name} נטען בהצלחה עם ${website.pages.length} דפים!`, 'success');
+        }
+
+        function loadWebsiteContent(website) {
+            // Create realistic professional website content
+            const websiteHTML = createProfessionalWebsite(website);
             
             const frame = document.getElementById('previewFrame');
-            frame.srcdoc = demoHTML;
+            frame.srcdoc = websiteHTML;
             
             frame.onload = function() {
                 setupEditableElements();
-                showLoading(false);
-                showNotification(`אתר ${websites[websiteId].name} נטען בהצלחה!`, 'success');
+                updateWebsiteStyles(website.colors);
             };
         }
 
-        function createDemoHTML(website) {
+        function createProfessionalWebsite(website) {
             return `
                 <!DOCTYPE html>
                 <html lang="he" dir="rtl">
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>${website.name}</title>
+                    <title>${website.businessName}</title>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                     <style>
                         * { margin: 0; padding: 0; box-sizing: border-box; }
                         body { 
                             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                             line-height: 1.6;
                             color: #333;
+                            scroll-behavior: smooth;
                         }
-                        .hero {
-                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                            color: white;
-                            padding: 100px 20px;
-                            text-align: center;
-                            min-height: 80vh;
+                        
+                        /* Navigation */
+                        .navbar {
+                            background: rgba(255, 255, 255, 0.95);
+                            backdrop-filter: blur(20px);
+                            padding: 1rem 0;
+                            position: fixed;
+                            top: 0;
+                            width: 100%;
+                            z-index: 1000;
+                            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+                        }
+                        
+                        .nav-container {
+                            max-width: 1200px;
+                            margin: 0 auto;
+                            padding: 0 2rem;
                             display: flex;
+                            justify-content: space-between;
                             align-items: center;
-                            justify-content: center;
-                            flex-direction: column;
                         }
+                        
+                        .logo {
+                            font-size: 1.5rem;
+                            font-weight: 700;
+                            color: ${website.colors.primary};
+                        }
+                        
+                        .nav-links {
+                            display: flex;
+                            gap: 2rem;
+                            list-style: none;
+                        }
+                        
+                        .nav-links a {
+                            text-decoration: none;
+                            color: #333;
+                            font-weight: 500;
+                            transition: color 0.3s ease;
+                        }
+                        
+                        .nav-links a:hover {
+                            color: ${website.colors.primary};
+                        }
+                        
+                        /* Hero Section */
+                        .hero {
+                            background: linear-gradient(135deg, ${website.colors.primary} 0%, ${website.colors.secondary} 100%);
+                            color: white;
+                            padding: 150px 0 100px;
+                            text-align: center;
+                            position: relative;
+                            overflow: hidden;
+                        }
+                        
+                        .hero::before {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+                            opacity: 0.3;
+                        }
+                        
+                        .hero-content {
+                            max-width: 800px;
+                            margin: 0 auto;
+                            padding: 0 2rem;
+                            position: relative;
+                            z-index: 2;
+                        }
+                        
                         .hero h1 {
                             font-size: 3.5rem;
                             margin-bottom: 1rem;
                             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
                         }
-                        .hero p {
+                        
+                        .hero .subtitle {
                             font-size: 1.3rem;
                             margin-bottom: 2rem;
-                            max-width: 600px;
+                            opacity: 0.9;
                         }
+                        
                         .cta-button {
                             background: white;
-                            color: #667eea;
+                            color: ${website.colors.primary};
                             padding: 15px 40px;
                             border: none;
                             border-radius: 50px;
@@ -1297,796 +1549,475 @@
                             transition: all 0.3s ease;
                             text-decoration: none;
                             display: inline-block;
+                            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
                         }
+                        
                         .cta-button:hover {
-                            transform: translateY(-2px);
-                            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                            transform: translateY(-3px);
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
                         }
-                        .section {
-                            padding: 80px 20px;
+                        
+                        /* Services Section */
+                        .services {
+                            padding: 100px 0;
+                            background: #f8f9fa;
+                        }
+                        
+                        .container {
                             max-width: 1200px;
                             margin: 0 auto;
+                            padding: 0 2rem;
                         }
-                        .section h2 {
-                            font-size: 2.5rem;
+                        
+                        .section-title {
                             text-align: center;
+                            font-size: 2.5rem;
                             margin-bottom: 3rem;
                             color: #333;
                         }
-                        .services {
+                        
+                        .services-grid {
                             display: grid;
                             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                             gap: 2rem;
                             margin-top: 2rem;
                         }
-                        .service {
+                        
+                        .service-card {
                             background: white;
-                            padding: 2rem;
-                            border-radius: 15px;
-                            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                            padding: 2.5rem;
+                            border-radius: 20px;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
                             text-align: center;
                             transition: all 0.3s ease;
+                            border: 1px solid rgba(255,255,255,0.2);
                         }
-                        .service:hover {
-                            transform: translateY(-5px);
-                            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+                        
+                        .service-card:hover {
+                            transform: translateY(-10px);
+                            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
                         }
-                        .service h3 {
+                        
+                        .service-icon {
+                            width: 80px;
+                            height: 80px;
+                            background: linear-gradient(45deg, ${website.colors.primary}, ${website.colors.secondary});
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin: 0 auto 1.5rem;
+                            font-size: 2rem;
+                            color: white;
+                        }
+                        
+                        .service-card h3 {
                             font-size: 1.5rem;
                             margin-bottom: 1rem;
-                            color: #667eea;
+                            color: ${website.colors.primary};
                         }
-                        .service p {
+                        
+                        .service-card p {
                             color: #666;
                             line-height: 1.6;
                         }
-                        .contact {
-                            background: #f8f9fa;
-                            padding: 80px 20px;
+                        
+                        .price {
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            color: ${website.colors.primary};
+                            margin-top: 1rem;
+                        }
+                        
+                        /* About Section */
+                        .about {
+                            padding: 100px 0;
+                            background: white;
+                        }
+                        
+                        .about-content {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 4rem;
+                            align-items: center;
+                        }
+                        
+                        .about-text h2 {
+                            font-size: 2.5rem;
+                            margin-bottom: 2rem;
+                            color: #333;
+                        }
+                        
+                        .about-text p {
+                            font-size: 1.1rem;
+                            color: #666;
+                            margin-bottom: 1.5rem;
+                            line-height: 1.8;
+                        }
+                        
+                        .about-image {
                             text-align: center;
                         }
-                        .contact h2 {
-                            color: #333;
+                        
+                        .about-image img {
+                            width: 100%;
+                            max-width: 400px;
+                            border-radius: 20px;
+                            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+                        }
+                        
+                        /* Contact Section */
+                        .contact {
+                            padding: 100px 0;
+                            background: linear-gradient(135deg, ${website.colors.primary} 0%, ${website.colors.secondary} 100%);
+                            color: white;
+                        }
+                        
+                        .contact-content {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 4rem;
+                        }
+                        
+                        .contact-info h2 {
+                            font-size: 2.5rem;
                             margin-bottom: 2rem;
                         }
-                        .contact-info {
-                            display: flex;
-                            justify-content: center;
-                            gap: 3rem;
-                            flex-wrap: wrap;
-                            margin-top: 2rem;
-                        }
+                        
                         .contact-item {
                             display: flex;
                             align-items: center;
                             gap: 1rem;
+                            margin-bottom: 1.5rem;
                             font-size: 1.1rem;
                         }
+                        
                         .contact-item i {
-                            color: #667eea;
-                            font-size: 1.5rem;
+                            width: 50px;
+                            height: 50px;
+                            background: rgba(255,255,255,0.2);
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1.2rem;
                         }
+                        
+                        .contact-form {
+                            background: rgba(255,255,255,0.1);
+                            padding: 2rem;
+                            border-radius: 20px;
+                            backdrop-filter: blur(20px);
+                        }
+                        
+                        .form-group {
+                            margin-bottom: 1.5rem;
+                        }
+                        
+                        .form-group label {
+                            display: block;
+                            margin-bottom: 0.5rem;
+                            font-weight: 600;
+                        }
+                        
+                        .form-group input,
+                        .form-group textarea {
+                            width: 100%;
+                            padding: 12px;
+                            border: none;
+                            border-radius: 10px;
+                            font-size: 1rem;
+                            background: rgba(255,255,255,0.9);
+                        }
+                        
+                        .form-group textarea {
+                            height: 100px;
+                            resize: vertical;
+                        }
+                        
+                        .submit-btn {
+                            background: white;
+                            color: ${website.colors.primary};
+                            padding: 12px 30px;
+                            border: none;
+                            border-radius: 10px;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            width: 100%;
+                        }
+                        
+                        .submit-btn:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                        }
+                        
+                        /* WhatsApp Float Button */
+                        .whatsapp-float {
+                            position: fixed;
+                            bottom: 20px;
+                            left: 20px;
+                            width: 60px;
+                            height: 60px;
+                            background: #25d366;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: white;
+                            font-size: 1.5rem;
+                            text-decoration: none;
+                            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+                            transition: all 0.3s ease;
+                            z-index: 1000;
+                        }
+                        
+                        .whatsapp-float:hover {
+                            transform: scale(1.1);
+                            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+                        }
+                        
+                        /* Editable Elements */
                         .editable {
                             transition: all 0.3s ease;
                             cursor: pointer;
                             position: relative;
                             border-radius: 4px;
+                            min-height: 20px;
                         }
+                        
                         .editable:hover {
                             outline: 2px dashed rgba(102, 126, 234, 0.5);
                             background: rgba(102, 126, 234, 0.05) !important;
                         }
+                        
                         .editable.selected {
                             outline: 3px solid #667eea !important;
                             background: rgba(102, 126, 234, 0.1) !important;
                         }
+                        
                         .editable[contenteditable="true"] {
                             outline: 3px solid #26de81 !important;
                             background: rgba(38, 222, 129, 0.1) !important;
                         }
+                        
+                        /* Responsive Design */
+                        @media (max-width: 768px) {
+                            .nav-links {
+                                display: none;
+                            }
+                            
+                            .hero h1 {
+                                font-size: 2.5rem;
+                            }
+                            
+                            .about-content,
+                            .contact-content {
+                                grid-template-columns: 1fr;
+                                gap: 2rem;
+                            }
+                            
+                            .services-grid {
+                                grid-template-columns: 1fr;
+                            }
+                        }
                     </style>
                 </head>
                 <body>
-                    <section class="hero">
-                        <h1 class="editable" data-type="text">${website.name}</h1>
-                        <p class="editable" data-type="text">מומחה ב${website.category} עם ניסיון רב שנים ושירות מקצועי ואמין</p>
-                        <a href="#contact" class="cta-button editable" data-type="text">יצירת קשר</a>
+                    <!-- Navigation -->
+                    <nav class="navbar">
+                        <div class="nav-container">
+                            <div class="logo editable" data-type="text">
+                                ${website.businessName.split(' ')[0]}
+                            </div>
+                            <ul class="nav-links">
+                                ${website.pages.map(page => `
+                                    <li><a href="#${page.id}" class="editable" data-type="text">${page.name}</a></li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <!-- Hero Section -->
+                    <section class="hero" id="home">
+                        <div class="hero-content">
+                            <h1 class="editable" data-type="text">${website.businessName}</h1>
+                            <p class="subtitle editable" data-type="text">${website.description}</p>
+                            <a href="#contact" class="cta-button editable" data-type="text">צור קשר עכשיו</a>
+                        </div>
                     </section>
 
-                    <section class="section">
-                        <h2 class="editable" data-type="text">השירותים שלנו</h2>
-                        <div class="services">
-                            <div class="service">
-                                <h3 class="editable" data-type="text">שירות מקצועי</h3>
-                                <p class="editable" data-type="text">תיאור מפורט של השירות הראשון שאנו מציעים עם כל הפרטים החשובים</p>
-                            </div>
-                            <div class="service">
-                                <h3 class="editable" data-type="text">ייעוץ אישי</h3>
-                                <p class="editable" data-type="text">ייעוץ מותאם אישית לצרכים שלכם עם מעקב צמוד והכוונה מקצועית</p>
-                            </div>
-                            <div class="service">
-                                <h3 class="editable" data-type="text">שירות VIP</h3>
-                                <p class="editable" data-type="text">שירות פרמיום עם זמינות מלאה ויחס אישי למען שביעות רצונכם</p>
+                    <!-- Services Section -->
+                    <section class="services" id="services">
+                        <div class="container">
+                            <h2 class="section-title editable" data-type="text">השירותים שלנו</h2>
+                            <div class="services-grid">
+                                ${website.features.map((feature, index) => `
+                                    <div class="service-card">
+                                        <div class="service-icon">
+                                            <i class="fas fa-${getServiceIcon(website.category, index)}"></i>
+                                        </div>
+                                        <h3 class="editable" data-type="text">${feature}</h3>
+                                        <p class="editable" data-type="text">תיאור מפורט של השירות ${feature} עם כל הפרטים החשובים עבור הלקוחות שלנו</p>
+                                        <div class="price editable" data-type="text">החל מ-₪${Math.floor(Math.random() * 500) + 200}</div>
+                                    </div>
+                                `).join('')}
                             </div>
                         </div>
                     </section>
 
+                    <!-- About Section -->
+                    <section class="about" id="about">
+                        <div class="container">
+                            <div class="about-content">
+                                <div class="about-text">
+                                    <h2 class="editable" data-type="text">אודות ${website.businessName}</h2>
+                                    <p class="editable" data-type="text">
+                                        אנחנו מתמחים ב${website.category} עם ניסיון רב שנים בתחום. 
+                                        הצוות המקצועי שלנו מחויב לספק שירות ברמה הגבוהה ביותר ותוצאות מעולות.
+                                    </p>
+                                    <p class="editable" data-type="text">
+                                        המומחיות שלנו, הציוד המתקדם והגישה האישית שלנו הופכים אותנו לבחירה הראשונה 
+                                        עבור לקוחות המחפשים שירות איכותי ומקצועי.
+                                    </p>
+                                    <a href="#contact" class="cta-button editable" data-type="text">קבע פגישת ייעוץ</a>
+                                </div>
+                                <div class="about-image">
+                                    <img src="${getWebsiteImage(website.category)}" alt="${website.businessName}" class="editable" data-type="image">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Contact Section -->
                     <section class="contact" id="contact">
-                        <h2 class="editable" data-type="text">צור קשר</h2>
-                        <p class="editable" data-type="text">נשמח לענות על כל שאלה ולתת ייעוץ מקצועי</p>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span class="editable" data-type="text">052-1234567</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span class="editable" data-type="text">info@example.com</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span class="editable" data-type="text">תל אביב, ישראל</span>
+                        <div class="container">
+                            <div class="contact-content">
+                                <div class="contact-info">
+                                    <h2 class="editable" data-type="text">צור קשר</h2>
+                                    <div class="contact-item">
+                                        <i class="fas fa-phone"></i>
+                                        <span class="editable" data-type="text">${website.phone}</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <i class="fas fa-envelope"></i>
+                                        <span class="editable" data-type="text">${website.email}</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span class="editable" data-type="text">${website.address}</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="editable" data-type="text">א'-ה': 9:00-18:00 | ו': 9:00-13:00</span>
+                                    </div>
+                                </div>
+                                <div class="contact-form">
+                                    <form>
+                                        <div class="form-group">
+                                            <label class="editable" data-type="text">שם מלא</label>
+                                            <input type="text" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="editable" data-type="text">טלפון</label>
+                                            <input type="tel" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="editable" data-type="text">אימייל</label>
+                                            <input type="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="editable" data-type="text">הודעה</label>
+                                            <textarea placeholder="איך נוכל לעזור לך?" required></textarea>
+                                        </div>
+                                        <button type="submit" class="submit-btn editable" data-type="text">שלח הודעה</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </section>
+
+                    <!-- WhatsApp Float Button -->
+                    <a href="https://wa.me/972${website.phone.replace(/[^0-9]/g, '').substring(1)}?text=היי, אני מעוניין/ת לקבל מידע נוסף" 
+                       class="whatsapp-float" target="_blank" title="צור קשר ב-WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+
+                    <script>
+                        // Smooth scrolling for navigation links
+                        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                            anchor.addEventListener('click', function (e) {
+                                e.preventDefault();
+                                const target = document.querySelector(this.getAttribute('href'));
+                                if (target) {
+                                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            });
+                        });
+
+                        // Form submission
+                        document.querySelector('form').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            alert('תודה על פנייתך! נחזור אליך בהקדם');
+                        });
+
+                        // Add some animations on scroll
+                        const observerOptions = { threshold: 0.1 };
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    entry.target.style.opacity = '1';
+                                    entry.target.style.transform = 'translateY(0)';
+                                }
+                            });
+                        }, observerOptions);
+
+                        document.querySelectorAll('.service-card').forEach(card => {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(50px)';
+                            card.style.transition = 'all 0.6s ease';
+                            observer.observe(card);
+                        });
+                    </script>
                 </body>
                 </html>
             `;
         }
 
-        function loadDefaultWebsite() {
-            // Load first website by default
-            const firstWebsite = Object.keys(websites)[0];
-            document.getElementById('websiteSelector').value = firstWebsite;
-            loadWebsite(firstWebsite);
-        }
-
-        // Editable Elements Setup
-        function setupEditableElements() {
-            const frame = document.getElementById('previewFrame');
-            if (!frame.contentDocument) return;
-
-            const editableElements = frame.contentDocument.querySelectorAll('.editable');
-            
-            editableElements.forEach(element => {
-                element.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    selectElement(this);
-                });
-
-                element.addEventListener('dblclick', function(e) {
-                    e.stopPropagation();
-                    if (this.dataset.type === 'text') {
-                        this.contentEditable = true;
-                        this.focus();
-                        selectText(this);
-                    }
-                });
-
-                element.addEventListener('blur', function() {
-                    this.contentEditable = false;
-                    saveCurrentState();
-                });
-
-                element.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        this.blur();
-                    }
-                });
-            });
-
-            // Click outside to deselect
-            frame.contentDocument.addEventListener('click', function(e) {
-                if (!e.target.classList.contains('editable')) {
-                    deselectElement();
-                }
-            });
-        }
-
-        function selectElement(element) {
-            deselectElement();
-            selectedElement = element;
-            element.classList.add('selected');
-            updatePropertiesPanel(element);
-        }
-
-        function deselectElement() {
-            if (selectedElement) {
-                selectedElement.classList.remove('selected');
-                selectedElement = null;
-            }
-        }
-
-        function selectText(element) {
-            const range = document.createRange();
-            range.selectNodeContents(element);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-        }
-
-        function updatePropertiesPanel(element) {
-            const computedStyle = window.getComputedStyle(element);
-            
-            // Update text input
-            document.getElementById('elementText').value = element.textContent;
-            
-            // Update font family
-            document.getElementById('fontFamily').value = computedStyle.fontFamily.split(',')[0].replace(/'/g, '');
-            
-            // Update font size
-            const fontSize = parseInt(computedStyle.fontSize);
-            document.getElementById('fontSize').value = fontSize;
-            document.getElementById('fontSizeValue').textContent = fontSize + 'px';
-            
-            // Update colors
-            document.getElementById('textColor').value = rgbToHex(computedStyle.color);
-            document.getElementById('bgColor').value = rgbToHex(computedStyle.backgroundColor);
-            
-            // Update spacing
-            const padding = parseInt(computedStyle.padding) || 0;
-            document.getElementById('padding').value = padding;
-            document.getElementById('paddingValue').textContent = padding + 'px';
-        }
-
-        // Helper Functions
-        function rgbToHex(rgb) {
-            if (!rgb || rgb === 'rgba(0, 0, 0, 0)') return '#ffffff';
-            
-            const rgbMatch = rgb.match(/\d+/g);
-            if (!rgbMatch) return '#000000';
-            
-            const r = parseInt(rgbMatch[0]);
-            const g = parseInt(rgbMatch[1]);
-            const b = parseInt(rgbMatch[2]);
-            
-            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-        }
-
-        // Element Updates
-        function updateElementText(value) {
-            if (selectedElement) {
-                selectedElement.textContent = value;
-                saveCurrentState();
-            }
-        }
-
-        function updateElementLink(value) {
-            if (selectedElement && selectedElement.tagName === 'A') {
-                selectedElement.href = value;
-                saveCurrentState();
-            }
-        }
-
-        function updateFontFamily(value) {
-            if (selectedElement) {
-                selectedElement.style.fontFamily = value;
-                saveCurrentState();
-            }
-        }
-
-        function updateFontSize(value) {
-            if (selectedElement) {
-                selectedElement.style.fontSize = value + 'px';
-                document.getElementById('fontSizeValue').textContent = value + 'px';
-                saveCurrentState();
-            }
-        }
-
-        function toggleFontWeight(weight) {
-            if (selectedElement) {
-                selectedElement.style.fontWeight = selectedElement.style.fontWeight === weight ? 'normal' : weight;
-                saveCurrentState();
-            }
-        }
-
-        function toggleFontStyle(style) {
-            if (selectedElement) {
-                selectedElement.style.fontStyle = selectedElement.style.fontStyle === style ? 'normal' : style;
-                saveCurrentState();
-            }
-        }
-
-        function updateTextColor(color) {
-            if (selectedElement) {
-                selectedElement.style.color = color;
-                saveCurrentState();
-            }
-        }
-
-        function updateBgColor(color) {
-            if (selectedElement) {
-                selectedElement.style.backgroundColor = color;
-                saveCurrentState();
-            }
-        }
-
-        function updateBorderColor(color) {
-            if (selectedElement) {
-                selectedElement.style.borderColor = color;
-                saveCurrentState();
-            }
-        }
-
-        function updatePadding(value) {
-            if (selectedElement) {
-                selectedElement.style.padding = value + 'px';
-                document.getElementById('paddingValue').textContent = value + 'px';
-                saveCurrentState();
-            }
-        }
-
-        function updateMargin(value) {
-            if (selectedElement) {
-                selectedElement.style.margin = value + 'px';
-                document.getElementById('marginValue').textContent = value + 'px';
-                saveCurrentState();
-            }
-        }
-
-        function updateBorderWidth(value) {
-            if (selectedElement) {
-                selectedElement.style.borderWidth = value + 'px';
-                selectedElement.style.borderStyle = 'solid';
-                document.getElementById('borderWidthValue').textContent = value + 'px';
-                saveCurrentState();
-            }
-        }
-
-        function updateBorderRadius(value) {
-            if (selectedElement) {
-                selectedElement.style.borderRadius = value + 'px';
-                document.getElementById('borderRadiusValue').textContent = value + 'px';
-                saveCurrentState();
-            }
-        }
-
-        function updateOpacity(value) {
-            if (selectedElement) {
-                selectedElement.style.opacity = value / 100;
-                document.getElementById('opacityValue').textContent = value + '%';
-                saveCurrentState();
-            }
-        }
-
-        function toggleShadow(type) {
-            if (!selectedElement) return;
-            
-            switch(type) {
-                case 'none':
-                    selectedElement.style.boxShadow = 'none';
-                    break;
-                case 'small':
-                    selectedElement.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-                    break;
-                case 'large':
-                    selectedElement.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
-                    break;
-            }
-            saveCurrentState();
-        }
-
-        // Device Controls
-        function setDevice(device) {
-            currentDevice = device;
-            
-            // Update button states
-            document.querySelectorAll('.device-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Update canvas
-            const canvas = document.getElementById('canvasContainer');
-            canvas.className = `canvas-container ${device}`;
-            
-            showNotification(`מעבר למצב ${device === 'desktop' ? 'מחשב' : device === 'tablet' ? 'טאבלט' : 'מובייל'}`, 'info');
-        }
-
-        function updateZoom(value) {
-            zoomLevel = value;
-            document.getElementById('zoomValue').textContent = value + '%';
-            
-            const canvas = document.getElementById('canvasContainer');
-            canvas.style.transform = `scale(${value / 100})`;
-        }
-
-        // Components
-        function addComponent(type) {
-            if (!currentWebsite) {
-                showNotification('בחר אתר תחילה', 'warning');
-                return;
-            }
-
-            showNotification(`מוסיף רכיב: ${type}`, 'info');
-            
-            const frame = document.getElementById('previewFrame');
-            if (!frame.contentDocument) return;
-
-            let newElement;
-            
-            switch(type) {
-                case 'text':
-                    newElement = frame.contentDocument.createElement('p');
-                    newElement.className = 'editable';
-                    newElement.dataset.type = 'text';
-                    newElement.textContent = 'טקסט חדש - לחץ כפול לעריכה';
-                    newElement.style.cssText = 'padding: 20px; margin: 10px; font-size: 16px; color: #333;';
-                    break;
-                    
-                case 'hero':
-                    newElement = frame.contentDocument.createElement('section');
-                    newElement.className = 'hero editable';
-                    newElement.dataset.type = 'section';
-                    newElement.innerHTML = `
-                        <h1 class="editable" data-type="text">כותרת ראשית</h1>
-                        <p class="editable" data-type="text">תיאור קצר ומרשים</p>
-                        <button class="cta-button editable" data-type="text">פעולה</button>
-                    `;
-                    break;
-                    
-                case 'image':
-                    newElement = frame.contentDocument.createElement('img');
-                    newElement.className = 'editable';
-                    newElement.dataset.type = 'image';
-                    newElement.src = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop';
-                    newElement.alt = 'תמונה';
-                    newElement.style.cssText = 'width: 100%; max-width: 600px; height: auto; border-radius: 10px; margin: 20px 0;';
-                    break;
-                    
-                case 'button':
-                    newElement = frame.contentDocument.createElement('button');
-                    newElement.className = 'cta-button editable';
-                    newElement.dataset.type = 'text';
-                    newElement.textContent = 'כפתור חדש';
-                    break;
-                    
-                default:
-                    showNotification(`רכיב ${type} יפותח בגרסה הבאה`, 'info');
-                    return;
-            }
-            
-            // Add to body
-            frame.contentDocument.body.appendChild(newElement);
-            
-            // Setup editable
-            setupEditableElements();
-            
-            // Select new element
-            selectElement(newElement);
-            
-            showNotification(`רכיב ${type} נוסף בהצלחה!`, 'success');
-        }
-
-        // Pages Management
-        function addNewPage() {
-            const pageName = prompt('שם הדף החדש:');
-            if (!pageName) return;
-            
-            const pagesList = document.getElementById('pagesList');
-            const newPage = document.createElement('div');
-            newPage.className = 'page-item';
-            newPage.innerHTML = `
-                <span>${pageName}</span>
-                <div class="page-controls">
-                    <button title="ערוך"><i class="fas fa-edit"></i></button>
-                    <button title="שכפל"><i class="fas fa-copy"></i></button>
-                    <button title="מחק"><i class="fas fa-trash"></i></button>
-                </div>
-            `;
-            
-            pagesList.appendChild(newPage);
-            showNotification(`דף "${pageName}" נוסף בהצלחה!`, 'success');
-        }
-
-        // Media Management
-        function uploadMedia() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*,video/*';
-            input.multiple = true;
-            
-            input.onchange = function(e) {
-                const files = Array.from(e.target.files);
-                files.forEach(file => {
-                    if (file.type.startsWith('image/')) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            addMediaItem(file.name, e.target.result, 'image');
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-                showNotification(`${files.length} קבצים הועלו בהצלחה!`, 'success');
+        // Helper functions for content generation
+        function getServiceIcon(category, index) {
+            const icons = {
+                'רפואה אסתטית': ['user-md', 'syringe', 'eye', 'hand-sparkles'],
+                'מאמן כושר': ['dumbbell', 'heartbeat', 'apple-alt', 'chart-line'],
+                'יוגה ומדיטציה': ['leaf', 'om', 'heart', 'moon'],
+                'תזונאית קלינית': ['apple-alt', 'weight', 'calculator', 'clipboard-list'],
+                'עורכי דין': ['gavel', 'balance-scale', 'file-contract', 'handshake'],
+                'חשבת שכר': ['calculator', 'file-invoice', 'chart-pie', 'money-check'],
+                'יופי ועיצוב שיער': ['cut', 'spray-can', 'hand-sparkles', 'star'],
+                'מורה פרטית': ['graduation-cap', 'book', 'pencil-alt', 'trophy'],
+                'אסתטיקה רפואית': ['user-md', 'magic', 'gem', 'sparkles'],
+                'נופש ואירועים': ['plane', 'glass-cheers', 'map', 'star'],
+                'נדל"ן יוקרה': ['home', 'key', 'chart-line', 'handshake']
             };
             
-            input.click();
+            const categoryIcons = icons[category] || ['star', 'heart', 'gem', 'magic'];
+            return categoryIcons[index % categoryIcons.length];
         }
 
-        function addMediaItem(name, src, type) {
-            const mediaGrid = document.getElementById('mediaGrid');
-            const mediaItem = document.createElement('div');
-            mediaItem.className = 'media-item';
-            mediaItem.onclick = () => selectMedia(name);
-            
-            if (type === 'image') {
-                mediaItem.innerHTML = `
-                    <img src="${src}" alt="${name}">
-                    <small>${name}</small>
-                `;
-            }
-            
-            mediaGrid.appendChild(mediaItem);
-        }
-
-        function selectMedia(mediaId) {
-            if (selectedElement && selectedElement.tagName === 'IMG') {
-                selectedElement.src = `https://images.unsplash.com/photo-${Math.random().toString(36).substr(2, 9)}?w=600&h=400&fit=crop`;
-                showNotification('תמונה הוחלפה בהצלחה!', 'success');
-                saveCurrentState();
-            } else {
-                showNotification('בחר תמונה באתר תחילה', 'warning');
-            }
-        }
-
-        // AI Functions
-        function toggleAI() {
-            aiActive = !aiActive;
-            const aiChat = document.getElementById('aiChat');
-            aiChat.classList.toggle('active', aiActive);
-        }
-
-        function sendAIMessage() {
-            const input = document.getElementById('aiInput');
-            const message = input.value.trim();
-            if (!message) return;
-            
-            const messagesContainer = document.getElementById('aiMessages');
-            
-            // Add user message
-            const userMessage = document.createElement('div');
-            userMessage.style.cssText = 'background: #667eea; color: white; padding: 10px; border-radius: 8px; margin-bottom: 10px; text-align: right;';
-            userMessage.textContent = message;
-            messagesContainer.appendChild(userMessage);
-            
-            // Add AI response
-            setTimeout(() => {
-                const aiResponse = document.createElement('div');
-                aiResponse.style.cssText = 'background: #f0f0f0; padding: 10px; border-radius: 8px; margin-bottom: 10px;';
-                aiResponse.textContent = getAIResponse(message);
-                messagesContainer.appendChild(aiResponse);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }, 1000);
-            
-            input.value = '';
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function getAIResponse(message) {
-            const responses = [
-                'זה רעיון מעולה! בואו נוסיף את זה לאתר.',
-                'אני ממליץ לשנות את הצבעים להרמוניה יותר טובה.',
-                'תוכל להוסיף גלריית תמונות כאן, זה יעשה רושם!',
-                'הטקסט הזה מושלם - רק צריך להדגיש אותו יותר.',
-                'בואו נוסיף אנימציה עדינה לרכיב הזה.',
-                'אני חושב שכפתור קריאה לפעולה כאן יהיה מעולה.',
-                'החלק הזה נראה טוב, אבל אפשר לשפר את הרווחים.',
-                'מה דעתך להוסיף סקציית המלצות לקוחות?',
-            ];
-            return responses[Math.floor(Math.random() * responses.length)];
-        }
-
-        function aiOptimize() {
-            showLoading(true);
-            setTimeout(() => {
-                showLoading(false);
-                showNotification('AI ביצע אופטימיזציה למהירות וביצועים!', 'success');
-            }, 2000);
-        }
-
-        function aiGenerateContent() {
-            if (!selectedElement) {
-                showNotification('בחר אלמנט טקסט תחילה', 'warning');
-                return;
-            }
-            
-            const suggestions = [
-                'שירות מקצועי ואמין עם ניסיון של שנים רבות בתחום',
-                'פתרונות מותאמים אישית לכל לקוח ולקוח',
-                'צוות מומחים עם הכשרה מתקדמת ושירות ברמה הגבוהה ביותר',
-                'יעילות מקסימלית ותוצאות מדהימות בזמן הקצר ביותר',
-                'שביעות רצון מלאה מובטחת עם אחריות מלאה על השירות'
-            ];
-            
-            const newContent = suggestions[Math.floor(Math.random() * suggestions.length)];
-            selectedElement.textContent = newContent;
-            document.getElementById('elementText').value = newContent;
-            
-            showNotification('AI יצר תוכן חדש!', 'success');
-            saveCurrentState();
-        }
-
-        function aiColorScheme() {
-            const colors = [
-                ['#667eea', '#764ba2'], // Purple
-                ['#f093fb', '#f5576c'], // Pink
-                ['#4facfe', '#00f2fe'], // Blue
-                ['#43e97b', '#38f9d7'], // Green
-                ['#fa709a', '#fee140'], // Orange
-                ['#a8edea', '#fed6e3'], // Pastel
-                ['#667db6', '#0082c8'], // Professional
-                ['#ff9a9e', '#fecfef']  // Soft
-            ];
-            
-            const selectedColors = colors[Math.floor(Math.random() * colors.length)];
-            
-            if (selectedElement) {
-                selectedElement.style.background = `linear-gradient(45deg, ${selectedColors[0]}, ${selectedColors[1]})`;
-                selectedElement.style.color = 'white';
-                showNotification('AI יצר ערכת צבעים חדשה!', 'success');
-                saveCurrentState();
-            } else {
-                showNotification('בחר אלמנט תחילה', 'warning');
-            }
-        }
-
-        // Save/Load System
-        function saveCurrentState() {
-            if (!currentWebsite) return;
-            
-            const frame = document.getElementById('previewFrame');
-            if (frame.contentDocument) {
-                const state = {
-                    website: currentWebsite,
-                    html: frame.contentDocument.documentElement.outerHTML,
-                    timestamp: Date.now()
-                };
-                
-                undoStack.push(state);
-                redoStack = []; // Clear redo stack
-                
-                // Limit undo stack size
-                if (undoStack.length > 50) {
-                    undoStack.shift();
-                }
-            }
-        }
-
-        function undoAction() {
-            if (undoStack.length > 1) {
-                const currentState = undoStack.pop();
-                redoStack.push(currentState);
-                
-                const previousState = undoStack[undoStack.length - 1];
-                restoreState(previousState);
-                
-                showNotification('פעולה בוטלה', 'info');
-            } else {
-                showNotification('אין פעולות לביטול', 'warning');
-            }
-        }
-
-        function redoAction() {
-            if (redoStack.length > 0) {
-                const state = redoStack.pop();
-                undoStack.push(state);
-                restoreState(state);
-                
-                showNotification('פעולה שוחזרה', 'info');
-            } else {
-                showNotification('אין פעולות לשחזור', 'warning');
-            }
-        }
-
-        function restoreState(state) {
-            const frame = document.getElementById('previewFrame');
-            frame.srcdoc = state.html;
-            frame.onload = function() {
-                setupEditableElements();
+        function getWebsiteImage(category) {
+            const images = {
+                'רפואה אסתטית': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop',
+                'מאמן כושר': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
+                'יוגה ומדיטציה': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop',
+                'תזונאית קלינית': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop',
+                'עורכי דין': 'https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?w=600&h=400&fit=crop',
+                'חשבת שכר': 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop',
+                'יופי ועיצוב שיער': 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop',
+                'מורה פרטית': 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop',
+                'אסתטיקה רפואית': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop',
+                'נופש ואירועים': 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=400&fit=crop',
+                'נדל"ן יוקרה': 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop'
             };
-        }
-
-        function autoSave() {
-            if (currentWebsite) {
-                saveProject(true);
-            }
-        }
-
-        function saveProject(isAuto = false) {
-            if (!currentWebsite) {
-                showNotification('אין אתר לשמירה', 'warning');
-                return;
-            }
             
-            showLoading(true);
-            
-            setTimeout(() => {
-                const frame = document.getElementById('previewFrame');
-                const html = frame.contentDocument ? frame.contentDocument.documentElement.outerHTML : '';
-                
-                // Save to localStorage (in real app, save to server)
-                localStorage.setItem(`website_${currentWebsite}`, html);
-                localStorage.setItem(`website_${currentWebsite}_timestamp`, Date.now());
-                
-                showLoading(false);
-                
-                if (!isAuto) {
-                    showNotification('הפרויקט נשמר בהצלחה!', 'success');
-                }
-            }, 1000);
-        }
-
-        function publishSite() {
-            if (!currentWebsite) {
-                showNotification('בחר אתר תחילה', 'warning');
-                return;
-            }
-            
-            showLoading(true);
-            
-            setTimeout(() => {
-                showLoading(false);
-                showNotification('האתר פורסם בהצלחה! זמין בכתובת: example.com', 'success');
-            }, 3000);
-        }
-
-        function previewSite() {
-            if (!currentWebsite) {
-                showNotification('בחר אתר תחילה', 'warning');
-                return;
-            }
-            
-            const frame = document.getElementById('previewFrame');
-            if (frame.contentDocument) {
-                const html = frame.contentDocument.documentElement.outerHTML;
-                const blob = new Blob([html], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                window.open(url, '_blank');
-                showNotification('תצוגה מקדימה נפתחה', 'info');
-            }
-        }
-
-        // Utility Functions
-        function showNotification(message, type = 'info') {
-            const notification = document.getElementById('notification');
-            const text = document.getElementById('notificationText');
-            
-            text.textContent = message;
-            notification.className = `notification ${type} show`;
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
-        }
-
-        function showLoading(show) {
-            const loading = document.getElementById('loading');
-            loading.classList.toggle('show', show);
-        }
-
-        // Keyboard Shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey || e.metaKey) {
-                switch(e.key) {
-                    case 's':
-                        e.preventDefault();
-                        saveProject();
-                        break;
-                    case 'z':
-                        e.preventDefault();
-                        if (e.shiftKey) {
-                            redoAction();
-                        } else {
-                            undoAction();
-                        }
-                        break;
-                }
-            }
-        });
-
-        // Console message
-        console.log('🚀 WebMaster Pro Ultimate Editor initialized!');
-        console.log('💎 Features: Visual Editor, AI Assistant, Media Manager, 11 Professional Websites');
-        console.log('💰 Total Value: ₪26,900');
-    </script>
-</body>
-</html>
+            return images[category] || 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43
