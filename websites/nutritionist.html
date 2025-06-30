@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ד"ר שרה כהן | תזונאית קלינית מומחית | ייעוץ תזונה מקצועי</title>
+    <meta name="description" content="ד"ר שרה כהן - תזונאית קלינית מומחית עם 18 שנות ניסיון. ייעוץ תזונה אישי, תפריטים מותאמים וליווי צמוד לשינוי אורח חיים בריא.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Assistant:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #059669;
+            --secondary-green: #10b981;
+            --accent-orange: #ea580c;
+            --light-green: #d1fae5;
+            --text-dark: #064e3b;
+            --text-light: #6b7280;
+            --bg-white: #ffffff;
+            --bg-light: #f0fdf4;
+            --border-light: #bbf7d0;
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-green);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, 
+                var(--primary-green) 0%, 
+                var(--secondary-green) 50%, 
+                #34d399 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="leaf" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23leaf)"/></svg>');
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Heebo', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-orange);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #c2410c;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-green);
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Heebo', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent-orange);
+            border-radius: 2px;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--secondary-green);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-green);
+        }
+
+        .service-card h3 {
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .service-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-top: 1rem;
+        }
+
+        .service-duration {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* About */
+        .about {
+            background: var(--bg-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .qualifications {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .qualification-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .qualification-icon {
+            font-size: 2rem;
+            color: var(--secondary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .qualification-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--bg-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 4rem;
+            color: var(--light-green);
+            font-family: serif;
+        }
+
+        .testimonial-text {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-info h4 {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info span {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            color: var(--accent-orange);
+            margin-left: auto;
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            padding: 2rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--accent-orange);
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* BMI Calculator */
+        .bmi-calculator {
+            background: var(--bg-light);
+        }
+
+        .calculator-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-light);
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .bmi-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--light-green);
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .bmi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .bmi-status {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .bmi-advice {
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Floating Buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-medium);
+            transition: all 0.3s ease;
+        }
+
+        .floating-btn.whatsapp {
+            background: #25d366;
+        }
+
+        .floating-btn.phone {
+            background: var(--secondary-green);
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-strong);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .qualifications {
+                grid-template-columns: 1fr;
+            }
+
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Scroll Animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">ד"ר שרה כהן</a>
+            <ul class="nav-links">
+                <li><a href="#home">בית</a></li>
+                <li><a href="#services">שירותים</a></li>
+                <li><a href="#about">אודות</a></li>
+                <li><a href="#calculator">מחשבון BMI</a></li>
+                <li><a href="#contact">צור קשר</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>ד"ר שרה כהן 🥗</h1>
+            <p class="subtitle">תזונאית קלינית מומחית - המסע שלך לחיים בריאים יותר</p>
+            
+            <div class="hero-stats">
+                <div class="stat-card scroll-animate">
+                    <span class="stat-number">18+</span>
+                    <div class="stat-label">שנות ניסיון</div>
+                </div>
+                <div class="stat-card scroll-animate">
+                    <span class="stat-number">2,800+</span>
+                    <div class="stat-label">לקוחות הצליחו</div>
+                </div>
+                <div class="stat-card scroll-animate">
+                    <span class="stat-number">94%</span>
+                    <div class="stat-label">הגיעו למטרה</div>
+                </div>
+                <div class="stat-card scroll-animate">
+                    <span class="stat-number">15</span>
+                    <div class="stat-label">ק"ג ממוצע ירידה</div>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">📞 קבע פגישה</a>
+                <a href="#calculator" class="btn btn-secondary">📊 מחשבון BMI</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title scroll-animate">שירותי תזונה מקצועיים</h2>
+            <div class="services-grid">
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">🍎</div>
+                    <h3>ייעוץ תזונה אישי</h3>
+                    <p>ייעוץ תזונה מותאם אישית עם תפריט מפורט, רשימת קניות וליווי צמוד לאורך הדרך.</p>
+                    <div class="service-price">₪350</div>
+                    <div class="service-duration">פגישה של 90 דקות</div>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">⚖️</div>
+                    <h3>תוכנית הרזיה</h3>
+                    <p>תוכנית הרזיה בריאה ומדעית עם ליווי שבועי ומעקב צמוד אחר התקדמות.</p>
+                    <div class="service-price">₪1,200</div>
+                    <div class="service-duration">חבילת 3 חודשים</div>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">💪</div>
+                    <h3>תזונה ספורטיבית</h3>
+                    <p>תפריטים מותאמים לספורטאים וחובבי כושר לשיפור ביצועים ובניית מסת שריר.</p>
+                    <div class="service-price">₪450</div>
+                    <div class="service-duration">פגישה + תוכנית לחודש</div>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">🤱</div>
+                    <h3>תזונה בהריון</h3>
+                    <p>ליווי תזונתי מקצועי בהריון והנקה להבטחת בריאות האם והתינוק.</p>
+                    <div class="service-price">₪400</div>
+                    <div class="service-duration">פגישה + מעקב חודשי</div>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">🍼</div>
+                    <h3>תזונת ילדים</h3>
+                    <p>תוכניות תזונה מותאמות לילדים עם בעיות אכילה, אלרגיות או צרכים מיוחדים.</p>
+                    <div class="service-price">₪320</div>
+                    <div class="service-duration">פגישה משפחתית 75 דקות</div>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">⚕️</div>
+                    <h3>תזונה רפואית</h3>
+                    <p>ליווי תזונתי למחלות כרוניות - סכרת, לחץ דם, כולסטרול גבוה ובעיות עיכול.</p>
+                    <div class="service-price">₪380</div>
+                    <div class="service-duration">פגישה + תוכנית מותאמת</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BMI Calculator -->
+    <section id="calculator" class="section bmi-calculator">
+        <div class="container">
+            <h2 class="section-title scroll-animate">מחשבון BMI</h2>
+            <div class="calculator-container scroll-animate">
+                <h3 style="margin-bottom: 1.5rem; text-align: center; color: var(--text-dark);">חשב את מדד מסת הגוף שלך</h3>
+                
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="height">גובה (ס"מ):</label>
+                        <input type="number" id="height" placeholder="לדוגמה: 170" min="100" max="250">
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">משקל (ק"ג):</label>
+                        <input type="number" id="weight" placeholder="לדוגמה: 70" min="30" max="300">
+                    </div>
+                </div>
+
+                <button onclick="calculateBMI()" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">🧮 חשב BMI</button>
+
+                <div id="bmi-result" class="bmi-result">
+                    <div class="bmi-value" id="bmi-value"></div>
+                    <div class="bmi-status" id="bmi-status"></div>
+                    <div class="bmi-advice" id="bmi-advice"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title scroll-animate">אודות ד"ר שרה כהן</h2>
+            <div class="about-content">
+                <div class="about-text scroll-animate">
+                    <h3>18 שנות מצוינות בתחום התזונה</h3>
+                    <p>ד"ר שרה כהן היא תזונאית קלינית מומחית עם תואר דוקטור בתזונה קלינית מהאוניברסיטה העברית. במשך 18 שנה היא עוזרת לאלפי לקוחות להשיג את המטרות התזונתיות שלהם ולשפר את איכות החיים שלהם.</p>
+                    <p>השיטה הייחודית שלה משלבת מדע מתקדם עם גישה אישית וחמה, תוך התאמה מלאה לאורח החיים, המצב הבריאותי והעדפות האישיות של כל לקוח.</p>
+                    <p>ד"ר כהן מתמחה בתזונה רפואית, הרזיה בריאה, תזונה ספורטיבית ותזונת ילדים. היא מרצה בקביעות בכנסים מקצועיים ומחברת מאמרים מדעיים בתחום התזונה.</p>
+                </div>
+                <div class="qualifications scroll-animate">
+                    <div class="qualification-item">
+                        <div class="qualification-icon">🎓</div>
+                        <div class="qualification-text">דוקטור בתזונה קלינית</div>
+                    </div>
+                    <div class="qualification-item">
+                        <div class="qualification-icon">🏥</div>
+                        <div class="qualification-text">רישיון משרד הבריאות</div>
+                    </div>
+                    <div class="qualification-item">
+                        <div class="qualification-icon">🥇</div>
+                        <div class="qualification-text">פרס מצוינות מקצועית</div>
+                    </div>
+                    <div class="qualification-item">
+                        <div class="qualification-icon">📚</div>
+                        <div class="qualification-text">מחברת 15+ מאמרים</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title scroll-animate">המלצות מלקוחות</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">ד"ר שרה שינתה לי את החיים! ירדתי 18 קילו בצורה בריאה ונכונה. הליווי שלה מקצועי וחם, והתפריטים טעימים ומגוונים. ממליצה בחום!</p>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>מיכל לוי</h4>
+                            <span>גילאי 34, אמא לשלושה</span>
+                        </div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">כאצן מרתון, הייתי זקוק לתזונה מדויקת לשיפור הביצועים. ד"ר כהן בנתה לי תוכנית שהשפרה את זמני הריצה ב-12%. מקצועיות ברמה הגבוהה ביותר!</p>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>דני רוזן</h4>
+                            <span>רץ מרתון, גיל 28</span>
+                        </div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">בהריון הראשון שלי הייתי מאוד מבולבלת לגבי תזונה נכונה. ד"ר שרה ליוותה אותי בכל השלבים עם סבלנות ומקצועיות. תודה על הליווי המופלא!</p>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>נועה כהן</h4>
+                            <span>אמא טרייה, גיל 30</span>
+                        </div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title scroll-animate" style="color: white;">צור קשר</h2>
+            <div class="contact-content">
+                <div class="contact-info scroll-animate">
+                    <h3 style="margin-bottom: 2rem; font-size: 1.5rem;">פרטי התקשרות</h3>
+                    
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <strong>כתובת:</strong><br>
+                            רחוב ארלוזורוב 15, רמת גן<br>
+                            קומה 3, חדר 12
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <strong>טלפון:</strong><br>
+                            03-9876543<br>
+                            052-1234567 (נייד)
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <strong>אימייל:</strong><br>
+                            dr.sarah.nutrition@gmail.com
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-icon">🕐</span>
+                        <div>
+                            <strong>שעות קבלה:</strong><br>
+                            א'-ה': 08:00-19:00<br>
+                            ו': 08:00-13:00
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form scroll-animate" onsubmit="sendToWhatsApp(event)">
+                    <h3 style="margin-bottom: 1.5rem;">קבע פגישת ייעוץ</h3>
+                    
+                    <div class="form-group">
+                        <label for="name">שם מלא:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">טלפון:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">גיל:</label>
+                        <input type="number" id="age" name="age" min="5" max="120" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">סוג השירות:</label>
+                        <select id="service" name="service" required>
+                            <option value="">בחר שירות</option>
+                            <option value="ייעוץ תזונה אישי">ייעוץ תזונה אישי - ₪350</option>
+                            <option value="תוכנית הרזיה">תוכנית הרזיה - ₪1,200</option>
+                            <option value="תזונה ספורטיבית">תזונה ספורטיבית - ₪450</option>
+                            <option value="תזונה בהריון">תזונה בהריון - ₪400</option>
+                            <option value="תזונת ילדים">תזונת ילדים - ₪320</option>
+                            <option value="תזונה רפואית">תזונה רפואית - ₪380</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goals">המטרות שלך:</label>
+                        <textarea id="goals" name="goals" placeholder="תאר את המטרות התזונתיות שלך, בעיות בריאות קיימות או צרכים מיוחדים..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">📲 שלח בקשה</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">בית</a>
+                <a href="#services">שירותים</a>
+                <a href="#about">אודות</a>
+                <a href="#calculator">מחשבון BMI</a>
+                <a href="#contact">צור קשר</a>
+                <a href="#">מדיניות פרטיות</a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 ד"ר שרה כהן - תזונאית קלינית. כל הזכויות שמורות.</p>
+                <p>רישיון משרד הבריאות: 789456 | חברת התזונאים הקלינים בישראל</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/972521234567" class="floating-btn whatsapp" title="וואטסאפ">💬</a>
+        <a href="tel:0521234567" class="floating-btn phone" title="התקשר">📞</a>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // BMI Calculator
+        function calculateBMI() {
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const resultDiv = document.getElementById('bmi-result');
+            const bmiValue = document.getElementById('bmi-value');
+            const bmiStatus = document.getElementById('bmi-status');
+            const bmiAdvice = document.getElementById('bmi-advice');
+
+            if (!height || !weight) {
+                alert('אנא מלא את כל השדות');
+                return;
+            }
+
+            const heightInMeters = height / 100;
+            const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
+
+            let status, advice, color;
+
+            if (bmi < 18.5) {
+                status = 'משקל נמוך';
+                advice = 'המשקל שלך נמוך מהנורמה. מומלץ להתייעץ עם תזונאית לגבי תוכנית להעלאת משקל בריאה.';
+                color = '#3b82f6';
+            } else if (bmi >= 18.5 && bmi < 25) {
+                status = 'משקל תקין';
+                advice = 'המשקל שלך בטווח הבריא! המשך לשמור על אורח חיים בריא ופעילות גופנית סדירה.';
+                color = '#059669';
+            } else if (bmi >= 25 && bmi < 30) {
+                status = 'עודף משקל';
+                advice = 'יש לך עודף משקל קל. מומלץ לפנות לתזונאית לבניית תוכנית הרזיה בריאה ומתאימה.';
+                color = '#ea580c';
+            } else {
+                status = 'השמנה';
+                advice = 'המשקל שלך מעל לטווח הבריא. חשוב מאוד להתייעץ עם תזונאית לבניית תוכנית הרזיה מקצועית.';
+                color = '#dc2626';
+            }
+
+            bmiValue.textContent = bmi;
+            bmiStatus.textContent = status;
+            bmiStatus.style.color = color;
+            bmiAdvice.textContent = advice;
+            resultDiv.style.display = 'block';
+        }
+
+        // WhatsApp form submission
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const age = document.getElementById('age').value;
+            const service = document.getElementById('service').value;
+            const goals = document.getElementById('goals').value;
+            
+            const whatsappMessage = `שלום ד"ר שרה,
+
+👤 שם: ${name}
+📞 טלפון: ${phone}
+🎂 גיל: ${age}
+🍎 שירות מבוקש: ${service}
+
+🎯 המטרות שלי:
+${goals}
+
+אשמח לקבוע פגישת ייעוץ. תודה!`;
+            
+            const whatsappUrl = `https://wa.me/972521234567?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Console log for updates
+        console.log('🥗 ד"ר שרה כהן - תזונאית קלינית - האתר עודכן בהצלחה!');
+        console.log('✅ עיצוב בריאותי ונקי ברמה מקצועית');
+        console.log('🍎 6 שירותי תזונה מקצועיים עם מחירים');
+        console.log('🧮 מחשבון BMI אינטראקטיבי');
+        console.log('💰 מחירים: ₪320-1,200 לפי שירות');
+        console.log('📱 רספונסיבי ומותאם לכל מכשיר');
+    </script>
+</body>
+</html>
