@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - אדיטור ויזואלי מקצועי</title>
+    <title>WebMaster Pro - אתרים מקצועיים ברמה עולמית</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
+        :root {
+            --primary: #000000;
+            --secondary: #ffffff;
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            --shadow-subtle: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-small: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-large: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-extra: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,439 +47,489 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            height: 100vh;
-            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            color: var(--gray-900);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-feature-settings: "cv11", "ss01";
+            font-variation-settings: "opsz" 32;
         }
 
         /* Header */
         .header {
-            height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            z-index: 1000;
         }
 
         .logo {
-            font-size: 20px;
-            font-weight: 700;
-            background: linear-gradient(45deg, #4f46e5, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
         }
 
-        .header-controls {
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-lg);
+            color: var(--gray-700);
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 0.5rem;
+            font-size: 0.95rem;
         }
 
-        .website-selector {
-            padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+        .nav-btn:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-400);
+            transform: translateY(-1px);
+        }
+
+        .nav-btn.primary {
+            background: var(--primary);
+            border-color: var(--primary);
             color: white;
+        }
+
+        .nav-btn.primary:hover {
+            background: var(--gray-800);
+            border-color: var(--gray-800);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--gray-600);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+            color: var(--gray-500);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        /* Filters */
+        .filters-section {
+            padding: 2rem;
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .filters {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-lg);
+            color: var(--gray-600);
+            padding: 0.75rem 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .search-box {
+            background: white;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-lg);
+            padding: 0.75rem 1rem;
+            color: var(--gray-900);
+            font-size: 0.95rem;
+            width: 300px;
+            transition: all 0.2s ease;
+        }
+
+        .search-box:focus {
             outline: none;
-            min-width: 200px;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+        }
+
+        .search-box::placeholder {
+            color: var(--gray-400);
+        }
+
+        /* Websites Grid */
+        .websites-section {
+            padding: 4rem 2rem 6rem;
+            background: white;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 2rem;
+        }
+
+        .website-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            group: hover;
+        }
+
+        .website-card:hover {
+            border-color: var(--gray-300);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-extra);
+        }
+
+        .website-image {
+            width: 100%;
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .website-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.1) 100%);
+            z-index: 1;
+        }
+
+        .website-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .website-badge.premium {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            border: none;
+        }
+
+        .website-badge.popular {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+        }
+
+        .website-content {
+            padding: 2rem;
+        }
+
+        .website-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .website-info {
+            flex: 1;
+        }
+
+        .website-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .website-category {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .website-price {
+            background: var(--gray-900);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-lg);
+            font-weight: 700;
+            font-size: 1rem;
+            white-space: nowrap;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .website-description {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .website-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: var(--gray-100);
+            color: var(--gray-600);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+        }
+
+        .website-actions {
+            display: flex;
+            gap: 0.75rem;
         }
 
         .action-btn {
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: white;
+            flex: 1;
+            background: transparent;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-lg);
+            color: var(--gray-700);
+            padding: 0.875rem 1rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
             text-decoration: none;
         }
 
         .action-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            background: var(--gray-50);
+            border-color: var(--gray-400);
+            transform: translateY(-1px);
         }
 
         .action-btn.primary {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            border-color: #4f46e5;
-        }
-
-        .action-btn.success {
-            background: linear-gradient(135deg, #10b981, #059669);
-            border-color: #10b981;
-        }
-
-        /* Layout */
-        .main-layout {
-            display: flex;
-            height: calc(100vh - 60px);
-        }
-
-        /* Left Sidebar */
-        .left-sidebar {
-            width: 280px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .sidebar-section {
-            margin-bottom: 30px;
-        }
-
-        .section-header {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Website Grid */
-        .website-grid {
-            display: grid;
-            gap: 10px;
-        }
-
-        .website-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .website-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .website-card.active {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            border-color: #4f46e5;
-        }
-
-        .website-card h4 {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .website-card .category {
-            font-size: 12px;
-            opacity: 0.8;
-            margin-bottom: 8px;
-        }
-
-        .website-card .price {
-            font-size: 16px;
-            font-weight: 700;
-            color: #10b981;
-        }
-
-        /* AI Panel */
-        .ai-panel {
-            background: rgba(79, 70, 229, 0.1);
-            border: 1px solid rgba(79, 70, 229, 0.3);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .ai-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .ai-input {
-            width: 100%;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            background: var(--primary);
+            border-color: var(--primary);
             color: white;
-            outline: none;
-            margin-bottom: 10px;
         }
 
-        .ai-suggestions {
-            display: grid;
-            gap: 8px;
-            margin-top: 15px;
+        .action-btn.primary:hover {
+            background: var(--gray-800);
+            border-color: var(--gray-800);
         }
 
-        .ai-suggestion {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .ai-suggestion:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Tools Panel */
-        .tool-panel {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .tool-group {
-            margin-bottom: 20px;
-        }
-
-        .tool-group h4 {
-            font-size: 14px;
-            margin-bottom: 10px;
-            opacity: 0.8;
-        }
-
-        .tool-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-            align-items: center;
-        }
-
-        .tool-row label {
-            font-size: 12px;
-            min-width: 60px;
-        }
-
-        .color-picker {
-            width: 40px;
-            height: 30px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .range-input {
-            flex: 1;
-        }
-
-        .text-input {
-            flex: 1;
-            padding: 6px 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            color: white;
-            outline: none;
-            font-size: 12px;
-        }
-
-        .tool-btn {
-            padding: 6px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            color: white;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .tool-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Center Area */
-        .center-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .preview-header {
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
-
-        .device-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .device-btn {
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            color: white;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .device-btn.active {
-            background: #4f46e5;
-            border-color: #4f46e5;
-        }
-
-        .preview-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .website-frame {
-            width: 100%;
-            height: 100%;
-            max-width: 1200px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-        .website-frame.tablet {
-            max-width: 768px;
-            height: 80%;
-        }
-
-        .website-frame.mobile {
-            max-width: 375px;
-            height: 70%;
-        }
-
-        /* Right Sidebar */
-        .right-sidebar {
-            width: 300px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .inspector-panel {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .inspector-tabs {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 20px;
-        }
-
-        .inspector-tab {
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            color: white;
-            cursor: pointer;
-            font-size: 12px;
-            flex: 1;
+        /* Footer */
+        .footer {
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+            padding: 4rem 2rem;
             text-align: center;
-            transition: all 0.3s ease;
         }
 
-        .inspector-tab.active {
-            background: #4f46e5;
-            border-color: #4f46e5;
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .inspector-content {
-            min-height: 200px;
+        .footer-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
         }
 
-        .property-item {
-            display: flex;
-            justify-content: space-between;
+        .footer-text {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            background: var(--primary);
+            border: none;
+            border-radius: var(--radius-xl);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
             align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 12px;
+            gap: 0.75rem;
         }
 
-        .property-label {
-            opacity: 0.8;
-        }
-
-        .property-value {
-            font-weight: 500;
-        }
-
-        /* Status Bar */
-        .status-bar {
-            height: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            font-size: 12px;
-        }
-
-        .status-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #10b981;
+        .cta-button:hover {
+            background: var(--gray-800);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-large);
         }
 
         /* Notifications */
         .notification {
             position: fixed;
-            top: 80px;
-            right: 20px;
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            border-radius: 8px;
+            top: 2rem;
+            right: 2rem;
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            padding: 1rem 1.5rem;
+            color: var(--gray-900);
+            font-weight: 500;
             z-index: 10000;
-            transform: translateX(400px);
+            transform: translateX(100%);
             transition: transform 0.3s ease;
-            max-width: 300px;
+            box-shadow: var(--shadow-large);
+            min-width: 320px;
+            max-width: 500px;
         }
 
         .notification.show {
@@ -453,976 +537,649 @@
         }
 
         .notification.success {
-            background: rgba(16, 185, 129, 0.9);
+            border-left: 4px solid var(--success);
         }
 
         .notification.error {
-            background: rgba(239, 68, 68, 0.9);
+            border-left: 4px solid var(--danger);
         }
 
-        .notification.info {
-            background: rgba(79, 70, 229, 0.9);
-        }
-
-        /* Loading */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top: 3px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .notification.warning {
+            border-left: 4px solid var(--warning);
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
-            .left-sidebar,
-            .right-sidebar {
-                width: 250px;
+        @media (max-width: 1024px) {
+            .websites-grid {
+                grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            }
+            
+            .hero-title {
+                font-size: 3rem;
             }
         }
 
-        @media (max-width: 900px) {
-            .left-sidebar,
-            .right-sidebar {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                z-index: 1000;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
             }
-
-            .left-sidebar.open,
-            .right-sidebar.open {
-                transform: translateX(0);
+            
+            .nav-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero {
+                padding: 4rem 1rem 3rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .websites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                justify-content: center;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .website-actions {
+                flex-direction: column;
             }
         }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .websites-section {
+                padding: 3rem 1rem 4rem;
+            }
+        }
+
+        /* Loading animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .website-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .website-card:nth-child(1) { animation-delay: 0.1s; }
+        .website-card:nth-child(2) { animation-delay: 0.2s; }
+        .website-card:nth-child(3) { animation-delay: 0.3s; }
+        .website-card:nth-child(4) { animation-delay: 0.4s; }
+        .website-card:nth-child(5) { animation-delay: 0.5s; }
+        .website-card:nth-child(6) { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-    </div>
-
-    <!-- Notification -->
-    <div class="notification" id="notification"></div>
-
     <!-- Header -->
     <header class="header">
-        <div class="logo">
-            <i class="fas fa-magic"></i>
-            WebMaster Pro
-        </div>
-
-        <div class="header-controls">
-            <select class="website-selector" id="websiteSelector" onchange="loadSelectedWebsite()">
-                <option value="">בחר אתר לעריכה...</option>
-            </select>
-
-            <button class="action-btn" onclick="previewWebsite()">
-                <i class="fas fa-eye"></i>
-                תצוגה מקדימה
-            </button>
-
-            <button class="action-btn success" onclick="saveWebsite()">
-                <i class="fas fa-save"></i>
-                שמור
-            </button>
-
-            <button class="action-btn primary" onclick="exportWebsite()">
-                <i class="fas fa-download"></i>
-                ייצא
-            </button>
+        <div class="header-content">
+            <div class="logo">WebMaster Pro</div>
+            
+            <div class="nav-actions">
+                <a href="#" class="nav-btn" onclick="openEditor()">
+                    <i class="fas fa-edit"></i>
+                    פתח עורך
+                </a>
+                <a href="#websites" class="nav-btn">
+                    <i class="fas fa-th-large"></i>
+                    אתרים
+                </a>
+                <a href="#" class="nav-btn primary">
+                    <i class="fas fa-rocket"></i>
+                    התחל עכשיו
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Layout -->
-    <div class="main-layout">
-        <!-- Left Sidebar -->
-        <aside class="left-sidebar">
-            <!-- Website Gallery -->
-            <section class="sidebar-section">
-                <div class="section-header">
-                    <i class="fas fa-globe-americas"></i>
-                    <span>האתרים שלי (11)</span>
-                </div>
-                <div class="website-grid" id="websiteGrid">
-                    <!-- Dynamic content -->
-                </div>
-            </section>
-
-            <!-- AI Assistant -->
-            <section class="sidebar-section">
-                <div class="ai-panel">
-                    <div class="ai-header">
-                        <i class="fas fa-robot"></i>
-                        <span>עוזר AI</span>
-                    </div>
-                    
-                    <input type="text" class="ai-input" id="aiInput" 
-                           placeholder="שאל אותי כל שאלה...">
-                    
-                    <button class="action-btn primary" onclick="sendAIMessage()" style="width: 100%;">
-                        <i class="fas fa-paper-plane"></i>
-                        שלח
-                    </button>
-                    
-                    <div class="ai-suggestions">
-                        <div class="ai-suggestion" onclick="askAI('שפר את העיצוב')">
-                            שפר את העיצוב
-                        </div>
-                        <div class="ai-suggestion" onclick="askAI('צור תוכן חדש')">
-                            צור תוכן חדש
-                        </div>
-                        <div class="ai-suggestion" onclick="askAI('אופטימיזציה')">
-                            אופטימיזציה
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Design Tools -->
-            <section class="sidebar-section">
-                <div class="tool-panel">
-                    <div class="section-header">
-                        <i class="fas fa-palette"></i>
-                        <span>כלי עיצוב</span>
-                    </div>
-
-                    <div class="tool-group">
-                        <h4>צבעים</h4>
-                        <div class="tool-row">
-                            <label>רקע:</label>
-                            <input type="color" class="color-picker" id="bgColor" value="#4f46e5" onchange="updateBackgroundColor(this.value)">
-                        </div>
-                        <div class="tool-row">
-                            <label>טקסט:</label>
-                            <input type="color" class="color-picker" id="textColor" value="#000000" onchange="updateTextColor(this.value)">
-                        </div>
-                    </div>
-
-                    <div class="tool-group">
-                        <h4>טיפוגרפיה</h4>
-                        <div class="tool-row">
-                            <label>גודל:</label>
-                            <input type="range" class="range-input" min="12" max="72" value="16" onchange="updateFontSize(this.value)">
-                        </div>
-                        <div class="tool-row">
-                            <button class="tool-btn" onclick="toggleBold()">
-                                <i class="fas fa-bold"></i> עבה
-                            </button>
-                            <button class="tool-btn" onclick="toggleItalic()">
-                                <i class="fas fa-italic"></i> נטוי
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="tool-group">
-                        <h4>פריסה</h4>
-                        <div class="tool-row">
-                            <button class="tool-btn" onclick="alignLeft()">
-                                <i class="fas fa-align-left"></i> שמאל
-                            </button>
-                            <button class="tool-btn" onclick="alignCenter()">
-                                <i class="fas fa-align-center"></i> מרכז
-                            </button>
-                            <button class="tool-btn" onclick="alignRight()">
-                                <i class="fas fa-align-right"></i> ימין
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </aside>
-
-        <!-- Center Area -->
-        <main class="center-area">
-            <div class="preview-header">
-                <div class="device-buttons">
-                    <button class="device-btn active" onclick="setDevice('desktop')">
-                        <i class="fas fa-desktop"></i> Desktop
-                    </button>
-                    <button class="device-btn" onclick="setDevice('tablet')">
-                        <i class="fas fa-tablet-alt"></i> Tablet
-                    </button>
-                    <button class="device-btn" onclick="setDevice('mobile')">
-                        <i class="fas fa-mobile-alt"></i> Mobile
-                    </button>
-                </div>
-
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span id="websiteName">בחר אתר לעריכה</span>
-                    <div class="status-indicator" id="connectionStatus"></div>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i>
+                11 אתרים מקצועיים מוכנים
             </div>
-
-            <div class="preview-container">
-                <iframe class="website-frame" id="websiteFrame" src="about:blank"></iframe>
-            </div>
-        </main>
-
-        <!-- Right Sidebar -->
-        <aside class="right-sidebar">
-            <div class="inspector-panel">
-                <div class="inspector-tabs">
-                    <button class="inspector-tab active" onclick="switchInspectorTab('properties')">מאפיינים</button>
-                    <button class="inspector-tab" onclick="switchInspectorTab('styles')">סגנונות</button>
-                    <button class="inspector-tab" onclick="switchInspectorTab('layers')">שכבות</button>
+            
+            <h1 class="hero-title">אתרים עסקיים ברמה עולמית</h1>
+            <p class="hero-subtitle">פלטפורמה מתקדמת לבניית אתרים מקצועיים עם עורך ויזואלי חכם</p>
+            <p class="hero-description">
+                בחר מתוך 11 עיצובים איכותיים, התאם אישית בעורך המתקדם והשק את האתר החדש שלך תוך 24 שעות
+            </p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">אתרים מוכנים</div>
                 </div>
-
-                <div class="inspector-content" id="inspectorContent">
-                    <div class="property-item">
-                        <span class="property-label">אלמנט נבחר:</span>
-                        <span class="property-value" id="selectedElement">אין</span>
-                    </div>
-                    <div class="property-item">
-                        <span class="property-label">סוג:</span>
-                        <span class="property-value" id="elementType">-</span>
-                    </div>
-                    <div class="property-item">
-                        <span class="property-label">מחלקה:</span>
-                        <span class="property-value" id="elementClass">-</span>
-                    </div>
-                    <div class="property-item">
-                        <span class="property-label">מידות:</span>
-                        <span class="property-value" id="elementDimensions">-</span>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number">24 שעות</div>
+                    <div class="stat-label">זמן הכנה</div>
                 </div>
-            </div>
-
-            <!-- Quick Actions -->
-            <section class="sidebar-section">
-                <div class="tool-panel">
-                    <div class="section-header">
-                        <i class="fas fa-lightning-bolt"></i>
-                        <span>פעולות מהירות</span>
-                    </div>
-
-                    <div style="display: grid; gap: 10px;">
-                        <button class="tool-btn" onclick="addSection()">
-                            <i class="fas fa-plus"></i> הוסף סקשן
-                        </button>
-                        <button class="tool-btn" onclick="duplicateElement()">
-                            <i class="fas fa-copy"></i> שכפל אלמנט
-                        </button>
-                        <button class="tool-btn" onclick="deleteElement()">
-                            <i class="fas fa-trash"></i> מחק אלמנט
-                        </button>
-                        <button class="tool-btn" onclick="undoChange()">
-                            <i class="fas fa-undo"></i> בטל פעולה
-                        </button>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">תחומי התמחות</div>
                 </div>
-            </section>
-        </aside>
-    </div>
-
-    <!-- Status Bar -->
-    <footer class="status-bar">
-        <div class="status-left">
-            <div class="status-item">
-                <div class="status-indicator" id="statusIndicator"></div>
-                <span id="statusText">מוכן לעבודה</span>
-            </div>
-            <div class="status-item">
-                <i class="fas fa-globe"></i>
-                <span id="websiteCount">11 אתרים זמינים</span>
-            </div>
-            <div class="status-item">
-                <i class="fas fa-robot"></i>
-                <span id="aiStatus">AI מוכן</span>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">רספונסיבי</div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <span id="lastSaved">לא נשמר</span>
-            <span id="currentDevice">Desktop</span>
+    <!-- Filters -->
+    <section class="filters-section">
+        <div class="filters">
+            <div class="filter-group">
+                <button class="filter-btn active" onclick="filterWebsites('all')">הכל</button>
+                <button class="filter-btn" onclick="filterWebsites('medical')">רפואה</button>
+                <button class="filter-btn" onclick="filterWebsites('business')">עסקים</button>
+                <button class="filter-btn" onclick="filterWebsites('fitness')">כושר</button>
+                <button class="filter-btn" onclick="filterWebsites('education')">חינוך</button>
+                <button class="filter-btn" onclick="filterWebsites('beauty')">יופי</button>
+            </div>
+            
+            <input type="text" class="search-box" placeholder="חפש אתר לפי שם או תחום..." onkeyup="searchWebsites(this.value)">
+        </div>
+    </section>
+
+    <!-- Websites Section -->
+    <section class="websites-section" id="websites">
+        <div class="section-container">
+            <h2 class="section-title">פורטפוליו אתרים מקצועיים</h2>
+            
+            <div class="websites-grid" id="websitesGrid">
+                <!-- האתרים יטענו כאן דינמית -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h2 class="footer-title">מוכן לאתר החדש שלך?</h2>
+            <p class="footer-text">
+                בחר עיצוב מהפורטפוליו, התאם אותו לעסק שלך בעורך המתקדם, 
+                והשק אתר מקצועי שמייצג את הברנד שלך בצורה הטובה ביותר
+            </p>
+            <button class="cta-button" onclick="openEditor()">
+                <i class="fas fa-magic"></i>
+                פתח את העורך
+            </button>
         </div>
     </footer>
 
     <script>
-        // ===== מסד נתונים האתרים =====
-        const websiteDatabase = {
-            'dr-michal-rosen': {
-                id: 'dr-michal-rosen',
-                name: 'ד"ר מיכל רוזן - אסתטיקה רפואית',
-                category: 'רפואה',
-                price: '₪2,800',
-                path: './websites/dr-michal-rosen.html',
-                color: '#4f46e5'
-            },
-            'fitness-co': {
-                id: 'fitness-co',
-                name: 'דני פיט - מאמן כושר אישי',
-                category: 'כושר',
-                price: '₪2,200',
-                path: './websites/fitness-co.html',
-                color: '#10b981'
-            },
-            'yoga-studio': {
-                id: 'yoga-studio',
-                name: 'סטודיו אוהם - יוגה ומדיטציה',
-                category: 'בריאות',
-                price: '₪1,900',
-                path: './websites/yoga-studio.html',
-                color: '#8b5cf6'
-            },
-            'nutritionist': {
-                id: 'nutritionist',
-                name: 'ד"ר שרה כהן - תזונאית קלינית',
-                category: 'רפואה',
-                price: '₪2,400',
-                path: './websites/nutritionist.html',
-                color: '#f59e0b'
-            },
-            'law-firm': {
-                id: 'law-firm',
-                name: 'משרד ברקוביץ ושות - עורכי דין',
-                category: 'שירותים משפטיים',
-                price: '₪2,500',
-                path: './websites/law-firm.html',
-                color: '#374151'
-            },
-            'accountant': {
-                id: 'accountant',
-                name: 'רינה לוי - חשבת שכר וייעוץ כלכלי',
-                category: 'כספים',
-                price: '₪2,000',
-                path: './websites/accountant.html',
-                color: '#059669'
-            },
-            'beauty-salon': {
-                id: 'beauty-salon',
-                name: 'מספרה BELLA - יופי ועיצוב שיער',
-                category: 'יופי',
-                price: '₪1,700',
-                path: './websites/beauty-salon.html',
-                color: '#ec4899'
-            },
-            'tutor': {
-                id: 'tutor',
-                name: 'ד"ר רונית לוי - מורה פרטית',
-                category: 'חינוך',
-                price: '₪2,100',
-                path: './websites/tutor.html',
-                color: '#6366f1'
-            },
+        // ========== Website Database ==========
+        const availableWebsites = {
             'aesthetic-clinic': {
                 id: 'aesthetic-clinic',
                 name: 'קליניקת יופי פרמיום',
-                category: 'אסתטיקה',
-                price: '₪3,200',
-                path: './websites/aesthetic-clinic.html',
-                color: '#7c3aed'
+                category: 'אסתטיקה רפואית',
+                price: 3200,
+                file: 'websites/aesthetic-clinic.html',
+                businessName: 'קליניקת יופי פרמיום',
+                description: 'מרכז רפואה אסתטית מתקדמת עם 6 שירותים מפורטים, גלריה לפני-אחרי ומערכת הזמנות מקוונת מתקדמת.',
+                tags: ['רפואה', 'יופי', 'אסתטיקה', 'פרמיום'],
+                filterCategory: 'medical',
+                badge: 'premium',
+                image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
             },
-            'multibrawn': {
-                id: 'multibrawn',
-                name: 'מולטיבראון - נופש ואירועים',
-                category: 'נופש',
-                price: '₪2,300',
-                path: './websites/multibrawn.html',
-                color: '#14b8a6'
+            'dr-michal-rosen': {
+                id: 'dr-michal-rosen',
+                name: 'ד"ר מיכל רוזן',
+                category: 'רפואה אסתטית',
+                price: 2800,
+                file: 'websites/dr-michal-rosen.html',
+                businessName: 'ד"ר מיכל רוזן',
+                description: 'אתר רופא אסתטיקה מקצועי עם מחשבון BMI, גלריית טיפולים ומערכת תורים אונליין מתקדמת.',
+                tags: ['רפואה', 'רופא', 'אסתטיקה', 'פופולרי'],
+                filterCategory: 'medical',
+                badge: 'popular',
+                image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
             },
             'real-estate': {
                 id: 'real-estate',
                 name: 'נדל"ן פרמיום',
-                category: 'נדל"ן',
-                price: '₪2,700',
-                path: './websites/real-estate.html',
-                color: '#dc2626'
+                category: 'השקעות נדל"ן',
+                price: 2700,
+                file: 'websites/real-estate.html',
+                businessName: 'נדל"ן פרמיום',
+                description: 'פלטפורמת נדל"ן יוקרתית עם מנוע חיפוש מתקדם, גלריית נכסים ומחשבון משכנתא מקצועי.',
+                tags: ['נדל"ן', 'השקעות', 'יוקרה', 'מחשבון'],
+                filterCategory: 'business',
+                image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
+            },
+            'law-firm': {
+                id: 'law-firm',
+                name: 'משרד ברקוביץ',
+                category: 'שירותים משפטיים',
+                price: 2500,
+                file: 'websites/law-firm.html',
+                businessName: 'משרד ברקוביץ',
+                description: 'אתר משרד עורכי דין מקצועי עם תחומי התמחות, פרופיל צוות מפורט ומערכת יעוץ מקוונת.',
+                tags: ['משפטים', 'עורכי דין', 'יעוץ', 'מקצועי'],
+                filterCategory: 'business',
+                image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
+            },
+            'nutritionist': {
+                id: 'nutritionist',
+                name: 'ד"ר שרה כהן',
+                category: 'תזונה קלינית',
+                price: 2400,
+                file: 'websites/nutritionist.html',
+                businessName: 'ד"ר שרה כהן',
+                description: 'אתר תזונאית קלינית עם מחשבון תזונה חכם, תפריטים מותאמים אישית ומערכת מעקב דיגיטלית.',
+                tags: ['תזונה', 'בריאות', 'דיאטה', 'מחשבון'],
+                filterCategory: 'medical',
+                image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
+            },
+            'multibrawn': {
+                id: 'multibrawn',
+                name: 'מולטיבראון',
+                category: 'נופש ואירועים',
+                price: 2300,
+                file: 'websites/multibrawn.html',
+                businessName: 'מולטיבראון',
+                description: 'פלטפורמת נופש ואירועים יוקרתית עם גלריית יעדים, מערכת הזמנות אונליין ותכנון אירועים מותאם.',
+                tags: ['נופש', 'אירועים', 'יוקרה', 'הזמנות'],
+                filterCategory: 'business',
+                image: 'https://images.unsplash.com/photo-1520637736862-4d197d17c53a?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
+            },
+            'fitness-coach': {
+                id: 'fitness-coach',
+                name: 'דני פיט',
+                category: 'אימון אישי',
+                price: 2200,
+                file: 'websites/fitness-co.html',
+                businessName: 'דני פיט',
+                description: 'אתר מאמן כושר אישי עם תוכניות אימון מותאמות, מחשבון BMI ומערכת מעקב התקדמות דיגיטלית.',
+                tags: ['כושר', 'אימון', 'בריאות', 'מחשבון'],
+                filterCategory: 'fitness',
+                image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
+            },
+            'tutor': {
+                id: 'tutor',
+                name: 'ד"ר רונית לוי',
+                category: 'חינוך פרטי',
+                price: 2100,
+                file: 'websites/tutor.html',
+                businessName: 'ד"ר רונית לוי',
+                description: 'אתר מורה פרטית מומחית עם מגוון תחומי לימוד, שיטות הוראה חדשניות ומערכת שיעורים אונליין.',
+                tags: ['חינוך', 'הוראה', 'לימודים', 'פרטי'],
+                filterCategory: 'education',
+                image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
+            },
+            'accountant': {
+                id: 'accountant',
+                name: 'רינה לוי CPA',
+                category: 'חשבונות ושכר',
+                price: 2000,
+                file: 'websites/accountant.html',
+                businessName: 'רינה לוי CPA',
+                description: 'אתר חשבת שכר מוסמכת עם מחשבון שכר מתקדם, שירותי חשבונות מקצועיים ומערכת דיווחים דיגיטלית.',
+                tags: ['חשבונות', 'שכר', 'מסים', 'מחשבון'],
+                filterCategory: 'business',
+                image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
+            },
+            'yoga-studio': {
+                id: 'yoga-studio',
+                name: 'סטודיו אוהם',
+                category: 'יוגה ומדיטציה',
+                price: 1900,
+                file: 'websites/yoga-studio.html',
+                businessName: 'סטודיו אוהם',
+                description: 'סטודיו יוגה ומדיטציה עם לוח שיעורים דינמי, פרופיל מורות מקצועיות ומדיטציות מודרכות אונליין.',
+                tags: ['יוגה', 'מדיטציה', 'רוגע', 'בריאות'],
+                filterCategory: 'fitness',
+                image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
+            },
+            'beauty-salon': {
+                id: 'beauty-salon',
+                name: 'מספרה BELLA',
+                category: 'יופי ועיצוב שיער',
+                price: 1700,
+                file: 'websites/beauty-salon.html',
+                businessName: 'מספרה BELLA',
+                description: 'מספרה יוקרתית עם גלריית עבודות מקצועית, מחירון שירותים מפורט ומערכת הזמנות אונליין נוחה.',
+                tags: ['יופי', 'שיער', 'מספרה', 'עיצוב'],
+                filterCategory: 'beauty',
+                image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=500&h=280&fit=crop&crop=center&auto=format&q=80'
             }
         };
 
-        // ===== משתנים גלובליים =====
-        let currentWebsite = null;
-        let selectedElement = null;
-        let currentDevice = 'desktop';
-        let websiteChanges = [];
-        let aiAssistant = null;
+        // ========== Global Variables ==========
+        let currentFilter = 'all';
+        let currentSearch = '';
 
-        // ===== אתחול המערכת =====
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 WebMaster Pro Starting...');
-            
-            try {
-                // אתחול הממשק
-                initializeInterface();
-                
-                // אתחול האתרים
-                populateWebsiteGrid();
-                populateWebsiteSelector();
-                
-                // אתחול ה-AI
-                initializeAI();
-                
-                // אתחול מאזינים
-                setupEventListeners();
-                
-                console.log('✅ WebMaster Pro Ready!');
-                showNotification('🎉 WebMaster Pro מוכן לעבודה!', 'success');
-                
-            } catch (error) {
-                console.error('❌ Initialization failed:', error);
-                showNotification('❌ שגיאה באתחול המערכת', 'error');
-            }
-        });
-
-        // ===== אתחול הממשק =====
-        function initializeInterface() {
-            // עדכון סטטוס
-            document.getElementById('statusText').textContent = 'מוכן לעבודה';
-            document.getElementById('websiteCount').textContent = `${Object.keys(websiteDatabase).length} אתרים זמינים`;
-            document.getElementById('aiStatus').textContent = 'AI מוכן';
+        // ========== Core Functions ==========
+        function initializeGallery() {
+            console.log('🚀 Initializing WebMaster Pro Gallery...');
+            populateWebsiteGrid();
+            updateStats();
+            console.log('✅ Gallery initialized successfully');
         }
 
-        // ===== אתחול רשת האתרים =====
         function populateWebsiteGrid() {
-            const grid = document.getElementById('websiteGrid');
+            const grid = document.getElementById('websitesGrid');
             grid.innerHTML = '';
-            
-            Object.values(websiteDatabase).forEach(website => {
-                const card = document.createElement('div');
-                card.className = 'website-card';
-                card.setAttribute('data-website', website.id);
-                card.onclick = () => loadWebsite(website);
-                
-                card.innerHTML = `
-                    <h4>${website.name}</h4>
-                    <div class="category">${website.category}</div>
-                    <div class="price">${website.price}</div>
+
+            const filteredWebsites = filterAndSearchWebsites();
+
+            if (filteredWebsites.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
+                        <div style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem;">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--gray-600);">לא נמצאו אתרים</h3>
+                        <p style="color: var(--gray-500);">נסה לשנות את הפילטרים או החיפוש</p>
+                    </div>
                 `;
-                
-                grid.appendChild(card);
+                return;
+            }
+
+            filteredWebsites.forEach(website => {
+                const websiteCard = createWebsiteCard(website);
+                grid.appendChild(websiteCard);
             });
         }
 
-        // ===== אתחול בורר האתרים =====
-        function populateWebsiteSelector() {
-            const selector = document.getElementById('websiteSelector');
-            
-            Object.values(websiteDatabase).forEach(website => {
-                const option = document.createElement('option');
-                option.value = website.id;
-                option.textContent = website.name;
-                selector.appendChild(option);
-            });
+        function createWebsiteCard(website) {
+            const card = document.createElement('div');
+            card.className = 'website-card';
+            card.setAttribute('data-category', website.filterCategory);
+            card.setAttribute('data-name', website.name.toLowerCase());
+
+            card.innerHTML = `
+                <div class="website-image" style="background-image: url('${website.image}')">
+                    ${website.badge ? `<div class="website-badge ${website.badge}">${getBadgeText(website.badge)}</div>` : ''}
+                </div>
+                
+                <div class="website-content">
+                    <div class="website-header">
+                        <div class="website-info">
+                            <h3 class="website-title">${website.name}</h3>
+                            <p class="website-category">${website.category}</p>
+                        </div>
+                        <div class="website-price">₪${website.price.toLocaleString()}</div>
+                    </div>
+                    
+                    <p class="website-description">${website.description}</p>
+                    
+                    <div class="website-tags">
+                        ${website.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    
+                    <div class="website-actions">
+                        <button class="action-btn" onclick="previewWebsite('${website.id}')">
+                            <i class="fas fa-eye"></i>
+                            תצוגה מקדימה
+                        </button>
+                        <button class="action-btn primary" onclick="editWebsite('${website.id}')">
+                            <i class="fas fa-edit"></i>
+                            ערוך עכשיו
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            return card;
         }
 
-        // ===== אתחול AI =====
-        function initializeAI() {
-            // בדיקה אם Claude API זמין
-            const hasClaudeAPI = typeof window.claude !== 'undefined' && window.claude.complete;
-            
-            aiAssistant = {
-                available: hasClaudeAPI,
-                
-                async sendMessage(message, context = {}) {
-                    try {
-                        if (this.available) {
-                            return await this.sendToClaudeAPI(message, context);
-                        } else {
-                            return this.getSmartResponse(message, context);
-                        }
-                    } catch (error) {
-                        console.error('AI Error:', error);
-                        return {
-                            success: false,
-                            message: 'מצטער, יש בעיה עם הAI. אנסה שוב.',
-                            suggestions: []
-                        };
-                    }
-                },
-                
-                async sendToClaudeAPI(message, context) {
-                    const prompt = `אתה WebMaster Pro AI Assistant - עוזר מקצועי לבניית אתרים.
-
-הקשר נוכחי:
-- אתר נוכחי: ${context.currentWebsite?.name || 'לא נבחר'}
-- אלמנט נבחר: ${context.selectedElement || 'לא נבחר'}
-
-שאלת המשתמש: "${message}"
-
-אנא מענה כעוזר AI מקצועי שמבין בעיצוב אתרים, UX/UI, SEO, ותוכן.
-החזר תשובה בפורמט JSON:
-{
-  "text": "התשובה המלאה כאן",
-  "suggestions": ["הצעה 1", "הצעה 2", "הצעה 3"],
-  "actions": []
-}`;
-                    
-                    const response = await window.claude.complete(prompt);
-                    
-                    try {
-                        return JSON.parse(response);
-                    } catch {
-                        return {
-                            text: response,
-                            suggestions: [],
-                            actions: []
-                        };
-                    }
-                },
-                
-                getSmartResponse(message, context) {
-                    const responses = {
-                        'עיצוב': 'אני ממליץ להשתמש בצבעים הרמוניים ולשמור על עקביות בעיצוב.',
-                        'צבע': 'נסה צבעים מהפלטה: #4f46e5 (כחול), #10b981 (ירוק), #f59e0b (כתום)',
-                        'טקסט': 'השתמש בגופנים קריאים וודא ניגודיות טובה עם הרקע.',
-                        'תוכן': 'כתוב תוכן ברור ותמציתי שמתמקד בצרכי הלקוח.',
-                        'seo': 'הוסף כותרות H1-H6, תיאור מטא, ומילות מפתח רלוונטיות.'
-                    };
-                    
-                    const key = Object.keys(responses).find(k => message.includes(k));
-                    const text = responses[key] || 'אני כאן לעזור! שאל אותי על עיצוב, תוכן, צבעים או כל נושא אחר.';
-                    
-                    return {
-                        success: true,
-                        text,
-                        suggestions: ['שפר צבעים', 'עדכן תוכן', 'אופטימיזציה'],
-                        actions: []
-                    };
-                }
+        function getBadgeText(badge) {
+            const badges = {
+                'premium': 'פרמיום',
+                'popular': 'פופולרי',
+                'new': 'חדש'
             };
-            
-            document.getElementById('aiStatus').textContent = hasClaudeAPI ? 'Claude AI זמין' : 'AI Basic מוכן';
+            return badges[badge] || badge;
         }
 
-        // ===== מאזינים =====
-        function setupEventListeners() {
-            // מאזין Enter באינפוט AI
-            document.getElementById('aiInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendAIMessage();
-                }
+        function filterAndSearchWebsites() {
+            let websites = Object.values(availableWebsites);
+
+            // Filter by category
+            if (currentFilter !== 'all') {
+                websites = websites.filter(website => website.filterCategory === currentFilter);
+            }
+
+            // Filter by search
+            if (currentSearch) {
+                websites = websites.filter(website => 
+                    website.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    website.category.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    website.description.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    website.tags.some(tag => tag.toLowerCase().includes(currentSearch.toLowerCase()))
+                );
+            }
+
+            // Sort by price (highest first)
+            websites.sort((a, b) => b.price - a.price);
+
+            return websites;
+        }
+
+        function filterWebsites(category) {
+            currentFilter = category;
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
-            
-            // מאזין שמירה אוטומטית
-            setInterval(autoSave, 30000); // כל 30 שניות
-        }
-
-        // ===== טעינת אתר =====
-        async function loadWebsite(website) {
-            try {
-                showLoading();
-                
-                const frame = document.getElementById('websiteFrame');
-                const websiteName = document.getElementById('websiteName');
-                
-                // עדכון הממשק
-                websiteName.textContent = website.name;
-                currentWebsite = website;
-                
-                // עדכון הגלריה
-                document.querySelectorAll('.website-card').forEach(card => {
-                    card.classList.remove('active');
-                });
-                document.querySelector(`[data-website="${website.id}"]`).classList.add('active');
-                
-                // עדכון הבורר
-                document.getElementById('websiteSelector').value = website.id;
-                
-                // טעינת האתר
-                frame.onload = function() {
-                    setTimeout(() => {
-                        try {
-                            setupWebsiteForEditing(frame);
-                            hideLoading();
-                            showNotification(`✅ ${website.name} נטען ומוכן לעריכה!`, 'success');
-                            updateStatus('מוכן לעריכה');
-                        } catch (error) {
-                            console.error('Error setting up website:', error);
-                            hideLoading();
-                            showNotification('❌ שגיאה בהכנת האתר לעריכה', 'error');
-                        }
-                    }, 1000);
-                };
-                
-                frame.onerror = function() {
-                    hideLoading();
-                    showNotification(`❌ שגיאה בטעינת ${website.name}`, 'error');
-                };
-                
-                frame.src = website.path;
-                
-            } catch (error) {
-                console.error('Error loading website:', error);
-                hideLoading();
-                showNotification('❌ שגיאה בטעינת האתר', 'error');
-            }
-        }
-
-        // ===== הכנת אתר לעריכה =====
-        function setupWebsiteForEditing(frame) {
-            try {
-                const frameDoc = frame.contentDocument || frame.contentWindow.document;
-                
-                if (!frameDoc) {
-                    throw new Error('Cannot access frame document');
-                }
-                
-                // הוספת data-editable לאלמנטים
-                const editableSelectors = [
-                    'h1, h2, h3, h4, h5, h6',
-                    'p',
-                    '.hero-title, .hero-subtitle',
-                    '.service-title, .service-description',
-                    '.testimonial-text, .testimonial-name',
-                    '.contact-info, .address',
-                    '.btn, .cta-button',
-                    '.price, .price-value'
-                ];
-                
-                let elementCount = 0;
-                
-                editableSelectors.forEach(selector => {
-                    const elements = frameDoc.querySelectorAll(selector);
-                    elements.forEach((element, index) => {
-                        element.setAttribute('data-editable', 'true');
-                        element.setAttribute('data-element-id', `${selector.replace(/[^a-zA-Z0-9]/g, '_')}_${index}`);
-                        element.setAttribute('data-original-content', element.innerHTML);
-                        
-                        // הוספת מאזינים
-                        element.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            selectElement(element);
-                        });
-                        
-                        element.addEventListener('mouseenter', function() {
-                            if (!element.classList.contains('selected')) {
-                                element.style.outline = '2px dashed #f59e0b';
-                                element.style.cursor = 'pointer';
-                            }
-                        });
-                        
-                        element.addEventListener('mouseleave', function() {
-                            if (!element.classList.contains('selected')) {
-                                element.style.outline = 'none';
-                            }
-                        });
-                        
-                        elementCount++;
-                    });
-                });
-                
-                console.log(`🎯 Found ${elementCount} editable elements`);
-                
-            } catch (error) {
-                console.error('Error in setupWebsiteForEditing:', error);
-                throw error;
-            }
-        }
-
-        // ===== בחירת אלמנט =====
-        function selectElement(element) {
-            try {
-                // ביטול בחירה קודמת
-                if (selectedElement) {
-                    selectedElement.classList.remove('selected');
-                    selectedElement.style.outline = 'none';
-                }
-                
-                // בחירת האלמנט החדש
-                selectedElement = element;
-                element.classList.add('selected');
-                element.style.outline = '2px solid #4f46e5';
-                element.style.outlineOffset = '2px';
-                
-                // עדכון האינספקטור
-                updateInspector(element);
-                
-                console.log('Selected element:', element);
-                
-            } catch (error) {
-                console.error('Error selecting element:', error);
-            }
-        }
-
-        // ===== עדכון האינספקטור =====
-        function updateInspector(element) {
-            try {
-                const elementId = element.getAttribute('data-element-id') || 'unknown';
-                const tagName = element.tagName.toLowerCase();
-                const className = element.className || 'none';
-                const rect = element.getBoundingClientRect();
-                
-                document.getElementById('selectedElement').textContent = elementId;
-                document.getElementById('elementType').textContent = tagName;
-                document.getElementById('elementClass').textContent = className;
-                document.getElementById('elementDimensions').textContent = `${Math.round(rect.width)}×${Math.round(rect.height)}px`;
-                
-            } catch (error) {
-                console.error('Error updating inspector:', error);
-            }
-        }
-
-        // ===== פונקציות עריכה =====
-        function updateBackgroundColor(color) {
-            if (selectedElement) {
-                selectedElement.style.backgroundColor = color;
-                registerChange('backgroundColor', color);
-                showNotification('🎨 צבע רקע עודכן', 'success');
-            }
-        }
-
-        function updateTextColor(color) {
-            if (selectedElement) {
-                selectedElement.style.color = color;
-                registerChange('color', color);
-                showNotification('🎨 צבע טקסט עודכן', 'success');
-            }
-        }
-
-        function updateFontSize(size) {
-            if (selectedElement) {
-                selectedElement.style.fontSize = size + 'px';
-                registerChange('fontSize', size + 'px');
-                showNotification(`📏 גודל גופן עודכן ל-${size}px`, 'success');
-            }
-        }
-
-        function toggleBold() {
-            if (selectedElement) {
-                const isBold = selectedElement.style.fontWeight === 'bold';
-                selectedElement.style.fontWeight = isBold ? 'normal' : 'bold';
-                registerChange('fontWeight', isBold ? 'normal' : 'bold');
-                showNotification(isBold ? '📝 בוטל עיבוי' : '📝 הוגדר עיבוי', 'success');
-            }
-        }
-
-        function toggleItalic() {
-            if (selectedElement) {
-                const isItalic = selectedElement.style.fontStyle === 'italic';
-                selectedElement.style.fontStyle = isItalic ? 'normal' : 'italic';
-                registerChange('fontStyle', isItalic ? 'normal' : 'italic');
-                showNotification(isItalic ? '📝 בוטל נטוי' : '📝 הוגדר נטוי', 'success');
-            }
-        }
-
-        function alignLeft() { if (selectedElement) selectedElement.style.textAlign = 'left'; }
-        function alignCenter() { if (selectedElement) selectedElement.style.textAlign = 'center'; }
-        function alignRight() { if (selectedElement) selectedElement.style.textAlign = 'right'; }
-
-        // ===== רישום שינויים =====
-        function registerChange(property, value) {
-            websiteChanges.push({
-                timestamp: new Date().toISOString(),
-                elementId: selectedElement?.getAttribute('data-element-id'),
-                property: property,
-                value: value,
-                websiteId: currentWebsite?.id
-            });
-            
-            updateStatus(`${websiteChanges.length} שינויים לא נשמרו`);
-        }
-
-        // ===== פונקציות מכשירים =====
-        function setDevice(device) {
-            currentDevice = device;
-            const frame = document.getElementById('websiteFrame');
-            const buttons = document.querySelectorAll('.device-btn');
-            
-            // עדכון כפתורים
-            buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
-            // עדכון frame
-            frame.className = `website-frame ${device}`;
+            populateWebsiteGrid();
+            showNotification(`סונן לפי: ${getCategoryName(category)}`, 'success');
+        }
+
+        function searchWebsites(query) {
+            currentSearch = query;
+            populateWebsiteGrid();
             
-            document.getElementById('currentDevice').textContent = device === 'desktop' ? 'Desktop' : 
-                                                                 device === 'tablet' ? 'Tablet' : 'Mobile';
+            if (query) {
+                showNotification(`מחפש: "${query}"`, 'success');
+            }
+        }
+
+        function getCategoryName(category) {
+            const categoryNames = {
+                'all': 'כל האתרים',
+                'medical': 'רפואה',
+                'business': 'עסקים',
+                'fitness': 'כושר',
+                'education': 'חינוך',
+                'beauty': 'יופי'
+            };
+            return categoryNames[category] || category;
+        }
+
+        function updateStats() {
+            const websites = Object.values(availableWebsites);
+            const totalWebsites = websites.length;
+            const categories = [...new Set(websites.map(w => w.filterCategory))].length;
+
+            // Update DOM elements
+            const statCards = document.querySelectorAll('.stat-card');
+            if (statCards.length >= 4) {
+                statCards[0].querySelector('.stat-number').textContent = totalWebsites;
+                statCards[1].querySelector('.stat-number').textContent = '24 שעות';
+                statCards[2].querySelector('.stat-number').textContent = categories;
+                statCards[3].querySelector('.stat-number').textContent = '100%';
+            }
+        }
+
+        // ========== Website Actions ==========
+        function previewWebsite(websiteId) {
+            const website = availableWebsites[websiteId];
+            if (!website) {
+                showNotification('❌ אתר לא נמצא!', 'error');
+                return;
+            }
+
+            // Try to open the actual website file
+            const newWindow = window.open('', '_blank');
             
-            console.log(`📱 Switched to ${device} view`);
+            fetch(website.file)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('File not found');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    newWindow.document.write(html);
+                    newWindow.document.close();
+                    showNotification(`👁️ פתח תצוגה מקדימה של ${website.name}`, 'success');
+                })
+                .catch(error => {
+                    console.log('File not found, loading template:', error);
+                    // Load template if file doesn't exist
+                    const templateHTML = generatePreviewTemplate(website);
+                    newWindow.document.write(templateHTML);
+                    newWindow.document.close();
+                    showNotification(`📝 פתח תבנית של ${website.name}`, 'success');
+                });
         }
 
-        // ===== AI Functions =====
-        async function sendAIMessage() {
-            const input = document.getElementById('aiInput');
-            const message = input.value.trim();
+        function editWebsite(websiteId) {
+            const website = availableWebsites[websiteId];
+            if (!website) {
+                showNotification('❌ אתר לא נמצא!', 'error');
+                return;
+            }
+
+            // Open editor with specific website
+            const editorUrl = `editor.html?website=${websiteId}`;
+            window.open(editorUrl, '_blank', 'width=1400,height=900');
             
-            if (!message) return;
-            
-            try {
-                showNotification('🤖 AI חושב...', 'info');
-                
-                const context = {
-                    currentWebsite: currentWebsite,
-                    selectedElement: selectedElement?.tagName
-                };
-                
-                const response = await aiAssistant.sendMessage(message, context);
-                
-                if (response.success !== false) {
-                    showNotification(`🤖 AI: ${response.text}`, 'success');
-                    console.log('AI Response:', response);
-                } else {
-                    showNotification(response.message, 'error');
-                }
-                
-                input.value = '';
-                
-            } catch (error) {
-                console.error('AI Error:', error);
-                showNotification('❌ שגיאה ב-AI', 'error');
-            }
+            showNotification(`🎨 פותח עורך עבור ${website.name}`, 'success');
         }
 
-        function askAI(question) {
-            document.getElementById('aiInput').value = question;
-            sendAIMessage();
+        function openEditor() {
+            // Open editor without specific website
+            window.open('editor.html', '_blank', 'width=1400,height=900');
+            showNotification('🚀 פותח את העורך הויזואלי', 'success');
         }
 
-        // ===== פונקציות עיקריות =====
-        function loadSelectedWebsite() {
-            const selectedId = document.getElementById('websiteSelector').value;
-            if (selectedId && websiteDatabase[selectedId]) {
-                loadWebsite(websiteDatabase[selectedId]);
-            }
+        function generatePreviewTemplate(website) {
+            return `
+                <!DOCTYPE html>
+                <html lang="he" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${website.businessName}</title>
+                    <style>
+                        * { margin: 0; padding: 0; box-sizing: border-box; }
+                        body { font-family: 'Inter', Arial, sans-serif; line-height: 1.6; color: #333; }
+                        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 100px 20px; text-align: center; }
+                        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+                        .section { padding: 80px 20px; }
+                        h1 { font-size: 3rem; margin-bottom: 20px; }
+                        h2 { font-size: 2.5rem; margin-bottom: 30px; text-align: center; }
+                        .btn { background: #667eea; color: white; padding: 15px 30px; border: none; border-radius: 25px; font-weight: 600; text-decoration: none; display: inline-block; margin-top: 20px; }
+                    </style>
+                </head>
+                <body>
+                    <header class="hero">
+                        <div class="container">
+                            <h1>${website.businessName}</h1>
+                            <p style="font-size: 1.3rem; margin-bottom: 10px;">${website.description}</p>
+                            <p style="font-size: 1.1rem;">שירות מקצועי ואמין בתחום ${website.category}</p>
+                            <a href="#" class="btn">צור קשר עכשיו</a>
+                        </div>
+                    </header>
+                    
+                    <section class="section">
+                        <div class="container">
+                            <h2>השירותים שלנו</h2>
+                            <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
+                                אנחנו מתמחים ב${website.category} ומעניקים שירות מקצועי ואישי לכל לקוח. 
+                                עם ניסיון של שנים רבות בתחום, אנחנו מבטיחים את השירות הטוב ביותר.
+                            </p>
+                        </div>
+                    </section>
+                    
+                    <footer style="background: #333; color: white; padding: 40px 20px; text-align: center;">
+                        <div class="container">
+                            <h3>${website.businessName} - צרו קשר</h3>
+                            <p>📞 050-1234567</p>
+                            <p>✉️ info@${website.id}.co.il</p>
+                            <p>📍 ישראל</p>
+                            <p style="margin-top: 20px; opacity: 0.7;">© 2025 ${website.businessName}. כל הזכויות שמורות.</p>
+                        </div>
+                    </footer>
+                </body>
+                </html>
+            `;
         }
 
-        async function saveWebsite() {
-            try {
-                if (!currentWebsite) {
-                    showNotification('❌ אין אתר נבחר לשמירה', 'error');
-                    return;
-                }
-                
-                showNotification('💾 שומר שינויים...', 'info');
-                
-                // שמירה ל-localStorage (בגרסה מלאה זה יהיה שרת)
-                const saveData = {
-                    websiteId: currentWebsite.id,
-                    changes: websiteChanges,
-                    timestamp: new Date().toISOString()
-                };
-                
-                localStorage.setItem(`webmaster_changes_${currentWebsite.id}`, JSON.stringify(saveData));
-                
-                // איפוס שינויים
-                websiteChanges = [];
-                updateStatus('נשמר בהצלחה');
-                
-                showNotification('✅ השינויים נשמרו בהצלחה!', 'success');
-                
-            } catch (error) {
-                console.error('Save error:', error);
-                showNotification('❌ שגיאה בשמירה', 'error');
-            }
-        }
-
-        function previewWebsite() {
-            if (currentWebsite) {
-                window.open(currentWebsite.path, '_blank');
-                showNotification('👁️ נפתח בחלון חדש', 'info');
-            }
-        }
-
-        function exportWebsite() {
-            try {
-                if (!currentWebsite) {
-                    showNotification('❌ אין אתר נבחר לייצוא', 'error');
-                    return;
-                }
-                
-                const frame = document.getElementById('websiteFrame');
-                const frameDoc = frame.contentDocument || frame.contentWindow.document;
-                
-                if (!frameDoc) {
-                    throw new Error('Cannot access website content');
-                }
-                
-                // קבלת ה-HTML המעודכן
-                const html = frameDoc.documentElement.outerHTML;
-                
-                // יצירת קובץ להורדה
-                const blob = new Blob([html], { type: 'text/html; charset=utf-8' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `${currentWebsite.id}-edited-${new Date().toISOString().split('T')[0]}.html`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                
-                showNotification('📁 האתר יוצא בהצלחה!', 'success');
-                
-            } catch (error) {
-                console.error('Export error:', error);
-                showNotification('❌ שגיאה בייצוא האתר', 'error');
-            }
-        }
-
-        // ===== פונקציות עזר =====
-        function showLoading() {
-            document.getElementById('loadingOverlay').style.display = 'flex';
-        }
-
-        function hideLoading() {
-            document.getElementById('loadingOverlay').style.display = 'none';
-        }
-
-        function showNotification(message, type = 'info') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
+        // ========== Utility Functions ==========
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
             notification.className = `notification ${type}`;
-            notification.classList.add('show');
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
             
             setTimeout(() => {
                 notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
             }, 3000);
         }
 
-        function updateStatus(text) {
-            document.getElementById('statusText').textContent = text;
-            document.getElementById('lastSaved').textContent = `עודכן: ${new Date().toLocaleTimeString('he-IL')}`;
-        }
+        // ========== Smooth Scrolling ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-        function autoSave() {
-            if (websiteChanges.length > 0) {
-                console.log('🔄 Auto-saving...');
-                saveWebsite();
-            }
-        }
-
-        // ===== פונקציות נוספות =====
-        function switchInspectorTab(tab) {
-            const tabs = document.querySelectorAll('.inspector-tab');
-            tabs.forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            console.log(`Switched to ${tab} tab`);
-        }
-
-        function addSection() { showNotification('➕ הוספת סקשן (בפיתוח)', 'info'); }
-        function duplicateElement() { showNotification('📄 שכפול אלמנט (בפיתוח)', 'info'); }
-        function deleteElement() { showNotification('🗑️ מחיקת אלמנט (בפיתוח)', 'info'); }
-        function undoChange() { showNotification('↶ ביטול פעולה (בפיתוח)', 'info'); }
-
-        // ===== הודעת הצלחה =====
-        console.log('🎯 WebMaster Pro Editor Loaded Successfully!');
-        console.log('📊 Available websites:', Object.keys(websiteDatabase).length);
-        console.log('💰 Total value: ₪26,900');
+        // ========== Initialize ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeGallery();
+            console.log('🎯 WebMaster Pro Gallery מוכן!');
+        });
     </script>
 </body>
 </html>
