@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סטודיו אוהם - יוגה ומדיטציה | מרחב של שלווה ואיזון</title>
+    <meta name="description" content="סטודיו אוהם - מרחב של שלווה, איזון ותנועה מודעת. שיעורי יוגה, מדיטציה וסדנאות רוחניות בלב תל אביב.">
+    <meta name="keywords" content="יוגה, מדיטציה, האטה יוגה, ויניאסה, רוחניות, סטודיו אוהם, תל אביב">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --secondary-gradient: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            --accent-gradient: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            --earth-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --accent-color: #66a6ff;
+            --bg-light: #fef9f3;
+            --wisdom-purple: #8b5fbf;
+            --nature-green: #4ade80;
+            --sunset-orange: #ff9068;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .wisdom-font {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Glass Morphism & Zen Styles */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        .zen-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .zen-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .zen-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        /* Header */
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="mandala" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><circle cx="25" cy="25" r="4" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23mandala)"/></svg>');
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 4.5em;
+            margin-bottom: 25px;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+
+        .zen-quote {
+            font-size: 1.2em;
+            font-style: italic;
+            margin: 30px 0;
+            opacity: 0.9;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .btn {
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--accent-color);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: white;
+            border: 2px solid var(--glass-border);
+        }
+
+        .btn-zen {
+            background: var(--earth-gradient);
+            color: white;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2em;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .nav-item {
+            padding: 25px 30px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            position: relative;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-item:hover {
+            color: var(--accent-color);
+            background: rgba(102, 166, 255, 0.05);
+        }
+
+        .nav-item:hover::before {
+            width: 80%;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+            font-weight: 300;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: var(--text-secondary);
+            margin-bottom: 70px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-style: italic;
+        }
+
+        /* Classes Grid */
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .class-card {
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .class-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .class-image.hatha {
+            background: var(--primary-gradient);
+        }
+
+        .class-image.vinyasa {
+            background: var(--secondary-gradient);
+        }
+
+        .class-image.meditation {
+            background: var(--earth-gradient);
+        }
+
+        .class-image.private {
+            background: var(--accent-gradient);
+        }
+
+        .class-image::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border-radius: 50%;
+            background: inherit;
+            opacity: 0.3;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.1; }
+        }
+
+        .class-title {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .class-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .class-details {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .class-detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .class-detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .class-price {
+            font-size: 1.5em;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .philosophy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 L90 90 L10 90 Z" fill="none" stroke="rgba(139,95,191,0.05)" stroke-width="0.5"/><circle cx="50" cy="50" r="20" fill="none" stroke="rgba(139,95,191,0.03)" stroke-width="0.3"/></svg>');
+            opacity: 0.5;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .philosophy-content h3 {
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+            font-family: 'Dancing Script', cursive;
+            font-weight: 600;
+        }
+
+        .philosophy-content p {
+            margin-bottom: 25px;
+            color: var(--text-secondary);
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .philosophy-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5em;
+            position: relative;
+            overflow: hidden;
+            background: var(--earth-gradient);
+        }
+
+        .philosophy-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="rgba(255,255,255,0.1)"><circle cx="20" cy="20" r="3"/><circle cx="80" cy="80" r="3"/><circle cx="50" cy="50" r="2"/><path d="M30 70 Q50 30 70 70" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/></g></svg>');
+            opacity: 0.6;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .value-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .value-item i {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .value-item h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .value-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Schedule Section */
+        .schedule {
+            background: white;
+        }
+
+        .schedule-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+
+        .schedule-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule-table th {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .schedule-table td {
+            padding: 18px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.3s ease;
+        }
+
+        .schedule-table tr:hover td {
+            background: var(--bg-light);
+        }
+
+        .class-time {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .class-name {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .class-instructor {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--primary-gradient);
+            color: white;
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 0 Q50 50 100 0 L100 100 Q50 50 0 100 Z" fill="rgba(255,255,255,0.03)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 600;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .contact-item i {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            padding: 50px;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid var(--glass-border);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.9);
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: white;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 70px;
+            height: 70px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8em;
+            text-decoration: none;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            animation: lotus 3s ease-in-out infinite;
+        }
+
+        @keyframes lotus {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 80px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 25px;
+            font-size: 1.4em;
+            font-weight: 600;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #a0aec0;
+            text-decoration: none;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 3em;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .philosophy-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .classes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-content {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-table {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/972523456789?text=שלום! אני מעוניין/ת לקבל פרטים על שיעורי יוגה בסטודיו אוהם" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 data-editable="main-title">סטודיו אוהם</h1>
+            <p class="subtitle" data-editable="subtitle">מרחב של שלווה, איזון ותנועה מודעת</p>
+            <div class="zen-quote" data-editable="quote">"היוגה היא המסע של העצמי, דרך העצמי, אל העצמי"</div>
+            
+            <div class="cta-buttons">
+                <a href="#classes" class="btn btn-primary">
+                    <i class="fas fa-heart"></i>
+                    שיעורי יוגה
+                </a>
+                <a href="tel:052-3456789" class="btn btn-secondary">
+                    <i class="fas fa-phone"></i>
+                    052-3456789
+                </a>
+                <a href="#contact" class="btn btn-zen">
+                    <i class="fas fa-leaf"></i>
+                    התחלת המסע
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#classes" class="nav-item">שיעורים</a>
+            <a href="#philosophy" class="nav-item">הפילוסופיה שלנו</a>
+            <a href="#schedule" class="nav-item">לוח זמנים</a>
+            <a href="#contact" class="nav-item">יצירת קשר</a>
+        </div>
+    </nav>
+
+    <!-- Classes Section -->
+    <section id="classes" class="section">
+        <div class="container">
+            <h2 class="section-title" data-editable="classes-title">השיעורים שלנו</h2>
+            <p class="section-subtitle" data-editable="classes-subtitle">כל שיעור הוא הזמנה למסע פנימי של גילוי, ריפוי וחיבור לעצמי האמיתי שלך</p>
+            
+            <div class="classes-grid">
+                <div class="zen-card">
+                    <div class="class-image hatha">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3 class="class-title" data-editable="class1-title">האטה יוגה</h3>
+                    <p class="class-description" data-editable="class1-desc">יוגה איטית ומדיטטיבית המתמקדת בנשימה ובהחזקת תנוחות לזמן ממושך. מושלמת למתחילים ולמי שמחפש שלווה פנימית.</p>
+                    
+                    <div class="class-details">
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-clock"></i> משך שיעור</span>
+                            <span>75 דקות</span>
+                        </div>
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-users"></i> גודל כיתה</span>
+                            <span>עד 12 משתתפים</span>
+                        </div>
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-signal"></i> רמת קושי</span>
+                            <span>מתחילים-בינוני</span>
+                        </div>
+                    </div>
+                    
+                    <div class="class-price">₪80 לשיעור</div>
+                    <a href="#contact" class="btn btn-primary">הרשמה לשיעור</a>
+                </div>
+
+                <div class="zen-card">
+                    <div class="class-image vinyasa">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h3 class="class-title" data-editable="class2-title">ויניאסה פלו</h3>
+                    <p class="class-description" data-editable="class2-desc">זרימה דינמית של תנוחות המתחברות לנשימה. שיעור אנרגטי שמחזק הגוף ומרגיע את הנפש.</p>
+                    
+                    <div class="class-details">
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-clock"></i> משך שיעור</span>
+                            <span>60 דקות</span>
+                        </div>
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-users"></i> גודל כיתה</span>
+                            <span>עד 15 משתתפים</span>
+                        </div>
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-signal"></i> רמת קושי</span>
+                            <span>בינוני-מתקדם</span>
+                        </div>
+                    </div>
+                    
+                    <div class="class-price">₪90 לשיעור</div>
+                    <a href="#contact" class="btn btn-primary">הרשמה לשיעור</a>
+                </div>
+
+                <div class="zen-card">
+                    <div class="class-image meditation">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="class-title" data-editable="class3-title">מדיטציה מודרכת</h3>
+                    <p class="class-description" data-editable="class3-desc">שיעור מדיטציה עמוקה עם טכניקות שונות למפגש עם השקט הפנימי ולפיתוח מודעות.</p>
+                    
+                    <div class="class-details">
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-clock"></i> משך שיעור</span>
+                            <span>45 דקות</span>
+                        </div>
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-users"></i> גודל כיתה</span>
+                            <span>עד 20 משתתפים</span>
+                        </div>
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-signal"></i> רמת קושי</span>
+                            <span>כל הרמות</span>
+                        </div>
+                    </div>
+                    
+                    <div class="class-price">₪60 לשיעור</div>
+                    <a href="#contact" class="btn btn-primary">הרשמה לשיעור</a>
+                </div>
+
+                <div class="zen-card">
+                    <div class="class-image private">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3 class="class-title" data-editable="class4-title">שיעורים פרטיים</h3>
+                    <p class="class-description" data-editable="class4-desc">שיעור אישי המותאם במיוחד עבורך - למטרות ספציפיות, פציעות או רצון להעמיק בתרגול.</p>
+                    
+                    <div class="class-details">
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-clock"></i> משך שיעור</span>
+                            <span>60-90 דקות</span>
+                        </div>
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-users"></i> גודל כיתה</span>
+                            <span>1-2 משתתפים</span>
+                        </div>
+                        <div class="class-detail-item">
+                            <span><i class="fas fa-signal"></i> רמת קושי</span>
+                            <span>מותאם אישית</span>
+                        </div>
+                    </div>
+                    
+                    <div class="class-price">₪250 לשיעור</div>
+                    <a href="#contact" class="btn btn-primary">קביעת פגישה</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="section philosophy">
+        <div class="container">
+            <div class="philosophy-grid">
+                <div class="philosophy-content">
+                    <h3 data-editable="philosophy-title">הפילוסופיה שלנו</h3>
+                    <p data-editable="philosophy-desc1">ביוגה לא מדובר רק בתנוחות גופניות. זהו מסע של התחברות לעצמי האמיתי, למקור השלווה והחוכמה שנמצא בתוך כולנו.</p>
+                    <p data-editable="philosophy-desc2">אנחנו מאמינים שכל אדם נושא בתוכו את היכולת לריפוי, צמיחה ושחרור. התפקיד שלנו הוא ליצור מרחב בטוח ותומך שמאפשר לתהליך הטבעי הזה להתרחש.</p>
+                    <p data-editable="philosophy-desc3">הסטודיו שלנו הוא בית לקהילה של מחפשי דרך, מקום שבו אפשר להיות עצמית ללא שיפוט, ולחקור את היופי והעומק של הקיום האנושי.</p>
+                </div>
+                <div class="philosophy-image">
+                    <i class="fas fa-om"></i>
+                </div>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-item">
+                    <i class="fas fa-heart"></i>
+                    <h4>אהבה עצמית</h4>
+                    <p>טיפוח יחס אוהב ומקבל כלפי עצמנו ואחרים</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-balance-scale"></i>
+                    <h4>איזון</h4>
+                    <p>מציאת הרמוניה בין גוף, נפש ורוח</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-seedling"></i>
+                    <h4>צמיחה</h4>
+                    <p>תהליך מתמשך של למידה והתפתחות אישית</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-users"></i>
+                    <h4>קהילה</h4>
+                    <p>יצירת קשרים אמיתיים ותמיכה הדדית</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="section schedule">
+        <div class="container">
+            <h2 class="section-title" data-editable="schedule-title">לוח זמנים שבועי</h2>
+            <p class="section-subtitle" data-editable="schedule-subtitle">מגוון שיעורים לאורך השבוע להתאמה מושלמת לשגרת החיים שלך</p>
+            
+            <div class="schedule-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>שעה</th>
+                            <th>יום א'</th>
+                            <th>יום ב'</th>
+                            <th>יום ג'</th>
+                            <th>יום ד'</th>
+                            <th>יום ה'</th>
+                            <th>יום ו'</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="class-time">07:00-08:15</td>
+                            <td><div class="class-name">האטה יוגה</div><div class="class-instructor">מירי</div></td>
+                            <td><div class="class-name">ויניאסה פלו</div><div class="class-instructor">דנה</div></td>
+                            <td><div class="class-name">האטה יוגה</div><div class="class-instructor">מירי</div></td>
+                            <td><div class="class-name">ויניאסה פלו</div><div class="class-instructor">דנה</div></td>
+                            <td><div class="class-name">האטה יוגה</div><div class="class-instructor">מירי</div></td>
+                            <td><div class="class-name">שבת שלום</div><div class="class-instructor">-</div></td>
+                        </tr>
+                        <tr>
+                            <td class="class-time">09:30-10:45</td>
+                            <td><div class="class-name">ויניאסא פלו</div><div class="class-instructor">דנה</div></td>
+                            <td><div class="class-name">האטה יוגה</div><div class="class-instructor">שירה</div></td>
+                            <td><div class="class-name">ויניאסא פלו</div><div class="class-instructor">דנה</div></td>
+                            <td><div class="class-name">האטה יוגה</div><div class="class-instructor">שירה</div></td>
+                            <td><div class="class-name">ויניאסא פלו</div><div class="class-instructor">דנה</div></td>
+                            <td><div class="class-name">יוגה מתחילים</div><div class="class-instructor">מירי</div></td>
+                        </tr>
+                        <tr>
+                            <td class="class-time">18:00-19:00</td>
+                            <td><div class="class-name">מדיטציה מודרכת</div><div class="class-instructor">יוסי</div></td>
+                            <td><div class="class-name">ויניאסא פלו</div><div class="class-instructor">דנה</div></td>
+                            <td><div class="class-name">מדיטציה מודרכת</div><div class="class-instructor">יוסי</div></td>
+                            <td><div class="class-name">ויניאסא פלו</div><div class="class-instructor">דנה</div></td>
+                            <td><div class="class-name">האטה יוגה</div><div class="class-instructor">שירה</div></td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td class="class-time">19:30-20:45</td>
+                            <td><div class="class-name">האטה יוגה</div><div class="class-instructor">שירה</div></td>
+                            <td><div class="class-name">מדיטציה מודרכת</div><div class="class-instructor">יוסי</div></td>
+                            <td><div class="class-name">האטה יוגה</div><div class="class-instructor">שירה</div></td>
+                            <td><div class="class-name">מדיטציה מודרכת</div><div class="class-instructor">יוסי</div></td>
+                            <td><div class="class-name">ויניאסא פלו</div><div class="class-instructor">דנה</div></td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title" data-editable="contact-title">בואו נתחיל את המסע יחד</h2>
+            <p class="section-subtitle" data-editable="contact-subtitle">כל מסע מתחיל בצעד הראשון. אנחנו כאן כדי ללוות אותך בדרך לגילוי העצמי והשלמות</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>פרטי התקשרות</h3>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>טלפון</strong><br>
+                            <a href="tel:052-3456789" data-editable="phone">052-3456789</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>אימייל</strong><br>
+                            <a href="mailto:info@yoga-studio.co.il" data-editable="email">info@yoga-studio.co.il</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>כתובת</strong><br>
+                            <span data-editable="address">רחוב לוינסקי 15, תל אביב</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>שעות פעילות</strong><br>
+                            א'-ה': 07:00-21:00<br>
+                            ו': 07:00-15:00<br>
+                            ש': סגור
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>שאלות והרשמה</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">שם מלא *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">טלפון *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="class-type">איזה שיעור מעניין אותך?</label>
+                            <select id="class-type" name="class-type">
+                                <option value="">בחר שיעור...</option>
+                                <option value="hatha">האטה יוגה</option>
+                                <option value="vinyasa">ויניאסה פלו</option>
+                                <option value="meditation">מדיטציה מודרכת</option>
+                                <option value="private">שיעורים פרטיים</option>
+                                <option value="beginner">שיעור מתחילים</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="experience">רמת הניסיון שלך ביוגה</label>
+                            <select id="experience" name="experience">
+                                <option value="">בחר רמה...</option>
+                                <option value="beginner">מתחיל מוחלט</option>
+                                <option value="some">קצת ניסיון</option>
+                                <option value="regular">מתרגל בקביעות</option>
+                                <option value="advanced">מתקדם</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">הודעה נוספת</label>
+                            <textarea id="message" name="message" placeholder="ספר לנו קצת על עצמך, על המטרות שלך או שאלות שיש לך..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-zen" style="width: 100%;">
+                            <i class="fas fa-heart"></i>
+                            שלח ובואו נתחיל את המסע
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>סטודיו אוהם</h4>
+                    <p>מרחב של שלווה, איזון ותנועה מודעת. אנחנו מזמינים אותך למסע של גילוי עצמי והתחברות פנימית.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="פייסבוק"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="אינסטגרם"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="יוטיוב"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>השיעורים שלנו</h4>
+                    <p><a href="#classes">האטה יוגה</a></p>
+                    <p><a href="#classes">ויניאסה פלו</a></p>
+                    <p><a href="#classes">מדיטציה מודרכת</a></p>
+                    <p><a href="#classes">שיעורים פרטיים</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>יצירת קשר</h4>
+                    <p><i class="fas fa-phone"></i> 052-3456789</p>
+                    <p><i class="fas fa-envelope"></i> info@yoga-studio.co.il</p>
+                    <p><i class="fas fa-map-marker-alt"></i> רחוב לוינסקי 15, תל אביב</p>
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid #2d3748; padding-top: 30px; margin-top: 40px; text-align: center; color: #a0aec0;">
+                <p>&copy; 2025 סטודיו אוהם - יוגה ומדיטציה. כל הזכויות שמורות.</p>
+                <p style="margin-top: 10px; font-size: 0.9em; font-style: italic;">"במקום שקט, הנפש מוצאת את דרכה הביתה"</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const phone = formData.get('phone');
+            const classType = formData.get('class-type');
+            const experience = formData.get('experience');
+            const message = formData.get('message');
+            
+            // Create WhatsApp message
+            let whatsappMessage = `שלום! אני ${name}%0A` +
+                `טלפון: ${phone}%0A`;
+            
+            if (classType) {
+                const classNames = {
+                    'hatha': 'האטה יוגה',
+                    'vinyasa': 'ויניאסה פלו',
+                    'meditation': 'מדיטציה מודרכת',
+                    'private': 'שיעורים פרטיים',
+                    'beginner': 'שיעור מתחילים'
+                };
+                whatsappMessage += `מעוניין/ת ב: ${classNames[classType]}%0A`;
+            }
+            
+            if (experience) {
+                const experienceNames = {
+                    'beginner': 'מתחיל מוחלט',
+                    'some': 'קצת ניסיון',
+                    'regular': 'מתרגל בקביעות',
+                    'advanced': 'מתקדם'
+                };
+                whatsappMessage += `רמת ניסיון: ${experienceNames[experience]}%0A`;
+            }
+            
+            if (message) {
+                whatsappMessage += `הודעה נוספת: ${message}`;
+            } else {
+                whatsappMessage += 'מעוניין/ת לקבל פרטים על שיעורי יוגה';
+            }
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/972523456789?text=${whatsappMessage}`, '_blank');
+            
+            // Reset form
+            this.reset();
+            alert('תודה! אתה מועבר לווטסאפ לתיאום הפגישה הראשונה');
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.zen-card, .value-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.8s ease';
+            observer.observe(card);
+        });
+
+        // Floating elements animation
+        function createFloatingElement() {
+            const symbols = ['🕉️', '🧘‍♀️', '🌸', '🍃', '🌙', '✨'];
+            const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            const element = document.createElement('div');
+            element.textContent = symbol;
+            element.style.position = 'fixed';
+            element.style.fontSize = '20px';
+            element.style.opacity = '0.3';
+            element.style.pointerEvents = 'none';
+            element.style.zIndex = '1';
+            element.style.left = Math.random() * window.innerWidth + 'px';
+            element.style.top = window.innerHeight + 'px';
+            element.style.transition = 'all 8s linear';
+            
+            document.body.appendChild(element);
+            
+            setTimeout(() => {
+                element.style.top = '-50px';
+                element.style.opacity = '0';
+            }, 100);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 8000);
+        }
+
+        // Create floating elements periodically
+        setInterval(createFloatingElement, 3000);
+
+        // Breathing animation for philosophy section
+        const breathingElements = document.querySelectorAll('.class-image::before');
+        
+        // Add zen quotes on scroll
+        const zenQuotes = [
+            "כשאתה מגיע לסוף מה שאתה צריך לדעת, אתה עומד בתחילת מה שאתה צריך להרגיש",
+            "היוגה אינה על גמישות הגוף, אלא על גמישות החיים",
+            "שלווה פנימית מתחילה בבחירה שלא לתת לאירועים או לאנשים לשלוט ברגשות שלך",
+            "הנשימה שלך היא הכח שלך"
+        ];
+
+        let quoteIndex = 0;
+        const zenQuoteElement = document.querySelector('.zen-quote');
+        
+        function rotateQuote() {
+            zenQuoteElement.style.opacity = '0';
+            setTimeout(() => {
+                zenQuoteElement.textContent = `"${zenQuotes[quoteIndex]}"`;
+                zenQuoteElement.style.opacity = '1';
+                quoteIndex = (quoteIndex + 1) % zenQuotes.length;
+            }, 500);
+        }
+
+        // Rotate quotes every 8 seconds
+        setInterval(rotateQuote, 8000);
+    </script>
+</body>
+</html>
