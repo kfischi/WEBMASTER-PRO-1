@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - אדיטור ויזואלי מושלם</title>
+    <title>WebMaster Pro - אדיטור ויזואלי מתוקן</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* CSS Variables - מוגדרים בצורה ברורה */
         :root {
             --primary: #667eea;
             --secondary: #764ba2;
             --success: #26de81;
             --warning: #fed330;
             --danger: #ff3838;
+            --info: #4facfe;
             --bg-primary: #f8f9fa;
             --bg-secondary: #ffffff;
             --text-primary: #2c3e50;
             --text-secondary: #6c757d;
             --border: #e1e5e9;
             --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -57,7 +60,7 @@
             color: white;
             width: 45px;
             height: 45px;
-            border-radius: 12px;
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -74,7 +77,7 @@
         .website-selector {
             background: white;
             border: 2px solid var(--border);
-            border-radius: 12px;
+            border-radius: var(--radius);
             padding: 12px 20px;
             font-size: 15px;
             min-width: 350px;
@@ -136,31 +139,6 @@
             box-shadow: var(--shadow);
         }
 
-        .panel-tabs {
-            display: flex;
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .panel-tab {
-            flex: 1;
-            padding: 15px 10px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .panel-tab.active {
-            background: white;
-            color: var(--primary);
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        }
-
         .panel-content {
             flex: 1;
             padding: 20px;
@@ -170,7 +148,7 @@
         .section {
             margin-bottom: 25px;
             background: white;
-            border-radius: 12px;
+            border-radius: var(--radius);
             padding: 20px;
             box-shadow: 0 3px 15px rgba(0,0,0,0.08);
             border: 1px solid rgba(255,255,255,0.2);
@@ -513,7 +491,7 @@
             top: 100px;
             right: 20px;
             background: white;
-            border-radius: 12px;
+            border-radius: var(--radius);
             padding: 15px 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             transform: translateX(400px);
@@ -664,84 +642,66 @@
     <div class="main-container">
         <!-- Left Panel -->
         <div class="left-panel">
-            <div class="panel-tabs">
-                <button class="panel-tab active" onclick="switchTab('design')">
-                    <i class="fas fa-palette"></i>
-                    עיצוב
-                </button>
-                <button class="panel-tab" onclick="switchTab('content')">
-                    <i class="fas fa-edit"></i>
-                    תוכן
-                </button>
-                <button class="panel-tab" onclick="switchTab('settings')">
-                    <i class="fas fa-cog"></i>
-                    הגדרות
-                </button>
-            </div>
+            <div class="panel-content">
+                <!-- Website Info Section -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-info-circle"></i>
+                        פרטי האתר
+                    </div>
+                    <div class="website-info" id="websiteInfo">
+                        <p style="color: var(--text-secondary); text-align: center;">בחר אתר מהרשימה העליונה לצפייה בפרטים</p>
+                    </div>
+                </div>
 
-            <div class="panel-content" id="panelContent">
-                <!-- Design Tab Content -->
-                <div id="designTab">
-                    <!-- Website Info Section -->
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-info-circle"></i>
-                            פרטי האתר
+                <!-- Design Tools Section -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-tools"></i>
+                        כלי עיצוב
+                    </div>
+                    <div class="tools-grid">
+                        <div class="tool-btn" onclick="enableTextEdit()">
+                            <i class="fas fa-edit"></i>
+                            ערוך טקסט
                         </div>
-                        <div class="website-info" id="websiteInfo">
-                            <p style="color: var(--text-secondary); text-align: center;">בחר אתר מהרשימה העליונה לצפייה בפרטים</p>
+                        <div class="tool-btn" onclick="changeColors()">
+                            <i class="fas fa-palette"></i>
+                            שנה צבעים
+                        </div>
+                        <div class="tool-btn" onclick="addElement()">
+                            <i class="fas fa-plus"></i>
+                            הוסף אלמנט
+                        </div>
+                        <div class="tool-btn" onclick="duplicateSection()">
+                            <i class="fas fa-copy"></i>
+                            שכפל קטע
+                        </div>
+                        <div class="tool-btn" onclick="uploadImage()">
+                            <i class="fas fa-image"></i>
+                            העלה תמונה
+                        </div>
+                        <div class="tool-btn" onclick="layoutTools()">
+                            <i class="fas fa-th-large"></i>
+                            פריסה
                         </div>
                     </div>
+                </div>
 
-                    <!-- Design Tools Section -->
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-tools"></i>
-                            כלי עיצוב
-                        </div>
-                        <div class="tools-grid">
-                            <div class="tool-btn" onclick="enableTextEdit()">
-                                <i class="fas fa-edit"></i>
-                                ערוך טקסט
-                            </div>
-                            <div class="tool-btn" onclick="changeColors()">
-                                <i class="fas fa-palette"></i>
-                                שנה צבעים
-                            </div>
-                            <div class="tool-btn" onclick="addElement()">
-                                <i class="fas fa-plus"></i>
-                                הוסף אלמנט
-                            </div>
-                            <div class="tool-btn" onclick="duplicateSection()">
-                                <i class="fas fa-copy"></i>
-                                שכפל קטע
-                            </div>
-                            <div class="tool-btn" onclick="uploadImage()">
-                                <i class="fas fa-image"></i>
-                                העלה תמונה
-                            </div>
-                            <div class="tool-btn" onclick="layoutTools()">
-                                <i class="fas fa-th-large"></i>
-                                פריסה
-                            </div>
-                        </div>
+                <!-- Quick Actions Section -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-bolt"></i>
+                        פעולות מהירות
                     </div>
-
-                    <!-- Quick Actions Section -->
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-bolt"></i>
-                            פעולות מהירות
-                        </div>
-                        <button class="btn" onclick="autoSave()" style="width: 100%; margin-bottom: 10px;">
-                            <i class="fas fa-save"></i>
-                            שמירה אוטומטית
-                        </button>
-                        <button class="btn success" onclick="openInNewTab()" style="width: 100%;">
-                            <i class="fas fa-external-link-alt"></i>
-                            פתח בטאב חדש
-                        </button>
-                    </div>
+                    <button class="btn" onclick="autoSave()" style="width: 100%; margin-bottom: 10px;">
+                        <i class="fas fa-save"></i>
+                        שמירה אוטומטית
+                    </button>
+                    <button class="btn success" onclick="openInNewTab()" style="width: 100%;">
+                        <i class="fas fa-external-link-alt"></i>
+                        פתח בטאב חדש
+                    </button>
                 </div>
             </div>
         </div>
@@ -790,85 +750,68 @@
 
         <!-- Right Panel -->
         <div class="right-panel">
-            <div class="panel-tabs">
-                <button class="panel-tab active" onclick="switchPropertiesTab('element')">
-                    <i class="fas fa-mouse-pointer"></i>
-                    אלמנט
-                </button>
-                <button class="panel-tab" onclick="switchPropertiesTab('page')">
-                    <i class="fas fa-file-alt"></i>
-                    דף
-                </button>
-                <button class="panel-tab" onclick="switchPropertiesTab('site')">
-                    <i class="fas fa-globe"></i>
-                    אתר
-                </button>
-            </div>
-
-            <div class="properties-content" id="propertiesContent">
+            <div class="properties-content">
                 <!-- Element Properties -->
-                <div id="elementProperties">
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-mouse-pointer"></i>
-                            מאפייני אלמנט
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">טקסט:</label>
-                            <input type="text" class="form-control" id="elementText" placeholder="בחר אלמנט לעריכה">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">צבע טקסט:</label>
-                            <input type="color" class="color-input" id="textColor" value="#333333">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">צבע רקע:</label>
-                            <input type="color" class="color-input" id="bgColor" value="#ffffff">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">גודל פונט: <span id="fontSizeValue" class="range-value">16px</span></label>
-                            <input type="range" class="range-input" min="10" max="48" value="16" id="fontSize" onchange="updateFontSize(this.value)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">משקל פונט:</label>
-                            <select class="form-control" id="fontWeight">
-                                <option value="normal">רגיל</option>
-                                <option value="bold">עבה</option>
-                                <option value="lighter">דק</option>
-                            </select>
-                        </div>
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-mouse-pointer"></i>
+                        מאפייני אלמנט
                     </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">טקסט:</label>
+                        <input type="text" class="form-control" id="elementText" placeholder="בחר אלמנט לעריכה">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">צבע טקסט:</label>
+                        <input type="color" class="color-input" id="textColor" value="#333333">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">צבע רקע:</label>
+                        <input type="color" class="color-input" id="bgColor" value="#ffffff">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">גודל פונט: <span id="fontSizeValue" class="range-value">16px</span></label>
+                        <input type="range" class="range-input" min="10" max="48" value="16" id="fontSize" onchange="updateFontSize(this.value)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">משקל פונט:</label>
+                        <select class="form-control" id="fontWeight">
+                            <option value="normal">רגיל</option>
+                            <option value="bold">עבה</option>
+                            <option value="lighter">דק</option>
+                        </select>
+                    </div>
+                </div>
 
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-layer-group"></i>
-                            מיקום ופריסה
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">רווח פנימי: <span id="paddingValue" class="range-value">20px</span></label>
-                            <input type="range" class="range-input" min="0" max="50" value="20" id="padding" onchange="updatePadding(this.value)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">רווח חיצוני: <span id="marginValue" class="range-value">10px</span></label>
-                            <input type="range" class="range-input" min="0" max="50" value="10" id="margin" onchange="updateMargin(this.value)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">יישור טקסט:</label>
-                            <select class="form-control" id="textAlign">
-                                <option value="right">ימין</option>
-                                <option value="center">מרכז</option>
-                                <option value="left">שמאל</option>
-                                <option value="justify">מוצדק</option>
-                            </select>
-                        </div>
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-layer-group"></i>
+                        מיקום ופריסה
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">רווח פנימי: <span id="paddingValue" class="range-value">20px</span></label>
+                        <input type="range" class="range-input" min="0" max="50" value="20" id="padding" onchange="updatePadding(this.value)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">רווח חיצוני: <span id="marginValue" class="range-value">10px</span></label>
+                        <input type="range" class="range-input" min="0" max="50" value="10" id="margin" onchange="updateMargin(this.value)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">יישור טקסט:</label>
+                        <select class="form-control" id="textAlign">
+                            <option value="right">ימין</option>
+                            <option value="center">מרכז</option>
+                            <option value="left">שמאל</option>
+                            <option value="justify">מוצדק</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -1023,10 +966,15 @@
         // Initialize Application
         document.addEventListener('DOMContentLoaded', function() {
             console.log('✅ DOM נטען, מתחיל אתחול מערכת...');
-            initializeEditor();
-            setupEventListeners();
-            startAutoSave();
-            showNotification('success', '🚀 WebMaster Pro מוכן לעבודה! בחר אתר מהרשימה העליונה.');
+            try {
+                initializeEditor();
+                setupEventListeners();
+                startAutoSave();
+                showNotification('success', '🚀 WebMaster Pro מוכן לעבודה! בחר אתר מהרשימה העליונה.');
+            } catch (error) {
+                console.error('❌ שגיאה באתחול:', error);
+                showNotification('error', 'שגיאה באתחול המערכת');
+            }
         });
 
         function initializeEditor() {
@@ -1053,15 +1001,6 @@
                     }
                 });
             }
-
-            // Listen for messages from iframe
-            window.addEventListener('message', function(event) {
-                if (event.data.type === 'elementSelected') {
-                    selectElement(event.data);
-                } else if (event.data.type === 'elementUpdated') {
-                    updateElementProperties(event.data);
-                }
-            });
 
             // Form controls
             setupFormControls();
@@ -1110,8 +1049,8 @@
         }
 
         function loadWebsite(websiteId) {
-            console.log('📂 טוען אתר מלא:', websiteId);
-            updateStatus('טוען אתר מקצועי...', true);
+            console.log('📂 טוען אתר:', websiteId);
+            updateStatus('טוען אתר...', true);
 
             const website = websites[websiteId];
             currentWebsite = websiteId;
@@ -1119,687 +1058,195 @@
             // Update website info display
             updateWebsiteInfo(website);
 
-            // Create full professional website
+            // Try to load the actual file first, then fallback to generated content
             const iframe = document.getElementById('websiteIframe');
             const placeholder = document.getElementById('placeholder');
 
-            console.log('🎨 יוצר אתר מקצועי מלא עבור:', website.name);
-            const websiteHTML = generateProfessionalWebsite(website);
-            
-            iframe.srcdoc = websiteHTML;
+            // First, try to load the actual file
+            iframe.src = website.file;
             
             iframe.onload = function() {
-                iframe.style.display = 'block';
-                placeholder.style.display = 'none';
-                updateStatus('אתר נטען בהצלחה', false);
-                showNotification('success', '✅ אתר "' + website.name + '" נטען בהצלחה!');
-                enableEditingMode();
+                // Check if the file loaded successfully
+                try {
+                    // Try to access iframe content to see if it loaded
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    if (iframeDoc && iframeDoc.body && iframeDoc.body.innerHTML.trim() !== '') {
+                        // File loaded successfully
+                        iframe.style.display = 'block';
+                        placeholder.style.display = 'none';
+                        updateStatus('אתר נטען בהצלחה', false);
+                        showNotification('success', '✅ אתר "' + website.name + '" נטען מהקובץ המקורי!');
+                        console.log('✅ טוען מקובץ קיים:', website.file);
+                    } else {
+                        throw new Error('File is empty or not found');
+                    }
+                } catch (error) {
+                    // File not found or error, generate content
+                    console.log('📝 יוצר תוכן זמני עבור:', website.name);
+                    const generatedHTML = generateProfessionalWebsite(website);
+                    iframe.src = '';
+                    iframe.srcdoc = generatedHTML;
+                    
+                    iframe.onload = function() {
+                        iframe.style.display = 'block';
+                        placeholder.style.display = 'none';
+                        updateStatus('אתר נטען (תוכן זמני)', false);
+                        showNotification('info', '📝 אתר "' + website.name + '" נטען עם תוכן זמני');
+                    };
+                }
             };
 
             iframe.onerror = function() {
-                updateStatus('שגיאה בטעינת האתר', false);
-                showNotification('error', '❌ שגיאה בטעינת האתר. אנא נסה שוב.');
+                // Fallback: generate content
+                console.log('📝 שגיאה בטעינה, יוצר תוכן זמני עבור:', website.name);
+                const generatedHTML = generateProfessionalWebsite(website);
+                iframe.src = '';
+                iframe.srcdoc = generatedHTML;
+                
+                iframe.onload = function() {
+                    iframe.style.display = 'block';
+                    placeholder.style.display = 'none';
+                    updateStatus('אתר נטען (תוכן זמני)', false);
+                    showNotification('warning', '⚠️ לא נמצא קובץ מקורי, נטען תוכן זמני');
+                };
             };
         }
 
         function generateProfessionalWebsite(website) {
-            const colors = getWebsiteColors(website.category);
-            const services = getWebsiteServices(website.category);
-            
             return `<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${website.name} - ${website.category}</title>
-    <meta name="description" content="${website.description}">
-    <meta name="keywords" content="${website.category}, ${website.name}, שירותים מקצועיים">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        ${generateProfessionalCSS(colors)}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            line-height: 1.6; 
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 2rem; 
+            text-align: center;
+            color: white;
+        }
+        .hero {
+            padding: 4rem 0;
+        }
+        h1 { 
+            font-size: 3rem; 
+            margin-bottom: 1rem; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .subtitle { 
+            font-size: 1.3rem; 
+            margin-bottom: 2rem; 
+            opacity: 0.9;
+        }
+        .services {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+        }
+        .services h2 {
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .service-card {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .service-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .price {
+            color: #26de81;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+        .contact {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .cta-button {
+            background: #26de81;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 1rem;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(38, 222, 129, 0.4);
+        }
     </style>
 </head>
 <body>
-    ${generateNavigation(website, colors)}
-    ${generateHeroSection(website, colors)}
-    ${generateServicesSection(website, services, colors)}
-    ${generateAboutSection(website, colors)}
-    ${generateContactSection(website, colors)}
-    ${generateFooter(website, colors)}
-    ${generateEditingScript()}
+    <div class="container">
+        <div class="hero">
+            <h1>${website.name}</h1>
+            <p class="subtitle">${website.description}</p>
+            <button class="cta-button">צור קשר עכשיו</button>
+        </div>
+        
+        <div class="services">
+            <h2>השירותים שלנו</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>שירות מקצועי 1</h3>
+                    <p>תיאור מפורט של השירות הראשון שאנו מספקים עם איכות גבוהה</p>
+                    <div class="price">החל מ-₪299</div>
+                </div>
+                <div class="service-card">
+                    <h3>שירות מקצועי 2</h3>
+                    <p>תיאור מפורט של השירות השני עם דגש על מקצועיות ואמינות</p>
+                    <div class="price">החל מ-₪399</div>
+                </div>
+                <div class="service-card">
+                    <h3>שירות מקצועי 3</h3>
+                    <p>שירות מתקדם ומותאם אישית לצרכים המיוחדים שלכם</p>
+                    <div class="price">החל מ-₪499</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact">
+            <h2>צור קשר</h2>
+            <p>נשמח לענות על כל שאלה ולתת ייעוץ מקצועי</p>
+            <p>📞 052-1234567 | 📧 info@${website.name.replace(/\s+/g, '').toLowerCase()}.co.il</p>
+            <button class="cta-button">שלח הודעה</button>
+        </div>
+    </div>
 </body>
 </html>`;
-        }
-
-        function generateProfessionalCSS(colors) {
-            return `
-                * { margin: 0; padding: 0; box-sizing: border-box; }
-                
-                body { 
-                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-                    line-height: 1.6; 
-                    color: #333; 
-                    overflow-x: hidden; 
-                    scroll-behavior: smooth; 
-                }
-                
-                /* Glass Morphism Effects */
-                .glass { 
-                    background: rgba(255, 255, 255, 0.25); 
-                    backdrop-filter: blur(20px); 
-                    border: 1px solid rgba(255, 255, 255, 0.18); 
-                    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37); 
-                }
-                
-                /* Navigation */
-                .navbar { 
-                    position: fixed; 
-                    top: 0; 
-                    width: 100%; 
-                    z-index: 1000; 
-                    background: rgba(255, 255, 255, 0.95); 
-                    backdrop-filter: blur(20px); 
-                    padding: 1rem 0; 
-                    box-shadow: 0 2px 20px rgba(0,0,0,0.1); 
-                }
-                
-                .nav-container { 
-                    max-width: 1200px; 
-                    margin: 0 auto; 
-                    padding: 0 2rem; 
-                    display: flex; 
-                    justify-content: space-between; 
-                    align-items: center; 
-                }
-                
-                .logo { 
-                    font-size: 1.8rem; 
-                    font-weight: 700; 
-                    color: ${colors.primary}; 
-                    text-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
-                    cursor: pointer;
-                }
-                
-                .nav-links { 
-                    display: flex; 
-                    gap: 2rem; 
-                    list-style: none; 
-                }
-                
-                .nav-links a { 
-                    text-decoration: none; 
-                    color: #333; 
-                    font-weight: 500; 
-                    transition: all 0.3s ease; 
-                    padding: 8px 15px; 
-                    border-radius: 8px; 
-                    cursor: pointer;
-                }
-                
-                .nav-links a:hover { 
-                    color: ${colors.primary}; 
-                    background: rgba(102, 126, 234, 0.1); 
-                }
-                
-                /* Hero Section */
-                .hero { 
-                    background: linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary} 100%); 
-                    color: white; 
-                    padding: 120px 0; 
-                    text-align: center; 
-                    position: relative; 
-                    overflow: hidden; 
-                    min-height: 100vh; 
-                    display: flex; 
-                    align-items: center; 
-                }
-                
-                .hero::before { 
-                    content: ""; 
-                    position: absolute; 
-                    top: 0; 
-                    left: 0; 
-                    right: 0; 
-                    bottom: 0; 
-                    background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000'><polygon fill='rgba(255,255,255,0.1)' points='0,1000 1000,0 1000,1000'/></svg>"); 
-                    background-size: cover; 
-                }
-                
-                .hero-content { 
-                    position: relative; 
-                    z-index: 2; 
-                    max-width: 800px; 
-                    margin: 0 auto; 
-                }
-                
-                .hero h1 { 
-                    font-size: 4rem; 
-                    margin-bottom: 1.5rem; 
-                    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); 
-                    line-height: 1.2; 
-                    cursor: pointer;
-                }
-                
-                .hero .subtitle { 
-                    font-size: 1.4rem; 
-                    margin-bottom: 2.5rem; 
-                    opacity: 0.95; 
-                    max-width: 600px; 
-                    margin-left: auto; 
-                    margin-right: auto; 
-                    cursor: pointer;
-                }
-                
-                .cta-button { 
-                    background: white; 
-                    color: ${colors.primary}; 
-                    padding: 15px 40px; 
-                    border: none; 
-                    border-radius: 50px; 
-                    font-size: 1.1rem; 
-                    font-weight: 600; 
-                    cursor: pointer; 
-                    transition: all 0.3s ease; 
-                    text-decoration: none; 
-                    display: inline-block; 
-                    margin: 0 10px; 
-                    box-shadow: 0 5px 20px rgba(0,0,0,0.2); 
-                }
-                
-                .cta-button:hover { 
-                    transform: translateY(-3px); 
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
-                }
-                
-                /* Content Sections */
-                .content-section { 
-                    padding: 100px 0; 
-                    position: relative; 
-                }
-                
-                .content-section:nth-child(even) { 
-                    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
-                }
-                
-                .container { 
-                    max-width: 1200px; 
-                    margin: 0 auto; 
-                    padding: 0 2rem; 
-                }
-                
-                .section-title { 
-                    font-size: 3rem; 
-                    text-align: center; 
-                    margin-bottom: 3rem; 
-                    color: #333; 
-                    position: relative; 
-                    cursor: pointer;
-                }
-                
-                .section-title::after { 
-                    content: ""; 
-                    position: absolute; 
-                    bottom: -15px; 
-                    left: 50%; 
-                    transform: translateX(-50%); 
-                    width: 80px; 
-                    height: 4px; 
-                    background: linear-gradient(45deg, ${colors.primary}, ${colors.secondary}); 
-                    border-radius: 2px; 
-                }
-                
-                /* Services Grid */
-                .services-grid { 
-                    display: grid; 
-                    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-                    gap: 2.5rem; 
-                    margin-top: 4rem; 
-                }
-                
-                .service-card { 
-                    background: white; 
-                    padding: 3rem; 
-                    border-radius: 25px; 
-                    box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
-                    text-align: center; 
-                    transition: all 0.3s ease; 
-                    border: 1px solid rgba(255,255,255,0.2); 
-                    position: relative; 
-                    overflow: hidden; 
-                    cursor: pointer;
-                }
-                
-                .service-card::before { 
-                    content: ""; 
-                    position: absolute; 
-                    top: 0; 
-                    left: 0; 
-                    width: 100%; 
-                    height: 5px; 
-                    background: linear-gradient(45deg, ${colors.primary}, ${colors.secondary}); 
-                }
-                
-                .service-card:hover { 
-                    transform: translateY(-10px); 
-                    box-shadow: 0 25px 50px rgba(0,0,0,0.2); 
-                }
-                
-                .service-icon { 
-                    width: 90px; 
-                    height: 90px; 
-                    margin: 0 auto 2rem; 
-                    background: linear-gradient(45deg, ${colors.primary}, ${colors.secondary}); 
-                    border-radius: 50%; 
-                    display: flex; 
-                    align-items: center; 
-                    justify-content: center; 
-                    font-size: 2.5rem; 
-                    color: white; 
-                    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3); 
-                }
-                
-                .service-card h3 { 
-                    font-size: 1.6rem; 
-                    margin-bottom: 1.5rem; 
-                    color: ${colors.primary}; 
-                    cursor: pointer;
-                }
-                
-                .service-card p { 
-                    color: #666; 
-                    line-height: 1.8; 
-                    margin-bottom: 2rem; 
-                    cursor: pointer;
-                }
-                
-                .price { 
-                    font-size: 1.4rem; 
-                    font-weight: 700; 
-                    color: ${colors.primary}; 
-                    background: rgba(102, 126, 234, 0.1); 
-                    padding: 10px 20px; 
-                    border-radius: 20px; 
-                    display: inline-block; 
-                    cursor: pointer;
-                }
-                
-                /* Contact Section */
-                .contact { 
-                    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
-                }
-                
-                .contact-content { 
-                    display: grid; 
-                    grid-template-columns: 1fr 1fr; 
-                    gap: 5rem; 
-                    align-items: start; 
-                }
-                
-                .contact-info h2 { 
-                    color: ${colors.primary}; 
-                    margin-bottom: 2rem; 
-                    font-size: 2.5rem; 
-                    cursor: pointer;
-                }
-                
-                .contact-info p { 
-                    font-size: 1.1rem; 
-                    color: #666; 
-                    margin-bottom: 3rem; 
-                    line-height: 1.7; 
-                    cursor: pointer;
-                }
-                
-                .contact-item { 
-                    display: flex; 
-                    align-items: center; 
-                    gap: 1.5rem; 
-                    margin-bottom: 2rem; 
-                    font-size: 1.1rem; 
-                    cursor: pointer;
-                }
-                
-                .contact-item i { 
-                    width: 55px; 
-                    height: 55px; 
-                    background: ${colors.primary}; 
-                    color: white; 
-                    border-radius: 50%; 
-                    display: flex; 
-                    align-items: center; 
-                    justify-content: center; 
-                    font-size: 1.3rem; 
-                    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3); 
-                }
-                
-                /* Footer */
-                .footer { 
-                    background: #1a1a1a; 
-                    color: white; 
-                    padding: 60px 0 30px; 
-                }
-                
-                .footer-content { 
-                    display: grid; 
-                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-                    gap: 3rem; 
-                    margin-bottom: 2rem; 
-                }
-                
-                .footer-section h4 { 
-                    color: ${colors.primary}; 
-                    margin-bottom: 1.5rem; 
-                    font-size: 1.3rem; 
-                    cursor: pointer;
-                }
-                
-                .footer-section p { 
-                    color: #ccc; 
-                    line-height: 1.6; 
-                    cursor: pointer;
-                }
-                
-                /* Editable Elements */
-                .editable { 
-                    transition: all 0.3s ease; 
-                    border-radius: 4px; 
-                    min-height: 20px; 
-                    position: relative;
-                }
-                
-                .editable:hover { 
-                    outline: 2px dashed rgba(102, 126, 234, 0.7); 
-                    background: rgba(102, 126, 234, 0.05) !important; 
-                }
-                
-                .editable.selected { 
-                    outline: 3px solid #667eea !important; 
-                    background: rgba(102, 126, 234, 0.1) !important; 
-                }
-                
-                .editable[contenteditable="true"] { 
-                    outline: 3px solid #26de81 !important; 
-                    background: rgba(38, 222, 129, 0.1) !important; 
-                }
-                
-                /* Responsive Design */
-                @media (max-width: 768px) {
-                    .hero h1 { font-size: 2.5rem; }
-                    .hero .subtitle { font-size: 1.1rem; }
-                    .contact-content { grid-template-columns: 1fr; gap: 2rem; }
-                    .services-grid { grid-template-columns: 1fr; }
-                    .section-title { font-size: 2.2rem; }
-                }
-            `;
-        }
-
-        function generateNavigation(website, colors) {
-            return `
-                <nav class="navbar">
-                    <div class="nav-container">
-                        <div class="logo editable" data-type="text" data-element="logo">${website.name}</div>
-                        <ul class="nav-links">
-                            <li><a href="#home" class="editable" data-type="text" data-element="nav-home">בית</a></li>
-                            <li><a href="#services" class="editable" data-type="text" data-element="nav-services">שירותים</a></li>
-                            <li><a href="#about" class="editable" data-type="text" data-element="nav-about">אודות</a></li>
-                            <li><a href="#contact" class="editable" data-type="text" data-element="nav-contact">צור קשר</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            `;
-        }
-
-        function generateHeroSection(website, colors) {
-            return `
-                <section class="hero" id="home">
-                    <div class="container">
-                        <div class="hero-content">
-                            <h1 class="editable" data-type="text" data-element="hero-title">${website.name}</h1>
-                            <p class="subtitle editable" data-type="text" data-element="hero-subtitle">${website.description} - מקצועיות ואיכות ללא פשרות</p>
-                            <div class="hero-buttons">
-                                <a href="#contact" class="cta-button editable" data-type="text" data-element="cta-contact">צור קשר עכשיו</a>
-                                <a href="#services" class="cta-button editable" data-type="text" data-element="cta-services">גלה עוד</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            `;
-        }
-
-        function generateServicesSection(website, services, colors) {
-            let servicesHTML = services.map((service, index) => `
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-${service.icon}"></i>
-                    </div>
-                    <h3 class="editable" data-type="text" data-element="service-title-${index}">${service.title}</h3>
-                    <p class="editable" data-type="text" data-element="service-desc-${index}">${service.description}</p>
-                    <div class="price editable" data-type="text" data-element="service-price-${index}">החל מ-₪${service.price}</div>
-                </div>
-            `).join('');
-
-            return `
-                <section class="content-section" id="services">
-                    <div class="container">
-                        <h2 class="section-title editable" data-type="text" data-element="services-title">השירותים המקצועיים שלנו</h2>
-                        <div class="services-grid">
-                            ${servicesHTML}
-                        </div>
-                    </div>
-                </section>
-            `;
-        }
-
-        function generateAboutSection(website, colors) {
-            return `
-                <section class="content-section" id="about">
-                    <div class="container">
-                        <h2 class="section-title editable" data-type="text" data-element="about-title">אודות ${website.name}</h2>
-                        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-                            <p class="editable" data-type="text" data-element="about-content" style="font-size: 1.2rem; line-height: 1.8; color: #666; margin-bottom: 2rem;">
-                                ${website.name} הוקם מתוך רצון לספק שירות ברמה הגבוהה ביותר בתחום ${website.category}. 
-                                אנחנו מאמינים ביחס אישי, מקצועיות ותוצאות מעולות שחורגות מהציפיות.
-                                הצוות המקצועי שלנו בעל ניסיון רב שנים וזוכה להכשרות מתמידות על מנת להיות מעודכן 
-                                בטכנולוגיות החדישות ובשיטות הטיפול המתקדמות ביותר בעולם.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-            `;
-        }
-
-        function generateContactSection(website, colors) {
-            return `
-                <section class="content-section contact" id="contact">
-                    <div class="container">
-                        <div class="contact-content">
-                            <div class="contact-info">
-                                <h2 class="editable" data-type="text" data-element="contact-title">צור קשר</h2>
-                                <p class="editable" data-type="text" data-element="contact-subtitle">נשמח לענות על כל שאלה ולתת ייעוץ מקצועי ללא התחייבות. אנחנו כאן בשבילכם!</p>
-                                <div class="contact-item">
-                                    <i class="fas fa-phone"></i>
-                                    <span class="editable" data-type="text" data-element="contact-phone">052-1234567</span>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <span class="editable" data-type="text" data-element="contact-email">info@${website.name.replace(/\s+/g, '-').toLowerCase()}.co.il</span>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span class="editable" data-type="text" data-element="contact-address">תל אביב, ישראל</span>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="fas fa-clock"></i>
-                                    <span class="editable" data-type="text" data-element="contact-hours">א'-ה': 9:00-18:00 | ו': 9:00-13:00</span>
-                                </div>
-                            </div>
-                            <div class="contact-form-container">
-                                <div style="background: white; padding: 3rem; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
-                                    <h3 class="editable" data-type="text" data-element="form-title" style="color: ${colors.primary}; margin-bottom: 2rem; font-size: 1.8rem;">שלח הודעה</h3>
-                                    <p class="editable" data-type="text" data-element="form-subtitle" style="color: #666; margin-bottom: 2rem;">מלא את הפרטים ונחזור אליך בהקדם</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            `;
-        }
-
-        function generateFooter(website, colors) {
-            return `
-                <footer class="footer">
-                    <div class="container">
-                        <div class="footer-content">
-                            <div class="footer-section">
-                                <h4 class="editable" data-type="text" data-element="footer-title">${website.name}</h4>
-                                <p class="editable" data-type="text" data-element="footer-description">${website.description}</p>
-                            </div>
-                            <div class="footer-section">
-                                <h4 class="editable" data-type="text" data-element="footer-links-title">קישורים מהירים</h4>
-                                <p class="editable" data-type="text" data-element="footer-link-home" style="margin-bottom: 0.5rem;">עמוד הבית</p>
-                                <p class="editable" data-type="text" data-element="footer-link-services" style="margin-bottom: 0.5rem;">שירותים</p>
-                                <p class="editable" data-type="text" data-element="footer-link-about" style="margin-bottom: 0.5rem;">אודות</p>
-                                <p class="editable" data-type="text" data-element="footer-link-contact">צור קשר</p>
-                            </div>
-                            <div class="footer-section">
-                                <h4 class="editable" data-type="text" data-element="footer-contact-title">פרטי קשר</h4>
-                                <p class="editable" data-type="text" data-element="footer-phone">טלפון: 052-1234567</p>
-                                <p class="editable" data-type="text" data-element="footer-email">אימייל: info@${website.name.replace(/\s+/g, '-').toLowerCase()}.co.il</p>
-                                <p class="editable" data-type="text" data-element="footer-address">כתובת: תל אביב, ישראל</p>
-                            </div>
-                        </div>
-                        <div style="border-top: 1px solid #333; padding-top: 2rem; text-align: center; color: #999;">
-                            <p class="editable" data-type="text" data-element="footer-copyright">&copy; 2024 ${website.name}. כל הזכויות שמורות.</p>
-                        </div>
-                    </div>
-                </footer>
-            `;
-        }
-
-        function generateEditingScript() {
-            return `
-                <script>
-                    // Enable editing functionality within iframe
-                    document.addEventListener('DOMContentLoaded', function() {
-                        setupEditableElements();
-                    });
-
-                    function setupEditableElements() {
-                        const editableElements = document.querySelectorAll('.editable');
-                        
-                        editableElements.forEach(element => {
-                            element.addEventListener('click', function(e) {
-                                e.preventDefault();
-                                selectElement(this);
-                            });
-                            
-                            element.addEventListener('dblclick', function(e) {
-                                e.preventDefault();
-                                enableEditing(this);
-                            });
-                        });
-                    }
-
-                    function selectElement(element) {
-                        // Remove previous selection
-                        document.querySelectorAll('.editable.selected').forEach(el => {
-                            el.classList.remove('selected');
-                        });
-                        
-                        // Add selection to current element
-                        element.classList.add('selected');
-                        
-                        // Send message to parent
-                        window.parent.postMessage({
-                            type: 'elementSelected',
-                            element: element.dataset.element,
-                            text: element.textContent.trim(),
-                            tagName: element.tagName,
-                            dataType: element.dataset.type
-                        }, '*');
-                    }
-
-                    function enableEditing(element) {
-                        if (element.dataset.type === 'text') {
-                            element.contentEditable = true;
-                            element.focus();
-                            
-                            // Select all text
-                            const range = document.createRange();
-                            range.selectNodeContents(element);
-                            const selection = window.getSelection();
-                            selection.removeAllRanges();
-                            selection.addRange(range);
-                            
-                            element.addEventListener('blur', function() {
-                                element.contentEditable = false;
-                                window.parent.postMessage({
-                                    type: 'elementUpdated',
-                                    element: element.dataset.element,
-                                    text: element.textContent.trim()
-                                }, '*');
-                            });
-                            
-                            element.addEventListener('keydown', function(e) {
-                                if (e.key === 'Enter') {
-                                    e.preventDefault();
-                                    element.blur();
-                                } else if (e.key === 'Escape') {
-                                    element.blur();
-                                }
-                            });
-                        }
-                    }
-                </script>
-            `;
-        }
-
-        function getWebsiteColors(category) {
-            const colorSchemes = {
-                'רפואה אסתטית': { primary: '#667eea', secondary: '#764ba2' },
-                'מאמן כושר': { primary: '#4facfe', secondary: '#00f2fe' },
-                'יוגה ומדיטציה': { primary: '#43e97b', secondary: '#38f9d7' },
-                'תזונאית קלינית': { primary: '#fa709a', secondary: '#fee140' },
-                'עורכי דין': { primary: '#667eea', secondary: '#764ba2' },
-                'חשבת שכר': { primary: '#4facfe', secondary: '#00f2fe' },
-                'יופי ועיצוב שיער': { primary: '#fa709a', secondary: '#fee140' },
-                'מורה פרטית': { primary: '#43e97b', secondary: '#38f9d7' },
-                'אסתטיקה רפואית': { primary: '#667eea', secondary: '#764ba2' },
-                'נופש ואירועים': { primary: '#4facfe', secondary: '#00f2fe' },
-                'נדל"ן יוקרה': { primary: '#fa709a', secondary: '#fee140' }
-            };
-            
-            return colorSchemes[category] || { primary: '#667eea', secondary: '#764ba2' };
-        }
-
-        function getWebsiteServices(category) {
-            const servicesByCategory = {
-                'רפואה אסתטית': [
-                    { title: 'בוטוקס מתקדם', description: 'טיפול בקמטים דינמיים עם תוצאות טבעיות ומדויקות', price: '800', icon: 'syringe' },
-                    { title: 'מילוי חומצה היאלורונית', description: 'החזרת נפח והענקת מראה צעיר לפנים', price: '1200', icon: 'magic' },
-                    { title: 'לייזר פרקציונלי', description: 'שיפור מרקם העור והעלמת צלקות', price: '1500', icon: 'star' },
-                    { title: 'פילינג כימי', description: 'חידוש העור ושיפור הברק הטבעי', price: '600', icon: 'sparkles' }
-                ],
-                'מאמן כושר': [
-                    { title: 'אימון אישי', description: 'תוכנית אימון מותאמת אישית לצרכים שלך', price: '300', icon: 'dumbbell' },
-                    { title: 'תוכנית תזונה', description: 'ייעוץ תזונתי מקצועי ותפריט מותאם', price: '200', icon: 'apple-alt' },
-                    { title: 'מעקב דיגיטלי', description: 'מעקב שבועי אחר התקדמות עם אפליקציה', price: '150', icon: 'chart-line' },
-                    { title: 'אימוני קבוצה', description: 'אימונים בקבוצות קטנות עד 4 אנשים', price: '100', icon: 'users' }
-                ],
-                'יוגה ומדיטציה': [
-                    { title: 'האטה יוגה', description: 'שיעורי יוגה איטיים ומדוקדקים למתחילים', price: '120', icon: 'leaf' },
-                    { title: 'וינייסה פלו', description: 'רצף תנועות זורמות ודינמיות', price: '150', icon: 'lotus' },
-                    { title: 'מדיטציה מודרכת', description: 'שיעורי מדיטציה להרגעת הנפש', price: '100', icon: 'om' },
-                    { title: 'יוגה טיפולית', description: 'יוגה מותאמת לבעיות גב וצוואר', price: '180', icon: 'peace' }
-                ]
-            };
-            
-            return servicesByCategory[category] || [
-                { title: 'שירות מקצועי 1', description: 'תיאור מקצועי ומפורט של השירות הראשון', price: '200', icon: 'star' },
-                { title: 'שירות מקצועי 2', description: 'תיאור מקצועי ומפורט של השירות השני', price: '300', icon: 'heart' },
-                { title: 'שירות מקצועי 3', description: 'תיאור מקצועי ומפורט של השירות השלישי', price: '400', icon: 'gem' },
-                { title: 'שירות מקצועי 4', description: 'תיאור מקצועי נוסף עם פרטים מיוחדים', price: '350', icon: 'award' }
-            ];
         }
 
         function updateWebsiteInfo(website) {
@@ -1823,10 +1270,6 @@
                     <span class="info-label">סטטוס:</span>
                     <span class="info-value">${website.status}</span>
                 </div>
-                <div class="info-row">
-                    <span class="info-label">עודכן:</span>
-                    <span class="info-value">${website.lastModified}</span>
-                </div>
                 <div style="margin-top: 15px; padding: 12px; background: rgba(102, 126, 234, 0.1); border-radius: 8px; font-size: 13px; color: var(--primary); text-align: center; font-weight: 600;">
                     💎 ${website.description}
                 </div>
@@ -1834,69 +1277,6 @@
                     📊 סה"כ שווי תיק: ₪${totalValue.toLocaleString()}
                 </div>
             `;
-        }
-
-        function enableEditingMode() {
-            console.log('🎨 מפעיל מצב עריכה מתקדם...');
-            
-            // Enable all form controls
-            const controls = ['elementText', 'textColor', 'bgColor', 'fontSize', 'fontWeight', 'textAlign', 'padding', 'margin'];
-            controls.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.disabled = false;
-                }
-            });
-            
-            showNotification('success', '🎨 מצב עריכה פעיל! לחץ על אלמנט באתר לעריכה');
-        }
-
-        function selectElement(data) {
-            selectedElement = data;
-            
-            // Update form with element data
-            const elementText = document.getElementById('elementText');
-            if (elementText) {
-                elementText.value = data.text;
-            }
-            
-            // Update status bar
-            document.getElementById('selectedElement').textContent = `נבחר: ${data.element}`;
-            
-            showNotification('info', `אלמנט נבחר: ${data.element}`);
-        }
-
-        function updateElementText(newText) {
-            if (selectedElement) {
-                const iframe = document.getElementById('websiteIframe');
-                if (iframe && iframe.contentWindow) {
-                    iframe.contentWindow.postMessage({
-                        type: 'updateElement',
-                        element: selectedElement.element,
-                        property: 'textContent',
-                        value: newText
-                    }, '*');
-                }
-            }
-        }
-
-        function applyStyleToSelected(property, value) {
-            if (selectedElement) {
-                const iframe = document.getElementById('websiteIframe');
-                if (iframe && iframe.contentWindow) {
-                    iframe.contentWindow.postMessage({
-                        type: 'updateElementStyle',
-                        element: selectedElement.element,
-                        property: property,
-                        value: value
-                    }, '*');
-                }
-            }
-        }
-
-        function updateElementProperties(data) {
-            console.log('📝 עדכון אלמנט:', data);
-            showNotification('success', 'אלמנט עודכן בהצלחה');
         }
 
         // Device Controls
@@ -1943,28 +1323,6 @@
             applyStyleToSelected('margin', `${value}px`);
         }
 
-        // Tab Functions
-        function switchTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.panel-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Update content (placeholder for now)
-            showNotification('info', `עבר לטאב ${tabName}`);
-        }
-
-        function switchPropertiesTab(tabName) {
-            // Update tab buttons
-            event.target.parentElement.querySelectorAll('.panel-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            showNotification('info', `עבר למאפייני ${tabName}`);
-        }
-
         // Tool Functions
         function enableTextEdit() {
             editMode = !editMode;
@@ -1972,7 +1330,7 @@
             
             if (editMode) {
                 toolBtn.classList.add('active');
-                showNotification('success', '🖊️ מצב עריכת טקסט פעיל - לחץ כפל על טקסט באתר');
+                showNotification('success', '🖊️ מצב עריכת טקסט פעיל');
             } else {
                 toolBtn.classList.remove('active');
                 showNotification('info', 'מצב עריכת טקסט כבוי');
@@ -2059,10 +1417,14 @@
             }
             
             const iframe = document.getElementById('websiteIframe');
-            if (iframe.style.display !== 'none' && iframe.srcdoc) {
+            if (iframe.style.display !== 'none') {
                 const newWindow = window.open('', '_blank', 'width=1200,height=800');
-                newWindow.document.write(iframe.srcdoc);
-                newWindow.document.close();
+                if (iframe.src) {
+                    newWindow.location.href = iframe.src;
+                } else if (iframe.srcdoc) {
+                    newWindow.document.write(iframe.srcdoc);
+                    newWindow.document.close();
+                }
                 showNotification('info', '👁️ תצוגה מקדימה נפתחה בחלון חדש');
             }
         }
@@ -2086,6 +1448,16 @@
         }
 
         // Utility Functions
+        function updateElementText(newText) {
+            // This would update the selected element's text
+            console.log('📝 עדכון טקסט:', newText);
+        }
+
+        function applyStyleToSelected(property, value) {
+            // This would apply styles to the selected element
+            console.log('🎨 עדכון סגנון:', property, value);
+        }
+
         function showNotification(type, message) {
             const notification = document.getElementById('notification');
             const notificationIcon = document.getElementById('notificationIcon');
