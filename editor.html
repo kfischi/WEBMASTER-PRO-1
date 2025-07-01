@@ -742,6 +742,15 @@
                         <p style="margin-top: 15px; color: var(--primary); font-weight: 600;">
                             11 אתרים ברמה עולמית | שווי כולל: ₪26,900
                         </p>
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px; font-size: 13px; line-height: 1.6;">
+                            <strong>📁 מבנה קבצים נדרש:</strong><br>
+                            📄 האדיטור (הקובץ הזה)<br>
+                            📁 websites/<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;📄 dr-michal-rosen.html<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;📄 fitness-co.html<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;📄 yoga-studio.html<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;📄 ... (שאר 8 האתרים)
+                        </div>
                     </div>
                     <iframe class="website-iframe" id="websiteIframe" style="display: none;"></iframe>
                 </div>
@@ -867,7 +876,7 @@
                 category: 'רפואה אסתטית',
                 price: 2800,
                 description: 'מרפאת אסתטיקה רפואית מתקדמת עם טיפולי יופי חדשניים',
-                file: 'dr-michal-rosen.html',
+                file: 'websites/dr-michal-rosen.html',
                 status: 'מוכן',
                 lastModified: '2025-01-15'
             },
@@ -876,7 +885,7 @@
                 category: 'מאמן כושר',
                 price: 2200,
                 description: 'מאמן כושר אישי מוסמך עם ניסיון רב שנים בפיתוח גוף',
-                file: 'fitness-co.html',
+                file: 'websites/fitness-co.html',
                 status: 'מוכן',
                 lastModified: '2025-01-10'
             },
@@ -885,7 +894,7 @@
                 category: 'יוגה ומדיטציה',
                 price: 1900,
                 description: 'מרחב של שלווה, איזון ותנועה מודעת לגוף ולנפש',
-                file: 'yoga-studio.html',
+                file: 'websites/yoga-studio.html',
                 status: 'מוכן',
                 lastModified: '2025-01-08'
             },
@@ -894,7 +903,7 @@
                 category: 'תזונאית קלינית',
                 price: 2400,
                 description: 'תזונאית קלינית מוסמכת עם התמחות בהרזיה בריאה',
-                file: 'nutritionist.html',
+                file: 'websites/nutritionist.html',
                 status: 'מוכן',
                 lastModified: '2025-01-12'
             },
@@ -903,7 +912,7 @@
                 category: 'עורכי דין',
                 price: 2500,
                 description: 'משרד עורכי דין מוביל עם ניסיון רב שנים בדיני מסחר',
-                file: 'law-firm.html',
+                file: 'websites/law-firm.html',
                 status: 'מוכן',
                 lastModified: '2025-01-05'
             },
@@ -912,7 +921,7 @@
                 category: 'חשבת שכר',
                 price: 2000,
                 description: 'שירותי שכר וחשבונאות מקצועיים לעסקים קטנים ובינוניים',
-                file: 'accountant.html',
+                file: 'websites/accountant.html',
                 status: 'מוכן',
                 lastModified: '2025-01-07'
             },
@@ -921,7 +930,7 @@
                 category: 'יופי ועיצוב שיער',
                 price: 1700,
                 description: 'סלון יופי מוביל עם הטכנולוגיות העדכניות בעיצוב שיער',
-                file: 'beauty-salon.html',
+                file: 'websites/beauty-salon.html',
                 status: 'מוכן',
                 lastModified: '2025-01-03'
             },
@@ -930,7 +939,7 @@
                 category: 'מורה פרטית',
                 price: 2100,
                 description: 'מורה פרטית מנוסה עם דוקטורט בחינוך ופסיכולוגיה',
-                file: 'tutor.html',
+                file: 'websites/tutor.html',
                 status: 'מוכן',
                 lastModified: '2025-01-09'
             },
@@ -939,7 +948,7 @@
                 category: 'אסתטיקה רפואית',
                 price: 3200,
                 description: 'מרכז רפואה אסתטית מתקדמת לחידוש העור וטיפולי יופי',
-                file: 'aesthetic-clinic.html',
+                file: 'websites/aesthetic-clinic.html',
                 status: 'מוכן - פרמיום',
                 lastModified: '2025-01-15'
             },
@@ -948,7 +957,7 @@
                 category: 'נופש ואירועים',
                 price: 2300,
                 description: 'חברה מובילה בתחום הנופש והאירועים הקורפורטיביים',
-                file: 'multibrawn.html',
+                file: 'websites/multibrawn.html',
                 status: 'מוכן',
                 lastModified: '2025-01-11'
             },
@@ -957,7 +966,7 @@
                 category: 'נדל"ן יוקרה',
                 price: 2700,
                 description: 'חברת נדל"ן מתמחה בנכסי פרמיום ויוקרה בישראל',
-                file: 'real-estate.html',
+                file: 'websites/real-estate.html',
                 status: 'מוכן',
                 lastModified: '2025-01-13'
             }
@@ -1058,57 +1067,68 @@
             // Update website info display
             updateWebsiteInfo(website);
 
-            // Try to load the actual file first, then fallback to generated content
             const iframe = document.getElementById('websiteIframe');
             const placeholder = document.getElementById('placeholder');
 
+            console.log('🔍 מחפש קובץ באתיב:', website.file);
+            
             // First, try to load the actual file
             iframe.src = website.file;
             
             iframe.onload = function() {
-                // Check if the file loaded successfully
-                try {
-                    // Try to access iframe content to see if it loaded
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    if (iframeDoc && iframeDoc.body && iframeDoc.body.innerHTML.trim() !== '') {
-                        // File loaded successfully
-                        iframe.style.display = 'block';
-                        placeholder.style.display = 'none';
-                        updateStatus('אתר נטען בהצלחה', false);
-                        showNotification('success', '✅ אתר "' + website.name + '" נטען מהקובץ המקורי!');
-                        console.log('✅ טוען מקובץ קיים:', website.file);
-                    } else {
-                        throw new Error('File is empty or not found');
+                // Use a timeout to check if content loaded properly
+                setTimeout(function() {
+                    try {
+                        // Check if iframe loaded successfully by testing the title or basic content
+                        const iframeWindow = iframe.contentWindow;
+                        const iframeDoc = iframe.contentDocument || iframeWindow.document;
+                        
+                        // More robust check - look for actual content
+                        if (iframeDoc && iframeDoc.documentElement && 
+                            iframeDoc.documentElement.innerHTML.length > 100 && 
+                            !iframeDoc.title.includes('404') && 
+                            !iframeDoc.body.innerHTML.includes('Not Found')) {
+                            
+                            // File loaded successfully
+                            iframe.style.display = 'block';
+                            placeholder.style.display = 'none';
+                            updateStatus('אתר נטען בהצלחה', false);
+                            showNotification('success', '✅ אתר "' + website.name + '" נטען מהקובץ המקורי!');
+                            console.log('✅ נטען בהצלחה מ:', website.file);
+                        } else {
+                            throw new Error('File not found or empty');
+                        }
+                    } catch (error) {
+                        console.log('📝 קובץ לא נמצא, יוצר תוכן זמני עבור:', website.name);
+                        loadFallbackContent(website, iframe, placeholder);
                     }
-                } catch (error) {
-                    // File not found or error, generate content
-                    console.log('📝 יוצר תוכן זמני עבור:', website.name);
-                    const generatedHTML = generateProfessionalWebsite(website);
-                    iframe.src = '';
-                    iframe.srcdoc = generatedHTML;
-                    
-                    iframe.onload = function() {
-                        iframe.style.display = 'block';
-                        placeholder.style.display = 'none';
-                        updateStatus('אתר נטען (תוכן זמני)', false);
-                        showNotification('info', '📝 אתר "' + website.name + '" נטען עם תוכן זמני');
-                    };
-                }
+                }, 500); // Wait 500ms for content to load
             };
 
             iframe.onerror = function() {
-                // Fallback: generate content
-                console.log('📝 שגיאה בטעינה, יוצר תוכן זמני עבור:', website.name);
-                const generatedHTML = generateProfessionalWebsite(website);
-                iframe.src = '';
-                iframe.srcdoc = generatedHTML;
-                
-                iframe.onload = function() {
-                    iframe.style.display = 'block';
-                    placeholder.style.display = 'none';
-                    updateStatus('אתר נטען (תוכן זמני)', false);
-                    showNotification('warning', '⚠️ לא נמצא קובץ מקורי, נטען תוכן זמני');
-                };
+                console.log('❌ שגיאה בטעינה, יוצר תוכן זמני עבור:', website.name);
+                loadFallbackContent(website, iframe, placeholder);
+            };
+            
+            // Also set a timeout as fallback
+            setTimeout(function() {
+                if (iframe.style.display === 'none') {
+                    console.log('⏰ זמן קצוב חלף, יוצר תוכן זמני עבור:', website.name);
+                    loadFallbackContent(website, iframe, placeholder);
+                }
+            }, 2000); // 2 second timeout
+        }
+
+        function loadFallbackContent(website, iframe, placeholder) {
+            const generatedHTML = generateProfessionalWebsite(website);
+            iframe.src = '';
+            iframe.srcdoc = generatedHTML;
+            
+            iframe.onload = function() {
+                iframe.style.display = 'block';
+                placeholder.style.display = 'none';
+                updateStatus('אתר נטען (תוכן זמני)', false);
+                showNotification('warning', '⚠️ קובץ ' + website.file + ' לא נמצא, נטען תוכן זמני איכותי');
             };
         }
 
@@ -1509,6 +1529,11 @@
         console.log('✅ WebMaster Pro אדיטור ויזואלי נטען בהצלחה!');
         console.log('📊 זמין: ' + Object.keys(websites).length + ' אתרים בשווי ₪' + 
                    Object.values(websites).reduce((sum, site) => sum + site.price, 0).toLocaleString());
+        console.log('📁 מחפש אתרים בתיקייה: websites/');
+        console.log('📋 רשימת קבצים נדרשים:');
+        Object.values(websites).forEach(site => {
+            console.log('   📄 ' + site.file);
+        });
     </script>
 </body>
 </html>
