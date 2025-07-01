@@ -1145,36 +1145,112 @@
             }
         };
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            setupEventListeners();
-            populateWebsiteSelector();
-            showNotification('success', '🚀 WebMaster Pro נטען בהצלחה! 11 אתרים מקצועיים זמינים לעריכה.');
-        });
+        // Initialize immediately - no waiting for DOM
+        function initializeWebMasterPro() {
+            console.log('🚀 התחלת טעינת WebMaster Pro...');
+            
+            try {
+                setupEventListeners();
+                populateWebsiteSelector();
+                
+                console.log('✅ אתרים נטענו:', Object.keys(websiteDatabase).length);
+                showNotification('success', '🚀 WebMaster Pro נטען בהצלחה! 11 אתרים מקצועיים זמינים לעריכה.');
+            } catch (error) {
+                console.error('❌ שגיאה בטעינה:', error);
+                showNotification('error', 'שגיאה בטעינת המערכת');
+            }
+        }
+
+        // Initialize as soon as possible
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeWebMasterPro);
+        } else {
+            initializeWebMasterPro();
+        }
 
         function setupEventListeners() {
-            // Website selector
-            document.getElementById('websiteSelector').addEventListener('change', function() {
-                const websiteId = this.value;
-                if (websiteId) {
-                    loadWebsite(websiteId);
+            try {
+                // Website selector
+                const selector = document.getElementById('websiteSelector');
+                if (selector) {
+                    selector.addEventListener('change', function() {
+                        const websiteId = this.value;
+                        console.log('🎯 נבחר אתר:', websiteId);
+                        if (websiteId) {
+                            loadWebsite(websiteId);
+                        }
+                    });
                 }
-            });
 
-            // Auto-save functionality
-            setInterval(autoSave, 30000); // Auto-save every 30 seconds
+                // Auto-save functionality
+                setInterval(autoSave, 30000); // Auto-save every 30 seconds
+                
+                console.log('✅ Event listeners הוגדרו');
+            } catch (error) {
+                console.error('❌ שגיאה ב-setupEventListeners:', error);
+            }
         }
 
         function populateWebsiteSelector() {
-            const selector = document.getElementById('websiteSelector');
-            selector.innerHTML = '<option value="">בחר אתר לעריכה (11 זמינים)</option>';
-            
-            Object.values(websiteDatabase).forEach(website => {
-                const option = document.createElement('option');
-                option.value = website.id;
-                option.textContent = `${website.name} - ${website.category} (₪${website.price.toLocaleString()})`;
-                selector.appendChild(option);
-            });
+            try {
+                const selector = document.getElementById('websiteSelector');
+                if (!selector) {
+                    console.error('❌ לא נמצא websiteSelector');
+                    return;
+                }
+
+                console.log('📋 טוען אתרים לרשימה...');
+                
+                // Clear existing options
+                selector.innerHTML = '';
+                
+                // Add default option
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = 'בחר אתר לעריכה (11 זמינים)';
+                selector.appendChild(defaultOption);
+                
+                // Add website options
+                const websites = Object.values(websiteDatabase);
+                console.log('🔍 נמצאו אתרים:', websites.length);
+                
+                websites.forEach((website, index) => {
+                    try {
+                        const option = document.createElement('option');
+                        option.value = website.id;
+                        option.textContent = `${website.name} - ${website.category} (₪${website.price.toLocaleString()})`;
+                        selector.appendChild(option);
+                        console.log(`✅ נוסף אתר ${index + 1}:`, website.name);
+                    } catch (error) {
+                        console.error('❌ שגיאה בהוספת אתר:', website.name, error);
+                    }
+                });
+                
+                console.log('✅ כל האתרים נטענו בהצלחה!');
+                
+            } catch (error) {
+                console.error('❌ שגיאה ב-populateWebsiteSelector:', error);
+                
+                // Fallback - add options manually
+                const selector = document.getElementById('websiteSelector');
+                if (selector) {
+                    selector.innerHTML = `
+                        <option value="">בחר אתר לעריכה (11 זמינים)</option>
+                        <option value="dr-michal-rosen">ד"ר מיכל רוזן - רפואה אסתטית (₪2,800)</option>
+                        <option value="fitness-coach">דני פיט - מאמן כושר (₪2,200)</option>
+                        <option value="yoga-studio">סטודיו אוהם - יוגה ומדיטציה (₪1,900)</option>
+                        <option value="nutritionist">ד"ר שרה כהן - תזונאית קלינית (₪2,400)</option>
+                        <option value="law-firm">משרד ברקוביץ - עורכי דין (₪2,500)</option>
+                        <option value="accountant">רינה לוי - חשבת שכר (₪2,000)</option>
+                        <option value="beauty-salon">מספרה BELLA - יופי ועיצוב שיער (₪1,700)</option>
+                        <option value="tutor">ד"ר רונית לוי - מורה פרטית (₪2,100)</option>
+                        <option value="aesthetic-clinic">קליניקת יופי פרמיום - אסתטיקה רפואית (₪3,200)</option>
+                        <option value="multibrawn">מולטיבראון - נופש ואירועים (₪2,300)</option>
+                        <option value="real-estate">נדל"ן פרמיום - נדל"ן יוקרה (₪2,700)</option>
+                    `;
+                    console.log('✅ נוספו אתרים ידנית כ-fallback');
+                }
+            }
         }
 
         // Website Loading
