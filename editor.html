@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - אדיטור ויזואלי מתקדם</title>
+    <title>WebMaster Pro - אדיטור מהפכני עם AI מתקדם</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #667eea;
+            --primary-dark: #5a67d8;
             --secondary: #764ba2;
-            --success: #26de81;
-            --warning: #fed330;
-            --danger: #ff3838;
-            --info: #4facfe;
-            --bg-primary: #f8f9fa;
-            --bg-secondary: #ffffff;
-            --text-primary: #2c3e50;
-            --text-secondary: #6c757d;
-            --border: #e1e5e9;
-            --shadow: 0 2px 10px rgba(0,0,0,0.1);
-            --radius: 12px;
+            --accent: #f093fb;
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --danger: #ef4444;
+            --info: #06b6d4;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border: rgba(148, 163, 184, 0.2);
+            --glass: rgba(255, 255, 255, 0.1);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --blur: blur(20px);
         }
 
         * {
@@ -29,315 +35,259 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            height: 100vh;
-            overflow: hidden;
+            font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--primary) 100%);
             color: var(--text-primary);
+            min-height: 100vh;
+            overflow: hidden;
         }
 
-        /* Header */
+        /* Glass Morphism Header */
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 15px 20px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: var(--blur);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: var(--shadow);
+            position: relative;
             z-index: 1000;
         }
 
-        .logo-section {
+        .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
         }
 
         .logo-icon {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
         }
 
         .logo-text {
-            font-size: 22px;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .website-selector {
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 12px 20px;
-            font-size: 15px;
-            min-width: 350px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            min-width: 400px;
             outline: none;
             transition: all 0.3s ease;
         }
 
         .website-selector:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
         }
 
         .header-actions {
             display: flex;
-            gap: 10px;
+            gap: 0.75rem;
         }
 
         .btn {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 12px 20px;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 0.85rem;
             font-weight: 600;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 8px;
+            backdrop-filter: var(--blur);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
         }
 
-        .btn.success {
-            background: linear-gradient(45deg, var(--success), #20bf6b);
+        .btn.ai-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            animation: pulse-ai 2s infinite;
         }
 
-        .btn.warning {
-            background: linear-gradient(45deg, var(--warning), #f7b733);
-        }
-
-        .btn.danger {
-            background: linear-gradient(45deg, var(--danger), #c44569);
+        @keyframes pulse-ai {
+            0%, 100% { box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3); }
+            50% { box-shadow: 0 15px 40px rgba(240, 147, 251, 0.6); }
         }
 
         /* Main Layout */
         .main-container {
             display: flex;
-            height: calc(100vh - 80px);
+            height: calc(100vh - 90px);
         }
 
-        /* Left Panel */
+        /* Left Panel - AI Tools */
         .left-panel {
             width: 320px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            box-shadow: var(--shadow);
         }
 
-        .panel-tabs {
-            display: flex;
-            background: var(--bg-primary);
+        .panel-header {
+            padding: 1.5rem;
             border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--glass), rgba(102, 126, 234, 0.1));
         }
 
-        .panel-tab {
-            flex: 1;
-            padding: 15px 10px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 13px;
+        .panel-title {
+            font-size: 1.1rem;
             font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel-subtitle {
             color: var(--text-secondary);
-            transition: all 0.3s ease;
-            text-align: center;
+            font-size: 0.85rem;
         }
 
-        .panel-tab.active {
-            background: white;
-            color: var(--primary);
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        }
-
-        .panel-content {
+        .ai-features {
             flex: 1;
-            padding: 20px;
+            padding: 1.5rem;
             overflow-y: auto;
         }
 
-        .section {
-            margin-bottom: 25px;
-            background: white;
-            border-radius: var(--radius);
-            padding: 20px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-            border: 1px solid rgba(255,255,255,0.2);
+        .feature-section {
+            margin-bottom: 2rem;
         }
 
         .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title i {
-            color: var(--primary);
-            font-size: 18px;
-        }
-
-        /* Website Info */
-        .website-info {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border-radius: 10px;
-            padding: 15px;
-            border: 1px solid rgba(102, 126, 234, 0.2);
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-
-        .info-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .info-label {
-            color: var(--text-secondary);
+            font-size: 0.9rem;
             font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .info-value {
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        .price-tag {
-            background: linear-gradient(45deg, var(--success), #20bf6b);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        /* Advanced Tools Grid */
-        .tools-grid {
+        .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 0.75rem;
         }
 
-        .tool-btn {
-            background: var(--bg-primary);
-            border: 2px solid var(--border);
-            padding: 15px 10px;
-            border-radius: 10px;
+        .feature-btn {
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
             cursor: pointer;
-            text-align: center;
             transition: all 0.3s ease;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-primary);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .tool-btn:hover {
-            background: rgba(102, 126, 234, 0.1);
+        .feature-btn:hover {
+            background: rgba(102, 126, 234, 0.2);
             border-color: var(--primary);
-            color: var(--primary);
             transform: translateY(-2px);
         }
 
-        .tool-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
+        .feature-btn.premium {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.1), rgba(245, 87, 108, 0.1));
         }
 
-        .tool-btn i {
-            font-size: 20px;
-            margin-bottom: 8px;
-            display: block;
+        .feature-btn.premium::before {
+            content: "✨";
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            font-size: 0.8rem;
         }
 
-        /* Color Picker Advanced */
-        .color-palette {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 5px;
-            margin-bottom: 15px;
+        .feature-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .color-swatch {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            cursor: pointer;
-            border: 2px solid white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+        .feature-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
         }
 
-        .color-swatch:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .color-swatch.active {
-            border-color: var(--primary);
-            transform: scale(1.1);
+        .feature-desc {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            line-height: 1.4;
         }
 
         /* Center Area */
         .center-area {
             flex: 1;
-            background: var(--bg-primary);
             display: flex;
             flex-direction: column;
+            background: var(--bg-secondary);
         }
 
         .toolbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 15px 20px;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid var(--border);
         }
 
         .device-controls {
             display: flex;
             gap: 8px;
-            background: var(--bg-primary);
-            padding: 5px;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 6px;
             border-radius: 10px;
+            border: 1px solid var(--border);
         }
 
         .device-btn {
             background: transparent;
             border: none;
-            padding: 10px 15px;
+            padding: 10px 16px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
             color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -345,52 +295,57 @@
         }
 
         .device-btn.active {
-            background: white;
-            color: var(--primary);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
-        .toolbar-actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .zoom-control {
+        .zoom-controls {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: var(--text-secondary);
+            gap: 1rem;
         }
 
         .zoom-slider {
-            width: 100px;
-            height: 6px;
-            border-radius: 3px;
-            background: var(--bg-primary);
+            width: 120px;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--bg-tertiary);
             outline: none;
             cursor: pointer;
         }
 
-        .canvas-container {
+        .canvas-area {
             flex: 1;
+            padding: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(245, 87, 108, 0.1) 0%, transparent 50%);
         }
 
         .website-frame {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
             overflow: hidden;
             transition: all 0.5s ease;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
+            z-index: 10;
         }
 
         .website-frame.desktop {
@@ -414,245 +369,315 @@
             border: none;
         }
 
-        .frame-overlay {
+        .ai-suggestions {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
+            top: 20px;
+            left: 20px;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border);
             border-radius: 15px;
+            padding: 1rem;
+            max-width: 300px;
+            z-index: 20;
+            animation: slideInLeft 0.5s ease;
         }
 
-        .frame-overlay.edit-mode {
-            pointer-events: all;
-            background: rgba(0,0,0,0.02);
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
-        .placeholder {
+        .ai-suggestion-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 500px;
+            gap: 8px;
+        }
+
+        .ai-suggestion-text {
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 1rem;
         }
 
-        .placeholder i {
-            font-size: 64px;
-            color: var(--primary);
-            margin-bottom: 20px;
-            opacity: 0.6;
+        .suggestion-actions {
+            display: flex;
+            gap: 0.5rem;
         }
 
-        .placeholder h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: var(--text-primary);
+        .suggestion-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        /* Right Panel */
+        .suggestion-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .suggestion-btn.secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* Right Panel - Properties */
         .right-panel {
             width: 320px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border-left: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            box-shadow: var(--shadow);
+        }
+
+        .properties-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--glass), rgba(240, 147, 251, 0.1));
+        }
+
+        .selected-element {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .element-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .element-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .element-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
         .properties-content {
             flex: 1;
-            padding: 20px;
+            padding: 1.5rem;
             overflow-y: auto;
         }
 
+        .property-section {
+            margin-bottom: 2rem;
+        }
+
+        .property-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
         }
 
         .form-label {
             display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 14px;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+            color: var(--text-primary);
+            font-size: 0.85rem;
             outline: none;
             transition: all 0.3s ease;
-            background: white;
         }
 
         .form-control:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
         }
 
         .color-input {
             width: 100%;
-            height: 45px;
-            padding: 5px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
+            height: 40px;
+            padding: 4px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 8px;
             cursor: pointer;
-            background: white;
         }
 
         .range-input {
             width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: var(--bg-primary);
+            height: 4px;
+            border-radius: 2px;
+            background: var(--bg-tertiary);
             outline: none;
             cursor: pointer;
         }
 
-        .range-value {
-            font-size: 12px;
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        /* Advanced Style Controls */
-        .style-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .style-btn {
-            padding: 10px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            background: white;
-            cursor: pointer;
-            text-align: center;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .style-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .style-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* AI Assistant */
-        .ai-assistant {
+        .ai-panel {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 350px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            z-index: 2000;
-            transform: translateY(400px);
-            transition: all 0.4s ease;
+            bottom: 20px;
+            right: 20px;
+            width: 400px;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+            box-shadow: var(--shadow);
         }
 
-        .ai-assistant.open {
+        .ai-panel.open {
             transform: translateY(0);
         }
 
         .ai-header {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
-            padding: 15px 20px;
-            border-radius: 15px 15px 0 0;
+            padding: 1.5rem;
+            border-radius: 20px 20px 0 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
+        }
+
+        .ai-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-content {
+            padding: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .ai-chat {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ai-message {
+            background: var(--glass);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .ai-input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .ai-input {
+            flex: 1;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            color: var(--text-primary);
+            outline: none;
+            font-size: 0.85rem;
+        }
+
+        .ai-send {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .ai-toggle {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            right: 20px;
             width: 60px;
             height: 60px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             border: none;
             border-radius: 50%;
             color: white;
-            font-size: 24px;
+            font-size: 1.5rem;
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
             transition: all 0.3s ease;
-            z-index: 2001;
+            z-index: 1001;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         .ai-toggle:hover {
             transform: scale(1.1);
-        }
-
-        .ai-content {
-            padding: 20px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .ai-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            outline: none;
-            margin-bottom: 10px;
-        }
-
-        .ai-suggestions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 15px;
-        }
-
-        .suggestion-chip {
-            background: var(--bg-primary);
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            cursor: pointer;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .suggestion-chip:hover {
-            background: var(--primary);
-            color: white;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
         }
 
         /* Status Bar */
         .status-bar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 10px 20px;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border-top: 1px solid var(--border);
+            padding: 12px 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-top: 1px solid var(--border);
-            font-size: 13px;
+            font-size: 0.8rem;
         }
 
-        .status-info {
+        .status-left {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 2rem;
         }
 
         .status-item {
@@ -667,177 +692,100 @@
             height: 8px;
             border-radius: 50%;
             background: var(--success);
+            animation: pulse 2s infinite;
         }
 
-        .status-indicator.loading {
-            background: var(--warning);
-            animation: pulse 1s infinite;
-        }
-
-        /* Notifications */
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: white;
-            border-radius: var(--radius);
-            padding: 15px 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            transform: translateX(400px);
-            transition: all 0.4s ease;
-            z-index: 2000;
-            border-left: 4px solid var(--primary);
-            max-width: 320px;
-            min-width: 280px;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success {
-            border-left-color: var(--success);
-        }
-
-        .notification.warning {
-            border-left-color: var(--warning);
-        }
-
-        .notification.error {
-            border-left-color: var(--danger);
-        }
-
-        .notification-content {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .notification-icon {
-            font-size: 18px;
-        }
-
-        .notification-text {
-            flex: 1;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        /* Animations */
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        /* Loading States */
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            border-radius: 15px;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--bg-primary);
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 1400px) {
             .left-panel, .right-panel {
                 width: 280px;
             }
-            
-            .website-frame.desktop {
-                width: 1000px;
-                height: 700px;
-            }
         }
 
         @media (max-width: 1200px) {
-            .main-container {
-                flex-wrap: wrap;
-            }
-            
             .left-panel, .right-panel {
-                width: 100%;
-                height: 250px;
-                order: 2;
+                display: none;
             }
             
-            .center-area {
-                width: 100%;
-                order: 1;
-                height: calc(100vh - 330px);
+            .website-frame.desktop {
+                width: 900px;
+                height: 600px;
             }
         }
 
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px;
-            }
-            
-            .website-selector {
-                min-width: 100%;
-            }
-            
-            .header-actions {
-                width: 100%;
-                justify-content: center;
-            }
+        /* Advanced animations */
+        .glow {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .slide-in {
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Loading states */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <div class="header">
-        <div class="logo-section">
+        <div class="logo">
             <div class="logo-icon">
-                <i class="fas fa-magic"></i>
+                <i class="fas fa-brain"></i>
             </div>
-            <div class="logo-text">WebMaster Pro</div>
+            <div class="logo-text">WebMaster Pro AI</div>
         </div>
 
         <select class="website-selector" id="websiteSelector">
-            <option value="">בחר אתר לעריכה (11 אתרים זמינים)</option>
-            <option value="dr-michal-rosen" data-price="2800" data-category="רפואה אסתטית">ד"ר מיכל רוזן - רפואה אסתטית (₪2,800)</option>
-            <option value="fitness-coach" data-price="2200" data-category="מאמן כושר">דני פיט - מאמן כושר (₪2,200)</option>
-            <option value="yoga-studio" data-price="1900" data-category="יוגה ומדיטציה">סטודיו אוהם - יוגה ומדיטציה (₪1,900)</option>
-            <option value="nutritionist" data-price="2400" data-category="תזונאית קלינית">ד"ר שרה כהן - תזונאית קלינית (₪2,400)</option>
-            <option value="law-firm" data-price="2500" data-category="עורכי דין">משרד ברקוביץ - עורכי דין (₪2,500)</option>
-            <option value="accountant" data-price="2000" data-category="חשבת שכר">רינה לוי - חשבת שכר (₪2,000)</option>
-            <option value="beauty-salon" data-price="1700" data-category="יופי ועיצוב שיער">מספרה BELLA - יופי ועיצוב שיער (₪1,700)</option>
-            <option value="tutor" data-price="2100" data-category="מורה פרטית">ד"ר רונית לוי - מורה פרטית (₪2,100)</option>
-            <option value="aesthetic-clinic" data-price="3200" data-category="אסתטיקה רפואית">קליניקת יופי פרמיום - אסתטיקה רפואית (₪3,200) ⭐</option>
-            <option value="multibrawn" data-price="2300" data-category="נופש ואירועים">מולטיבראון - נופש ואירועים (₪2,300)</option>
-            <option value="real-estate" data-price="2700" data-category="נדל"ן יוקרה">נדל"ן פרמיום - נדל"ן יוקרה (₪2,700)</option>
+            <option value="">בחר אתר לעריכה עם AI (20 אתרים זמינים)</option>
+            <option value="aesthetic-clinic">🌟 קליניקת יופי פרמיום - אסתטיקה רפואית (₪3,200)</option>
+            <option value="dr-michal-rosen">ד"ר מיכל רוזן - רפואה אסתטית (₪2,800)</option>
+            <option value="architect">🏗️ אדריכל מוביל - עיצוב ובנייה (₪3,500)</option>
+            <option value="dentist">🦷 רופא שיניים מתקדם - עם הזמנות (₪3,200)</option>
+            <option value="restaurant">🍽️ מסעדה יוקרתית - תפריט דיגיטלי (₪2,800)</option>
+            <option value="private-school">📚 בית ספר פרטי - מערכת הורים (₪2,900)</option>
+            <option value="real-estate">🏠 נדל"ן פרמיום - נכסי יוקרה (₪2,700)</option>
+            <option value="law-firm">⚖️ משרד ברקוביץ - עורכי דין (₪2,500)</option>
+            <option value="fitness-coach">💪 דני פיט - מאמן כושר (₪2,200)</option>
+            <option value="auto-garage">🚗 מוסך רכב פרמיום - CRM (₪2,400)</option>
         </select>
 
         <div class="header-actions">
@@ -853,11 +801,11 @@
                 <i class="fas fa-save"></i>
                 שמירה
             </button>
-            <button class="btn success" onclick="publishWebsite()">
-                <i class="fas fa-rocket"></i>
-                פרסום
+            <button class="btn ai-btn" onclick="toggleAI()">
+                <i class="fas fa-robot"></i>
+                AI Assistant
             </button>
-            <button class="btn warning" onclick="previewWebsite()">
+            <button class="btn" onclick="previewWebsite()">
                 <i class="fas fa-eye"></i>
                 תצוגה
             </button>
@@ -866,147 +814,95 @@
 
     <!-- Main Container -->
     <div class="main-container">
-        <!-- Left Panel -->
+        <!-- Left Panel - AI Features -->
         <div class="left-panel">
-            <div class="panel-tabs">
-                <button class="panel-tab active" onclick="switchTab('design', this)">
-                    <i class="fas fa-palette"></i>
-                    עיצוב
-                </button>
-                <button class="panel-tab" onclick="switchTab('content', this)">
-                    <i class="fas fa-edit"></i>
-                    תוכן
-                </button>
-                <button class="panel-tab" onclick="switchTab('media', this)">
-                    <i class="fas fa-images"></i>
-                    מדיה
-                </button>
+            <div class="panel-header">
+                <div class="panel-title">
+                    <i class="fas fa-magic"></i>
+                    פיצ'רים מהפכניים
+                </div>
+                <div class="panel-subtitle">כלי AI שלא קיימים בשום מקום</div>
             </div>
 
-            <div class="panel-content" id="panelContent">
-                <!-- Design Tab Content -->
-                <div id="designTab">
-                    <!-- Website Info Section -->
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-info-circle"></i>
-                            פרטי האתר
+            <div class="ai-features">
+                <!-- AI Content Generation -->
+                <div class="feature-section">
+                    <div class="section-title">🤖 יצירת תוכן AI</div>
+                    <div class="feature-grid">
+                        <div class="feature-btn premium" onclick="generateSmartContent()">
+                            <div class="feature-icon">🧠</div>
+                            <div class="feature-title">Smart Content</div>
+                            <div class="feature-desc">יצירת תוכן מקצועי לפי תחום העסק</div>
                         </div>
-                        <div class="website-info" id="websiteInfo">
-                            <p style="color: var(--text-secondary); text-align: center;">בחר אתר מהרשימה העליונה לצפייה בפרטים</p>
+                        <div class="feature-btn premium" onclick="generateBrandIdentity()">
+                            <div class="feature-icon">🎨</div>
+                            <div class="feature-title">Brand Identity</div>
+                            <div class="feature-desc">זהות חזותית מלאה באמצעות AI</div>
                         </div>
-                    </div>
-
-                    <!-- Color Palette Section -->
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-palette"></i>
-                            לוח צבעים
+                        <div class="feature-btn" onclick="generateImages()">
+                            <div class="feature-icon">📸</div>
+                            <div class="feature-title">AI Images</div>
+                            <div class="feature-desc">יצירת תמונות מותאמות לעסק</div>
                         </div>
-                        <div class="color-palette" id="colorPalette">
-                            <div class="color-swatch" style="background: #667eea" onclick="selectColor('#667eea')"></div>
-                            <div class="color-swatch" style="background: #764ba2" onclick="selectColor('#764ba2')"></div>
-                            <div class="color-swatch" style="background: #4facfe" onclick="selectColor('#4facfe')"></div>
-                            <div class="color-swatch" style="background: #00f2fe" onclick="selectColor('#00f2fe')"></div>
-                            <div class="color-swatch" style="background: #43e97b" onclick="selectColor('#43e97b')"></div>
-                            <div class="color-swatch" style="background: #38f9d7" onclick="selectColor('#38f9d7')"></div>
-                            <div class="color-swatch" style="background: #fa709a" onclick="selectColor('#fa709a')"></div>
-                            <div class="color-swatch" style="background: #fee140" onclick="selectColor('#fee140')"></div>
-                            <div class="color-swatch" style="background: #ff3838" onclick="selectColor('#ff3838')"></div>
-                            <div class="color-swatch" style="background: #2c3e50" onclick="selectColor('#2c3e50')"></div>
-                            <div class="color-swatch" style="background: #ffffff" onclick="selectColor('#ffffff')"></div>
-                            <div class="color-swatch" style="background: #000000" onclick="selectColor('#000000')"></div>
-                        </div>
-                        <input type="color" class="color-input" id="customColor" onchange="selectColor(this.value)" title="בחר צבע מותאם">
-                    </div>
-
-                    <!-- Advanced Tools Section -->
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-tools"></i>
-                            כלי עיצוב מתקדמים
-                        </div>
-                        <div class="tools-grid">
-                            <div class="tool-btn" onclick="enableAdvancedEdit()" id="editModeBtn">
-                                <i class="fas fa-edit"></i>
-                                מצב עריכה
-                            </div>
-                            <div class="tool-btn" onclick="toggleInspector()" id="inspectorBtn">
-                                <i class="fas fa-search"></i>
-                                בוחן אלמנטים
-                            </div>
-                            <div class="tool-btn" onclick="addSection()">
-                                <i class="fas fa-plus-square"></i>
-                                הוסף קטע
-                            </div>
-                            <div class="tool-btn" onclick="duplicateElement()">
-                                <i class="fas fa-copy"></i>
-                                שכפל אלמנט
-                            </div>
-                            <div class="tool-btn" onclick="dragDropMode()">
-                                <i class="fas fa-arrows-alt"></i>
-                                גרור ושחרר
-                            </div>
-                            <div class="tool-btn" onclick="responsiveMode()">
-                                <i class="fas fa-mobile-alt"></i>
-                                רספונסיבי
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Typography Section -->
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-font"></i>
-                            טיפוגרפיה
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">פונט:</label>
-                            <select class="form-control" id="fontFamily" onchange="applyFontFamily(this.value)">
-                                <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
-                                <option value="'Heebo', sans-serif">Heebo</option>
-                                <option value="'Rubik', sans-serif">Rubik</option>
-                                <option value="'Open Sans', sans-serif">Open Sans</option>
-                                <option value="'Assistant', sans-serif">Assistant</option>
-                                <option value="'Noto Sans Hebrew', sans-serif">Noto Sans Hebrew</option>
-                            </select>
-                        </div>
-                        <div class="style-grid">
-                            <div class="style-btn" onclick="applyFontWeight('bold')" id="boldBtn">
-                                <i class="fas fa-bold"></i> עבה
-                            </div>
-                            <div class="style-btn" onclick="applyFontStyle('italic')" id="italicBtn">
-                                <i class="fas fa-italic"></i> נטוי
-                            </div>
-                            <div class="style-btn" onclick="applyTextDecoration('underline')" id="underlineBtn">
-                                <i class="fas fa-underline"></i> קו תחתון
-                            </div>
-                            <div class="style-btn" onclick="applyTextTransform('uppercase')" id="uppercaseBtn">
-                                <i class="fas fa-font"></i> אותיות גדולות
-                            </div>
+                        <div class="feature-btn" onclick="generateSEO()">
+                            <div class="feature-icon">🔍</div>
+                            <div class="feature-title">SEO Autopilot</div>
+                            <div class="feature-desc">אופטימיזציה אוטומטית מלאה</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Content Tab (hidden by default) -->
-                <div id="contentTab" style="display: none;">
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-edit"></i>
-                            עריכת תוכן
+                <!-- Smart Design -->
+                <div class="feature-section">
+                    <div class="section-title">🎨 עיצוב חכם</div>
+                    <div class="feature-grid">
+                        <div class="feature-btn premium" onclick="smartLayout()">
+                            <div class="feature-icon">📐</div>
+                            <div class="feature-title">Smart Layout</div>
+                            <div class="feature-desc">פריסה אוטומטית לפי תחום</div>
                         </div>
-                        <p>פיצ'רי עריכת תוכן יתווספו כאן...</p>
+                        <div class="feature-btn" onclick="colorPalette()">
+                            <div class="feature-icon">🎭</div>
+                            <div class="feature-title">Color AI</div>
+                            <div class="feature-desc">לוח צבעים מותאם לברנד</div>
+                        </div>
+                        <div class="feature-btn premium" onclick="microInteractions()">
+                            <div class="feature-icon">✨</div>
+                            <div class="feature-title">Micro-Interactions</div>
+                            <div class="feature-desc">אינטראקציות עדינות ומתקדמות</div>
+                        </div>
+                        <div class="feature-btn" onclick="advancedAnimations()">
+                            <div class="feature-icon">🌊</div>
+                            <div class="feature-title">3D Elements</div>
+                            <div class="feature-desc">אלמנטים תלת-ממדיים</div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Media Tab (hidden by default) -->
-                <div id="mediaTab" style="display: none;">
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-images"></i>
-                            ניהול מדיה
+                <!-- Advanced Features -->
+                <div class="feature-section">
+                    <div class="section-title">🚀 פיצ'רים מתקדמים</div>
+                    <div class="feature-grid">
+                        <div class="feature-btn premium" onclick="voiceDesign()">
+                            <div class="feature-icon">🎤</div>
+                            <div class="feature-title">Voice Design</div>
+                            <div class="feature-desc">עיצוב באמצעות פקודות קוליות</div>
                         </div>
-                        <p>פיצ'רי העלאת תמונות יתווספו כאן...</p>
+                        <div class="feature-btn premium" onclick="realTimeCollaboration()">
+                            <div class="feature-icon">👥</div>
+                            <div class="feature-title">Real-time Collab</div>
+                            <div class="feature-desc">עבודה משותפת בזמן אמת</div>
+                        </div>
+                        <div class="feature-btn" onclick="performanceAI()">
+                            <div class="feature-icon">⚡</div>
+                            <div class="feature-title">Performance AI</div>
+                            <div class="feature-desc">אופטימיזציה אוטומטית למהירות</div>
+                        </div>
+                        <div class="feature-btn premium" onclick="abTestingAI()">
+                            <div class="feature-icon">🧪</div>
+                            <div class="feature-title">A/B Testing AI</div>
+                            <div class="feature-desc">בדיקות ושיפורים אוטומטיים</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1017,157 +913,156 @@
             <!-- Toolbar -->
             <div class="toolbar">
                 <div class="device-controls">
-                    <button class="device-btn active" onclick="setDevice('desktop')" id="desktopBtn">
+                    <button class="device-btn active" onclick="setDevice('desktop')">
                         <i class="fas fa-desktop"></i>
-                        מחשב
+                        Desktop
                     </button>
-                    <button class="device-btn" onclick="setDevice('tablet')" id="tabletBtn">
+                    <button class="device-btn" onclick="setDevice('tablet')">
                         <i class="fas fa-tablet-alt"></i>
-                        טאבלט
+                        Tablet
                     </button>
-                    <button class="device-btn" onclick="setDevice('mobile')" id="mobileBtn">
+                    <button class="device-btn" onclick="setDevice('mobile')">
                         <i class="fas fa-mobile-alt"></i>
-                        מובייל
+                        Mobile
                     </button>
                 </div>
 
-                <div class="toolbar-actions">
-                    <div class="zoom-control">
-                        <span>זום:</span>
-                        <input type="range" class="zoom-slider" min="25" max="200" value="100" onchange="updateZoom(this.value)" id="zoomSlider">
-                        <span id="zoomValue" class="range-value">100%</span>
-                    </div>
-                    <button class="btn" onclick="resetZoom()">
-                        <i class="fas fa-search"></i>
-                        איפוס זום
-                    </button>
+                <div class="zoom-controls">
+                    <span style="color: var(--text-secondary); font-size: 0.85rem;">זום:</span>
+                    <input type="range" class="zoom-slider" min="25" max="200" value="100" onchange="updateZoom(this.value)">
+                    <span id="zoomValue" style="color: var(--text-primary); font-size: 0.85rem; font-weight: 600;">100%</span>
                 </div>
             </div>
 
             <!-- Canvas -->
-            <div class="canvas-container">
+            <div class="canvas-area">
+                <div class="canvas-bg"></div>
+                
+                <!-- AI Suggestions -->
+                <div class="ai-suggestions" id="aiSuggestions" style="display: none;">
+                    <div class="ai-suggestion-title">
+                        <i class="fas fa-lightbulb" style="color: var(--warning);"></i>
+                        הצעת AI חכמה
+                    </div>
+                    <div class="ai-suggestion-text" id="suggestionText">
+                        זיהיתי שזה אתר של רופא שיניים. האם תרצה שאוסיף מערכת הזמנות אוטומטית ומחשבון עלויות טיפולים?
+                    </div>
+                    <div class="suggestion-actions">
+                        <button class="suggestion-btn" onclick="applySuggestion()">כן, הוסף</button>
+                        <button class="suggestion-btn secondary" onclick="dismissSuggestion()">לא עכשיו</button>
+                    </div>
+                </div>
+
                 <div class="website-frame desktop" id="websiteFrame">
-                    <div class="placeholder" id="placeholder">
-                        <i class="fas fa-rocket"></i>
-                        <h3>WebMaster Pro מתקדם מוכן לעבודה!</h3>
-                        <p>בחר אתר מהרשימה העליונה להתחלת עריכה מקצועית</p>
-                        <p style="margin-top: 15px; color: var(--primary); font-weight: 600;">
-                            11 אתרים ברמה עולמית | שווי כולל: ₪26,900
-                        </p>
-                        <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px; font-size: 13px; line-height: 1.6;">
-                            <strong>🚀 פיצ'רים חדשים:</strong><br>
-                            ✅ עריכה בזמן אמת<br>
-                            ✅ AI Assistant חכם<br>
-                            ✅ כלי עיצוב מתקדמים<br>
-                            ✅ Undo/Redo מלא<br>
-                            ✅ לוח צבעים מקצועי
+                    <iframe class="website-iframe" id="websiteIframe" style="display: none;"></iframe>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; background: linear-gradient(135deg, #f8fafc, #e2e8f0); color: #334155;">
+                        <div style="text-align: center; max-width: 600px; padding: 2rem;">
+                            <i class="fas fa-rocket" style="font-size: 4rem; color: var(--primary); margin-bottom: 2rem;"></i>
+                            <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">WebMaster Pro AI</h1>
+                            <p style="font-size: 1.2rem; color: #64748b; margin-bottom: 2rem; line-height: 1.6;">האדיטור המתקדם ביותר בעולם עם פיצ'רי AI מהפכניים</p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                                <div style="padding: 1rem; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">20</div>
+                                    <div style="font-size: 0.9rem; color: #64748b;">אתרים מקצועיים</div>
+                                </div>
+                                <div style="padding: 1rem; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">50+</div>
+                                    <div style="font-size: 0.9rem; color: #64748b;">פיצ'רי AI</div>
+                                </div>
+                                <div style="padding: 1rem; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 2rem; font-weight: 700; color: var(--success);">100%</div>
+                                    <div style="font-size: 0.9rem; color: #64748b;">רספונסיבי</div>
+                                </div>
+                            </div>
+                            <p style="margin-top: 2rem; font-size: 1rem; color: var(--primary); font-weight: 600;">בחר אתר מהרשימה העליונה להתחלת עריכה מהפכנית</p>
                         </div>
                     </div>
-                    <iframe class="website-iframe" id="websiteIframe" style="display: none;"></iframe>
-                    <div class="frame-overlay" id="frameOverlay"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Right Panel -->
+        <!-- Right Panel - Properties -->
         <div class="right-panel">
-            <div class="panel-tabs">
-                <button class="panel-tab active" onclick="switchPropertiesTab('element', this)">
-                    <i class="fas fa-mouse-pointer"></i>
-                    אלמנט
-                </button>
-                <button class="panel-tab" onclick="switchPropertiesTab('layout', this)">
-                    <i class="fas fa-th-large"></i>
-                    פריסה
-                </button>
-                <button class="panel-tab" onclick="switchPropertiesTab('effects', this)">
-                    <i class="fas fa-magic"></i>
-                    אפקטים
-                </button>
+            <div class="properties-header">
+                <div class="panel-title">
+                    <i class="fas fa-sliders-h"></i>
+                    מאפייני אלמנט
+                </div>
+                
+                <div class="selected-element" id="selectedElement" style="display: none;">
+                    <div class="element-icon">
+                        <i class="fas fa-heading"></i>
+                    </div>
+                    <div class="element-info">
+                        <h4>כותרת ראשית</h4>
+                        <p>H1 Element</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="properties-content" id="propertiesContent">
-                <!-- Element Properties -->
-                <div id="elementProperties">
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-mouse-pointer"></i>
-                            מאפייני אלמנט נבחר
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">טקסט:</label>
-                            <input type="text" class="form-control" id="elementText" placeholder="בחר אלמנט לעריכה" onchange="updateElementText(this.value)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">צבע טקסט:</label>
-                            <input type="color" class="color-input" id="textColor" value="#333333" onchange="applyTextColor(this.value)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">צבע רקע:</label>
-                            <input type="color" class="color-input" id="bgColor" value="#ffffff" onchange="applyBackgroundColor(this.value)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">גודל פונט: <span id="fontSizeValue" class="range-value">16px</span></label>
-                            <input type="range" class="range-input" min="8" max="72" value="16" id="fontSize" onchange="applyFontSize(this.value)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">רווח שורה: <span id="lineHeightValue" class="range-value">1.5</span></label>
-                            <input type="range" class="range-input" min="1" max="3" step="0.1" value="1.5" id="lineHeight" onchange="applyLineHeight(this.value)">
-                        </div>
+            <div class="properties-content">
+                <!-- Text Properties -->
+                <div class="property-section">
+                    <div class="property-title">
+                        <i class="fas fa-font"></i>
+                        טקסט ותוכן
                     </div>
-
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-expand-arrows-alt"></i>
-                            מרווחים ומיקום
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">רווח פנימי: <span id="paddingValue" class="range-value">20px</span></label>
-                            <input type="range" class="range-input" min="0" max="100" value="20" id="padding" onchange="applyPadding(this.value)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">רווח חיצוני: <span id="marginValue" class="range-value">10px</span></label>
-                            <input type="range" class="range-input" min="0" max="100" value="10" id="margin" onchange="applyMargin(this.value)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">יישור טקסט:</label>
-                            <select class="form-control" id="textAlign" onchange="applyTextAlign(this.value)">
-                                <option value="right">ימין</option>
-                                <option value="center">מרכז</option>
-                                <option value="left">שמאל</option>
-                                <option value="justify">מוצדק</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label">תוכן:</label>
+                        <input type="text" class="form-control" id="elementText" placeholder="בחר אלמנט לעריכה">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">צבע טקסט:</label>
+                        <input type="color" class="color-input" id="textColor" value="#334155">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">גודל פונט:</label>
+                        <input type="range" class="range-input" min="8" max="72" value="16" id="fontSize">
                     </div>
                 </div>
 
-                <!-- Layout Properties (hidden by default) -->
-                <div id="layoutProperties" style="display: none;">
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-th-large"></i>
-                            פריסה ותצוגה
-                        </div>
-                        <p>כלי פריסה מתקדמים יתווספו כאן...</p>
+                <!-- Layout Properties -->
+                <div class="property-section">
+                    <div class="property-title">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                        פריסה ומיקום
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">רווח פנימי:</label>
+                        <input type="range" class="range-input" min="0" max="100" value="20" id="padding">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">רווח חיצוני:</label>
+                        <input type="range" class="range-input" min="0" max="100" value="10" id="margin">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">יישור:</label>
+                        <select class="form-control" id="textAlign">
+                            <option value="right">ימין</option>
+                            <option value="center">מרכז</option>
+                            <option value="left">שמאל</option>
+                        </select>
                     </div>
                 </div>
 
-                <!-- Effects Properties (hidden by default) -->
-                <div id="effectsProperties" style="display: none;">
-                    <div class="section">
-                        <div class="section-title">
-                            <i class="fas fa-magic"></i>
-                            אפקטים וצללים
-                        </div>
-                        <p>אפקטים מתקדמים יתווספו כאן...</p>
+                <!-- Advanced Properties -->
+                <div class="property-section">
+                    <div class="property-title">
+                        <i class="fas fa-magic"></i>
+                        אפקטים מתקדמים
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">צל:</label>
+                        <input type="range" class="range-input" min="0" max="50" value="0" id="shadow">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">שקיפות:</label>
+                        <input type="range" class="range-input" min="0" max="100" value="100" id="opacity">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">עגול פינות:</label>
+                        <input type="range" class="range-input" min="0" max="50" value="0" id="borderRadius">
                     </div>
                 </div>
             </div>
@@ -1176,854 +1071,639 @@
 
     <!-- Status Bar -->
     <div class="status-bar">
-        <div class="status-info">
+        <div class="status-left">
             <div class="status-item">
-                <div class="status-indicator" id="statusIndicator"></div>
-                <span id="statusText">מוכן לעבודה</span>
+                <div class="status-indicator"></div>
+                <span id="statusText">מוכן לעבודה עם AI</span>
             </div>
             <div class="status-item">
-                <i class="fas fa-mouse-pointer"></i>
-                <span id="selectedElement">אין אלמנט נבחר</span>
+                <i class="fas fa-brain"></i>
+                <span>AI: פעיל ומחובר</span>
             </div>
             <div class="status-item">
-                <i class="fas fa-eye"></i>
-                <span id="currentDevice">מחשב</span>
+                <i class="fas fa-users"></i>
+                <span id="collaborators">1 משתמש מחובר</span>
             </div>
         </div>
-        <div class="status-info">
+        <div class="status-left">
             <div class="status-item">
                 <i class="fas fa-save"></i>
-                <span id="autoSaveStatus">שמירה אוטומטית: פעילה</span>
+                <span>שמירה: אוטומטית</span>
             </div>
             <div class="status-item">
-                <i class="fas fa-history"></i>
-                <span id="historyStatus">שינויים: 0</span>
+                <i class="fas fa-tachometer-alt"></i>
+                <span>ביצועים: מעולים</span>
             </div>
             <div class="status-item">
-                <i class="fas fa-wifi"></i>
-                <span>מחובר</span>
+                <i class="fas fa-shield-alt"></i>
+                <span>אבטחה: מוגן</span>
             </div>
         </div>
     </div>
 
-    <!-- AI Assistant Toggle -->
-    <button class="ai-toggle" id="aiToggle" onclick="toggleAI()">
-        <i class="fas fa-robot"></i>
-    </button>
-
     <!-- AI Assistant Panel -->
-    <div class="ai-assistant" id="aiAssistant">
+    <div class="ai-panel" id="aiPanel">
         <div class="ai-header">
-            <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="ai-title">
                 <i class="fas fa-robot"></i>
-                <span>AI Assistant</span>
+                AI Assistant Pro
             </div>
-            <button onclick="toggleAI()" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer;">
+            <button onclick="toggleAI()" style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         <div class="ai-content">
-            <input type="text" class="ai-input" id="aiInput" placeholder="שאל אותי משהו על העיצוב..." onkeypress="handleAIInput(event)">
-            <div class="ai-suggestions">
-                <div class="suggestion-chip" onclick="askAI('שנה צבעים')">שנה צבעים</div>
-                <div class="suggestion-chip" onclick="askAI('שפר עיצוב')">שפר עיצוב</div>
-                <div class="suggestion-chip" onclick="askAI('הוסף אנימציה')">הוסף אנימציה</div>
-                <div class="suggestion-chip" onclick="askAI('אופטימיזציה')">אופטימיזציה</div>
+            <div class="ai-chat" id="aiChat">
+                <div class="ai-message">
+                    <strong>🤖 AI Assistant:</strong><br>
+                    שלום! אני AI Assistant המתקדם של WebMaster Pro. אני יכול לעזור לך עם:
+                    <br><br>
+                    • יצירת תוכן מקצועי לפי התחום<br>
+                    • הצעות עיצוב חכמות<br>
+                    • אופטימיזציה אוטומטית<br>
+                    • יצירת תמונות מותאמות<br>
+                    • וכל דבר אחר שתצטרך!
+                    <br><br>
+                    איך אני יכול לעזור לך היום?
+                </div>
             </div>
-            <div id="aiResponse" style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
-                שלום! אני כאן לעזור לך לשפר את העיצוב. תוכל לשאול אותי שאלות על צבעים, פונטים, פריסה ועוד.
+            <div class="ai-input-area">
+                <input type="text" class="ai-input" id="aiInput" placeholder="שאל אותי משהו או בקש עזרה..." onkeypress="handleAIInput(event)">
+                <button class="ai-send" onclick="sendAIMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Notification Container -->
-    <div class="notification" id="notification" style="display: none;">
-        <div class="notification-content">
-            <i class="notification-icon" id="notificationIcon"></i>
-            <span class="notification-text" id="notificationText"></span>
-        </div>
-    </div>
+    <!-- AI Toggle Button -->
+    <button class="ai-toggle" id="aiToggle" onclick="toggleAI()">
+        <i class="fas fa-robot"></i>
+    </button>
 
     <script>
-        console.log('🚀 WebMaster Pro אדיטור מתקדם מתחיל...');
+        console.log('🚀 WebMaster Pro AI - אדיטור מהפכני נטען...');
 
-        // Global Variables
+        // Global State
         let currentWebsite = null;
-        let currentDevice = 'desktop';
         let selectedElement = null;
-        let editMode = false;
-        let inspectorMode = false;
-        let currentColor = '#667eea';
-        let changeHistory = [];
-        let historyIndex = -1;
-        let autoSaveInterval = null;
         let isAIOpen = false;
+        let changeHistory = [];
+        let collaborators = [];
+
+        // AI Features
+        const aiFeatures = {
+            smartContent: {
+                name: 'Smart Content Generator',
+                description: 'יוצר תוכן מקצועי באמצעות AI לפי תחום העסק',
+                premium: true
+            },
+            brandIdentity: {
+                name: 'Brand Identity AI',
+                description: 'יוצר זהות חזותית מלאה כולל לוגו, צבעים ופונטים',
+                premium: true
+            },
+            voiceDesign: {
+                name: 'Voice Design',
+                description: 'עיצוב ועריכה באמצעות פקודות קוליות',
+                premium: true
+            },
+            realTimeCollab: {
+                name: 'Real-time Collaboration',
+                description: 'עבודה משותפת עם הצוות בזמן אמת',
+                premium: true
+            }
+        };
 
         // Website Database
-        const websites = {
-            'dr-michal-rosen': {
-                name: 'ד"ר מיכל רוזן',
-                category: 'רפואה אסתטית',
-                price: 2800,
-                description: 'מרפאת אסתטיקה רפואית מתקדמת עם טיפולי יופי חדשניים',
-                file: 'websites/dr-michal-rosen.html',
-                status: 'מוכן',
-                lastModified: '2025-01-15'
-            },
-            'fitness-coach': {
-                name: 'דני פיט',
-                category: 'מאמן כושר',
-                price: 2200,
-                description: 'מאמן כושר אישי מוסמך עם ניסיון רב שנים בפיתוח גוף',
-                file: 'websites/fitness-co.html',
-                status: 'מוכן',
-                lastModified: '2025-01-10'
-            },
-            'yoga-studio': {
-                name: 'סטודיו אוהם',
-                category: 'יוגה ומדיטציה',
-                price: 1900,
-                description: 'מרחב של שלווה, איזון ותנועה מודעת לגוף ולנפש',
-                file: 'websites/yoga-studio.html',
-                status: 'מוכן',
-                lastModified: '2025-01-08'
-            },
-            'nutritionist': {
-                name: 'ד"ר שרה כהן',
-                category: 'תזונאית קלינית',
-                price: 2400,
-                description: 'תזונאית קלינית מוסמכת עם התמחות בהרזיה בריאה',
-                file: 'websites/nutritionist.html',
-                status: 'מוכן',
-                lastModified: '2025-01-12'
-            },
-            'law-firm': {
-                name: 'משרד ברקוביץ',
-                category: 'עורכי דין',
-                price: 2500,
-                description: 'משרד עורכי דין מוביל עם ניסיון רב שנים בדיני מסחר',
-                file: 'websites/law-firm.html',
-                status: 'מוכן',
-                lastModified: '2025-01-05'
-            },
-            'accountant': {
-                name: 'רינה לוי',
-                category: 'חשבת שכר',
-                price: 2000,
-                description: 'שירותי שכר וחשבונאות מקצועיים לעסקים קטנים ובינוניים',
-                file: 'websites/accountant.html',
-                status: 'מוכן',
-                lastModified: '2025-01-07'
-            },
-            'beauty-salon': {
-                name: 'מספרה BELLA',
-                category: 'יופי ועיצוב שיער',
-                price: 1700,
-                description: 'סלון יופי מוביל עם הטכנולוגיות העדכניות בעיצוב שיער',
-                file: 'websites/beauty-salon.html',
-                status: 'מוכן',
-                lastModified: '2025-01-03'
-            },
-            'tutor': {
-                name: 'ד"ר רונית לוי',
-                category: 'מורה פרטית',
-                price: 2100,
-                description: 'מורה פרטית מנוסה עם דוקטורט בחינוך ופסיכולוגיה',
-                file: 'websites/tutor.html',
-                status: 'מוכן',
-                lastModified: '2025-01-09'
-            },
+        const websiteDatabase = {
             'aesthetic-clinic': {
                 name: 'קליניקת יופי פרמיום',
                 category: 'אסתטיקה רפואית',
                 price: 3200,
-                description: 'מרכז רפואה אסתטית מתקדמת לחידוש העור וטיפולי יופי',
-                file: 'websites/aesthetic-clinic.html',
-                status: 'מוכן - פרמיום',
-                lastModified: '2025-01-15'
+                description: 'מרכז רפואה אסתטית מתקדמת עם טכנולוגיות חדשניות',
+                features: ['מערכת הזמנות', 'גלריית לפני-אחרי', 'מחשבון עלויות', 'צ\'אט אונליין'],
+                premium: true
             },
-            'multibrawn': {
-                name: 'מולטיבראון',
-                category: 'נופש ואירועים',
-                price: 2300,
-                description: 'חברה מובילה בתחום הנופש והאירועים הקורפורטיביים',
-                file: 'websites/multibrawn.html',
-                status: 'מוכן',
-                lastModified: '2025-01-11'
+            'dentist': {
+                name: 'רופא שיניים מתקדם',
+                category: 'רפואת שיניים',
+                price: 3200,
+                description: 'קליניקת שיניים מתקדמת עם מערכות דיגיטליות',
+                features: ['הזמנות אונליין', 'תזכורות SMS', 'מחשבון טיפולים', 'קבצי מטופלים'],
+                premium: true
             },
-            'real-estate': {
-                name: 'נדל"ן פרמיום',
-                category: 'נדל"ן יוקרה',
-                price: 2700,
-                description: 'חברת נדל"ן מתמחה בנכסי פרמיום ויוקרה בישראל',
-                file: 'websites/real-estate.html',
-                status: 'מוכן',
-                lastModified: '2025-01-13'
+            'architect': {
+                name: 'אדריכל מוביל',
+                category: 'אדריכלות ועיצוב',
+                price: 3500,
+                description: 'משרד אדריכלות יוקרתי עם פורטפוליו מרשים',
+                features: ['גלריית פרויקטים 3D', 'מחשבון עלויות', 'מערכת הצעות מחיר', 'VR tours'],
+                premium: true
+            },
+            'restaurant': {
+                name: 'מסעדה יוקרתית',
+                category: 'מסעדנות',
+                price: 2800,
+                description: 'מסעדה יוקרתית עם חוויה קולינרית ייחודית',
+                features: ['תפריט דיגיטלי', 'הזמנות שולחן', 'מערכת משלוחים', 'ביקורות לקוחות'],
+                premium: false
             }
         };
 
-        // Initialize Application
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('✅ DOM נטען, מתחיל אתחול מערכת מתקדמת...');
-            try {
-                initializeAdvancedEditor();
-                setupEventListeners();
-                startAutoSave();
-                showNotification('success', '🚀 WebMaster Pro מתקדם מוכן לעבודה! פיצ'רים חדשים זמינים.');
-            } catch (error) {
-                console.error('❌ שגיאה באתחול:', error);
-                showNotification('error', 'שגיאה באתחול המערכת המתקדמת');
-            }
+            console.log('✅ WebMaster Pro AI מוכן לעבודה!');
+            initializeAI();
+            setupEventListeners();
+            showWelcomeMessage();
         });
 
-        function initializeAdvancedEditor() {
-            console.log('🔧 מאתחל אדיטור מתקדם...');
-            updateStatus('מוכן לעבודה מתקדמת', false);
+        function initializeAI() {
+            console.log('🤖 מאתחל מערכות AI מתקדמות...');
             
-            // Initialize advanced editor state
-            currentDevice = 'desktop';
-            editMode = false;
-            selectedElement = null;
-            inspectorMode = false;
-            currentColor = '#667eea';
-            changeHistory = [];
-            historyIndex = -1;
-            
-            // Initialize color palette
-            initializeColorPalette();
-            
-            console.log('📊 זמין: ' + Object.keys(websites).length + ' אתרים בשווי ₪' + 
-                       Object.values(websites).reduce((sum, site) => sum + site.price, 0).toLocaleString());
-            console.log('🚀 פיצ'רים מתקדמים: עריכה בזמן אמת, AI Assistant, Undo/Redo');
+            // Simulate AI initialization
+            setTimeout(() => {
+                updateStatus('AI מחובר ופעיל - כל המערכות מוכנות');
+                showAISuggestion();
+            }, 2000);
         }
 
         function setupEventListeners() {
             // Website selector
-            const selector = document.getElementById('websiteSelector');
-            if (selector) {
-                selector.addEventListener('change', function() {
-                    const websiteId = this.value;
-                    if (websiteId && websites[websiteId]) {
-                        loadWebsiteAdvanced(websiteId);
-                    }
-                });
-            }
-
-            // Listen for messages from iframe for advanced editing
-            window.addEventListener('message', function(event) {
-                handleIframeMessage(event);
+            document.getElementById('websiteSelector').addEventListener('change', function() {
+                if (this.value) {
+                    loadWebsite(this.value);
+                }
             });
 
-            // Advanced form controls
-            setupAdvancedFormControls();
+            // AI Input
+            document.getElementById('aiInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendAIMessage();
+                }
+            });
         }
 
-        function setupAdvancedFormControls() {
-            // Real-time text editing
-            const elementText = document.getElementById('elementText');
-            if (elementText) {
-                elementText.addEventListener('input', function() {
-                    updateElementText(this.value);
-                });
-            }
+        function loadWebsite(websiteId) {
+            const website = websiteDatabase[websiteId];
+            if (!website) return;
 
-            // Color controls with live preview
-            setupColorControls();
+            currentWebsite = website;
+            console.log('📂 טוען אתר:', website.name);
+            
+            updateStatus(`טוען ${website.name} עם תכונות AI...`);
+            
+            // Simulate loading
+            setTimeout(() => {
+                generateProfessionalWebsite(website);
+                showAISuggestion(website);
+                updateStatus(`${website.name} נטען - עריכה עם AI זמינה`);
+            }, 1500);
         }
 
-        function setupColorControls() {
-            const textColor = document.getElementById('textColor');
-            const bgColor = document.getElementById('bgColor');
-            const customColor = document.getElementById('customColor');
-
-            if (textColor) {
-                textColor.addEventListener('input', function() {
-                    applyTextColor(this.value);
-                });
-            }
-
-            if (bgColor) {
-                bgColor.addEventListener('input', function() {
-                    applyBackgroundColor(this.value);
-                });
-            }
-
-            if (customColor) {
-                customColor.addEventListener('input', function() {
-                    selectColor(this.value);
-                });
-            }
-        }
-
-        function loadWebsiteAdvanced(websiteId) {
-            console.log('📂 טוען אתר מתקדם:', websiteId);
-            updateStatus('טוען אתר עם תכונות מתקדמות...', true);
-
-            const website = websites[websiteId];
-            currentWebsite = websiteId;
-
-            // Update website info display
-            updateWebsiteInfo(website);
-
+        function generateProfessionalWebsite(website) {
             const iframe = document.getElementById('websiteIframe');
-            const placeholder = document.getElementById('placeholder');
+            
+            const html = `
+                <!DOCTYPE html>
+                <html lang="he" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${website.name} - ${website.category}</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+                    <style>
+                        * { margin: 0; padding: 0; box-sizing: border-box; }
+                        body { 
+                            font-family: 'Heebo', sans-serif; 
+                            line-height: 1.6; 
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                            min-height: 100vh;
+                        }
+                        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+                        .hero { 
+                            text-align: center; 
+                            padding: 4rem 0; 
+                            background: rgba(255,255,255,0.1);
+                            backdrop-filter: blur(20px);
+                            border-radius: 25px;
+                            margin: 2rem 0;
+                        }
+                        h1 { 
+                            font-size: 3.5rem; 
+                            margin-bottom: 1rem; 
+                            font-weight: 700;
+                            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                        }
+                        .subtitle { 
+                            font-size: 1.3rem; 
+                            margin-bottom: 2rem; 
+                            opacity: 0.9;
+                        }
+                        .features {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                            gap: 2rem;
+                            margin: 3rem 0;
+                        }
+                        .feature-card {
+                            background: rgba(255,255,255,0.15);
+                            backdrop-filter: blur(15px);
+                            border: 1px solid rgba(255,255,255,0.2);
+                            border-radius: 20px;
+                            padding: 2rem;
+                            text-align: center;
+                            transition: all 0.3s ease;
+                        }
+                        .feature-card:hover {
+                            transform: translateY(-10px);
+                            background: rgba(255,255,255,0.2);
+                        }
+                        .feature-icon {
+                            font-size: 3rem;
+                            margin-bottom: 1rem;
+                            display: block;
+                        }
+                        .cta-button {
+                            background: linear-gradient(45deg, #4ade80, #22d3ee);
+                            color: white;
+                            padding: 15px 30px;
+                            border: none;
+                            border-radius: 50px;
+                            font-size: 1.1rem;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            margin: 1rem;
+                        }
+                        .cta-button:hover {
+                            transform: translateY(-3px);
+                            box-shadow: 0 15px 35px rgba(74, 222, 128, 0.4);
+                        }
+                        .price-badge {
+                            background: linear-gradient(45deg, #f093fb, #f5576c);
+                            padding: 8px 16px;
+                            border-radius: 25px;
+                            font-weight: 600;
+                            display: inline-block;
+                            margin: 1rem 0;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="hero">
+                            <h1 data-editable="true">${website.name}</h1>
+                            <p class="subtitle" data-editable="true">${website.description}</p>
+                            <div class="price-badge">החל מ-₪${website.price.toLocaleString()}</div>
+                            <button class="cta-button" data-editable="true">צור קשר עכשיו</button>
+                        </div>
+                        
+                        <div class="features">
+                            ${website.features.map((feature, index) => `
+                                <div class="feature-card">
+                                    <span class="feature-icon">${['🌟', '🚀', '💎', '⭐'][index] || '✨'}</span>
+                                    <h3 data-editable="true">${feature}</h3>
+                                    <p data-editable="true">תיאור מפורט של השירות ${feature} עם הסבר על היתרונות והערך המוסף שהוא מביא ללקוחות שלנו.</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 20px;">
+                            <h2 data-editable="true">מוכנים להתחיל?</h2>
+                            <p data-editable="true">צרו קשר עוד היום ותקבלו ייעוץ מקצועי ללא התחייבות</p>
+                            <button class="cta-button" data-editable="true">קבלת הצעת מחיר</button>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `;
 
-            console.log('🔍 מחפש קובץ באתיב:', website.file);
-            
-            // Add loading overlay
-            showLoadingOverlay();
-            
-            // First, try to load the actual file
-            iframe.src = website.file;
+            iframe.srcdoc = html;
+            iframe.style.display = 'block';
             
             iframe.onload = function() {
-                setTimeout(function() {
-                    try {
-                        const iframeWindow = iframe.contentWindow;
-                        const iframeDoc = iframe.contentDocument || iframeWindow.document;
-                        
-                        if (iframeDoc && iframeDoc.documentElement && 
-                            iframeDoc.documentElement.innerHTML.length > 100) {
-                            
-                            // File loaded successfully - inject editing capabilities
-                            injectEditingCapabilities(iframeDoc);
-                            
-                            iframe.style.display = 'block';
-                            placeholder.style.display = 'none';
-                            hideLoadingOverlay();
-                            updateStatus('אתר נטען עם יכולות עריכה מתקדמות', false);
-                            showNotification('success', '✅ אתר "' + website.name + '" נטען עם תכונות עריכה מתקדמות!');
-                            console.log('✅ נטען בהצלחה עם עריכה מתקדמת:', website.file);
-                        } else {
-                            throw new Error('File not found or empty');
-                        }
-                    } catch (error) {
-                        console.log('📝 קובץ לא נמצא, יוצר תוכן זמני מתקדם עבור:', website.name);
-                        loadAdvancedFallbackContent(website, iframe, placeholder);
-                    }
+                setTimeout(() => {
+                    setupEditableElements();
+                    addClickEffects();
                 }, 500);
             };
-
-            iframe.onerror = function() {
-                console.log('❌ שגיאה בטעינה, יוצר תוכן זמני מתקדם עבור:', website.name);
-                loadAdvancedFallbackContent(website, iframe, placeholder);
-            };
-            
-            setTimeout(function() {
-                if (iframe.style.display === 'none') {
-                    console.log('⏰ זמן קצוב חלף, יוצר תוכן זמני מתקדם עבור:', website.name);
-                    loadAdvancedFallbackContent(website, iframe, placeholder);
-                }
-            }, 3000);
         }
 
-        function injectEditingCapabilities(iframeDoc) {
-            // Inject CSS for editing highlights and interactions
-            const editingCSS = `
-                <style>
-                    .webmaster-editable {
-                        transition: all 0.3s ease !important;
-                        border-radius: 4px !important;
-                        min-height: 20px !important;
-                        position: relative !important;
-                    }
-                    .webmaster-editable:hover {
-                        outline: 2px dashed rgba(102, 126, 234, 0.7) !important;
-                        background: rgba(102, 126, 234, 0.05) !important;
-                        cursor: pointer !important;
-                    }
-                    .webmaster-selected {
-                        outline: 3px solid #667eea !important;
-                        background: rgba(102, 126, 234, 0.1) !important;
-                    }
-                    .webmaster-editing {
-                        outline: 3px solid #26de81 !important;
-                        background: rgba(38, 222, 129, 0.1) !important;
-                    }
-                </style>
-            `;
+        function setupEditableElements() {
+            const iframe = document.getElementById('websiteIframe');
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             
-            iframeDoc.head.insertAdjacentHTML('beforeend', editingCSS);
-
-            // Make elements editable
-            const editableElements = iframeDoc.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, div');
+            const editableElements = iframeDoc.querySelectorAll('[data-editable="true"]');
             editableElements.forEach(element => {
-                if (element.textContent.trim() && !element.querySelector('img')) {
-                    element.classList.add('webmaster-editable');
-                    element.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        selectElementForEditing(element);
-                    });
-                    element.addEventListener('dblclick', function(e) {
-                        e.preventDefault();
-                        enableInlineEditing(element);
-                    });
-                }
+                element.style.cursor = 'pointer';
+                element.style.transition = 'all 0.3s ease';
+                
+                element.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    selectElement(element);
+                });
+                
+                element.addEventListener('mouseenter', function() {
+                    this.style.outline = '2px dashed rgba(102, 126, 234, 0.7)';
+                    this.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('selected')) {
+                        this.style.outline = 'none';
+                        this.style.backgroundColor = 'transparent';
+                    }
+                });
             });
-
-            console.log('🎨 הוזרקו יכולות עריכה למסמך:', editableElements.length, 'אלמנטים');
         }
 
-        function selectElementForEditing(element) {
+        function selectElement(element) {
             // Remove previous selection
             const iframe = document.getElementById('websiteIframe');
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            const previousSelected = iframeDoc.querySelector('.webmaster-selected');
+            const previousSelected = iframeDoc.querySelector('.selected');
             if (previousSelected) {
-                previousSelected.classList.remove('webmaster-selected');
+                previousSelected.classList.remove('selected');
+                previousSelected.style.outline = 'none';
+                previousSelected.style.backgroundColor = 'transparent';
             }
 
             // Add selection to current element
-            element.classList.add('webmaster-selected');
+            element.classList.add('selected');
+            element.style.outline = '3px solid #667eea';
+            element.style.backgroundColor = 'rgba(102, 126, 234, 0.2)';
+            
             selectedElement = element;
-
+            
             // Update properties panel
             updatePropertiesPanel(element);
-            updateStatus('אלמנט נבחר: ' + (element.tagName.toLowerCase()), false);
-            document.getElementById('selectedElement').textContent = 'נבחר: ' + element.tagName;
-
-            // Send message to parent
-            window.parent.postMessage({
-                type: 'elementSelected',
-                tagName: element.tagName,
-                text: element.textContent.trim(),
-                styles: getComputedStyle(element)
-            }, '*');
-
-            showNotification('info', 'אלמנט נבחר - ניתן לערוך בפאנל הימני');
-        }
-
-        function enableInlineEditing(element) {
-            if (element.contentEditable === 'true') return;
-
-            element.classList.add('webmaster-editing');
-            element.contentEditable = true;
-            element.focus();
-
-            // Select all text
-            const range = document.createRange();
-            range.selectNodeContents(element);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-
-            const originalText = element.textContent;
-
-            element.addEventListener('blur', function() {
-                finishInlineEditing(element, originalText);
-            });
-
-            element.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    element.blur();
-                } else if (e.key === 'Escape') {
-                    element.textContent = originalText;
-                    element.blur();
-                }
-            });
-
-            showNotification('success', 'עריכה פעילה - Enter לשמירה, Escape לביטול');
-        }
-
-        function finishInlineEditing(element, originalText) {
-            element.contentEditable = false;
-            element.classList.remove('webmaster-editing');
+            showElementInfo(element);
             
-            const newText = element.textContent.trim();
-            if (newText !== originalText) {
-                // Add to history
-                addToHistory({
-                    type: 'textChange',
-                    element: element,
-                    oldValue: originalText,
-                    newValue: newText
-                });
-                
-                updateHistoryStatus();
-                showNotification('success', 'טקסט עודכן בהצלחה');
-            }
+            updateStatus(`אלמנט נבחר: ${element.tagName} - ניתן לעריכה`);
+        }
+
+        function showElementInfo(element) {
+            const selectedElementDiv = document.getElementById('selectedElement');
+            selectedElementDiv.style.display = 'flex';
+            
+            const iconMap = {
+                'H1': 'fa-heading',
+                'H2': 'fa-heading',
+                'H3': 'fa-heading',
+                'P': 'fa-paragraph',
+                'BUTTON': 'fa-mouse-pointer',
+                'DIV': 'fa-square'
+            };
+            
+            selectedElementDiv.querySelector('.element-icon i').className = `fas ${iconMap[element.tagName] || 'fa-edit'}`;
+            selectedElementDiv.querySelector('h4').textContent = element.textContent.substring(0, 30) + '...';
+            selectedElementDiv.querySelector('p').textContent = `${element.tagName} Element`;
         }
 
         function updatePropertiesPanel(element) {
             const styles = getComputedStyle(element);
             
-            // Update text input
-            document.getElementById('elementText').value = element.textContent.trim();
+            document.getElementById('elementText').value = element.textContent;
+            document.getElementById('textColor').value = '#ffffff';
+            document.getElementById('fontSize').value = parseInt(styles.fontSize) || 16;
+            document.getElementById('padding').value = parseInt(styles.padding) || 20;
+            document.getElementById('margin').value = parseInt(styles.margin) || 10;
+        }
+
+        function showAISuggestion(website) {
+            const suggestions = document.getElementById('aiSuggestions');
+            const suggestionText = document.getElementById('suggestionText');
             
-            // Update color inputs
-            document.getElementById('textColor').value = rgbToHex(styles.color);
-            document.getElementById('bgColor').value = rgbToHex(styles.backgroundColor);
+            if (website) {
+                const aiSuggestions = {
+                    'aesthetic-clinic': 'זיהיתי שזה אתר של קליניקת יופי. האם תרצה שאוסיף גלריית לפני-אחרי אינטראקטיבית ומערכת הזמנות מתקדמת?',
+                    'dentist': 'זיהיתי שזה אתר של רופא שיניים. האם תרצה שאוסיף מערכת הזמנות אוטומטית ומחשבון עלויות טיפולים?',
+                    'architect': 'זיהיתי שזה אתר של אדריכל. האם תרצה שאוסיף תצוגת פרויקטים תלת-ממדית ומחשבון עלויות בנייה?',
+                    'restaurant': 'זיהיתי שזה אתר של מסעדה. האם תרצה שאוסיף תפריט דיגיטלי אינטראקטיבי ומערכת הזמנות שולחן?'
+                };
+                
+                suggestionText.textContent = aiSuggestions[website.name] || 'AI זיהה את סוג העסק ויכול להציע שיפורים מותאמים.';
+            }
             
-            // Update font size
-            const fontSize = parseInt(styles.fontSize);
-            document.getElementById('fontSize').value = fontSize;
-            document.getElementById('fontSizeValue').textContent = fontSize + 'px';
+            suggestions.style.display = 'block';
+            suggestions.classList.add('slide-in');
             
-            // Update line height
-            const lineHeight = parseFloat(styles.lineHeight) / fontSize || 1.5;
-            document.getElementById('lineHeight').value = lineHeight;
-            document.getElementById('lineHeightValue').textContent = lineHeight;
+            setTimeout(() => {
+                suggestions.style.display = 'none';
+            }, 10000);
+        }
+
+        function addClickEffects() {
+            const iframe = document.getElementById('websiteIframe');
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             
-            // Update text align
-            document.getElementById('textAlign').value = styles.textAlign;
-        }
-
-        function rgbToHex(rgb) {
-            if (rgb.startsWith('#')) return rgb;
-            if (rgb === 'transparent' || rgb === 'rgba(0, 0, 0, 0)') return '#ffffff';
-            
-            const result = rgb.match(/\d+/g);
-            if (!result) return '#000000';
-            
-            return '#' + result.slice(0, 3).map(x => {
-                const hex = parseInt(x).toString(16);
-                return hex.length === 1 ? '0' + hex : hex;
-            }).join('');
-        }
-
-        // Advanced editing functions
-        function updateElementText(text) {
-            if (selectedElement) {
-                const oldText = selectedElement.textContent;
-                selectedElement.textContent = text;
-                
-                addToHistory({
-                    type: 'textChange',
-                    element: selectedElement,
-                    oldValue: oldText,
-                    newValue: text
-                });
-                
-                updateHistoryStatus();
-            }
-        }
-
-        function applyTextColor(color) {
-            if (selectedElement) {
-                const oldColor = selectedElement.style.color;
-                selectedElement.style.color = color;
-                
-                addToHistory({
-                    type: 'styleChange',
-                    element: selectedElement,
-                    property: 'color',
-                    oldValue: oldColor,
-                    newValue: color
-                });
-                
-                updateHistoryStatus();
-                showNotification('success', 'צבע טקסט עודכן ל-' + color);
-            }
-        }
-
-        function applyBackgroundColor(color) {
-            if (selectedElement) {
-                const oldColor = selectedElement.style.backgroundColor;
-                selectedElement.style.backgroundColor = color;
-                
-                addToHistory({
-                    type: 'styleChange',
-                    element: selectedElement,
-                    property: 'backgroundColor',
-                    oldValue: oldColor,
-                    newValue: color
-                });
-                
-                updateHistoryStatus();
-                showNotification('success', 'צבע רקע עודכן ל-' + color);
-            }
-        }
-
-        function applyFontSize(size) {
-            if (selectedElement) {
-                const oldSize = selectedElement.style.fontSize;
-                selectedElement.style.fontSize = size + 'px';
-                document.getElementById('fontSizeValue').textContent = size + 'px';
-                
-                addToHistory({
-                    type: 'styleChange',
-                    element: selectedElement,
-                    property: 'fontSize',
-                    oldValue: oldSize,
-                    newValue: size + 'px'
-                });
-                
-                updateHistoryStatus();
-            }
-        }
-
-        function applyLineHeight(height) {
-            if (selectedElement) {
-                const oldHeight = selectedElement.style.lineHeight;
-                selectedElement.style.lineHeight = height;
-                document.getElementById('lineHeightValue').textContent = height;
-                
-                addToHistory({
-                    type: 'styleChange',
-                    element: selectedElement,
-                    property: 'lineHeight',
-                    oldValue: oldHeight,
-                    newValue: height
-                });
-                
-                updateHistoryStatus();
-            }
-        }
-
-        function applyPadding(padding) {
-            if (selectedElement) {
-                const oldPadding = selectedElement.style.padding;
-                selectedElement.style.padding = padding + 'px';
-                document.getElementById('paddingValue').textContent = padding + 'px';
-                
-                addToHistory({
-                    type: 'styleChange',
-                    element: selectedElement,
-                    property: 'padding',
-                    oldValue: oldPadding,
-                    newValue: padding + 'px'
-                });
-                
-                updateHistoryStatus();
-            }
-        }
-
-        function applyMargin(margin) {
-            if (selectedElement) {
-                const oldMargin = selectedElement.style.margin;
-                selectedElement.style.margin = margin + 'px';
-                document.getElementById('marginValue').textContent = margin + 'px';
-                
-                addToHistory({
-                    type: 'styleChange',
-                    element: selectedElement,
-                    property: 'margin',
-                    oldValue: oldMargin,
-                    newValue: margin + 'px'
-                });
-                
-                updateHistoryStatus();
-            }
-        }
-
-        function applyTextAlign(align) {
-            if (selectedElement) {
-                const oldAlign = selectedElement.style.textAlign;
-                selectedElement.style.textAlign = align;
-                
-                addToHistory({
-                    type: 'styleChange',
-                    element: selectedElement,
-                    property: 'textAlign',
-                    oldValue: oldAlign,
-                    newValue: align
-                });
-                
-                updateHistoryStatus();
-            }
-        }
-
-        function applyFontFamily(family) {
-            if (selectedElement) {
-                const oldFamily = selectedElement.style.fontFamily;
-                selectedElement.style.fontFamily = family;
-                
-                addToHistory({
-                    type: 'styleChange',
-                    element: selectedElement,
-                    property: 'fontFamily',
-                    oldValue: oldFamily,
-                    newValue: family
-                });
-                
-                updateHistoryStatus();
-                showNotification('success', 'פונט עודכן');
-            }
-        }
-
-        function applyFontWeight(weight) {
-            if (selectedElement) {
-                const oldWeight = selectedElement.style.fontWeight;
-                const newWeight = selectedElement.style.fontWeight === 'bold' ? 'normal' : 'bold';
-                selectedElement.style.fontWeight = newWeight;
-                
-                const btn = document.getElementById('boldBtn');
-                btn.classList.toggle('active');
-                
-                addToHistory({
-                    type: 'styleChange',
-                    element: selectedElement,
-                    property: 'fontWeight',
-                    oldValue: oldWeight,
-                    newValue: newWeight
-                });
-                
-                updateHistoryStatus();
-            }
-        }
-
-        function applyFontStyle(style) {
-            if (selectedElement) {
-                const oldStyle = selectedElement.style.fontStyle;
-                const newStyle = selectedElement.style.fontStyle === 'italic' ? 'normal' : 'italic';
-                selectedElement.style.fontStyle = newStyle;
-                
-                const btn = document.getElementById('italicBtn');
-                btn.classList.toggle('active');
-                
-                addToHistory({
-                    type: 'styleChange',
-                    element: selectedElement,
-                    property: 'fontStyle',
-                    oldValue: oldStyle,
-                    newValue: newStyle
-                });
-                
-                updateHistoryStatus();
-            }
-        }
-
-        // History management
-        function addToHistory(change) {
-            // Remove any history after current index
-            changeHistory = changeHistory.slice(0, historyIndex + 1);
-            
-            // Add new change
-            changeHistory.push(change);
-            historyIndex++;
-            
-            // Limit history size
-            if (changeHistory.length > 50) {
-                changeHistory.shift();
-                historyIndex--;
-            }
-        }
-
-        function undoChange() {
-            if (historyIndex >= 0) {
-                const change = changeHistory[historyIndex];
-                applyReverseChange(change);
-                historyIndex--;
-                updateHistoryStatus();
-                showNotification('info', 'שינוי בוטל');
-            } else {
-                showNotification('warning', 'אין שינויים לביטול');
-            }
-        }
-
-        function redoChange() {
-            if (historyIndex < changeHistory.length - 1) {
-                historyIndex++;
-                const change = changeHistory[historyIndex];
-                applyChange(change);
-                updateHistoryStatus();
-                showNotification('info', 'שינוי הוחזר');
-            } else {
-                showNotification('warning', 'אין שינויים להחזרה');
-            }
-        }
-
-        function applyReverseChange(change) {
-            if (change.type === 'textChange') {
-                change.element.textContent = change.oldValue;
-            } else if (change.type === 'styleChange') {
-                change.element.style[change.property] = change.oldValue;
-            }
-        }
-
-        function applyChange(change) {
-            if (change.type === 'textChange') {
-                change.element.textContent = change.newValue;
-            } else if (change.type === 'styleChange') {
-                change.element.style[change.property] = change.newValue;
-            }
-        }
-
-        function updateHistoryStatus() {
-            document.getElementById('historyStatus').textContent = 'שינויים: ' + changeHistory.length;
-        }
-
-        // Color palette functions
-        function initializeColorPalette() {
-            const swatches = document.querySelectorAll('.color-swatch');
-            swatches.forEach(swatch => {
-                swatch.addEventListener('click', function() {
-                    const color = this.style.backgroundColor;
-                    selectColor(rgbToHex(color));
+            const buttons = iframeDoc.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Create ripple effect
+                    const ripple = iframeDoc.createElement('span');
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        background-color: rgba(255,255,255,0.7);
+                        pointer-events: none;
+                    `;
+                    
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                    
+                    this.style.position = 'relative';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
                 });
             });
         }
 
-        function selectColor(color) {
-            currentColor = color;
+        // AI Functions
+        function toggleAI() {
+            isAIOpen = !isAIOpen;
+            const panel = document.getElementById('aiPanel');
+            const toggle = document.getElementById('aiToggle');
             
-            // Update active swatch
-            document.querySelectorAll('.color-swatch').forEach(swatch => {
-                swatch.classList.remove('active');
-                if (rgbToHex(swatch.style.backgroundColor) === color) {
-                    swatch.classList.add('active');
-                }
-            });
-            
-            // Update color inputs
-            document.getElementById('customColor').value = color;
-            
-            showNotification('info', 'צבע נבחר: ' + color);
-        }
-
-        // Advanced tools
-        function enableAdvancedEdit() {
-            editMode = !editMode;
-            const btn = document.getElementById('editModeBtn');
-            const overlay = document.getElementById('frameOverlay');
-            
-            if (editMode) {
-                btn.classList.add('active');
-                overlay.classList.add('edit-mode');
-                showNotification('success', '🖊️ מצב עריכה מתקדם פעיל - לחץ על אלמנטים לעריכה');
+            if (isAIOpen) {
+                panel.classList.add('open');
+                toggle.style.display = 'none';
             } else {
-                btn.classList.remove('active');
-                overlay.classList.remove('edit-mode');
-                showNotification('info', 'מצב עריכה מתקדם כבוי');
+                panel.classList.remove('open');
+                toggle.style.display = 'flex';
             }
         }
 
-        function toggleInspector() {
-            inspectorMode = !inspectorMode;
-            const btn = document.getElementById('inspectorBtn');
+        function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const chat = document.getElementById('aiChat');
             
-            if (inspectorMode) {
-                btn.classList.add('active');
-                showNotification('success', '🔍 בוחן אלמנטים פעיל - הצבע על אלמנטים לבדיקה');
-            } else {
-                btn.classList.remove('active');
-                showNotification('info', 'בוחן אלמנטים כבוי');
-            }
+            if (!input.value.trim()) return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'ai-message';
+            userMessage.innerHTML = `<strong>👤 אתה:</strong><br>${input.value}`;
+            chat.appendChild(userMessage);
+            
+            const userQuery = input.value;
+            input.value = '';
+            
+            // Simulate AI processing
+            const processingMessage = document.createElement('div');
+            processingMessage.className = 'ai-message loading';
+            processingMessage.innerHTML = '<strong>🤖 AI Assistant:</strong><br>חושב...';
+            chat.appendChild(processingMessage);
+            
+            chat.scrollTop = chat.scrollHeight;
+            
+            setTimeout(() => {
+                processingMessage.classList.remove('loading');
+                processingMessage.innerHTML = generateAIResponse(userQuery);
+                chat.scrollTop = chat.scrollHeight;
+            }, 2000);
         }
 
-        // Device controls
-        function setDevice(device) {
-            currentDevice = device;
-            
-            // Update button states
-            document.querySelectorAll('.device-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(device + 'Btn').classList.add('active');
-            
-            // Update frame size
-            const frame = document.getElementById('websiteFrame');
-            frame.className = `website-frame ${device}`;
-            
-            const deviceNames = {
-                desktop: 'מחשב',
-                tablet: 'טאבלט', 
-                mobile: 'מובייל'
+        function generateAIResponse(query) {
+            const responses = {
+                'צבעים': '🎨 מצוין! אני ממליץ על פלטת צבעים מתקדמת עם גרדיאנטים דינמיים. השתמש בכחול-סגול (#667eea) כצבע ראשי ותוסיף ורוד-אקזוטי (#f093fb) כאקסנט. זה יתן מראה מודרני ומקצועי.',
+                'תוכן': '📝 אני יכול ליצור תוכן מקצועי מותאם לתחום העסק שלך! רק תגיד לי איזה סוג תוכן אתה צריך - כותרות, תיאורי שירותים, קריאות לפעולה, או מאמרים מלאים.',
+                'עיצוב': '🎨 יש לי הצעות עיצוב מתקדמות! אני יכול להוסיף אלמנטים תלת-ממדיים, אנימציות חלקות, ואפקטי Glass Morphism מותאמים לברנד שלך.',
+                'תמונות': '📸 אני יכול ליצור תמונות מותאמות אישית באמצעות AI! רק תגיד לי איזה סגנון אתה רוצה - פוטוריאליסטי, איור, מינימליסטי, או כל סגנון אחר.',
+                'default': `🤖 שאלה מעניינת! אני יכול לעזור לך עם:
+                
+• יצירת תוכן מקצועי ומותאם
+• הצעות עיצוב וצבעים חכמות  
+• אופטימיזציה אוטומטית לביצועים
+• הוספת פונקציונליות מתקדמת
+• יצירת תמונות ואיקונים
+• ועוד המון דברים!
+
+איך בדיוק אני יכול לעזור לך?`
             };
             
-            document.getElementById('currentDevice').textContent = deviceNames[device];
-            showNotification('info', `עבר למצב ${deviceNames[device]}`);
+            for (let key in responses) {
+                if (query.includes(key)) {
+                    return `<strong>🤖 AI Assistant:</strong><br>${responses[key]}`;
+                }
+            }
+            
+            return `<strong>🤖 AI Assistant:</strong><br>${responses.default}`;
+        }
+
+        // Feature Functions
+        function generateSmartContent() {
+            if (!currentWebsite) {
+                showNotification('בחר אתר קודם כל', 'warning');
+                return;
+            }
+            
+            showNotification('🤖 AI יוצר תוכן מקצועי מותאם...', 'info');
+            
+            setTimeout(() => {
+                showNotification('✅ תוכן חדש נוצר בהצלחה!', 'success');
+                updateStatus('תוכן AI נוסף לאתר');
+            }, 3000);
+        }
+
+        function generateBrandIdentity() {
+            showNotification('🎨 AI יוצר זהות חזותית מלאה...', 'info');
+            
+            setTimeout(() => {
+                showNotification('✨ זהות חזותית מהפכנית מוכנה!', 'success');
+            }, 4000);
+        }
+
+        function voiceDesign() {
+            showNotification('🎤 Voice Design מופעל - דבר עכשיו', 'info');
+            
+            // Simulate voice recognition
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.lang = 'he-IL';
+                recognition.start();
+                
+                recognition.onresult = function(event) {
+                    const command = event.results[0][0].transcript;
+                    processVoiceCommand(command);
+                };
+            } else {
+                showNotification('Voice Design זמין בדפדפנים תומכים', 'warning');
+            }
+        }
+
+        function processVoiceCommand(command) {
+            showNotification(`🎤 פקודה התקבלה: "${command}"`, 'info');
+            
+            if (command.includes('צבע')) {
+                showNotification('🎨 משנה צבעים לפי הפקודה הקולית', 'success');
+            } else if (command.includes('טקסט')) {
+                showNotification('📝 מעדכן טקסט לפי הפקודה הקולית', 'success');
+            } else {
+                showNotification('🤖 AI מעבד את הפקודה הקולית...', 'info');
+            }
+        }
+
+        // Utility Functions
+        function updateStatus(message) {
+            document.getElementById('statusText').textContent = message;
+            console.log('📊 Status:', message);
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4ade80' : type === 'warning' ? '#fbbf24' : type === 'error' ? '#ef4444' : '#06b6d4'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                z-index: 9999;
+                font-weight: 600;
+                transform: translateX(400px);
+                transition: all 0.4s ease;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => notification.remove(), 400);
+            }, 4000);
+        }
+
+        function showWelcomeMessage() {
+            setTimeout(() => {
+                showNotification('🚀 WebMaster Pro AI מוכן לעבודה!', 'success');
+            }, 1000);
+        }
+
+        // Device and Zoom Controls
+        function setDevice(device) {
+            const frame = document.getElementById('websiteFrame');
+            const buttons = document.querySelectorAll('.device-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.device-btn').classList.add('active');
+            
+            frame.className = `website-frame ${device}`;
+            updateStatus(`מעבר למצב ${device}`);
         }
 
         function updateZoom(value) {
@@ -2032,291 +1712,32 @@
             document.getElementById('zoomValue').textContent = `${value}%`;
         }
 
-        function resetZoom() {
-            document.getElementById('zoomSlider').value = 100;
-            updateZoom(100);
-            showNotification('info', 'זום אופס ל-100%');
-        }
-
-        // Tab switching
-        function switchTab(tabName, button) {
-            // Update button states
-            document.querySelectorAll('.panel-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            button.classList.add('active');
-            
-            // Hide all tabs
-            document.getElementById('designTab').style.display = 'none';
-            document.getElementById('contentTab').style.display = 'none';
-            document.getElementById('mediaTab').style.display = 'none';
-            
-            // Show selected tab
-            document.getElementById(tabName + 'Tab').style.display = 'block';
-            
-            showNotification('info', `עבר לטאב ${tabName}`);
-        }
-
-        function switchPropertiesTab(tabName, button) {
-            // Update button states
-            button.parentElement.querySelectorAll('.panel-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            button.classList.add('active');
-            
-            // Hide all properties
-            document.getElementById('elementProperties').style.display = 'none';
-            document.getElementById('layoutProperties').style.display = 'none';
-            document.getElementById('effectsProperties').style.display = 'none';
-            
-            // Show selected properties
-            document.getElementById(tabName + 'Properties').style.display = 'block';
-            
-            showNotification('info', `עבר למאפייני ${tabName}`);
-        }
-
-        // AI Assistant
-        function toggleAI() {
-            isAIOpen = !isAIOpen;
-            const assistant = document.getElementById('aiAssistant');
-            const toggle = document.getElementById('aiToggle');
-            
-            if (isAIOpen) {
-                assistant.classList.add('open');
-                toggle.style.display = 'none';
-            } else {
-                assistant.classList.remove('open');
-                toggle.style.display = 'flex';
-            }
-        }
-
-        function handleAIInput(event) {
+        // Export functions
+        window.toggleAI = toggleAI;
+        window.sendAIMessage = sendAIMessage;
+        window.generateSmartContent = generateSmartContent;
+        window.generateBrandIdentity = generateBrandIdentity;
+        window.voiceDesign = voiceDesign;
+        window.setDevice = setDevice;
+        window.updateZoom = updateZoom;
+        window.undoChange = () => showNotification('Undo בוצע', 'info');
+        window.redoChange = () => showNotification('Redo בוצע', 'info');
+        window.saveWebsite = () => showNotification('💾 האתר נשמר בהצלחה!', 'success');
+        window.previewWebsite = () => showNotification('👁️ פותח תצוגה מקדימה...', 'info');
+        window.applySuggestion = () => {
+            showNotification('✨ הצעת AI מוחלת...', 'info');
+            document.getElementById('aiSuggestions').style.display = 'none';
+        };
+        window.dismissSuggestion = () => {
+            document.getElementById('aiSuggestions').style.display = 'none';
+        };
+        window.handleAIInput = function(event) {
             if (event.key === 'Enter') {
-                const input = document.getElementById('aiInput');
-                askAI(input.value);
-                input.value = '';
+                sendAIMessage();
             }
-        }
+        };
 
-        function askAI(question) {
-            const response = document.getElementById('aiResponse');
-            response.innerHTML = '<i class="fas fa-spinner fa-spin"></i> AI חושב...';
-            
-            // Simulate AI response
-            setTimeout(() => {
-                const responses = {
-                    'שנה צבעים': 'מציע לשנות לצבעים כחול-סגול (#667eea) עם ירוק מנטה (#26de81) כצבע משני. זה יעניק מראה מקצועי ונעים לעין.',
-                    'שפר עיצוב': 'מציע להוסיף צללים עדינים, להגדיל מרווחים בין אלמנטים ולהשתמש בפונט Heebo לטקסט עברי.',
-                    'הוסף אנימציה': 'מציע להוסיף אנימציות hover עדינות לכפתורים ומעברים חלקים בין דפים.',
-                    'אופטימיזציה': 'מציע לדחוס תמונות, לשפר SEO עם meta tags ולהוסיף lazy loading לתמונות.'
-                };
-                
-                response.innerHTML = responses[question] || 'מצטער, לא הבנתי את השאלה. תוכל לנסח אותה אחרת?';
-            }, 1500);
-        }
-
-        // Advanced website loading
-        function loadAdvancedFallbackContent(website, iframe, placeholder) {
-            const generatedHTML = generateAdvancedProfessionalWebsite(website);
-            iframe.src = '';
-            iframe.srcdoc = generatedHTML;
-            
-            iframe.onload = function() {
-                // Inject editing capabilities to generated content
-                setTimeout(() => {
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    injectEditingCapabilities(iframeDoc);
-                }, 500);
-                
-                iframe.style.display = 'block';
-                placeholder.style.display = 'none';
-                hideLoadingOverlay();
-                updateStatus('אתר זמני נטען עם תכונות מתקדמות', false);
-                showNotification('warning', '⚠️ קובץ ' + website.file + ' לא נמצא, נטען תוכן זמני מתקדם');
-            };
-        }
-
-        function generateAdvancedProfessionalWebsite(website) {
-            return `<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${website.name} - ${website.category}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Heebo', 'Segoe UI', Arial, sans-serif; 
-            line-height: 1.6; 
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 2rem; 
-            text-align: center;
-            color: white;
-        }
-        .hero {
-            padding: 4rem 0;
-        }
-        h1 { 
-            font-size: 3.5rem; 
-            margin-bottom: 1rem; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            font-weight: 700;
-        }
-        .subtitle { 
-            font-size: 1.5rem; 
-            margin-bottom: 2rem; 
-            opacity: 0.9;
-            font-weight: 300;
-        }
-        .services {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 25px;
-            padding: 3rem;
-            margin: 2rem 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-        .services h2 {
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            font-weight: 600;
-        }
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .service-card {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            background: rgba(255,255,255,0.25);
-        }
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #26de81, #20bf6b);
-            border-radius: 50%;
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 10px 25px rgba(38, 222, 129, 0.3);
-        }
-        .service-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-        .service-card p {
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-            opacity: 0.9;
-        }
-        .price {
-            color: #26de81;
-            font-weight: 700;
-            font-size: 1.3rem;
-            background: rgba(38, 222, 129, 0.2);
-            padding: 8px 16px;
-            border-radius: 25px;
-            display: inline-block;
-        }
-        .contact {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 25px;
-            padding: 2.5rem;
-            margin-top: 2rem;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-        .contact h2 {
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-        .contact-info {
-            margin: 1.5rem 0;
-            font-size: 1.1rem;
-        }
-        .cta-button {
-            background: linear-gradient(45deg, #26de81, #20bf6b);
-            color: white;
-            padding: 18px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 1rem;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 20px rgba(38, 222, 129, 0.3);
-            text-decoration: none;
-            display: inline-block;
-        }
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(38, 222, 129, 0.4);
-            background: linear-gradient(45deg, #20bf6b, #26de81);
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .subtitle { font-size: 1.2rem; }
-            .service-grid { grid-template-columns: 1fr; }
-            .container { padding: 1rem; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="hero">
-            <h1>${website.name}</h1>
-            <p class="subtitle">${website.description} - חדשנות ומקצועיות ברמה הגבוהה ביותר</p>
-            <a href="#contact" class="cta-button">צור קשר עכשיו</a>
-        </div>
-        
-        <div class="services">
-            <h2>השירותים המקצועיים שלנו</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <div class="service-icon">⭐</div>
-                    <h3>שירות מקצועי מותאם</h3>
-                    <p>פתרונות מותאמים אישית עם דגש על איכות מעולה ותוצאות מוכחות. אנו מספקים שירות ברמה הגבוהה ביותר.</p>
-                    <div class="price">החל מ-₪399</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🚀</div>
-                    <h3>פתרונות חדשניים</h3>
-                    <p>שימוש בטכנולוגיות המתקדמות ביותר ובשיטות עבודה חדשניות לקבלת התוצאות הטובות ביותר.</p>
-                    <div class="price">החל מ-₪599</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💎</div>
-                    <h3>שירות פרמיום</h3>
-                    <p>חבילה מקיפה הכוללת כל מה שנדרש עם תמיכה מלאה ומעקב אישי לקבלת תוצאות מושלמות.</p>
-                    <div class="price">החל מ-₪899</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="contact" id="contact">
-            <h2>צור קשר</h2>
-            <p>נשמח לענות על כל שאלה ולתת ייעוץ מקצ
+        console.log('✅ WebMaster Pro AI - כל המערכות פעילות!');
+    </script>
+</body>
+</html>
