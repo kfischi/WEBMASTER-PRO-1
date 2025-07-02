@@ -744,6 +744,17 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes highlight {
+            0%, 100% { 
+                background: rgba(0, 255, 255, 0.1);
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            }
+            50% { 
+                background: rgba(0, 255, 255, 0.3);
+                box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+            }
+        }
+
         /* Responsive */
         @media (max-width: 1400px) {
             .ai-editor {
@@ -1118,95 +1129,385 @@
             'contact': { name: 'צור קשר', content: '', status: 'טיוטה' }
         };
 
-        // All 11 websites database
+        // All 11 websites database - WITH WORKING DEMOS
         const websiteDatabase = {
             'dr-michal-rosen': {
                 title: 'ד"ר מיכל רוזן',
                 type: 'רפואה אסתטית',
                 price: '₪2,800',
                 status: 'מוכן',
-                url: 'https://dr-michal-rosen.netlify.app/',
-                description: 'קליניקה לרפואה אסתטית מתקדמת'
+                url: 'demo', // Will load demo content
+                description: 'קליניקה לרפואה אסתטית מתקדמת',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh;">
+                        <header style="padding: 2rem; text-align: center; background: rgba(255,255,255,0.1);">
+                            <h1 data-editable="true" style="font-size: 2.5rem; margin-bottom: 1rem;">ד"ר מיכל רוזן</h1>
+                            <p data-editable="true" style="font-size: 1.2rem; opacity: 0.9;">מומחית לרפואה אסתטית מתקדמת</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: white; color: #333; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                                <h2 data-editable="true" style="color: #667eea; margin-bottom: 1.5rem;">שירותים מתקדמים</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                                    <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 10px;">
+                                        <h3 data-editable="true" style="color: #667eea;">בוטוקס ופילרים</h3>
+                                        <p data-editable="true">טיפולי בוטוקס ופילרים ברמה הגבוהה ביותר עם תוצאות טבעיות</p>
+                                    </div>
+                                    <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 10px;">
+                                        <h3 data-editable="true" style="color: #667eea;">לייזר ואסתטיקה</h3>
+                                        <p data-editable="true">טיפולי לייזר מתקדמים להסרת שיער ושיפור מרקם העור</p>
+                                    </div>
+                                </div>
+                                <div style="text-align: center; margin-top: 2rem;">
+                                    <button data-editable="true" style="background: #667eea; color: white; padding: 1rem 2rem; border: none; border-radius: 25px; font-size: 1.1rem; cursor: pointer;">
+                                        קבע תור עכשיו
+                                    </button>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             },
             'danny-fit': {
                 title: 'דני פיט',
                 type: 'מאמן כושר',
                 price: '₪2,200',
                 status: 'מוכן',
-                url: 'https://danny-fit-trainer.netlify.app/',
-                description: 'מאמן כושר אישי מקצועי'
+                url: 'demo',
+                description: 'מאמן כושר אישי מקצועי',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #4ecdc4 0%, #1e3c72 100%); color: white; min-height: 100vh;">
+                        <header style="padding: 2rem; text-align: center; background: rgba(0,0,0,0.3);">
+                            <h1 data-editable="true" style="font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">דני פיט</h1>
+                            <p data-editable="true" style="font-size: 1.3rem; opacity: 0.9;">מאמן כושר אישי • הכשרה מקצועית • תוצאות מוכחות</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: rgba(255,255,255,0.95); color: #333; padding: 2rem; border-radius: 15px;">
+                                <h2 data-editable="true" style="color: #4ecdc4; margin-bottom: 1.5rem; text-align: center;">התכנית שלי</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                                    <div style="text-align: center; padding: 1.5rem; border: 2px solid #4ecdc4; border-radius: 15px;">
+                                        <h3 data-editable="true" style="color: #1e3c72;">💪 אימון אישי</h3>
+                                        <p data-editable="true">תכנית אימונים מותאמת אישית לצרכים ולמטרות שלך</p>
+                                        <div data-editable="true" style="font-size: 1.5rem; font-weight: bold; color: #4ecdc4;">₪150/שעה</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 1.5rem; border: 2px solid #4ecdc4; border-radius: 15px;">
+                                        <h3 data-editable="true" style="color: #1e3c72;">🥗 תזונה</h3>
+                                        <p data-editable="true">ייעוץ תזונתי מקצועי וחשיבת תפריט מותאם</p>
+                                        <div data-editable="true" style="font-size: 1.5rem; font-weight: bold; color: #4ecdc4;">₪200/חודש</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 1.5rem; border: 2px solid #4ecdc4; border-radius: 15px;">
+                                        <h3 data-editable="true" style="color: #1e3c72;">📱 מעקב אונליין</h3>
+                                        <p data-editable="true">מעקב יומיומי ותמיכה רציפה דרך אפליקציה</p>
+                                        <div data-editable="true" style="font-size: 1.5rem; font-weight: bold; color: #4ecdc4;">₪100/חודש</div>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             },
             'studio-ohm': {
                 title: 'סטודיו אוהם',
                 type: 'יוגה ומדיטציה',
                 price: '₪1,900',
                 status: 'מוכן',
-                url: 'https://studio-ohm-yoga.netlify.app/',
-                description: 'סטודיו יוגה ומדיטציה'
+                url: 'demo',
+                description: 'סטודיו יוגה ומדיטציה',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #95e1d3 0%, #30a3b8 100%); color: #333; min-height: 100vh;">
+                        <header style="padding: 3rem; text-align: center; background: rgba(255,255,255,0.2);">
+                            <h1 data-editable="true" style="font-size: 3.5rem; margin-bottom: 1rem; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">סטודיו אוהם</h1>
+                            <p data-editable="true" style="font-size: 1.4rem; color: white; opacity: 0.9;">מרחב של שלווה, יוגה ומדיטציה</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                                <h2 data-editable="true" style="color: #30a3b8; margin-bottom: 2rem; text-align: center;">השיעורים שלנו</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                                    <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #95e1d3, #30a3b8); color: white; border-radius: 15px;">
+                                        <h3 data-editable="true" style="margin-bottom: 1rem;">🧘‍♀️ יוגה לכל הרמות</h3>
+                                        <p data-editable="true">שיעורי יוגה מותאמים למתחילים ומתקדמים</p>
+                                        <div data-editable="true" style="margin-top: 1rem; font-weight: bold;">₪80 לשיעור</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #95e1d3, #30a3b8); color: white; border-radius: 15px;">
+                                        <h3 data-editable="true" style="margin-bottom: 1rem;">🌅 מדיטציה מודרכת</h3>
+                                        <p data-editable="true">סדנאות מדיטציה להפגת מתח ושחרור חרדות</p>
+                                        <div data-editable="true" style="margin-top: 1rem; font-weight: bold;">₪60 לשיעור</div>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             },
             'dr-sarah-cohen': {
                 title: 'ד"ר שרה כהן',
                 type: 'תזונאית מומחית',
                 price: '₪2,400',
                 status: 'מוכן',
-                url: 'https://dr-sarah-cohen-nutrition.netlify.app/',
-                description: 'תזונאית קלינית מומחית'
+                url: 'demo',
+                description: 'תזונאית קלינית מומחית',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #a8e6cf 0%, #558b2f 100%); color: #333; min-height: 100vh;">
+                        <header style="padding: 2rem; text-align: center; background: rgba(255,255,255,0.1);">
+                            <h1 data-editable="true" style="font-size: 2.8rem; margin-bottom: 1rem; color: white;">ד"ר שרה כהן</h1>
+                            <p data-editable="true" style="font-size: 1.2rem; color: white; opacity: 0.9;">תזונאית קלינית מומחית • דיאטנית מוסמכת</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: white; padding: 2rem; border-radius: 15px;">
+                                <h2 data-editable="true" style="color: #558b2f; margin-bottom: 1.5rem; text-align: center;">השירותים שלי</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                                    <div style="padding: 1.5rem; border: 2px solid #a8e6cf; border-radius: 10px; text-align: center;">
+                                        <h3 data-editable="true" style="color: #558b2f;">🥗 תכנית תזונה אישית</h3>
+                                        <p data-editable="true">תפריט מותאם למטרותיך ולצרכים הרפואיים</p>
+                                        <div data-editable="true" style="color: #558b2f; font-weight: bold; font-size: 1.2rem;">₪300 לייעוץ</div>
+                                    </div>
+                                    <div style="padding: 1.5rem; border: 2px solid #a8e6cf; border-radius: 10px; text-align: center;">
+                                        <h3 data-editable="true" style="color: #558b2f;">📊 מעקב וליווי</h3>
+                                        <p data-editable="true">מעקב שבועי והתאמת התזונה לפי התקדמות</p>
+                                        <div data-editable="true" style="color: #558b2f; font-weight: bold; font-size: 1.2rem;">₪150/חודש</div>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             },
             'barkovich-law': {
                 title: 'משרד ברקוביץ',
                 type: 'עורכי דין',
                 price: '₪2,500',
                 status: 'מוכן',
-                url: 'https://barkovich-law-firm.netlify.app/',
-                description: 'משרד עורכי דין מקצועי'
+                url: 'demo',
+                description: 'משרד עורכי דין מקצועי',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; min-height: 100vh;">
+                        <header style="padding: 2rem; text-align: center; background: rgba(0,0,0,0.2);">
+                            <h1 data-editable="true" style="font-size: 2.5rem; margin-bottom: 1rem;">משרד עורכי דין ברקוביץ ושות'</h1>
+                            <p data-editable="true" style="font-size: 1.2rem; opacity: 0.9;">ייצוג משפטי מקצועי • ניסיון של 25 שנה</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: white; color: #333; padding: 2rem; border-radius: 15px;">
+                                <h2 data-editable="true" style="color: #2c3e50; margin-bottom: 1.5rem; text-align: center;">תחומי התמחות</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                                    <div style="padding: 1.5rem; background: #ecf0f1; border-radius: 10px;">
+                                        <h3 data-editable="true" style="color: #2c3e50;">⚖️ דין פלילי</h3>
+                                        <p data-editable="true">ייצוג בבתי משפט בתיקים פליליים</p>
+                                    </div>
+                                    <div style="padding: 1.5rem; background: #ecf0f1; border-radius: 10px;">
+                                        <h3 data-editable="true" style="color: #2c3e50;">🏠 דין נדל"ן</h3>
+                                        <p data-editable="true">עסקאות נדל"ן וייצוג בסכסוכים</p>
+                                    </div>
+                                    <div style="padding: 1.5rem; background: #ecf0f1; border-radius: 10px;">
+                                        <h3 data-editable="true" style="color: #2c3e50;">💼 דין מסחרי</h3>
+                                        <p data-editable="true">ייעוץ לחברות והסכמים מסחריים</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             },
             'rina-levy-accounting': {
                 title: 'רינה לוי',
                 type: 'חשבת שכר',
                 price: '₪2,000',
                 status: 'מוכן',
-                url: 'https://rina-levy-accounting.netlify.app/',
-                description: 'שירותי חשבות ושכר'
+                url: 'demo',
+                description: 'שירותי חשבות ושכר',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #88d8c0 0%, #1db584 100%); color: #333; min-height: 100vh;">
+                        <header style="padding: 2rem; text-align: center; background: rgba(255,255,255,0.1);">
+                            <h1 data-editable="true" style="font-size: 2.5rem; margin-bottom: 1rem; color: white;">רינה לוי CPA</h1>
+                            <p data-editable="true" style="font-size: 1.2rem; color: white; opacity: 0.9;">חשבת מוסמכת • שירותי חשבות ושכר</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: white; padding: 2rem; border-radius: 15px;">
+                                <h2 data-editable="true" style="color: #1db584; margin-bottom: 1.5rem; text-align: center;">השירותים שלי</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                                    <div style="text-align: center; padding: 1.5rem; border: 2px solid #88d8c0; border-radius: 10px;">
+                                        <h3 data-editable="true" style="color: #1db584;">📊 ניהול חשבונות</h3>
+                                        <p data-editable="true">ניהול ספרים מלא לעסקים קטנים ובינוניים</p>
+                                        <div data-editable="true" style="color: #1db584; font-weight: bold;">₪800/חודש</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 1.5rem; border: 2px solid #88d8c0; border-radius: 10px;">
+                                        <h3 data-editable="true" style="color: #1db584;">💰 חישוב שכר</h3>
+                                        <p data-editable="true">חישוב שכר מדויק כולל תלושים ודיווחים</p>
+                                        <div data-editable="true" style="color: #1db584; font-weight: bold;">₪50/עובד</div>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             },
             'bella-salon': {
                 title: 'מספרה BELLA',
                 type: 'יופי ועיצוב שיער',
                 price: '₪1,700',
                 status: 'מוכן',
-                url: 'https://bella-beauty-salon.netlify.app/',
-                description: 'מספרה ויופי מקצועית'
+                url: 'demo',
+                description: 'מספרה ויופי מקצועית',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #ffa8a8 0%, #ff6b9d 100%); color: white; min-height: 100vh;">
+                        <header style="padding: 2rem; text-align: center; background: rgba(0,0,0,0.2);">
+                            <h1 data-editable="true" style="font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">BELLA</h1>
+                            <p data-editable="true" style="font-size: 1.3rem; opacity: 0.9;">מספרה ויופי • עיצוב שיער מקצועי</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: white; color: #333; padding: 2rem; border-radius: 20px;">
+                                <h2 data-editable="true" style="color: #ff6b9d; margin-bottom: 1.5rem; text-align: center;">השירותים שלנו</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                                    <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #ffa8a8, #ff6b9d); color: white; border-radius: 15px;">
+                                        <h3 data-editable="true">✂️ תספורת ועיצוב</h3>
+                                        <p data-editable="true">תספורות מודרניות ועיצוב שיער מקצועי</p>
+                                        <div data-editable="true" style="font-weight: bold; margin-top: 1rem;">החל מ-₪120</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #ffa8a8, #ff6b9d); color: white; border-radius: 15px;">
+                                        <h3 data-editable="true">🎨 צביעה וגוונים</h3>
+                                        <p data-editable="true">צביעת שיער מקצועית בטכניקות מתקדמות</p>
+                                        <div data-editable="true" style="font-weight: bold; margin-top: 1rem;">החל מ-₪200</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #ffa8a8, #ff6b9d); color: white; border-radius: 15px;">
+                                        <h3 data-editable="true">💅 עיצוב ציפורניים</h3>
+                                        <p data-editable="true">מניקור ופדיקור מקצועי</p>
+                                        <div data-editable="true" style="font-weight: bold; margin-top: 1rem;">החל מ-₪80</div>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             },
             'dr-ronit-tutor': {
                 title: 'ד"ר רונית לוי',
                 type: 'מורה פרטית',
                 price: '₪2,100',
                 status: 'מוכן',
-                url: 'https://dr-ronit-private-tutor.netlify.app/',
-                description: 'חינוך פרטי מקצועי'
+                url: 'demo',
+                description: 'חינוך פרטי מקצועי',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #b8a9c9 0%, #6366f1 100%); color: white; min-height: 100vh;">
+                        <header style="padding: 2rem; text-align: center; background: rgba(0,0,0,0.2);">
+                            <h1 data-editable="true" style="font-size: 2.5rem; margin-bottom: 1rem;">ד"ר רונית לוי</h1>
+                            <p data-editable="true" style="font-size: 1.2rem; opacity: 0.9;">חינוך פרטי מקצועי • ניסיון של 15 שנה</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: white; color: #333; padding: 2rem; border-radius: 15px;">
+                                <h2 data-editable="true" style="color: #6366f1; margin-bottom: 1.5rem; text-align: center;">מקצועות הוראה</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                                    <div style="padding: 1.5rem; border: 2px solid #b8a9c9; border-radius: 10px; text-align: center;">
+                                        <h3 data-editable="true" style="color: #6366f1;">📚 מתמטיקה ופיזיקה</h3>
+                                        <p data-editable="true">הוראה פרטית לכל הרמות - יסודי, חטיבה ותיכון</p>
+                                        <div data-editable="true" style="color: #6366f1; font-weight: bold;">₪120/שעה</div>
+                                    </div>
+                                    <div style="padding: 1.5rem; border: 2px solid #b8a9c9; border-radius: 10px; text-align: center;">
+                                        <h3 data-editable="true" style="color: #6366f1;">🎓 הכנה לבגרות</h3>
+                                        <p data-editable="true">הכנה מקיפה לבחינות בגרות במתמטיקה ופיזיקה</p>
+                                        <div data-editable="true" style="color: #6366f1; font-weight: bold;">₪150/שעה</div>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             },
             'premium-beauty': {
                 title: 'קליניקת יופי פרמיום',
                 type: 'אסתטיקה רפואית',
                 price: '₪3,200',
                 status: 'בפיתוח',
-                url: '#',
-                description: 'קליניקת יופי מתקדמת'
+                url: 'demo',
+                description: 'קליניקת יופי מתקדמת',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #ff8a80 0%, #7c3aed 100%); color: white; min-height: 100vh;">
+                        <header style="padding: 3rem; text-align: center; background: rgba(0,0,0,0.3);">
+                            <h1 data-editable="true" style="font-size: 3.5rem; margin-bottom: 1rem;">קליניקת יופי פרמיום</h1>
+                            <p data-editable="true" style="font-size: 1.4rem; opacity: 0.9;">טכנולוגיות עתידיות • תוצאות מושלמות</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: white; color: #333; padding: 2rem; border-radius: 20px;">
+                                <h2 data-editable="true" style="color: #7c3aed; margin-bottom: 2rem; text-align: center;">שירותים פרמיום</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                                    <div style="padding: 2rem; background: linear-gradient(135deg, #ff8a80, #7c3aed); color: white; border-radius: 15px; text-align: center;">
+                                        <h3 data-editable="true">💎 הידרה פייסיאל</h3>
+                                        <p data-editable="true">טיפול פנים מתקדם עם טכנולוגיה אמריקאית</p>
+                                        <div data-editable="true" style="font-weight: bold; font-size: 1.2rem;">₪450</div>
+                                    </div>
+                                    <div style="padding: 2rem; background: linear-gradient(135deg, #ff8a80, #7c3aed); color: white; border-radius: 15px; text-align: center;">
+                                        <h3 data-editable="true">⚡ RF מיקרו-נידלינג</h3>
+                                        <p data-editable="true">טיפול מהפכני להידוק ושיפור מרקם העור</p>
+                                        <div data-editable="true" style="font-weight: bold; font-size: 1.2rem;">₪800</div>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             },
             'multibrown-events': {
                 title: 'מולטיבראון',
                 type: 'נופש ואירועים',
                 price: '₪2,300',
                 status: 'תיקון נדרש',
-                url: '#',
-                description: 'חברת נופש ואירועים'
+                url: 'demo',
+                description: 'חברת נופש ואירועים',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #81c784 0%, #14b8a6 100%); color: white; min-height: 100vh;">
+                        <header style="padding: 3rem; text-align: center; background: rgba(0,0,0,0.2);">
+                            <h1 data-editable="true" style="font-size: 3.5rem; margin-bottom: 1rem;">מולטיבראון</h1>
+                            <p data-editable="true" style="font-size: 1.4rem; opacity: 0.9;">נופש מושלם • אירועים בלתי נשכחים</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: white; color: #333; padding: 2rem; border-radius: 20px;">
+                                <h2 data-editable="true" style="color: #14b8a6; margin-bottom: 2rem; text-align: center;">השירותים שלנו</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                                    <div style="padding: 2rem; background: linear-gradient(135deg, #81c784, #14b8a6); color: white; border-radius: 15px; text-align: center;">
+                                        <h3 data-editable="true">🏖️ חופשות מאורגנות</h3>
+                                        <p data-editable="true">חבילות נופש מותאמות לכל המשפחה</p>
+                                        <div data-editable="true" style="font-weight: bold;">החל מ-₪2,500</div>
+                                    </div>
+                                    <div style="padding: 2rem; background: linear-gradient(135deg, #81c784, #14b8a6); color: white; border-radius: 15px; text-align: center;">
+                                        <h3 data-editable="true">🎉 ארגון אירועים</h3>
+                                        <p data-editable="true">אירועים עסקיים ופרטיים ברמה הגבוהה ביותר</p>
+                                        <div data-editable="true" style="font-weight: bold;">החל מ-₪5,000</div>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             },
             'premium-realestate': {
                 title: 'נדל"ן פרמיום',
                 type: 'תיווך נדל"ן יוקרה',
                 price: '₪2,700',
                 status: 'מתוכנן',
-                url: '#',
-                description: 'חברת נדלן יוקרתית'
+                url: 'demo',
+                description: 'חברת נדלן יוקרתית',
+                content: `
+                    <div style="font-family: 'Heebo', sans-serif; direction: rtl; background: linear-gradient(135deg, #64b5f6 0%, #dc2626 100%); color: white; min-height: 100vh;">
+                        <header style="padding: 3rem; text-align: center; background: rgba(0,0,0,0.3);">
+                            <h1 data-editable="true" style="font-size: 3.5rem; margin-bottom: 1rem;">נדל"ן פרמיום</h1>
+                            <p data-editable="true" style="font-size: 1.4rem; opacity: 0.9;">תיווך נדל"ן יוקרתי • השקעות נבונות</p>
+                        </header>
+                        <main style="padding: 3rem 2rem;">
+                            <section style="max-width: 1200px; margin: 0 auto; background: white; color: #333; padding: 2rem; border-radius: 20px;">
+                                <h2 data-editable="true" style="color: #dc2626; margin-bottom: 2rem; text-align: center;">השירותים שלנו</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                                    <div style="padding: 2rem; background: linear-gradient(135deg, #64b5f6, #dc2626); color: white; border-radius: 15px; text-align: center;">
+                                        <h3 data-editable="true">🏠 מכירת דירות יוקרה</h3>
+                                        <p data-editable="true">מכירה ורכישה של נכסי יוקרה בתל אביב והמרכז</p>
+                                        <div data-editable="true" style="font-weight: bold;">עמלה 2%</div>
+                                    </div>
+                                    <div style="padding: 2rem; background: linear-gradient(135deg, #64b5f6, #dc2626); color: white; border-radius: 15px; text-align: center;">
+                                        <h3 data-editable="true">💰 ייעוץ השקעות</h3>
+                                        <p data-editable="true">ייעוץ מקצועי להשקעות נדל"ן ברווחיות גבוהה</p>
+                                        <div data-editable="true" style="font-weight: bold;">₪500/שעה</div>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                `
             }
         };
 
@@ -1419,34 +1720,125 @@
             currentPage = 'home';
             loadPagesList();
             
-            // Load website in iframe (only for ready websites)
-            if (currentWebsite.status === 'מוכן' && currentWebsite.url !== '#') {
-                const frame = document.getElementById('previewFrame');
-                frame.src = currentWebsite.url;
-                frame.style.display = 'block';
-                frame.onload = function() {
-                    try {
-                        // Add editing capabilities to the loaded website
-                        addEditingCapabilities(frame);
-                    } catch (e) {
-                        console.log('Cross-origin iframe - limited editing');
-                    }
-                };
-                
-                document.querySelector('.hologram-preview').style.display = 'none';
-                updateStatus(`עורך: ${currentWebsite.title}`);
-                showNotification('success', `טוען ${currentWebsite.title}...`);
-                
-                setTimeout(() => {
-                    showNotification('info', 'האתר נטען! השתמש בכלי העריכה או בצ\'אט AI');
-                }, 2000);
-            } else {
-                showNotification('warning', `האתר ${currentWebsite.title} עדיין ${currentWebsite.status}`);
-                updateStatus(`נבחר: ${currentWebsite.title} (${currentWebsite.status})`);
-            }
+            // Load website demo content
+            const frame = document.getElementById('previewFrame');
+            const doc = frame.contentDocument || frame.contentWindow.document;
+            
+            // Write the demo content directly to iframe
+            doc.open();
+            doc.write(`
+                <!DOCTYPE html>
+                <html lang="he" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${currentWebsite.title}</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        
+                        body {
+                            font-family: 'Heebo', sans-serif;
+                            line-height: 1.6;
+                        }
+                        
+                        [data-editable="true"] {
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        }
+                        
+                        [data-editable="true"]:hover {
+                            outline: 2px dashed #00FFFF;
+                            background: rgba(0, 255, 255, 0.1);
+                        }
+                        
+                        .editing-active {
+                            border: 2px dashed #00FFFF !important;
+                            position: relative;
+                            cursor: pointer !important;
+                        }
+                        
+                        .editing-active::after {
+                            content: '✏️ לחץ לעריכה';
+                            position: absolute;
+                            top: -25px;
+                            left: 0;
+                            background: #00FFFF;
+                            color: black;
+                            padding: 2px 8px;
+                            border-radius: 5px;
+                            font-size: 11px;
+                            font-weight: 600;
+                            z-index: 9999;
+                            pointer-events: none;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${currentWebsite.content}
+                    
+                    <script>
+                        // Enable editing interactions
+                        document.addEventListener('click', function(e) {
+                            if (e.target.getAttribute('data-editable') === 'true') {
+                                e.preventDefault();
+                                // Send message to parent frame
+                                try {
+                                    window.parent.postMessage({
+                                        type: 'elementSelected',
+                                        element: {
+                                            tagName: e.target.tagName.toLowerCase(),
+                                            textContent: e.target.textContent,
+                                            id: e.target.id || '',
+                                            className: e.target.className || ''
+                                        }
+                                    }, '*');
+                                } catch (error) {
+                                    console.log('Parent communication error:', error);
+                                }
+                            }
+                        });
+                        
+                        // Listen for commands from parent
+                        window.addEventListener('message', function(e) {
+                            if (e.data.type === 'updateText') {
+                                const element = document.querySelector(e.data.selector);
+                                if (element) {
+                                    element.textContent = e.data.newText;
+                                }
+                            }
+                            
+                            if (e.data.type === 'updateStyle') {
+                                const element = document.querySelector(e.data.selector);
+                                if (element) {
+                                    element.style[e.data.property] = e.data.value;
+                                }
+                            }
+                        });
+                        
+                        console.log('✅ Website demo loaded: ${currentWebsite.title}');
+                    </script>
+                </body>
+                </html>
+            `);
+            doc.close();
+            
+            frame.style.display = 'block';
+            document.querySelector('.hologram-preview').style.display = 'none';
+            
+            updateStatus(`עורך: ${currentWebsite.title}`);
+            showNotification('success', `${currentWebsite.title} נטען בהצלחה!`);
+            
+            setTimeout(() => {
+                showNotification('info', 'האתר מוכן לעריכה! הפעל מצב עריכה או השתמש ב-AI');
+            }, 1500);
             
             // Send notification to AI
-            addAIMessage(`נבחר אתר: ${currentWebsite.title} (${currentWebsite.type}, ${currentWebsite.price}). איך אוכל לעזור לשפר אותו?`);
+            addAIMessage(`נטען אתר: ${currentWebsite.title} (${currentWebsite.type}, ${currentWebsite.price}). האתר מוכן לעריכה! איך אוכל לעזור?`);
         }
 
         function addEditingCapabilities(frame) {
@@ -1545,7 +1937,7 @@
             }
         }
 
-        // ✏️ Direct Editing Functions
+        // ✏️ Direct Editing Functions (Enhanced for Demo Content)
         function toggleEditMode() {
             isEditMode = !isEditMode;
             const btn1 = document.getElementById('editModeBtn');
@@ -1580,42 +1972,18 @@
             if (!frame.contentDocument) return;
             
             try {
-                // Add editing styles
-                const style = frame.contentDocument.createElement('style');
-                style.textContent = `
-                    .editing-active {
-                        border: 2px dashed #00FFFF !important;
-                        position: relative;
-                        cursor: pointer !important;
-                    }
-                    .editing-active::after {
-                        content: '✏️ לחץ לעריכה';
-                        position: absolute;
-                        top: -25px;
-                        left: 0;
-                        background: #00FFFF;
-                        color: black;
-                        padding: 2px 8px;
-                        border-radius: 5px;
-                        font-size: 11px;
-                        font-weight: 600;
-                        z-index: 9999;
-                        pointer-events: none;
-                    }
-                `;
-                frame.contentDocument.head.appendChild(style);
+                // Add editing styles to the iframe
+                const doc = frame.contentDocument;
+                const elements = doc.querySelectorAll('[data-editable="true"]');
                 
-                // Add click listeners
-                const elements = frame.contentDocument.querySelectorAll('h1, h2, h3, p, img, button, a');
                 elements.forEach(element => {
                     element.classList.add('editing-active');
-                    element.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        selectElementForEdit(element);
-                    });
                 });
+                
+                showNotification('info', `${elements.length} אלמנטים זמינים לעריכה`);
+                
             } catch (error) {
-                showNotification('warning', 'עריכה מוגבלת בגלל הגבלות אבטחה');
+                showNotification('warning', 'יש הגבלות עריכה - משתמש במצב חלופי');
             }
         }
 
@@ -1624,7 +1992,8 @@
             if (!frame.contentDocument) return;
             
             try {
-                const elements = frame.contentDocument.querySelectorAll('.editing-active');
+                const doc = frame.contentDocument;
+                const elements = doc.querySelectorAll('.editing-active');
                 elements.forEach(element => {
                     element.classList.remove('editing-active');
                 });
@@ -1636,16 +2005,26 @@
             }
         }
 
-        function selectElementForEdit(element) {
-            selectedElement = element;
-            const tagName = element.tagName.toLowerCase();
-            const className = element.className || '';
-            const id = element.id || '';
+        // Listen for messages from iframe
+        window.addEventListener('message', function(e) {
+            if (e.data.type === 'elementSelected') {
+                handleElementSelection(e.data.element);
+            }
+        });
+
+        function handleElementSelection(elementData) {
+            selectedElement = elementData;
             
             document.getElementById('selectedElement').textContent = 
-                `${tagName}${id ? '#' + id : ''}${className ? '.' + className.split(' ')[0] : ''}`;
+                `${elementData.tagName}${elementData.id ? '#' + elementData.id : ''}${elementData.className ? '.' + elementData.className.split(' ')[0] : ''}`;
             
-            showNotification('info', `אלמנט נבחר: ${tagName}`);
+            showNotification('info', `אלמנט נבחר: ${elementData.tagName}`);
+            
+            // Auto-fill text editor if text content exists
+            const textEditor = document.getElementById('textEditor');
+            if (elementData.textContent && textEditor) {
+                textEditor.value = elementData.textContent;
+            }
         }
 
         function editText() {
@@ -1659,7 +2038,7 @@
             
             textEditor.style.display = 'block';
             applyBtn.style.display = 'block';
-            textEditor.value = selectedElement.textContent;
+            textEditor.value = selectedElement.textContent || '';
             textEditor.focus();
         }
 
@@ -1667,6 +2046,18 @@
             if (!selectedElement) return;
             
             const newText = document.getElementById('textEditor').value;
+            
+            // Send message to iframe to update the text
+            const frame = document.getElementById('previewFrame');
+            if (frame.contentWindow) {
+                frame.contentWindow.postMessage({
+                    type: 'updateText',
+                    selector: `${selectedElement.tagName.toLowerCase()}`,
+                    newText: newText
+                }, '*');
+            }
+            
+            // Update our local reference
             selectedElement.textContent = newText;
             
             document.getElementById('textEditor').style.display = 'none';
@@ -1681,9 +2072,18 @@
                 return;
             }
             
-            const newSrc = prompt('הכנס URL חדש לתמונה:', selectedElement.src);
+            const newSrc = prompt('הכנס URL חדש לתמונה:', 'https://via.placeholder.com/400x300/667eea/white?text=תמונה+חדשה');
             if (newSrc) {
-                selectedElement.src = newSrc;
+                // Send message to iframe to update the image
+                const frame = document.getElementById('previewFrame');
+                if (frame.contentWindow) {
+                    frame.contentWindow.postMessage({
+                        type: 'updateStyle',
+                        selector: 'img',
+                        property: 'src',
+                        value: newSrc
+                    }, '*');
+                }
                 showNotification('success', 'תמונה שונתה בהצלחה!');
             }
         }
@@ -1694,11 +2094,55 @@
                 return;
             }
             
-            const color = prompt('הכנס צבע (hex, rgb, או שם):', '#4f46e5');
-            if (color) {
-                selectedElement.style.color = color;
-                showNotification('success', 'צבע שונה בהצלחה!');
+            // Create a simple color picker interface
+            const colors = ['#667eea', '#764ba2', '#4ecdc4', '#ff6b9d', '#ffa8a8', '#a8e6cf', '#88d8c0', '#b8a9c9'];
+            const colorOptions = colors.map(color => 
+                `<div style="width: 40px; height: 40px; background: ${color}; border-radius: 50%; cursor: pointer; margin: 5px; display: inline-block;" onclick="applyColor('${color}')"></div>`
+            ).join('');
+            
+            // Create temporary color picker
+            const colorPicker = document.createElement('div');
+            colorPicker.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0,0,0,0.9);
+                padding: 20px;
+                border-radius: 15px;
+                border: 2px solid var(--accent-neon);
+                z-index: 10000;
+                text-align: center;
+            `;
+            
+            colorPicker.innerHTML = `
+                <h3 style="color: white; margin-bottom: 15px;">בחר צבע</h3>
+                <div>${colorOptions}</div>
+                <button onclick="this.parentElement.remove()" style="margin-top: 15px; padding: 8px 15px; background: var(--accent-red); color: white; border: none; border-radius: 5px; cursor: pointer;">סגור</button>
+            `;
+            
+            document.body.appendChild(colorPicker);
+        }
+
+        function applyColor(color) {
+            if (!selectedElement) return;
+            
+            // Send message to iframe to update color
+            const frame = document.getElementById('previewFrame');
+            if (frame.contentWindow) {
+                frame.contentWindow.postMessage({
+                    type: 'updateStyle',
+                    selector: selectedElement.tagName.toLowerCase(),
+                    property: 'color',
+                    value: color
+                }, '*');
             }
+            
+            showNotification('success', `צבע שונה ל-${color}!`);
+            
+            // Remove color picker
+            const colorPicker = document.querySelector('div[style*="position: fixed"]');
+            if (colorPicker) colorPicker.remove();
         }
 
         function editLayout() {
@@ -1708,9 +2152,10 @@
             }
             
             showNotification('info', 'פותח עורך פריסה מתקדם...');
+            // This would open a more advanced layout editor
         }
 
-        // 🧩 Add Elements Functions
+        // 🧩 Add Elements Functions (Enhanced)
         function addElement(type) {
             if (!currentWebsite) {
                 showNotification('warning', 'בחר אתר תחילה');
@@ -1723,50 +2168,76 @@
                 return;
             }
             
+            const elementHTML = getElementHTML(type);
+            
             try {
-                const element = createElement(type);
-                frame.contentDocument.body.appendChild(element);
+                // Add element to the main section of the demo content
+                const doc = frame.contentDocument;
+                const mainSection = doc.querySelector('main section') || doc.querySelector('main') || doc.body;
+                
+                const tempDiv = doc.createElement('div');
+                tempDiv.innerHTML = elementHTML;
+                const newElement = tempDiv.firstElementChild;
+                
+                mainSection.appendChild(newElement);
+                
                 showNotification('success', `${getElementName(type)} נוסף בהצלחה!`);
+                
+                // Highlight the new element
+                newElement.style.animation = 'highlight 2s ease-in-out';
+                
             } catch (error) {
-                showNotification('warning', 'לא ניתן להוסיף אלמנט בגלל הגבלות אבטחה');
+                showNotification('warning', 'שגיאה בהוספת אלמנט: ' + error.message);
             }
         }
 
-        function createElement(type) {
-            const frame = document.getElementById('previewFrame');
-            const doc = frame.contentDocument;
+        function getElementHTML(type) {
+            const commonStyle = 'margin: 20px auto; max-width: 800px; padding: 15px;';
             
             switch(type) {
                 case 'heading':
-                    const heading = doc.createElement('h2');
-                    heading.textContent = 'כותרת חדשה';
-                    heading.style.cssText = 'margin: 20px; color: #333; font-weight: bold;';
-                    return heading;
+                    return `<h2 data-editable="true" style="${commonStyle} color: #667eea; font-size: 2rem; text-align: center;">כותרת חדשה</h2>`;
                 
                 case 'text':
-                    const text = doc.createElement('p');
-                    text.textContent = 'טקסט חדש. לחץ לעריכה.';
-                    text.style.cssText = 'margin: 15px; line-height: 1.6; color: #666;';
-                    return text;
+                    return `<p data-editable="true" style="${commonStyle} line-height: 1.6; color: #333; background: #f8f9fa; border-radius: 8px;">טקסט חדש. לחץ לעריכה כדי לשנות את התוכן.</p>`;
                 
                 case 'image':
-                    const img = doc.createElement('img');
-                    img.src = 'https://via.placeholder.com/400x200/e1e1e1/999?text=תמונה+חדשה';
-                    img.alt = 'תמונה חדשה';
-                    img.style.cssText = 'max-width: 100%; height: auto; margin: 20px; border-radius: 8px;';
-                    return img;
+                    return `<img data-editable="true" src="https://via.placeholder.com/600x300/667eea/white?text=תמונה+חדשה" alt="תמונה חדשה" style="${commonStyle} width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">`;
                 
                 case 'button':
-                    const button = doc.createElement('button');
-                    button.textContent = 'כפתור חדש';
-                    button.style.cssText = 'background: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 6px; margin: 10px; cursor: pointer;';
-                    return button;
+                    return `<div style="${commonStyle} text-align: center;"><button data-editable="true" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">כפתור חדש</button></div>`;
+                
+                case 'gallery':
+                    return `<div data-editable="true" style="${commonStyle} display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <img src="https://via.placeholder.com/200x150/667eea/white?text=1" style="width: 100%; border-radius: 8px;">
+                        <img src="https://via.placeholder.com/200x150/764ba2/white?text=2" style="width: 100%; border-radius: 8px;">
+                        <img src="https://via.placeholder.com/200x150/4ecdc4/white?text=3" style="width: 100%; border-radius: 8px;">
+                    </div>`;
+                
+                case 'video':
+                    return `<div data-editable="true" style="${commonStyle} background: #f0f0f0; padding: 50px; text-align: center; border-radius: 10px; border: 2px dashed #ccc;">
+                        <i class="fas fa-video" style="font-size: 3em; color: #666; margin-bottom: 15px;"></i>
+                        <br>הוסף וידאו כאן - לחץ לעריכה
+                    </div>`;
+                
+                case 'form':
+                    return `<div data-editable="true" style="${commonStyle} background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                        <h3 style="color: #667eea; margin-bottom: 20px; text-align: center;">צור קשר</h3>
+                        <input type="text" placeholder="שם מלא" style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px;">
+                        <input type="email" placeholder="אימייל" style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px;">
+                        <textarea placeholder="הודעה" style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; height: 100px; resize: vertical;"></textarea>
+                        <button type="submit" style="background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; width: 100%;">שלח הודעה</button>
+                    </div>`;
+                
+                case 'map':
+                    return `<div data-editable="true" style="${commonStyle} background: #e8f4f8; padding: 50px; text-align: center; border-radius: 10px; border: 2px solid #4ecdc4;">
+                        <i class="fas fa-map-marker-alt" style="font-size: 3em; color: #4ecdc4; margin-bottom: 15px;"></i>
+                        <br><strong>מפה - המיקום שלנו</strong>
+                        <br>כאן תוכל להוסיף מפת Google או מיקום
+                    </div>`;
                 
                 default:
-                    const div = doc.createElement('div');
-                    div.textContent = 'אלמנט חדש';
-                    div.style.cssText = 'padding: 20px; background: #f8f9fa; border: 1px solid #ddd; margin: 20px; border-radius: 8px;';
-                    return div;
+                    return `<div data-editable="true" style="${commonStyle} background: #f8f9fa; border: 2px dashed #ddd; border-radius: 8px; text-align: center; color: #666;">אלמנט חדש - לחץ לעריכה</div>`;
             }
         }
 
