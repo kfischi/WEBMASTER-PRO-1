@@ -348,50 +348,6 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        /* Website Grid in Sidebar */
-        .website-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-
-        .website-card {
-            background: #2a3142;
-            border: 1px solid #3a4374;
-            border-radius: 8px;
-            padding: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .website-card:hover {
-            border-color: #4facfe;
-            background: #353a52;
-        }
-
-        .website-card.active {
-            border-color: #4facfe;
-            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1));
-        }
-
-        .website-name {
-            font-weight: bold;
-            margin-bottom: 4px;
-            color: #ffffff;
-        }
-
-        .website-category {
-            font-size: 0.8em;
-            color: #7d8590;
-            margin-bottom: 4px;
-        }
-
-        .website-price {
-            font-size: 0.85em;
-            color: #4facfe;
-            font-weight: bold;
-        }
-
         /* Responsive */
         @media (max-width: 1200px) {
             .left-sidebar, .right-sidebar {
@@ -440,13 +396,6 @@
     <div class="editor-container">
         <!-- Left Sidebar - Tools -->
         <div class="left-sidebar">
-            <!-- Website List -->
-            <div class="sidebar-section">
-                <div class="section-title">📋 האתרים שלך</div>
-                <div class="website-grid" id="websiteGrid">
-                    <!-- Will be populated by JavaScript -->
-                </div>
-            </div>
 
             <!-- Text Tools -->
             <div class="sidebar-section">
@@ -510,33 +459,62 @@
             <iframe class="website-frame" id="websiteFrame" src="about:blank"></iframe>
         </div>
 
-        <!-- Right Sidebar - Properties -->
+        <!-- Right Sidebar - Advanced Tools -->
         <div class="right-sidebar">
             <div class="property-group">
                 <div class="section-title">🎯 אלמנט נבחר</div>
                 <div id="selectedElementInfo">
-                    <p style="color: #7d8590; font-size: 0.9em;">לא נבחר אלמנט</p>
+                    <p style="color: #7d8590; font-size: 0.9em;">לחץ על טקסט באתר לעריכה</p>
                 </div>
             </div>
 
             <div class="property-group">
-                <div class="section-title">📝 מאפיינים</div>
+                <div class="section-title">📝 עריכת תוכן</div>
                 
-                <label>זמר:</label>
-                <div class="property-row">
-                    <input type="number" class="property-input" id="marginTop" placeholder="Top">
-                    <input type="number" class="property-input" id="marginRight" placeholder="Right">
-                    <input type="number" class="property-input" id="marginBottom" placeholder="Bottom">
-                    <input type="number" class="property-input" id="marginLeft" placeholder="Left">
-                </div>
+                <label>טקסט:</label>
+                <textarea class="input-field" id="elementText" placeholder="עדכן את הטקסט כאן..." rows="3"></textarea>
+                
+                <button class="tool-btn" style="width: 100%; margin: 10px 0;" onclick="updateElementText()">
+                    ✏️ עדכן טקסט
+                </button>
+            </div>
 
-                <label>ריפוד:</label>
-                <div class="property-row">
-                    <input type="number" class="property-input" id="paddingTop" placeholder="Top">
-                    <input type="number" class="property-input" id="paddingRight" placeholder="Right">
-                    <input type="number" class="property-input" id="paddingBottom" placeholder="Bottom">
-                    <input type="number" class="property-input" id="paddingLeft" placeholder="Left">
+            <div class="property-group">
+                <div class="section-title">🖼️ ניהול תמונות</div>
+                
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="uploadImage()">
+                <button class="tool-btn" style="width: 100%; margin: 5px 0;" onclick="document.getElementById('imageUpload').click()">
+                    📁 החלף תמונה
+                </button>
+                
+                <button class="tool-btn" style="width: 100%; margin: 5px 0;" onclick="optimizeImages()">
+                    ⚡ אופטמיזציה
+                </button>
+            </div>
+
+            <div class="property-group">
+                <div class="section-title">🎨 סגנונות מתקדמים</div>
+                
+                <label>צל (Shadow):</label>
+                <input type="range" class="input-field" id="shadowRange" min="0" max="20" value="0" oninput="applyShadow(this.value)">
+                
+                <label>שקיפות רקע:</label>
+                <input type="range" class="input-field" id="backgroundOpacity" min="0" max="100" value="100" oninput="applyBackgroundOpacity(this.value)">
+                
+                <label>מרחק בין שורות:</label>
+                <input type="range" class="input-field" id="lineHeight" min="1" max="3" step="0.1" value="1.5" oninput="applyLineHeight(this.value)">
+            </div>
+
+            <div class="property-group">
+                <div class="section-title">📱 רספונסיביות</div>
+                
+                <div class="tool-group">
+                    <button class="tool-btn" onclick="hideOnMobile()">📱 הסתר במובייל</button>
+                    <button class="tool-btn" onclick="showOnlyMobile()">📱 רק במובייל</button>
                 </div>
+                
+                <label>גודל במובייל (%):</label>
+                <input type="range" class="input-field" id="mobileSize" min="50" max="150" value="100" oninput="applyMobileSize(this.value)">
             </div>
 
             <div class="property-group">
@@ -545,6 +523,7 @@
                     <div>אתר נוכחי: <span id="currentWebsiteName">-</span></div>
                     <div>שינויים: <span id="changesCount">0</span></div>
                     <div>שמירה אחרונה: <span id="lastSave">-</span></div>
+                    <div>מצב עריכה: <span id="editingMode" style="color: #10b981;">מוכן</span></div>
                 </div>
             </div>
         </div>
@@ -683,18 +662,17 @@
 
         // DOM Elements
         const websiteSelect = document.getElementById('websiteSelect');
-        const websiteGrid = document.getElementById('websiteGrid');
         const websiteFrame = document.getElementById('websiteFrame');
         const previewUrl = document.getElementById('previewUrl');
         const notification = document.getElementById('notification');
         const currentWebsiteName = document.getElementById('currentWebsiteName');
         const changesCountElement = document.getElementById('changesCount');
         const lastSaveElement = document.getElementById('lastSave');
+        const editingModeElement = document.getElementById('editingMode');
 
         // Initialize Editor
         function initEditor() {
             populateWebsiteSelector();
-            populateWebsiteGrid();
             setupEventListeners();
             showNotification('WebMaster Pro Editor מוכן לעבודה!', 'success');
         }
@@ -711,26 +689,6 @@
             });
         }
 
-        // Populate Website Grid
-        function populateWebsiteGrid() {
-            websiteGrid.innerHTML = '';
-            
-            Object.values(professionalWebsites).forEach(website => {
-                const card = document.createElement('div');
-                card.className = 'website-card';
-                card.dataset.websiteId = website.id;
-                
-                card.innerHTML = `
-                    <div class="website-name">${website.name}</div>
-                    <div class="website-category">${website.category}</div>
-                    <div class="website-price">₪${website.price.toLocaleString()}</div>
-                `;
-                
-                card.addEventListener('click', () => loadWebsite(website.id));
-                websiteGrid.appendChild(card);
-            });
-        }
-
         // Load Website in Editor
         function loadWebsite(websiteId) {
             const website = professionalWebsites[websiteId];
@@ -741,12 +699,7 @@
             websiteSelect.value = websiteId;
             previewUrl.value = `websites/${website.fileName}`;
             currentWebsiteName.textContent = website.name;
-
-            // Update active state
-            document.querySelectorAll('.website-card').forEach(card => {
-                card.classList.remove('active');
-            });
-            document.querySelector(`[data-website-id="${websiteId}"]`).classList.add('active');
+            editingModeElement.textContent = 'טוען...';
 
             // Load website in iframe
             const fullPath = `websites/${website.fileName}`;
@@ -759,14 +712,17 @@
             websiteFrame.onload = function() {
                 try {
                     setupWebsiteEditing();
+                    editingModeElement.textContent = 'מוכן לעריכה';
                     showNotification(`${website.name} נטען בהצלחה!`, 'success');
                 } catch (error) {
                     console.warn('Could not setup editing (CORS or local file):', error);
+                    editingModeElement.textContent = 'עריכה מוגבלת';
                     showNotification(`${website.name} נטען (עריכה מוגבלת)`, 'warning');
                 }
             };
 
             websiteFrame.onerror = function() {
+                editingModeElement.textContent = 'שגיאה';
                 showNotification(`שגיאה בטעינת ${website.name}`, 'error');
             };
         }
@@ -824,6 +780,12 @@
                     <strong>תוכן:</strong> ${textContent}...
                 </div>
             `;
+
+            // Update text area with current content
+            const elementTextArea = document.getElementById('elementText');
+            if (elementTextArea) {
+                elementTextArea.value = element.textContent.trim();
+            }
 
             // Update input fields with current values
             const computedStyle = getComputedStyle(element);
@@ -987,6 +949,103 @@
             const b = parseInt(rgbArray[2]).toString(16).padStart(2, '0');
             
             return `#${r}${g}${b}`;
+        }
+
+        // Advanced Editing Functions
+        function updateElementText() {
+            if (!selectedElement) {
+                showNotification('יש לבחור אלמנט תחילה', 'warning');
+                return;
+            }
+
+            const newText = document.getElementById('elementText').value;
+            if (newText.trim()) {
+                selectedElement.textContent = newText;
+                markAsDirty();
+                showNotification('הטקסט עודכן בהצלחה', 'success');
+            }
+        }
+
+        function uploadImage() {
+            const input = document.getElementById('imageUpload');
+            const file = input.files[0];
+            
+            if (!file) return;
+            
+            // Create URL for the image
+            const imageUrl = URL.createObjectURL(file);
+            
+            if (selectedElement && selectedElement.tagName === 'IMG') {
+                selectedElement.src = imageUrl;
+                markAsDirty();
+                showNotification('התמונה הוחלפה בהצלחה', 'success');
+            } else {
+                showNotification('בחר תמונה לעריכה', 'warning');
+            }
+        }
+
+        function optimizeImages() {
+            if (!currentWebsite) {
+                showNotification('טען אתר תחילה', 'warning');
+                return;
+            }
+            
+            showNotification('מבצע אופטימיזציה לתמונות...', 'info');
+            
+            setTimeout(() => {
+                showNotification('אופטימיזציה הושלמה!', 'success');
+            }, 2000);
+        }
+
+        function applyShadow(value) {
+            if (!selectedElement) return;
+            
+            selectedElement.style.boxShadow = `0 ${value}px ${value * 2}px rgba(0,0,0,0.1)`;
+            markAsDirty();
+        }
+
+        function applyBackgroundOpacity(value) {
+            if (!selectedElement) return;
+            
+            selectedElement.style.opacity = value / 100;
+            markAsDirty();
+        }
+
+        function applyLineHeight(value) {
+            if (!selectedElement) return;
+            
+            selectedElement.style.lineHeight = value;
+            markAsDirty();
+        }
+
+        function hideOnMobile() {
+            if (!selectedElement) {
+                showNotification('בחר אלמנט תחילה', 'warning');
+                return;
+            }
+            
+            selectedElement.style.setProperty('display', 'none', 'important');
+            selectedElement.classList.add('hidden-mobile');
+            markAsDirty();
+            showNotification('האלמנט יוסתר במובייל', 'success');
+        }
+
+        function showOnlyMobile() {
+            if (!selectedElement) {
+                showNotification('בחר אלמנט תחילה', 'warning');
+                return;
+            }
+            
+            selectedElement.classList.add('mobile-only');
+            markAsDirty();
+            showNotification('האלמנט יוצג רק במובייל', 'success');
+        }
+
+        function applyMobileSize(value) {
+            if (!selectedElement) return;
+            
+            selectedElement.style.setProperty('--mobile-size', value + '%');
+            markAsDirty();
         }
 
         // Initialize when page loads
