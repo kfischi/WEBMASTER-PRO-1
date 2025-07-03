@@ -1,459 +1,113 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 WebMaster Pro - אדיטור שעובד</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
-            direction: rtl;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .website-selector select {
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-size: 1rem;
-            min-width: 300px;
-        }
-
-        .editor-container {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 20px;
-            height: 70vh;
-        }
-
-        .tools-panel {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .main-area {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .editor-tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .tab {
-            padding: 15px 25px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-size: 1rem;
-            color: #666;
-        }
-
-        .tab.active {
-            background: white;
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        .editor-content {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f8f9fa;
-        }
-
-        .welcome-message {
-            text-align: center;
-            color: #666;
-        }
-
-        .welcome-message h2 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .welcome-message p {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-        }
-
-        .btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            margin: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            background: #5a67d8;
-            transform: translateY(-2px);
-        }
-
-        .btn.success {
-            background: #22c55e;
-        }
-
-        .btn.success:hover {
-            background: #16a34a;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #333;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 5px;
-        }
-
-        .tool-group {
-            margin-bottom: 20px;
-        }
-
-        .tool-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .tool-input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 0.9rem;
-        }
-
-        .status-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .iframe-container {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 8px;
-            display: none;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebMaster Pro – אדיטור מתקדם</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .editor-toolbar button { @apply px-3 py-2 rounded text-white font-semibold mr-2 mb-2; }
+    .selected { outline: 2px solid #4f46e5; }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">🚀 WebMaster Pro</div>
-            
-            <div class="website-selector">
-                <select id="websiteSelect" onchange="loadWebsite()">
-                    <option value="">בחר אתר לעריכה...</option>
-                    <option value="dr-michal">ד"ר מיכל רוזן - רפואה אסתטית (₪2,800)</option>
-                    <option value="dani-fit">דני פיט - מאמן כושר (₪2,200)</option>
-                    <option value="yoga-studio">סטודיו אוהם - יוגה (₪1,900)</option>
-                    <option value="nutritionist">ד"ר שרה כהן - תזונאית (₪2,400)</option>
-                    <option value="law-firm">משרד ברקוביץ - עו"ד (₪2,500)</option>
-                    <option value="accountant">רינה לוי - חשבת שכר (₪2,000)</option>
-                    <option value="beauty-salon">מספרה BELLA (₪1,700)</option>
-                    <option value="tutor">ד"ר רונית לוי - מורה פרטית (₪2,100)</option>
-                    <option value="aesthetic-clinic">קליניקת יופי פרמיום (₪3,200)</option>
-                    <option value="travel">מולטיבראון - נופש (₪2,300)</option>
-                    <option value="real-estate">נדל"ן פרמיום (₪2,700)</option>
-                </select>
-            </div>
-            
-            <div>
-                <button class="btn" onclick="toggleEdit()">עריכה</button>
-                <button class="btn" onclick="saveWebsite()">שמור</button>
-                <button class="btn" onclick="previewWebsite()">תצוגה מקדימה</button>
-            </div>
-        </div>
+<body class="bg-gray-100 text-gray-900">
 
-        <!-- Editor Container -->
-        <div class="editor-container">
-            <!-- Main Area -->
-            <div class="main-area">
-                <div class="editor-tabs">
-                    <button class="tab active" onclick="switchTab('visual')">ויזואלי</button>
-                    <button class="tab" onclick="switchTab('code')">קוד</button>
-                </div>
-                
-                <div class="editor-content">
-                    <div class="welcome-message" id="welcomeMessage">
-                        <h2>🚀 WebMaster Pro</h2>
-                        <p>בחר אתר מהרשימה כדי להתחיל לערוך</p>
-                        
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">11</div>
-                                <div class="stat-label">אתרים מוכנים</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">₪26,900</div>
-                                <div class="stat-label">שווי כולל</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">100%</div>
-                                <div class="stat-label">מוכן למכירה</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <iframe class="iframe-container" id="websiteFrame"></iframe>
-                </div>
-            </div>
+<header class="bg-indigo-700 text-white text-center p-4 text-2xl font-bold">
+  WebMaster Pro – עורך ברמה שלא הכרת
+</header>
 
-            <!-- Tools Panel -->
-            <div class="tools-panel">
-                <div class="section-title">כלי עריכה</div>
-                
-                <div class="tool-group">
-                    <label class="tool-label">צבע טקסט:</label>
-                    <input type="color" class="tool-input" value="#333333" onchange="changeTextColor(this.value)">
-                </div>
-                
-                <div class="tool-group">
-                    <label class="tool-label">צבע רקע:</label>
-                    <input type="color" class="tool-input" value="#ffffff" onchange="changeBgColor(this.value)">
-                </div>
-                
-                <div class="tool-group">
-                    <label class="tool-label">גודל פונט:</label>
-                    <input type="range" class="tool-input" min="12" max="48" value="16" onchange="changeFontSize(this.value)">
-                </div>
-                
-                <div class="tool-group">
-                    <button class="btn" onclick="addElement('heading')">הוסף כותרת</button>
-                    <button class="btn" onclick="addElement('text')">הוסף טקסט</button>
-                    <button class="btn" onclick="addElement('image')">הוסף תמונה</button>
-                    <button class="btn" onclick="addElement('button')">הוסף כפתור</button>
-                </div>
-                
-                <div class="section-title">מידע נוכחי</div>
-                <div id="currentInfo">
-                    <p><strong>אתר נוכחי:</strong> <span id="currentSite">לא נבחר</span></p>
-                    <p><strong>מצב עריכה:</strong> <span id="editStatus">כבוי</span></p>
-                    <p><strong>שמירה אחרונה:</strong> <span id="lastSave">--</span></p>
-                </div>
-            </div>
-        </div>
-    </div>
+<main class="p-6 max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-center gap-2 editor-toolbar mb-4">
+    <button onclick="addBlock('title')" class="bg-indigo-600">כותרת</button>
+    <button onclick="addBlock('text')" class="bg-blue-600">טקסט</button>
+    <button onclick="addBlock('image')" class="bg-green-600">תמונה</button>
+    <button onclick="addBlock('video')" class="bg-purple-600">וידאו</button>
+    <button onclick="addBlock('button')" class="bg-yellow-600">כפתור</button>
+    <button onclick="generateAIContent()" class="bg-pink-600">🧠 תוכן עם AI</button>
+    <button onclick="downloadHTML()" class="bg-gray-800">📥 הורד אתר</button>
+  </div>
 
-    <script>
-        // Global variables
-        var currentWebsite = null;
-        var editMode = false;
-        var selectedElement = null;
+  <div id="editorCanvas" contenteditable="true" class="min-h-[500px] p-6 bg-white border rounded shadow-lg space-y-4">
+    <p class="text-gray-400 text-center">✨ התחל לבנות את האתר שלך כאן...</p>
+  </div>
+</main>
 
-        // Website database
-        var websites = {
-            'dr-michal': {
-                name: 'ד"ר מיכל רוזן - רפואה אסתטית',
-                price: '₪2,800',
-                html: '<h1>ד"ר מיכל רוזן</h1><p>רפואה אסתטית מתקדמת</p><button>קבע תור</button>'
-            },
-            'dani-fit': {
-                name: 'דני פיט - מאמן כושר',
-                price: '₪2,200',
-                html: '<h1>דני פיט</h1><p>מאמן כושר אישי</p><button>התחל אימון</button>'
-            },
-            'yoga-studio': {
-                name: 'סטודיו אוהם - יוגה',
-                price: '₪1,900',
-                html: '<h1>סטודיו אוהם</h1><p>יוגה ומדיטציה</p><button>הצטרף אלינו</button>'
-            }
+<script>
+  const canvas = document.getElementById("editorCanvas");
+
+  function addBlock(type) {
+    let el;
+    switch(type) {
+      case 'title':
+        el = document.createElement("h1");
+        el.textContent = prompt("כותרת ראשית:");
+        el.className = "text-4xl font-bold my-4";
+        break;
+      case 'text':
+        el = document.createElement("p");
+        el.textContent = prompt("פסקת טקסט:");
+        el.className = "text-lg my-2";
+        break;
+      case 'image':
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.onchange = e => {
+          const reader = new FileReader();
+          reader.onload = event => {
+            const img = document.createElement("img");
+            img.src = event.target.result;
+            img.className = "my-4 max-w-full rounded shadow";
+            canvas.appendChild(img);
+          };
+          reader.readAsDataURL(e.target.files[0]);
         };
+        input.click();
+        return;
+      case 'video':
+        const url = prompt("קישור YouTube:");
+        if (!url) return;
+        const iframe = document.createElement("iframe");
+        iframe.src = url;
+        iframe.width = "560";
+        iframe.height = "315";
+        iframe.frameBorder = "0";
+        iframe.allowFullscreen = true;
+        iframe.className = "my-4";
+        el = iframe;
+        break;
+      case 'button':
+        el = document.createElement("a");
+        el.href = "#";
+        el.textContent = prompt("טקסט לכפתור:");
+        el.className = "inline-block bg-indigo-500 text-white px-4 py-2 rounded shadow my-3";
+        break;
+    }
+    if (el) canvas.appendChild(el);
+  }
 
-        function loadWebsite() {
-            var select = document.getElementById('websiteSelect');
-            var websiteId = select.value;
-            
-            if (!websiteId || !websites[websiteId]) {
-                return;
-            }
+  function generateAIContent() {
+    const idea = prompt("מה תרצה ש-AI ייצור?");
+    if (!idea) return;
+    const p = document.createElement("p");
+    p.textContent = `🤖 (תוכן נוצר עבור: "${idea}")`;
+    p.className = "text-base italic bg-yellow-100 p-2 rounded my-2";
+    canvas.appendChild(p);
+  }
 
-            currentWebsite = websiteId;
-            var website = websites[websiteId];
-            
-            // Hide welcome message
-            document.getElementById('welcomeMessage').style.display = 'none';
-            
-            // Show iframe
-            var frame = document.getElementById('websiteFrame');
-            frame.style.display = 'block';
-            
-            // Create full HTML
-            var fullHtml = '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial;padding:20px;direction:rtl} h1{color:#667eea} button{background:#667eea;color:white;padding:10px 20px;border:none;border-radius:5px}</style></head><body>' + website.html + '</body></html>';
-            
-            // Load into iframe
-            frame.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(fullHtml);
-            
-            // Update info
-            document.getElementById('currentSite').textContent = website.name;
-            document.getElementById('lastSave').textContent = new Date().toLocaleTimeString();
-            
-            alert('האתר ' + website.name + ' נטען בהצלחה!');
-        }
+  function downloadHTML() {
+    const content = `
+      <html><head><meta charset='UTF-8'>
+      <title>אתר מ-WebMaster Pro</title>
+      <style>body{font-family:sans-serif;padding:2rem;}img{max-width:100%;}</style></head>
+      <body>${canvas.innerHTML}</body></html>`;
+    const blob = new Blob([content], { type: "text/html" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "my-website.html";
+    link.click();
+  }
+</script>
 
-        function toggleEdit() {
-            editMode = !editMode;
-            document.getElementById('editStatus').textContent = editMode ? 'פעיל' : 'כבוי';
-            
-            if (editMode) {
-                alert('מצב עריכה הופעל - לחץ על אלמנטים באתר לעריכה');
-            } else {
-                alert('מצב עריכה כובה');
-            }
-        }
-
-        function saveWebsite() {
-            if (!currentWebsite) {
-                alert('אין אתר לשמירה');
-                return;
-            }
-            
-            document.getElementById('lastSave').textContent = new Date().toLocaleTimeString();
-            alert('האתר נשמר בהצלחה!');
-        }
-
-        function previewWebsite() {
-            if (!currentWebsite) {
-                alert('בחר אתר תחילה');
-                return;
-            }
-            
-            var website = websites[currentWebsite];
-            var newWindow = window.open('', '_blank');
-            var fullHtml = '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial;padding:20px;direction:rtl} h1{color:#667eea} button{background:#667eea;color:white;padding:10px 20px;border:none;border-radius:5px}</style></head><body>' + website.html + '</body></html>';
-            newWindow.document.write(fullHtml);
-            newWindow.document.close();
-        }
-
-        function switchTab(tab) {
-            var tabs = document.querySelectorAll('.tab');
-            tabs.forEach(function(t) {
-                t.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            if (tab === 'code') {
-                alert('מצב עריכת קוד - בקרוב!');
-            }
-        }
-
-        function changeTextColor(color) {
-            if (!editMode) {
-                alert('יש להפעיל מצב עריכה תחילה');
-                return;
-            }
-            alert('צבע טקסט שונה ל-' + color);
-        }
-
-        function changeBgColor(color) {
-            if (!editMode) {
-                alert('יש להפעיל מצב עריכה תחילה');
-                return;
-            }
-            alert('צבע רקע שונה ל-' + color);
-        }
-
-        function changeFontSize(size) {
-            if (!editMode) {
-                alert('יש להפעיל מצב עריכה תחילה');
-                return;
-            }
-            alert('גודל פונט שונה ל-' + size + 'px');
-        }
-
-        function addElement(type) {
-            if (!editMode) {
-                alert('יש להפעיל מצב עריכה תחילה');
-                return;
-            }
-            alert('נוסף אלמנט: ' + type);
-        }
-
-        // Initialize
-        console.log('🚀 WebMaster Pro מוכן!');
-        console.log('✅ אדיטור פשוט שעובד ללא שגיאות');
-        console.log('🎯 בחר אתר מהרשימה כדי להתחיל');
-    </script>
 </body>
 </html>
