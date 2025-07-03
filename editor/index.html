@@ -5,72 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebMaster Pro - עורך ויזואלי</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>body { font-family: 'Heebo', sans-serif; }</n</style>
+  <style>
+    body { font-family: 'Heebo', sans-serif; }
+  </style>
 </head>
 <body class="bg-gray-50">
-  <div class="p-4">
-    <h1 class="text-2xl font-bold mb-4">עורך WebMaster Pro</h1>
-    <!-- Website Selector -->
-    <select id="websiteSelector" class="border p-2 rounded" onchange="loadWebsite(this.value)">
-      <option value="">בחר אתר לעריכה</option>
-      <option value="law-firm">עורך דין</option>
-      <option value="fitness-coach">מאמן כושר</option>
-      <option value="vacation">נופש ואירועים</option>
+  <!-- כותרת -->
+  <div class="p-4 bg-white shadow mb-4">
+    <h1 class="text-2xl font-bold text-center">עורך WebMaster Pro Ultimate</h1>
+    <p class="text-center text-gray-600">ערוך בקלות כל אתר דמו בעזרת לחיצת כפתור</p>
+  </div>
+
+  <!-- בורר דמו -->
+  <div class="container mx-auto p-4 flex flex-col md:flex-row justify-center items-center gap-4">
+    <select id="websiteSelector" class="border p-2 rounded w-full md:w-1/3">
+      <option value="">בחר דמו לעריכה</option>
+      <option value="law-firm.html">עורך דין</option>
+      <option value="fitness-co.html">מאמן כושר</option>
+      <option value="yoga-studio.html">סטודיו יוגה</option>
+      <option value="tutor.html">מורה פרטית</option>
+      <option value="aesthetic-clinic.html">קליניקת יופי פרמיום</option>
     </select>
-    <!-- Preview Button -->
-    <button id="togglePreviewBtn" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded" onclick="previewWebsite()">
+    <button id="loadBtn" class="bg-purple-600 text-white px-4 py-2 rounded w-full md:w-auto">
+      טען לעורך
+    </button>
+    <button id="previewBtn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded w-full md:w-auto">
       תצוגה מקדימה
     </button>
   </div>
 
-  <!-- Editor Area -->
-  <div class="h-screen p-4">
-    <iframe id="previewFrame" class="w-full h-full border rounded" src="about:blank"></iframe>
+  <!-- אזור עורך -->
+  <div class="container mx-auto p-4">
+    <iframe id="previewFrame" class="w-full h-[80vh] border rounded" src="about:blank"></iframe>
   </div>
 
   <script>
-    // דוגמת מאגר אתרים
-    const websites = {
-      'law-firm': { preview: 'https://law-firm.netlify.app' },
-      'fitness-coach': { preview: 'https://fitness-coach.netlify.app' },
-      'vacation': { preview: 'https://multibrown.netlify.app' }
-    };
+    const selector   = document.getElementById('websiteSelector');
+    const loadBtn    = document.getElementById('loadBtn');
+    const previewBtn = document.getElementById('previewBtn');
+    const iframe     = document.getElementById('previewFrame');
+    let currentFile  = '';
 
-    let selectedWebsite;
-
-    function loadWebsite(id) {
-      selectedWebsite = id;
-      const cfg = websites[id];
-      if (!cfg) {
-        alert('בחר דמו תקין');
+    // טען את קובץ ה-HTML מתוך /websites, הוסף data-editable ואז הצג ב-iframe
+    loadBtn.addEventListener('click', () => {
+      const file = selector.value;
+      if (!file) {
+        alert('בחר דמו לפני טעינה');
         return;
       }
-      const iframe = document.getElementById('previewFrame');
-      iframe.src = cfg.preview;
-      iframe.onload = () => {
-        enableEditing(iframe);
-      };
-    }
+      currentFile = file;
+      fetch(`/websites/${file}`)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          // הוסף תכונה לעריכה לכל כותרת, פסקה, קישור וכפתור
+          doc.querySelectorAll('h1,h2,h3,p,a,button').forEach(el => {
+            el.setAttribute('data-editable', 'true');
+          });
+          // סגור קישורי יחוס ביחס לתיקיית websites
+          iframe.srcdoc = 
+            '<base href="' + location.origin + '/websites/" />' + 
+            doc.documentElement.outerHTML;
+          iframe.onload = enableEditing;
+        });
+    });
 
-    function previewWebsite() {
-      if (!selectedWebsite) {
+    // פותח את הדמו בחלון חדש
+    previewBtn.addEventListener('click', () => {
+      if (!currentFile) {
         alert('בחר דמו לפני תצוגה');
         return;
       }
-      window.open(websites[selectedWebsite].preview, '_blank');
-    }
+      window.open(`/websites/${currentFile}`, '_blank');
+    });
 
-    function enableEditing(iframe) {
+    // הופך אלמנטים עם data-editable ל-editable בפועל
+    function enableEditing() {
       try {
         const doc = iframe.contentDocument || iframe.contentWindow.document;
-        doc.querySelectorAll('[data-editable]')
-          .forEach(el => {
-            el.contentEditable = 'true';
-            el.style.outline = '1px dashed #4F46E5';
-          });
-        console.log('עריכה מאופשרת:', doc.querySelectorAll('[data-editable]').length);
+        doc.querySelectorAll('[data-editable]').forEach(el => {
+          el.contentEditable = 'true';
+          el.style.outline = '2px dashed #A78BFA';
+          el.addEventListener('focus', () => el.style.backgroundColor = '#F5F3FF');
+          el.addEventListener('blur',  () => el.style.backgroundColor = '');
+        });
       } catch (e) {
-        console.error('שגיאה בעריכה:', e);
+        console.error('שגיאה בהפעלת עריכה:', e);
       }
     }
   </script>
