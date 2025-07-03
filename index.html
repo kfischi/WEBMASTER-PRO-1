@@ -1571,111 +1571,120 @@
             const frame = document.getElementById('websiteFrame');
             frame.style.display = 'block';
             
-            // Load website with editable functionality
-            const editableHTML = makeHTMLEditable(website.html);
-            frame.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(editableHTML);
-            
-            // Update info
-            document.getElementById('currentSite').textContent = website.name;
-            document.getElementById('lastSave').textContent = new Date().toLocaleTimeString();
-            
-            // Setup iframe communication
-            setupIframeCommunication();
-            
-            showNotification(`🚀 ${website.name} נטען בהצלחה!`, 'success');
+            // Load website directly into iframe
+            try {
+                const editableHTML = makeHTMLEditable(website.html);
+                
+                // Write HTML directly to iframe
+                const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+                iframeDoc.open();
+                iframeDoc.write(editableHTML);
+                iframeDoc.close();
+                
+                // Setup iframe communication after loading
+                setTimeout(() => {
+                    setupIframeCommunication();
+                }, 500);
+                
+                // Update info
+                document.getElementById('currentSite').textContent = website.name;
+                document.getElementById('lastSave').textContent = new Date().toLocaleTimeString();
+                
+                showNotification(`🚀 ${website.name} נטען בהצלחה!`, 'success');
+                
+            } catch (error) {
+                console.error('Error loading website:', error);
+                
+                // Fallback method - use srcdoc
+                const cleanHTML = website.html.replace(/"/g, '&quot;');
+                frame.srcdoc = makeHTMLEditable(website.html);
+                
+                // Update info
+                document.getElementById('currentSite').textContent = website.name;
+                document.getElementById('lastSave').textContent = new Date().toLocaleTimeString();
+                
+                showNotification(`🚀 ${website.name} נטען (fallback)!`, 'success');
+            }
         }
 
         function makeHTMLEditable(html) {
             // Add enhanced editable functionality
             let editableHTML = html;
             
-            // Add global editing script
+            // Add global editing script - improved version
             const editingScript = `
 <script>
-// Enhanced editing functionality
+// Enhanced editing functionality for WebMaster Pro Ultra
 let selectedElement = null;
 
 function setupEditing() {
-    document.addEventListener('click', function(e) {
-        if (window.parent && window.parent.editMode) {
-            e.preventDefault();
-            selectElement(e.target);
+    console.log('🎯 Setting up editing functionality...');
+    
+    // Add editing CSS
+    const editingCSS = document.createElement('style');
+    editingCSS.textContent = \`
+        .webmaster-editing * {
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .webmaster-editing *:hover {
+            outline: 2px dashed #667eea !important;
+            background-color: rgba(102, 126, 234, 0.1) !important;
+        }
+
+        .webmaster-selected {
+            outline: 3px solid #667eea !important;
+            background-color: rgba(102, 126, 234, 0.2) !important;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3) !important;
+        }
+
+        [contenteditable="true"] {
+            outline: 3px solid #22c55e !important;
+            background-color: rgba(34, 197, 94, 0.1) !important;
+        }
+        
+        .webmaster-editing [data-editable="true"]:hover::after {
+            content: "✏️ לחיצה כפולה לעריכה";
+            position: absolute;
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 1000;
+            pointer-events: none;
+            transform: translateY(-100%);
+        }
+    \`;
+    document.head.appendChild(editingCSS);
+    
+    // Make elements editable
+    const editableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, div, span');
+    editableElements.forEach(element => {
+        // Add data-editable if not exists
+        if (!element.hasAttribute('data-editable')) {
+            element.setAttribute('data-editable', 'true');
         }
     });
     
-    document.addEventListener('dblclick', function(e) {
-        if (window.parent && window.parent.editMode) {
-            e.preventDefault();
-            startDirectEdit(e.target);
-        }
-    });
+    console.log('✅ Editing setup complete!');
 }
 
-function selectElement(element) {
-    // Remove previous selection
-    document.querySelectorAll('.webmaster-selected').forEach(el => {
-        el.classList.remove('webmaster-selected');
-    });
-    
-    // Add selection to current element
-    element.classList.add('webmaster-selected');
-    selectedElement = element;
-    
-    // Notify parent
-    if (window.parent && window.parent.updatePropertiesPanel) {
-        window.parent.updatePropertiesPanel(element);
-    }
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupEditing);
+} else {
+    setupEditing();
 }
-
-function startDirectEdit(element) {
-    if (element.hasAttribute('data-editable') || 
-        ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'DIV', 'SPAN'].includes(element.tagName)) {
-        
-        element.contentEditable = true;
-        element.focus();
-        
-        // Save on blur
-        element.addEventListener('blur', function() {
-            element.contentEditable = false;
-            if (window.parent && window.parent.markAsChanged) {
-                window.parent.markAsChanged();
-            }
-        }, { once: true });
-    }
-}
-
-// Add CSS for editing
-const editingCSS = \`
-<style>
-.webmaster-editing * {
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-}
-
-.webmaster-editing *:hover {
-    outline: 2px dashed #667eea !important;
-    background-color: rgba(102, 126, 234, 0.1) !important;
-}
-
-.webmaster-selected {
-    outline: 3px solid #667eea !important;
-    background-color: rgba(102, 126, 234, 0.2) !important;
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3) !important;
-}
-
-[contenteditable="true"] {
-    outline: 3px solid #22c55e !important;
-    background-color: rgba(34, 197, 94, 0.1) !important;
-}
-</style>
-\`;
-
-document.head.insertAdjacentHTML('beforeend', editingCSS);
-document.addEventListener('DOMContentLoaded', setupEditing);
 </script>`;
             
             // Insert script before closing body tag
-            editableHTML = editableHTML.replace('</body>', editingScript + '</body>');
+            if (editableHTML.includes('</body>')) {
+                editableHTML = editableHTML.replace('</body>', editingScript + '</body>');
+            } else {
+                editableHTML += editingScript;
+            }
             
             return editableHTML;
         }
@@ -1683,18 +1692,98 @@ document.addEventListener('DOMContentLoaded', setupEditing);
         function setupIframeCommunication() {
             const frame = document.getElementById('websiteFrame');
             
-            frame.onload = function() {
-                try {
-                    const iframeDoc = frame.contentDocument || frame.contentWindow.document;
-                    
+            try {
+                const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+                
+                if (iframeDoc && iframeDoc.body) {
                     // Enable editing mode if active
                     if (editMode) {
                         iframeDoc.body.classList.add('webmaster-editing');
                     }
-                } catch (e) {
-                    console.log('iframe communication setup completed');
+                    
+                    // Add click listeners to all elements
+                    const allElements = iframeDoc.querySelectorAll('*');
+                    allElements.forEach(element => {
+                        element.addEventListener('click', function(e) {
+                            if (editMode) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                selectElementInFrame(this);
+                            }
+                        });
+                        
+                        element.addEventListener('dblclick', function(e) {
+                            if (editMode) {
+                                e.preventDefault();
+                                startDirectEditInFrame(this);
+                            }
+                        });
+                    });
+                    
+                    console.log('✅ iframe communication setup completed');
+                } else {
+                    console.log('⚠️ iframe document not ready yet');
                 }
-            };
+            } catch (e) {
+                console.log('🔄 iframe communication setup - trying alternative method');
+                
+                // Alternative setup method
+                frame.onload = function() {
+                    try {
+                        const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+                        if (editMode && iframeDoc && iframeDoc.body) {
+                            iframeDoc.body.classList.add('webmaster-editing');
+                        }
+                    } catch (err) {
+                        console.log('iframe loaded with restrictions');
+                    }
+                };
+            }
+        }
+
+        function selectElementInFrame(element) {
+            try {
+                const frame = document.getElementById('websiteFrame');
+                const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+                
+                // Remove previous selection
+                iframeDoc.querySelectorAll('.webmaster-selected').forEach(el => {
+                    el.classList.remove('webmaster-selected');
+                });
+                
+                // Add selection to current element
+                element.classList.add('webmaster-selected');
+                selectedElement = element;
+                
+                // Update properties panel
+                updatePropertiesPanel(element);
+                
+                showNotification(`🎯 נבחר: ${element.tagName}`, 'info');
+            } catch (e) {
+                console.log('Element selected:', element.tagName);
+            }
+        }
+
+        function startDirectEditInFrame(element) {
+            try {
+                if (element.hasAttribute('data-editable') || 
+                    ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'DIV', 'SPAN'].includes(element.tagName)) {
+                    
+                    element.contentEditable = true;
+                    element.focus();
+                    
+                    // Save on blur
+                    element.addEventListener('blur', function() {
+                        element.contentEditable = false;
+                        markAsChanged();
+                        showNotification('✏️ טקסט נערך', 'success');
+                    }, { once: true });
+                    
+                    showNotification('✏️ עריכת טקסט פעילה', 'success');
+                }
+            } catch (e) {
+                console.log('Direct edit started for:', element.tagName);
+            }
         }
 
         function toggleEditMode() {
@@ -1710,7 +1799,7 @@ document.addEventListener('DOMContentLoaded', setupEditing);
                 // Enable editing in iframe
                 try {
                     const iframeDoc = frame.contentDocument || frame.contentWindow.document;
-                    if (iframeDoc) {
+                    if (iframeDoc && iframeDoc.body) {
                         iframeDoc.body.classList.add('webmaster-editing');
                     }
                 } catch (e) {
@@ -1726,13 +1815,19 @@ document.addEventListener('DOMContentLoaded', setupEditing);
                 // Disable editing in iframe
                 try {
                     const iframeDoc = frame.contentDocument || frame.contentWindow.document;
-                    if (iframeDoc) {
+                    if (iframeDoc && iframeDoc.body) {
                         iframeDoc.body.classList.remove('webmaster-editing');
+                        // Remove all selections
+                        iframeDoc.querySelectorAll('.webmaster-selected').forEach(el => {
+                            el.classList.remove('webmaster-selected');
+                        });
                     }
                 } catch (e) {
                     console.log('Edit mode disabled');
                 }
                 
+                selectedElement = null;
+                document.getElementById('selectedElement').textContent = 'אין';
                 showNotification('📝 מצב עריכה כובה', 'info');
             }
         }
@@ -1749,9 +1844,21 @@ document.addEventListener('DOMContentLoaded', setupEditing);
                 
                 try {
                     const iframeDoc = frame.contentDocument || frame.contentWindow.document;
-                    htmlContent = iframeDoc.documentElement.outerHTML;
+                    if (iframeDoc && iframeDoc.documentElement) {
+                        htmlContent = iframeDoc.documentElement.outerHTML;
+                        
+                        // Clean up editing artifacts
+                        htmlContent = htmlContent
+                            .replace(/class="[^"]*webmaster-[^"]*[^"]*"/g, '')
+                            .replace(/contenteditable="[^"]*"/g, '')
+                            .replace(/\s+class=""/g, '')
+                            .replace(/\s+class="\s*"/g, '');
+                    } else {
+                        htmlContent = websites[currentWebsite].html; // Fallback
+                    }
                 } catch (e) {
                     htmlContent = websites[currentWebsite].html; // Fallback
+                    console.log('Using fallback HTML for save');
                 }
                 
                 // Save to websites database
@@ -1762,12 +1869,17 @@ document.addEventListener('DOMContentLoaded', setupEditing);
                 
                 showNotification('💾 האתר נשמר בהצלחה!', 'success');
                 
-                // Auto-backup (simulate)
+                // Reset the "changes not saved" indicator
+                const saveTime = document.getElementById('lastSave');
+                saveTime.style.color = '';
+                
+                // Auto-backup simulation
                 setTimeout(() => {
                     showNotification('☁️ גיבוי אוטומטי הושלם', 'info');
                 }, 2000);
                 
             } catch (error) {
+                console.error('Save error:', error);
                 showNotification('❌ שגיאה בשמירה: ' + error.message, 'error');
             }
         }
@@ -1779,9 +1891,29 @@ document.addEventListener('DOMContentLoaded', setupEditing);
             }
             
             const website = websites[currentWebsite];
-            const newWindow = window.open('', '_blank', 'width=1200,height=800');
+            let previewHTML = website.html;
             
-            const previewHTML = `
+            // Try to get current HTML from iframe if available
+            try {
+                const frame = document.getElementById('websiteFrame');
+                const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+                if (iframeDoc && iframeDoc.documentElement) {
+                    previewHTML = iframeDoc.documentElement.outerHTML;
+                    
+                    // Clean up editing artifacts for preview
+                    previewHTML = previewHTML
+                        .replace(/class="[^"]*webmaster-[^"]*[^"]*"/g, '')
+                        .replace(/contenteditable="[^"]*"/g, '')
+                        .replace(/\s+class=""/g, '')
+                        .replace(/\s+class="\s*"/g, '');
+                }
+            } catch (e) {
+                console.log('Using original HTML for preview');
+            }
+            
+            const newWindow = window.open('', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+            
+            const previewPage = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -1793,28 +1925,51 @@ document.addEventListener('DOMContentLoaded', setupEditing);
         .preview-header { 
             background: linear-gradient(45deg, #667eea, #764ba2); 
             color: white; 
-            padding: 10px 20px; 
+            padding: 12px 20px; 
             font-size: 14px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .preview-content { height: calc(100vh - 50px); }
-        .preview-content iframe { width: 100%; height: 100%; border: none; }
+        .preview-header .left { display: flex; align-items: center; gap: 15px; }
+        .preview-header .right { display: flex; align-items: center; gap: 10px; }
+        .preview-content { background: #f8f9fa; }
+        .preview-content iframe { width: 100%; height: calc(100vh - 60px); border: none; }
+        .close-btn { 
+            background: rgba(255,255,255,0.2); 
+            border: none; 
+            color: white; 
+            padding: 8px 15px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        .close-btn:hover { background: rgba(255,255,255,0.3); }
     </style>
 </head>
 <body>
     <div class="preview-header">
-        <span>🔍 תצוגה מקדימה: ${website.name}</span>
-        <span>💰 ${website.price}</span>
+        <div class="left">
+            <span>🔍 תצוגה מקדימה:</span>
+            <strong>${website.name}</strong>
+        </div>
+        <div class="right">
+            <span>💰 ${website.price}</span>
+            <button class="close-btn" onclick="window.close()">✖ סגור</button>
+        </div>
     </div>
     <div class="preview-content">
-        <iframe src="data:text/html;charset=utf-8,${encodeURIComponent(website.html)}"></iframe>
+        <iframe srcdoc="${previewHTML.replace(/"/g, '&quot;')}"></iframe>
     </div>
 </body>
 </html>`;
             
-            newWindow.document.write(previewHTML);
+            newWindow.document.write(previewPage);
             newWindow.document.close();
             
             showNotification('👁️ תצוגה מקדימה נפתחה בחלון חדש', 'success');
@@ -1865,7 +2020,7 @@ document.addEventListener('DOMContentLoaded', setupEditing);
             }
         }
 
-        // Design Tools
+        // Design Tools - Updated for iframe compatibility
         function changeTextColor(color) {
             if (!editMode) {
                 showNotification('⚠️ יש להפעיל מצב עריכה תחילה', 'warning');
@@ -1882,7 +2037,7 @@ document.addEventListener('DOMContentLoaded', setupEditing);
                     markAsChanged();
                     showNotification(`🎨 צבע טקסט שונה ל-${color}`, 'success');
                 } else {
-                    showNotification('⚠️ בחר אלמנט תחילה', 'warning');
+                    showNotification('⚠️ בחר אלמנט תחילה על ידי לחיצה עליו', 'warning');
                 }
             } catch (e) {
                 showNotification('🎨 צבע טקסט יוחל כשתבחר אלמנט', 'info');
@@ -1905,7 +2060,7 @@ document.addEventListener('DOMContentLoaded', setupEditing);
                     markAsChanged();
                     showNotification(`🎨 צבע רקע שונה ל-${color}`, 'success');
                 } else {
-                    showNotification('⚠️ בחר אלמנט תחילה', 'warning');
+                    showNotification('⚠️ בחר אלמנט תחילה על ידי לחיצה עליו', 'warning');
                 }
             } catch (e) {
                 showNotification('🎨 צבע רקע יוחל כשתבחר אלמנט', 'info');
@@ -1928,44 +2083,82 @@ document.addEventListener('DOMContentLoaded', setupEditing);
                     markAsChanged();
                     showNotification(`📏 גודל פונט שונה ל-${size}px`, 'success');
                 } else {
-                    showNotification('⚠️ בחר אלמנט תחילה', 'warning');
+                    showNotification('⚠️ בחר אלמנט תחילה על ידי לחיצה עליו', 'warning');
                 }
             } catch (e) {
                 showNotification('📏 גודל פונט יוחל כשתבחר אלמנט', 'info');
             }
         }
 
-        // Add Elements
+        // Add Elements - Enhanced for iframe
         function addElement(type) {
             if (!editMode) {
                 showNotification('⚠️ יש להפעיל מצב עריכה תחילה', 'warning');
                 return;
             }
             
+            if (!currentWebsite) {
+                showNotification('⚠️ בחר אתר תחילה', 'warning');
+                return;
+            }
+            
             const elements = {
-                'heading': '<h2 data-editable="true" style="color: #667eea; margin: 20px 0;">כותרת חדשה</h2>',
-                'text': '<p data-editable="true" style="margin: 15px 0; line-height: 1.6;">טקסט חדש לעריכה</p>',
-                'image': '<img src="https://via.placeholder.com/400x200/667eea/white?text=תמונה+חדשה" style="max-width: 100%; border-radius: 10px; margin: 15px 0;" alt="תמונה חדשה">',
-                'video': '<div style="margin: 20px 0; text-align: center;"><div style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 40px; border-radius: 15px;">📹 אזור וידאו - הוסף קישור YouTube או URL</div></div>',
-                'button': '<button style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 16px; cursor: pointer; margin: 10px;" onclick="alert(\'כפתור חדש!\')">כפתור חדש</button>',
-                'gallery': '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;"><img src="https://via.placeholder.com/200x150/667eea/white?text=1" style="border-radius: 10px;"><img src="https://via.placeholder.com/200x150/764ba2/white?text=2" style="border-radius: 10px;"><img src="https://via.placeholder.com/200x150/22c55e/white?text=3" style="border-radius: 10px;"></div>'
+                'heading': '<h2 data-editable="true" style="color: #667eea; margin: 20px 0; font-size: 2rem;">כותרת חדשה - לחיצה כפולה לעריכה</h2>',
+                'text': '<p data-editable="true" style="margin: 15px 0; line-height: 1.6; color: #333;">טקסט חדש לעריכה - לחיצה כפולה לעריכה</p>',
+                'image': '<div style="margin: 20px 0; text-align: center;"><img src="https://via.placeholder.com/400x200/667eea/white?text=תמונה+חדשה" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" alt="תמונה חדשה"></div>',
+                'video': '<div style="margin: 20px 0; padding: 20px; background: linear-gradient(45deg, #667eea, #764ba2); color: white; border-radius: 15px; text-align: center;"><h3 style="margin: 0 0 10px 0;">📹 אזור וידאו</h3><p style="margin: 0; opacity: 0.9;">הוסף קישור YouTube או URL וידאו כאן</p></div>',
+                'button': '<div style="margin: 15px 0; text-align: center;"><button style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 16px; cursor: pointer; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'translateY(0)\'" onclick="alert(\'כפתור חדש!\')">כפתור חדש</button></div>',
+                'gallery': '<div style="margin: 20px 0;"><h3 style="color: #667eea; margin-bottom: 15px;">גלריית תמונות</h3><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;"><img src="https://via.placeholder.com/200x150/667eea/white?text=תמונה+1" style="border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'"><img src="https://via.placeholder.com/200x150/764ba2/white?text=תמונה+2" style="border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'"><img src="https://via.placeholder.com/200x150/22c55e/white?text=תמונה+3" style="border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'"></div></div>'
             };
             
             try {
                 const frame = document.getElementById('websiteFrame');
                 const iframeDoc = frame.contentDocument || frame.contentWindow.document;
-                const container = iframeDoc.querySelector('.container') || iframeDoc.body;
                 
-                const newElement = iframeDoc.createElement('div');
-                newElement.innerHTML = elements[type];
+                // Try to find a good container
+                let container = iframeDoc.querySelector('.container');
+                if (!container) {
+                    container = iframeDoc.querySelector('body');
+                }
                 
-                container.appendChild(newElement);
-                markAsChanged();
-                showNotification(`➕ ${type} נוסף בהצלחה!`, 'success');
+                if (container) {
+                    const newElement = iframeDoc.createElement('div');
+                    newElement.innerHTML = elements[type];
+                    newElement.style.cssText = 'animation: slideInUp 0.5s ease-out; opacity: 0; transform: translateY(20px);';
+                    
+                    container.appendChild(newElement);
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        newElement.style.opacity = '1';
+                        newElement.style.transform = 'translateY(0)';
+                    }, 100);
+                    
+                    markAsChanged();
+                    showNotification(`➕ ${getElementName(type)} נוסף בהצלחה!`, 'success');
+                    
+                    // Scroll to new element
+                    newElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    showNotification('❌ לא ניתן למצוא מקום להוספת האלמנט', 'error');
+                }
                 
             } catch (e) {
-                showNotification(`➕ ${type} יתווסף לאתר`, 'info');
+                console.error('Error adding element:', e);
+                showNotification(`➕ ${getElementName(type)} יתווסף לאתר`, 'info');
             }
+        }
+        
+        function getElementName(type) {
+            const names = {
+                'heading': 'כותרת',
+                'text': 'טקסט',
+                'image': 'תמונה',
+                'video': 'וידאו',
+                'button': 'כפתור',
+                'gallery': 'גלריה'
+            };
+            return names[type] || type;
         }
 
         // AI Functions
