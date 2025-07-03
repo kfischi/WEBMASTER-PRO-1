@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebMaster Pro - עורך ויזואלי</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>body { font-family: 'Heebo', sans-serif; }</n</style>
+</head>
+<body class="bg-gray-50">
+  <div class="p-4">
+    <h1 class="text-2xl font-bold mb-4">עורך WebMaster Pro</h1>
+    <!-- Website Selector -->
+    <select id="websiteSelector" class="border p-2 rounded" onchange="loadWebsite(this.value)">
+      <option value="">בחר אתר לעריכה</option>
+      <option value="law-firm">עורך דין</option>
+      <option value="fitness-coach">מאמן כושר</option>
+      <option value="vacation">נופש ואירועים</option>
+    </select>
+    <!-- Preview Button -->
+    <button id="togglePreviewBtn" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded" onclick="previewWebsite()">
+      תצוגה מקדימה
+    </button>
+  </div>
+
+  <!-- Editor Area -->
+  <div class="h-screen p-4">
+    <iframe id="previewFrame" class="w-full h-full border rounded" src="about:blank"></iframe>
+  </div>
+
+  <script>
+    // דוגמת מאגר אתרים
+    const websites = {
+      'law-firm': { preview: 'https://law-firm.netlify.app' },
+      'fitness-coach': { preview: 'https://fitness-coach.netlify.app' },
+      'vacation': { preview: 'https://multibrown.netlify.app' }
+    };
+
+    let selectedWebsite;
+
+    function loadWebsite(id) {
+      selectedWebsite = id;
+      const cfg = websites[id];
+      if (!cfg) {
+        alert('בחר דמו תקין');
+        return;
+      }
+      const iframe = document.getElementById('previewFrame');
+      iframe.src = cfg.preview;
+      iframe.onload = () => {
+        enableEditing(iframe);
+      };
+    }
+
+    function previewWebsite() {
+      if (!selectedWebsite) {
+        alert('בחר דמו לפני תצוגה');
+        return;
+      }
+      window.open(websites[selectedWebsite].preview, '_blank');
+    }
+
+    function enableEditing(iframe) {
+      try {
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.querySelectorAll('[data-editable]')
+          .forEach(el => {
+            el.contentEditable = 'true';
+            el.style.outline = '1px dashed #4F46E5';
+          });
+        console.log('עריכה מאופשרת:', doc.querySelectorAll('[data-editable]').length);
+      } catch (e) {
+        console.error('שגיאה בעריכה:', e);
+      }
+    }
+  </script>
+</body>
+</html>
