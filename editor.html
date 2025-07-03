@@ -1420,6 +1420,10 @@
                 websitesGrid.appendChild(card);
             });
 
+    </script>
+</body>
+</html>
+
             addActivity(`✅ ${Object.keys(websiteDatabase).length} אתרים נטענו בגלריה`);
         }
 
@@ -1866,4 +1870,134 @@
             
             try {
                 const frame = document.getElementById('websiteFrame');
-                const doc = frame.
+                const doc = frame.contentDocument || frame.contentWindow.document;
+                const htmlContent = doc.documentElement.outerHTML;
+                
+                // Save to websiteDatabase
+                websiteDatabase[currentWebsite].demoContent = htmlContent;
+                
+                addActivity(`💾 ${websiteDatabase[currentWebsite].name} נשמר`);
+                showNotification('success', 'האתר נשמר בהצלחה');
+                
+                // Auto-save to localStorage as backup
+                localStorage.setItem('webmaster_pro_backup', JSON.stringify({
+                    websiteId: currentWebsite,
+                    content: htmlContent,
+                    timestamp: new Date().toISOString()
+                }));
+                
+            } catch (error) {
+                console.error('Save failed:', error);
+                showNotification('error', 'שגיאה בשמירה');
+            }
+        }
+
+        function previewWebsite() {
+            if (!currentWebsite) {
+                showNotification('warning', 'אין אתר לתצוגה מקדימה');
+                return;
+            }
+            
+            try {
+                const frame = document.getElementById('websiteFrame');
+                const doc = frame.contentDocument || frame.contentWindow.document;
+                const htmlContent = doc.documentElement.outerHTML;
+                
+                const previewWindow = window.open('', '_blank');
+                previewWindow.document.write(htmlContent);
+                previewWindow.document.close();
+                
+                addActivity(`👁️ תצוגה מקדימה נפתחה`);
+                showNotification('success', 'תצוגה מקדימה נפתחה בחלון חדש');
+                
+            } catch (error) {
+                console.error('Preview failed:', error);
+                showNotification('error', 'שגיאה בתצוגה מקדימה');
+            }
+        }
+
+        function exportWebsite() {
+            if (!currentWebsite) {
+                showNotification('warning', 'אין אתר לייצוא');
+                return;
+            }
+            
+            try {
+                const frame = document.getElementById('websiteFrame');
+                const doc = frame.contentDocument || frame.contentWindow.document;
+                const htmlContent = doc.documentElement.outerHTML;
+                
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${websiteDatabase[currentWebsite].name.replace(/[^a-zA-Z0-9\u0590-\u05FF]/g, '_')}.html`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                addActivity(`📥 ${websiteDatabase[currentWebsite].name} יוצא`);
+                showNotification('success', 'האתר יוצא בהצלחה');
+                
+            } catch (error) {
+                console.error('Export failed:', error);
+                showNotification('error', 'שגיאה בייצוא');
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize gallery
+            initializeWebsiteGallery();
+            
+            // Initialize AI system check
+            setTimeout(() => {
+                if (typeof window.claude !== 'undefined' && window.claude.complete) {
+                    addActivity('🤖 AI אמיתי זמין - Claude API מחובר');
+                    addChatMessage('assistant', '🚀 AI Ultra מוכן! יש לי גישה ל-Claude API אמיתי עם יכולות מתקדמות.');
+                } else {
+                    addActivity('🤖 AI סימולציה פעיל - ללא API חיצוני');
+                    addChatMessage('assistant', '🔮 AI Ultra מוכן עם מערכת fallback מתקדמת. לחיבור Claude API אמיתי, הגדר את window.claude.complete');
+                }
+            }, 1000);
+            
+            // Auto-save every 30 seconds
+            setInterval(() => {
+                if (currentWebsite && editMode) {
+                    saveWebsite();
+                }
+            }, 30000);
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case 's':
+                            e.preventDefault();
+                            saveWebsite();
+                            break;
+                        case 'e':
+                            e.preventDefault();
+                            toggleEditMode();
+                            break;
+                    }
+                }
+            });
+            
+            console.log('🚀 WebMaster Pro Ultra מוכן!');
+            console.log('📊 אתרים זמינים:', Object.keys(websiteDatabase).length);
+            console.log('💰 שווי כולל:', Object.values(websiteDatabase).reduce((sum, site) => {
+                const price = parseInt(site.price.replace(/[^\d]/g, ''));
+                return sum + price;
+            }, 0).toLocaleString() + ' ₪');
+            console.log('⌨️ קיצורי מקלדת: Ctrl+S (שמור), Ctrl+E (עריכה)');
+            
+            addActivity('🎉 WebMaster Pro Ultra הופעל בהצלחה!');
+            addActivity('💎 11 אתרים מקצועיים מוכנים לעריכה');
+            addActivity(`💰 שווי כולל: ₪${Object.values(websiteDatabase).reduce((sum, site) => {
+                const price = parseInt(site.price.replace(/[^\d]/g, ''));
+                return sum + price;
+            }, 0).toLocaleString()}`);
+        });
