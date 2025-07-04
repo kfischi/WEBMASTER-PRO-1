@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WebMaster Pro Ultimate - Editor</title>
+  <title>WebMaster Pro Ultimate - Visual Editor</title>
   <!-- GrapesJS CSS -->
   <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet"/>
-  <!-- Tailwind for UI around GrapesJS -->
+  <!-- Plugin CSS (Forms, Sliders, Tooltips) -->
+  <link href="https://unpkg.com/grapesjs-plugin-forms/dist/grapesjs-plugin-forms.css" rel="stylesheet"/>
+  <link href="https://unpkg.com/grapesjs-lory-slider/dist/grapesjs-lory-slider.css" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body, html { height: 100%; margin: 0; }
-    #gjs { height: calc(100vh - 64px); }
-    header { height: 64px; }
+    body, html { height:100%; margin:0; font-family: 'Heebo', sans-serif; }
+    #gjs { height: calc(100vh - 60px); }
+    header { height:60px; }
   </style>
 </head>
 <body class="flex flex-col">
   <!-- Top Bar -->
-  <header class="flex items-center justify-between px-6 bg-gradient-to-r from-purple-700 to-indigo-600 text-white">
+  <header class="flex items-center justify-between px-4 bg-gradient-to-r from-blue-700 to-purple-600 text-white h-14">
     <div class="flex items-center space-x-4">
-      <h1 class="text-xl font-bold">WebMaster Pro Ultimate Editor</h1>
+      <i class="fas fa-cubes text-2xl"></i>
+      <h1 class="text-xl font-bold">WebMaster Pro Ultimate</h1>
       <select id="siteSelect" class="rounded px-2 py-1 text-black">
         <option value="">בחר דמו</option>
         <option value="law-firm.html">עורך דין</option>
@@ -27,20 +30,23 @@
         <option value="tutor.html">מורה פרטית</option>
         <option value="aesthetic-clinic.html">קליניקה</option>
       </select>
-      <button id="loadBtn" class="bg-green-500 hover:bg-green-600 px-3 py-1 rounded">טען</button>
+      <button id="loadBtn" class="bg-green-500 hover:bg-green-600 px-3 py-1 rounded">טען עורך</button>
     </div>
-    <div class="flex items-center space-x-4">
-      <button id="saveBtn" class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded">שמור</button>
-      <button id="previewBtn" class="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded">תצוגה</button>
-      <button id="publishBtn" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded">פרסם</button>
+    <div class="flex items-center space-x-3">
+      <button id="saveBtn" class="bg-yellow-400 hover:bg-yellow-500 px-2 py-1 rounded"><i class="fas fa-save"></i></button>
+      <button id="previewBtn" class="bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded"><i class="fas fa-eye"></i></button>
+      <button id="publishBtn" class="bg-red-500 hover:bg-red-600 px-2 py-1 rounded"><i class="fas fa-upload"></i></button>
     </div>
   </header>
 
-  <!-- GrapesJS Container -->
+  <!-- Editor Container -->
   <div id="gjs"></div>
 
   <!-- Scripts -->
   <script src="https://unpkg.com/grapesjs"></script>
+  <script src="https://unpkg.com/grapesjs-plugin-forms"></script>
+  <script src="https://unpkg.com/grapesjs-lory-slider"></script>
+  <script src="https://unpkg.com/grapesjs-plugin-tooltips"></script>
   <script>
     let editor;
     document.getElementById('loadBtn').onclick = () => {
@@ -49,46 +55,53 @@
       fetch(`/websites/${page}`)
         .then(res => res.text())
         .then(html => {
-          if (editor) editor.destroy();
+          editor && editor.destroy();
           editor = grapesjs.init({
             container: '#gjs',
             fromElement: false,
             height: '100%',
-            width: 'auto',
-            storageManager: false,
-            panels: { defaults: [] },
+            storageManager: { autoload: false, autosave: false },
+            plugins: ['gjs-plugin-forms', 'gjs-lory-slider', 'gjs-plugin-tooltips'],
+            pluginsOpts: {
+              'gjs-plugin-forms': {},
+              'gjs-lory-slider': {},
+              'gjs-plugin-tooltips': {}
+            },
             blockManager: {
-              appendTo: '#gjs',
+              appendTo: '#blocks',
               blocks: [
-                { id: 'section', label: 'Section', content: '<section style="padding:20px;"><h2>Section</h2></section>' },
-                { id: 'text', label: 'Text', content: '<p>Insert your text here</p>' },
-                { id: 'image', label: 'Image', content: '<img src="https://via.placeholder.com/350x150" />' },
-                { id: 'video', label: 'Video', content: '<video controls><source src="" /></video>' }
+                { id: 'section', label: 'סקשן', content: '<section style="padding:20px;"><h2>כותרת</h2><p>טקסט</p></section>' },
+                { id: 'text', label: 'טקסט', content: '<p>כתוב כאן</p>' },
+                { id: 'image', label: 'תמונה', content: '<img src="https://via.placeholder.com/600x300" />' },
+                { id: 'video', label: 'וידאו', content: '<video controls><source src="" /></video>' },
+                { id: 'form', label: 'טופס', content: { type: 'form' } },
+                { id: 'slider', label: 'סליידר', content: { type: 'lory-slider' } }
               ]
             },
-            styleManager: { sectors: [] },
-            assetManager: { embedAsBase64: true },
-            commands: {
-              defaults: []
-            }
+            layerManager: { appendTo: '.layers-container' },
+            selectorManager: { appendTo: '.styles-container' },
+            styleManager: { appendTo: '.styles-container' },
+            assetManager: { embedAsBase64: true, upload: false },
+            panels: { defaults: [
+              { id: 'basic-actions', el: '.panel__basic-actions', buttons: [
+                { id: 'visibility', active: true, className: 'fa fa-eye', command: 'sw-visibility', title: 'Toggle visibility' },
+                { id: 'export', className: 'fa fa-download', command: 'export-template', title: 'Export' }
+              ]}
+            ]}
           });
           editor.setComponents(html);
-          editor.Panels.removeButton('options', 'export-template');
+          editor.setStyle('');
+          // Save command
           editor.Commands.add('save-db', {
             run: editor => {
-              const content = editor.getHtml() + '<style>' + editor.getCss() + '</style>';
-              fetch(`/api/websites/${page}/save`, {
-                method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ content })
-              }).then(()=> alert('נשמר בהצלחה'));
+              const content = editor.getHtml() + '<style>'+editor.getCss()+'</style>';
+              fetch(`/api/websites/${page}/save`, { method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({content}) })
+                .then(()=> alert('נשמר בהצלחה'));
             }
           });
           document.getElementById('saveBtn').onclick = () => editor.runCommand('save-db');
           document.getElementById('previewBtn').onclick = () => window.open(`/websites/${page}`, '_blank');
-          document.getElementById('publishBtn').onclick = () => {
-            fetch(`/api/websites/${page}/publish`, { method:'POST' })
-              .then(()=> alert('פורסם בהצלחה'));
-          };
+          document.getElementById('publishBtn').onclick = () => fetch(`/api/websites/${page}/publish`,{method:'POST'}).then(()=>alert('פורסם בהצלחה'));
         });
     };
   </script>
