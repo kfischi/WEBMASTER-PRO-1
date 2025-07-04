@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WebMaster Pro - עורך פורץ דרך</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>WebMaster Pro Ultimate - Editor</title>
+  <!-- GrapesJS CSS -->
+  <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet"/>
+  <!-- Tailwind for UI around GrapesJS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body, html { height: 100%; margin: 0; font-family: 'Heebo', sans-serif; }
-    .toolbar-btn:hover { background: rgba(255,255,255,0.1); }
-    .section-highlight { outline: 2px dashed #10B981; }
+    body, html { height: 100%; margin: 0; }
+    #gjs { height: calc(100vh - 64px); }
+    header { height: 64px; }
   </style>
 </head>
-<body class="flex flex-col h-full bg-gray-100">
+<body class="flex flex-col">
   <!-- Top Bar -->
-  <header class="flex items-center justify-between px-6 py-3 bg-gradient-to-r from-purple-700 to-indigo-600 text-white shadow-lg">
-    <div class="flex items-center gap-4">
-      <i class="fas fa-rocket text-xl"></i>
-      <h1 class="text-2xl font-bold">WebMaster Pro Ultimate</h1>
-      <select id="siteSelect" class="bg-white text-gray-800 rounded px-3 py-1">
+  <header class="flex items-center justify-between px-6 bg-gradient-to-r from-purple-700 to-indigo-600 text-white">
+    <div class="flex items-center space-x-4">
+      <h1 class="text-xl font-bold">WebMaster Pro Ultimate Editor</h1>
+      <select id="siteSelect" class="rounded px-2 py-1 text-black">
         <option value="">בחר דמו</option>
         <option value="law-firm.html">עורך דין</option>
         <option value="fitness-co.html">מאמן כושר</option>
@@ -26,121 +27,70 @@
         <option value="tutor.html">מורה פרטית</option>
         <option value="aesthetic-clinic.html">קליניקה</option>
       </select>
-      <button id="loadBtn" class="bg-green-500 hover:bg-green-600 px-4 py-1 rounded">טען עורך</button>
+      <button id="loadBtn" class="bg-green-500 hover:bg-green-600 px-3 py-1 rounded">טען</button>
     </div>
-    <div class="flex items-center gap-3">
-      <button id="saveBtn" class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-save"></i> שמור</button>
-      <button id="previewBtn" class="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-eye"></i> תצוגה</button>
-      <button id="publishBtn" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-upload"></i> פרסם</button>
+    <div class="flex items-center space-x-4">
+      <button id="saveBtn" class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded">שמור</button>
+      <button id="previewBtn" class="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded">תצוגה</button>
+      <button id="publishBtn" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded">פרסם</button>
     </div>
   </header>
 
-  <div class="flex flex-1 overflow-hidden">
-    <!-- Left Sidebar (Tools) -->
-    <aside class="w-20 bg-white border-r flex flex-col items-center py-4 space-y-4 overflow-auto">
-      <button class="toolbar-btn p-3 rounded-lg" title="Select"><i class="fas fa-mouse-pointer"></i></button>
-      <button class="toolbar-btn p-3 rounded-lg" title="Text"><i class="fas fa-font"></i></button>
-      <button class="toolbar-btn p-3 rounded-lg" title="Image"><i class="fas fa-image"></i></button>
-      <button class="toolbar-btn p-3 rounded-lg" title="Video"><i class="fas fa-video"></i></button>
-      <button class="toolbar-btn p-3 rounded-lg" title="Section"><i class="fas fa-th-large"></i></button>
-      <button class="toolbar-btn p-3 rounded-lg" title="Color"><i class="fas fa-palette"></i></button>
-      <button class="toolbar-btn p-3 rounded-lg" title="AI"><i class="fas fa-robot"></i></button>
-    </aside>
+  <!-- GrapesJS Container -->
+  <div id="gjs"></div>
 
-    <!-- Canvas Area -->
-    <main class="flex-1 relative bg-white">
-      <iframe id="canvasFrame" class="w-full h-full" src="about:blank"></iframe>
-      <!-- Drop Overlay -->
-      <div id="dropOverlay" class="absolute inset-0 hidden bg-black bg-opacity-20 flex items-center justify-center text-white text-xl">
-        גרור קובץ לכאן להעלאה
-      </div>
-    </main>
-
-    <!-- Right Sidebar (Properties) -->
-    <aside class="w-72 bg-white border-l p-4 overflow-auto">
-      <h2 class="text-lg font-semibold mb-4">מאפייני אלמנט</h2>
-      <div id="propPanel" class="space-y-3 text-gray-700">בחר אלמנט כדי לערוך</div>
-    </aside>
-  </div>
-
+  <!-- Scripts -->
+  <script src="https://unpkg.com/grapesjs"></script>
   <script>
-    const siteSelect = document.getElementById('siteSelect');
-    const loadBtn = document.getElementById('loadBtn');
-    const previewBtn = document.getElementById('previewBtn');
-    const saveBtn = document.getElementById('saveBtn');
-    const publishBtn = document.getElementById('publishBtn');
-    const iframe = document.getElementById('canvasFrame');
-    const dropOverlay = document.getElementById('dropOverlay');
-    const propPanel = document.getElementById('propPanel');
-    let currentPage = '';
-
-    // Load page and enable editor
-    loadBtn.onclick = () => {
-      const page = siteSelect.value;
-      if (!page) return alert('בחר קודם דמו');
-      currentPage = page;
+    let editor;
+    document.getElementById('loadBtn').onclick = () => {
+      const page = document.getElementById('siteSelect').value;
+      if (!page) return alert('בחר דמו לפני טעינה');
       fetch(`/websites/${page}`)
         .then(res => res.text())
         .then(html => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-          doc.querySelectorAll('h1,h2,h3,p,a,button,img,video,section,div').forEach(el => el.setAttribute('data-editable','true'));
-          iframe.srcdoc = `<base href="${location.origin}/websites/"/>` + doc.documentElement.outerHTML;
-          iframe.onload = initializeEditor;
+          if (editor) editor.destroy();
+          editor = grapesjs.init({
+            container: '#gjs',
+            fromElement: false,
+            height: '100%',
+            width: 'auto',
+            storageManager: false,
+            panels: { defaults: [] },
+            blockManager: {
+              appendTo: '#gjs',
+              blocks: [
+                { id: 'section', label: 'Section', content: '<section style="padding:20px;"><h2>Section</h2></section>' },
+                { id: 'text', label: 'Text', content: '<p>Insert your text here</p>' },
+                { id: 'image', label: 'Image', content: '<img src="https://via.placeholder.com/350x150" />' },
+                { id: 'video', label: 'Video', content: '<video controls><source src="" /></video>' }
+              ]
+            },
+            styleManager: { sectors: [] },
+            assetManager: { embedAsBase64: true },
+            commands: {
+              defaults: []
+            }
+          });
+          editor.setComponents(html);
+          editor.Panels.removeButton('options', 'export-template');
+          editor.Commands.add('save-db', {
+            run: editor => {
+              const content = editor.getHtml() + '<style>' + editor.getCss() + '</style>';
+              fetch(`/api/websites/${page}/save`, {
+                method: 'POST', headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ content })
+              }).then(()=> alert('נשמר בהצלחה'));
+            }
+          });
+          document.getElementById('saveBtn').onclick = () => editor.runCommand('save-db');
+          document.getElementById('previewBtn').onclick = () => window.open(`/websites/${page}`, '_blank');
+          document.getElementById('publishBtn').onclick = () => {
+            fetch(`/api/websites/${page}/publish`, { method:'POST' })
+              .then(()=> alert('פורסם בהצלחה'));
+          };
         });
     };
-
-    // Preview
-    previewBtn.onclick = () => {
-      if (!currentPage) return alert('אין דמו טעון');
-      window.open(`/websites/${currentPage}`, '_blank');
-    };
-
-    // Initialize editing: drag & drop, click handlers
-    function initializeEditor() {
-      const doc = iframe.contentDocument;
-      // Click to select
-      doc.querySelectorAll('[data-editable]').forEach(el => {
-        el.contentEditable = true;
-        el.onmouseenter = () => el.classList.add('section-highlight');
-        el.onmouseleave = () => el.classList.remove('section-highlight');
-        el.onclick = e => { e.stopPropagation(); showProperties(el); };
-      });
-      // Drag & drop files
-      doc.body.addEventListener('dragover', e => { e.preventDefault(); dropOverlay.classList.remove('hidden'); });
-      doc.body.addEventListener('dragleave', e => { dropOverlay.classList.add('hidden'); });
-      doc.body.addEventListener('drop', e => {
-        e.preventDefault(); dropOverlay.classList.add('hidden');
-        const file = e.dataTransfer.files[0];
-        const url = URL.createObjectURL(file);
-        const media = file.type.startsWith('image') ? 'img' : 'video';
-        const el = doc.createElement(media);
-        el.src = url;
-        el.controls = file.type.startsWith('video');
-        el.style.maxWidth = '100%';
-        doc.body.appendChild(el);
-      });
-    }
-
-    // Show properties in side panel
-    function showProperties(el) {
-      propPanel.innerHTML = `
-        <div><b>תג:</b> ${el.tagName}</div>
-        <div><label>תוכן:<br><textarea id="propText" class="w-full h-24 border p-1">${el.textContent.trim()}</textarea></label></div>
-        <div><label>צבע טקסט: <input type="color" id="propColor" value="#000000"></label></div>
-        <button id="aiBtn" class="bg-indigo-600 text-white px-3 py-1 rounded">AI כתיבת תוכן</button>
-      `;
-      document.getElementById('propText').oninput = e => el.textContent = e.target.value;
-      document.getElementById('propColor').oninput = e => el.style.color = e.target.value;
-      document.getElementById('aiBtn').onclick = () => {
-        const promptText = prompt('הנח AI לשכתוב:');
-        if (promptText) el.textContent = '💡 AI: ' + promptText;
-      };
-    }
-
-    // שמירה ופרסום – TODO: שלחו ל-API backend
-    saveBtn.onclick = () => alert('התוכן נשמר לשרת');
-    publishBtn.onclick = () => alert('האתר פורסם');
   </script>
 </body>
 </html>
