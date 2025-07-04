@@ -6,135 +6,145 @@
   <title>ד"ר מיכל רוזן – רפואה אסתטית</title>
   <meta name="description" content="מרפאה אסתטית מובילה בישראל, טיפולי בוטוקס, מילוי והצערת עור ללא ניתוח.">
   <link href="css/style.css" rel="stylesheet">
-  <style>
-    /* Slider styles */
-    .hero-slider { position: absolute; inset: 0; overflow: hidden; }
-    .hero-slider .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; }
-    .hero-slider .slide.active { opacity: 1; }
-  </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <header class="glass-card nav">
-    <div class="container nav-container">
-      <a href="#home" class="logo">ד"ר מיכל רוזן</a>
+  <!-- NAVBAR -->
+  <header class="glass-card nav" style="background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);position:fixed;top:0;width:100%;z-index:100;">
+    <div class="container flex justify-between items-center py-4">
+      <a href="#home" class="text-white text-xl font-bold">ד"ר מיכל רוזן</a>
       <nav>
-        <ul class="menu">
-          <li><a href="#home">בית</a></li>
-          <li><a href="#about">אודות</a></li>
-          <li><a href="#services">שירותים</a></li>
-          <li><a href="#clients">לקוחות</a></li>
-          <li><a href="#gallery">גלריה</a></li>
-          <li><a href="#projects">פרויקטים</a></li>
-          <li><a href="#blog">מאמרים</a></li>
-          <li><a href="#contact">צור קשר</a></li>
+        <ul class="menu flex gap-6 text-white">
+          <li><a href="#home" class="hover:text-accent">בית</a></li>
+          <li><a href="#about" class="hover:text-accent">אודות</a></li>
+          <li><a href="#services" class="hover:text-accent">שירותים</a></li>
+          <li><a href="#clients" class="hover:text-accent">לקוחות</a></li>
+          <li><a href="#contact" class="hover:text-accent">צור קשר</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Home Section (Slider) -->
-  <section id="home" class="hero">
-    <div class="hero-slider">
-      <div class="slide" style="background:url('https://source.unsplash.com/1600x900/?skin-care') center/cover no-repeat;"></div>
-      <div class="slide" style="background:url('images/https://source.unsplash.com/1600x900/?beauty-treatment')center/cover no-repeat;"></div>
-      <div class="slide" style="background:url('images/https://source.unsplash.com/1600x900/?aesthetic')center/cover no-repeat;"></div>
-    </div>
-    <div class="hero-overlay"></div>
-    <div class="container hero-content fadeInUp">
-      <h1>להביא את היופי הטבעי שלך לידי ביטוי</h1>
-      <p>טיפולי אסתטיקה חדשניים ללא ניתוח – בוטוקס, מילוי וטיפולי לייזר.</p>
-      <a href="#contact" class="btn btn-primary">קבע/י תור עכשיו</a>
+  <!-- HERO -->
+  <section id="home" class="relative h-screen flex items-center justify-center text-center text-white" style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+    <div class="overlay absolute inset-0 opacity-50" style="background:url('https://source.unsplash.com/1600x900/?spa,wellness')center/cover;"></div>
+    <div class="container relative z-10 px-4">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4 fadeInUp">להביא את היופי הטבעי שלך<br>לידי ביטוי</h1>
+      <p class="text-lg md:text-2xl mb-8 fadeInUp">טיפולי אסתטיקה חדשניים ללא ניתוח – בוטוקס, מילוי וטיפולי לייזר.</p>
+      <a href="#contact" class="btn btn-primary px-8 py-3 fadeInUp">קבע/י תור עכשיו</a>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section id="about" class="container about fadeInUp">
-    <h2>אודות</h2>
-    <p>ד"ר מיכל רוזן, מומחית לרפואה אסתטית עם למעלה מ-10 שנות ניסיון, מוסמכת מהאיגוד הישראלי לרפואה אסתטית.</p>
-    <ul>
-      <li>PhD ברפואה אסתטית, אוניברסיטת תל אביב</li>
-      <li>הרצאות בינלאומיות בכנסים רפואיים</li>
-      <li>פרס על מצוינות קלינית, 2022</li>
-    </ul>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services" class="container services fadeInUp">
-    <h2>השירותים שלנו</h2>
-    <div class="cards">
-      <div class="card hover-lift"><img src="https://source.unsplash.com/400x300/?botox" alt="בוטוקס"><h3>בוטוקס</h3><p>החלקת קמטים באזור המצח והעיניים.</p></div>
-      <div class="card hover-lift"><img src="images/https://source.unsplash.com/400x300/?dermal-filler" alt="מילוי עור"><h3>מילוי עור</h3><p>החזרת נפח טבעי לגבות ולשפתיים.</p></div>
-      <div class="card hover-lift"><img src="images/https://source.unsplash.com/400x300/?laser-treatment" alt="לייזר"><h3>טיפולי לייזר</h3><p>הבהרת עור, הסרת כתמים וצלקות.</p></div>
-      <div class="card hover-lift"><img src="images/https://source.unsplash.com/400x300/?skin-rejuvenation" alt="הצערת עור"><h3>הצערת עור</h3><p>טיפולים מתקדמים להצערת מראה העור.</p></div>
+  <!-- ABOUT -->
+  <section id="about" class="container py-20">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <img src="https://source.unsplash.com/800x600/?doctor,clinic" alt="ד"ר מיכל" class="rounded-lg shadow-lg fadeInUp">
+      <div class="fadeInUp">
+        <h2 class="text-3xl font-bold mb-4">אודות</h2>
+        <p class="mb-4">ד"ר מיכל רוזן, מומחית לרפואה אסתטית עם למעלה מ-10 שנות ניסיון, מוסמכת מהאיגוד הישראלי לרפואה אסתטית.</p>
+        <ul class="list-disc list-inside text-lg">
+          <li>PhD ברפואה אסתטית, אוניברסיטת תל אביב</li>
+          <li>הרצאות בינלאומיות בכנסים רפואיים</li>
+          <li>פרס על מצוינות קלינית, 2022</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- Clients Section -->
-  <section id="clients" class="container testimonials slideInLeft">
-    <h2>לקוחות מרוצים</h2>
-    <div class="testimonials-grid">
-      <div class="testimonial-card glass-card hover-lift"><p>"חוויה מקצועית ואמינה, התוצאות מרהיבות!"</p><span>– יעל כהן</span></div>
-      <div class="testimonial-card glass-card hover-lift"><p>"ד"ר מיכל מדהימה, ממליצה בחום."</p><span>– רונית לוי</span></div>
-      <div class="testimonial-card glass-card hover-lift"><p>"שירות מעולה ותמיכה לאורך כל הדרך."</p><span>– דניאל ברוש</span></div>
+  <!-- SERVICES -->
+  <section id="services" class="bg-gray-50 py-20">
+    <div class="container">
+      <h2 class="text-3xl font-bold text-center mb-12 fadeInUp">השירותים שלנו</h2>
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="card glass-card hover-lift fadeInUp">
+          <img src="https://source.unsplash.com/400x300/?botox" alt="בוטוקס" class="rounded-t-lg">
+          <div class="p-6">
+            <h3 class="font-semibold mb-2">בוטוקס</h3>
+            <p>החלקת קמטים באזור המצח והעיניים.</p>
+          </div>
+        </div>
+        <div class="card glass-card hover-lift fadeInUp">
+          <img src="https://source.unsplash.com/400x300/?dermal-filler" alt="מילוי עור" class="rounded-t-lg">
+          <div class="p-6">
+            <h3 class="font-semibold mb-2">מילוי עור</h3>
+            <p>החזרת נפח טבעי לגבות ולשפתיים.</p>
+          </div>
+        </div>
+        <div class="card glass-card hover-lift fadeInUp">
+          <img src="https://source.unsplash.com/400x300/?laser-treatment" alt="לייזר" class="rounded-t-lg">
+          <div class="p-6">
+            <h3 class="font-semibold mb-2">טיפולי לייזר</h3>
+            <p>הבהרת עור, הסרת כתמים וצלקות.</p>
+          </div>
+        </div>
+        <div class="card glass-card hover-lift fadeInUp">
+          <img src="https://source.unsplash.com/400x300/?skin-rejuvenation" alt="הצערת עור" class="rounded-t-lg">
+          <div class="p-6">
+            <h3 class="font-semibold mb-2">הצערת עור</h3>
+            <p>טיפולים מתקדמים להצערת מראה העור.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Gallery Section -->
-  <section id="gallery" class="container gallery fadeInUp">
-    <h2>גלריה</h2>
-    <div class="gallery-grid">
-      <img src="images/https://source.unsplash.com/400x300/?before-after-aesthetic" alt="לפני ואחרי טיפול" loading="lazy">
-      <img src="images/https://source.unsplash.com/400x300/?skin-treatment" alt="לפני ואחרי טיפול" loading="lazy">
-      <img src="images/https://source.unsplash.com/400x300/?facial-care" alt="לפני ואחרי טיפול" loading="lazy">
-      <img src="images/https://source.unsplash.com/400x300/?cosmetic" alt="לפני ואחרי טיפול" loading="lazy">
+  <!-- CLIENTS -->
+  <section id="clients" class="container py-20">
+    <h2 class="text-3xl font-bold text-center mb-12 fadeInUp">לקוחות מרוצים</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="testimonial-card glass-card hover-lift fadeInUp p-6">
+        <p>"חוויה מקצועית ואמינה, התוצאות מרהיבות!"</p>
+        <span class="block mt-2 font-semibold">– יעל כהן</span>
+      </div>
+      <div class="testimonial-card glass-card hover-lift fadeInUp p-6">
+        <p>"הרגשתי בטוחה לאורך כל הטיפול, ממליצה בחום."</p>
+        <span class="block mt-2 font-semibold">– דני לוי</span>
+      </div>
+      <div class="testimonial-card glass-card hover-lift fadeInUp p-6">
+        <p>"מקצועית, אמינה ותוצאות מעל המצופה."</p>
+        <span class="block mt-2 font-semibold">– רונית לוי</span>
+      </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="container projects fadeInUp">
-    <h2>פרויקטים מרכזיים</h2>
-    <article class="project-card glass-card hover-lift">
-      <h3>טיפול בוטוקס קבוצתי</h3>
-      <p>פרויקט טיפולי קבוצה ל-20 משתתפים.</p>
-    </article>
-  </section>
-
-  <!-- Blog Section -->
-  <section id="blog" class="container blog fadeInUp">
-    <h2>מאמרים וחדשות</h2>
-    <article class="blog-post glass-card hover-lift">
-      <h3>כיצד לבחור טיפול מתאים</h3>
-      <p>טיפים לבחירת הטיפול האסתטי המתאים לצרכיך.</p>
-      <span>20.05.2025</span>
-    </article>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="container contact fadeInUp">
-    <h2>צור קשר</h2>
-    <form class="contact-form" action="#" method="post">
-      <input type="text" name="name" placeholder="שם" required>
-      <input type="email" name="email" placeholder="אימייל" required>
-      <textarea name="message" placeholder="הודעה"></textarea>
-      <button type="submit" class="btn btn-primary">שלח</button>
-    </form>
-    <div class="contact-info">
-      <p>טלפון: 03-1234567</p>
-      <p>אימייל: info@dr-michal-rosen.co.il</p>
-      <iframe src="https://www.google.com/maps/embed?..." width="100%" height="200" frameborder="0" allowfullscreen></iframe>
+  <!-- CONTACT CTA -->
+  <section id="contact" class="relative py-20" style="background:linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+    <div class="overlay absolute inset-0 opacity-30 bg-black"></div>
+    <div class="container relative z-10 text-center text-white">
+      <h2 class="text-3xl font-bold mb-4 fadeInUp">נשמע מעניין?</h2>
+      <p class="mb-8 fadeInUp">השאירו פרטים ונחזור אליכם עם הצעה אישית.</p>
+      <a href="#contact-form" class="btn btn-primary fadeInUp">צור קשר עכשיו</a>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="glass-card footer">
-    <div class="container footer-content">
-      <p>© 2025 ד"ר מיכל רוזן</p>
+  <!-- FOOTER & FORM -->
+  <section id="contact-form" class="container py-20">
+    <div class="grid md:grid-cols-2 gap-12">
+      <form class="contact-form glass-card p-8 hover-lift fadeInUp" action="#" method="post">
+        <h3 class="text-2xl font-bold mb-4">צור קשר</h3>
+        <input type="text" name="name" placeholder="שם" required class="w-full mb-4 p-3 rounded">
+        <input type="email" name="email" placeholder="אימייל" required class="w-full mb-4 p-3 rounded">
+        <textarea name="message" placeholder="הודעה" class="w-full mb-4 p-3 rounded"></textarea>
+        <button type="submit" class="btn btn-primary w-full py-3">שליחה</button>
+      </form>
+      <div class="contact-info fadeInUp">
+        <h3 class="text-2xl font-bold mb-4">פרטי התקשרות</h3>
+        <p>טלפון: 03-1234567</p>
+        <p>אימייל: info@dr-michal-rosen.co.il</p>
+        <iframe src="https://www.google.com/maps/embed?..." width="100%" height="300" frameborder="0" allowfullscreen class="mt-4 rounded"></iframe>
+      </div>
     </div>
-  </footer>
+  </section>
 
+  <!-- SCRIPTS -->
   <script>
-    // Hero slider script
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+    // Hero slider
     (function() {
       var slides = document.querySelectorAll('.hero-slider .slide');
       var current = 0;
