@@ -1,194 +1,1356 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🚀 WebMaster Pro Ultimate - גלריה ואדיטור משולבים</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    /* ===== Reset & Base ===== */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Inter', sans-serif; background: #0f172a; color: #f1f5f9; scroll-behavior: smooth; }
-    a { text-decoration: none; color: inherit; }
-    button { background: none; border: none; cursor: pointer; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 WebMaster Pro Ultimate - 11 אתרים יוקרתיים | ₪26,900</title>
+    <meta name="description" content="WebMaster Pro - המערכת המתקדמת בעולם לבניית אתרים עסקיים. 11 דמואים מהממים מחוברים לעורך ויזואלי מהפכני!">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Heebo:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== Root Variables ===== */
+        :root {
+            --primary: #6366f1;
+            --primary-light: #8b5cf6;
+            --secondary: #f43f5e;
+            --accent: #06d6a0;
+            --accent-gold: #fbbf24;
+            --bg-dark: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --text-white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.3);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            --gradient-text: linear-gradient(90deg, #6366f1, #8b5cf6, #06d6a0);
+        }
 
-    /* ===== Layout ===== */
-    .container { display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: 1fr; height: 100vh; gap: 1rem; padding: 1rem; }
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* ===== Header ===== */
-    .header { display: flex; justify-content: space-between; align-items: center; background: rgba(15,23,42,0.8); backdrop-filter: blur(8px); padding: 1rem 2rem; border-radius: 1rem; position: sticky; top: 0; z-index: 100; }
-    .header-brand h1 { font-size: 2rem; font-weight: 800; color: #10b981; }
-    .header-brand p { font-size: 1rem; opacity: 0.7; }
-    .header-nav a { margin: 0 0.5rem; padding: 0.5rem 1rem; background: rgba(15,23,42,0.6); border-radius: 0.5rem; font-weight: 600; transition: background 0.3s; }
-    .header-nav a:hover { background: #10b981; color: #0f172a; }
-    .header-actions button { padding: 0.5rem 1rem; background: #10b981; border-radius: 0.5rem; font-weight: 600; transition: background 0.3s; color: #0f172a; }
-    .header-actions button:hover { background: #0d9776; }
+        html, body {
+            height: 100%;
+            background: var(--bg-dark);
+            color: var(--text-white);
+            font-family: 'Inter', 'Heebo', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-    /* ===== Gallery ===== */
-    .gallery { overflow-y: auto; max-height: calc(100vh - 8rem); padding: 1rem; }
-    .filter-group { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-    .filter-btn { padding: 0.5rem 1rem; background: rgba(15,23,42,0.7); border-radius: 0.5rem; transition: background 0.3s, color 0.3s; cursor: pointer; }
-    .filter-btn.active { background: #10b981; color: #0f172a; }
-    .websites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
-    .website-card { background: rgba(15,23,42,0.8); border-radius: 1rem; padding: 1rem; display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s; }
-    .website-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .website-card img { border-radius: 0.5rem; width: 100%; height: 140px; object-fit: cover; margin-bottom: 0.75rem; }
-    .website-title { font-size: 1.2rem; font-weight: 600; color: #10b981; margin-bottom: 0.25rem; }
-    .website-desc { flex: 1; font-size: 0.9rem; opacity: 0.8; margin-bottom: 1rem; }
-    .card-actions { display: flex; gap: 0.5rem; }
-    .btn-edit, .btn-preview { flex: 1; padding: 0.5rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; transition: background 0.3s; }
-    .btn-edit { background: #10b981; color: #0f172a; }
-    .btn-edit:hover { background: #0d9776; }
-    .btn-preview { background: rgba(255,255,255,0.1); color: #f1f5f9; }
-    .btn-preview:hover { background: rgba(255,255,255,0.2); }
+        /* ===== Animated Background ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-hero);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease-in-out infinite;
+            z-index: -2;
+        }
 
-    /* ===== Editor ===== */
-    .editor { display: grid; grid-template-columns: 250px 1fr 300px; grid-template-rows: auto 1fr; gap: 1rem; height: calc(100vh - 8rem); }
-    .sidebar-tools, .sidebar-properties { background: rgba(15,23,42,0.8); backdrop-filter: blur(8px); border-radius: 1rem; padding: 1rem; overflow-y: auto; }
-    .sidebar-tools h2, .sidebar-properties h2 { color: #10b981; font-size: 1.25rem; margin-bottom: 1rem; }
-    .tool-btn, .property-group button { width: 100%; padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(15,23,42,0.6); border-radius: 0.5rem; color: #f1f5f9; transition: background 0.3s, color 0.3s; }
-    .tool-btn:hover, .property-group button:hover { background: #10b981; color: #0f172a; }
-    .canvas { grid-column: 2; grid-row: 1 / span 2; position: relative; border-radius: 1rem; overflow: hidden; background: rgba(255,255,255,0.05); }
-    .iframe-container { width: 100%; height: 100%; position: relative; }
-    .preview-iframe { width: 100%; height: 100%; border: none; transform-origin: top left; transition: transform 0.3s; }
-    .loading-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; color: #f1f5f9; font-size: 1.25rem; visibility: hidden; opacity: 0; transition: opacity 0.3s; }
-    .loading-overlay.visible { visibility: visible; opacity: 1; }
-    .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #10b981; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .editor-header { grid-column: 1 / span 3; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; color: #f1f5f9; }
-  </style>
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(244, 63, 94, 0.1) 0%, transparent 50%);
+            animation: backgroundFloat 10s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes backgroundFloat {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+            100% { transform: scale(1.1) rotate(2deg); opacity: 0.8; }
+        }
+
+        /* ===== Layout Container ===== */
+        .container {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-brand h1 {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .header-brand i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link, .nav-btn {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before, .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link:hover::before, .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover, .nav-btn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .editor-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            font-weight: 600;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .editor-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        /* ===== Main Content ===== */
+        .main-content {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .content-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #ffffff, #e2e8f0, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        /* ===== Gallery Section ===== */
+        .gallery-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            font-family: 'Outfit', sans-serif;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== Filter Tabs ===== */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab.active::before {
+            left: 0;
+            opacity: 1;
+        }
+
+        .filter-tab.active {
+            color: white;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .filter-tab:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        /* ===== Website Grid ===== */
+        .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .website-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            opacity: 1;
+            transform: scale(1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .website-card.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+
+        .website-card:hover {
+            transform: translateY(-15px) rotateX(5deg) rotateY(2deg) scale(1.02);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .website-preview {
+            position: relative;
+            height: 220px;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .preview-mockup {
+            width: 90%;
+            height: 90%;
+            background: white;
+            border-radius: var(--radius-md);
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .website-card:hover .preview-mockup {
+            transform: scale(1);
+        }
+
+        .mockup-header {
+            height: 20px;
+            background: #f1f5f9;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            gap: 4px;
+        }
+
+        .mockup-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        .mockup-content {
+            padding: 0;
+            height: calc(100% - 20px);
+            background: var(--bg-light);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .mockup-content img.loaded {
+            opacity: 1;
+        }
+
+        .website-card:hover .mockup-content img {
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .website-card:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .overlay-icon {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .overlay-text {
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .website-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .website-badge.premium {
+            background: linear-gradient(135deg, var(--accent-gold), #f59e0b);
+            border: none;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(251, 191, 36, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.8); }
+        }
+
+        .website-badge.popular {
+            background: linear-gradient(135deg, var(--secondary), #dc2626);
+            border: none;
+        }
+
+        .website-content {
+            padding: 2rem;
+        }
+
+        .website-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .website-info {
+            flex: 1;
+        }
+
+        .website-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.25rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .website-category {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .website-price {
+            background: linear-gradient(135deg, var(--accent-gold), #f59e0b);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-lg);
+            font-weight: 700;
+            font-size: 1rem;
+            white-space: nowrap;
+            font-family: 'Outfit', sans-serif;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .website-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .website-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature-tag:hover {
+            background: rgba(99, 102, 241, 0.4);
+            transform: scale(1.05);
+        }
+
+        .website-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .action-btn.primary:hover {
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        .footer-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-stat {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .content-container {
+                padding: 0 1rem;
+            }
+
+            .hero-section {
+                padding: 2rem 0;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .websites-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .website-actions {
+                flex-direction: column;
+            }
+
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+
+            .filter-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .website-card:hover {
+                transform: translateY(-10px) scale(1.02);
+            }
+        }
+
+        /* ===== Loading Animations ===== */
+        .loading {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== Particles ===== */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                opacity: 0; 
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            50% { 
+                transform: translateY(-120px) rotate(180deg); 
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <header class="header">
-      <div class="header-brand">
-        <h1>🚀 WebMaster Pro Ultimate</h1>
-        <p>השליטה במערכת בידיים שלך</p>
-      </div>
-      <nav class="header-nav">
-        <button class="filter-btn active" onclick="showGallery()">האתרים שלנו</button>
-        <a href="home.html">דף הבית</a>
-        <a href="landing.html">דפי נחיתה</a>
-        <a href="guides.html">מדריכים</a>
-        <a href="articles.html">מאמרים</a>
-        <a href="about.html">אודות</a>
-        <a href="contact.html">צור קשר</a>
-      </nav>
-      <div class="header-actions">
-        <button onclick="showGallery()">גלריה</button>
-        <button id="openEditorBtn" disabled>פתח אדיטור</button>
-      </div>
-    </header>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
 
-    <!-- Gallery & Editor -->
-    <div id="mainArea">
-      <section id="gallerySection" class="gallery">
-        <div class="filter-group" id="filterGroup"></div>
-        <div class="websites-grid" id="websitesGrid"></div>
-      </section>
-      <section id="editorSection" class="editor" style="display:none;">
-        <div class="sidebar-tools">
-          <h2>🛠 כלים</h2>
-          <button class="tool-btn" onclick="selectTool('select')">Select</button>
-          <button class="tool-btn" onclick="selectTool('text')">Text</button>
-          <button class="tool-btn" onclick="selectTool('image')">Image</button>
-          <button class="tool-btn" onclick="selectTool('color')">Color</button>
-          <button class="tool-btn" onclick="zoomIn()">Zoom +</button>
-          <button class="tool-btn" onclick="zoomOut()">Zoom -</button>
-        </div>
-        <div class="canvas">
-          <div class="editor-header">
-            <div id="editorTitle">Editing</div>
-            <div class="loading-overlay" id="loadingOverlay">
-              <div class="spinner"></div>
-              טוען...
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-brand">
+                    <i class="fas fa-rocket"></i>
+                    <h1>WebMaster Pro Ultimate</h1>
+                </div>
+                <nav class="header-nav">
+                    <button class="nav-btn" onclick="showGallery()">הגלריה</button>
+                    <a href="#" class="nav-link">בית</a>
+                    <a href="#" class="nav-link">שירותים</a>
+                    <a href="#" class="nav-link">אודות</a>
+                    <a href="#" class="nav-link">צור קשר</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="nav-btn editor-btn" id="openEditorBtn">
+                        <i class="fas fa-edit"></i>
+                        פתח אדיטור
+                    </button>
+                </div>
             </div>
-          </div>
-          <div class="iframe-container">
-            <iframe id="previewFrame" class="preview-iframe"></iframe>
-          </div>
-        </div>
-        <div class="sidebar-properties">
-          <h2>⚙ מאפיינים</h2>
-          <div id="propertyControls"></div>
-        </div>
-      </section>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-container">
+                <!-- Hero Section -->
+                <section class="hero-section">
+                    <div class="hero-badge">
+                        <i class="fas fa-star"></i>
+                        11 אתרים מקצועיים מוכנים
+                    </div>
+                    <h1 class="hero-title">
+                        WebMaster Pro Ultimate
+                        <br>מערכת בניית אתרים מתקדמת
+                    </h1>
+                    <p class="hero-subtitle">
+                        גלריית 11 אתרים יוקרתיים ברמה עולמית עם עורך ויזואלי מהפכני.
+                        כל אתר כולל קוד production-ready, עיצוב רספונסיבי ופונקציונליות מלאה.
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-card loading">
+                            <div class="stat-number">11</div>
+                            <div class="stat-label">אתרים מוכנים</div>
+                        </div>
+                        <div class="stat-card loading">
+                            <div class="stat-number">₪26,900</div>
+                            <div class="stat-label">שווי כולל</div>
+                        </div>
+                        <div class="stat-card loading">
+                            <div class="stat-number">9</div>
+                            <div class="stat-label">תחומים עסקיים</div>
+                        </div>
+                        <div class="stat-card loading">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">ברמה עולמית</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gallery Section -->
+                <section class="gallery-section" id="gallerySection">
+                    <div class="section-header">
+                        <h2 class="section-title">🎨 גלריית האתרים המקצועיים</h2>
+                        <p class="section-subtitle">
+                            כל אתר בנוי עם טכנולוגיות מתקדמות ועיצוב רספונסיבי ברמה עולמית
+                        </p>
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">הכל</button>
+                        <button class="filter-tab" data-filter="medical">רפואה ובריאות</button>
+                        <button class="filter-tab" data-filter="business">עסקים ושירותים</button>
+                        <button class="filter-tab" data-filter="lifestyle">יופי ולייפסטייל</button>
+                        <button class="filter-tab" data-filter="premium">פרמיום</button>
+                    </div>
+
+                    <!-- Websites Grid -->
+                    <div class="websites-grid" id="websitesGrid">
+                        <!-- האתרים יטענו כאן דינמית -->
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="footer-text">
+                    WebMaster Pro Ultimate - מערכת מתקדמת לבניית אתרים עסקיים
+                    <br>כל האתרים כוללים קוד production-ready ועיצוב ברמה עולמית
+                </p>
+                
+                <div class="footer-stats">
+                    <div class="footer-stat">
+                        <div class="footer-stat-number">11</div>
+                        <div>אתרים מוכנים</div>
+                    </div>
+                    <div class="footer-stat">
+                        <div class="footer-stat-number">₪26,900</div>
+                        <div>שווי כולל</div>
+                    </div>
+                    <div class="footer-stat">
+                        <div class="footer-stat-number">9</div>
+                        <div>תחומים</div>
+                    </div>
+                    <div class="footer-stat">
+                        <div class="footer-stat-number">100%</div>
+                        <div>איכות</div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 WebMaster Pro Ultimate. כל הזכויות שמורות. | פותח עם ❤️ בישראל</p>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer"></footer>
-  </div>
+    <script>
+        // Website Data - מחובר לתיקיית websites/ עם תמונות איכותיות
+        const professionalWebsites = [
+            {
+                id: 'dr-michal-rosen',
+                title: 'ד"ר מיכל רוזן - רפואה אסתטית',
+                category: 'אסתטיקה רפואית',
+                price: 2800,
+                description: 'אתר יוקרתי לרופאה אסתטית עם 6 טיפולים מתקדמים, מחשבון עלויות פונקציונלי וחוויית לקוח VIP.',
+                features: ['בוטוקס', 'פילר', 'לייזר', 'טיפולי פנים'],
+                badges: ['popular'],
+                categoryClass: 'medical',
+                type: 'medical',
+                icon: 'fas fa-user-md',
+                previewImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/dr-michal-rosen.html'
+            },
+            {
+                id: 'fitness-co',
+                title: 'דני פיט - מאמן כושר אישי',
+                category: 'כושר ואימונים',
+                price: 2200,
+                description: 'אתר דינמי למאמן כושר עם מחשבון BMI מתקדם, תוכניות אימון מותאמות אישית ו-6 שירותי כושר מקצועיים.',
+                features: ['אימון אישי', 'תזונה', 'תוכניות אימון', 'מחשבון BMI'],
+                badges: [],
+                categoryClass: 'lifestyle',
+                type: 'lifestyle',
+                icon: 'fas fa-dumbbell',
+                previewImage: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/fitness-co.html'
+            },
+            {
+                id: 'yoga-studio',
+                title: 'סטודיו אוהם - יוגה ומדיטציה',
+                category: 'יוגה ורוחניות',
+                price: 1900,
+                description: 'אתר רגוע וחם לסטודיו יוגה עם 6 סוגי שיעורים, לוח זמנים אינטראקטיבי ואווירה רוחנית.',
+                features: ['יוגה התרפויטית', 'מדיטציה', 'שיעורי קבוצה', 'אימון אישי'],
+                badges: [],
+                categoryClass: 'lifestyle',
+                type: 'lifestyle',
+                icon: 'fas fa-leaf',
+                previewImage: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/yoga-studio.html'
+            },
+            {
+                id: 'nutritionist',
+                title: 'ד"ר שרה כהן - תזונאית קלינית',
+                category: 'תזונה ודיאטה',
+                price: 2400,
+                description: 'אתר מקצועי לתזונאית עם מחשבון תזונתי מתקדם, תוכניות דיאטה מותאמות אישית ו-6 שירותי תזונה.',
+                features: ['ייעוץ תזונתי', 'תפריטים אישיים', 'מעקב תזונתי', 'מחשבון קלוריות'],
+                badges: [],
+                categoryClass: 'medical',
+                type: 'medical',
+                icon: 'fas fa-apple-alt',
+                previewImage: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/nutritionist.html'
+            },
+            {
+                id: 'law-firm',
+                title: 'משרד ברקוביץ - עו"ד',
+                category: 'שירותים משפטיים',
+                price: 2500,
+                description: 'אתר מקצועי למשרד עורכי דין עם 6 תחומי התמחות, טופס יצירת קשר מתקדם וסטטיסטיקות מרשימות.',
+                features: ['דיני משפחה', 'דיני עבודה', 'דיני נזיקין', 'ייצוג פלילי'],
+                badges: [],
+                categoryClass: 'business',
+                type: 'business',
+                icon: 'fas fa-balance-scale',
+                previewImage: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/law-firm.html'
+            },
+            {
+                id: 'accountant',
+                title: 'רינה לוי - חשבת שכר',
+                category: 'חשבונאות ומס',
+                price: 2000,
+                description: 'אתר צבעוני למומחית חשבות שכר עם מחשבון שכר פונקציונלי, התמחות בהייטק ושירותי ביטוח לאומי.',
+                features: ['חישוב שכר', 'דוחות שכר', 'ביטוח לאומי', 'התמחות הייטק'],
+                badges: [],
+                categoryClass: 'business',
+                type: 'business',
+                icon: 'fas fa-calculator',
+                previewImage: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/accountant.html'
+            },
+            {
+                id: 'beauty-salon',
+                title: 'מספרה BELLA - יופי',
+                category: 'יופי ועיצוב שיער',
+                price: 1700,
+                description: 'אתר חיוני ומרהיב למספרה מקצועית עם 6 שירותי יופי, גלריית עבודות אינטראקטיבית וטופס קביעת תור מתקדם.',
+                features: ['תספורת ועיצוב', 'צביעה', 'מניקור', 'טיפולי פנים'],
+                badges: [],
+                categoryClass: 'lifestyle',
+                type: 'lifestyle',
+                icon: 'fas fa-cut',
+                previewImage: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/beauty-salon.html'
+            },
+            {
+                id: 'tutor',
+                title: 'ד"ר רונית לוי - מורה פרטית',
+                category: 'חינוך והוראה',
+                price: 2100,
+                description: 'אתר אקדמי אלגנטי למורה פרטית עם מחשבון עלות שיעורים, 6 מקצועות לימוד ואנימציות מתמטיות ייחודיות.',
+                features: ['מתמטיקה', 'פיזיקה', 'אנגלית', 'הכנה לבגרות'],
+                badges: [],
+                categoryClass: 'business',
+                type: 'business',
+                icon: 'fas fa-graduation-cap',
+                previewImage: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/tutor.html'
+            },
+            {
+                id: 'aesthetic-clinic',
+                title: 'קליניקת יופי פרמיום',
+                category: 'אסתטיקה רפואית',
+                price: 3200,
+                description: 'אתר יוקרתי לקליניקה אסתטית במגדל עזריאלי עם 6 טיפולים מתקדמים, עיצוב זהוב פרמיום וחוויית לקוח VIP.',
+                features: ['בוטוקס פרמיום', 'לייזר פרקציונלי', 'פילינג יהלום', 'טיפולי היפו'],
+                badges: ['premium'],
+                categoryClass: 'medical',
+                type: 'premium',
+                icon: 'fas fa-gem',
+                previewImage: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/aesthetic-clinic.html'
+            },
+            {
+                id: 'multibrawn',
+                title: 'מולטיבראון - נופש ואירועים',
+                category: 'נופש ואירועים',
+                price: 2300,
+                description: 'אתר יוקרתי למרכז נופש ואירועים עם 6 שירותים מקיפים, גלריית תמונות עשירה והמלצות לקוחות מרגשות.',
+                features: ['חתונות', 'אירועי חברה', 'נופש יוקרתי', 'קייטרינג'],
+                badges: [],
+                categoryClass: 'premium',
+                type: 'premium',
+                icon: 'fas fa-mountain',
+                previewImage: 'https://images.unsplash.com/photo-1519167758481-83f29c852c81?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/multibrawn.html'
+            },
+            {
+                id: 'real-estate',
+                title: 'נדל"ן פרמיום',
+                category: 'השקעות נדל"ן',
+                price: 2700,
+                description: 'אתר יוקרתי לחברת נדל"ן עם 6 נכסי פרמיום, מחשבון השקעה מתקדם ו-6 שירותים מקצועיים להשקעות חכמות.',
+                features: ['נכסי יוקרה', 'ייעוץ השקעות', 'ניתוח שוק', 'מחשבון רווחיות'],
+                badges: [],
+                categoryClass: 'premium',
+                type: 'premium',
+                icon: 'fas fa-building',
+                previewImage: 'https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                link: './websites/real-estate.html'
+            }
+        ];
 
-  <script>
-    const professionalWebsites = [
-      { id: 'dr-michal-rosen', name: 'ד"ר מיכל רוזן', category: 'רפואה אסתטית', description: 'מרפאה אסתטית עם ייעוץ און-ליין וטופס קביעת תור', price: '₪8,500', img: 'https://source.unsplash.com/240x140/?clinic' },
-      { id: 'dani-fit', name: 'דני פיט', category: 'כושר', description: 'מאמן כושר אישי עם תוכנית אימון מותאמת', price: '₪6,900', img: 'https://source.unsplash.com/240x140/?fitness' },
-      { id: 'yoga-studio', name: 'סטודיו אוהם', category: 'יוגה', description: 'סטודיו יוגה ומדיטציה בהרמוניה מלאה', price: '₪6,200', img: 'https://source.unsplash.com/240x140/?yoga' },
-      { id: 'nutritionist', name: 'ד"ר שרה כהן', category: 'תזונה', description: 'תזונאית קלינית עם תפריטים אישיים', price: '₪7,200', img: 'https://source.unsplash.com/240x140/?nutrition' },
-      { id: 'law-firm', name: 'משרד ברקוביץ', category: 'עורכי דין', description: 'משרד עורכי דין מוביל בשירות אישי', price: '₪7,800', img: 'https://source.unsplash.com/240x140/?law' },
-      { id: 'accountant', name: 'רינה לוי', category: 'חשבות', description: 'חשבת שכר עם פתרונות מותאמים לעסקים', price: '₪6,800', img: 'https://source.unsplash.com/240x140/?accountant' },
-      { id: 'bella-salon', name: 'מספרה BELLA', category: 'יופי', description: 'מספרה ועיצוב שיער ברמה הגבוהה ביותר', price: '₪5,900', img: 'https://source.unsplash.com/240x140/?salon' },
-      { id: 'tutor-ronit', name: 'ד"ר רונית לוי', category: 'חינוך', description:
-        'מורה פרטית ומלווה אקדמי עם נסיון עשיר', price: '₪6,500', img: 'https://source.unsplash.com/240x140/?tutor' },
-      { id: 'premium-clinic', name: 'קליניקת יופי פרמיום', category: 'יופי מתקדם', description: 'קליניקה אסתטית עם טכנולוגיות חדשניות', price: '₪12,500', img: 'https://source.unsplash.com/240x140/?beauty+clinic' },
-      { id: 'multibrawn', name: 'מולטיבראון', category: 'אירועים', description: 'אירועים מושלמים ונופש אקסקלוסיבי', price: '₪8,900', img: 'https://source.unsplash.com/240x140/?event' },
-      { id: 'real-estate', name: 'נדל"ן פרמיום', category: 'נדל"ן', description: 'נדל"ן יוקרתי בישראל ובחו"ל', price: '₪9,200', img: 'https://source.unsplash.com/240x140/?realestate' }
-    ];
+        // Initialize particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 25;
 
-    let currentWebsiteGlobal = null;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
 
-    function initialize() {
-      const grid = document.getElementById('websitesGrid');
-      professionalWebsites.forEach(site => {
-        const card = document.createElement('div'); card.className = 'website-card';
-        card.innerHTML = `
-          <img src="${site.img}" alt="${site.name}">
-          <div class="website-title">${site.name}</div>
-          <div class="website-desc">${site.description}</div>
-          <div class="site-price">${site.price}</div>
-          <div class="card-actions">
-            <button class="btn-preview" onclick="previewSite('${site.id}')">תצוגה מקדימה</button>
-            <button class="btn-edit" onclick="enableEditor('${site.id}')">עריכה</button>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
+        // Render websites
+        function renderWebsites(websitesToShow = professionalWebsites) {
+            const grid = document.getElementById('websitesGrid');
+            
+            grid.innerHTML = websitesToShow.map(website => `
+                <div class="website-card loading" data-category="${website.categoryClass}" data-type="${website.type}">
+                    ${website.badges.map(badge => `
+                        <div class="website-badge ${badge}">
+                            ${badge === 'premium' ? '💎 פרמיום' : '🔥 פופולרי'}
+                        </div>
+                    `).join('')}
+                    
+                    <div class="website-preview">
+                        <div class="preview-mockup">
+                            <div class="mockup-header">
+                                <div class="mockup-dot dot-red"></div>
+                                <div class="mockup-dot dot-yellow"></div>
+                                <div class="mockup-dot dot-green"></div>
+                            </div>
+                            <div class="mockup-content">
+                                <img src="${website.previewImage}" alt="${website.title}" loading="lazy">
+                                <div class="image-overlay">
+                                    <i class="${website.icon} overlay-icon"></i>
+                                    <div class="overlay-text">לחץ לתצוגה מקדימה</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="website-content">
+                        <div class="website-header">
+                            <div class="website-info">
+                                <h3 class="website-title">${website.title}</h3>
+                                <p class="website-category">${website.category}</p>
+                            </div>
+                            <div class="website-price">₪${website.price.toLocaleString()}</div>
+                        </div>
+                        
+                        <p class="website-description">${website.description}</p>
+                        
+                        <div class="website-features">
+                            ${website.features.map(feature => `
+                                <span class="feature-tag">${feature}</span>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="website-actions">
+                            <a href="${website.link}" class="action-btn" target="_blank">
+                                <i class="fas fa-eye"></i>
+                                תצוגה מקדימה
+                            </a>
+                            <button class="action-btn primary" onclick="openInEditor('${website.id}')">
+                                <i class="fas fa-edit"></i>
+                                ערוך עכשיו
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
 
-    function showGallery() {
-      document.getElementById('gallerySection').style.display = 'block';
-      document.getElementById('editorSection').style.display = 'none';
-      document.getElementById('openEditorBtn').disabled = true;
-    }
+            // Add loading animation with stagger
+            setTimeout(() => {
+                const cards = document.querySelectorAll('.website-card.loading');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.remove('loading');
+                        
+                        // Handle image loading
+                        const img = card.querySelector('.mockup-content img');
+                        if (img) {
+                            img.onload = () => {
+                                img.classList.add('loaded');
+                            };
+                            // If image is already loaded (cached)
+                            if (img.complete) {
+                                img.classList.add('loaded');
+                            }
+                        }
+                    }, index * 100);
+                });
+            }, 100);
+        }
 
-    function enableEditor(id) {
-      currentWebsiteGlobal = professionalWebsites.find(w => w.id === id);
-      document.getElementById('openEditorBtn').disabled = false;
-      previewSite(id);
-    }
+        // Filter functionality
+        function setupFilters() {
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Update active tab
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    const filter = tab.dataset.filter;
+                    
+                    // Filter websites
+                    if (filter === 'all') {
+                        showAllCards();
+                    } else {
+                        filterCards(filter);
+                    }
+                });
+            });
+        }
 
-    function previewSite(id) {
-      const site = professionalWebsites.find(w => w.id === id);
-      const iframe = document.getElementById('previewFrame');
-      document.getElementById('editorTitle').textContent = site.name;
-      document.getElementById('loadingOverlay').classList.add('visible');
-      iframe.src = `${site.id}/index.html`;
-      iframe.onload = () => document.getElementById('loadingOverlay').classList.remove('visible');
-      showGallery();
-    }
+        function filterCards(filter) {
+            const cards = document.querySelectorAll('.website-card');
+            
+            cards.forEach(card => {
+                const category = card.dataset.category;
+                const type = card.dataset.type;
+                
+                if (category === filter || type === filter) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            // Ensure images load for visible cards
+            setTimeout(handleImageLoading, 100);
+        }
 
-    function openEditor() {
-      document.getElementById('gallerySection').style.display = 'none';
-      document.getElementById('editorSection').style.display = 'grid';
-      // further editor init...
-    }
+        function showAllCards() {
+            const cards = document.querySelectorAll('.website-card');
+            cards.forEach(card => card.classList.remove('hidden'));
+            
+            // Ensure images load for all visible cards
+            setTimeout(handleImageLoading, 100);
+        }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const openEditorBtn = document.getElementById('openEditorBtn');
-      openEditorBtn.addEventListener('click', openEditor);
-      initialize();
-    });
-  </script>
+        // Handle image loading for newly rendered cards
+        function handleImageLoading() {
+            const images = document.querySelectorAll('.mockup-content img:not(.loaded)');
+            images.forEach(img => {
+                img.onload = () => {
+                    img.classList.add('loaded');
+                };
+                // If image is already loaded (cached)
+                if (img.complete) {
+                    img.classList.add('loaded');
+                }
+            });
+        }
+
+        // Gallery toggle
+        function showGallery() {
+            document.getElementById('gallerySection').style.display = 'block';
+            // Hide editor if exists
+            const editorSection = document.getElementById('editorSection');
+            if (editorSection) {
+                editorSection.style.display = 'none';
+            }
+        }
+
+        // Open in editor (placeholder)
+        function openInEditor(websiteId) {
+            console.log('Opening website in editor:', websiteId);
+            alert(`🚀 פותח את ${websiteId} בעורך הויזואלי...\n\nהאדיטור יושק בקרוב!`);
+        }
+
+        // Handle image loading for newly rendered cards
+        function handleImageLoading() {
+            const images = document.querySelectorAll('.mockup-content img:not(.loaded)');
+            images.forEach(img => {
+                img.onload = () => {
+                    img.classList.add('loaded');
+                };
+                // If image is already loaded (cached)
+                if (img.complete) {
+                    img.classList.add('loaded');
+                }
+            });
+        }
+
+        // Smooth scrolling
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Initializing WebMaster Pro Ultimate...');
+            
+            createParticles();
+            renderWebsites();
+            setupFilters();
+            setupSmoothScroll();
+            handleImageLoading();
+            
+            // Add loading animations to stats with stagger
+            setTimeout(() => {
+                const stats = document.querySelectorAll('.stat-card.loading');
+                stats.forEach((stat, index) => {
+                    setTimeout(() => {
+                        stat.classList.remove('loading');
+                    }, index * 150 + 500);
+                });
+            }, 100);
+            
+            console.log('✅ WebMaster Pro Ultimate Ready!');
+            console.log('💎 11 Professional Websites with High-Quality Images');
+            console.log('🔗 Connected to /websites/ directory');
+            console.log('🖼️ Unsplash Premium Images Integrated');
+            console.log('🎨 Advanced Glass Morphism Design');
+            console.log('📱 Fully Responsive Design');
+            console.log('⚡ Ready for Editor Integration');
+            console.log('🌟 Preview Images: Medical, Business, Lifestyle & Premium');
+        });
+    </script>
 </body>
 </html>
