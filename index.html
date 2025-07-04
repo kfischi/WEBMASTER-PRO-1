@@ -53,4 +53,60 @@
     .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #10b981; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .editor-header { grid-column: 1 / span 3; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; color: #f1f5f9; }
-    .website-selector, .device-group button, .action-group button { padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border-radius:
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <h1>🚀 WebMaster Pro Ultimate</h1>
+        <p>השליטה במערכת בידיים שלך</p>
+      </div>
+      <div class="header-actions">
+        <button onclick="showGallery()">גלריה</button>
+        <button onclick="openEditor()">פתח אדיטור</button>
+      </div>
+    </header>
+
+    <!-- Gallery & Editor -->
+    <div id="mainArea">
+      <section id="gallerySection" class="gallery">
+        <div class="filter-group" id="filterGroup"></div>
+        <div class="websites-grid" id="websitesGrid"></div>
+      </section>
+      <section id="editorSection" class="editor" style="display:none;"></section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer"></footer>
+  </div>
+
+  <script>
+    const professionalWebsites = [...]; // נשתמש במערך המלא של האתרים
+
+    function initialize() {
+      renderGallery();
+    }
+
+    function renderGallery() {
+      const grid = document.getElementById('websitesGrid');
+      const filters = document.getElementById('filterGroup');
+      // הנחה: פונקציות ליצירת כרטיסים וכפתורי סינון
+    }
+
+    function showGallery() {
+      document.getElementById('gallerySection').style.display = 'block';
+      document.getElementById('editorSection').style.display = 'none';
+    }
+
+    function openEditor(websiteId) {
+      document.getElementById('gallerySection').style.display = 'none';
+      document.getElementById('editorSection').style.display = 'grid';
+      // Load editor UI
+    }
+
+    document.addEventListener('DOMContentLoaded', initialize);
+  </script>
+</body>
+</html>
