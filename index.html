@@ -338,10 +338,18 @@
 
     <script>
         const websites = [
-            { id: 'dr-michal-rosen', title: 'ד"ר מיכל רוזן', category: 'רפואה אסתטית', description: 'קליניקה מובילה...', price: 2800, url: './websites/dr-michal-rosen.html', image: 'https://source.unsplash.com/400x300/?aesthetic,clinic', tags: ['medical','premium']},
-            { id: 'fitness-co', title: 'דני פיט', category: 'מאמן אישי', description: 'מאמן כושר מקצועי...', price: 2200, url: './websites/fitness-co.html', image: 'https://source.unsplash.com/400x300/?fitness,trainer', tags: ['lifestyle','business']},
-            // ... other 9 items with appropriate image URLs ...
-        ];
+    { id: 'dr-michal-rosen', title: 'ד"ר מיכל רוזן', category: 'רפואה אסתטית', description: 'קליניקה מובילה לרפואה אסתטית ועיצוב פנים מתקדם עם יותר מ-15 שנות ניסיון', price: 2800, url: './websites/dr-michal-rosen.html', image: 'https://i.imghippo.com/files/htWG9491QkE.png', tags: ['medical','premium'] },
+    { id: 'fitness-co', title: 'דני פיט', category: 'מאמן אישי', description: 'מאמן כושר מקצועי עם מתודות אימון מתקדמות ותוכניות אישיות', price: 2200, url: './websites/fitness-co.html', image: 'https://i.imghippo.com/files/WiRp8302YJs.png', tags: ['lifestyle','business'] },
+    { id: 'yoga-studio', title: 'סטודיו אוהם', category: 'יוגה ומדיטציה', description: 'מרכז יוגה ומדיטציה ברוח המזרח הרחוק עם מגוון שיעורים', price: 1900, url: './websites/yoga-studio.html', image: 'https://i.imghippo.com/files/eJk7179MXo.png', tags: ['lifestyle'] },
+    { id: 'nutritionist', title: 'ד"ר שרה כהן', category: 'תזונאית קלינית', description: 'תזונה קלינית מבוססת מדע עם תוכניות אישיות לירידה במשקל', price: 2400, url: './websites/nutritionist.html', image: 'https://i.imghippo.com/files/rhNp2418oyE.png', tags: ['medical','lifestyle'] },
+    { id: 'law-firm', title: 'משרד ברקוביץ', category: 'עורכי דין', description: 'משרד עורכי דין מקצועי עם התמחות באזרחי, מסחרי ונדל"ן', price: 2500, url: './websites/law-firm.html', image: 'https://i.imghippo.com/files/hVyV3858OQ.png', tags: ['business'] },
+    { id: 'accountant', title: 'רינה לוי', category: 'חשבת שכר', description: 'שירותי חשבות שכר מקצועיים לעסקים קטנים ובינוניים', price: 2000, url: './websites/accountant.html', image: 'https://i.imghippo.com/files/tGN5433dAU.png', tags: ['business'] },
+    { id: 'beauty-salon', title: 'מספרה BELLA', category: 'יופי ועיצוב שיער', description: 'מספרה מודרנית עם שירותי יופי מקצועיים וטיפולי שיער', price: 1700, url: './websites/beauty-salon.html', image: 'https://i.imghippo.com/files/xnK4816Hc.png', tags: ['lifestyle'] },
+    { id: 'tutor', title: 'ד"ר רונית לוי', category: 'מורה פרטית', description: 'הוראה פרטית במתמטיקה ומדעים ברמה אקדמית גבוהה', price: 2100, url: './websites/tutor.html', image: 'https://i.imghippo.com/files/Ceu2132Q.png', tags: ['business'] },
+    { id: 'aesthetic-clinic', title: 'קליניקת יופי פרמיום', category: 'אסתטיקה רפואית', description: 'קליניקה יוקרתית לאסתטיקה רפואית ועיצוב פנים ברמה הגבוהה ביותר', price: 3200, url: './websites/aesthetic-clinic.html', image: 'https://i.imghippo.com/files/sWlf1880WKM.png', tags: ['medical','premium'] },
+    { id: 'multibrawn', title: 'מולטיבראון', category: 'נופש ואירועים', description: 'אירוח ונופש יוקרתי במלונות בוטיק ברחבי הארץ עם חבילות מותאמות', price: 2300, url: './websites/multibrawn.html', image: 'https://i.imghippo.com/files/pL5530Z.png', tags: ['lifestyle','premium'] },
+    { id: 'real-estate', title: 'נדל"ן פרמיום', category: 'השקעות נדל"ן', description: 'השקעות נדל"ן יוקרתיות ויעוץ מקצועי בשוק הנדל"ן הישראלי', price: 2700, url: './websites/real-estate.html', image: 'https://i.imghippo.com/files/htWG9491QkE.png', tags: ['business','premium'] }
+];
 
         function createWebsiteCards() {
             const grid = document.getElementById('websitesGrid');
