@@ -49,7 +49,8 @@
     .canvas { grid-column: 2; grid-row: 1 / span 2; position: relative; border-radius: 1rem; overflow: hidden; background: rgba(255,255,255,0.05); }
     .iframe-container { width: 100%; height: 100%; position: relative; }
     .preview-iframe { width: 100%; height: 100%; border: none; transform-origin: top left; transition: transform 0.3s; }
-    .loading-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; color: #f1f5f9; font-size: 1.25rem; visibility: visible; opacity: 1; transition: opacity 0.3s; }
+    .loading-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; color: #f1f5f9; font-size: 1.25rem; visibility: hidden; opacity: 0; transition: opacity 0.3s; }
+    .loading-overlay.visible { visibility: visible; opacity: 1; }
     .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #10b981; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .editor-header { grid-column: 1 / span 3; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; color: #f1f5f9; }
@@ -65,7 +66,7 @@
       </div>
       <div class="header-actions">
         <button onclick="showGallery()">גלריה</button>
-        <button onclick="openEditor()">פתח אדיטור</button>
+        <button id="openEditorBtn" disabled>פתח אדיטור</button>
       </div>
     </header>
 
@@ -75,7 +76,33 @@
         <div class="filter-group" id="filterGroup"></div>
         <div class="websites-grid" id="websitesGrid"></div>
       </section>
-      <section id="editorSection" class="editor" style="display:none;"></section>
+      <section id="editorSection" class="editor" style="display:none;">
+        <div class="sidebar-tools">
+          <h2>🛠 כלים</h2>
+          <button class="tool-btn" onclick="selectTool('select')">Select</button>
+          <button class="tool-btn" onclick="selectTool('text')">Text</button>
+          <button class="tool-btn" onclick="selectTool('image')">Image</button>
+          <button class="tool-btn" onclick="selectTool('color')">Color</button>
+          <button class="tool-btn" onclick="zoomIn()">Zoom +</button>
+          <button class="tool-btn" onclick="zoomOut()">Zoom -</button>
+        </div>
+        <div class="canvas">
+          <div class="editor-header">
+            <div id="editorTitle">Editor</div>
+            <div class="loading-overlay" id="loadingOverlay">
+              <div class="spinner"></div>
+              טוען...
+            </div>
+          </div>
+          <div class="iframe-container">
+            <iframe id="previewFrame" class="preview-iframe"></iframe>
+          </div>
+        </div>
+        <div class="sidebar-properties">
+          <h2>⚙ מאפיינים</h2>
+          <div id="propertyControls"></div>
+        </div>
+      </section>
     </div>
 
     <!-- Footer -->
@@ -83,7 +110,10 @@
   </div>
 
   <script>
-    const professionalWebsites = [...]; // נשתמש במערך המלא של האתרים
+    const professionalWebsites = [
+      { id: 'dr-michal-rosen', name: 'ד"ר מיכל רוזן', category: 'רפואה', price: 2800, image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=500&q=80', url:'dr-michal-rosen.html' },
+      /* ... כל שאר האתרים ... */
+    ];
 
     function initialize() {
       renderGallery();
@@ -91,20 +121,52 @@
 
     function renderGallery() {
       const grid = document.getElementById('websitesGrid');
-      const filters = document.getElementById('filterGroup');
-      // הנחה: פונקציות ליצירת כרטיסים וכפתורי סינון
+      grid.innerHTML = '';
+      const filters = Array.from(new Set(professionalWebsites.map(w=>w.category)));
+      const filterGroup = document.getElementById('filterGroup');
+      filterGroup.innerHTML = '<button class="filter-btn active" data-filter="all">כל האתרים</button>' +
+        filters.map(cat=>`<button class="filter-btn" data-filter="${cat}">${cat}</button>`).join('');
+      filterGroup.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click', ()=>{
+        filterGroup.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        filterWebsites(btn.getAttribute('data-filter'));
+      }));
+      professionalWebsites.forEach(website=>{
+        const card = document.createElement('div'); card.className='website-card';
+        card.innerHTML=`<img src="${website.image}" alt="${website.name}"><div class="website-title">${website.name}</div><div class="website-desc">₪${website.price}</div><div class="card-actions"><button class="btn-edit">Edit</button><button class="btn-preview">Preview</button></div>`;
+        card.querySelector('.btn-edit').onclick=()=>openEditor(website);
+        card.querySelector('.btn-preview').onclick=()=>window.open(website.url,'_blank');
+        card.setAttribute('data-category',website.category);
+        grid.appendChild(card);
+      });
+    }
+
+    function filterWebsites(filter) {
+      document.querySelectorAll('.website-card').forEach(card=>{
+        card.style.display = (filter==='all' || card.getAttribute('data-category')===filter)?'flex':'none';
+      });
     }
 
     function showGallery() {
-      document.getElementById('gallerySection').style.display = 'block';
-      document.getElementById('editorSection').style.display = 'none';
+      document.getElementById('gallerySection').style.display='block';
+      document.getElementById('editorSection').style.display='none';
     }
 
-    function openEditor(websiteId) {
-      document.getElementById('gallerySection').style.display = 'none';
-      document.getElementById('editorSection').style.display = 'grid';
-      // Load editor UI
+    function openEditor(website) {
+      document.getElementById('gallerySection').style.display='none';
+      document.getElementById('editorSection').style.display='grid';
+      document.getElementById('editorTitle').textContent = 'Editing: '+website.name;
+      const iframe = document.getElementById('previewFrame');
+      const overlay = document.getElementById('loadingOverlay'); overlay.classList.add('visible');
+      iframe.src = website.url;
+      iframe.onload = ()=> overlay.classList.remove('visible');
+      document.getElementById('openEditorBtn').disabled = false;
     }
+
+    function selectTool(tool) { console.log('Tool:',tool); }
+    function zoomIn(){const f=document.getElementById('previewFrame');f.style.transform='scale('+ (getScale()+0.1) +')';}
+    function zoomOut(){const f=document.getElementById('previewFrame');f.style.transform='scale('+ (getScale()-0.1) +')';}
+    function getScale(){const f=document.getElementById('previewFrame'); const m = f.style.transform.match(/scale\(([^)]+)\)/); return m?parseFloat(m[1]):1; }
 
     document.addEventListener('DOMContentLoaded', initialize);
   </script>
