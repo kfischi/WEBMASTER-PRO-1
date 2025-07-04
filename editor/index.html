@@ -3,96 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WebMaster Pro - עורך ויזואלי</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>WebMaster Pro - עורך פורץ דרך</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Heebo', sans-serif; }
+    .toolbar-btn:hover { background: rgba(255,255,255,0.2); }
+    .drag-over { outline: 2px dashed #10B981; }
   </style>
 </head>
-<body class="bg-gray-50">
-  <!-- כותרת -->
-  <div class="p-4 bg-white shadow mb-4">
-    <h1 class="text-2xl font-bold text-center">עורך WebMaster Pro Ultimate</h1>
-    <p class="text-center text-gray-600">ערוך בקלות כל אתר דמו בעזרת לחיצת כפתור</p>
-  </div>
+<body class="flex flex-col h-screen bg-gray-100">
+  <!-- Header -->
+  <header class="flex items-center justify-between px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-700 text-white shadow-lg">
+    <div class="flex items-center gap-6">
+      <h1 class="text-3xl font-bold">WebMaster Pro Ultimate</h1>
+      <select id="siteSelector" class="bg-white text-gray-800 rounded px-3 py-2">
+        <option value="">בחר אתר דמו</option>
+        <option value="law-firm.html">עורך דין</option>
+        <option value="fitness-co.html">מאמן כושר</option>
+        <option value="yoga-studio.html">יוגה</option>
+        <option value="tutor.html">מורה פרטית</option>
+        <option value="aesthetic-clinic.html">קליניקה</option>
+      </select>
+      <button id="btnLoad" class="bg-green-500 px-4 py-2 rounded-lg font-medium">טען עורך</button>
+    </div>
+    <div class="flex items-center gap-4">
+      <button id="btnSave" class="bg-yellow-400 px-4 py-2 rounded-lg font-medium">שמור אוטומטית</button>
+      <button id="btnPreview" class="bg-blue-500 px-4 py-2 rounded-lg font-medium">תצוגה מקדימה</button>
+      <button id="btnPublish" class="bg-red-500 px-4 py-2 rounded-lg font-medium">פרסם</button>
+    </div>
+  </header>
+  
+  <div class="flex flex-1 overflow-hidden">
+    <!-- Tools Sidebar -->
+    <aside class="w-20 bg-white border-r p-4 flex flex-col items-center space-y-5 overflow-auto">
+      <button class="toolbar-btn p-3 rounded-full" title="Select"><i>🖱️</i></button>
+      <button class="toolbar-btn p-3 rounded-full" title="Text"><i>🔤</i></button>
+      <button class="toolbar-btn p-3 rounded-full" title="Image"><i>🖼️</i></button>
+      <button class="toolbar-btn p-3 rounded-full" title="Video"><i>🎥</i></button>
+      <button class="toolbar-btn p-3 rounded-full" title="AI"><i>🤖</i></button>
+      <button class="toolbar-btn p-3 rounded-full" title="Color Picker"><i>🎨</i></button>
+      <button class="toolbar-btn p-3 rounded-full" title="Sections"><i>📐</i></button>
+    </aside>
+    
+    <!-- Canvas & Drag-Drop -->
+    <main class="flex-1 relative bg-white">
+      <iframe id="frame" class="w-full h-full" src="about:blank"></iframe>
+      <!-- Drag & Drop Overlay -->
+      <div id="dropZone" class="absolute inset-0 hidden bg-gray-200 bg-opacity-50 flex items-center justify-center text-gray-700 text-lg">
+        גרור לכאן כדי להעלות תמונה/וידאו
+      </div>
+    </main>
 
-  <!-- בורר דמו -->
-  <div class="container mx-auto p-4 flex flex-col md:flex-row justify-center items-center gap-4">
-    <select id="websiteSelector" class="border p-2 rounded w-full md:w-1/3">
-      <option value="">בחר דמו לעריכה</option>
-      <option value="law-firm.html">עורך דין</option>
-      <option value="fitness-co.html">מאמן כושר</option>
-      <option value="yoga-studio.html">סטודיו יוגה</option>
-      <option value="tutor.html">מורה פרטית</option>
-      <option value="aesthetic-clinic.html">קליניקת יופי פרמיום</option>
-    </select>
-    <button id="loadBtn" class="bg-purple-600 text-white px-4 py-2 rounded w-full md:w-auto">
-      טען לעורך
-    </button>
-    <button id="previewBtn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded w-full md:w-auto">
-      תצוגה מקדימה
-    </button>
-  </div>
-
-  <!-- אזור עורך -->
-  <div class="container mx-auto p-4">
-    <iframe id="previewFrame" class="w-full h-[80vh] border rounded" src="about:blank"></iframe>
+    <!-- Properties Panel -->
+    <aside class="w-80 bg-white border-l p-6 overflow-auto">
+      <h2 class="text-xl font-semibold mb-4">המאפיינים</h2>
+      <div id="propPanel" class="space-y-4 text-gray-700">בחר אלמנט עבור תכונות מתקדמות</div>
+    </aside>
   </div>
 
   <script>
-    const selector   = document.getElementById('websiteSelector');
-    const loadBtn    = document.getElementById('loadBtn');
-    const previewBtn = document.getElementById('previewBtn');
-    const iframe     = document.getElementById('previewFrame');
-    let currentFile  = '';
+    // כלי ראשי
+    const selector = document.getElementById('siteSelector');
+    const btnLoad = document.getElementById('btnLoad');
+    const btnPreview = document.getElementById('btnPreview');
+    const frame = document.getElementById('frame');
+    const dropZone = document.getElementById('dropZone');
+    const propPanel = document.getElementById('propPanel');
+    let currentSrc = '';
 
-    // טען את קובץ ה-HTML מתוך /websites, הוסף data-editable ואז הצג ב-iframe
-    loadBtn.addEventListener('click', () => {
-      const file = selector.value;
-      if (!file) {
-        alert('בחר דמו לפני טעינה');
-        return;
-      }
-      currentFile = file;
-      fetch(`/websites/${file}`)
-        .then(res => res.text())
+    // טען קוד HTML + enable drag/drop, editing, AI
+    btnLoad.onclick = () => {
+      const page = selector.value;
+      if (!page) return alert('בחר תחילה אתר דמו');
+      currentSrc = page;
+      fetch(`/websites/${page}`)
+        .then(r => r.text())
         .then(html => {
           const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-          // הוסף תכונה לעריכה לכל כותרת, פסקה, קישור וכפתור
-          doc.querySelectorAll('h1,h2,h3,p,a,button').forEach(el => {
-            el.setAttribute('data-editable', 'true');
-          });
-          // סגור קישורי יחוס ביחס לתיקיית websites
-          iframe.srcdoc = 
-            '<base href="' + location.origin + '/websites/" />' + 
-            doc.documentElement.outerHTML;
-          iframe.onload = enableEditing;
+          const doc = parser.parseFromString(html,'text/html');
+          // הענקת יכולת עריכה
+          const tags = ['h1','h2','h3','p','a','button','img','video','section'];
+          doc.querySelectorAll(tags.join(',')).forEach(el => el.setAttribute('data-editable','true'));
+          frame.srcdoc = `<base href="${location.origin}/websites/"/>` + doc.documentElement.outerHTML;
+          frame.onload = initEditor;
         });
-    });
+    };
+    btnPreview.onclick = () => window.open(`/websites/${currentSrc}`, '_blank');
+    // Save & Publish יעודכן בהמשך
 
-    // פותח את הדמו בחלון חדש
-    previewBtn.addEventListener('click', () => {
-      if (!currentFile) {
-        alert('בחר דמו לפני תצוגה');
-        return;
-      }
-      window.open(`/websites/${currentFile}`, '_blank');
-    });
+    function initEditor() {
+      const doc = frame.contentDocument;
+      // הפעלת עריכה
+      doc.querySelectorAll('[data-editable]').forEach(el => {
+        el.contentEditable = 'true';
+        el.style.outline='1px dotted #333';
+        el.onmouseenter = () => el.style.outline='2px dashed #10B981';
+        el.onmouseleave = () => el.style.outline='1px dotted #333';
+        el.onclick = () => showProps(el);
+      });
+      // drag & drop תמונות
+      frame.contentDocument.body.addEventListener('dragover', e=>{e.preventDefault(); dropZone.classList.remove('hidden'); dropZone.classList.add('drag-over');});
+      frame.contentDocument.body.addEventListener('dragleave', e=>{dropZone.classList.add('hidden'); dropZone.classList.remove('drag-over');});
+      frame.contentDocument.body.addEventListener('drop', e=>{
+        e.preventDefault(); dropZone.classList.add('hidden');
+        const file = e.dataTransfer.files[0];
+        const url = URL.createObjectURL(file);
+        const img = document.createElement('img'); img.src=url; img.style.maxWidth='100%';
+        frame.contentDocument.body.appendChild(img);
+      });
+    }
 
-    // הופך אלמנטים עם data-editable ל-editable בפועל
-    function enableEditing() {
-      try {
-        const doc = iframe.contentDocument || iframe.contentWindow.document;
-        doc.querySelectorAll('[data-editable]').forEach(el => {
-          el.contentEditable = 'true';
-          el.style.outline = '2px dashed #A78BFA';
-          el.addEventListener('focus', () => el.style.backgroundColor = '#F5F3FF');
-          el.addEventListener('blur',  () => el.style.backgroundColor = '');
-        });
-      } catch (e) {
-        console.error('שגיאה בהפעלת עריכה:', e);
-      }
+    function showProps(el) {
+      propPanel.innerHTML = `
+        <div><strong>תג:</strong> ${el.tagName}</div>
+        <label>תוכן: <textarea id='txt' class='w-full border p-1' rows='3'>${el.textContent}</textarea></label>
+        <label>צבע טקסט: <input type='color' id='clr' value='#333333'></label>
+        <button id='aiGen' class='mt-2 bg-indigo-500 text-white px-3 py-1 rounded'>AI שכתוב</button>
+      `;
+      document.getElementById('txt').oninput = e=> el.textContent=e.target.value;
+      document.getElementById('clr').oninput = e=> el.style.color=e.target.value;
+      document.getElementById('aiGen').onclick = ()=> aiRewrite(el);
+    }
+
+    function aiRewrite(el) {
+      const prompt = prompt('הקלד הנחיה ל-AI');
+      if (!prompt) return;
+      // דמה: יוצג טקסט חדש
+      el.textContent = '🔄 AI מחליף תוכן לפי ההנחיה: ' + prompt;
     }
   </script>
 </body>
