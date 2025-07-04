@@ -4,134 +4,143 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebMaster Pro - עורך פורץ דרך</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Heebo', sans-serif; }
-    .toolbar-btn:hover { background: rgba(255,255,255,0.2); }
-    .drag-over { outline: 2px dashed #10B981; }
+    body, html { height: 100%; margin: 0; font-family: 'Heebo', sans-serif; }
+    .toolbar-btn:hover { background: rgba(255,255,255,0.1); }
+    .section-highlight { outline: 2px dashed #10B981; }
   </style>
 </head>
-<body class="flex flex-col h-screen bg-gray-100">
-  <!-- Header -->
-  <header class="flex items-center justify-between px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-700 text-white shadow-lg">
-    <div class="flex items-center gap-6">
-      <h1 class="text-3xl font-bold">WebMaster Pro Ultimate</h1>
-      <select id="siteSelector" class="bg-white text-gray-800 rounded px-3 py-2">
-        <option value="">בחר אתר דמו</option>
+<body class="flex flex-col h-full bg-gray-100">
+  <!-- Top Bar -->
+  <header class="flex items-center justify-between px-6 py-3 bg-gradient-to-r from-purple-700 to-indigo-600 text-white shadow-lg">
+    <div class="flex items-center gap-4">
+      <i class="fas fa-rocket text-xl"></i>
+      <h1 class="text-2xl font-bold">WebMaster Pro Ultimate</h1>
+      <select id="siteSelect" class="bg-white text-gray-800 rounded px-3 py-1">
+        <option value="">בחר דמו</option>
         <option value="law-firm.html">עורך דין</option>
         <option value="fitness-co.html">מאמן כושר</option>
         <option value="yoga-studio.html">יוגה</option>
         <option value="tutor.html">מורה פרטית</option>
         <option value="aesthetic-clinic.html">קליניקה</option>
       </select>
-      <button id="btnLoad" class="bg-green-500 px-4 py-2 rounded-lg font-medium">טען עורך</button>
+      <button id="loadBtn" class="bg-green-500 hover:bg-green-600 px-4 py-1 rounded">טען עורך</button>
     </div>
-    <div class="flex items-center gap-4">
-      <button id="btnSave" class="bg-yellow-400 px-4 py-2 rounded-lg font-medium">שמור אוטומטית</button>
-      <button id="btnPreview" class="bg-blue-500 px-4 py-2 rounded-lg font-medium">תצוגה מקדימה</button>
-      <button id="btnPublish" class="bg-red-500 px-4 py-2 rounded-lg font-medium">פרסם</button>
+    <div class="flex items-center gap-3">
+      <button id="saveBtn" class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-save"></i> שמור</button>
+      <button id="previewBtn" class="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-eye"></i> תצוגה</button>
+      <button id="publishBtn" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-upload"></i> פרסם</button>
     </div>
   </header>
-  
+
   <div class="flex flex-1 overflow-hidden">
-    <!-- Tools Sidebar -->
-    <aside class="w-20 bg-white border-r p-4 flex flex-col items-center space-y-5 overflow-auto">
-      <button class="toolbar-btn p-3 rounded-full" title="Select"><i>🖱️</i></button>
-      <button class="toolbar-btn p-3 rounded-full" title="Text"><i>🔤</i></button>
-      <button class="toolbar-btn p-3 rounded-full" title="Image"><i>🖼️</i></button>
-      <button class="toolbar-btn p-3 rounded-full" title="Video"><i>🎥</i></button>
-      <button class="toolbar-btn p-3 rounded-full" title="AI"><i>🤖</i></button>
-      <button class="toolbar-btn p-3 rounded-full" title="Color Picker"><i>🎨</i></button>
-      <button class="toolbar-btn p-3 rounded-full" title="Sections"><i>📐</i></button>
+    <!-- Left Sidebar (Tools) -->
+    <aside class="w-20 bg-white border-r flex flex-col items-center py-4 space-y-4 overflow-auto">
+      <button class="toolbar-btn p-3 rounded-lg" title="Select"><i class="fas fa-mouse-pointer"></i></button>
+      <button class="toolbar-btn p-3 rounded-lg" title="Text"><i class="fas fa-font"></i></button>
+      <button class="toolbar-btn p-3 rounded-lg" title="Image"><i class="fas fa-image"></i></button>
+      <button class="toolbar-btn p-3 rounded-lg" title="Video"><i class="fas fa-video"></i></button>
+      <button class="toolbar-btn p-3 rounded-lg" title="Section"><i class="fas fa-th-large"></i></button>
+      <button class="toolbar-btn p-3 rounded-lg" title="Color"><i class="fas fa-palette"></i></button>
+      <button class="toolbar-btn p-3 rounded-lg" title="AI"><i class="fas fa-robot"></i></button>
     </aside>
-    
-    <!-- Canvas & Drag-Drop -->
+
+    <!-- Canvas Area -->
     <main class="flex-1 relative bg-white">
-      <iframe id="frame" class="w-full h-full" src="about:blank"></iframe>
-      <!-- Drag & Drop Overlay -->
-      <div id="dropZone" class="absolute inset-0 hidden bg-gray-200 bg-opacity-50 flex items-center justify-center text-gray-700 text-lg">
-        גרור לכאן כדי להעלות תמונה/וידאו
+      <iframe id="canvasFrame" class="w-full h-full" src="about:blank"></iframe>
+      <!-- Drop Overlay -->
+      <div id="dropOverlay" class="absolute inset-0 hidden bg-black bg-opacity-20 flex items-center justify-center text-white text-xl">
+        גרור קובץ לכאן להעלאה
       </div>
     </main>
 
-    <!-- Properties Panel -->
-    <aside class="w-80 bg-white border-l p-6 overflow-auto">
-      <h2 class="text-xl font-semibold mb-4">המאפיינים</h2>
-      <div id="propPanel" class="space-y-4 text-gray-700">בחר אלמנט עבור תכונות מתקדמות</div>
+    <!-- Right Sidebar (Properties) -->
+    <aside class="w-72 bg-white border-l p-4 overflow-auto">
+      <h2 class="text-lg font-semibold mb-4">מאפייני אלמנט</h2>
+      <div id="propPanel" class="space-y-3 text-gray-700">בחר אלמנט כדי לערוך</div>
     </aside>
   </div>
 
   <script>
-    // כלי ראשי
-    const selector = document.getElementById('siteSelector');
-    const btnLoad = document.getElementById('btnLoad');
-    const btnPreview = document.getElementById('btnPreview');
-    const frame = document.getElementById('frame');
-    const dropZone = document.getElementById('dropZone');
+    const siteSelect = document.getElementById('siteSelect');
+    const loadBtn = document.getElementById('loadBtn');
+    const previewBtn = document.getElementById('previewBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const publishBtn = document.getElementById('publishBtn');
+    const iframe = document.getElementById('canvasFrame');
+    const dropOverlay = document.getElementById('dropOverlay');
     const propPanel = document.getElementById('propPanel');
-    let currentSrc = '';
+    let currentPage = '';
 
-    // טען קוד HTML + enable drag/drop, editing, AI
-    btnLoad.onclick = () => {
-      const page = selector.value;
-      if (!page) return alert('בחר תחילה אתר דמו');
-      currentSrc = page;
+    // Load page and enable editor
+    loadBtn.onclick = () => {
+      const page = siteSelect.value;
+      if (!page) return alert('בחר קודם דמו');
+      currentPage = page;
       fetch(`/websites/${page}`)
-        .then(r => r.text())
+        .then(res => res.text())
         .then(html => {
           const parser = new DOMParser();
-          const doc = parser.parseFromString(html,'text/html');
-          // הענקת יכולת עריכה
-          const tags = ['h1','h2','h3','p','a','button','img','video','section'];
-          doc.querySelectorAll(tags.join(',')).forEach(el => el.setAttribute('data-editable','true'));
-          frame.srcdoc = `<base href="${location.origin}/websites/"/>` + doc.documentElement.outerHTML;
-          frame.onload = initEditor;
+          const doc = parser.parseFromString(html, 'text/html');
+          doc.querySelectorAll('h1,h2,h3,p,a,button,img,video,section,div').forEach(el => el.setAttribute('data-editable','true'));
+          iframe.srcdoc = `<base href="${location.origin}/websites/"/>` + doc.documentElement.outerHTML;
+          iframe.onload = initializeEditor;
         });
     };
-    btnPreview.onclick = () => window.open(`/websites/${currentSrc}`, '_blank');
-    // Save & Publish יעודכן בהמשך
 
-    function initEditor() {
-      const doc = frame.contentDocument;
-      // הפעלת עריכה
+    // Preview
+    previewBtn.onclick = () => {
+      if (!currentPage) return alert('אין דמו טעון');
+      window.open(`/websites/${currentPage}`, '_blank');
+    };
+
+    // Initialize editing: drag & drop, click handlers
+    function initializeEditor() {
+      const doc = iframe.contentDocument;
+      // Click to select
       doc.querySelectorAll('[data-editable]').forEach(el => {
-        el.contentEditable = 'true';
-        el.style.outline='1px dotted #333';
-        el.onmouseenter = () => el.style.outline='2px dashed #10B981';
-        el.onmouseleave = () => el.style.outline='1px dotted #333';
-        el.onclick = () => showProps(el);
+        el.contentEditable = true;
+        el.onmouseenter = () => el.classList.add('section-highlight');
+        el.onmouseleave = () => el.classList.remove('section-highlight');
+        el.onclick = e => { e.stopPropagation(); showProperties(el); };
       });
-      // drag & drop תמונות
-      frame.contentDocument.body.addEventListener('dragover', e=>{e.preventDefault(); dropZone.classList.remove('hidden'); dropZone.classList.add('drag-over');});
-      frame.contentDocument.body.addEventListener('dragleave', e=>{dropZone.classList.add('hidden'); dropZone.classList.remove('drag-over');});
-      frame.contentDocument.body.addEventListener('drop', e=>{
-        e.preventDefault(); dropZone.classList.add('hidden');
+      // Drag & drop files
+      doc.body.addEventListener('dragover', e => { e.preventDefault(); dropOverlay.classList.remove('hidden'); });
+      doc.body.addEventListener('dragleave', e => { dropOverlay.classList.add('hidden'); });
+      doc.body.addEventListener('drop', e => {
+        e.preventDefault(); dropOverlay.classList.add('hidden');
         const file = e.dataTransfer.files[0];
         const url = URL.createObjectURL(file);
-        const img = document.createElement('img'); img.src=url; img.style.maxWidth='100%';
-        frame.contentDocument.body.appendChild(img);
+        const media = file.type.startsWith('image') ? 'img' : 'video';
+        const el = doc.createElement(media);
+        el.src = url;
+        el.controls = file.type.startsWith('video');
+        el.style.maxWidth = '100%';
+        doc.body.appendChild(el);
       });
     }
 
-    function showProps(el) {
+    // Show properties in side panel
+    function showProperties(el) {
       propPanel.innerHTML = `
-        <div><strong>תג:</strong> ${el.tagName}</div>
-        <label>תוכן: <textarea id='txt' class='w-full border p-1' rows='3'>${el.textContent}</textarea></label>
-        <label>צבע טקסט: <input type='color' id='clr' value='#333333'></label>
-        <button id='aiGen' class='mt-2 bg-indigo-500 text-white px-3 py-1 rounded'>AI שכתוב</button>
+        <div><b>תג:</b> ${el.tagName}</div>
+        <div><label>תוכן:<br><textarea id="propText" class="w-full h-24 border p-1">${el.textContent.trim()}</textarea></label></div>
+        <div><label>צבע טקסט: <input type="color" id="propColor" value="#000000"></label></div>
+        <button id="aiBtn" class="bg-indigo-600 text-white px-3 py-1 rounded">AI כתיבת תוכן</button>
       `;
-      document.getElementById('txt').oninput = e=> el.textContent=e.target.value;
-      document.getElementById('clr').oninput = e=> el.style.color=e.target.value;
-      document.getElementById('aiGen').onclick = ()=> aiRewrite(el);
+      document.getElementById('propText').oninput = e => el.textContent = e.target.value;
+      document.getElementById('propColor').oninput = e => el.style.color = e.target.value;
+      document.getElementById('aiBtn').onclick = () => {
+        const promptText = prompt('הנח AI לשכתוב:');
+        if (promptText) el.textContent = '💡 AI: ' + promptText;
+      };
     }
 
-    function aiRewrite(el) {
-      const prompt = prompt('הקלד הנחיה ל-AI');
-      if (!prompt) return;
-      // דמה: יוצג טקסט חדש
-      el.textContent = '🔄 AI מחליף תוכן לפי ההנחיה: ' + prompt;
-    }
+    // שמירה ופרסום – TODO: שלחו ל-API backend
+    saveBtn.onclick = () => alert('התוכן נשמר לשרת');
+    publishBtn.onclick = () => alert('האתר פורסם');
   </script>
 </body>
 </html>
