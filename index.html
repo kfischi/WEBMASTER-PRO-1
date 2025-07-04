@@ -6,112 +6,51 @@
   <title>🚀 WebMaster Pro Ultimate - גלריה ואדיטור משולבים</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    /* Reset & Base */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; width: 100%; font-family: 'Inter', sans-serif; scroll-behavior: smooth; background: #0f172a; color: #f1f5f9; }
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Inter', sans-serif; background: #0f172a; color: #f1f5f9; scroll-behavior: smooth; }
     a { text-decoration: none; color: inherit; }
-    button { cursor: pointer; }
+    button { background: none; border: none; cursor: pointer; }
 
-    /* Layout */
+    /* ===== Layout ===== */
     .container { display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: 1fr; height: 100vh; gap: 1rem; padding: 1rem; }
 
-    /* Header */
-    .header { display: flex; align-items: center; justify-content: space-between; background: rgba(15,23,42,0.8); backdrop-filter: blur(8px); padding: 1rem 2rem; border-radius: 1rem; position: sticky; top: 0; z-index: 100; }
-    .header-brand { display: flex; align-items: center; gap: 1rem; }
+    /* ===== Header ===== */
+    .header { display: flex; justify-content: space-between; align-items: center; background: rgba(15,23,42,0.8); backdrop-filter: blur(8px); padding: 1rem 2rem; border-radius: 1rem; position: sticky; top: 0; z-index: 100; }
     .header-brand h1 { font-size: 2rem; font-weight: 800; color: #10b981; }
     .header-brand p { font-size: 1rem; opacity: 0.7; }
-    .header-actions { display: flex; gap: 1rem; }
-    .action-btn { padding: 0.5rem 1rem; background: #10b981; border: none; border-radius: 0.5rem; font-weight: 600; transition: background 0.3s; }
-    .action-btn:hover { background: #0d9776; }
+    .header-actions button { padding: 0.5rem 1rem; background: #10b981; border-radius: 0.5rem; font-weight: 600; transition: background 0.3s; color: #0f172a; }
+    .header-actions button:hover { background: #0d9776; }
 
-    /* Gallery */
-    .gallery { padding: 1rem; overflow-y: auto; max-height: calc(100vh - 8rem); }
+    /* ===== Gallery ===== */
+    .gallery { overflow-y: auto; max-height: calc(100vh - 8rem); padding: 1rem; }
     .filter-group { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-    .filter-btn { padding: 0.5rem 1rem; background: rgba(15,23,42,0.7); border: none; border-radius: 0.5rem; color: #f1f5f9; transition: background 0.3s; }
-    .filter-btn.active{ background: #10b981; color: #0f172a; }
-    .websites-grid { display: grid; grid-template-columns: repeat( auto-fill, minmax(240px, 1fr) ); gap: 1rem; }
-    .website-card { background: rgba(15,23,42,0.8); padding: 1rem; border-radius: 1rem; display: flex; flex-direction: column; height: 100%; transition: transform 0.3s, box-shadow 0.3s; }
+    .filter-btn { padding: 0.5rem 1rem; background: rgba(15,23,42,0.7); border-radius: 0.5rem; transition: background 0.3s, color 0.3s; }
+    .filter-btn.active { background: #10b981; color: #0f172a; }
+    .websites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .website-card { background: rgba(15,23,42,0.8); border-radius: 1rem; padding: 1rem; display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s; }
     .website-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .website-card img { width: 100%; border-radius: 0.5rem; margin-bottom: 0.75rem; }
+    .website-card img { border-radius: 0.5rem; width: 100%; height: 140px; object-fit: cover; margin-bottom: 0.75rem; }
     .website-title { font-size: 1.2rem; font-weight: 600; color: #10b981; margin-bottom: 0.25rem; }
-    .website-desc { font-size: 0.9rem; opacity: 0.8; margin-bottom: auto; }
-    .card-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
-    .btn-edit, .btn-preview { flex: 1; padding: 0.5rem; border-radius: 0.5rem; border: none; font-size: 0.9rem; font-weight: 600; transition: background 0.3s; }
+    .website-desc { flex: 1; font-size: 0.9rem; opacity: 0.8; margin-bottom: 1rem; }
+    .card-actions { display: flex; gap: 0.5rem; }
+    .btn-edit, .btn-preview { flex: 1; padding: 0.5rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; transition: background 0.3s; }
     .btn-edit { background: #10b981; color: #0f172a; }
     .btn-edit:hover { background: #0d9776; }
     .btn-preview { background: rgba(255,255,255,0.1); color: #f1f5f9; }
     .btn-preview:hover { background: rgba(255,255,255,0.2); }
 
-    /* Editor */
-    .editor { display: grid; grid-template-columns: 250px 1fr 300px; grid-template-rows: auto 1fr auto; gap: 1rem; height: calc(100vh - 8rem); }
+    /* ===== Editor ===== */
+    .editor { display: grid; grid-template-columns: 250px 1fr 300px; grid-template-rows: auto 1fr; gap: 1rem; height: calc(100vh - 8rem); }
     .sidebar-tools, .sidebar-properties { background: rgba(15,23,42,0.8); backdrop-filter: blur(8px); border-radius: 1rem; padding: 1rem; overflow-y: auto; }
-    .sidebar-tools h2, .sidebar-properties h2 { font-size: 1.25rem; margin-bottom: 1rem; color: #10b981; }
-    .tool-btn, .property-group button { width: 100%; padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(15,23,42,0.6); border: none; border-radius: 0.5rem; color: #f1f5f9; transition: background 0.3s; }
+    .sidebar-tools h2, .sidebar-properties h2 { color: #10b981; font-size: 1.25rem; margin-bottom: 1rem; }
+    .tool-btn, .property-group button { width: 100%; padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(15,23,42,0.6); border-radius: 0.5rem; color: #f1f5f9; transition: background 0.3s, color 0.3s; }
     .tool-btn:hover, .property-group button:hover { background: #10b981; color: #0f172a; }
-    .canvas { grid-column: 2; grid-row: 1 / span 2; background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; position: relative; }
+    .canvas { grid-column: 2; grid-row: 1 / span 2; position: relative; border-radius: 1rem; overflow: hidden; background: rgba(255,255,255,0.05); }
     .iframe-container { width: 100%; height: 100%; position: relative; }
     .preview-iframe { width: 100%; height: 100%; border: none; transform-origin: top left; transition: transform 0.3s; }
-    .loading-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; color: #f1f5f9; font-size: 1.25rem; visibility: hidden; opacity: 0; transition: opacity 0.3s; }
-    .loading-overlay.active { visibility: visible; opacity: 1; }
+    .loading-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; color: #f1f5f9; font-size: 1.25rem; visibility: visible; opacity: 1; transition: opacity 0.3s; }
     .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #10b981; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .editor-header { grid-column: 1 / span 3; display: flex; align-items: center; justify-content: space-between; padding: 0.75rem; color: #f1f5f9; }
-    .website-selector, .device-group button, .action-group button { padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border: none; border-radius: 0.5rem; color: #f1f5f9; transition: background 0.3s; }
-    .device-btn.active, .action-btn.active { background: #10b981; color: #0f172a; }
-    .status-bar { grid-column: 1 / span 3; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 1rem; font-size: 0.875rem; }
-    .status-item { display: flex; align-items: center; gap: 0.5rem; }
-    .status-indicator { width: 10px; height: 10px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-    /* Scrollbars */
-    ::-webkit-scrollbar { width: 8px; height: 8px; } ::-webkit-scrollbar-track { background: rgba(15,23,42,0.5); border-radius: 4px; } ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; } ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.5); }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-brand">
-        <h1>🚀 WebMaster Pro Ultimate</h1>
-        <p>גלריה ואדיטור משולבים ברמת מיליארד דולר</p>
-      </div>
-      <div class="header-actions">
-        <button class="action-btn" onclick="openMainEditor()">פתח אדיטור ראשי</button>
-      </div>
-    </div>
-    <!-- Gallery -->
-    <div class="gallery">
-      <div class="filter-group">
-        <!-- filter buttons -->
-      </div>
-      <div id="websitesGrid" class="websites-grid"></div>
-    </div>
-    <!-- Editor -->
-    <div class="editor">
-      <div class="sidebar-tools">
-        <h2>🛠️ כלי</h2>
-        <!-- tools list -->
-      </div>
-      <div class="canvas">
-        <div class="iframe-container">
-          <iframe id="previewIframe" class="preview-iframe" src="about:blank"></iframe>
-          <div id="loadingOverlay" class="loading-overlay"><div class="spinner"></div>טוען...</div>
-        </div>
-      </div>
-      <div class="sidebar-properties">
-        <h2>⚙️ מאפיינים</h2>
-        <!-- properties panel -->
-      </div>
-    </div>
-    <!-- Status Bar -->
-    <div class="status-bar">
-      <div class="status-item"><div class="status-indicator"></div><span id="connectionStatus">מחובר</span></div>
-      <div class="status-item"><span id="lastSaved">נשמר זה עתה</span></div>
-      <div class="status-item"><span id="aiStatus">AI מוכן</span></div>
-    </div>
-  </div>
-  <script>
-    // JS logic to dynamically populate filters, gallery, tools and initialize editor...
-    console.log('🚀 WebMaster Pro Ultimate loaded!');
-  </script>
-</body>
-</html>
+    .editor-header { grid-column: 1 / span 3; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; color: #f1f5f9; }
+    .website-selector, .device-group button, .action-group button { padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border-radius:
