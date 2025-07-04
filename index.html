@@ -3,131 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🚀 WebMaster Pro Ultimate - גלריה ואדיטור משולבים</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    /* ===== Reset & Base ===== */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Inter', sans-serif; background: #0f172a; color: #f1f5f9; scroll-behavior: smooth; }
-    a { text-decoration: none; color: inherit; }
-    button { background: none; border: none; cursor: pointer; }
-
-    /* ===== Layout ===== */
-    .container { display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: 1fr; height: 100vh; gap: 1rem; padding: 1rem; }
-
-    /* ===== Header ===== */
-    .header { display: flex; justify-content: space-between; align-items: center; background: rgba(15,23,42,0.8); backdrop-filter: blur(8px); padding: 1rem 2rem; border-radius: 1rem; position: sticky; top: 0; z-index: 100; }
-    .header-brand h1 { font-size: 2rem; font-weight: 800; color: #10b981; }
-    .header-brand p { font-size: 1rem; opacity: 0.7; }
-    .header-actions button { padding: 0.5rem 1rem; background: #10b981; border-radius: 0.5rem; font-weight: 600; transition: background 0.3s; color: #0f172a; }
-    .header-actions button:hover { background: #0d9776; }
-
-    /* ===== Gallery ===== */
-    .gallery { overflow-y: auto; max-height: calc(100vh - 8rem); padding: 1rem; }
-    .filter-group { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-    .filter-btn { padding: 0.5rem 1rem; background: rgba(15,23,42,0.7); border-radius: 0.5rem; transition: background 0.3s, color 0.3s; }
-    .filter-btn.active { background: #10b981; color: #0f172a; }
-    .websites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
-    .website-card { background: rgba(15,23,42,0.8); border-radius: 1rem; padding: 1rem; display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s; }
-    .website-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .website-card img { border-radius: 0.5rem; width: 100%; height: 140px; object-fit: cover; margin-bottom: 0.75rem; }
-    .website-title { font-size: 1.2rem; font-weight: 600; color: #10b981; margin-bottom: 0.25rem; }
-    .website-desc { flex: 1; font-size: 0.9rem; opacity: 0.8; margin-bottom: 1rem; }
-    .card-actions { display: flex; gap: 0.5rem; }
-    .btn-edit, .btn-preview { flex: 1; padding: 0.5rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; transition: background 0.3s; }
-    .btn-edit { background: #10b981; color: #0f172a; }
-    .btn-edit:hover { background: #0d9776; }
-    .btn-preview { background: rgba(255,255,255,0.1); color: #f1f5f9; }
-    .btn-preview:hover { background: rgba(255,255,255,0.2); }
-
-    /* ===== Editor ===== */
-    .editor { display: grid; grid-template-columns: 250px 1fr 300px; grid-template-rows: auto 1fr; gap: 1rem; height: calc(100vh - 8rem); }
-    .sidebar-tools, .sidebar-properties { background: rgba(15,23,42,0.8); backdrop-filter: blur(8px); border-radius: 1rem; padding: 1rem; overflow-y: auto; }
-    .sidebar-tools h2, .sidebar-properties h2 { color: #10b981; font-size: 1.25rem; margin-bottom: 1rem; }
-    .tool-btn, .property-group button { width: 100%; padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(15,23,42,0.6); border-radius: 0.5rem; color: #f1f5f9; transition: background 0.3s, color 0.3s; }
-    .tool-btn:hover, .property-group button:hover { background: #10b981; color: #0f172a; }
-    .canvas { grid-column: 2; grid-row: 1 / span 2; position: relative; border-radius: 1rem; overflow: hidden; background: rgba(255,255,255,0.05); }
-    .iframe-container { width: 100%; height: 100%; position: relative; }
-    .preview-iframe { width: 100%; height: 100%; border: none; transform-origin: top left; transition: transform 0.3s; }
-    .loading-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; color: #f1f5f9; font-size: 1.25rem; visibility: hidden; opacity: 0; transition: opacity 0.3s; }
-    .loading-overlay.visible { visibility: visible; opacity: 1; }
-    .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #10b981; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .editor-header { grid-column: 1 / span 3; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; color: #f1f5f9; }
-  </style>
+  <title>ד"ר מיכל רוזן – רפואה אסתטית</title>
+  <meta name="description" content="מרפאה אסתטית מובילה בישראל, טיפולי בוטוקס, מילוי והצערת עור ללא ניתוח.">
+  <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <header class="header">
-      <div class="header-brand">
-        <h1>🚀 WebMaster Pro Ultimate</h1>
-        <p>השליטה במערכת בידיים שלך</p>
-      </div>
-      <div class="header-actions">
-        <button onclick="showGallery()">גלריה</button>
-        <button id="openEditorBtn" disabled>פתח אדיטור</button>
-      </div>
-    </header>
-
-    <!-- Gallery & Editor -->
-    <div id="mainArea">
-      <section id="gallerySection" class="gallery">
-        <div class="filter-group" id="filterGroup"></div>
-        <div class="websites-grid" id="websitesGrid"></div>
-      </section>
-      <section id="editorSection" class="editor" style="display:none;">
-        <div class="sidebar-tools">
-          <h2>🛠 כלים</h2>
-          <button class="tool-btn" onclick="selectTool('select')">Select</button>
-          <button class="tool-btn" onclick="selectTool('text')">Text</button>
-          <button class="tool-btn" onclick="selectTool('image')">Image</button>
-          <button class="tool-btn" onclick="selectTool('color')">Color</button>
-          <button class="tool-btn" onclick="zoomIn()">Zoom +</button>
-          <button class="tool-btn" onclick="zoomOut()">Zoom -</button>
-        </div>
-        <div class="canvas">
-          <div class="editor-header">
-            <div id="editorTitle">Editing</div>
-            <div class="loading-overlay" id="loadingOverlay">
-              <div class="spinner"></div>
-              טוען...
-            </div>
-          </div>
-          <div class="iframe-container">
-            <iframe id="previewFrame" class="preview-iframe"></iframe>
-          </div>
-        </div>
-        <div class="sidebar-properties">
-          <h2>⚙ מאפיינים</h2>
-          <div id="propertyControls"></div>
-        </div>
-      </section>
+  <!-- Navigation -->
+  <header class="glass-card nav">
+    <div class="container nav-container">
+      <a href="#home" class="logo">ד"ר מיכל רוזן</a>
+      <nav>
+        <ul class="menu">
+          <li><a href="#home">בית</a></li>
+          <li><a href="#about">אודות</a></li>
+          <li><a href="#services">שירותים</a></li>
+          <li><a href="#clients">לקוחות</a></li>
+          <li><a href="#gallery">גלריה</a></li>
+          <li><a href="#projects">פרויקטים</a></li>
+          <li><a href="#blog">מאמרים</a></li>
+          <li><a href="#contact">צור קשר</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <!-- Footer -->
-    <footer class="footer"></footer>
-  </div>
+  <!-- Home Section -->
+  <section id="home" class="hero" style="background:url('images/hero.jpg')center/cover no-repeat;height:80vh;position:relative;">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content fadeInUp">
+      <h1>להביא את היופי הטבעי שלך לידי ביטוי</h1>
+      <p>טיפולי אסתטיקה חדשניים ללא ניתוח – בוטוקס, מילוי וטיפולי לייזר.</p>
+      <a href="#contact" class="btn btn-primary">קבע/י תור עכשיו</a>
+    </div>
+  </section>
 
-  <script>
-    const professionalWebsites = [
-  // ... array ...
-];
+  <!-- About Section -->
+  <section id="about" class="container about fadeInUp">
+    <h2>אודות</h2>
+    <p>ד"ר מיכל רוזן, מומחית לרפואה אסתטית עם למעלה מ-10 שנות ניסיון, מוסמכת מהאיגוד הישראלי לרפואה אסתטית.</p>
+    <ul>
+      <li>PhD ברפואה אסתטית, אוניברסיטת תל אביב</li>
+      <li>הרצאות בינלאומיות בכנסים רפואיים</li>
+      <li>פרס על מצוינות קלינית, 2022</li>
+    </ul>
+  </section>
 
-let currentWebsiteGlobal = null;
+  <!-- Services Section -->
+  <section id="services" class="container services fadeInUp">
+    <h2>השירותים שלנו</h2>
+    <div class="cards">
+      <div class="card hover-lift"><img src="images/service1.jpg" alt="בוטוקס"><h3>בוטוקס</h3><p>החלקת קמטים באזור המצח והעיניים.</p></div>
+      <div class="card hover-lift"><img src="images/service2.jpg" alt="מילוי עור"><h3>מילוי עור</h3><p>החזרת נפח טבעי לגבות ולשפתיים.</p></div>
+      <div class="card hover-lift"><img src="images/service3.jpg" alt="לייזר"><h3>טיפולי לייזר</h3><p>הבהרת עור, הסרת כתמים וצלקות.</p></div>
+      <div class="card hover-lift"><img src="images/service4.jpg" alt="הצערת עור"><h3>הצערת עור</h3><p>טיפולים מתקדמים להצערת מראה העור.</p></div>
+    </div>
+  </section>
 
-// assign button handler after DOM
-window.addEventListener('DOMContentLoaded', () => {
-  const openEditorBtn = document.getElementById('openEditorBtn');
-  openEditorBtn.disabled = true;
-  openEditorBtn.addEventListener('click', () => {
-    if (currentWebsiteGlobal) {
-      openEditor(currentWebsiteGlobal);
-    }
-  });
-  initialize();
-});
-('DOMContentLoaded', initialize);
-  </script>
+  <!-- Clients Section -->
+  <section id="clients" class="container testimonials slideInLeft">
+    <h2>לקוחות מרוצים</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card glass-card hover-lift"><p>"חוויה מקצועית ואמינה, התוצאות מרהיבות!"</p><span>– יעל כהן</span></div>
+      <div class="testimonial-card glass-card hover-lift"><p>"ד"ר מיכל מדהימה, ממליצה בחום."</p><span>– רונית לוי</span></div>
+      <div class="testimonial-card glass-card hover-lift"><p>"שירות מעולה ותמיכה לאורך כל הדרך."</p><span>– דניאל ברוש</span></div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="container gallery fadeInUp">
+    <h2>גלריה</h2>
+    <div class="gallery-grid">
+      <img src="images/gallery1.jpg" alt="לפני ואחרי טיפול" loading="lazy">
+      <img src="images/gallery2.jpg" alt="לפני ואחרי טיפול" loading="lazy">
+      <img src="images/gallery3.jpg" alt="לפני ואחרי טיפול" loading="lazy">
+      <img src="images/gallery4.jpg" alt="לפני ואחרי טיפול" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="container projects fadeInUp">
+    <h2>פרויקטים מרכזיים</h2>
+    <article class="project-card glass-card hover-lift">
+      <h3>טיפול בוטוקס קבוצתי</h3>
+      <p>פרויקט טיפולי קבוצה ל-20 משתתפים.</p>
+    </article>
+  </section>
+
+  <!-- Blog Section -->
+  <section id="blog" class="container blog fadeInUp">
+    <h2>מאמרים וחדשות</h2>
+    <article class="blog-post glass-card hover-lift">
+      <h3>כיצד לבחור טיפול מתאים</h3>
+      <p>טיפים לבחירת הטיפול האסתטי המתאים לצרכיך.</p>
+      <span>20.05.2025</span>
+    </article>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container contact fadeInUp">
+    <h2>צור קשר</h2>
+    <form class="contact-form" action="#" method="post">
+      <input type="text" name="name" placeholder="שם" required>
+      <input type="email" name="email" placeholder="אימייל" required>
+      <textarea name="message" placeholder="הודעה"></textarea>
+      <button type="submit" class="btn btn-primary">שלח</button>
+    </form>
+    <div class="contact-info">
+      <p>טלפון: 03-1234567</p>
+      <p>אימייל: info@dr-michal-rosen.co.il</p>
+      <iframe src="https://www.google.com/maps/embed?..." width="100%" height="200" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="glass-card footer">
+    <div class="container footer-content">
+      <p>© 2025 ד"ר מיכל רוזן</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
