@@ -27,7 +27,7 @@
     /* ===== Gallery ===== */
     .gallery { overflow-y: auto; max-height: calc(100vh - 8rem); padding: 1rem; }
     .filter-group { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-    .filter-btn { padding: 0.5rem 1rem; background: rgba(15,23,42,0.7); border-radius: 0.5rem; transition: background 0.3s, color 0.3s; }
+    .filter-btn { padding: 0.5rem 1rem; background: rgba(15,23,42,0.7); border-radius: 0.5rem; transition: background 0.3s, color 0.3s; cursor: pointer; }
     .filter-btn.active { background: #10b981; color: #0f172a; }
     .websites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
     .website-card { background: rgba(15,23,42,0.8); border-radius: 1rem; padding: 1rem; display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s; }
@@ -122,34 +122,73 @@
 
   <script>
     const professionalWebsites = [
-      // ... array ...
+      { id: 'dr-michal-rosen', name: 'ד"ר מיכל רוזן', category: 'רפואה אסתטית', description: 'מרפאה אסתטית עם ייעוץ און-ליין וטופס קביעת תור', price: '₪8,500', img: 'https://source.unsplash.com/240x140/?clinic' },
+      { id: 'dani-fit', name: 'דני פיט', category: 'כושר', description: 'מאמן כושר אישי עם תוכנית אימון מותאמת', price: '₪6,900', img: 'https://source.unsplash.com/240x140/?fitness' },
+      { id: 'yoga-studio', name: 'סטודיו אוהם', category: 'יוגה', description: 'סטודיו יוגה ומדיטציה בהרמוניה מלאה', price: '₪6,200', img: 'https://source.unsplash.com/240x140/?yoga' },
+      { id: 'nutritionist', name: 'ד"ר שרה כהן', category: 'תזונה', description: 'תזונאית קלינית עם תפריטים אישיים', price: '₪7,200', img: 'https://source.unsplash.com/240x140/?nutrition' },
+      { id: 'law-firm', name: 'משרד ברקוביץ', category: 'עורכי דין', description: 'משרד עורכי דין מוביל בשירות אישי', price: '₪7,800', img: 'https://source.unsplash.com/240x140/?law' },
+      { id: 'accountant', name: 'רינה לוי', category: 'חשבות', description: 'חשבת שכר עם פתרונות מותאמים לעסקים', price: '₪6,800', img: 'https://source.unsplash.com/240x140/?accountant' },
+      { id: 'bella-salon', name: 'מספרה BELLA', category: 'יופי', description: 'מספרה ועיצוב שיער ברמה הגבוהה ביותר', price: '₪5,900', img: 'https://source.unsplash.com/240x140/?salon' },
+      { id: 'tutor-ronit', name: 'ד"ר רונית לוי', category: 'חינוך', description:
+        'מורה פרטית ומלווה אקדמי עם נסיון עשיר', price: '₪6,500', img: 'https://source.unsplash.com/240x140/?tutor' },
+      { id: 'premium-clinic', name: 'קליניקת יופי פרמיום', category: 'יופי מתקדם', description: 'קליניקה אסתטית עם טכנולוגיות חדשניות', price: '₪12,500', img: 'https://source.unsplash.com/240x140/?beauty+clinic' },
+      { id: 'multibrawn', name: 'מולטיבראון', category: 'אירועים', description: 'אירועים מושלמים ונופש אקסקלוסיבי', price: '₪8,900', img: 'https://source.unsplash.com/240x140/?event' },
+      { id: 'real-estate', name: 'נדל"ן פרמיום', category: 'נדל"ן', description: 'נדל"ן יוקרתי בישראל ובחו"ל', price: '₪9,200', img: 'https://source.unsplash.com/240x140/?realestate' }
     ];
 
     let currentWebsiteGlobal = null;
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const openEditorBtn = document.getElementById('openEditorBtn');
-      openEditorBtn.disabled = true;
-      openEditorBtn.addEventListener('click', () => {
-        if (currentWebsiteGlobal) {
-          openEditor(currentWebsiteGlobal);
-        }
+    function initialize() {
+      const grid = document.getElementById('websitesGrid');
+      professionalWebsites.forEach(site => {
+        const card = document.createElement('div'); card.className = 'website-card';
+        card.innerHTML = `
+          <img src="${site.img}" alt="${site.name}">
+          <div class="website-title">${site.name}</div>
+          <div class="website-desc">${site.description}</div>
+          <div class="site-price">${site.price}</div>
+          <div class="card-actions">
+            <button class="btn-preview" onclick="previewSite('${site.id}')">תצוגה מקדימה</button>
+            <button class="btn-edit" onclick="enableEditor('${site.id}')">עריכה</button>
+          </div>
+        `;
+        grid.appendChild(card);
       });
-      initialize();
-    });
+    }
 
     function showGallery() {
       document.getElementById('gallerySection').style.display = 'block';
       document.getElementById('editorSection').style.display = 'none';
+      document.getElementById('openEditorBtn').disabled = true;
     }
-    function openEditor(site) {
+
+    function enableEditor(id) {
+      currentWebsiteGlobal = professionalWebsites.find(w => w.id === id);
+      document.getElementById('openEditorBtn').disabled = false;
+      previewSite(id);
+    }
+
+    function previewSite(id) {
+      const site = professionalWebsites.find(w => w.id === id);
+      const iframe = document.getElementById('previewFrame');
+      document.getElementById('editorTitle').textContent = site.name;
+      document.getElementById('loadingOverlay').classList.add('visible');
+      iframe.src = `${site.id}/index.html`;
+      iframe.onload = () => document.getElementById('loadingOverlay').classList.remove('visible');
+      showGallery();
+    }
+
+    function openEditor() {
       document.getElementById('gallerySection').style.display = 'none';
       document.getElementById('editorSection').style.display = 'grid';
-      // load into iframe etc.
+      // further editor init...
     }
-    function initialize() {
-      // populate filters and cards
-    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const openEditorBtn = document.getElementById('openEditorBtn');
+      openEditorBtn.addEventListener('click', openEditor);
+      initialize();
+    });
   </script>
 </body>
 </html>
