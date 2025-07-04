@@ -6,6 +6,12 @@
   <title>ד"ר מיכל רוזן – רפואה אסתטית</title>
   <meta name="description" content="מרפאה אסתטית מובילה בישראל, טיפולי בוטוקס, מילוי והצערת עור ללא ניתוח.">
   <link href="css/style.css" rel="stylesheet">
+  <style>
+    /* Slider styles */
+    .hero-slider { position: absolute; inset: 0; overflow: hidden; }
+    .hero-slider .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; }
+    .hero-slider .slide.active { opacity: 1; }
+  </style>
 </head>
 <body>
   <!-- Navigation -->
@@ -30,9 +36,9 @@
   <!-- Home Section (Slider) -->
   <section id="home" class="hero">
     <div class="hero-slider">
-      <div class="slide" style="background:url('images/hero1.jpg')center/cover no-repeat;"></div>
-      <div class="slide" style="background:url('images/hero2.jpg')center/cover no-repeat;"></div>
-      <div class="slide" style="background:url('images/hero3.jpg')center/cover no-repeat;"></div>
+      <div class="slide" style="background:url('https://source.unsplash.com/1600x900/?skin-care') center/cover no-repeat;"></div>
+      <div class="slide" style="background:url('images/https://source.unsplash.com/1600x900/?beauty-treatment')center/cover no-repeat;"></div>
+      <div class="slide" style="background:url('images/https://source.unsplash.com/1600x900/?aesthetic')center/cover no-repeat;"></div>
     </div>
     <div class="hero-overlay"></div>
     <div class="container hero-content fadeInUp">
@@ -57,10 +63,10 @@
   <section id="services" class="container services fadeInUp">
     <h2>השירותים שלנו</h2>
     <div class="cards">
-      <div class="card hover-lift"><img src="images/service1.jpg" alt="בוטוקס"><h3>בוטוקס</h3><p>החלקת קמטים באזור המצח והעיניים.</p></div>
-      <div class="card hover-lift"><img src="images/service2.jpg" alt="מילוי עור"><h3>מילוי עור</h3><p>החזרת נפח טבעי לגבות ולשפתיים.</p></div>
-      <div class="card hover-lift"><img src="images/service3.jpg" alt="לייזר"><h3>טיפולי לייזר</h3><p>הבהרת עור, הסרת כתמים וצלקות.</p></div>
-      <div class="card hover-lift"><img src="images/service4.jpg" alt="הצערת עור"><h3>הצערת עור</h3><p>טיפולים מתקדמים להצערת מראה העור.</p></div>
+      <div class="card hover-lift"><img src="https://source.unsplash.com/400x300/?botox" alt="בוטוקס"><h3>בוטוקס</h3><p>החלקת קמטים באזור המצח והעיניים.</p></div>
+      <div class="card hover-lift"><img src="images/https://source.unsplash.com/400x300/?dermal-filler" alt="מילוי עור"><h3>מילוי עור</h3><p>החזרת נפח טבעי לגבות ולשפתיים.</p></div>
+      <div class="card hover-lift"><img src="images/https://source.unsplash.com/400x300/?laser-treatment" alt="לייזר"><h3>טיפולי לייזר</h3><p>הבהרת עור, הסרת כתמים וצלקות.</p></div>
+      <div class="card hover-lift"><img src="images/https://source.unsplash.com/400x300/?skin-rejuvenation" alt="הצערת עור"><h3>הצערת עור</h3><p>טיפולים מתקדמים להצערת מראה העור.</p></div>
     </div>
   </section>
 
@@ -78,10 +84,10 @@
   <section id="gallery" class="container gallery fadeInUp">
     <h2>גלריה</h2>
     <div class="gallery-grid">
-      <img src="images/gallery1.jpg" alt="לפני ואחרי טיפול" loading="lazy">
-      <img src="images/gallery2.jpg" alt="לפני ואחרי טיפול" loading="lazy">
-      <img src="images/gallery3.jpg" alt="לפני ואחרי טיפול" loading="lazy">
-      <img src="images/gallery4.jpg" alt="לפני ואחרי טיפול" loading="lazy">
+      <img src="images/https://source.unsplash.com/400x300/?before-after-aesthetic" alt="לפני ואחרי טיפול" loading="lazy">
+      <img src="images/https://source.unsplash.com/400x300/?skin-treatment" alt="לפני ואחרי טיפול" loading="lazy">
+      <img src="images/https://source.unsplash.com/400x300/?facial-care" alt="לפני ואחרי טיפול" loading="lazy">
+      <img src="images/https://source.unsplash.com/400x300/?cosmetic" alt="לפני ואחרי טיפול" loading="lazy">
     </div>
   </section>
 
@@ -127,6 +133,20 @@
     </div>
   </footer>
 
+  <script>
+    // Hero slider script
+    (function() {
+      var slides = document.querySelectorAll('.hero-slider .slide');
+      var current = 0;
+      function nextSlide() {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }
+      slides[current].classList.add('active');
+      setInterval(nextSlide, 5000);
+    })();
+  </script>
   <script src="js/script.js"></script>
 </body>
 </html>
