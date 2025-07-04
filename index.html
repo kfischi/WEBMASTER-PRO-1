@@ -829,6 +829,507 @@
                 transform: translateY(-120px) rotate(180deg); 
             }
         }
+
+        /* ===== Purchase Modal ===== */
+        .purchase-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .purchase-modal.visible {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            margin: auto;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .purchase-modal.visible .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 2rem 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .modal-title i {
+            color: var(--accent-gold);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.7);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 0 2rem 2rem;
+        }
+
+        .selected-website {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .website-preview-small {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .website-preview-small img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--glass-border);
+        }
+
+        .website-details h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+
+        .website-details p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .price-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .price-amount {
+            background: linear-gradient(135deg, var(--accent-gold), #f59e0b);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+        }
+
+        .form-section h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .form-section h4 i {
+            color: var(--primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
+            color: white;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .option-card input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .option-card input[type="checkbox"]:checked + .option-content {
+            color: white;
+        }
+
+        .option-card input[type="checkbox"]:checked ~ * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .option-card input[type="checkbox"]:checked::before {
+            left: 0;
+            opacity: 0.1;
+        }
+
+        .option-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .option-content i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .option-price {
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .price-summary {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--accent-gold));
+        }
+
+        .summary-header h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .summary-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-line:last-child {
+            border-bottom: none;
+        }
+
+        .summary-line span:first-child {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .summary-line span:last-child {
+            color: white;
+            font-weight: 600;
+        }
+
+        .discount-line {
+            color: var(--accent) !important;
+        }
+
+        .discount-text {
+            color: var(--accent) !important;
+        }
+
+        .discount-amount {
+            color: var(--accent) !important;
+        }
+
+        .total-line {
+            border-top: 2px solid var(--primary) !important;
+            padding-top: 1rem !important;
+            margin-top: 0.5rem;
+        }
+
+        .total-label {
+            font-size: 1.1rem !important;
+            font-weight: 700 !important;
+            color: white !important;
+        }
+
+        .total-amount {
+            font-size: 1.3rem !important;
+            font-weight: 800 !important;
+            color: var(--accent-gold) !important;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .launch-discount {
+            background: rgba(6, 214, 160, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
+            text-align: center;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .form-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .submit-btn {
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .email-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+
+        .email-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Responsive Design for Modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 1rem auto;
+                max-height: 95vh;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .website-preview-small {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .website-preview-small img {
+                width: 100px;
+                height: 75px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -955,6 +1456,168 @@
                 </div>
             </div>
         </footer>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div class="purchase-modal" id="purchaseModal">
+        <div class="modal-overlay" onclick="closePurchaseModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-shopping-cart"></i>
+                    הזמנת אתר מקצועי
+                </h2>
+                <button class="modal-close" onclick="closePurchaseModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Website Info -->
+                <div class="selected-website">
+                    <div class="website-preview-small">
+                        <img id="selectedWebsiteImage" src="" alt="" />
+                        <div class="website-details">
+                            <h3 id="selectedWebsiteTitle"></h3>
+                            <p id="selectedWebsiteCategory"></p>
+                            <div class="price-display">
+                                <span class="price-label">מחיר:</span>
+                                <span class="price-amount" id="selectedWebsitePrice"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Form -->
+                <form class="order-form" id="orderForm">
+                    <div class="form-section">
+                        <h4>
+                            <i class="fas fa-user"></i>
+                            פרטי ההזמנה
+                        </h4>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerName">שם מלא *</label>
+                                <input type="text" id="customerName" name="customerName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerPhone">טלפון *</label>
+                                <input type="tel" id="customerPhone" name="customerPhone" required placeholder="050-1234567">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerEmail">אימייל *</label>
+                                <input type="email" id="customerEmail" name="customerEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="businessName">שם העסק</label>
+                                <input type="text" id="businessName" name="businessName" placeholder="אופציונלי">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>
+                            <i class="fas fa-cogs"></i>
+                            אפשרויות נוספות
+                        </h4>
+                        
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="checkbox" name="hostingIncluded" value="180">
+                                <div class="option-content">
+                                    <i class="fas fa-server"></i>
+                                    <span class="option-title">אחסון שנתי</span>
+                                    <span class="option-price">+₪180/שנה</span>
+                                </div>
+                            </label>
+                            
+                            <label class="option-card">
+                                <input type="checkbox" name="domainIncluded" value="65">
+                                <div class="option-content">
+                                    <i class="fas fa-globe"></i>
+                                    <span class="option-title">דומיין .co.il</span>
+                                    <span class="option-price">+₪65/שנה</span>
+                                </div>
+                            </label>
+                            
+                            <label class="option-card">
+                                <input type="checkbox" name="maintenanceIncluded" value="300">
+                                <div class="option-content">
+                                    <i class="fas fa-tools"></i>
+                                    <span class="option-title">תחזוקה חודשית</span>
+                                    <span class="option-price">+₪300/חודש</span>
+                                </div>
+                            </label>
+                            
+                            <label class="option-card">
+                                <input type="checkbox" name="seoIncluded" value="500">
+                                <div class="option-content">
+                                    <i class="fas fa-search"></i>
+                                    <span class="option-title">אופטימיזציה SEO</span>
+                                    <span class="option-price">+₪500 חד פעמי</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="specialRequests">בקשות מיוחדות</label>
+                            <textarea id="specialRequests" name="specialRequests" rows="3" placeholder="תארו בקצרה מה חשוב לכם באתר, צבעים מועדפים, תוכן מיוחד..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Price Summary -->
+                    <div class="price-summary">
+                        <div class="summary-header">
+                            <h4>
+                                <i class="fas fa-calculator"></i>
+                                סיכום הזמנה
+                            </h4>
+                        </div>
+                        <div class="summary-details">
+                            <div class="summary-line">
+                                <span>מחיר אתר:</span>
+                                <span id="basePriceDisplay"></span>
+                            </div>
+                            <div class="summary-line extras-line" id="extrasLine" style="display: none;">
+                                <span>תוספות:</span>
+                                <span id="extrasTotal">₪0</span>
+                            </div>
+                            <div class="summary-line discount-line" id="discountLine" style="display: none;">
+                                <span class="discount-text">הנחת השקה (10%):</span>
+                                <span class="discount-amount" id="discountAmount">-₪0</span>
+                            </div>
+                            <div class="summary-line total-line">
+                                <span class="total-label">סה"כ לתשלום:</span>
+                                <span class="total-amount" id="totalPrice"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="launch-discount">
+                            <i class="fas fa-gift"></i>
+                            קבלו 10% הנחת השקה על כל הזמנה הראשונה!
+                        </div>
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <div class="form-actions">
+                        <button type="button" class="submit-btn whatsapp-btn" onclick="submitViaWhatsApp()">
+                            <i class="fab fa-whatsapp"></i>
+                            שלח הזמנה בוואטסאפ
+                        </button>
+                        <button type="button" class="submit-btn email-btn" onclick="submitViaEmail()">
+                            <i class="fas fa-envelope"></i>
+                            שלח הזמנה באימייל
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1182,9 +1845,9 @@
                                 <i class="fas fa-eye"></i>
                                 תצוגה מקדימה
                             </a>
-                            <button class="action-btn primary" onclick="openInEditor('${website.id}')">
-                                <i class="fas fa-edit"></i>
-                                ערוך עכשיו
+                            <button class="action-btn primary" onclick="openPurchaseModal('${website.id}', '${website.title}', ${website.price})">
+                                <i class="fas fa-shopping-cart"></i>
+                                קנה עכשיו
                             </button>
                         </div>
                     </div>
@@ -1276,6 +1939,282 @@
             });
         }
 
+        // Purchase Modal Functions
+        let selectedWebsite = null;
+        let basePrice = 0;
+
+        function openPurchaseModal(websiteId, title, price) {
+            const website = professionalWebsites.find(w => w.id === websiteId);
+            if (!website) return;
+
+            selectedWebsite = website;
+            basePrice = price;
+
+            // Update modal content
+            document.getElementById('selectedWebsiteImage').src = website.previewImage;
+            document.getElementById('selectedWebsiteTitle').textContent = website.title;
+            document.getElementById('selectedWebsiteCategory').textContent = website.category;
+            document.getElementById('selectedWebsitePrice').textContent = `₪${price.toLocaleString()}`;
+            document.getElementById('basePriceDisplay').textContent = `₪${price.toLocaleString()}`;
+
+            // Reset form
+            document.getElementById('orderForm').reset();
+            updatePriceCalculation();
+
+            // Show modal
+            const modal = document.getElementById('purchaseModal');
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('visible');
+            }, 10);
+
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePurchaseModal() {
+            const modal = document.getElementById('purchaseModal');
+            modal.classList.remove('visible');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        function updatePriceCalculation() {
+            let extrasTotal = 0;
+            const checkboxes = document.querySelectorAll('.option-card input[type="checkbox"]');
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    extrasTotal += parseInt(checkbox.value);
+                }
+            });
+
+            const subtotal = basePrice + extrasTotal;
+            const discount = Math.floor(subtotal * 0.1); // 10% discount
+            const total = subtotal - discount;
+
+            // Update displays
+            document.getElementById('extrasTotal').textContent = `₪${extrasTotal.toLocaleString()}`;
+            document.getElementById('discountAmount').textContent = `-₪${discount.toLocaleString()}`;
+            document.getElementById('totalPrice').textContent = `₪${total.toLocaleString()}`;
+
+            // Show/hide extras and discount lines
+            const extrasLine = document.getElementById('extrasLine');
+            const discountLine = document.getElementById('discountLine');
+            
+            if (extrasTotal > 0) {
+                extrasLine.style.display = 'flex';
+            } else {
+                extrasLine.style.display = 'none';
+            }
+
+            if (discount > 0) {
+                discountLine.style.display = 'flex';
+            } else {
+                discountLine.style.display = 'none';
+            }
+        }
+
+        function getFormData() {
+            const form = document.getElementById('orderForm');
+            const formData = new FormData(form);
+            
+            const data = {
+                website: selectedWebsite,
+                customer: {
+                    name: formData.get('customerName'),
+                    phone: formData.get('customerPhone'),
+                    email: formData.get('customerEmail'),
+                    businessName: formData.get('businessName') || 'לא צוין'
+                },
+                options: {
+                    hosting: document.querySelector('input[name="hostingIncluded"]').checked,
+                    domain: document.querySelector('input[name="domainIncluded"]').checked,
+                    maintenance: document.querySelector('input[name="maintenanceIncluded"]').checked,
+                    seo: document.querySelector('input[name="seoIncluded"]').checked
+                },
+                specialRequests: formData.get('specialRequests') || 'אין בקשות מיוחדות',
+                pricing: {
+                    basePrice: basePrice,
+                    extras: getExtrasTotal(),
+                    discount: getDiscount(),
+                    total: getTotal()
+                }
+            };
+
+            return data;
+        }
+
+        function getExtrasTotal() {
+            let total = 0;
+            const checkboxes = document.querySelectorAll('.option-card input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    total += parseInt(checkbox.value);
+                }
+            });
+            return total;
+        }
+
+        function getDiscount() {
+            const subtotal = basePrice + getExtrasTotal();
+            return Math.floor(subtotal * 0.1);
+        }
+
+        function getTotal() {
+            const subtotal = basePrice + getExtrasTotal();
+            const discount = getDiscount();
+            return subtotal - discount;
+        }
+
+        function validateForm() {
+            const requiredFields = ['customerName', 'customerPhone', 'customerEmail'];
+            const errors = [];
+
+            requiredFields.forEach(fieldName => {
+                const field = document.getElementById(fieldName);
+                if (!field.value.trim()) {
+                    errors.push(`שדה ${field.previousElementSibling.textContent} הוא חובה`);
+                    field.style.borderColor = '#ef4444';
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+
+            // Validate email
+            const email = document.getElementById('customerEmail').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email && !emailRegex.test(email)) {
+                errors.push('כתובת אימייל לא תקינה');
+                document.getElementById('customerEmail').style.borderColor = '#ef4444';
+            }
+
+            // Validate phone
+            const phone = document.getElementById('customerPhone').value;
+            const phoneRegex = /^[\d\-\s\+\(\)]+$/;
+            if (phone && !phoneRegex.test(phone)) {
+                errors.push('מספר טלפון לא תקין');
+                document.getElementById('customerPhone').style.borderColor = '#ef4444';
+            }
+
+            if (errors.length > 0) {
+                alert('אנא תקנו את השגיאות הבאות:\n' + errors.join('\n'));
+                return false;
+            }
+
+            return true;
+        }
+
+        function submitViaWhatsApp() {
+            if (!validateForm()) return;
+
+            const data = getFormData();
+            
+            let message = `🚀 *הזמנה חדשה - WebMaster Pro*\n\n`;
+            message += `*אתר נבחר:* ${data.website.title}\n`;
+            message += `*קטגוריה:* ${data.website.category}\n\n`;
+            
+            message += `*פרטי לקוח:*\n`;
+            message += `👤 שם: ${data.customer.name}\n`;
+            message += `📱 טלפון: ${data.customer.phone}\n`;
+            message += `📧 אימייל: ${data.customer.email}\n`;
+            message += `🏢 עסק: ${data.customer.businessName}\n\n`;
+            
+            if (data.options.hosting || data.options.domain || data.options.maintenance || data.options.seo) {
+                message += `*תוספות נבחרות:*\n`;
+                if (data.options.hosting) message += `☁️ אחסון שנתי (+₪180)\n`;
+                if (data.options.domain) message += `🌐 דומיין .co.il (+₪65)\n`;
+                if (data.options.maintenance) message += `🔧 תחזוקה חודשית (+₪300)\n`;
+                if (data.options.seo) message += `🔍 אופטימיזציה SEO (+₪500)\n`;
+                message += `\n`;
+            }
+            
+            message += `*מחירים:*\n`;
+            message += `💰 מחיר בסיס: ₪${data.pricing.basePrice.toLocaleString()}\n`;
+            if (data.pricing.extras > 0) {
+                message += `➕ תוספות: ₪${data.pricing.extras.toLocaleString()}\n`;
+            }
+            if (data.pricing.discount > 0) {
+                message += `🎁 הנחת השקה (10%): -₪${data.pricing.discount.toLocaleString()}\n`;
+            }
+            message += `✅ *סה"כ: ₪${data.pricing.total.toLocaleString()}*\n\n`;
+            
+            if (data.specialRequests !== 'אין בקשות מיוחדות') {
+                message += `*בקשות מיוחדות:*\n${data.specialRequests}\n\n`;
+            }
+            
+            message += `---\n`;
+            message += `נשלח מהגלריה: https://webmaster-pro-1.netlify.app\n`;
+            message += `תאריך: ${new Date().toLocaleDateString('he-IL')}`;
+
+            // Kfir's WhatsApp number
+            const whatsappNumber = '972526359513'; // ✅ Updated with your number!
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success message
+            alert('🎉 הזמנתך נשלחה בהצלחה!\n\nתיפתח עכשיו חלון וואטסאפ עם פרטי ההזמנה.\nאני אחזור אליך בהקדם!');
+            
+            closePurchaseModal();
+        }
+
+        function submitViaEmail() {
+            if (!validateForm()) return;
+
+            const data = getFormData();
+            
+            let subject = `הזמנת אתר: ${data.website.title} - ${data.customer.name}`;
+            
+            let body = `הזמנה חדשה מהגלריה:\n\n`;
+            body += `אתר נבחר: ${data.website.title}\n`;
+            body += `קטגוריה: ${data.website.category}\n\n`;
+            
+            body += `פרטי לקוח:\n`;
+            body += `שם: ${data.customer.name}\n`;
+            body += `טלפון: ${data.customer.phone}\n`;
+            body += `אימייל: ${data.customer.email}\n`;
+            body += `עסק: ${data.customer.businessName}\n\n`;
+            
+            if (data.options.hosting || data.options.domain || data.options.maintenance || data.options.seo) {
+                body += `תוספות נבחרות:\n`;
+                if (data.options.hosting) body += `- אחסון שנתי (+₪180)\n`;
+                if (data.options.domain) body += `- דומיין .co.il (+₪65)\n`;
+                if (data.options.maintenance) body += `- תחזוקה חודשית (+₪300)\n`;
+                if (data.options.seo) body += `- אופטימיזציה SEO (+₪500)\n`;
+                body += `\n`;
+            }
+            
+            body += `מחירים:\n`;
+            body += `מחיר בסיס: ₪${data.pricing.basePrice.toLocaleString()}\n`;
+            if (data.pricing.extras > 0) {
+                body += `תוספות: ₪${data.pricing.extras.toLocaleString()}\n`;
+            }
+            if (data.pricing.discount > 0) {
+                body += `הנחת השקה (10%): -₪${data.pricing.discount.toLocaleString()}\n`;
+            }
+            body += `סה"כ: ₪${data.pricing.total.toLocaleString()}\n\n`;
+            
+            if (data.specialRequests !== 'אין בקשות מיוחדות') {
+                body += `בקשות מיוחדות:\n${data.specialRequests}\n\n`;
+            }
+            
+            body += `נשלח מ: https://webmaster-pro-1.netlify.app\n`;
+            body += `תאריך: ${new Date().toLocaleDateString('he-IL')}`;
+
+            // Kfir's email
+            const emailUrl = `mailto:kfir.biz@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; // ✅ Updated with your email!
+            
+            window.location.href = emailUrl;
+            
+            // Show success message
+            alert('📧 הזמנתך נשלחה בהצלחה!\n\nתיפתח עכשיו תוכנת האימייל שלך עם פרטי ההזמנה.\nאני אחזור אליך בהקדם!');
+            
+            closePurchaseModal();
+        }
+
         // Gallery toggle
         function showGallery() {
             document.getElementById('gallerySection').style.display = 'block';
@@ -1286,10 +2225,9 @@
             }
         }
 
-        // Open in editor (placeholder)
+        // Legacy function for editor button
         function openInEditor(websiteId) {
-            console.log('Opening website in editor:', websiteId);
-            alert(`🚀 פותח את ${websiteId} בעורך הויזואלי...\n\nהאדיטור יושק בקרוב!`);
+            openPurchaseModal(websiteId, 'אתר נבחר', 2500);
         }
 
         // Handle image loading for newly rendered cards
@@ -1332,6 +2270,28 @@
             setupSmoothScroll();
             handleImageLoading();
             
+            // Setup purchase modal event listeners
+            document.addEventListener('click', (e) => {
+                // Close modal when clicking outside
+                if (e.target.classList.contains('modal-overlay')) {
+                    closePurchaseModal();
+                }
+            });
+
+            // Setup price calculation updates
+            document.addEventListener('change', (e) => {
+                if (e.target.type === 'checkbox' && e.target.closest('.option-card')) {
+                    updatePriceCalculation();
+                }
+            });
+
+            // Handle escape key to close modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closePurchaseModal();
+                }
+            });
+            
             // Add loading animations to stats with stagger
             setTimeout(() => {
                 const stats = document.querySelectorAll('.stat-card.loading');
@@ -1342,14 +2302,18 @@
                 });
             }, 100);
             
-            console.log('✅ WebMaster Pro Ultimate Ready!');
+            console.log('✅ WebMaster Pro Ultimate Ready for Kfir!');
             console.log('💎 11 Professional Websites with High-Quality Images');
             console.log('🔗 Connected to /websites/ directory');
             console.log('🖼️ Unsplash Premium Images Integrated');
             console.log('🎨 Advanced Glass Morphism Design');
             console.log('📱 Fully Responsive Design');
-            console.log('⚡ Ready for Editor Integration');
-            console.log('🌟 Preview Images: Medical, Business, Lifestyle & Premium');
+            console.log('💰 Sales System Ready - Purchase Modal Active');
+            console.log('📱 WhatsApp: 052-635-9513 (CONFIGURED)');
+            console.log('📧 Email: kfir.biz@gmail.com (CONFIGURED)');
+            console.log('🛒 WhatsApp & Email Integration Working');
+            console.log('⚡ Ready for Immediate Sales!');
+            console.log('🌟 Let\'s start making money! 💰');
         });
     </script>
 </body>
