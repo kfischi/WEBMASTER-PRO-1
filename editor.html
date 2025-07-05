@@ -1,1055 +1,173 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🤖 WebMaster Pro AI - אדיטור ויזואלי מתקדם</title>
-  <meta name="description" content="אדיטור ויזואלי מתקדם לעריכת 11 אתרים מקצועיים עם AI מובנה">
-  
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WebMaster Pro AI Editor</title>
   <style>
-    /* ===== CSS VARIABLES ===== */
     :root {
       --primary: #4f46e5;
-      --primary-hover: #3730a3;
-      --bg: #0f0f23;
-      --bg-secondary: #1a1a40;
-      --glass-bg: rgba(255,255,255,0.1);
       --glass-border: rgba(255,255,255,0.2);
-      --text: #fff;
-      --text-secondary: #cbd5e1;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --error: #ef4444;
+    }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family: sans-serif; display: grid; grid-template-columns:180px 1fr 200px; height:100vh; overflow:hidden; }
+    aside { background: #111; color:#fff; padding:1rem; overflow:auto; }
+    main { background:#fafafa; position:relative; }
+
+    #canvas-content {
+      width:100%; height:100%; padding:1rem; overflow:auto;
+      background:#fff; transition:all .3s;
+    }
+    #canvas-content.drag-over {
+      outline:2px dashed var(--primary);
+    }
+    .draggable {
+      position:relative; border:1px dashed transparent;
+    }
+    .draggable.dragging {
+      opacity:0.5;
     }
 
-    /* ===== BASE STYLES ===== */
-    * { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
-    }
-    
-    body { 
-      display: grid; 
-      grid-template-rows: auto 1fr; 
-      grid-template-columns: 1fr; 
-      height: 100vh;
-      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-secondary) 100%);
-      color: var(--text); 
-      font-family: 'Inter', 'Assistant', system-ui, sans-serif; 
-      overflow: hidden; 
-    }
-
-    /* ===== MAIN LAYOUT ===== */
-    .editor-container { 
-      display: grid; 
-      grid-template-columns: 280px 1fr 320px; 
-      grid-template-rows: auto 1fr; 
-      height: 100%; 
-      gap: 1px;
-      background: var(--glass-border);
-    }
-
-    /* ===== HEADER ===== */
-    header.header { 
-      grid-column: 1/-1; 
-      background: var(--glass-bg); 
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--glass-border); 
-      display: flex; 
-      align-items: center; 
-      padding: 0.75rem 1.5rem; 
-      position: relative;
-      z-index: 100;
-    }
-    
-    header .logo { 
-      font-size: 1.4rem; 
-      font-weight: 700; 
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    header .logo i {
-      color: var(--primary);
-    }
-    
-    header .tools { 
-      margin-left: auto; 
-      display: flex; 
-      gap: 0.75rem; 
-    }
-    
-    header .tools button { 
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
-      color: #fff; 
-      border: none; 
-      padding: 0.6rem 1.2rem; 
-      border-radius: 0.5rem; 
-      font-weight: 600;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      font-size: 0.9rem;
-      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
-    }
-    
-    header .tools button:hover { 
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
-    }
-
-    /* ===== SIDEBARS ===== */
-    aside.sidebar-left, aside.sidebar-right {
-      background: var(--glass-bg); 
-      backdrop-filter: blur(20px); 
-      border: 1px solid var(--glass-border);
-      padding: 1.5rem; 
-      overflow-y: auto;
-      position: relative;
-    }
-    
-    aside.sidebar-left { 
-      grid-row: 2; 
-      border-right: none;
-    }
-    
-    aside.sidebar-right { 
-      grid-row: 2; 
-      border-left: none;
-    }
-
-    /* ===== CANVAS ===== */
-    main.canvas { 
-      position: relative; 
-      background: #ffffff; 
-      overflow: hidden;
-    }
-    
-    #loading-overlay { 
-      position: absolute; 
-      inset: 0; 
-      background: linear-gradient(135deg, rgba(15,15,35,0.9) 0%, rgba(26,26,64,0.9) 100%);
-      backdrop-filter: blur(10px);
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      color: var(--text); 
-      font-size: 1.3rem;
-      font-weight: 600;
-      visibility: hidden;
-      z-index: 50;
-    }
-    
-    #canvas-iframe { 
-      width: 100%; 
-      height: 100%; 
-      border: none; 
-      background: white;
-    }
-
-    /* ===== WEBSITES LIST ===== */
-    .websites-list .website-item {
-      display: flex; 
-      gap: 0.75rem; 
-      margin-bottom: 0.75rem; 
-      padding: 0.75rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border-radius: 0.5rem;
-      border: 1px solid transparent;
-    }
-    
-    .websites-list .website-item img { 
-      width: 50px; 
-      height: 50px; 
-      border-radius: 8px; 
-      object-fit: cover;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-    
-    .websites-list .website-item:hover {
-      background: rgba(255,255,255,0.1);
-      transform: translateX(-4px);
-      border-color: var(--glass-border);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    }
-
-    .websites-list .website-item div {
-      flex: 1;
-    }
-
-    .websites-list .website-item .website-name {
-      font-weight: 600;
-      color: var(--text);
-      font-size: 0.95rem;
-    }
-
-    /* ===== BLOCKS LIST ===== */
     .blocks-list .block-item {
-      display: flex; 
-      align-items: center; 
-      gap: 0.75rem; 
-      padding: 0.75rem; 
-      margin-bottom: 0.5rem;
-      cursor: pointer; 
-      border-radius: 0.5rem; 
-      border: 1px solid var(--glass-border);
-      transition: all 0.3s ease;
-      background: rgba(255,255,255,0.05);
+      display:flex; align-items:center; gap:.5rem;
+      padding:.5rem; margin-bottom:.5rem;
+      border:1px solid var(--glass-border); border-radius:4px;
+      background:rgba(255,255,255,0.1); cursor:grab;
+      transition:all .2s;
     }
-    
+    .blocks-list .block-item:active { cursor:grabbing; }
     .blocks-list .block-item:hover {
-      background: rgba(255,255,255,0.15);
-      transform: translateX(-4px);
-      border-color: var(--primary);
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+      background:rgba(255,255,255,0.2);
+      transform:translateX(-2px);
     }
 
-    .blocks-list .block-item i {
-      color: var(--primary);
-      font-size: 1.1rem;
-      width: 20px;
+    .tool-btn {
+      width:100%; padding:.75rem; margin-bottom:.5rem;
+      background:var(--primary); color:#fff; border:none; border-radius:.5rem;
+      cursor:pointer; transition:all .3s;
     }
+    .tool-btn:hover { transform:translateY(-2px); box-shadow:0 4px 15px rgba(79,70,229,0.4); }
 
-    /* ===== PROPERTIES PANEL ===== */
-    .properties-panel .property-section { 
-      margin-bottom: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      padding: 1rem;
-      border-radius: 0.5rem;
-      border: 1px solid var(--glass-border);
-    }
-    
-    .property-section h3 { 
-      margin-bottom: 0.75rem; 
-      font-size: 1rem;
-      color: var(--primary);
-      font-weight: 600;
-    }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    @keyframes slideInLeft { from{transform:translateX(-100%);} to{transform:translateX(0);} }
+    @keyframes bounce { 0%,20%,50%,80%,to{transform:translateY(0);} 40%,60%{transform:translateY(-30px);} }
+    @keyframes pulse { 0%{transform:scale(1);} 50%{transform:scale(1.05);} 100%{transform:scale(1);} }
 
-    .property-section input,
-    .property-section select,
-    .property-section textarea {
-      width: 100%;
-      padding: 0.6rem;
-      border: 1px solid var(--glass-border);
-      border-radius: 0.4rem;
-      background: rgba(255,255,255,0.1);
-      color: var(--text);
-      font-family: inherit;
-      transition: all 0.2s ease;
+    .notification {
+      position:fixed; top:1rem; left:50%; transform:translateX(-50%);
+      background:var(--primary); color:#fff; padding:1rem 2rem; border-radius:8px;
+      animation:fadeIn 0.5s ease, fadeOut 0.5s ease 2.5s;
     }
-
-    .property-section input:focus,
-    .property-section select:focus,
-    .property-section textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
-    }
-
-    .property-section button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 0.4rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-weight: 500;
-    }
-
-    .property-section button:hover {
-      background: var(--primary-hover);
-      transform: translateY(-1px);
-    }
-
-    /* ===== SELECTED ELEMENT ===== */
-    .selected {
-      outline: 2px solid var(--primary) !important;
-      outline-offset: 2px;
-      background: rgba(79, 70, 229, 0.1) !important;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-
-    .selected::before {
-      content: '✏️ עורך';
-      position: absolute;
-      top: -25px;
-      left: 0;
-      background: var(--primary);
-      color: white;
-      padding: 2px 8px;
-      font-size: 11px;
-      border-radius: 4px;
-      font-weight: 600;
-      z-index: 1000;
-    }
-
-    /* ===== AI CHAT ===== */
-    #ai-chat {
-      background: rgba(0,0,0,0.3);
-      padding: 1rem;
-      border-radius: 0.75rem;
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(10px);
-    }
-    
-    #ai-chat h3 {
-      color: var(--primary);
-      margin-bottom: 0.75rem;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    #ai-chat h3::before {
-      content: '🤖';
-    }
-    
-    .chat-message {
-      padding: 0.75rem;
-      margin-bottom: 0.5rem;
-      border-radius: 0.5rem;
-      word-wrap: break-word;
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-    
-    .chat-message.user {
-      background: rgba(79,70,229,0.4);
-      margin-left: 15%;
-      border: 1px solid rgba(79,70,229,0.6);
-    }
-    
-    .chat-message.ai {
-      background: rgba(124,58,237,0.4);
-      margin-right: 15%;
-      border: 1px solid rgba(124,58,237,0.6);
-    }
-
-    /* ===== NOTIFICATIONS ===== */
-    .notification { 
-      position: fixed; 
-      bottom: 2rem; 
-      left: 50%; 
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-      color: #fff; 
-      padding: 1rem 1.5rem; 
-      border-radius: 0.75rem;
-      font-weight: 600;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-      animation: slideIn 0.4s ease-out, fadeOut 0.4s ease-out 2.5s forwards;
-      z-index: 1000;
-    }
-    
-    @keyframes slideIn {
-      from { 
-        transform: translateX(-50%) translateY(100px); 
-        opacity: 0; 
-      }
-      to { 
-        transform: translateX(-50%) translateY(0); 
-        opacity: 1; 
-      }
-    }
-
-    @keyframes fadeOut { 
-      to { 
-        opacity: 0; 
-        transform: translateX(-50%) translateY(20px); 
-      } 
-    }
-
-    /* ===== SEARCH BOX ===== */
-    .search-box {
-      margin-bottom: 1rem;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid var(--glass-border);
-      border-radius: 0.5rem;
-      background: rgba(255,255,255,0.1);
-      color: var(--text);
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
-    }
-
-    .search-box input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
-    }
-
-    .search-box input::placeholder {
-      color: var(--text-secondary);
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 1200px) {
-      .editor-container {
-        grid-template-columns: 250px 1fr 280px;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .editor-container {
-        grid-template-columns: 220px 1fr 260px;
-      }
-      
-      aside.sidebar-left, aside.sidebar-right {
-        padding: 1rem;
-      }
-    }
-
-    /* ===== CUSTOM SCROLLBAR ===== */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.1);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--primary);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-hover);
-    }
+    @keyframes fadeOut { from{opacity:1;} to{opacity:0;} }
   </style>
 </head>
 <body>
-
-<div class="editor-container">
-  <!-- ===== HEADER ===== -->
-  <header class="header">
-    <div class="logo">
-      <i class="fas fa-magic"></i> 
-      WebMaster Pro AI
-    </div>
-    <div class="tools">
-      <button onclick="saveChanges()" title="שמור שינויים">
-        <i class="fas fa-save"></i> שמור
-      </button>
-      <button onclick="exportWebsite()" title="ייצא אתר">
-        <i class="fas fa-download"></i> ייצא
-      </button>
-      <button onclick="openAIChat()" title="פתח AI Assistant">
-        <i class="fas fa-robot"></i> AI
-      </button>
-    </div>
-  </header>
-
-  <!-- ===== SIDEBAR LEFT: אתרים + בלוקים ===== -->
-  <aside class="sidebar-left">
-    <!-- רשימת אתרים -->
-    <div class="websites-list">
-      <div class="search-box">
-        <input type="text" placeholder="🔍 חיפוש אתר..." oninput="filterList(this.value)"/>
-      </div>
-      <!-- אתרים יווצרו דינמית -->
-    </div>
-    
-    <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid var(--glass-border);"/>
-    
-    <!-- רשימת בלוקים -->
-    <div class="blocks-list">
-      <h3><i class="fas fa-puzzle-piece"></i> בלוקים</h3>
-      <!-- בלוקים יווצרו דינמית -->
-    </div>
-    
-    <!-- AI Chat -->
-    <div id="ai-chat" style="display:none; margin-top:1.5rem;">
-      <h3>AI Assistant</h3>
-      <div id="chat-messages" style="height:200px; overflow-y:auto; background:rgba(0,0,0,0.2); padding:0.75rem; border-radius:0.5rem; margin-bottom:0.75rem;"></div>
-      <input id="ai-input" type="text" placeholder="שאל את ה-AI..." style="width:100%; padding:0.75rem; border-radius:0.5rem; border:1px solid var(--glass-border); margin-bottom:0.5rem;"/>
-      <button onclick="askAI()" style="width:100%; padding:0.75rem; background:var(--primary); color:#fff; border:none; border-radius:0.5rem; cursor:pointer;">
-        <i class="fas fa-paper-plane"></i> שלח
-      </button>
+  <aside>
+    <h3>🔧 בלוקים</h3>
+    <div class="blocks-list"></div>
+    <hr>
+    <div class="advanced-tools">
+      <h3>🎨 כלים מתקדמים</h3>
+      <button onclick="magicDesign()" class="tool-btn">✨ Magic Design</button>
+      <button onclick="openVideoEditor()" class="tool-btn">🎬 עריכת וידאו</button>
+      <button onclick="optimizeWebsite()" class="tool-btn">⚡ אופטימיזציה</button>
+      <button onclick="generateSEO()" class="tool-btn">📈 SEO אוטומטי</button>
     </div>
   </aside>
-
-  <!-- ===== CANVAS: איזור העריכה ===== -->
-  <main class="canvas">
-    <div id="loading-overlay">
-      <div style="text-align:center;">
-        <i class="fas fa-spinner fa-spin" style="font-size:2rem; margin-bottom:1rem;"></i>
-        <div>טוען אתר...</div>
-      </div>
-    </div>
-    <iframe id="canvas-iframe"></iframe>
+  <main>
+    <div id="canvas-content"></div>
   </main>
-
-  <!-- ===== SIDEBAR RIGHT: מאפיינים ===== -->
-  <aside class="sidebar-right properties-panel">
-    <!-- עריכת טקסט -->
+  <aside>
+    <h3>🔍 מאפיינים</h3>
     <div class="property-section">
-      <h3><i class="fas fa-font"></i> עריכת טקסט</h3>
-      <textarea id="text-editor" placeholder="עריכת תוכן..." style="height:5rem; resize:vertical;"></textarea>
-      <button onclick="updateProperty('innerText', document.getElementById('text-editor').value)" style="margin-top:0.75rem;">
-        <i class="fas fa-check"></i> יישם שינויים
-      </button>
+      <h3>אנימציות</h3>
+      <select onchange="addAnimation(this.value)">
+        <option value="">בחר אנימציה</option>
+        <option value="fadeIn">Fade In</option>
+        <option value="slideInLeft">Slide In</option>
+        <option value="bounce">Bounce</option>
+        <option value="pulse">Pulse</option>
+      </select>
     </div>
-    
-    <!-- צבעים -->
     <div class="property-section">
-      <h3><i class="fas fa-palette"></i> צבעים</h3>
-      <div style="display:grid; gap:0.75rem;">
-        <label style="display:flex; align-items:center; gap:0.5rem;">
-          צבע טקסט: 
-          <input type="color" id="text-color" onchange="updateProperty('color', this.value)" style="width:60px; height:40px; padding:2px;"/>
-        </label>
-        <label style="display:flex; align-items:center; gap:0.5rem;">
-          צבע רקע: 
-          <input type="color" id="bg-color" onchange="updateProperty('backgroundColor', this.value)" style="width:60px; height:40px; padding:2px;"/>
-        </label>
-      </div>
-    </div>
-    
-    <!-- פונט -->
-    <div class="property-section">
-      <h3><i class="fas fa-text-height"></i> טיפוגרפיה</h3>
-      <div style="display:grid; gap:0.75rem;">
-        <label>
-          משפחת פונט:
-          <select id="font-family" onchange="updateProperty('fontFamily', this.value)">
-            <option value="Inter">Inter</option>
-            <option value="Assistant">Assistant</option>
-            <option value="Arial">Arial</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Times">Times</option>
-          </select>
-        </label>
-        <label>
-          גודל פונט: <span id="font-size-display">16px</span>
-          <input type="range" id="font-size" min="12" max="48" value="16" 
-                 oninput="updateProperty('fontSize', this.value+'px'); document.getElementById('font-size-display').textContent = this.value+'px'"/>
-        </label>
-      </div>
-    </div>
-
-    <!-- מידע על האלמנט הנבחר -->
-    <div class="property-section">
-      <h3><i class="fas fa-info-circle"></i> מידע</h3>
-      <div id="element-info" style="font-size:0.9rem; color:var(--text-secondary);">
-        בחר אלמנט לעריכה
-      </div>
+      <h3>📱 רספונסיביות</h3>
+      <button onclick="previewMobile()" class="tool-btn">📱 מובייל</button>
+      <button onclick="previewTablet()" class="tool-btn">📱 טאבלט</button>
+      <button onclick="previewDesktop()" class="tool-btn">💻 דסקטופ</button>
     </div>
   </aside>
-</div>
 
-<script>
-  // ===== נתוני האתרים =====
-  const websites = [
-    { id:'dr-michal-rosen', name:'ד\'ר מיכל רוזן', url:'./websites/dr-michal-rosen.html', image:'https://i.imghippo.com/files/Ayyb2287TOc.png', category:'רפואה אסתטית' },
-    { id:'fitness-co', name:'דני פיט', url:'./websites/fitness-co.html', image:'https://i.imghippo.com/files/WiRp8302YJs.png', category:'מאמן כושר' },
-    { id:'yoga-studio', name:'סטודיו אוהם', url:'./websites/yoga-studio.html', image:'https://i.imghippo.com/files/eJk7179MXo.png', category:'יוגה ומדיטציה' },
-    { id:'nutritionist', name:'ד\'ר שרה כהן', url:'./websites/nutritionist.html', image:'https://i.imghippo.com/files/rhNp2418oyE.png', category:'תזונאית קלינית' },
-    { id:'law-firm', name:'משרד ברקוביץ', url:'./websites/law-firm.html', image:'https://i.imghippo.com/files/hVyV3858OQ.png', category:'עורכי דין' },
-    { id:'accountant', name:'רינה לוי', url:'./websites/accountant.html', image:'https://i.imghippo.com/files/tGN5433dAU.png', category:'חשבת שכר' },
-    { id:'beauty-salon', name:'מספרה BELLA', url:'./websites/beauty-salon.html', image:'https://i.imghippo.com/files/xnK4816Hc.png', category:'יופי ועיצוב שיער' },
-    { id:'tutor', name:'ד\'ר רונית לוי', url:'./websites/tutor.html', image:'https://i.imghippo.com/files/Ceu2132Q.png', category:'מורה פרטית' },
-    { id:'aesthetic-clinic', name:'קליניקת יופי פרמיום', url:'./websites/aesthetic-clinic.html', image:'https://i.imghippo.com/files/sWlf1880WKM.png', category:'אסתטיקה רפואית' },
-    { id:'multibrawn', name:'מולטיבראון', url:'./websites/multibrawn.html', image:'https://i.imghippo.com/files/pL5530Z.png', category:'נופש ואירועים' },
-    { id:'real-estate', name:'נדל"ן פרמיום', url:'./websites/real-estate.html', image:'https://i.imghippo.com/files/htWG9491QkE.png', category:'השקעות נדל"ן' }
-  ];
+  <div id="video-editor-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:2000;">
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:#222; color:#fff; padding:2rem; border-radius:1rem; width:80%; height:80%; overflow:auto;">
+      <h2>🎬 עריכת וידאו</h2>
+      <input type="file" accept="video/*" onchange="handleVideoUpload(this.files[0])"><br><br>
+      <div style="position:relative;">
+        <video id="video-preview" controls style="width:100%; max-height:300px;"></video>
+      </div>
+      <br>
+      <button onclick="trimVideo()">✂️ חתוך</button>
+      <button onclick="addVideoText()">📝 הוסף טקסט</button>
+      <button onclick="exportVideo()">💾 ייצא</button>
+      <button onclick="closeVideoEditor()">❌ סגור</button>
+    </div>
+  </div>
 
-  // ===== בלוקים =====
-  const blockTypes = [
-    { type: 'text', icon: 'fas fa-font', name: 'טקסט', template: '<p data-editable="true" style="cursor:pointer; padding:10px; margin:10px 0;">טקסט חדש - לחץ לעריכה</p>' },
-    { type: 'heading', icon: 'fas fa-heading', name: 'כותרת', template: '<h2 data-editable="true" style="cursor:pointer; padding:10px; margin:15px 0; color:#4f46e5;">כותרת חדשה</h2>' },
-    { type: 'button', icon: 'fas fa-hand-pointer', name: 'כפתור', template: '<button data-editable="true" style="padding:12px 24px; background:#4f46e5; color:white; border:none; border-radius:6px; cursor:pointer; margin:10px; font-weight:600;">כפתור חדש</button>' },
-    { type: 'image', icon: 'fas fa-image', name: 'תמונה', template: '<img data-editable="true" src="https://via.placeholder.com/300x200/4f46e5/white?text=תמונה+חדשה" alt="תמונה חדשה" style="max-width:100%; height:auto; margin:10px 0; border-radius:8px; cursor:pointer;">' }
-  ];
+  <script>
+    // רשימת האתרים המלאה
+    const websites = [
+      {id:'dr-michal-rosen', name:'ד"ר מיכל רוזן', url:'./websites/dr-michal-rosen.html', image:'https://i.imghippo.com/files/Ayyb2287TOc.png', category:'medical', price:'₪2,800'},
+      {id:'fitness-co', name:'דני פיט', url:'./websites/fitness-co.html', image:'https://i.imghippo.com/files/WiRp8302YJs.png', category:'lifestyle', price:'₪2,200'},
+      {id:'yoga-studio', name:'סטודיו אוהם', url:'./websites/yoga-studio.html', image:'https://i.imghippo.com/files/eJk7179MXo.png', category:'lifestyle', price:'₪1,900'},
+      {id:'nutritionist', name:'ד"ר שרה כהן', url:'./websites/nutritionist.html', image:'https://i.imghippo.com/files/rhNp2418oyE.png', category:'medical', price:'₪2,400'},
+      {id:'law-firm', name:'משרד ברקוביץ', url:'./websites/law-firm.html', image:'https://i.imghippo.com/files/hVyV3858OQ.png', category:'business', price:'₪2,500'},
+      {id:'accountant', name:'רינה לוי', url:'./websites/accountant.html', image:'https://i.imghippo.com/files/tGN5433dAU.png', category:'business', price:'₪2,000'},
+      {id:'beauty-salon', name:'מספרה BELLA', url:'./websites/beauty-salon.html', image:'https://i.imghippo.com/files/xnK4816Hc.png', category:'lifestyle', price:'₪1,700'},
+      {id:'tutor', name:'ד"ר רונית לוי', url:'./websites/tutor.html', image:'https://i.imghippo.com/files/Ceu2132Q.png', category:'education', price:'₪2,100'},
+      {id:'aesthetic-clinic', name:'קליניקת יופי פרמיום', url:'./websites/aesthetic-clinic.html', image:'https://i.imghippo.com/files/sWlf1880WKM.png', category:'premium', price:'₪3,200'},
+      {id:'multibrawn', name:'מולטיבראון', url:'./websites/multibrawn.html', image:'https://i.imghippo.com/files/pL5530Z.png', category:'lifestyle', price:'₪2,300'},
+      {id:'real-estate', name:'נדל"ן פרמיום', url:'./websites/real-estate.html', image:'https://i.imghippo.com/files/htWG9491QkE.png', category:'premium', price:'₪2,700'}
+    ];
 
-  // ===== משתני מערכת =====
-  let currentWebsite = null;
-  let currentSelectedElement = null;
-
-  // ===== אתחול רשימת אתרים =====
-  function initWebsites() {
-    const list = document.querySelector('.websites-list');
-    const searchBox = list.querySelector('.search-box');
-    
-    // מנקה רשימה קיימת
-    list.querySelectorAll('.website-item').forEach(item => item.remove());
-    
-    websites.forEach(website => {
-      const div = document.createElement('div');
-      div.className = 'website-item';
-      div.onclick = () => loadWebsite(website.id);
-      div.innerHTML = `
-        <img src="${website.image}" alt="${website.name}" loading="lazy"/>
-        <div>
-          <div class="website-name">${website.name}</div>
-          <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;">${website.category}</div>
-        </div>`;
-      
-      // מוסיף אחרי search box
-      searchBox.parentNode.insertBefore(div, searchBox.nextSibling);
-    });
-  }
-
-  // ===== חיפוש אתרים =====
-  function filterList(query) {
-    document.querySelectorAll('.website-item').forEach(item => {
-      const name = item.querySelector('.website-name').textContent;
-      const category = item.querySelector('div div:last-child').textContent;
-      const matches = name.toLowerCase().includes(query.toLowerCase()) || 
-                     category.toLowerCase().includes(query.toLowerCase());
-      item.style.display = matches ? 'flex' : 'none';
-    });
-  }
-
-  // ===== אתחול בלוקים =====
-  function initBlocks() {
-    const list = document.querySelector('.blocks-list');
-    
-    // מנקה בלוקים קיימים
-    list.querySelectorAll('.block-item').forEach(item => item.remove());
-    
-    blockTypes.forEach(block => {
-      const div = document.createElement('div');
-      div.className = 'block-item';
-      div.onclick = () => addBlock(block.type);
-      div.title = `הוסף ${block.name}`;
-      div.innerHTML = `<i class="${block.icon}"></i> ${block.name}`;
-      list.appendChild(div);
-    });
-  }
-
-  // ===== הוספת בלוק =====
-  function addBlock(blockType) {
-    const iframe = document.getElementById('canvas-iframe');
-    if (!iframe.contentDocument) {
-      showNotification('טען אתר תחילה', 'warning');
-      return;
-    }
-    
-    const block = blockTypes.find(b => b.type === blockType);
-    const doc = iframe.contentDocument;
-    const newElement = doc.createElement('div');
-    newElement.innerHTML = block.template;
-    
-    const elementToAdd = newElement.firstElementChild;
-    
-    // מוסיף event listeners לאלמנט החדש
-    elementToAdd.addEventListener('click', (e) => {
-      e.preventDefault();
-      selectElement(elementToAdd);
-    });
-    
-    // מוסיף לסוף הגוף או אחרי האלמנט הנבחר
-    if (currentSelectedElement && currentSelectedElement.parentNode) {
-      currentSelectedElement.parentNode.insertBefore(elementToAdd, currentSelectedElement.nextSibling);
-    } else {
-      doc.body.appendChild(elementToAdd);
-    }
-    
-    // בוחר את האלמנט החדש
-    selectElement(elementToAdd);
-    
-    showNotification(`נוסף ${block.name} בהצלחה`, 'success');
-  }
-
-  // ===== טעינת אתר =====
-  function loadWebsite(id) {
-    const site = websites.find(w => w.id === id);
-    if (!site) {
-      showNotification('אתר לא נמצא', 'error');
-      return;
-    }
-    
-    currentWebsite = id;
-    const iframe = document.getElementById('canvas-iframe');
-    const overlay = document.getElementById('loading-overlay');
-    
-    // מציג loading
-    overlay.style.visibility = 'visible';
-    
-    // טוען את האתר
-    iframe.src = site.url;
-    
-    iframe.onload = () => {
-      overlay.style.visibility = 'hidden';
-      const doc = iframe.contentDocument;
-      
-      if (!doc) {
-        showNotification('שגיאה בטעינת האתר', 'error');
-        return;
-      }
-      
-      // מוסיף CSS לאתר עבור בחירה
-      const style = doc.createElement('style');
-      style.textContent = `
-        .selected {
-          outline: 2px solid #4f46e5 !important;
-          outline-offset: 2px;
-          background: rgba(79, 70, 229, 0.1) !important;
-          transition: all 0.2s ease;
-          position: relative;
-        }
-        .selected::before {
-          content: '✏️ עורך';
-          position: absolute;
-          top: -25px;
-          left: 0;
-          background: #4f46e5;
-          color: white;
-          padding: 2px 8px;
-          font-size: 11px;
-          border-radius: 4px;
-          font-weight: 600;
-          z-index: 1000;
-        }
-      `;
-      doc.head.appendChild(style);
-      
-      // מוסיף יכולת עריכה לכל האלמנטים הרלוונטיים
-      doc.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div.content, button, a').forEach(el => {
-        // מדלג על אלמנטים מסוימים
-        if (el.closest('nav') || el.closest('script') || el.closest('style')) return;
-        
-        el.setAttribute('data-editable', 'true');
-        el.style.cursor = 'pointer';
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          selectElement(el);
+    // טעינת אתר ישירה
+    async function loadWebsiteDirectly(id) {
+      const site = websites.find(w=>w.id===id);
+      try {
+        const res = await fetch(site.url);
+        const html = await res.text();
+        const canvas = document.getElementById('canvas-content');
+        canvas.innerHTML = html;
+        canvas.querySelectorAll('h1,h2,h3,p,span,div').forEach(el=>{
+          el.contentEditable = true;
+          makeElementDraggable(el);
+          el.addEventListener('click',()=> selectElement(el));
+          el.addEventListener('input',()=> saveChanges());
         });
-      });
-      
-      showNotification(`נטען: ${site.name}`, 'success');
-    };
-    
-    iframe.onerror = () => {
-      overlay.style.visibility = 'hidden';
-      showNotification('שגיאה בטעינת האתר', 'error');
-    };
-  }
+        showNotification('אתר נטען - עריכה זמינה!');
+      } catch (e) { showNotification('שגיאה בטעינת האתר', 'error'); }
+    }
 
-  // ===== בחירת אלמנט =====
-  function selectElement(el) {
-    // מסיר בחירה קודמת
-    if (currentSelectedElement) {
-      currentSelectedElement.classList.remove('selected');
-    }
-    
-    // בוחר אלמנט חדש
-    currentSelectedElement = el;
-    el.classList.add('selected');
-    
-    // מעדכן panel מאפיינים
-    const textEditor = document.getElementById('text-editor');
-    const elementInfo = document.getElementById('element-info');
-    
-    textEditor.value = el.innerText || el.textContent || '';
-    
-    // מציג מידע על האלמנט
-    const tagName = el.tagName.toLowerCase();
-    const classes = el.className ? ` (${el.className})` : '';
-    elementInfo.innerHTML = `
-      <strong>אלמנט נבחר:</strong><br>
-      ${tagName}${classes}<br>
-      <small>לחץ על מאפיין לעריכה</small>
-    `;
-    
-    // מעדכן color pickers
-    const computedStyle = getComputedStyle(el);
-    document.getElementById('text-color').value = rgbToHex(computedStyle.color);
-    document.getElementById('bg-color').value = rgbToHex(computedStyle.backgroundColor);
-    
-    showNotification('אלמנט נבחר לעריכה', 'info');
-  }
-
-  // ===== עדכון מאפיין =====
-  function updateProperty(prop, val) {
-    if (!currentSelectedElement) {
-      showNotification('בחר אלמנט תחילה', 'warning');
-      return;
-    }
-    
-    if (prop === 'innerText') {
-      currentSelectedElement.innerText = val;
-    } else {
-      currentSelectedElement.style[prop] = val;
-    }
-    
-    saveChanges();
-    showNotification('המאפיין עודכן', 'success');
-  }
-
-  // ===== שמירה =====
-  function saveChanges() {
-    const iframe = document.getElementById('canvas-iframe');
-    if (!iframe.contentDocument) {
-      showNotification('אין אתר לשמירה', 'warning');
-      return;
-    }
-    
-    try {
-      const html = iframe.contentDocument.documentElement.outerHTML;
-      localStorage.setItem(`webmaster_pro_${currentWebsite}`, html);
-      localStorage.setItem('webmaster_pro_last_saved', new Date().toISOString());
-      showNotification('השינויים נשמרו בהצלחה', 'success');
-    } catch (error) {
-      console.error('Save error:', error);
-      showNotification('שגיאה בשמירה', 'error');
-    }
-  }
-
-  // ===== ייצוא =====
-  function exportWebsite() {
-    const iframe = document.getElementById('canvas-iframe');
-    if (!iframe.contentDocument) {
-      showNotification('אין אתר לייצוא', 'warning');
-      return;
-    }
-    
-    try {
-      const html = iframe.contentDocument.documentElement.outerHTML;
-      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${currentWebsite || 'website'}.html`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      
-      showNotification('האתר יוצא בהצלחה', 'success');
-    } catch (error) {
-      console.error('Export error:', error);
-      showNotification('שגיאה בייצוא', 'error');
-    }
-  }
-
-  // ===== AI Assistant =====
-  async function aiAssistant(prompt) {
-    try {
-      if (typeof window.claude === 'undefined' || typeof window.claude.complete !== 'function') {
-        throw new Error('AI לא זמין במסגרת זו');
+    // VideoEditor מלאה
+    class VideoEditor {
+      constructor(){
+        this.videoElement = document.getElementById('video-preview');
+        this.startTime=0; this.endTime=0;
       }
-      
-      const response = await window.claude.complete(`
-        אתה עוזר מקצועי לעיצוב אתרים ו-UX/UI. המשתמש עורך אתר עם האדיטור שלנו.
-        
-        שאלת המשתמש: ${prompt}
-        
-        תן תשובה מועילה ומקצועית. אם אתה מציע שינויי CSS או HTML, תן דוגמאות קונקרטיות.
-        
-        תשובה ב-JSON:
-        {
-          "suggestion": "העצה המקצועית שלך",
-          "code": "קוד CSS/HTML אם רלוונטי (או ריק)",
-          "explanation": "הסבר מפורט איך לישם"
-        }
-      `);
-      
-      return JSON.parse(response);
-    } catch (error) {
-      console.error('AI Error:', error);
-      return {
-        suggestion: 'מצטער, יש בעיה בחיבור ל-AI. נסה שוב מאוחר יותר.',
-        code: '',
-        explanation: 'שירות ה-AI זמני לא זמין.'
-      };
-    }
-  }
-
-  async function askAI() {
-    const input = document.getElementById('ai-input');
-    const question = input.value.trim();
-    
-    if (!question) {
-      showNotification('כתב שאלה תחילה', 'warning');
-      return;
-    }
-    
-    // מוסיף הודעת משתמש
-    addChatMessage(question, 'user');
-    input.value = '';
-    
-    // מציג שהAI חושב
-    const thinkingMsg = addChatMessage('AI חושב...', 'ai');
-    
-    try {
-      const response = await aiAssistant(question);
-      
-      // מסיר הודעת "חושב"
-      thinkingMsg.remove();
-      
-      // מוסיף תשובת AI
-      addChatMessage(response.suggestion || 'לא זמין כרגע', 'ai');
-      
-      // אם יש קוד, מציג אותו
-      if (response.code) {
-        addChatMessage(`קוד מוצע:\n${response.code}`, 'ai');
+      handleVideoUpload(file){
+        if(!file||!file.type.startsWith('video/')){ showNotification('בחר וידאו תקין','error'); return; }
+        this.videoElement.src=URL.createObjectURL(file);
+        this.videoElement.onloadedmetadata=()=>{
+          this.endTime=this.videoElement.duration;
+          showNotification(`וידאו הועלה (${Math.round(this.endTime)}s)`);
+        };
       }
-      
-    } catch (error) {
-      thinkingMsg.remove();
-      addChatMessage('מצטער, יש בעיה בחיבור ל-AI', 'ai');
-    }
-  }
-
-  // ===== הודעות צ'אט =====
-  function addChatMessage(msg, type) {
-    const box = document.getElementById('chat-messages');
-    const div = document.createElement('div');
-    div.className = `chat-message ${type}`;
-    div.style.whiteSpace = 'pre-wrap';
-    div.textContent = msg;
-    
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
-    
-    return div; // מחזיר את האלמנט למחיקה אם נדרש
-  }
-
-  // ===== פתיחת/סגירת AI צ'אט =====
-  function openAIChat() {
-    const chat = document.getElementById('ai-chat');
-    const isVisible = chat.style.display !== 'none';
-    chat.style.display = isVisible ? 'none' : 'block';
-    
-    if (!isVisible) {
-      // מתמקד בשדה הקלט
-      setTimeout(() => {
-        document.getElementById('ai-input').focus();
-      }, 100);
-    }
-  }
-
-  // ===== הודעות למשתמש =====
-  function showNotification(txt, type = 'success') {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.textContent = txt;
-    
-    // צבעים לפי סוג
-    if (type === 'error') {
-      notification.style.background = 'linear-gradient(135deg, var(--error) 0%, #dc2626 100%)';
-    } else if (type === 'warning') {
-      notification.style.background = 'linear-gradient(135deg, var(--warning) 0%, #d97706 100%)';
-    } else if (type === 'info') {
-      notification.style.background = 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)';
-    }
-    
-    document.body.appendChild(notification);
-    
-    // מסיר אחרי 3 שניות
-    setTimeout(() => {
-      if (notification.parentNode) {
-        notification.remove();
+      trimVideo(){
+        const start=parseFloat(prompt('שנייה התחלה:')||0);
+        const end=parseFloat(prompt('שנייה סיום:')||this.videoElement.duration);
+        if(start<end&&end<=this.videoElement.duration){ this.startTime=start; this.endTime=end; this.videoElement.currentTime=start;
+          showNotification(`וידאו נחתך ${start}-${end}s`);
+        } else showNotification('זמנים לא תקינים','error');
       }
-    }, 3000);
-  }
-
-  // ===== פונקציות עזר =====
-  function rgbToHex(rgb) {
-    if (!rgb || rgb === 'rgba(0, 0, 0, 0)' || rgb === 'transparent') return '#000000';
-    
-    const result = rgb.match(/\d+/g);
-    if (!result || result.length < 3) return '#000000';
-    
-    return "#" + ((1 << 24) + (+result[0] << 16) + (+result[1] << 8) + +result[2]).toString(16).slice(1);
-  }
-
-  // ===== אתחול האפליקציה =====
-  document.addEventListener('DOMContentLoaded', () => {
-    try {
-      initWebsites();
-      initBlocks();
-      
-      // מציג הודעת ברוכים הבאים
-      setTimeout(() => {
-        showNotification('🚀 WebMaster Pro AI מוכן לעבודה!', 'info');
-      }, 500);
-      
-      console.log('✅ WebMaster Pro AI Editor loaded successfully');
-      console.log(`📊 ${websites.length} websites available for editing`);
-      
-    } catch (error) {
-      console.error('Initialization error:', error);
-      showNotification('שגיאה באתחול המערכת', 'error');
-    }
-  });
-
-  // ===== Event Listeners נוספים =====
-  
-  // Enter ב-AI input
-  document.addEventListener('DOMContentLoaded', () => {
-    const aiInput = document.getElementById('ai-input');
-    aiInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        askAI();
-      }
-    });
-  });
-
-  // Keyboard shortcuts
-  document.addEventListener('keydown', (e) => {
-    // Ctrl+S לשמירה
-    if (e.ctrlKey && e.key === 's') {
-      e.preventDefault();
-      saveChanges();
-    }
-    
-    // Ctrl+E לפתיחת AI
-    if (e.ctrlKey && e.key === 'e') {
-      e.preventDefault();
-      openAIChat();
-    }
-    
-    // ESC לביטול בחירה
-    if (e.key === 'Escape' && currentSelectedElement) {
-      currentSelectedElement.classList.remove('selected');
-      currentSelectedElement = null;
-      document.getElementById('element-info').textContent = 'בחר אלמנט לעריכה';
-    }
-  });
-
-  // ===== הגנה מפני איבוד נתונים =====
-  window.addEventListener('beforeunload', (e) => {
-    if (currentWebsite) {
-      const message = 'יש לך שינויים שלא נשמרו. האם אתה בטוח שברצונך לעזוב?';
-      e.returnValue = message;
-      return message;
-    }
-  });
-
-  // Export functions for debugging
-  window.WebMasterPro = {
-    websites,
-    blockTypes,
-    loadWebsite,
-    saveChanges,
-    exportWebsite,
-    currentWebsite: () => currentWebsite,
-    currentElement: () => currentSelectedElement
-  };
-</script>
-
-</body>
-</html>
+      addVideoText(){
+        const text=prompt('טקסט:'); const x=parseInt(prompt('X(0-100):')||50); const y=parseInt(prompt('Y(0-100):')||50);
+        if(text){ const ov=document.createElement('div');
+          ov.style.cssText=`position:absolute;top:${y}%;left:${x}%;color:white;font-size:24px;font-weight:bold;`
