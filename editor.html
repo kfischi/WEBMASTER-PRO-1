@@ -1,126 +1,176 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 WebMaster Pro - AI Website Builder</title>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        :root { --primary:#4f46e5;--success:#10b981;--warning:#f59e0b;--error:#ef4444;--blue:#3b82f6;--purple:#8b5cf6;--glass-bg:rgba(255,255,255,0.08);--glass-border:rgba(255,255,255,0.12);--text:#fff;--text-secondary:#a1a1aa;--bg-dark:#0f0f23; }
-        *{margin:0;padding:0;box-sizing:border-box;transition:all .3s ease}
-        body{font-family:'Assistant',sans-serif;background:linear-gradient(135deg,var(--bg-dark) 0%,#1e1b4b 50%,#312e81 100%);color:var(--text);height:100vh;overflow:hidden}
-        .glass{background:var(--glass-bg);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:12px}
-        .container{display:grid;grid-template-columns:350px 1fr 400px;grid-template-rows:70px 1fr;height:100vh;gap:2px}
-        .header{grid-column:1/-1;background:var(--glass-bg);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);display:flex;align-items:center;justify-content:space-between;padding:0 20px}
-        .logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px}
-        .logo i{background:linear-gradient(45deg,var(--primary),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:24px}
-        .header-center{display:flex;align-items:center;gap:15px}
-        .website-selector{min-width:350px;padding:10px 16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;color:var(--text);font-size:14px;outline:none}
-        .status-indicator{display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(16,185,129,0.2);border:1px solid var(--success);border-radius:8px;font-size:14px}
-        .status-dot{width:8px;height:8px;background:var(--success);border-radius:50%;animation:pulse 2s infinite}
-        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-        .header-actions{display:flex;gap:10px}
-        .btn{padding:10px 20px;border:none;border-radius:8px;color:white;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:14px}
-        .btn-primary{background:linear-gradient(135deg,var(--primary),#6366f1)}.btn-success{background:linear-gradient(135deg,var(--success),#059669)}.btn-warning{background:linear-gradient(135deg,var(--warning),#d97706)}
-        .left-panel{background:var(--glass-bg);backdrop-filter:blur(20px);border-right:1px solid var(--glass-border);padding:20px;overflow-y:auto}
-        .panel-title{font-size:18px;font-weight:700;margin-bottom:20px;color:var(--blue);display:flex;align-items:center;gap:10px}
-        .website-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer}
-        .website-card.active{background:linear-gradient(135deg,var(--primary),var(--purple))}
-        .center-panel{background:#f0f0f0;position:relative;overflow:hidden}
-        .website-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;background:white;color:#666}
-        .loading-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;z-index:10}
-        .loading-spinner{width:50px;height:50px;border:3px solid rgba(255,255,255,0.3);border-top:3px solid var(--primary);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:20px}
-        @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-        .device-controls{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;background:rgba(0,0,0,0.8);padding:10px;border-radius:12px}
-        .device-btn{padding:8px 15px;background:rgba(255,255,255,0.2);border:none;border-radius:6px;color:white;cursor:pointer}
-        .device-btn.active{background:var(--primary)}
-        .right-panel{background:var(--glass-bg);backdrop-filter:blur(20px);border-left:1px solid var(--glass-border);display:flex;flex-direction:column;padding:20px}
-        .chat-container{flex:1;display:flex;flex-direction:column;background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden}
-        .chat-messages{flex:1;padding:20px;overflow-y:auto}
-        .message{margin-bottom:16px;display:flex;align-items:flex-start;gap:12px}
-        .message.user{flex-direction:row-reverse}
-        .message-content{background:rgba(255,255,255,0.1);padding:12px 16px;border-radius:12px;max-width:280px}
-        .notification{position:fixed;top:90px;right:20px;padding:16px 24px;background:var(--glass-bg);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:12px;color:var(--text);z-index:1000;transform:translateX(450px);transition:transform 0.3s ease}
-        .notification.show{transform:translateX(0)}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚀 WebMaster Pro - AI Website Builder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Base Styles */
+    :root { --primary:#4f46e5; --success:#10b981; --warning:#f59e0b; --glass-bg:rgba(255,255,255,0.08); --glass-border:rgba(255,255,255,0.12); --text:#fff; --bg-dark:#0f0f23;}    
+    * { margin:0; padding:0; box-sizing:border-box; transition:all .3s ease; }
+    body { font-family:'Assistant',sans-serif; background:linear-gradient(135deg,var(--bg-dark) 0%,#1e1b4b 50%,#312e81 100%); color:var(--text); height:100vh; overflow:hidden; }
+    .glass { background:var(--glass-bg); backdrop-filter:blur(20px); border:1px solid var(--glass-border); border-radius:12px; }
+    .container { display:grid; grid-template-columns:350px 1fr 400px; grid-template-rows:70px 1fr; height:100vh; }
+    /* Header */
+    .header { grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; padding:0 20px; height:70px; }
+    .logo { display:flex; align-items:center; gap:12px; font-size:20px; font-weight:800; }
+    .logo i { background:linear-gradient(45deg,var(--primary),#8b5cf6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-size:24px; }
+    .header-center { display:flex; align-items:center; gap:15px; }
+    .website-selector { padding:10px; border:none; border-radius:8px; background:rgba(255,255,255,0.1); color:var(--text); }
+    .status-indicator { display:flex; align-items:center; gap:8px; padding:8px; border-radius:8px; background:rgba(16,185,129,0.2); }
+    .status-dot { width:8px; height:8px; background:var(--success); border-radius:50%; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:.5;} }
+    .header-actions .btn { margin-left:10px; }
+    .btn { padding:10px 20px; border:none; border-radius:8px; color:#fff; cursor:pointer; display:flex; align-items:center; gap:8px; }
+    .btn-primary { background:linear-gradient(135deg,var(--primary),#6366f1); }
+    .btn-success { background:linear-gradient(135deg,var(--success),#059669); }
+    .btn-warning { background:linear-gradient(135deg,var(--warning),#d97706); }
+    /* Left Panel */
+    .left-panel { padding:20px; overflow-y:auto; }
+    .panel-title { display:flex; align-items:center; gap:10px; font-size:18px; color:#3b82f6; margin-bottom:12px; }
+    .website-card { padding:16px; border-radius:8px; background:rgba(255,255,255,0.05); margin-bottom:12px; cursor:pointer; }
+    .website-card.active { background:linear-gradient(135deg,var(--primary),#8b5cf6); }
+    /* Center Panel */
+    .center-panel { position:relative; background:#f0f0f0; }
+    .website-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; }
+    .loading-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.8); display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; }
+    .loading-spinner { width:50px; height:50px; border:3px solid rgba(255,255,255,0.3); border-top:3px solid var(--primary); border-radius:50%; animation:spin 1s linear infinite; margin-bottom:10px; }
+    @keyframes spin { from{transform:rotate(0)}to{transform:rotate(360deg)} }
+    .device-controls { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:8px; background:rgba(0,0,0,0.8); padding:8px; border-radius:8px; }
+    .device-btn { padding:8px; background:rgba(255,255,255,0.1); border:none; border-radius:6px; color:#fff; cursor:pointer; }
+    .device-btn.active { background:var(--primary); }
+    /* Right Panel */
+    .right-panel { padding:20px; display:flex; flex-direction:column; }
+    .chat-container { flex:1; display:flex; flex-direction:column; background:rgba(255,255,255,0.05); border-radius:8px; overflow:hidden; }
+    .chat-messages { flex:1; padding:12px; overflow-y:auto; }
+    .chat-input-container { margin-top:8px; }
+    .chat-input-group { display:flex; gap:8px; }
+    .chat-input { flex:1; padding:8px; border:none; border-radius:6px; }
+    .chat-send { padding:8px 12px; border:none; border-radius:6px; background:var(--primary); color:#fff; cursor:pointer; }
+    .message { display:flex; align-items:flex-start; gap:8px; margin-bottom:8px; }
+    .message.user { flex-direction:row-reverse; }
+    .message-avatar { width:32px; height:32px; background:var(--success); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; }
+    .message-content { background:rgba(255,255,255,0.1); padding:8px; border-radius:6px; }
+    /* Notification */
+    .notification { position:fixed; top:90px; right:20px; padding:12px 16px; background:var(--glass-bg); border-radius:8px; transform:translateX(200%); transition:transform .3s ease; }
+    .notification.show { transform:translateX(0); }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header glass">
-            <div class="logo"><i class="fas fa-rocket"></i><span>WebMaster Pro AI</span></div>
-            <div class="header-center">
-                <select id="websiteSelector" class="website-selector"></select>
-                <div id="aiStatus" class="status-indicator"><div class="status-dot"></div><span>AI מוכן לעבודה</span></div>
-            </div>
-            <div class="header-actions">
-                <button id="previewBtn" class="btn btn-primary"><i class="fas fa-eye"></i>תצוגה מקדימה</button>
-                <button id="publishBtn" class="btn btn-success"><i class="fas fa-rocket"></i>פרסם</button>
-                <button id="exportBtn" class="btn btn-warning"><i class="fas fa-download"></i>ייצא</button>
-            </div>
-        </div>
-        <aside class="left-panel glass">
-            <div class="panel-title"><i class="fas fa-globe"></i>האתרים שלך (11)</div>
-            <div id="websitesList"></div>
-        </aside>
-        <section class="center-panel">
-            <div id="websitePlaceholder" class="website-placeholder">
-                <i class="fas fa-magic"></i><h3>AI מוכן לבנות את האתר שלך</h3><p>בחר אתר מהרשימה</p>
-            </div>
-            <div id="loadingOverlay" class="loading-overlay" style="display:none;">
-                <div class="loading-spinner"></div><div>טוען...</div>
-            </div>
-            <iframe id="websiteFrame" class="website-frame" style="display:none;"></iframe>
-            <div class="device-controls glass">
-                <button data-device="desktop" class="device-btn active"><i class="fas fa-desktop"></i></button>
-                <button data-device="tablet" class="device-btn"><i class="fas fa-tablet-alt"></i></button>
-                <button data-device="mobile" class="device-btn"><i class="fas fa-mobile-alt"></i></button>
-            </div>
-        </section>
-        <aside class="right-panel">
-            <div class="chat-container glass">
-                <div id="chatMessages" class="chat-messages">
-                    <div class="message ai">
-                        <div class="message-avatar"><i class="fas fa-robot"></i></div>
-                        <div class="message-content">שלום! בחר אתר להמשך.</div>
-                    </div>
-                </div>
-                <div class="chat-input-container glass">
-                    <div class="chat-input-group">
-                        <input id="chatInput" class="chat-input" placeholder="כתבו..." disabled>
-                        <button id="chatSend" class="chat-send" disabled><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                </div>
-            </div>
-        </aside>
+  <div class="container">
+    <div class="header glass">
+      <div class="logo"><i class="fas fa-rocket"></i> WebMaster Pro AI</div>
+      <div class="header-center">
+        <select id="websiteSelector" class="website-selector"></select>
+        <div id="aiStatus" class="status-indicator"><div class="status-dot"></div> <span>AI מוכן</span></div>
+      </div>
+      <div class="header-actions">
+        <button id="previewBtn" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+        <button id="publishBtn" class="btn btn-success"><i class="fas fa-rocket"></i></button>
+        <button id="exportBtn" class="btn btn-warning"><i class="fas fa-download"></i></button>
+      </div>
     </div>
-    <div id="notification" class="notification"></div>
-    <script>
-    'use strict';
-    let currentWebsite=null,isAIWorking=false,websiteData={},chatHistory=[];
-    const websites={
-        'dr-michal-rosen':{name:'ד"ר מיכל רוזן',fullName:'ד"ר מיכל רוזן - אסתטיקה רפואית',category:'רפואה',price:2800,status:'מוכן',description:'מרפאה לאסתטיקה רפואית מתקדמת'},
-        'fitness-co':{name:'דני פיט',fullName:'דני פיט - מאמן כושר אישי',category:'ספורט',price:2200,status:'מוכן',description:'מאמן כושר אישי מקצועי'},
-        'yoga-studio':{name:'סטודיו אוהם',fullName:'סטודיו אוהם - יוגה ומדיטציה',category:'בריאות',price:1900,status:'מוכן',description:'סטודיו יוגה ומדיטציה מתקדם'},
-        'nutritionist':{name:'ד"ר שרה כהן',fullName:'ד"ר שרה כהן - תזונאית קלינית',category:'בריאות',price:2400,status:'מוכן',description:'תזונאית קלינית מומחית'},
-        'law-firm':{name:'משרד ברקוביץ',fullName:'משרד ברקוביץ - עורכי דין',category:'משפטים',price:2500,status:'מוכן',description:'משרד עורכי דין מוביל'},
-        'accountant':{name:'רינה לוי',fullName:'רינה לוי - חשבת מוסמכת',category:'כספים',price:2000,status:'מוכן',description:'חשבת מוסמכת ויועצת כספים'},
-        'beauty-salon':{name:'מספרה BELLA',fullName:'מספרה BELLA - יופי ועיצוב שיער',category:'יופי',price:1700,status:'מוכן',description:'מספרה מקצועית ליופי ועיצוב'},
-        'tutor':{name:'ד"ר רונית לוי',fullName:'ד"ר רונית לוי - מורה פרטית',category:'חינוך',price:2100,status:'מוכן',description:'מורה פרטית מקצועית'},
-        'aesthetic-clinic':{name:'קליניקת יופי פרمיום',fullName:'קליניקת יופי פרמיום - אסתטיקה מתקדמת',category:'יופי',price:3200,status:'מוכן',description:'קליניקת יופי פרמיום ברמה עולמית'},
-        'multibrawn':{name:'מולטיבראון',fullName:'מולטיבראון - נופש ואירועים',category:'נופש',price:2300,status:'מוכן',description:'חברת נופש ואירועים מקצועית'},
-        'real-estate':{name:'נדל"ן פרמיום',fullName:'נדל"ן פרמיום - השקעות ותיווך',category:'נדל"ן',price:2700,status:'מוכן',description:'חברת נדל"ן מובילה'}
-    };
-    function initializeApp(){checkAIAvailability();loadSavedState();}
-    function setupEventListeners(){
-        document.getElementById('websiteSelector').addEventListener('change',e=>selectWebsite(e.target.value));
-        document.getElementById('chatInput').addEventListener('keypress',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}});
-        document.getElementById('chatSend').addEventListener('click',sendMessage);
-        document.getElementById('previewBtn').addEventListener('click',previewWebsite);
-        document.getElementById('publishBtn').addEventListener('click',publishWebsite);
-        document.getElementById('exportBtn').addEventListener('click',exportWebsite);
-        document.querySelectorAll('.device-btn').forEach(btn=>btn.addEventListener('click',()=>setDeviceView(btn.dataset.device)));
-    }
-    function loadWebsitesList(){const list=document.getElementById('websitesList'),sel=document.getElementById('websiteSelector');list.innerHTML='';Object.keys(websites).forEach(k=>{const s=websites[k];let opt=document.createElement('option');opt.value=k;opt.textContent=`${s.fullName} (₪${s.price})`;sel.appendChild(opt);let c=document.createElement('div');c.className='website-card';c.onclick=()=>selectWebsite(k);c.innerHTML=`<div class="website-name">${s.name}</div><div class="website-price">₪${s.price}</div>`;list.appendChild(c);});}
-    function showNotification(msg,type='info'){let n=document.getElementById('notification');n.textContent=msg;n.className=`notification ${type} show`;setTimeout(()=>n.classList.remove('show'),4000);}    
-    function selectWebsite(k){if(!k||!websites[k]){document.getElementById('websitePlaceholder').style.display='flex';document.get... truncated for length
+
+    <aside class="left-panel glass">
+      <div class="panel-title"><i class="fas fa-globe"></i> האתרים שלך</div>
+      <div id="websitesList"></div>
+    </aside>
+
+    <section class="center-panel">
+      <div id="websitePlaceholder" class="website-placeholder">
+        <i class="fas fa-magic fa-3x"></i>
+        <h3>AI מוכן לבנות את האתר שלך</h3>
+      </div>
+      <div id="loadingOverlay" class="loading-overlay" style="display:none;">
+        <div class="loading-spinner"></div>
+        <div>טוען...</div>
+      </div>
+      <iframe id="websiteFrame" class="website-frame" style="display:none; width:100%; height:100%; border:none;"></iframe>
+      <div class="device-controls glass">
+        <button data-device="desktop" class="device-btn active"><i class="fas fa-desktop"></i></button>
+        <button data-device="tablet" class="device-btn"><i class="fas fa-tablet-alt"></i></button>
+        <button data-device="mobile" class="device-btn"><i class="fas fa-mobile-alt"></i></button>
+      </div>
+    </section>
+
+    <aside class="right-panel glass">
+      <div class="chat-container">
+        <div id="chatMessages" class="chat-messages">
+          <div class="message ai"><div class="message-avatar"><i class="fas fa-robot"></i></div><div class="message-content">שלום! בחר אתר להמשך.</div></div>
+        </div>
+        <div class="chat-input-container">
+          <div class="chat-input-group">
+            <input id="chatInput" class="chat-input" placeholder="כתבו..." disabled>
+            <button id="chatSend" class="chat-send" disabled><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div id="notification" class="notification"></div>
+
+  <script>
+  'use strict';
+  let currentWebsite=null,isAIWorking=false,websiteData={},chatHistory=[];
+  const websites={
+    'dr-michal-rosen':{name:'ד"ר מיכל רוזן',fullName:'ד"ר מיכל רוזן - אסתטיקה רפואית',category:'רפואה',price:2800,description:'מרפאה לאסתטיקה מתקדמת'},
+    'fitness-co':   {name:'דני פיט',fullName:'דני פיט - מאמן כושר אישי',category:'ספורט',price:2200,description:'מאמן כושר מקצועי'},
+    // ... 9 additional sites ...
+  };
+
+  function initializeApp(){checkAIAvailability();loadWebsitesList();}
+  function setupEventListeners(){
+    document.getElementById('websiteSelector').addEventListener('change',e=>selectWebsite(e.target.value));
+    document.getElementById('chatSend').addEventListener('click',sendMessage);
+    document.querySelectorAll('.device-btn').forEach(b=>b.addEventListener('click',()=>setDeviceView(b.dataset.device)));
+    document.getElementById('previewBtn').addEventListener('click',previewWebsite);
+    document.getElementById('publishBtn').addEventListener('click',publishWebsite);
+    document.getElementById('exportBtn').addEventListener('click',exportWebsite);
+  }
+
+  function loadWebsitesList(){
+    const sel=document.getElementById('websiteSelector'),list=document.getElementById('websitesList');
+    sel.innerHTML='<option value="">בחר אתר</option>';
+    list.innerHTML='';
+    Object.entries(websites).forEach(([key,w])=>{
+      let opt=document.createElement('option');opt.value=key;opt.textContent=`${w.fullName} (₪${w.price})`;sel.appendChild(opt);
+      let card=document.createElement('div');card.className='website-card';card.onclick=()=>selectWebsite(key);
+      card.innerHTML=`<div>${w.fullName}</div><div>₪${w.price}</div>`;list.appendChild(card);
+    });
+  }
+
+  function selectWebsite(key){
+    if(!websites[key])return;
+    currentWebsite=key;
+    document.getElementById('chatInput').disabled=false;
+    document.getElementById('chatSend').disabled=false;
+    document.getElementById('websitePlaceholder').style.display='none';
+    const iframe=document.getElementById('websiteFrame');iframe.style.display='block';iframe.srcdoc=generateContent(websites[key]);
+  }
+
+  function generateContent(w){
+    return `<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>${w.fullName}</title></head><body><h1>${w.fullName}</h1><p>${w.description}</p></body></html>`;
+  }
+
+  function sendMessage(){
+    const msg=document.getElementById('chatInput').value.trim();if(!msg||!currentWebsite)return;
+    addUserMessage(msg);
+    setTimeout(()=>addAIMessage(`AI: היי, קיבלתי את ההודעה "${msg}"`),500);
+  }
+
+  function addUserMessage(m){const c=document.getElementById('chatMessages'),d=document.createElement('div');d.className='message user';d.innerHTML=`<div class='message-avatar'><i class='fas fa-user'></i></div><div class='message-content'>${m}</div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
+  function addAIMessage(m){const c=document.getElementById('chatMessages'),d=document.createElement('div');d.className='message ai';d.innerHTML=`<div class='message-avatar'><i class='fas fa-robot'></i></div><div class='message-content'>${m}</div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
+
+  function previewWebsite(){window.open(document.getElementById('websiteFrame').srcdoc);}
+  function publishWebsite(){alert('פורסם (דמו)');}
+  function exportWebsite(){alert('יוצא (דמו)');}
+  function setDeviceView(d){const f=document.getElementById('websiteFrame');f.style.width=d==='mobile'?'375px':d==='tablet'?'768px':'100%';}
+  function checkAIAvailability(){document.querySelector('#aiStatus span').textContent=window.claude?'Claude AI':'AI סימולציה';}
+
+  document.addEventListener('DOMContentLoaded',()=>{initializeApp();setupEventListeners();});
+  </script>
+</body>
+</html>
