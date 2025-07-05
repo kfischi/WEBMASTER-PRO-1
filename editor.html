@@ -31,7 +31,7 @@
       overflow: hidden;
       display: grid;
       grid-template-rows: 60px 1fr;
-      grid-template-columns: 240px 1fr 280px;
+      grid-template-columns: 280px 1fr 320px;
     }
 
     .header {
@@ -49,6 +49,87 @@
       font-size: 18px;
       font-weight: 700;
       color: var(--primary);
+    }
+
+    .website-selector {
+      position: relative;
+    }
+
+    .website-dropdown {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: var(--text);
+      font-size: 14px;
+      cursor: pointer;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .website-dropdown:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .dropdown-arrow {
+      margin-left: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown-arrow.open {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+    }
+
+    .dropdown-menu.show {
+      display: block;
+    }
+
+    .dropdown-item {
+      padding: 12px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .website-name {
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .website-category {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .website-price {
+      font-size: 12px;
+      color: var(--success);
+      font-weight: 600;
     }
 
     .header-actions {
@@ -109,60 +190,6 @@
       display: flex;
       align-items: center;
       gap: 8px;
-    }
-
-    .website-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .website-item {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 8px;
-      padding: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .website-item:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-1px);
-    }
-
-    .website-item.active {
-      background: var(--primary);
-      border-color: var(--primary);
-    }
-
-    .website-name {
-      font-weight: 500;
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .website-category {
-      font-size: 11px;
-      color: var(--text-secondary);
-      opacity: 0.8;
-    }
-
-    .website-price {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: var(--success);
-      color: white;
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-
-    .tools-section {
-      margin-top: 25px;
     }
 
     .tool-group {
@@ -257,39 +284,63 @@
     .notification.info { background: var(--primary); }
     .notification.warning { background: var(--warning); }
 
-    .ai-section {
-      border-top: 1px solid var(--glass-border);
-      padding-top: 20px;
-      margin-top: 20px;
-    }
-
-    .ai-input {
-      width: 100%;
-      min-height: 80px;
-      resize: vertical;
-      margin-bottom: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 6px;
-      padding: 10px;
-      color: var(--text);
-      font-family: inherit;
-    }
-
-    .ai-input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
     .range-input {
       width: 100%;
       margin-bottom: 10px;
     }
 
-    .export-section {
-      border-top: 1px solid var(--glass-border);
-      padding-top: 20px;
-      margin-top: 20px;
+    .font-controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .font-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .font-btn:hover, .font-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .element-info {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-size: 12px;
+    }
+
+    .blocks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .block-item {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 6px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 12px;
+    }
+
+    .block-item:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
     }
 
     @keyframes slideIn {
@@ -305,6 +356,20 @@
     .fade-in {
       animation: fadeIn 0.5s ease;
     }
+
+    /* עיצוב סקרול */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 3px;
+    }
   </style>
 </head>
 
@@ -314,6 +379,18 @@
     <div class="logo">
       <i class="fas fa-rocket"></i> WebMaster Pro
     </div>
+    
+    <!-- Website Selector -->
+    <div class="website-selector">
+      <div class="website-dropdown" onclick="toggleDropdown()">
+        <span id="selectedWebsiteName">בחר אתר לעריכה</span>
+        <i class="fas fa-chevron-down dropdown-arrow" id="dropdownArrow"></i>
+      </div>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <!-- יטען דינמית -->
+      </div>
+    </div>
+    
     <div class="header-actions">
       <button class="btn" onclick="saveCurrentWebsite()">
         <i class="fas fa-save"></i> שמור
@@ -327,30 +404,48 @@
     </div>
   </div>
 
-  <!-- Sidebar Left -->
+  <!-- Sidebar Left - בלוקים והוספות -->
   <div class="sidebar">
     <div class="section-title">
-      <i class="fas fa-globe"></i> אתרים זמינים
+      <i class="fas fa-plus"></i> הוסף בלוקים
     </div>
-    <div class="website-list" id="websiteList">
-      <!-- יטען דינמית -->
+    
+    <div class="blocks-grid">
+      <div class="block-item" onclick="addTextBlock()">
+        <i class="fas fa-font"></i>
+        <div>טקסט</div>
+      </div>
+      <div class="block-item" onclick="addButtonBlock()">
+        <i class="fas fa-hand-pointer"></i>
+        <div>כפתור</div>
+      </div>
+      <div class="block-item" onclick="addImageBlock()">
+        <i class="fas fa-image"></i>
+        <div>תמונה</div>
+      </div>
+      <div class="block-item" onclick="addSectionBlock()">
+        <i class="fas fa-th-large"></i>
+        <div>סקציה</div>
+      </div>
     </div>
 
-    <div class="tools-section">
+    <div class="tool-group">
       <div class="section-title">
-        <i class="fas fa-tools"></i> כלי עריכה מהירה
+        <i class="fas fa-search"></i> חיפוש ונווט
       </div>
-      
-      <div class="tool-group">
-        <label class="tool-label">חיפוש אתר</label>
-        <input type="text" class="tool-input" id="websiteSearch" placeholder="חפש אתר..." onkeyup="filterWebsites()">
-      </div>
+      <input type="text" class="tool-input" id="elementSearch" placeholder="חפש אלמנט..." onkeyup="searchElements()">
+    </div>
 
-      <div class="tool-group">
-        <button class="btn" onclick="loadDemoWebsite()">
-          <i class="fas fa-plus"></i> טען דמו חדש
-        </button>
+    <div class="tool-group">
+      <div class="section-title">
+        <i class="fas fa-history"></i> פעולות מהירות
       </div>
+      <button class="btn" onclick="undoAction()" style="margin-bottom: 8px; width: 100%;">
+        <i class="fas fa-undo"></i> בטל פעולה
+      </button>
+      <button class="btn" onclick="redoAction()" style="width: 100%;">
+        <i class="fas fa-redo"></i> חזור פעולה
+      </button>
     </div>
   </div>
 
@@ -362,83 +457,94 @@
     <iframe class="preview-frame" id="previewFrame" style="display: none;"></iframe>
   </div>
 
-  <!-- Sidebar Right -->
+  <!-- Sidebar Right - כלי עריכה -->
   <div class="sidebar-right">
+    <div class="element-info" id="elementInfo" style="display: none;">
+      <strong id="elementType">אלמנט לא נבחר</strong>
+      <div id="elementDetails"></div>
+    </div>
+
     <div class="section-title">
-      <i class="fas fa-palette"></i> עיצוב וסגנון
+      <i class="fas fa-edit"></i> עריכת טקסט
     </div>
 
     <div class="tool-group">
-      <label class="tool-label">עריכת טקסט</label>
-      <input type="text" class="tool-input" id="textInput" placeholder="הכנס טקסט חדש">
-      <button class="btn" onclick="updateSelectedText()" style="margin-top: 8px;">
-        <i class="fas fa-edit"></i> עדכן
-      </button>
+      <label class="tool-label">תוכן הטקסט</label>
+      <textarea class="tool-input" id="textContent" rows="3" placeholder="הכנס טקסט חדש" oninput="updateTextContent()"></textarea>
     </div>
 
     <div class="tool-group">
-      <label class="tool-label">צבעי רקע</label>
-      <div class="color-palette">
-        <div class="color-option" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)" onclick="changeBackgroundColor('linear-gradient(135deg, #667eea 0%, #764ba2 100%)')"></div>
-        <div class="color-option" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" onclick="changeBackgroundColor('linear-gradient(135deg, #f093fb 0%, #f5576c 100%)')"></div>
-        <div class="color-option" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)" onclick="changeBackgroundColor('linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)')"></div>
-        <div class="color-option" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)" onclick="changeBackgroundColor('linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)')"></div>
-        <div class="color-option" style="background: #667eea" onclick="changeBackgroundColor('#667eea')"></div>
-        <div class="color-option" style="background: #f093fb" onclick="changeBackgroundColor('#f093fb')"></div>
-        <div class="color-option" style="background: #4facfe" onclick="changeBackgroundColor('#4facfe')"></div>
-        <div class="color-option" style="background: #43e97b" onclick="changeBackgroundColor('#43e97b')"></div>
-      </div>
-    </div>
-
-    <div class="tool-group">
-      <label class="tool-label">צבע טקסט</label>
-      <input type="color" class="tool-input" id="textColorInput" value="#333333" onchange="changeTextColor(this.value)">
-    </div>
-
-    <div class="tool-group">
-      <label class="tool-label">גודל גופן</label>
-      <input type="range" class="range-input" id="fontSizeRange" min="12" max="48" value="16" onchange="changeFontSize(this.value)">
-      <span id="fontSizeDisplay">16px</span>
-    </div>
-
-    <div class="ai-section">
-      <div class="section-title">
-        <i class="fas fa-robot"></i> עוזר AI
-      </div>
-      
-      <div class="tool-group">
-        <textarea class="ai-input" id="aiInput" placeholder="שאל את העוזר AI... (לדוגמה: 'הוסף כפתור קשר')"></textarea>
-        <button class="btn" onclick="askAI()">
-          <i class="fas fa-magic"></i> שאל AI
+      <label class="tool-label">עיצוב טקסט</label>
+      <div class="font-controls">
+        <button class="font-btn" onclick="toggleBold()" id="boldBtn">
+          <i class="fas fa-bold"></i>
+        </button>
+        <button class="font-btn" onclick="toggleItalic()" id="italicBtn">
+          <i class="fas fa-italic"></i>
+        </button>
+        <button class="font-btn" onclick="toggleUnderline()" id="underlineBtn">
+          <i class="fas fa-underline"></i>
         </button>
       </div>
     </div>
 
-    <div class="export-section">
-      <div class="section-title">
-        <i class="fas fa-file-export"></i> ייצוא ושמירה
+    <div class="section-title">
+      <i class="fas fa-palette"></i> צבעים ועיצוב
+    </div>
+
+    <div class="tool-group">
+      <label class="tool-label">צבע טקסט</label>
+      <input type="color" class="tool-input" id="textColor" value="#333333" onchange="updateTextColor(this.value)">
+    </div>
+
+    <div class="tool-group">
+      <label class="tool-label">צבע רקע</label>
+      <input type="color" class="tool-input" id="bgColor" value="#ffffff" onchange="updateBackgroundColor(this.value)">
+    </div>
+
+    <div class="tool-group">
+      <label class="tool-label">גודל גופן</label>
+      <input type="range" class="range-input" id="fontSize" min="12" max="48" value="16" oninput="updateFontSize(this.value)">
+      <span id="fontSizeDisplay">16px</span>
+    </div>
+
+    <div class="tool-group">
+      <label class="tool-label">צבעים מהירים</label>
+      <div class="color-palette">
+        <div class="color-option" style="background: #667eea" onclick="applyQuickColor('#667eea')"></div>
+        <div class="color-option" style="background: #764ba2" onclick="applyQuickColor('#764ba2')"></div>
+        <div class="color-option" style="background: #f093fb" onclick="applyQuickColor('#f093fb')"></div>
+        <div class="color-option" style="background: #f5576c" onclick="applyQuickColor('#f5576c')"></div>
+        <div class="color-option" style="background: #4facfe" onclick="applyQuickColor('#4facfe')"></div>
+        <div class="color-option" style="background: #43e97b" onclick="applyQuickColor('#43e97b')"></div>
+        <div class="color-option" style="background: #fa709a" onclick="applyQuickColor('#fa709a')"></div>
+        <div class="color-option" style="background: #fee140" onclick="applyQuickColor('#fee140')"></div>
       </div>
-      
-      <button class="btn success" onclick="exportHTML()">
-        <i class="fas fa-code"></i> ייצא HTML
+    </div>
+
+    <div class="section-title">
+      <i class="fas fa-magic"></i> אפקטים מתקדמים
+    </div>
+
+    <div class="tool-group">
+      <button class="btn" onclick="applyGlassMorphism()" style="margin-bottom: 8px; width: 100%;">
+        <i class="fas fa-gem"></i> Glass Morphism
       </button>
-      <button class="btn warning" onclick="exportImages()">
-        <i class="fas fa-images"></i> ייצא תמונות
+      <button class="btn" onclick="addShadow()" style="margin-bottom: 8px; width: 100%;">
+        <i class="fas fa-sun"></i> הוסף צל
       </button>
-      <button class="btn" onclick="shareWebsite()">
-        <i class="fas fa-share"></i> שתף אתר
+      <button class="btn" onclick="addAnimation()" style="width: 100%;">
+        <i class="fas fa-play"></i> הוסף אנימציה
       </button>
     </div>
   </div>
 
   <script>
-    // 🛠️ JavaScript מתוקן ומלא
-    console.log('🚀 WebMaster Pro Editor מתחיל...');
-
     // משתנים גלובליים
     let currentWebsiteId = null;
     let selectedElement = null;
-    let websiteDatabase = {};
+    let actionHistory = [];
+    let historyIndex = -1;
 
     // רשימת האתרים המלאה
     const websites = [
@@ -447,88 +553,77 @@
         name: 'ד"ר מיכל רוזן',
         category: 'רפואה אסתטית',
         price: '₪2,800',
-        url: './websites/dr-michal-rosen.html',
-        image: 'https://i.imghippo.com/files/Ayyb2287TOc.png'
+        url: './websites/dr-michal-rosen.html'
       },
       {
         id: 'fitness-co',
         name: 'דני פיט',
         category: 'כושר ובריאות',
         price: '₪2,200',
-        url: './websites/fitness-co.html',
-        image: 'https://i.imghippo.com/files/WiRp8302YJs.png'
+        url: './websites/fitness-co.html'
       },
       {
         id: 'yoga-studio',
         name: 'סטודיו אוהם',
         category: 'יוגה ומדיטציה',
         price: '₪1,900',
-        url: './websites/yoga-studio.html',
-        image: 'https://i.imghippo.com/files/eJk7179MXo.png'
+        url: './websites/yoga-studio.html'
       },
       {
         id: 'nutritionist',
         name: 'ד"ר שרה כהן',
         category: 'תזונה ודיאטה',
         price: '₪2,400',
-        url: './websites/nutritionist.html',
-        image: 'https://i.imghippo.com/files/rhNp2418oyE.png'
+        url: './websites/nutritionist.html'
       },
       {
         id: 'law-firm',
         name: 'משרד ברקוביץ',
         category: 'משפטים ועו"ד',
         price: '₪2,500',
-        url: './websites/law-firm.html',
-        image: 'https://i.imghippo.com/files/hVyV3858OQ.png'
+        url: './websites/law-firm.html'
       },
       {
         id: 'accountant',
         name: 'רינה לוי',
         category: 'חשבת שכר',
         price: '₪2,000',
-        url: './websites/accountant.html',
-        image: 'https://i.imghippo.com/files/tGN5433dAU.png'
+        url: './websites/accountant.html'
       },
       {
         id: 'beauty-salon',
         name: 'מספרה BELLA',
         category: 'יופי וקוסמטיקה',
         price: '₪1,700',
-        url: './websites/beauty-salon.html',
-        image: 'https://i.imghippo.com/files/xnK4816Hc.png'
+        url: './websites/beauty-salon.html'
       },
       {
         id: 'tutor',
         name: 'ד"ר רונית לוי',
         category: 'חינוך והוראה',
         price: '₪2,100',
-        url: './websites/tutor.html',
-        image: 'https://i.imghippo.com/files/Ceu2132Q.png'
+        url: './websites/tutor.html'
       },
       {
         id: 'aesthetic-clinic',
         name: 'קליניקת יופי פרמיום',
         category: 'אסתטיקה רפואית',
         price: '₪3,200',
-        url: './websites/aesthetic-clinic.html',
-        image: 'https://i.imghippo.com/files/sWlf1880WKM.png'
+        url: './websites/aesthetic-clinic.html'
       },
       {
         id: 'multibrawn',
         name: 'מולטיבראון',
         category: 'נופש ואירועים',
         price: '₪2,300',
-        url: './websites/multibrawn.html',
-        image: 'https://i.imghippo.com/files/pL5530Z.png'
+        url: './websites/multibrawn.html'
       },
       {
         id: 'real-estate',
         name: 'נדל"ן פרמיום',
         category: 'נדל"ן ומקרקעין',
         price: '₪2,700',
-        url: './websites/real-estate.html',
-        image: 'https://i.imghippo.com/files/htWG9491QkE.png'
+        url: './websites/real-estate.html'
       }
     ];
 
@@ -546,26 +641,34 @@
       }, 3000);
     }
 
-    function loadWebsiteList() {
-      const websiteList = document.getElementById('websiteList');
-      websiteList.innerHTML = '';
+    function loadDropdownMenu() {
+      const dropdownMenu = document.getElementById('dropdownMenu');
+      dropdownMenu.innerHTML = '';
 
       websites.forEach(website => {
         const item = document.createElement('div');
-        item.className = 'website-item';
-        item.onclick = () => loadWebsite(website.id);
+        item.className = 'dropdown-item';
+        item.onclick = () => selectWebsite(website.id);
         
         item.innerHTML = `
-          <div class="website-price">${website.price}</div>
           <div class="website-name">${website.name}</div>
           <div class="website-category">${website.category}</div>
+          <div class="website-price">${website.price}</div>
         `;
         
-        websiteList.appendChild(item);
+        dropdownMenu.appendChild(item);
       });
     }
 
-    function loadWebsite(websiteId) {
+    function toggleDropdown() {
+      const dropdownMenu = document.getElementById('dropdownMenu');
+      const dropdownArrow = document.getElementById('dropdownArrow');
+      
+      dropdownMenu.classList.toggle('show');
+      dropdownArrow.classList.toggle('open');
+    }
+
+    function selectWebsite(websiteId) {
       const website = websites.find(w => w.id === websiteId);
       if (!website) {
         showNotification('אתר לא נמצא', 'error');
@@ -575,13 +678,14 @@
       currentWebsiteId = websiteId;
       
       // עדכון UI
-      document.querySelectorAll('.website-item').forEach(item => {
-        item.classList.remove('active');
-      });
-      
-      event.target.closest('.website-item').classList.add('active');
+      document.getElementById('selectedWebsiteName').textContent = website.name;
+      toggleDropdown();
       
       // טעינת האתר
+      loadWebsite(website);
+    }
+
+    function loadWebsite(website) {
       const frame = document.getElementById('previewFrame');
       const loading = document.getElementById('loadingMessage');
       
@@ -591,68 +695,164 @@
       frame.onload = function() {
         loading.style.display = 'none';
         frame.style.display = 'block';
-        setupFrameEditing();
+        setupEditableWebsite();
         showNotification(`${website.name} נטען בהצלחה!`, 'success');
       };
 
       frame.onerror = function() {
         loading.style.display = 'none';
-        frame.style.display = 'block';
-        frame.srcdoc = `
-          <html>
-            <body style="font-family: Arial; text-align: center; padding: 50px; color: #666;">
-              <h2>דמו - ${website.name}</h2>
-              <p>זהו דמו של האתר. קובץ ה-HTML לא נמצא במערכת.</p>
-              <p>אתר זה בשווי ${website.price}</p>
-              <button style="padding: 10px 20px; background: #4f46e5; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px;">כפתור לדוגמה</button>
-              <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; margin: 20px 0; border-radius: 10px;">
-                <h3>סקציה צבעונית</h3>
-                <p>זהו דמו של עיצוב מתקדם</p>
-              </div>
-            </body>
-          </html>
-        `;
-        showNotification('נטען באמצעות דמו', 'warning');
+        showNotification('שגיאה בטעינת האתר', 'error');
+        createDemoWebsite(website);
       };
       
       frame.src = website.url;
     }
 
-    function setupFrameEditing() {
+    function createDemoWebsite(website) {
+      const frame = document.getElementById('previewFrame');
+      frame.srcdoc = `
+        <!DOCTYPE html>
+        <html lang="he" dir="rtl">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>${website.name}</title>
+          <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font-family: 'Inter', Arial, sans-serif; line-height: 1.6; }
+            .hero { 
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+              color: white; padding: 100px 20px; text-align: center; 
+            }
+            .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+            .section { padding: 80px 20px; text-align: center; }
+            .card {
+              background: rgba(255, 255, 255, 0.1);
+              backdrop-filter: blur(20px);
+              border-radius: 15px;
+              padding: 30px;
+              margin: 20px 0;
+              border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            button { 
+              background: #4f46e5; color: white; padding: 15px 30px; 
+              border: none; border-radius: 8px; cursor: pointer; 
+              font-size: 16px; margin: 10px;
+            }
+            .grid { 
+              display: grid; 
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+              gap: 30px; 
+              margin: 40px 0;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="hero">
+            <div class="container">
+              <h1 data-editable="true">${website.name}</h1>
+              <p data-editable="true">שירות מקצועי ואמין בתחום ${website.category}</p>
+              <button data-editable="true">צור קשר עכשיו</button>
+            </div>
+          </div>
+          <div class="section">
+            <div class="container">
+              <h2 data-editable="true">השירותים שלנו</h2>
+              <div class="grid">
+                <div class="card">
+                  <h3 data-editable="true">שירות ראשון</h3>
+                  <p data-editable="true">תיאור מפורט של השירות הראשון שאנו מציעים</p>
+                </div>
+                <div class="card">
+                  <h3 data-editable="true">שירות שני</h3>
+                  <p data-editable="true">תיאור מפורט של השירות השני שאנו מציעים</p>
+                </div>
+                <div class="card">
+                  <h3 data-editable="true">שירות שלישי</h3>
+                  <p data-editable="true">תיאור מפורט של השירות השלישי שאנו מציעים</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section" style="background: #f8f9fa;">
+            <div class="container">
+              <h2 data-editable="true">למה לבחור בנו?</h2>
+              <p data-editable="true">אנחנו מציעים שירות מקצועי ואמין עם ניסיון של שנים רבות בתחום</p>
+              <button data-editable="true">קבע פגישה</button>
+            </div>
+          </div>
+        </body>
+        </html>
+      `;
+      
+      frame.style.display = 'block';
+      setTimeout(() => {
+        setupEditableWebsite();
+        showNotification(`דמו ${website.name} נטען`, 'warning');
+      }, 500);
+    }
+
+    function setupEditableWebsite() {
       try {
         const frame = document.getElementById('previewFrame');
         const frameDoc = frame.contentDocument || frame.contentWindow.document;
         
         // הוספת סגנונות לעריכה
         const editStyle = frameDoc.createElement('style');
+        editStyle.id = 'editing-styles';
         editStyle.textContent = `
-          .editable-element {
+          [data-editable="true"] {
             transition: all 0.3s ease;
             cursor: pointer;
             min-height: 20px;
+            position: relative;
           }
-          .editable-element:hover {
-            outline: 2px dashed #4f46e5;
-            background: rgba(79, 70, 229, 0.1);
+          [data-editable="true"]:hover {
+            outline: 2px dashed #4f46e5 !important;
+            background: rgba(79, 70, 229, 0.1) !important;
           }
-          .editable-element.selected {
-            outline: 2px solid #4f46e5;
-            background: rgba(79, 70, 229, 0.2);
+          [data-editable="true"].selected {
+            outline: 2px solid #4f46e5 !important;
+            background: rgba(79, 70, 229, 0.2) !important;
+          }
+          [data-editable="true"].editing {
+            outline: 2px solid #10b981 !important;
+            background: rgba(16, 185, 129, 0.1) !important;
           }
         `;
-        frameDoc.head.appendChild(editStyle);
+        
+        if (!frameDoc.head.contains(frameDoc.getElementById('editing-styles'))) {
+          frameDoc.head.appendChild(editStyle);
+        }
 
         // הפיכת אלמנטים לעריכים
-        const editableElements = frameDoc.querySelectorAll('h1, h2, h3, h4, h5, h6, p, button, a, span');
+        const editableElements = frameDoc.querySelectorAll('[data-editable="true"], h1, h2, h3, h4, h5, h6, p, button, a');
         editableElements.forEach((element, index) => {
-          element.classList.add('editable-element');
-          element.dataset.editId = index;
+          if (!element.hasAttribute('data-editable')) {
+            element.setAttribute('data-editable', 'true');
+          }
+          element.setAttribute('data-edit-id', index);
           
           element.addEventListener('click', function(e) {
             e.preventDefault();
-            selectElement(this);
+            e.stopPropagation();
+            selectElementForEditing(this);
+          });
+
+          element.addEventListener('dblclick', function(e) {
+            e.preventDefault();
+            startInlineEditing(this);
           });
         });
+
+        // הסרת בחירה בקליק מחוץ לאלמנט
+        frameDoc.addEventListener('click', function(e) {
+          if (!e.target.hasAttribute('data-editable')) {
+            clearSelection();
+          }
+        });
+
+        console.log(`✅ הוגדרו ${editableElements.length} אלמנטים לעריכה`);
 
       } catch (error) {
         console.error('שגיאה בהגדרת עריכה:', error);
@@ -660,7 +860,7 @@
       }
     }
 
-    function selectElement(element) {
+    function selectElementForEditing(element) {
       // הסרת בחירה קודמת
       const frame = document.getElementById('previewFrame');
       const frameDoc = frame.contentDocument || frame.contentWindow.document;
@@ -671,42 +871,144 @@
       selectedElement = element;
       
       // עדכון כלי העריכה
-      document.getElementById('textInput').value = element.textContent;
+      updateEditingPanel(element);
       showNotification('אלמנט נבחר לעריכה', 'info');
     }
 
-    function updateSelectedText() {
-      if (!selectedElement) {
-        showNotification('בחר אלמנט לעריכה', 'warning');
-        return;
-      }
+    function updateEditingPanel(element) {
+      // עדכון מידע האלמנט
+      const elementInfo = document.getElementById('elementInfo');
+      const elementType = document.getElementById('elementType');
+      const elementDetails = document.getElementById('elementDetails');
       
-      const newText = document.getElementById('textInput').value;
-      selectedElement.textContent = newText;
+      elementType.textContent = element.tagName.toLowerCase();
+      elementDetails.innerHTML = `
+        <div>תוכן: ${element.textContent.substring(0, 30)}...</div>
+        <div>ID: ${element.getAttribute('data-edit-id')}</div>
+      `;
+      elementInfo.style.display = 'block';
+      
+      // עדכון שדות העריכה
+      document.getElementById('textContent').value = element.textContent;
+      
+      const styles = window.getComputedStyle ? 
+        element.ownerDocument.defaultView.getComputedStyle(element) :
+        element.currentStyle;
+      
+      if (styles) {
+        const color = rgbToHex(styles.color) || '#333333';
+        const bgColor = rgbToHex(styles.backgroundColor) || '#ffffff';
+        const fontSize = parseInt(styles.fontSize) || 16;
+        
+        document.getElementById('textColor').value = color;
+        document.getElementById('bgColor').value = bgColor;
+        document.getElementById('fontSize').value = fontSize;
+        document.getElementById('fontSizeDisplay').textContent = fontSize + 'px';
+        
+        // עדכון כפתורי הפורמט
+        updateFormattingButtons(element);
+      }
+    }
+
+    function updateFormattingButtons(element) {
+      const styles = window.getComputedStyle ? 
+        element.ownerDocument.defaultView.getComputedStyle(element) :
+        element.currentStyle;
+      
+      if (styles) {
+        document.getElementById('boldBtn').classList.toggle('active', 
+          styles.fontWeight === 'bold' || parseInt(styles.fontWeight) >= 600);
+        document.getElementById('italicBtn').classList.toggle('active', 
+          styles.fontStyle === 'italic');
+        document.getElementById('underlineBtn').classList.toggle('active', 
+          styles.textDecoration.includes('underline'));
+      }
+    }
+
+    function startInlineEditing(element) {
+      if (element.contentEditable === 'true') return;
+      
+      element.contentEditable = true;
+      element.classList.add('editing');
+      element.focus();
+      
+      // בחירת כל הטקסט
+      const range = element.ownerDocument.createRange();
+      range.selectNodeContents(element);
+      const selection = element.ownerDocument.defaultView.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      
+      element.addEventListener('blur', function() {
+        stopInlineEditing(this);
+      }, { once: true });
+      
+      element.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          this.blur();
+        }
+        if (e.key === 'Escape') {
+          this.blur();
+        }
+      });
+      
+      showNotification('מצב עריכה ישירה - Enter לשמירה', 'info');
+    }
+
+    function stopInlineEditing(element) {
+      element.contentEditable = false;
+      element.classList.remove('editing');
+      addToHistory(`עדכון טקסט: ${element.textContent.substring(0, 20)}...`);
+      updateEditingPanel(element);
       showNotification('טקסט עודכן בהצלחה!', 'success');
     }
 
-    function changeBackgroundColor(color) {
+    function clearSelection() {
+      const frame = document.getElementById('previewFrame');
+      const frameDoc = frame.contentDocument || frame.contentWindow.document;
+      frameDoc.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+      
+      selectedElement = null;
+      document.getElementById('elementInfo').style.display = 'none';
+    }
+
+    // פונקציות עריכה
+    function updateTextContent() {
       if (!selectedElement) {
         showNotification('בחר אלמנט לעריכה', 'warning');
         return;
       }
       
-      selectedElement.style.background = color;
-      showNotification('צבע רקע עודכן!', 'success');
+      const newText = document.getElementById('textContent').value;
+      selectedElement.textContent = newText;
+      addToHistory(`עדכון טקסט: ${newText.substring(0, 20)}...`);
+      showNotification('טקסט עודכן!', 'success');
     }
 
-    function changeTextColor(color) {
+    function updateTextColor(color) {
       if (!selectedElement) {
         showNotification('בחר אלמנט לעריכה', 'warning');
         return;
       }
       
       selectedElement.style.color = color;
+      addToHistory(`שינוי צבע טקסט: ${color}`);
       showNotification('צבע טקסט עודכן!', 'success');
     }
 
-    function changeFontSize(size) {
+    function updateBackgroundColor(color) {
+      if (!selectedElement) {
+        showNotification('בחר אלמנט לעריכה', 'warning');
+        return;
+      }
+      
+      selectedElement.style.backgroundColor = color;
+      addToHistory(`שינוי צבע רקע: ${color}`);
+      showNotification('צבע רקע עודכן!', 'success');
+    }
+
+    function updateFontSize(size) {
       document.getElementById('fontSizeDisplay').textContent = size + 'px';
       
       if (!selectedElement) {
@@ -715,101 +1017,252 @@
       }
       
       selectedElement.style.fontSize = size + 'px';
+      addToHistory(`שינוי גודל גופן: ${size}px`);
       showNotification('גודל גופן עודכן!', 'success');
     }
 
-    function filterWebsites() {
-      const searchTerm = document.getElementById('websiteSearch').value.toLowerCase();
-      const websiteItems = document.querySelectorAll('.website-item');
-      
-      websiteItems.forEach(item => {
-        const name = item.querySelector('.website-name').textContent.toLowerCase();
-        const category = item.querySelector('.website-category').textContent.toLowerCase();
-        
-        if (name.includes(searchTerm) || category.includes(searchTerm)) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    }
-
-    function loadDemoWebsite() {
-      const frame = document.getElementById('previewFrame');
-      frame.srcdoc = `
-        <!DOCTYPE html>
-        <html lang="he" dir="rtl">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>אתר דמו חדש</title>
-          <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            body { font-family: 'Inter', Arial, sans-serif; line-height: 1.6; }
-            .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 100px 20px; text-align: center; }
-            .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-            .section { padding: 80px 20px; text-align: center; }
-            button { background: #4f46e5; color: white; padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
-          </style>
-        </head>
-        <body>
-          <div class="hero">
-            <h1>ברוכים הבאים לאתר החדש</h1>
-            <p>אתר מקצועי ויפהפה שנבנה עם WebMaster Pro</p>
-            <button>צור קשר</button>
-          </div>
-          <div class="section">
-            <div class="container">
-              <h2>השירותים שלנו</h2>
-              <p>אנחנו מציעים פתרונות מקצועיים ואמינים</p>
-            </div>
-          </div>
-        </body>
-        </html>
-      `;
-      
-      document.getElementById('loadingMessage').style.display = 'none';
-      frame.style.display = 'block';
-      
-      setTimeout(() => {
-        setupFrameEditing();
-        showNotification('דמו חדש נטען בהצלחה!', 'success');
-      }, 500);
-    }
-
-    async function askAI() {
-      const input = document.getElementById('aiInput').value;
-      if (!input.trim()) {
-        showNotification('הכנס שאלה לעוזר AI', 'warning');
+    function toggleBold() {
+      if (!selectedElement) {
+        showNotification('בחר אלמנט לעריכה', 'warning');
         return;
       }
-
-      showNotification('AI מעבד את הבקשה...', 'info');
       
-      try {
-        // חיבור לwindow.claude.complete אם קיים
-        if (window.claude && window.claude.complete) {
-          const response = await window.claude.complete(`אתה עוזר לבניית אתרים. המשתמש שואל: "${input}". תן תשובה קצרה ומעשית בעברית.`);
-          showNotification(`AI: ${response.substring(0, 100)}...`, 'success');
-        } else {
-          // תשובות דמו
-          const demoResponses = [
-            'אני ממליץ להוסיף כפתור "צור קשר" בחלק העליון של האתר',
-            'נסה לשנות את הצבעים לגוונים יותר מקצועיים',
-            'הוסף עוד תמונות להפוך את האתר לחיוני יותר',
-            'שקול להוסיף testimonials מלקוחות מרוצים',
-            'ייתכן שכדאי לשפר את הטקסט ולהפוך אותו לקליט יותר'
-          ];
-          const randomResponse = demoResponses[Math.floor(Math.random() * demoResponses.length)];
-          showNotification(`AI: ${randomResponse}`, 'success');
-        }
-      } catch (error) {
-        showNotification('שגיאה בחיבור לAI - נסה שוב', 'error');
-      }
+      const currentWeight = selectedElement.style.fontWeight;
+      const newWeight = (currentWeight === 'bold' || currentWeight === '700') ? 'normal' : 'bold';
+      selectedElement.style.fontWeight = newWeight;
       
-      document.getElementById('aiInput').value = '';
+      document.getElementById('boldBtn').classList.toggle('active', newWeight === 'bold');
+      addToHistory(`הדגשה: ${newWeight}`);
+      showNotification('הדגשה עודכנה!', 'success');
     }
 
+    function toggleItalic() {
+      if (!selectedElement) {
+        showNotification('בחר אלמנט לעריכה', 'warning');
+        return;
+      }
+      
+      const currentStyle = selectedElement.style.fontStyle;
+      const newStyle = currentStyle === 'italic' ? 'normal' : 'italic';
+      selectedElement.style.fontStyle = newStyle;
+      
+      document.getElementById('italicBtn').classList.toggle('active', newStyle === 'italic');
+      addToHistory(`נטיה: ${newStyle}`);
+      showNotification('נטיית גופן עודכנה!', 'success');
+    }
+
+    function toggleUnderline() {
+      if (!selectedElement) {
+        showNotification('בחר אלמנט לעריכה', 'warning');
+        return;
+      }
+      
+      const currentDecoration = selectedElement.style.textDecoration;
+      const newDecoration = currentDecoration.includes('underline') ? 'none' : 'underline';
+      selectedElement.style.textDecoration = newDecoration;
+      
+      document.getElementById('underlineBtn').classList.toggle('active', newDecoration === 'underline');
+      addToHistory(`קו תחתון: ${newDecoration}`);
+      showNotification('קו תחתון עודכן!', 'success');
+    }
+
+    function applyQuickColor(color) {
+      if (!selectedElement) {
+        showNotification('בחר אלמנט לעריכה', 'warning');
+        return;
+      }
+      
+      selectedElement.style.color = color;
+      document.getElementById('textColor').value = color;
+      addToHistory(`צבע מהיר: ${color}`);
+      showNotification('צבע הוחל!', 'success');
+    }
+
+    function applyGlassMorphism() {
+      if (!selectedElement) {
+        showNotification('בחר אלמנט לעריכה', 'warning');
+        return;
+      }
+      
+      selectedElement.style.cssText += `
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        border-radius: 15px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+      `;
+      
+      addToHistory('הוספת אפקט Glass Morphism');
+      showNotification('אפקט Glass Morphism הוחל!', 'success');
+    }
+
+    function addShadow() {
+      if (!selectedElement) {
+        showNotification('בחר אלמנט לעריכה', 'warning');
+        return;
+      }
+      
+      selectedElement.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+      addToHistory('הוספת צל');
+      showNotification('צל נוסף לאלמנט!', 'success');
+    }
+
+    function addAnimation() {
+      if (!selectedElement) {
+        showNotification('בחר אלמנט לעריכה', 'warning');
+        return;
+      }
+      
+      selectedElement.style.transition = 'all 0.3s ease';
+      selectedElement.style.transform = 'scale(1.05)';
+      
+      setTimeout(() => {
+        selectedElement.style.transform = 'scale(1)';
+      }, 300);
+      
+      addToHistory('הוספת אנימציה');
+      showNotification('אנימציה נוספה!', 'success');
+    }
+
+    // פונקציות בלוקים
+    function addTextBlock() {
+      if (!currentWebsiteId) {
+        showNotification('בחר אתר קודם', 'warning');
+        return;
+      }
+      
+      const frame = document.getElementById('previewFrame');
+      const frameDoc = frame.contentDocument || frame.contentWindow.document;
+      
+      const textElement = frameDoc.createElement('p');
+      textElement.textContent = 'טקסט חדש - לחץ לעריכה';
+      textElement.setAttribute('data-editable', 'true');
+      textElement.style.cssText = 'margin: 20px; padding: 15px; border: 2px dashed #ccc;';
+      
+      const container = frameDoc.querySelector('.container, .section, body');
+      if (container) {
+        container.appendChild(textElement);
+        setupEditableWebsite(); // עדכון האלמנטים הניתנים לעריכה
+        addToHistory('הוספת בלוק טקסט');
+        showNotification('בלוק טקסט נוסף!', 'success');
+      }
+    }
+
+    function addButtonBlock() {
+      if (!currentWebsiteId) {
+        showNotification('בחר אתר קודם', 'warning');
+        return;
+      }
+      
+      const frame = document.getElementById('previewFrame');
+      const frameDoc = frame.contentDocument || frame.contentWindow.document;
+      
+      const buttonElement = frameDoc.createElement('button');
+      buttonElement.textContent = 'כפתור חדש';
+      buttonElement.setAttribute('data-editable', 'true');
+      buttonElement.style.cssText = `
+        background: #4f46e5; color: white; padding: 15px 30px;
+        border: none; border-radius: 8px; cursor: pointer;
+        font-size: 16px; margin: 20px;
+      `;
+      
+      const container = frameDoc.querySelector('.container, .section, body');
+      if (container) {
+        container.appendChild(buttonElement);
+        setupEditableWebsite();
+        addToHistory('הוספת כפתור');
+        showNotification('כפתור נוסף!', 'success');
+      }
+    }
+
+    function addImageBlock() {
+      showNotification('תכונת הוספת תמונות תהיה זמינה בקרוב', 'info');
+    }
+
+    function addSectionBlock() {
+      if (!currentWebsiteId) {
+        showNotification('בחר אתר קודם', 'warning');
+        return;
+      }
+      
+      const frame = document.getElementById('previewFrame');
+      const frameDoc = frame.contentDocument || frame.contentWindow.document;
+      
+      const sectionElement = frameDoc.createElement('div');
+      sectionElement.style.cssText = `
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-radius: 15px;
+        padding: 40px;
+        margin: 30px 0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+      `;
+      
+      sectionElement.innerHTML = `
+        <h3 data-editable="true">כותרת חדשה</h3>
+        <p data-editable="true">תוכן הסקציה החדשה - לחץ לעריכה</p>
+      `;
+      
+      const container = frameDoc.querySelector('.container, body');
+      if (container) {
+        container.appendChild(sectionElement);
+        setupEditableWebsite();
+        addToHistory('הוספת סקציה');
+        showNotification('סקציה נוספה!', 'success');
+      }
+    }
+
+    // פונקציות חיפוש
+    function searchElements() {
+      const searchTerm = document.getElementById('elementSearch').value.toLowerCase();
+      const frame = document.getElementById('previewFrame');
+      const frameDoc = frame.contentDocument || frame.contentWindow.document;
+      const elements = frameDoc.querySelectorAll('[data-editable="true"]');
+      
+      elements.forEach(element => {
+        const text = element.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          element.style.outline = '3px solid #f59e0b';
+        } else {
+          element.style.outline = '';
+        }
+      });
+      
+      if (searchTerm) {
+        showNotification(`נמצאו תוצאות עבור: ${searchTerm}`, 'info');
+      }
+    }
+
+    // פונקציות היסטוריה
+    function addToHistory(action) {
+      actionHistory.push({
+        action: action,
+        timestamp: new Date().toLocaleTimeString(),
+        websiteId: currentWebsiteId
+      });
+      historyIndex = actionHistory.length - 1;
+    }
+
+    function undoAction() {
+      if (historyIndex > 0) {
+        historyIndex--;
+        showNotification(`בוטל: ${actionHistory[historyIndex + 1].action}`, 'info');
+      } else {
+        showNotification('אין פעולות לביטול', 'warning');
+      }
+    }
+
+    function redoAction() {
+      if (historyIndex < actionHistory.length - 1) {
+        historyIndex++;
+        showNotification(`חזור: ${actionHistory[historyIndex].action}`, 'info');
+      } else {
+        showNotification('אין פעולות לחזרה', 'warning');
+      }
+    }
+
+    // פונקציות שמירה וייצוא
     function saveCurrentWebsite() {
       if (!currentWebsiteId) {
         showNotification('בחר אתר לשמירה', 'warning');
@@ -821,10 +1274,10 @@
         const frameDoc = frame.contentDocument || frame.contentWindow.document;
         const htmlContent = frameDoc.documentElement.outerHTML;
         
-        // שמירה ב-localStorage
         localStorage.setItem(`website_${currentWebsiteId}`, htmlContent);
         localStorage.setItem(`website_${currentWebsiteId}_timestamp`, new Date().toISOString());
         
+        addToHistory('שמירת אתר');
         showNotification('האתר נשמר בהצלחה!', 'success');
       } catch (error) {
         showNotification('שגיאה בשמירה', 'error');
@@ -856,10 +1309,6 @@
         return;
       }
       
-      exportHTML();
-    }
-
-    function exportHTML() {
       try {
         const frame = document.getElementById('previewFrame');
         const frameDoc = frame.contentDocument || frame.contentWindow.document;
@@ -874,77 +1323,38 @@
         a.click();
         
         URL.revokeObjectURL(url);
+        addToHistory('ייצוא אתר');
         showNotification('קובץ HTML יוצא בהצלחה!', 'success');
       } catch (error) {
         showNotification('שגיאה בייצוא HTML', 'error');
       }
     }
 
-    function exportImages() {
-      showNotification('תכונת ייצוא תמונות תהיה זמינה בקרוב', 'info');
-    }
-
-    function shareWebsite() {
-      if (!currentWebsiteId) {
-        showNotification('בחר אתר לשיתוף', 'warning');
-        return;
-      }
+    // פונקציות עזר
+    function rgbToHex(rgb) {
+      if (!rgb || rgb === 'rgba(0, 0, 0, 0)' || rgb === 'transparent') return '#ffffff';
       
-      const url = `${window.location.origin}/websites/${currentWebsiteId}.html`;
+      const result = rgb.match(/\d+/g);
+      if (!result || result.length < 3) return '#ffffff';
       
-      if (navigator.share) {
-        navigator.share({
-          title: `אתר ${currentWebsiteId}`,
-          url: url
-        });
-      } else {
-        navigator.clipboard.writeText(url).then(() => {
-          showNotification('קישור הועתק ללוח!', 'success');
-        }).catch(() => {
-          showNotification('לא ניתן להעתיק קישור', 'error');
-        });
-      }
+      return "#" + ((1 << 24) + (parseInt(result[0]) << 16) + (parseInt(result[1]) << 8) + parseInt(result[2])).toString(16).slice(1);
     }
 
-    // API Functions (עם fallback)
-    async function apiCall(endpoint, method = 'GET', data = null) {
-      try {
-        const response = await fetch(`/.netlify/functions/${endpoint}`, {
-          method,
-          headers: { 'Content-Type': 'application/json' },
-          body: data ? JSON.stringify(data) : null
-        });
-        
-        if (!response.ok) throw new Error(`API Error: ${response.status}`);
-        return await response.json();
-      } catch (error) {
-        console.error('API Call failed:', error);
-        return { success: false, error: error.message };
+    // סגירת dropdown בקליק מחוץ
+    document.addEventListener('click', function(e) {
+      const websiteSelector = document.querySelector('.website-selector');
+      if (!websiteSelector.contains(e.target)) {
+        document.getElementById('dropdownMenu').classList.remove('show');
+        document.getElementById('dropdownArrow').classList.remove('open');
       }
-    }
-
-    // Error Handling
-    window.addEventListener('error', function(e) {
-      console.error('🐛 JavaScript Error:', e.error);
-      showNotification('התרחשה שגיאה - המערכת ממשיכה לפעול', 'warning');
-      return true;
     });
 
     // אתחול המערכת
     document.addEventListener('DOMContentLoaded', function() {
       try {
         console.log('🚀 WebMaster Pro Editor נטען בהצלחה!');
-        loadWebsiteList();
+        loadDropdownMenu();
         showNotification('WebMaster Pro מוכן לעבודה!', 'success');
-        
-        // בדיקת חיבור לAPI
-        apiCall('list-websites').then(result => {
-          if (result.success) {
-            showNotification('חיבור לשרת הצליח!', 'success');
-          } else {
-            console.log('פועל במצב לוקלי');
-          }
-        });
         
         console.log(`📊 נטענו ${websites.length} אתרים במערכת`);
         
@@ -954,7 +1364,7 @@
       }
     });
 
-    console.log('✅ WebMaster Pro Editor - מוכן לעבודה!');
+    console.log('✅ WebMaster Pro Editor - מוכן לעבודה מלאה!');
   </script>
 </body>
 </html>
