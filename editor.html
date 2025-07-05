@@ -2,86 +2,585 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WebMaster Pro AI Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚀 WebMaster Pro - אדיטור ויזואלי מתקדם</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
       --primary: #4f46e5;
-      --glass-border: rgba(255,255,255,0.2);
+      --bg: #0f0f23;
+      --glass-bg: rgba(255,255,255,0.08);
+      --glass-border: rgba(255,255,255,0.12);
+      --text: #ffffff;
+      --text-secondary: #a1a1aa;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
     }
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body { font-family: sans-serif; display: grid; grid-template-columns:180px 1fr 200px; height:100vh; overflow:hidden; }
-    aside { background: #111; color:#fff; padding:1rem; overflow:auto; }
-    main { background:#fafafa; position:relative; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #1e1b4b 50%, #312e81 100%);
+      color: var(--text);
+      height: 100vh;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 60px 1fr;
+      grid-template-columns: 240px 1fr 280px;
+    }
+
+    /* Header */
+    .header {
+      grid-column: 1 / -1;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%) contrast(120%);
+      border-bottom: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-tools {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Sidebars */
+    .sidebar {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%) contrast(120%);
+      border: 1px solid var(--glass-border);
+      padding: 1.5rem;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--glass-border) transparent;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: var(--glass-border);
+      border-radius: 3px;
+    }
+
+    .sidebar h3 {
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* Canvas */
+    .canvas {
+      background: #ffffff;
+      position: relative;
+      overflow: auto;
+    }
 
     #canvas-content {
-      width:100%; height:100%; padding:1rem; overflow:auto;
-      background:#fff; transition:all .3s;
-    }
-    #canvas-content.drag-over {
-      outline:2px dashed var(--primary);
-    }
-    .draggable {
-      position:relative; border:1px dashed transparent;
-    }
-    .draggable.dragging {
-      opacity:0.5;
+      width: 100%;
+      height: 100%;
+      padding: 2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      min-height: 100%;
     }
 
-    .blocks-list .block-item {
-      display:flex; align-items:center; gap:.5rem;
-      padding:.5rem; margin-bottom:.5rem;
-      border:1px solid var(--glass-border); border-radius:4px;
-      background:rgba(255,255,255,0.1); cursor:grab;
-      transition:all .2s;
+    #canvas-content.drag-over {
+      outline: 3px dashed var(--primary);
+      outline-offset: -3px;
+      background: rgba(79, 70, 229, 0.05);
     }
-    .blocks-list .block-item:active { cursor:grabbing; }
-    .blocks-list .block-item:hover {
-      background:rgba(255,255,255,0.2);
-      transform:translateX(-2px);
+
+    /* Buttons */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+
+    .btn:hover::before {
+      transform: translateX(100%);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+      color: white;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(79, 70, 229, 0.6);
+    }
+
+    .btn-secondary {
+      background: var(--glass-bg);
+      color: var(--text);
+      border: 1px solid var(--glass-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-1px);
     }
 
     .tool-btn {
-      width:100%; padding:.75rem; margin-bottom:.5rem;
-      background:var(--primary); color:#fff; border:none; border-radius:.5rem;
-      cursor:pointer; transition:all .3s;
+      width: 100%;
+      margin-bottom: 0.75rem;
+      justify-content: flex-start;
     }
-    .tool-btn:hover { transform:translateY(-2px); box-shadow:0 4px 15px rgba(79,70,229,0.4); }
 
-    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-    @keyframes slideInLeft { from{transform:translateX(-100%);} to{transform:translateX(0);} }
-    @keyframes bounce { 0%,20%,50%,80%,to{transform:translateY(0);} 40%,60%{transform:translateY(-30px);} }
-    @keyframes pulse { 0%{transform:scale(1);} 50%{transform:scale(1.05);} 100%{transform:scale(1);} }
+    /* Website Items */
+    .websites-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
 
+    .website-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .website-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .website-item:hover::before {
+      opacity: 1;
+    }
+
+    .website-item:hover {
+      transform: translateX(-4px) translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      border-color: var(--primary);
+    }
+
+    .website-item img {
+      width: 48px;
+      height: 48px;
+      border-radius: 0.5rem;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .website-info {
+      flex: 1;
+      z-index: 1;
+    }
+
+    .website-name {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .website-price {
+      font-size: 0.75rem;
+      color: var(--success);
+      font-weight: 500;
+    }
+
+    /* Block Items */
+    .blocks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .block-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 0.5rem;
+      cursor: grab;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .block-item:active {
+      cursor: grabbing;
+    }
+
+    .block-item:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateX(-2px);
+      border-color: var(--primary);
+    }
+
+    .block-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* Draggable Elements */
+    .draggable {
+      position: relative;
+      border: 2px dashed transparent;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .draggable:hover {
+      border-color: var(--primary);
+      background: rgba(79, 70, 229, 0.05);
+    }
+
+    .draggable.selected {
+      border-color: var(--primary);
+      background: rgba(79, 70, 229, 0.1);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    }
+
+    .draggable.dragging {
+      opacity: 0.6;
+      transform: scale(0.98);
+    }
+
+    /* Notifications */
     .notification {
-      position:fixed; top:1rem; left:50%; transform:translateX(-50%);
-      background:var(--primary); color:#fff; padding:1rem 2rem; border-radius:8px;
-      animation:fadeIn 0.5s ease, fadeOut 0.5s ease 2.5s;
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 1rem 1.5rem;
+      border-radius: 0.75rem;
+      color: white;
+      font-weight: 600;
+      z-index: 10000;
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1), fadeOut 0.4s ease-in-out 2.6s forwards;
     }
-    @keyframes fadeOut { from{opacity:1;} to{opacity:0;} }
+
+    .notification.success {
+      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+    }
+
+    .notification.warning {
+      background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%);
+    }
+
+    .notification.error {
+      background: linear-gradient(135deg, var(--error) 0%, #dc2626 100%);
+    }
+
+    .notification.info {
+      background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+    }
+
+    /* Modals */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow: auto;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+    }
+
+    /* Form Elements */
+    .input {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 0.5rem;
+      color: var(--text);
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 53%, 80%, to {
+        transform: translateY(0);
+      }
+      40%, 43% {
+        transform: translateY(-30px);
+      }
+      70% {
+        transform: translateY(-15px);
+      }
+      90% {
+        transform: translateY(-4px);
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      body {
+        grid-template-columns: 200px 1fr 240px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60px 1fr;
+      }
+      
+      .sidebar {
+        display: none;
+      }
+      
+      .canvas {
+        grid-column: 1;
+      }
+    }
   </style>
 </head>
 <body>
-  <aside>
-    <h3>🔧 בלוקים</h3>
-    <div class="blocks-list"></div>
-    <hr>
-    <div class="advanced-tools">
-      <h3>🎨 כלים מתקדמים</h3>
-      <button onclick="magicDesign()" class="tool-btn">✨ Magic Design</button>
-      <button onclick="openVideoEditor()" class="tool-btn">🎬 עריכת וידאו</button>
-      <button onclick="optimizeWebsite()" class="tool-btn">⚡ אופטימיזציה</button>
-      <button onclick="generateSEO()" class="tool-btn">📈 SEO אוטומטי</button>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <i class="fas fa-magic"></i>
+      <span>WebMaster Pro</span>
     </div>
+    <div class="header-tools">
+      <button class="btn btn-secondary" onclick="undoAction()">
+        <i class="fas fa-undo"></i>
+        <span>ביטול</span>
+      </button>
+      <button class="btn btn-secondary" onclick="redoAction()">
+        <i class="fas fa-redo"></i>
+        <span>חזרה</span>
+      </button>
+      <button class="btn btn-primary" onclick="saveChanges()">
+        <i class="fas fa-save"></i>
+        <span>שמירה</span>
+      </button>
+      <button class="btn btn-primary" onclick="exportWebsite()">
+        <i class="fas fa-download"></i>
+        <span>ייצוא</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar">
+    <h3>🌐 אתרים</h3>
+    <div class="websites-list"></div>
+
+    <h3>🧩 בלוקים</h3>
+    <div class="blocks-list"></div>
+
+    <h3>🎨 כלים מתקדמים</h3>
+    <button class="btn tool-btn btn-primary" onclick="magicDesign()">
+      <i class="fas fa-magic"></i>
+      <span>Magic Design</span>
+    </button>
+    <button class="btn tool-btn btn-secondary" onclick="openVideoEditor()">
+      <i class="fas fa-video"></i>
+      <span>עריכת וידאו</span>
+    </button>
+    <button class="btn tool-btn btn-secondary" onclick="optimizeWebsite()">
+      <i class="fas fa-bolt"></i>
+      <span>אופטימיזציה</span>
+    </button>
+    <button class="btn tool-btn btn-secondary" onclick="generateSEO()">
+      <i class="fas fa-chart-line"></i>
+      <span>SEO אוטומטי</span>
+    </button>
+    <button class="btn tool-btn btn-secondary" onclick="openAIChat()">
+      <i class="fas fa-robot"></i>
+      <span>AI Chat</span>
+    </button>
   </aside>
-  <main>
-    <div id="canvas-content"></div>
+
+  <!-- Canvas -->
+  <main class="canvas">
+    <div id="canvas-content">
+      <div style="text-align: center; padding: 4rem 2rem; color: #6b7280;">
+        <i class="fas fa-mouse-pointer" style="font-size: 3rem; margin-bottom: 1rem; color: #4f46e5;"></i>
+        <h2 style="margin-bottom: 1rem; color: #374151;">בחר אתר לעריכה</h2>
+        <p>לחץ על אחד האתרים מהרשימה כדי להתחיל לערוך אותו</p>
+      </div>
+    </div>
   </main>
-  <aside>
-    <h3>🔍 מאפיינים</h3>
-    <div class="property-section">
-      <h3>אנימציות</h3>
-      <select onchange="addAnimation(this.value)">
+
+  <!-- Right Sidebar -->
+  <aside class="sidebar">
+    <h3>⚙️ מאפיינים</h3>
+    <div style="margin-bottom: 1.5rem;">
+      <label style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">עריכת טקסט</label>
+      <textarea id="text-editor" class="input" style="height: 80px; resize: vertical;" placeholder="בחר אלמנט לעריכה..."></textarea>
+      <button class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;" onclick="updateSelectedText()">
+        <i class="fas fa-check"></i>
+        <span>עדכן טקסט</span>
+      </button>
+    </div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <label style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">צבעים</label>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+        <div>
+          <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem;">צבע טקסט</label>
+          <input type="color" id="text-color" class="input" onchange="updateProperty('color', this.value)" style="height: 40px; padding: 0; cursor: pointer;">
+        </div>
+        <div>
+          <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem;">צבע רקע</label>
+          <input type="color" id="bg-color" class="input" onchange="updateProperty('backgroundColor', this.value)" style="height: 40px; padding: 0; cursor: pointer;">
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <label style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">פונט</label>
+      <select id="font-family" class="input" style="margin-bottom: 0.5rem;" onchange="updateProperty('fontFamily', this.value)">
+        <option>Inter</option>
+        <option>Assistant</option>
+        <option>Arial</option>
+        <option>Georgia</option>
+        <option>Times New Roman</option>
+      </select>
+      <input type="range" id="font-size" min="12" max="48" value="16" class="input" style="margin-bottom: 0.5rem;" oninput="updateProperty('fontSize', this.value + 'px'); document.getElementById('font-size-value').textContent = this.value + 'px'">
+      <div style="text-align: center; font-size: 0.75rem; color: var(--text-secondary);">
+        גודל: <span id="font-size-value">16px</span>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <label style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">אנימציות</label>
+      <select class="input" onchange="addAnimation(this.value)">
         <option value="">בחר אנימציה</option>
         <option value="fadeIn">Fade In</option>
         <option value="slideInLeft">Slide In</option>
@@ -89,31 +588,103 @@
         <option value="pulse">Pulse</option>
       </select>
     </div>
-    <div class="property-section">
-      <h3>📱 רספונסיביות</h3>
-      <button onclick="previewMobile()" class="tool-btn">📱 מובייל</button>
-      <button onclick="previewTablet()" class="tool-btn">📱 טאבלט</button>
-      <button onclick="previewDesktop()" class="tool-btn">💻 דסקטופ</button>
+
+    <div style="margin-bottom: 1.5rem;">
+      <label style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">תמונות</label>
+      <input type="file" id="image-upload" accept="image/*" style="display: none;" onchange="handleImageUpload(this.files[0])">
+      <button class="btn btn-secondary tool-btn" onclick="document.getElementById('image-upload').click()">
+        <i class="fas fa-image"></i>
+        <span>החלף תמונה</span>
+      </button>
+    </div>
+
+    <h3>📱 תצוגות</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+      <button class="btn btn-secondary" onclick="previewMobile()" style="font-size: 0.75rem; padding: 0.5rem;">
+        <i class="fas fa-mobile-alt"></i>
+      </button>
+      <button class="btn btn-secondary" onclick="previewTablet()" style="font-size: 0.75rem; padding: 0.5rem;">
+        <i class="fas fa-tablet-alt"></i>
+      </button>
+      <button class="btn btn-secondary" onclick="previewDesktop()" style="font-size: 0.75rem; padding: 0.5rem;">
+        <i class="fas fa-desktop"></i>
+      </button>
     </div>
   </aside>
 
-  <div id="video-editor-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:2000;">
-    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:#222; color:#fff; padding:2rem; border-radius:1rem; width:80%; height:80%; overflow:auto;">
-      <h2>🎬 עריכת וידאו</h2>
-      <input type="file" accept="video/*" onchange="handleVideoUpload(this.files[0])"><br><br>
-      <div style="position:relative;">
-        <video id="video-preview" controls style="width:100%; max-height:300px;"></video>
+  <!-- AI Chat Modal -->
+  <div id="ai-chat-modal" class="modal">
+    <div class="modal-content" style="width: 600px; height: 500px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2 style="margin: 0;">🤖 AI Assistant</h2>
+        <button class="btn btn-secondary" onclick="closeAIChat()">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
-      <br>
-      <button onclick="trimVideo()">✂️ חתוך</button>
-      <button onclick="addVideoText()">📝 הוסף טקסט</button>
-      <button onclick="exportVideo()">💾 ייצא</button>
-      <button onclick="closeVideoEditor()">❌ סגור</button>
+      <div id="chat-messages" style="height: 300px; overflow-y: auto; background: var(--glass-bg); border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem; border: 1px solid var(--glass-border);"></div>
+      <div style="display: flex; gap: 0.5rem;">
+        <input type="text" id="ai-input" class="input" placeholder="שאל את ה-AI..." style="flex: 1;" onkeypress="if(event.key==='Enter') askAI()">
+        <button class="btn btn-primary" onclick="askAI()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Editor Modal -->
+  <div id="video-editor-modal" class="modal">
+    <div class="modal-content" style="width: 800px; height: 600px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2 style="margin: 0;">🎬 עריכת וידאו</h2>
+        <button class="btn btn-secondary" onclick="closeVideoEditor()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div style="margin-bottom: 1.5rem;">
+        <input type="file" id="video-upload" accept="video/*" style="display: none;" onchange="handleVideoUpload(this.files[0])">
+        <button class="btn btn-primary" onclick="document.getElementById('video-upload').click()">
+          <i class="fas fa-upload"></i>
+          <span>העלה וידאו</span>
+        </button>
+      </div>
+
+      <div style="position: relative; margin-bottom: 1.5rem;">
+        <video id="video-preview" controls style="width: 100%; max-height: 300px; background: #000; border-radius: 0.5rem;"></video>
+        <div id="video-overlays" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem;">
+        <button class="btn btn-secondary" onclick="trimVideo()">
+          <i class="fas fa-cut"></i>
+          <span>חתוך</span>
+        </button>
+        <button class="btn btn-secondary" onclick="addVideoText()">
+          <i class="fas fa-text"></i>
+          <span>הוסף טקסט</span>
+        </button>
+        <button class="btn btn-secondary" onclick="addVideoFilter()">
+          <i class="fas fa-filter"></i>
+          <span>פילטר</span>
+        </button>
+        <button class="btn btn-primary" onclick="exportVideo()">
+          <i class="fas fa-download"></i>
+          <span>ייצא</span>
+        </button>
+      </div>
     </div>
   </div>
 
   <script>
-    // רשימת האתרים המלאה
+    // ===== GLOBAL VARIABLES =====
+    let selectedElement = null;
+    let draggedElement = null;
+    let undoHistory = [];
+    let redoHistory = [];
+    let maxHistorySize = 50;
+    let videoEditor = null;
+
+    // ===== WEBSITE DATA =====
     const websites = [
       {id:'dr-michal-rosen', name:'ד"ר מיכל רוזן', url:'./websites/dr-michal-rosen.html', image:'https://i.imghippo.com/files/Ayyb2287TOc.png', category:'medical', price:'₪2,800'},
       {id:'fitness-co', name:'דני פיט', url:'./websites/fitness-co.html', image:'https://i.imghippo.com/files/WiRp8302YJs.png', category:'lifestyle', price:'₪2,200'},
@@ -128,46 +699,1524 @@
       {id:'real-estate', name:'נדל"ן פרמיום', url:'./websites/real-estate.html', image:'https://i.imghippo.com/files/htWG9491QkE.png', category:'premium', price:'₪2,700'}
     ];
 
-    // טעינת אתר ישירה
-    async function loadWebsiteDirectly(id) {
-      const site = websites.find(w=>w.id===id);
-      try {
-        const res = await fetch(site.url);
-        const html = await res.text();
-        const canvas = document.getElementById('canvas-content');
-        canvas.innerHTML = html;
-        canvas.querySelectorAll('h1,h2,h3,p,span,div').forEach(el=>{
-          el.contentEditable = true;
-          makeElementDraggable(el);
-          el.addEventListener('click',()=> selectElement(el));
-          el.addEventListener('input',()=> saveChanges());
-        });
-        showNotification('אתר נטען - עריכה זמינה!');
-      } catch (e) { showNotification('שגיאה בטעינת האתר', 'error'); }
+    // ===== BLOCK TYPES =====
+    const blockTypes = [
+      {
+        type: 'text',
+        icon: 'fas fa-font',
+        name: 'טקסט',
+        template: '<p class="draggable" style="padding: 1rem; margin: 0.5rem 0; cursor: pointer;">טקסט חדש - לחץ לעריכה</p>'
+      },
+      {
+        type: 'heading',
+        icon: 'fas fa-heading',
+        name: 'כותרת',
+        template: '<h2 class="draggable" style="padding: 1rem; margin: 0.5rem 0; cursor: pointer;">כותרת חדשה</h2>'
+      },
+      {
+        type: 'button',
+        icon: 'fas fa-hand-pointer',
+        name: 'כפתור',
+        template: '<button class="draggable" style="padding: 12px 24px; background: #4f46e5; color: white; border: none; border-radius: 8px; cursor: pointer; margin: 0.5rem; font-weight: 600;">כפתור חדש</button>'
+      },
+      {
+        type: 'image',
+        icon: 'fas fa-image',
+        name: 'תמונה',
+        template: '<img class="draggable" src="https://via.placeholder.com/300x200/4f46e5/ffffff?text=תמונה" style="max-width: 100%; height: auto; border-radius: 8px; margin: 0.5rem 0; cursor: pointer;" alt="תמונה חדשה">'
+      },
+      {
+        type: 'container',
+        icon: 'fas fa-square',
+        name: 'מיכל',
+        template: '<div class="draggable" style="padding: 2rem; border: 2px dashed #e5e7eb; border-radius: 8px; margin: 0.5rem 0; cursor: pointer; text-align: center; color: #6b7280;">מיכל חדש - גרור לכאן אלמנטים</div>'
+      }
+    ];
+
+    // ===== UTILITY FUNCTIONS =====
+    function showNotification(message, type = 'info') {
+      // Remove existing notifications
+      document.querySelectorAll('.notification').forEach(n => n.remove());
+      
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      // Auto remove after animation
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 3000);
     }
 
-    // VideoEditor מלאה
-    class VideoEditor {
-      constructor(){
-        this.videoElement = document.getElementById('video-preview');
-        this.startTime=0; this.endTime=0;
+    function saveToHistory() {
+      const currentState = document.getElementById('canvas-content').innerHTML;
+      undoHistory.push(currentState);
+      
+      // Limit history size
+      if (undoHistory.length > maxHistorySize) {
+        undoHistory.shift();
       }
-      handleVideoUpload(file){
-        if(!file||!file.type.startsWith('video/')){ showNotification('בחר וידאו תקין','error'); return; }
-        this.videoElement.src=URL.createObjectURL(file);
-        this.videoElement.onloadedmetadata=()=>{
-          this.endTime=this.videoElement.duration;
-          showNotification(`וידאו הועלה (${Math.round(this.endTime)}s)`);
+      
+      // Clear redo history when new action is performed
+      redoHistory = [];
+    }
+
+    function generateId() {
+      return 'el_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // ===== CORE EDITING FUNCTIONS =====
+    async function loadWebsiteDirectly(id) {
+      saveToHistory();
+      
+      const website = websites.find(w => w.id === id);
+      if (!website) {
+        showNotification('אתר לא נמצא', 'error');
+        return;
+      }
+
+      try {
+        showNotification('טוען אתר...', 'info');
+        currentWebsiteId = id;
+        
+        // Try to load from Supabase first
+        let content = null;
+        try {
+          const savedWebsite = await loadFromSupabase(id);
+          if (savedWebsite && savedWebsite.content) {
+            content = savedWebsite.content;
+            showNotification('נטען מהשרת', 'success');
+          }
+        } catch (supabaseError) {
+          console.log('No saved version in Supabase, loading original');
+        }
+        
+        // If no saved version, load original
+        if (!content) {
+          const response = await fetch(website.url);
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+          content = await response.text();
+          showNotification('נטען אתר מקורי', 'info');
+        }
+        
+        const canvas = document.getElementById('canvas-content');
+        canvas.innerHTML = content;
+
+        // Make all relevant elements editable and draggable
+        const editableSelectors = 'h1, h2, h3, h4, h5, h6, p, span, div, button, a, li';
+        canvas.querySelectorAll(editableSelectors).forEach(el => {
+          // Skip elements that are too small or likely containers
+          if (el.offsetWidth < 20 || el.offsetHeight < 20) return;
+          if (el.children.length > 3) return; // Skip complex containers
+          
+          makeElementEditable(el);
+        });
+
+        // Make images replaceable
+        canvas.querySelectorAll('img').forEach(img => {
+          makeImageReplaceable(img);
+        });
+
+        showNotification(`אתר "${website.name}" נטען בהצלחה!`, 'success');
+        
+      } catch (error) {
+        console.error('Error loading website:', error);
+        showNotification('שגיאה בטעינת האתר: ' + error.message, 'error');
+      }
+    }
+
+    function getCurrentWebsiteName() {
+      if (!currentWebsiteId) return 'אתר ללא שם';
+      const website = websites.find(w => w.id === currentWebsiteId);
+      return website ? website.name : 'אתר ללא שם';
+    }
+
+    function getCurrentTemplateId() {
+      return currentWebsiteId || 'custom';
+    }
+
+    function makeElementEditable(element) {
+      element.classList.add('draggable');
+      element.contentEditable = true;
+      element.style.cursor = 'pointer';
+      
+      // Add unique ID if doesn't exist
+      if (!element.id) {
+        element.id = generateId();
+      }
+
+      // Click to select
+      element.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectElement(element);
+      });
+
+      // Save on input
+      element.addEventListener('input', () => {
+        saveChanges();
+      });
+
+      // Make draggable
+      makeElementDraggable(element);
+    }
+
+    function makeImageReplaceable(img) {
+      img.classList.add('draggable');
+      img.style.cursor = 'pointer';
+      
+      if (!img.id) {
+        img.id = generateId();
+      }
+
+      img.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectElement(img);
+        
+        // Show image replacement option
+        const shouldReplace = confirm('האם ברצונך להחליף את התמונה?');
+        if (shouldReplace) {
+          document.getElementById('image-upload').click();
+        }
+      });
+
+      makeElementDraggable(img);
+    }
+
+    function selectElement(element) {
+      // Remove previous selection
+      document.querySelectorAll('.selected').forEach(el => {
+        el.classList.remove('selected');
+      });
+
+      // Select new element
+      element.classList.add('selected');
+      selectedElement = element;
+
+      // Update properties panel
+      updatePropertiesPanel(element);
+      
+      showNotification('אלמנט נבחר לעריכה', 'info');
+    }
+
+    function updatePropertiesPanel(element) {
+      const textEditor = document.getElementById('text-editor');
+      const textColor = document.getElementById('text-color');
+      const bgColor = document.getElementById('bg-color');
+      const fontFamily = document.getElementById('font-family');
+      const fontSize = document.getElementById('font-size');
+      const fontSizeValue = document.getElementById('font-size-value');
+
+      // Update text editor
+      if (element.tagName === 'IMG') {
+        textEditor.value = element.alt || '';
+        textEditor.placeholder = 'תיאור תמונה (Alt text)';
+      } else {
+        textEditor.value = element.textContent || '';
+        textEditor.placeholder = 'ערוך את הטקסט כאן...';
+      }
+
+      // Update color inputs
+      const computedStyle = window.getComputedStyle(element);
+      textColor.value = rgbToHex(computedStyle.color);
+      bgColor.value = rgbToHex(computedStyle.backgroundColor);
+
+      // Update font controls
+      fontFamily.value = computedStyle.fontFamily.split(',')[0].replace(/['"]/g, '');
+      const currentFontSize = parseInt(computedStyle.fontSize);
+      fontSize.value = currentFontSize;
+      fontSizeValue.textContent = currentFontSize + 'px';
+    }
+
+    function updateSelectedText() {
+      if (!selectedElement) {
+        showNotification('לא נבחר אלמנט לעריכה', 'warning');
+        return;
+      }
+
+      const newText = document.getElementById('text-editor').value;
+      
+      if (selectedElement.tagName === 'IMG') {
+        selectedElement.alt = newText;
+        showNotification('תיאור התמונה עודכן', 'success');
+      } else {
+        selectedElement.textContent = newText;
+        showNotification('הטקסט עודכן בהצלחה', 'success');
+      }
+      
+      saveChanges();
+    }
+
+    function updateProperty(property, value) {
+      if (!selectedElement) {
+        showNotification('לא נבחר אלמנט לעריכה', 'warning');
+        return;
+      }
+
+      selectedElement.style[property] = value;
+      saveChanges();
+      showNotification(`${property} עודכן`, 'success');
+    }
+
+    // ===== DRAG AND DROP =====
+    function makeElementDraggable(element) {
+      element.draggable = true;
+      
+      element.addEventListener('dragstart', (e) => {
+        draggedElement = element;
+        element.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      element.addEventListener('dragend', () => {
+        element.classList.remove('dragging');
+        draggedElement = null;
+      });
+    }
+
+    function initDragAndDrop() {
+      const canvas = document.getElementById('canvas-content');
+
+      canvas.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        canvas.classList.add('drag-over');
+        
+        if (draggedElement) {
+          const afterElement = getDragAfterElement(canvas, e.clientY);
+          if (afterElement == null) {
+            canvas.appendChild(draggedElement);
+          } else {
+            canvas.insertBefore(draggedElement, afterElement);
+          }
+        }
+      });
+
+      canvas.addEventListener('dragleave', (e) => {
+        if (!canvas.contains(e.relatedTarget)) {
+          canvas.classList.remove('drag-over');
+        }
+      });
+
+      canvas.addEventListener('drop', (e) => {
+        e.preventDefault();
+        canvas.classList.remove('drag-over');
+
+        const blockType = e.dataTransfer.getData('block-type');
+        if (blockType) {
+          addBlockToCanvas(blockType, e.clientX, e.clientY);
+        }
+        
+        if (draggedElement) {
+          saveToHistory();
+          showNotification('אלמנט הועבר בהצלחה', 'success');
+        }
+      });
+    }
+
+    function getDragAfterElement(container, y) {
+      const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
+      
+      return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    function addBlockToCanvas(blockType, x, y) {
+      const block = blockTypes.find(b => b.type === blockType);
+      if (!block) return;
+
+      saveToHistory();
+      
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = block.template;
+      const newElement = tempDiv.firstElementChild;
+      
+      makeElementEditable(newElement);
+      
+      const canvas = document.getElementById('canvas-content');
+      canvas.appendChild(newElement);
+      
+      showNotification(`${block.name} נוסף בהצלחה`, 'success');
+      
+      // Auto-select the new element
+      setTimeout(() => selectElement(newElement), 100);
+    }
+
+    // ===== HISTORY MANAGEMENT =====
+    function undoAction() {
+      if (undoHistory.length === 0) {
+        showNotification('אין פעולות לביטול', 'warning');
+        return;
+      }
+
+      const currentState = document.getElementById('canvas-content').innerHTML;
+      redoHistory.push(currentState);
+      
+      const previousState = undoHistory.pop();
+      document.getElementById('canvas-content').innerHTML = previousState;
+      
+      // Re-initialize editable elements
+      reinitializeEditableElements();
+      
+      showNotification('פעולה בוטלה', 'success');
+    }
+
+    function redoAction() {
+      if (redoHistory.length === 0) {
+        showNotification('אין פעולות לחזרה', 'warning');
+        return;
+      }
+
+      const currentState = document.getElementById('canvas-content').innerHTML;
+      undoHistory.push(currentState);
+      
+      const nextState = redoHistory.pop();
+      document.getElementById('canvas-content').innerHTML = nextState;
+      
+      // Re-initialize editable elements
+      reinitializeEditableElements();
+      
+      showNotification('פעולה בוצעה מחדש', 'success');
+    }
+
+    function reinitializeEditableElements() {
+      const canvas = document.getElementById('canvas-content');
+      
+      canvas.querySelectorAll('.draggable').forEach(el => {
+        // Remove existing event listeners by cloning
+        const newEl = el.cloneNode(true);
+        el.parentNode.replaceChild(newEl, el);
+        
+        // Re-initialize
+        if (newEl.tagName === 'IMG') {
+          makeImageReplaceable(newEl);
+        } else {
+          makeElementEditable(newEl);
+        }
+      });
+    }
+
+    // ===== SUPABASE INTEGRATION =====
+    let currentWebsiteId = null;
+    let currentUserId = null;
+
+    async function saveToSupabase(websiteId, content, name, templateId) {
+      try {
+        const response = await fetch('/.netlify/functions/save-website', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            websiteId: websiteId,
+            content: content,
+            name: name,
+            templateId: templateId,
+            userId: currentUserId,
+            isPublished: false
+          })
+        });
+
+        const result = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(result.error || 'Save failed');
+        }
+
+        return result;
+      } catch (error) {
+        console.error('Supabase save error:', error);
+        throw error;
+      }
+    }
+
+    async function loadFromSupabase(websiteId) {
+      try {
+        const response = await fetch(`/.netlify/functions/load-website?websiteId=${websiteId}`);
+        const result = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(result.error || 'Load failed');
+        }
+
+        return result.website;
+      } catch (error) {
+        console.error('Supabase load error:', error);
+        throw error;
+      }
+    }
+
+    // ===== SAVE AND EXPORT =====
+    async function saveChanges() {
+      try {
+        const content = document.getElementById('canvas-content').innerHTML;
+        
+        // Save to localStorage (backup)
+        localStorage.setItem('webmaster_pro_current_site', content);
+        localStorage.setItem('webmaster_pro_save_time', new Date().toISOString());
+        
+        // Save to Supabase (primary)
+        if (currentWebsiteId) {
+          showNotification('שומר לשרת...', 'info');
+          
+          await saveToSupabase(
+            currentWebsiteId,
+            content,
+            getCurrentWebsiteName(),
+            getCurrentTemplateId()
+          );
+          
+          showNotification('נשמר בהצלחה לשרת!', 'success');
+        } else {
+          showNotification('השינויים נשמרו מקומית', 'success');
+        }
+        
+        // Update undo history if this is a user action (not automatic)
+        if (event && event.isTrusted) {
+          saveToHistory();
+        }
+        
+      } catch (error) {
+        console.error('Save error:', error);
+        showNotification('שגיאה בשמירה: ' + error.message, 'error');
+        
+        // Still show success for localStorage save
+        showNotification('נשמר מקומית (גיבוי)', 'warning');
+      }
+    }
+
+    function exportWebsite() {
+      try {
+        const content = document.getElementById('canvas-content').innerHTML;
+        
+        // Create a complete HTML document
+        const fullHTML = `<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אתר מיוצא - WebMaster Pro</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 20px; }
+        .draggable { border: none !important; }
+        .selected { box-shadow: none !important; }
+        * { cursor: default !important; }
+    </style>
+</head>
+<body>
+${content}
+</body>
+</html>`;
+
+        const blob = new Blob([fullHTML], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `website-${new Date().toISOString().slice(0, 10)}.html`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        
+        URL.revokeObjectURL(url);
+        
+        showNotification('האתר יוצא בהצלחה!', 'success');
+      } catch (error) {
+        console.error('Export error:', error);
+        showNotification('שגיאה בייצוא: ' + error.message, 'error');
+      }
+    }
+
+    // ===== IMAGE HANDLING WITH COMPRESSION =====
+    async function compressImageInBrowser(file, quality = 0.8, maxWidth = 1200) {
+      return new Promise((resolve) => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        
+        img.onload = () => {
+          // Calculate new dimensions
+          let { width, height } = img;
+          if (width > maxWidth) {
+            height = (height * maxWidth) / width;
+            width = maxWidth;
+          }
+          
+          canvas.width = width;
+          canvas.height = height;
+          
+          // Draw and compress
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob(resolve, 'image/jpeg', quality);
+        };
+        
+        img.src = URL.createObjectURL(file);
+      });
+    }
+
+    async function handleImageUpload(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        showNotification('אנא בחר קובץ תמונה תקין', 'error');
+        return;
+      }
+
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      if (file.size > maxSize) {
+        showNotification('גודל התמונה גדול מדי (מקסימום 5MB)', 'error');
+        return;
+      }
+
+      try {
+        showNotification('דוחס תמונה...', 'info');
+        
+        // Compress image in browser
+        const compressedFile = await compressImageInBrowser(file, 0.8, 1200);
+        const compressionRatio = ((file.size - compressedFile.size) / file.size * 100).toFixed(1);
+        
+        if (compressionRatio > 0) {
+          showNotification(`תמונה דוחסה ב-${compressionRatio}%`, 'success');
+        }
+
+        // Convert to data URL for use
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (selectedElement && selectedElement.tagName === 'IMG') {
+            selectedElement.src = e.target.result;
+            showNotification('התמונה הוחלפה בהצלחה', 'success');
+            saveChanges();
+          } else {
+            // Create new image element
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            img.style.borderRadius = '8px';
+            img.style.margin = '0.5rem 0';
+            img.alt = 'תמונה חדשה';
+            
+            makeImageReplaceable(img);
+            
+            const canvas = document.getElementById('canvas-content');
+            canvas.appendChild(img);
+            
+            showNotification('תמונה חדשה נוספה', 'success');
+            saveChanges();
+          }
+        };
+        
+        reader.readAsDataURL(compressedFile);
+        
+      } catch (error) {
+        console.error('Image processing error:', error);
+        showNotification('שגיאה בעיבוד התמונה', 'error');
+      }
+    }
+
+    // Advanced image optimization (optional - for future TinyPNG integration)
+    async function optimizeImageWithAPI(imageData) {
+      try {
+        const response = await fetch('/.netlify/functions/compress-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            imageData: imageData,
+            filename: 'image.jpg'
+          })
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+          return result.compressedData;
+        } else {
+          throw new Error(result.error);
+        }
+      } catch (error) {
+        console.log('API compression not available, using browser compression');
+        return imageData; // Fallback to original
+      }
+    }
+
+    // ===== ANIMATIONS =====
+    function addAnimation(animationType) {
+      if (!selectedElement) {
+        showNotification('בחר אלמנט קודם', 'warning');
+        return;
+      }
+
+      if (!animationType) return;
+
+      const animations = {
+        fadeIn: 'fadeIn 1s ease-in-out',
+        slideInLeft: 'slideInLeft 0.8s ease-out',
+        bounce: 'bounce 2s infinite',
+        pulse: 'pulse 2s infinite'
+      };
+
+      selectedElement.style.animation = animations[animationType];
+      
+      showNotification(`אנימציה ${animationType} נוספה`, 'success');
+      saveChanges();
+    }
+
+    // ===== RESPONSIVE PREVIEW =====
+    function previewMobile() {
+      const canvas = document.getElementById('canvas-content');
+      canvas.style.width = '375px';
+      canvas.style.margin = '0 auto';
+      canvas.style.transition = 'all 0.3s ease';
+      showNotification('תצוגת מובייל', 'info');
+    }
+
+    function previewTablet() {
+      const canvas = document.getElementById('canvas-content');
+      canvas.style.width = '768px';
+      canvas.style.margin = '0 auto';
+      canvas.style.transition = 'all 0.3s ease';
+      showNotification('תצוגת טאבלט', 'info');
+    }
+
+    function previewDesktop() {
+      const canvas = document.getElementById('canvas-content');
+      canvas.style.width = '100%';
+      canvas.style.margin = '0';
+      canvas.style.transition = 'all 0.3s ease';
+      showNotification('תצוגת דסקטופ', 'info');
+    }
+
+    // ===== AI INTEGRATION =====
+    async function aiAssistant(prompt) {
+      try {
+        const response = await window.claude.complete(`
+אתה מומחה עיצוב אתרים ו-UX/UI. עזור למשתמש עם השאלה הבאה:
+${prompt}
+
+תן תשובה מועילה ומקצועית. אם צריך, תן גם הצעות לשיפור העיצוב.
+        `);
+        return response;
+      } catch (error) {
+        console.error('AI Error:', error);
+        return 'מצטער, שירות הAI לא זמין כרגע. בדוק את החיבור ל-API.';
+      }
+    }
+
+    function openAIChat() {
+      document.getElementById('ai-chat-modal').classList.add('active');
+      document.getElementById('ai-input').focus();
+    }
+
+    function closeAIChat() {
+      document.getElementById('ai-chat-modal').classList.remove('active');
+    }
+
+    async function askAI() {
+      const input = document.getElementById('ai-input');
+      const question = input.value.trim();
+      
+      if (!question) return;
+
+      // Add user message
+      addChatMessage(question, 'user');
+      input.value = '';
+
+      // Add loading message
+      const loadingMsg = addChatMessage('AI חושב...', 'ai loading');
+
+      try {
+        const response = await aiAssistant(question);
+        
+        // Remove loading message
+        loadingMsg.remove();
+        
+        // Add AI response
+        addChatMessage(response, 'ai');
+      } catch (error) {
+        loadingMsg.textContent = 'שגיאה בתקשורת עם AI';
+        loadingMsg.className = 'chat-message ai error';
+      }
+    }
+
+    function addChatMessage(message, type) {
+      const messagesContainer = document.getElementById('chat-messages');
+      const messageEl = document.createElement('div');
+      messageEl.className = `chat-message ${type}`;
+      messageEl.textContent = message;
+      
+      const styles = {
+        'chat-message': {
+          padding: '0.75rem',
+          marginBottom: '0.5rem',
+          borderRadius: '0.75rem',
+          wordWrap: 'break-word',
+          maxWidth: '85%'
+        },
+        'user': {
+          background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
+          color: 'white',
+          marginLeft: 'auto',
+          marginRight: '0'
+        },
+        'ai': {
+          background: 'var(--glass-bg)',
+          border: '1px solid var(--glass-border)',
+          marginRight: 'auto',
+          marginLeft: '0'
+        },
+        'loading': {
+          opacity: '0.7',
+          fontStyle: 'italic'
+        }
+      };
+      
+      Object.assign(messageEl.style, styles['chat-message']);
+      if (type.includes('user')) Object.assign(messageEl.style, styles.user);
+      if (type.includes('ai')) Object.assign(messageEl.style, styles.ai);
+      if (type.includes('loading')) Object.assign(messageEl.style, styles.loading);
+      
+      messagesContainer.appendChild(messageEl);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      
+      return messageEl;
+    }
+
+    // ===== MAGIC DESIGN =====
+    async function magicDesign() {
+      const businessType = prompt('איזה סוג עסק? (לדוגמה: מסעדה, רופא, עורך דין, מספרה)');
+      if (!businessType) return;
+
+      showNotification('AI יוצר עיצוב מותאם...', 'info');
+      
+      const templates = {
+        'מסעדה': createRestaurantTemplate(businessType),
+        'רופא': createDoctorTemplate(businessType),
+        'עורך דין': createLawyerTemplate(businessType),
+        'מספרה': createSalonTemplate(businessType),
+        'כושר': createFitnessTemplate(businessType),
+        'נדלן': createRealEstateTemplate(businessType)
+      };
+
+      let selectedTemplate = templates['רופא']; // Default
+
+      // Find matching template
+      for (const [key, template] of Object.entries(templates)) {
+        if (businessType.includes(key)) {
+          selectedTemplate = template;
+          break;
+        }
+      }
+
+      saveToHistory();
+      
+      const canvas = document.getElementById('canvas-content');
+      canvas.innerHTML = selectedTemplate;
+
+      // Make all elements editable
+      canvas.querySelectorAll('h1, h2, h3, p, button, img').forEach(el => {
+        if (el.tagName === 'IMG') {
+          makeImageReplaceable(el);
+        } else {
+          makeElementEditable(el);
+        }
+      });
+
+      showNotification(`עיצוב מותאם ל${businessType} נוצר!`, 'success');
+    }
+
+    function createRestaurantTemplate(businessName) {
+      return `
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 4rem 2rem; text-align: center; color: white; border-radius: 1rem; margin-bottom: 2rem;">
+          <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 800;">${businessName}</h1>
+          <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">חוויה קולינרית יוצאת דופן</p>
+          <button style="background: #ff6b6b; color: white; padding: 1rem 2rem; border: none; border-radius: 25px; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">הזמן מקום עכשיו</button>
+        </div>
+        <div style="padding: 3rem 2rem; max-width: 1000px; margin: 0 auto;">
+          <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #333;">התפריט שלנו</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #667eea; margin-bottom: 1rem;">מנות ראשונות</h3>
+              <p style="color: #666;">מבחר מנות פתיחה טריות ומפתיעות שמכינות את החיך לחוויה</p>
+            </div>
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #667eea; margin-bottom: 1rem;">מנות עיקריות</h3>
+              <p style="color: #666;">מנות עיקריות מעולות שמכינים השפים המובילים שלנו</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function createDoctorTemplate(businessName) {
+      return `
+        <div style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); padding: 4rem 2rem; text-align: center; color: white; border-radius: 1rem; margin-bottom: 2rem;">
+          <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 800;">${businessName}</h1>
+          <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">רפואה מתקדמת ואכפתית</p>
+          <button style="background: #00b894; color: white; padding: 1rem 2rem; border: none; border-radius: 25px; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">קבע תור עכשיו</button>
+        </div>
+        <div style="padding: 3rem 2rem; max-width: 1000px; margin: 0 auto;">
+          <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #333;">השירותים שלנו</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #74b9ff; margin-bottom: 1rem;">בדיקות מקיפות</h3>
+              <p style="color: #666;">אבחון מדויק ומהיר עם טכנולוגיה חדישה</p>
+            </div>
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #74b9ff; margin-bottom: 1rem;">טיפולים מתקדמים</h3>
+              <p style="color: #666;">שיטות טיפול חדשניות ויעילות</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function createLawyerTemplate(businessName) {
+      return `
+        <div style="background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%); padding: 4rem 2rem; text-align: center; color: white; border-radius: 1rem; margin-bottom: 2rem;">
+          <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 800;">${businessName}</h1>
+          <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">ייצוג משפטי מקצועי ומנוסה</p>
+          <button style="background: #f6ad55; color: #1a202c; padding: 1rem 2rem; border: none; border-radius: 25px; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">יעוץ משפטי עכשיו</button>
+        </div>
+        <div style="padding: 3rem 2rem; max-width: 1000px; margin: 0 auto;">
+          <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #333;">תחומי התמחות</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #2d3748; margin-bottom: 1rem;">דיני משפחה</h3>
+              <p style="color: #666;">ליווי משפטי בתחום המשפחה והגירושין</p>
+            </div>
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #2d3748; margin-bottom: 1rem;">דיני עבודה</h3>
+              <p style="color: #666;">ייצוג עובדים ומעסיקים בסכסוכי עבודה</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function createSalonTemplate(businessName) {
+      return `
+        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 4rem 2rem; text-align: center; color: white; border-radius: 1rem; margin-bottom: 2rem;">
+          <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 800;">${businessName}</h1>
+          <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">יופי וסטייל ברמה הגבוהה ביותר</p>
+          <button style="background: #4ecdc4; color: white; padding: 1rem 2rem; border: none; border-radius: 25px; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">קבע תור עכשיו</button>
+        </div>
+        <div style="padding: 3rem 2rem; max-width: 1000px; margin: 0 auto;">
+          <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #333;">השירותים שלנו</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #f5576c; margin-bottom: 1rem;">תספורת ועיצוב</h3>
+              <p style="color: #666;">תספורות מודרניות ועיצוב שיער יצירתי</p>
+            </div>
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #f5576c; margin-bottom: 1rem;">טיפולי יופי</h3>
+              <p style="color: #666;">טיפולי פנים מתקדמים ועיצוב גבות</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function createFitnessTemplate(businessName) {
+      return `
+        <div style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); padding: 4rem 2rem; text-align: center; color: #333; border-radius: 1rem; margin-bottom: 2rem;">
+          <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 800; color: #2d3748;">${businessName}</h1>
+          <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.8;">הדרך שלך לחיים בריאים ופעילים</p>
+          <button style="background: #4299e1; color: white; padding: 1rem 2rem; border: none; border-radius: 25px; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">התחל אימונים</button>
+        </div>
+        <div style="padding: 3rem 2rem; max-width: 1000px; margin: 0 auto;">
+          <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #333;">התוכניות שלנו</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #4299e1; margin-bottom: 1rem;">אימונים אישיים</h3>
+              <p style="color: #666;">תוכנית אימונים מותאמת אישית עם מדריך מנוסה</p>
+            </div>
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #4299e1; margin-bottom: 1rem;">שיעורי קבוצה</h3>
+              <p style="color: #666;">אימונים בקבוצות קטנות באווירה תומכת ומהנה</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function createRealEstateTemplate(businessName) {
+      return `
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 4rem 2rem; text-align: center; color: white; border-radius: 1rem; margin-bottom: 2rem;">
+          <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 800;">${businessName}</h1>
+          <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">הבית החדש שלך מחכה לך</p>
+          <button style="background: #48bb78; color: white; padding: 1rem 2rem; border: none; border-radius: 25px; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">בואו נמצא בית</button>
+        </div>
+        <div style="padding: 3rem 2rem; max-width: 1000px; margin: 0 auto;">
+          <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #333;">השירותים שלנו</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #667eea; margin-bottom: 1rem;">מכירת דירות</h3>
+              <p style="color: #666;">מכירה מקצועית עם הערכת שווי מדויקת</p>
+            </div>
+            <div style="text-align: center; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;">
+              <h3 style="color: #667eea; margin-bottom: 1rem;">השכרת נכסים</h3>
+              <p style="color: #666;">השכרה עם ליווי מלא ומציאת דיירים איכותיים</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ===== VIDEO EDITOR =====
+    class VideoEditor {
+      constructor() {
+        this.videoElement = null;
+        this.overlays = [];
+        this.startTime = 0;
+        this.endTime = 0;
+      }
+
+      init() {
+        this.videoElement = document.getElementById('video-preview');
+        this.overlaysContainer = document.getElementById('video-overlays');
+      }
+
+      handleUpload(file) {
+        if (!file || !file.type.startsWith('video/')) {
+          showNotification('אנא בחר קובץ וידאו תקין', 'error');
+          return;
+        }
+
+        if (file.size > 100 * 1024 * 1024) { // 100MB limit
+          showNotification('קובץ הוידאו גדול מדי (מקסימום 100MB)', 'error');
+          return;
+        }
+
+        this.videoElement.src = URL.createObjectURL(file);
+        this.videoElement.onloadedmetadata = () => {
+          this.endTime = this.videoElement.duration;
+          showNotification(`וידאו הועלה בהצלחה (${Math.round(this.endTime)} שניות)`, 'success');
         };
       }
-      trimVideo(){
-        const start=parseFloat(prompt('שנייה התחלה:')||0);
-        const end=parseFloat(prompt('שנייה סיום:')||this.videoElement.duration);
-        if(start<end&&end<=this.videoElement.duration){ this.startTime=start; this.endTime=end; this.videoElement.currentTime=start;
-          showNotification(`וידאו נחתך ${start}-${end}s`);
-        } else showNotification('זמנים לא תקינים','error');
+
+      trim() {
+        if (!this.videoElement.src) {
+          showNotification('אנא העלה וידאו תחילה', 'warning');
+          return;
+        }
+
+        const start = parseFloat(prompt('שנייה התחלה:', '0') || '0');
+        const end = parseFloat(prompt('שנייה סיום:', this.videoElement.duration) || this.videoElement.duration);
+
+        if (start >= 0 && end > start && end <= this.videoElement.duration) {
+          this.startTime = start;
+          this.endTime = end;
+          this.videoElement.currentTime = start;
+          
+          // Visual indicator for trim range
+          this.showTrimIndicator(start, end);
+          
+          showNotification(`וידאו נחתך: ${start.toFixed(1)}-${end.toFixed(1)} שניות`, 'success');
+        } else {
+          showNotification('זמנים לא תקינים', 'error');
+        }
       }
-      addVideoText(){
-        const text=prompt('טקסט:'); const x=parseInt(prompt('X(0-100):')||50); const y=parseInt(prompt('Y(0-100):')||50);
-        if(text){ const ov=document.createElement('div');
-          ov.style.cssText=`position:absolute;top:${y}%;left:${x}%;color:white;font-size:24px;font-weight:bold;`
+
+      showTrimIndicator(start, end) {
+        // Create a simple trim indicator
+        const indicator = document.createElement('div');
+        indicator.style.cssText = `
+          position: absolute;
+          bottom: 10px;
+          left: 10px;
+          background: rgba(0,0,0,0.8);
+          color: white;
+          padding: 5px 10px;
+          border-radius: 5px;
+          font-size: 12px;
+          z-index: 10;
+        `;
+        indicator.textContent = `חתוך: ${start.toFixed(1)}s - ${end.toFixed(1)}s`;
+        
+        this.overlaysContainer.appendChild(indicator);
+        
+        // Remove after 3 seconds
+        setTimeout(() => indicator.remove(), 3000);
+      }
+
+      addText() {
+        if (!this.videoElement.src) {
+          showNotification('אנא העלה וידאו תחילה', 'warning');
+          return;
+        }
+
+        const text = prompt('הכנס טקסט:');
+        if (!text) return;
+
+        const x = parseInt(prompt('מיקום X (0-100%):', '50') || '50');
+        const y = parseInt(prompt('מיקום Y (0-100%):', '50') || '50');
+
+        const textOverlay = document.createElement('div');
+        textOverlay.style.cssText = `
+          position: absolute;
+          top: ${y}%;
+          left: ${x}%;
+          transform: translate(-50%, -50%);
+          color: white;
+          font-size: 24px;
+          font-weight: bold;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+          background: rgba(0,0,0,0.5);
+          padding: 10px 15px;
+          border-radius: 8px;
+          z-index: 10;
+          cursor: pointer;
+        `;
+        textOverlay.textContent = text;
+        
+        // Click to remove
+        textOverlay.onclick = () => {
+          if (confirm('האם למחוק את הטקסט?')) {
+            textOverlay.remove();
+            this.overlays = this.overlays.filter(o => o !== textOverlay);
+          }
+        };
+
+        this.overlaysContainer.appendChild(textOverlay);
+        this.overlays.push(textOverlay);
+        
+        showNotification('טקסט נוסף לוידאו', 'success');
+      }
+
+      addFilter() {
+        if (!this.videoElement.src) {
+          showNotification('אנא העלה וידאו תחילה', 'warning');
+          return;
+        }
+
+        const filters = {
+          'none': 'none',
+          'grayscale': 'grayscale(100%)',
+          'sepia': 'sepia(100%)',
+          'blur': 'blur(2px)',
+          'brightness': 'brightness(1.5)',
+          'contrast': 'contrast(1.5)',
+          'saturate': 'saturate(2)'
+        };
+
+        const filterName = prompt('בחר פילטר:\n' + Object.keys(filters).join('\n'), 'none');
+        
+        if (filters[filterName]) {
+          this.videoElement.style.filter = filters[filterName];
+          showNotification(`פילטר ${filterName} הוחל`, 'success');
+        }
+      }
+
+      export() {
+        if (!this.videoElement.src) {
+          showNotification('אנא העלה וידאו תחילה', 'warning');
+          return;
+        }
+
+        // Create canvas for frame export
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = this.videoElement.videoWidth || 640;
+        canvas.height = this.videoElement.videoHeight || 480;
+
+        // Draw current frame
+        ctx.drawImage(this.videoElement, 0, 0, canvas.width, canvas.height);
+
+        // Add text overlays to canvas
+        this.overlays.forEach(overlay => {
+          const rect = overlay.getBoundingClientRect();
+          const videoRect = this.videoElement.getBoundingClientRect();
+          
+          const x = (rect.left - videoRect.left) / videoRect.width * canvas.width;
+          const y = (rect.top - videoRect.top) / videoRect.height * canvas.height;
+          
+          ctx.fillStyle = 'white';
+          ctx.font = '24px Arial';
+          ctx.strokeStyle = 'black';
+          ctx.lineWidth = 2;
+          ctx.strokeText(overlay.textContent, x, y);
+          ctx.fillText(overlay.textContent, x, y);
+        });
+
+        // Export as image (frame)
+        canvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `video-frame-${Date.now()}.png`;
+          a.click();
+          URL.revokeObjectURL(url);
+          
+          showNotification('פריים נוכחי יוצא בהצלחה', 'success');
+        });
+      }
+    }
+
+    function openVideoEditor() {
+      document.getElementById('video-editor-modal').classList.add('active');
+      if (!videoEditor) {
+        videoEditor = new VideoEditor();
+        videoEditor.init();
+      }
+    }
+
+    function closeVideoEditor() {
+      document.getElementById('video-editor-modal').classList.remove('active');
+    }
+
+    function handleVideoUpload(file) {
+      if (videoEditor) {
+        videoEditor.handleUpload(file);
+      }
+    }
+
+    function trimVideo() {
+      if (videoEditor) {
+        videoEditor.trim();
+      }
+    }
+
+    function addVideoText() {
+      if (videoEditor) {
+        videoEditor.addText();
+      }
+    }
+
+    function addVideoFilter() {
+      if (videoEditor) {
+        videoEditor.addFilter();
+      }
+    }
+
+    function exportVideo() {
+      if (videoEditor) {
+        videoEditor.export();
+      }
+    }
+
+    // ===== OPTIMIZATION AND SEO =====
+    function optimizeWebsite() {
+      showNotification('מתחיל אופטימיזציה...', 'info');
+      
+      const canvas = document.getElementById('canvas-content');
+      let optimizations = 0;
+
+      // Optimize images
+      canvas.querySelectorAll('img').forEach(img => {
+        if (img.naturalWidth > 1200) {
+          img.style.maxWidth = '100%';
+          img.style.height = 'auto';
+          img.loading = 'lazy';
+          optimizations++;
+        }
+      });
+
+      // Add meta viewport if missing
+      if (!document.querySelector('meta[name="viewport"]')) {
+        const viewport = document.createElement('meta');
+        viewport.name = 'viewport';
+        viewport.content = 'width=device-width, initial-scale=1.0';
+        document.head.appendChild(viewport);
+        optimizations++;
+      }
+
+      // Optimize CSS (remove unused styles)
+      const styles = document.querySelectorAll('style');
+      styles.forEach(style => {
+        if (style.textContent.trim() === '') {
+          style.remove();
+          optimizations++;
+        }
+      });
+
+      showNotification(`אופטימיזציה הושלמה! ${optimizations} שיפורים בוצעו`, 'success');
+    }
+
+    function generateSEO() {
+      showNotification('יוצר SEO אוטומטי...', 'info');
+      
+      const canvas = document.getElementById('canvas-content');
+      
+      // Extract title from first h1
+      const h1 = canvas.querySelector('h1');
+      const title = h1 ? h1.textContent.trim() : 'אתר מקצועי';
+      
+      // Extract description from first paragraph
+      const firstP = canvas.querySelector('p');
+      const description = firstP ? firstP.textContent.trim().substring(0, 160) : 'אתר מקצועי שנבנה עם WebMaster Pro';
+
+      // Update document title
+      document.title = title;
+
+      // Add or update meta description
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.name = 'description';
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.content = description;
+
+      // Add Open Graph tags
+      const ogTags = [
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:locale', content: 'he_IL' }
+      ];
+
+      ogTags.forEach(tag => {
+        let ogTag = document.querySelector(`meta[property="${tag.property}"]`);
+        if (!ogTag) {
+          ogTag = document.createElement('meta');
+          ogTag.setAttribute('property', tag.property);
+          document.head.appendChild(ogTag);
+        }
+        ogTag.content = tag.content;
+      });
+
+      // Add structured data (JSON-LD)
+      const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": title,
+        "description": description,
+        "url": window.location.href
+      };
+
+      let scriptTag = document.querySelector('script[type="application/ld+json"]');
+      if (!scriptTag) {
+        scriptTag = document.createElement('script');
+        scriptTag.type = 'application/ld+json';
+        document.head.appendChild(scriptTag);
+      }
+      scriptTag.textContent = JSON.stringify(structuredData, null, 2);
+
+      // Add alt texts to images without them
+      canvas.querySelectorAll('img:not([alt])').forEach((img, index) => {
+        img.alt = `תמונה ${index + 1} - ${title}`;
+      });
+
+      showNotification('SEO tags נוצרו בהצלחה!', 'success');
+    }
+
+    // ===== UTILITY FUNCTIONS =====
+    function rgbToHex(rgb) {
+      if (rgb.startsWith('#')) return rgb;
+      
+      const result = rgb.match(/\d+/g);
+      if (!result || result.length < 3) return '#000000';
+      
+      return '#' + result.slice(0, 3).map(num => {
+        const hex = parseInt(num).toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+      }).join('');
+    }
+
+    // ===== KEYBOARD SHORTCUTS =====
+    function initKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        // Ctrl+S - Save
+        if (e.ctrlKey && e.key === 's') {
+          e.preventDefault();
+          saveChanges();
+        }
+        
+        // Ctrl+Z - Undo
+        if (e.ctrlKey && e.key === 'z' && !e.shiftKey) {
+          e.preventDefault();
+          undoAction();
+        }
+        
+        // Ctrl+Shift+Z or Ctrl+Y - Redo
+        if ((e.ctrlKey && e.shiftKey && e.key === 'Z') || (e.ctrlKey && e.key === 'y')) {
+          e.preventDefault();
+          redoAction();
+        }
+        
+        // Delete - Remove selected element
+        if (e.key === 'Delete' && selectedElement) {
+          e.preventDefault();
+          if (confirm('האם למחוק את האלמנט הנבחר?')) {
+            selectedElement.remove();
+            selectedElement = null;
+            saveChanges();
+            showNotification('אלמנט נמחק', 'success');
+          }
+        }
+        
+        // Escape - Deselect
+        if (e.key === 'Escape' && selectedElement) {
+          selectedElement.classList.remove('selected');
+          selectedElement = null;
+          showNotification('הבחירה בוטלה', 'info');
+        }
+      });
+    }
+
+    // ===== INITIALIZATION =====
+    function initWebsitesList() {
+      const container = document.querySelector('.websites-list');
+      container.innerHTML = '';
+      
+      websites.forEach(website => {
+        const item = document.createElement('div');
+        item.className = 'website-item';
+        item.onclick = () => loadWebsiteDirectly(website.id);
+        
+        item.innerHTML = `
+          <img src="${website.image}" alt="${website.name}" loading="lazy">
+          <div class="website-info">
+            <div class="website-name">${website.name}</div>
+            <div class="website-price">${website.price}</div>
+          </div>
+        `;
+        
+        container.appendChild(item);
+      });
+    }
+
+    function initBlocksList() {
+      const container = document.querySelector('.blocks-list');
+      container.innerHTML = '';
+      
+      blockTypes.forEach(block => {
+        const item = document.createElement('div');
+        item.className = 'block-item';
+        item.draggable = true;
+        item.dataset.type = block.type;
+        
+        item.innerHTML = `
+          <div class="block-icon">
+            <i class="${block.icon}"></i>
+          </div>
+          <span>${block.name}</span>
+        `;
+        
+        // Add drag start event
+        item.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('block-type', block.type);
+          e.dataTransfer.effectAllowed = 'copy';
+        });
+        
+        container.appendChild(item);
+      });
+    }
+
+    async function initializeEditor() {
+      try {
+        // Initialize user session (basic for now)
+        currentUserId = localStorage.getItem('webmaster_user_id') || generateUserId();
+        localStorage.setItem('webmaster_user_id', currentUserId);
+        
+        // Initialize components
+        initWebsitesList();
+        initBlocksList();
+        initDragAndDrop();
+        initKeyboardShortcuts();
+        
+        // Test Supabase connection
+        await testSupabaseConnection();
+        
+        // Load saved website if exists
+        const savedContent = localStorage.getItem('webmaster_pro_current_site');
+        if (savedContent) {
+          const shouldLoad = confirm('נמצא אתר שמור. האם לטעון אותו?');
+          if (shouldLoad) {
+            document.getElementById('canvas-content').innerHTML = savedContent;
+            reinitializeEditableElements();
+            showNotification('אתר שמור נטען', 'success');
+          }
+        }
+        
+        // Welcome message
+        setTimeout(() => {
+          showNotification('ברוכים הבאים ל-WebMaster Pro! בחר אתר מהרשימה כדי להתחיל', 'info');
+        }, 1000);
+        
+        console.log('🚀 WebMaster Pro Editor initialized successfully!');
+        console.log('📊 Available websites:', websites.length);
+        console.log('🧩 Available blocks:', blockTypes.length);
+        console.log('👤 User ID:', currentUserId);
+        
+      } catch (error) {
+        console.error('Initialization error:', error);
+        showNotification('שגיאה באתחול האדיטור', 'error');
+      }
+    }
+
+    function generateUserId() {
+      return 'user_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now().toString(36);
+    }
+
+    async function testSupabaseConnection() {
+      try {
+        showNotification('בודק חיבור לשרת...', 'info');
+        
+        const response = await fetch('/.netlify/functions/list-websites');
+        const result = await response.json();
+        
+        if (response.ok) {
+          showNotification('חיבור לשרת תקין ✅', 'success');
+          console.log('✅ Supabase connection OK');
+        } else {
+          throw new Error(result.error);
+        }
+        
+      } catch (error) {
+        console.warn('⚠️ Supabase connection failed:', error);
+        showNotification('חיבור לשרת נכשל - עובד במצב מקומי', 'warning');
+      }
+    }
+
+    // Start the application
+    document.addEventListener('DOMContentLoaded', initializeEditor);
+
+    // Auto-save every 30 seconds
+    setInterval(() => {
+      if (document.getElementById('canvas-content').innerHTML.trim() !== '') {
+        const content = document.getElementById('canvas-content').innerHTML;
+        localStorage.setItem('webmaster_pro_autosave', content);
+        localStorage.setItem('webmaster_pro_autosave_time', new Date().toISOString());
+      }
+    }, 30000);
+
+    // Prevent accidental page leave
+    window.addEventListener('beforeunload', (e) => {
+      const content = document.getElementById('canvas-content').innerHTML;
+      const saved = localStorage.getItem('webmaster_pro_current_site') || '';
+      
+      if (content !== saved && content.trim() !== '') {
+        e.preventDefault();
+        e.returnValue = 'יש לך שינויים שלא נשמרו. האם אתה בטוח שברצונך לעזוב?';
+        return e.returnValue;
+      }
+    });
+
+    // Global error handler
+    window.addEventListener('error', (e) => {
+      console.error('Global error:', e.error);
+      showNotification('אירעה שגיאה לא צפויה. בדוק את הקונסול לפרטים נוספים.', 'error');
+    });
+
+    // Performance monitoring
+    if ('performance' in window) {
+      window.addEventListener('load', () => {
+        const loadTime = performance.now();
+        console.log(`⚡ Editor loaded in ${loadTime.toFixed(2)}ms`);
+      });
+    }
+  </script>
+</body>
+</html>
