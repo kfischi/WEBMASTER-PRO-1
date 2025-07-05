@@ -1,1417 +1,1055 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 WebMaster Pro - Ultimate Visual Editor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🤖 WebMaster Pro AI - אדיטור ויזואלי מתקדם</title>
+  <meta name="description" content="אדיטור ויזואלי מתקדם לעריכת 11 אתרים מקצועיים עם AI מובנה">
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #3730a3;
+      --bg: #0f0f23;
+      --bg-secondary: #1a1a40;
+      --glass-bg: rgba(255,255,255,0.1);
+      --glass-border: rgba(255,255,255,0.2);
+      --text: #fff;
+      --text-secondary: #cbd5e1;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+    }
+
+    /* ===== BASE STYLES ===== */
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
     
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body { 
+      display: grid; 
+      grid-template-rows: auto 1fr; 
+      grid-template-columns: 1fr; 
+      height: 100vh;
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-secondary) 100%);
+      color: var(--text); 
+      font-family: 'Inter', 'Assistant', system-ui, sans-serif; 
+      overflow: hidden; 
+    }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-            color: #ffffff;
-            overflow: hidden;
-            height: 100vh;
-        }
+    /* ===== MAIN LAYOUT ===== */
+    .editor-container { 
+      display: grid; 
+      grid-template-columns: 280px 1fr 320px; 
+      grid-template-rows: auto 1fr; 
+      height: 100%; 
+      gap: 1px;
+      background: var(--glass-border);
+    }
 
-        /* Header */
-        .editor-header {
-            height: 60px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            position: relative;
-            z-index: 1000;
-        }
+    /* ===== HEADER ===== */
+    header.header { 
+      grid-column: 1/-1; 
+      background: var(--glass-bg); 
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border); 
+      display: flex; 
+      align-items: center; 
+      padding: 0.75rem 1.5rem; 
+      position: relative;
+      z-index: 100;
+    }
+    
+    header .logo { 
+      font-size: 1.4rem; 
+      font-weight: 700; 
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    header .logo i {
+      color: var(--primary);
+    }
+    
+    header .tools { 
+      margin-left: auto; 
+      display: flex; 
+      gap: 0.75rem; 
+    }
+    
+    header .tools button { 
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+      color: #fff; 
+      border: none; 
+      padding: 0.6rem 1.2rem; 
+      border-radius: 0.5rem; 
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+    }
+    
+    header .tools button:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+    }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 18px;
-            font-weight: 700;
-            color: #ffffff;
-        }
+    /* ===== SIDEBARS ===== */
+    aside.sidebar-left, aside.sidebar-right {
+      background: var(--glass-bg); 
+      backdrop-filter: blur(20px); 
+      border: 1px solid var(--glass-border);
+      padding: 1.5rem; 
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    aside.sidebar-left { 
+      grid-row: 2; 
+      border-right: none;
+    }
+    
+    aside.sidebar-right { 
+      grid-row: 2; 
+      border-left: none;
+    }
 
-        .logo i {
-            color: #00d4ff;
-            font-size: 20px;
-        }
+    /* ===== CANVAS ===== */
+    main.canvas { 
+      position: relative; 
+      background: #ffffff; 
+      overflow: hidden;
+    }
+    
+    #loading-overlay { 
+      position: absolute; 
+      inset: 0; 
+      background: linear-gradient(135deg, rgba(15,15,35,0.9) 0%, rgba(26,26,64,0.9) 100%);
+      backdrop-filter: blur(10px);
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      color: var(--text); 
+      font-size: 1.3rem;
+      font-weight: 600;
+      visibility: hidden;
+      z-index: 50;
+    }
+    
+    #canvas-iframe { 
+      width: 100%; 
+      height: 100%; 
+      border: none; 
+      background: white;
+    }
 
-        .header-tools {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+    /* ===== WEBSITES LIST ===== */
+    .websites-list .website-item {
+      display: flex; 
+      gap: 0.75rem; 
+      margin-bottom: 0.75rem; 
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 0.5rem;
+      border: 1px solid transparent;
+    }
+    
+    .websites-list .website-item img { 
+      width: 50px; 
+      height: 50px; 
+      border-radius: 8px; 
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    .websites-list .website-item:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateX(-4px);
+      border-color: var(--glass-border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
 
-        .tool-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+    .websites-list .website-item div {
+      flex: 1;
+    }
 
-        .tool-btn:hover {
-            background: rgba(0, 212, 255, 0.2);
-            border-color: rgba(0, 212, 255, 0.4);
-            transform: translateY(-1px);
-        }
+    .websites-list .website-item .website-name {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
 
-        .tool-btn.active {
-            background: rgba(0, 212, 255, 0.3);
-            border-color: rgba(0, 212, 255, 0.6);
-        }
+    /* ===== BLOCKS LIST ===== */
+    .blocks-list .block-item {
+      display: flex; 
+      align-items: center; 
+      gap: 0.75rem; 
+      padding: 0.75rem; 
+      margin-bottom: 0.5rem;
+      cursor: pointer; 
+      border-radius: 0.5rem; 
+      border: 1px solid var(--glass-border);
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .blocks-list .block-item:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateX(-4px);
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+    }
 
-        /* Main Layout */
-        .editor-container {
-            display: flex;
-            height: calc(100vh - 60px);
-            position: relative;
-        }
+    .blocks-list .block-item i {
+      color: var(--primary);
+      font-size: 1.1rem;
+      width: 20px;
+    }
 
-        /* Left Panel */
-        .left-panel {
-            width: 280px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            overflow-y: auto;
-            transition: transform 0.3s ease;
-        }
+    /* ===== PROPERTIES PANEL ===== */
+    .properties-panel .property-section { 
+      margin-bottom: 1.5rem;
+      background: rgba(255,255,255,0.05);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--glass-border);
+    }
+    
+    .property-section h3 { 
+      margin-bottom: 0.75rem; 
+      font-size: 1rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
 
-        .panel-section {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 20px;
-        }
+    .property-section input,
+    .property-section select,
+    .property-section textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 0.4rem;
+      background: rgba(255,255,255,0.1);
+      color: var(--text);
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
 
-        .section-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .property-section input:focus,
+    .property-section select:focus,
+    .property-section textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+    }
 
-        .website-selector {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
+    .property-section button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
 
-        .component-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
+    .property-section button:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
 
-        .component-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 15px 10px;
-            text-align: center;
-            cursor: grab;
-            transition: all 0.3s ease;
-            font-size: 12px;
-        }
+    /* ===== SELECTED ELEMENT ===== */
+    .selected {
+      outline: 2px solid var(--primary) !important;
+      outline-offset: 2px;
+      background: rgba(79, 70, 229, 0.1) !important;
+      transition: all 0.2s ease;
+      position: relative;
+    }
 
-        .component-item:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: rgba(0, 212, 255, 0.3);
-            transform: translateY(-2px);
-        }
+    .selected::before {
+      content: '✏️ עורך';
+      position: absolute;
+      top: -25px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 2px 8px;
+      font-size: 11px;
+      border-radius: 4px;
+      font-weight: 600;
+      z-index: 1000;
+    }
 
-        .component-item:active {
-            cursor: grabbing;
-            transform: scale(0.95);
-        }
+    /* ===== AI CHAT ===== */
+    #ai-chat {
+      background: rgba(0,0,0,0.3);
+      padding: 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+    }
+    
+    #ai-chat h3 {
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-        .component-item i {
-            font-size: 20px;
-            margin-bottom: 8px;
-            color: #00d4ff;
-            display: block;
-        }
+    #ai-chat h3::before {
+      content: '🤖';
+    }
+    
+    .chat-message {
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.5rem;
+      word-wrap: break-word;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    
+    .chat-message.user {
+      background: rgba(79,70,229,0.4);
+      margin-left: 15%;
+      border: 1px solid rgba(79,70,229,0.6);
+    }
+    
+    .chat-message.ai {
+      background: rgba(124,58,237,0.4);
+      margin-right: 15%;
+      border: 1px solid rgba(124,58,237,0.6);
+    }
 
-        /* Main Editor Area */
-        .main-editor {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.3);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
+    /* ===== NOTIFICATIONS ===== */
+    .notification { 
+      position: fixed; 
+      bottom: 2rem; 
+      left: 50%; 
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+      color: #fff; 
+      padding: 1rem 1.5rem; 
+      border-radius: 0.75rem;
+      font-weight: 600;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      animation: slideIn 0.4s ease-out, fadeOut 0.4s ease-out 2.5s forwards;
+      z-index: 1000;
+    }
+    
+    @keyframes slideIn {
+      from { 
+        transform: translateX(-50%) translateY(100px); 
+        opacity: 0; 
+      }
+      to { 
+        transform: translateX(-50%) translateY(0); 
+        opacity: 1; 
+      }
+    }
 
-        .editor-toolbar {
-            height: 50px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
+    @keyframes fadeOut { 
+      to { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(20px); 
+      } 
+    }
 
-        .view-toggle {
-            display: flex;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            overflow: hidden;
-        }
+    /* ===== SEARCH BOX ===== */
+    .search-box {
+      margin-bottom: 1rem;
+    }
 
-        .view-btn {
-            background: transparent;
-            border: none;
-            color: rgba(255, 255, 255, 0.7);
-            padding: 8px 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 12px;
-        }
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 0.5rem;
+      background: rgba(255,255,255,0.1);
+      color: var(--text);
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
 
-        .view-btn.active {
-            background: rgba(0, 212, 255, 0.3);
-            color: #ffffff;
-        }
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+    }
 
-        .editor-canvas {
-            flex: 1;
-            background: #ffffff;
-            margin: 20px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
+    .search-box input::placeholder {
+      color: var(--text-secondary);
+    }
 
-        .editor-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #ffffff;
-        }
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1200px) {
+      .editor-container {
+        grid-template-columns: 250px 1fr 280px;
+      }
+    }
 
-        /* Right Panel */
-        .right-panel {
-            width: 300px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(20px);
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-            overflow-y: auto;
-            transition: transform 0.3s ease;
-        }
+    @media (max-width: 1024px) {
+      .editor-container {
+        grid-template-columns: 220px 1fr 260px;
+      }
+      
+      aside.sidebar-left, aside.sidebar-right {
+        padding: 1rem;
+      }
+    }
 
-        .settings-group {
-            margin-bottom: 20px;
-        }
+    /* ===== CUSTOM SCROLLBAR ===== */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
 
-        .settings-label {
-            font-size: 12px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 8px;
-            display: block;
-        }
+    ::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+    }
 
-        .settings-input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 14px;
-        }
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
 
-        .settings-input:focus {
-            outline: none;
-            border-color: rgba(0, 212, 255, 0.6);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .color-picker {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .color-option {
-            width: 30px;
-            height: 30px;
-            border-radius: 6px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .color-option:hover {
-            transform: scale(1.1);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        .color-option.active {
-            border-color: #ffffff;
-            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.5);
-        }
-
-        /* AI Assistant */
-        .ai-assistant {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .ai-assistant:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(0, 212, 255, 0.5);
-        }
-
-        .ai-assistant i {
-            font-size: 24px;
-            color: #ffffff;
-        }
-
-        .ai-chat {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 350px;
-            height: 400px;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            display: none;
-            flex-direction: column;
-            z-index: 999;
-            overflow: hidden;
-        }
-
-        .ai-chat.show {
-            display: flex;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .ai-header {
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .ai-header h3 {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .ai-close {
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.7);
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .ai-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .ai-message {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 12px;
-            padding: 12px 16px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .ai-input {
-            padding: 15px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .ai-input input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-
-        .ai-input input:focus {
-            outline: none;
-            border-color: rgba(0, 212, 255, 0.6);
-        }
-
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .left-panel {
-                width: 250px;
-            }
-            .right-panel {
-                width: 250px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .left-panel,
-            .right-panel {
-                position: absolute;
-                top: 0;
-                height: 100%;
-                z-index: 100;
-                transform: translateX(-100%);
-            }
-
-            .right-panel {
-                right: 0;
-                transform: translateX(100%);
-            }
-
-            .left-panel.show,
-            .right-panel.show {
-                transform: translateX(0);
-            }
-
-            .ai-chat {
-                width: calc(100% - 40px);
-                right: 20px;
-                left: 20px;
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid #00d4ff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Success/Error Messages */
-        .toast {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: rgba(0, 212, 255, 0.9);
-            color: #ffffff;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            z-index: 1001;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .toast.show {
-            transform: translateX(0);
-        }
-
-        .toast.error {
-            background: rgba(244, 67, 54, 0.9);
-        }
-
-        .toast.success {
-            background: rgba(76, 175, 80, 0.9);
-        }
-    </style>
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-hover);
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="editor-header">
-        <div class="logo">
-            <i class="fas fa-magic"></i>
-            WebMaster Pro - Ultimate Editor
-        </div>
-        
-        <div class="header-tools">
-            <button class="tool-btn" onclick="togglePanel('left')">
-                <i class="fas fa-cube"></i>
-                רכיבים
-            </button>
-            <button class="tool-btn" onclick="saveWebsite()">
-                <i class="fas fa-save"></i>
-                שמירה
-            </button>
-            <button class="tool-btn" onclick="previewWebsite()">
-                <i class="fas fa-eye"></i>
-                תצוגה מקדימה
-            </button>
-            <button class="tool-btn" onclick="exportWebsite()">
-                <i class="fas fa-download"></i>
-                ייצוא
-            </button>
-            <button class="tool-btn" onclick="toggleTheme()">
-                <i class="fas fa-moon"></i>
-                מצב כהה
-            </button>
-            <button class="tool-btn" onclick="togglePanel('right')">
-                <i class="fas fa-cog"></i>
-                הגדרות
-            </button>
-        </div>
+
+<div class="editor-container">
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="logo">
+      <i class="fas fa-magic"></i> 
+      WebMaster Pro AI
     </div>
-
-    <!-- Main Container -->
-    <div class="editor-container">
-        <!-- Left Panel - Components -->
-        <div class="left-panel" id="leftPanel">
-            <!-- Website Selector -->
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-globe"></i>
-                    בחירת אתר לעריכה
-                </div>
-                <select class="website-selector" id="websiteSelector" onchange="loadWebsite()">
-                    <option value="">בחר אתר לעריכה...</option>
-                    <option value="dr-michal-rosen">ד"ר מיכל רוזן - רפואה אסתטית (₪2,800)</option>
-                    <option value="fitness-co">דני פיט - מאמן כושר (₪2,200)</option>
-                    <option value="yoga-studio">סטודיו אוהם - יוגה (₪1,900)</option>
-                    <option value="nutritionist">ד"ר שרה כהן - תזונאית (₪2,400)</option>
-                    <option value="law-firm">משרד ברקוביץ - עו"ד (₪2,500)</option>
-                    <option value="accountant">רינה לוי - חשבת (₪2,000)</option>
-                    <option value="beauty-salon">מספרה BELLA - יופי (₪1,700)</option>
-                    <option value="tutor">ד"ר רונית לוי - מורה (₪2,100)</option>
-                    <option value="aesthetic-clinic">קליניקת יופי פרמיום (₪3,200)</option>
-                    <option value="multibrawn">מולטיבראון - נופש (₪2,300)</option>
-                    <option value="real-estate">נדל"ן פרמיום (₪2,700)</option>
-                </select>
-            </div>
-
-            <!-- Basic Components -->
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-cube"></i>
-                    רכיבים בסיסיים
-                </div>
-                <div class="component-grid">
-                    <div class="component-item" draggable="true" data-component="text">
-                        <i class="fas fa-font"></i>
-                        טקסט
-                    </div>
-                    <div class="component-item" draggable="true" data-component="heading">
-                        <i class="fas fa-heading"></i>
-                        כותרת
-                    </div>
-                    <div class="component-item" draggable="true" data-component="image">
-                        <i class="fas fa-image"></i>
-                        תמונה
-                    </div>
-                    <div class="component-item" draggable="true" data-component="button">
-                        <i class="fas fa-mouse-pointer"></i>
-                        כפתור
-                    </div>
-                    <div class="component-item" draggable="true" data-component="video">
-                        <i class="fas fa-video"></i>
-                        וידאו
-                    </div>
-                    <div class="component-item" draggable="true" data-component="gallery">
-                        <i class="fas fa-images"></i>
-                        גלריה
-                    </div>
-                </div>
-            </div>
-
-            <!-- Advanced Components -->
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-puzzle-piece"></i>
-                    רכיבים מתקדמים
-                </div>
-                <div class="component-grid">
-                    <div class="component-item" draggable="true" data-component="services">
-                        <i class="fas fa-concierge-bell"></i>
-                        שירותים
-                    </div>
-                    <div class="component-item" draggable="true" data-component="testimonials">
-                        <i class="fas fa-quote-left"></i>
-                        המלצות
-                    </div>
-                    <div class="component-item" draggable="true" data-component="faq">
-                        <i class="fas fa-question-circle"></i>
-                        שאלות נפוצות
-                    </div>
-                    <div class="component-item" draggable="true" data-component="contact">
-                        <i class="fas fa-envelope"></i>
-                        טופס יצירת קשר
-                    </div>
-                    <div class="component-item" draggable="true" data-component="stats">
-                        <i class="fas fa-chart-bar"></i>
-                        סטטיסטיקות
-                    </div>
-                    <div class="component-item" draggable="true" data-component="blog">
-                        <i class="fas fa-blog"></i>
-                        בלוג
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI Tools -->
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-robot"></i>
-                    כלי AI
-                </div>
-                <button class="tool-btn" onclick="generateContent()" style="width: 100%; margin-bottom: 10px;">
-                    <i class="fas fa-magic"></i>
-                    יצירת תוכן AI
-                </button>
-                <button class="tool-btn" onclick="optimizeSEO()" style="width: 100%; margin-bottom: 10px;">
-                    <i class="fas fa-search"></i>
-                    אופטימיזציה SEO
-                </button>
-                <button class="tool-btn" onclick="suggestDesign()" style="width: 100%;">
-                    <i class="fas fa-palette"></i>
-                    הצעות עיצוב
-                </button>
-            </div>
-        </div>
-
-        <!-- Main Editor Area -->
-        <div class="main-editor">
-            <!-- Editor Toolbar -->
-            <div class="editor-toolbar">
-                <div class="view-toggle">
-                    <button class="view-btn active" onclick="setView('desktop')">
-                        <i class="fas fa-desktop"></i>
-                        דסקטופ
-                    </button>
-                    <button class="view-btn" onclick="setView('tablet')">
-                        <i class="fas fa-tablet-alt"></i>
-                        טאבלט
-                    </button>
-                    <button class="view-btn" onclick="setView('mobile')">
-                        <i class="fas fa-mobile-alt"></i>
-                        מובייל
-                    </button>
-                </div>
-                
-                <div class="header-tools">
-                    <button class="tool-btn" onclick="undoAction()">
-                        <i class="fas fa-undo"></i>
-                    </button>
-                    <button class="tool-btn" onclick="redoAction()">
-                        <i class="fas fa-redo"></i>
-                    </button>
-                    <button class="tool-btn" onclick="toggleRuler()">
-                        <i class="fas fa-ruler"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Editor Canvas -->
-            <div class="editor-canvas" id="editorCanvas">
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>טוען אדיטור...</p>
-                </div>
-                <iframe id="websiteFrame" class="editor-iframe" style="display: none;"></iframe>
-            </div>
-        </div>
-
-        <!-- Right Panel - Settings -->
-        <div class="right-panel" id="rightPanel">
-            <!-- Element Settings -->
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-cog"></i>
-                    הגדרות אלמנט
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">טקסט</label>
-                    <input type="text" class="settings-input" id="elementText" placeholder="הכנס טקסט...">
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">גודל פונט</label>
-                    <input type="range" class="settings-input" id="fontSize" min="12" max="72" value="16">
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">צבע טקסט</label>
-                    <div class="color-picker">
-                        <div class="color-option" style="background: #000000" data-color="#000000"></div>
-                        <div class="color-option" style="background: #ffffff" data-color="#ffffff"></div>
-                        <div class="color-option" style="background: #00d4ff" data-color="#00d4ff"></div>
-                        <div class="color-option" style="background: #ff6b6b" data-color="#ff6b6b"></div>
-                        <div class="color-option" style="background: #4ecdc4" data-color="#4ecdc4"></div>
-                        <div class="color-option" style="background: #45b7d1" data-color="#45b7d1"></div>
-                        <div class="color-option" style="background: #f39c12" data-color="#f39c12"></div>
-                        <div class="color-option" style="background: #e74c3c" data-color="#e74c3c"></div>
-                    </div>
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">צבע רקע</label>
-                    <div class="color-picker">
-                        <div class="color-option" style="background: transparent; border: 1px solid #ccc" data-bg="transparent"></div>
-                        <div class="color-option" style="background: #ffffff" data-bg="#ffffff"></div>
-                        <div class="color-option" style="background: #f8f9fa" data-bg="#f8f9fa"></div>
-                        <div class="color-option" style="background: #e9ecef" data-bg="#e9ecef"></div>
-                        <div class="color-option" style="background: #00d4ff" data-bg="#00d4ff"></div>
-                        <div class="color-option" style="background: #ff6b6b" data-bg="#ff6b6b"></div>
-                        <div class="color-option" style="background: #4ecdc4" data-bg="#4ecdc4"></div>
-                        <div class="color-option" style="background: #2c3e50" data-bg="#2c3e50"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Layout Settings -->
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-th"></i>
-                    הגדרות פריסה
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">רוחב</label>
-                    <input type="text" class="settings-input" id="elementWidth" placeholder="auto">
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">גובה</label>
-                    <input type="text" class="settings-input" id="elementHeight" placeholder="auto">
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">מרווח פנימי</label>
-                    <input type="range" class="settings-input" id="elementPadding" min="0" max="50" value="10">
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">מרווח חיצוני</label>
-                    <input type="range" class="settings-input" id="elementMargin" min="0" max="50" value="0">
-                </div>
-            </div>
-
-            <!-- Advanced Settings -->
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-sliders-h"></i>
-                    הגדרות מתקדמות
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">עיגול פינות</label>
-                    <input type="range" class="settings-input" id="borderRadius" min="0" max="30" value="0">
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">שקיפות</label>
-                    <input type="range" class="settings-input" id="opacity" min="0" max="100" value="100">
-                </div>
-                
-                <div class="settings-group">
-                    <label class="settings-label">צל</label>
-                    <input type="range" class="settings-input" id="boxShadow" min="0" max="20" value="0">
-                </div>
-            </div>
-
-            <!-- Integrations -->
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-plug"></i>
-                    אינטגרציות
-                </div>
-                
-                <button class="tool-btn" onclick="setupAnalytics()" style="width: 100%; margin-bottom: 10px;">
-                    <i class="fab fa-google"></i>
-                    Google Analytics
-                </button>
-                <button class="tool-btn" onclick="setupSocial()" style="width: 100%; margin-bottom: 10px;">
-                    <i class="fas fa-share-alt"></i>
-                    רשתות חברתיות
-                </button>
-                <button class="tool-btn" onclick="setupSEO()" style="width: 100%;">
-                    <i class="fas fa-search"></i>
-                    כלי SEO
-                </button>
-            </div>
-        </div>
+    <div class="tools">
+      <button onclick="saveChanges()" title="שמור שינויים">
+        <i class="fas fa-save"></i> שמור
+      </button>
+      <button onclick="exportWebsite()" title="ייצא אתר">
+        <i class="fas fa-download"></i> ייצא
+      </button>
+      <button onclick="openAIChat()" title="פתח AI Assistant">
+        <i class="fas fa-robot"></i> AI
+      </button>
     </div>
+  </header>
 
-    <!-- AI Assistant -->
-    <div class="ai-assistant" onclick="toggleAI()">
-        <i class="fas fa-robot"></i>
+  <!-- ===== SIDEBAR LEFT: אתרים + בלוקים ===== -->
+  <aside class="sidebar-left">
+    <!-- רשימת אתרים -->
+    <div class="websites-list">
+      <div class="search-box">
+        <input type="text" placeholder="🔍 חיפוש אתר..." oninput="filterList(this.value)"/>
+      </div>
+      <!-- אתרים יווצרו דינמית -->
     </div>
-
+    
+    <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid var(--glass-border);"/>
+    
+    <!-- רשימת בלוקים -->
+    <div class="blocks-list">
+      <h3><i class="fas fa-puzzle-piece"></i> בלוקים</h3>
+      <!-- בלוקים יווצרו דינמית -->
+    </div>
+    
     <!-- AI Chat -->
-    <div class="ai-chat" id="aiChat">
-        <div class="ai-header">
-            <h3>🤖 AI Assistant</h3>
-            <button class="ai-close" onclick="toggleAI()">×</button>
-        </div>
-        <div class="ai-messages" id="aiMessages">
-            <div class="ai-message">
-                שלום! אני כאן לעזור לך לעצב את האתר. איך אוכל לעזור?
-            </div>
-        </div>
-        <div class="ai-input">
-            <input type="text" placeholder="שאל אותי כל שאלה..." onkeypress="handleAIInput(event)">
-        </div>
+    <div id="ai-chat" style="display:none; margin-top:1.5rem;">
+      <h3>AI Assistant</h3>
+      <div id="chat-messages" style="height:200px; overflow-y:auto; background:rgba(0,0,0,0.2); padding:0.75rem; border-radius:0.5rem; margin-bottom:0.75rem;"></div>
+      <input id="ai-input" type="text" placeholder="שאל את ה-AI..." style="width:100%; padding:0.75rem; border-radius:0.5rem; border:1px solid var(--glass-border); margin-bottom:0.5rem;"/>
+      <button onclick="askAI()" style="width:100%; padding:0.75rem; background:var(--primary); color:#fff; border:none; border-radius:0.5rem; cursor:pointer;">
+        <i class="fas fa-paper-plane"></i> שלח
+      </button>
+    </div>
+  </aside>
+
+  <!-- ===== CANVAS: איזור העריכה ===== -->
+  <main class="canvas">
+    <div id="loading-overlay">
+      <div style="text-align:center;">
+        <i class="fas fa-spinner fa-spin" style="font-size:2rem; margin-bottom:1rem;"></i>
+        <div>טוען אתר...</div>
+      </div>
+    </div>
+    <iframe id="canvas-iframe"></iframe>
+  </main>
+
+  <!-- ===== SIDEBAR RIGHT: מאפיינים ===== -->
+  <aside class="sidebar-right properties-panel">
+    <!-- עריכת טקסט -->
+    <div class="property-section">
+      <h3><i class="fas fa-font"></i> עריכת טקסט</h3>
+      <textarea id="text-editor" placeholder="עריכת תוכן..." style="height:5rem; resize:vertical;"></textarea>
+      <button onclick="updateProperty('innerText', document.getElementById('text-editor').value)" style="margin-top:0.75rem;">
+        <i class="fas fa-check"></i> יישם שינויים
+      </button>
+    </div>
+    
+    <!-- צבעים -->
+    <div class="property-section">
+      <h3><i class="fas fa-palette"></i> צבעים</h3>
+      <div style="display:grid; gap:0.75rem;">
+        <label style="display:flex; align-items:center; gap:0.5rem;">
+          צבע טקסט: 
+          <input type="color" id="text-color" onchange="updateProperty('color', this.value)" style="width:60px; height:40px; padding:2px;"/>
+        </label>
+        <label style="display:flex; align-items:center; gap:0.5rem;">
+          צבע רקע: 
+          <input type="color" id="bg-color" onchange="updateProperty('backgroundColor', this.value)" style="width:60px; height:40px; padding:2px;"/>
+        </label>
+      </div>
+    </div>
+    
+    <!-- פונט -->
+    <div class="property-section">
+      <h3><i class="fas fa-text-height"></i> טיפוגרפיה</h3>
+      <div style="display:grid; gap:0.75rem;">
+        <label>
+          משפחת פונט:
+          <select id="font-family" onchange="updateProperty('fontFamily', this.value)">
+            <option value="Inter">Inter</option>
+            <option value="Assistant">Assistant</option>
+            <option value="Arial">Arial</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Times">Times</option>
+          </select>
+        </label>
+        <label>
+          גודל פונט: <span id="font-size-display">16px</span>
+          <input type="range" id="font-size" min="12" max="48" value="16" 
+                 oninput="updateProperty('fontSize', this.value+'px'); document.getElementById('font-size-display').textContent = this.value+'px'"/>
+        </label>
+      </div>
     </div>
 
-    <script>
-        // Global Variables
-        let currentWebsite = '';
-        let selectedElement = null;
-        let editorHistory = [];
-        let historyIndex = -1;
-        let currentView = 'desktop';
-        let isDarkMode = true;
+    <!-- מידע על האלמנט הנבחר -->
+    <div class="property-section">
+      <h3><i class="fas fa-info-circle"></i> מידע</h3>
+      <div id="element-info" style="font-size:0.9rem; color:var(--text-secondary);">
+        בחר אלמנט לעריכה
+      </div>
+    </div>
+  </aside>
+</div>
 
-        // Website Data
-        const websites = {
-            'dr-michal-rosen': {
-                name: 'ד"ר מיכל רוזן - רפואה אסתטית',
-                url: './websites/dr-michal-rosen.html',
-                price: '₪2,800'
-            },
-            'fitness-co': {
-                name: 'דני פיט - מאמן כושר',
-                url: './websites/fitness-co.html',
-                price: '₪2,200'
-            },
-            'yoga-studio': {
-                name: 'סטודיו אוהם - יוגה',
-                url: './websites/yoga-studio.html',
-                price: '₪1,900'
-            },
-            'nutritionist': {
-                name: 'ד"ר שרה כהן - תזונאית',
-                url: './websites/nutritionist.html',
-                price: '₪2,400'
-            },
-            'law-firm': {
-                name: 'משרד ברקוביץ - עו"ד',
-                url: './websites/law-firm.html',
-                price: '₪2,500'
-            },
-            'accountant': {
-                name: 'רינה לוי - חשבת שכר',
-                url: './websites/accountant.html',
-                price: '₪2,000'
-            },
-            'beauty-salon': {
-                name: 'מספרה BELLA - יופי',
-                url: './websites/beauty-salon.html',
-                price: '₪1,700'
-            },
-            'tutor': {
-                name: 'ד"ר רונית לוי - מורה פרטית',
-                url: './websites/tutor.html',
-                price: '₪2,100'
-            },
-            'aesthetic-clinic': {
-                name: 'קליניקת יופי פרמיום',
-                url: './websites/aesthetic-clinic.html',
-                price: '₪3,200'
-            },
-            'multibrawn': {
-                name: 'מולטיבראון - נופש ואירועים',
-                url: './websites/multibrawn.html',
-                price: '₪2,300'
-            },
-            'real-estate': {
-                name: 'נדל"ן פרמיום',
-                url: './websites/real-estate.html',
-                price: '₪2,700'
-            }
-        };
+<script>
+  // ===== נתוני האתרים =====
+  const websites = [
+    { id:'dr-michal-rosen', name:'ד\'ר מיכל רוזן', url:'./websites/dr-michal-rosen.html', image:'https://i.imghippo.com/files/Ayyb2287TOc.png', category:'רפואה אסתטית' },
+    { id:'fitness-co', name:'דני פיט', url:'./websites/fitness-co.html', image:'https://i.imghippo.com/files/WiRp8302YJs.png', category:'מאמן כושר' },
+    { id:'yoga-studio', name:'סטודיו אוהם', url:'./websites/yoga-studio.html', image:'https://i.imghippo.com/files/eJk7179MXo.png', category:'יוגה ומדיטציה' },
+    { id:'nutritionist', name:'ד\'ר שרה כהן', url:'./websites/nutritionist.html', image:'https://i.imghippo.com/files/rhNp2418oyE.png', category:'תזונאית קלינית' },
+    { id:'law-firm', name:'משרד ברקוביץ', url:'./websites/law-firm.html', image:'https://i.imghippo.com/files/hVyV3858OQ.png', category:'עורכי דין' },
+    { id:'accountant', name:'רינה לוי', url:'./websites/accountant.html', image:'https://i.imghippo.com/files/tGN5433dAU.png', category:'חשבת שכר' },
+    { id:'beauty-salon', name:'מספרה BELLA', url:'./websites/beauty-salon.html', image:'https://i.imghippo.com/files/xnK4816Hc.png', category:'יופי ועיצוב שיער' },
+    { id:'tutor', name:'ד\'ר רונית לוי', url:'./websites/tutor.html', image:'https://i.imghippo.com/files/Ceu2132Q.png', category:'מורה פרטית' },
+    { id:'aesthetic-clinic', name:'קליניקת יופי פרמיום', url:'./websites/aesthetic-clinic.html', image:'https://i.imghippo.com/files/sWlf1880WKM.png', category:'אסתטיקה רפואית' },
+    { id:'multibrawn', name:'מולטיבראון', url:'./websites/multibrawn.html', image:'https://i.imghippo.com/files/pL5530Z.png', category:'נופש ואירועים' },
+    { id:'real-estate', name:'נדל"ן פרמיום', url:'./websites/real-estate.html', image:'https://i.imghippo.com/files/htWG9491QkE.png', category:'השקעות נדל"ן' }
+  ];
 
-        // Initialize Editor
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeEditor();
-            setupEventListeners();
-            showToast('success', 'WebMaster Pro Editor נטען בהצלחה! 🚀');
+  // ===== בלוקים =====
+  const blockTypes = [
+    { type: 'text', icon: 'fas fa-font', name: 'טקסט', template: '<p data-editable="true" style="cursor:pointer; padding:10px; margin:10px 0;">טקסט חדש - לחץ לעריכה</p>' },
+    { type: 'heading', icon: 'fas fa-heading', name: 'כותרת', template: '<h2 data-editable="true" style="cursor:pointer; padding:10px; margin:15px 0; color:#4f46e5;">כותרת חדשה</h2>' },
+    { type: 'button', icon: 'fas fa-hand-pointer', name: 'כפתור', template: '<button data-editable="true" style="padding:12px 24px; background:#4f46e5; color:white; border:none; border-radius:6px; cursor:pointer; margin:10px; font-weight:600;">כפתור חדש</button>' },
+    { type: 'image', icon: 'fas fa-image', name: 'תמונה', template: '<img data-editable="true" src="https://via.placeholder.com/300x200/4f46e5/white?text=תמונה+חדשה" alt="תמונה חדשה" style="max-width:100%; height:auto; margin:10px 0; border-radius:8px; cursor:pointer;">' }
+  ];
+
+  // ===== משתני מערכת =====
+  let currentWebsite = null;
+  let currentSelectedElement = null;
+
+  // ===== אתחול רשימת אתרים =====
+  function initWebsites() {
+    const list = document.querySelector('.websites-list');
+    const searchBox = list.querySelector('.search-box');
+    
+    // מנקה רשימה קיימת
+    list.querySelectorAll('.website-item').forEach(item => item.remove());
+    
+    websites.forEach(website => {
+      const div = document.createElement('div');
+      div.className = 'website-item';
+      div.onclick = () => loadWebsite(website.id);
+      div.innerHTML = `
+        <img src="${website.image}" alt="${website.name}" loading="lazy"/>
+        <div>
+          <div class="website-name">${website.name}</div>
+          <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;">${website.category}</div>
+        </div>`;
+      
+      // מוסיף אחרי search box
+      searchBox.parentNode.insertBefore(div, searchBox.nextSibling);
+    });
+  }
+
+  // ===== חיפוש אתרים =====
+  function filterList(query) {
+    document.querySelectorAll('.website-item').forEach(item => {
+      const name = item.querySelector('.website-name').textContent;
+      const category = item.querySelector('div div:last-child').textContent;
+      const matches = name.toLowerCase().includes(query.toLowerCase()) || 
+                     category.toLowerCase().includes(query.toLowerCase());
+      item.style.display = matches ? 'flex' : 'none';
+    });
+  }
+
+  // ===== אתחול בלוקים =====
+  function initBlocks() {
+    const list = document.querySelector('.blocks-list');
+    
+    // מנקה בלוקים קיימים
+    list.querySelectorAll('.block-item').forEach(item => item.remove());
+    
+    blockTypes.forEach(block => {
+      const div = document.createElement('div');
+      div.className = 'block-item';
+      div.onclick = () => addBlock(block.type);
+      div.title = `הוסף ${block.name}`;
+      div.innerHTML = `<i class="${block.icon}"></i> ${block.name}`;
+      list.appendChild(div);
+    });
+  }
+
+  // ===== הוספת בלוק =====
+  function addBlock(blockType) {
+    const iframe = document.getElementById('canvas-iframe');
+    if (!iframe.contentDocument) {
+      showNotification('טען אתר תחילה', 'warning');
+      return;
+    }
+    
+    const block = blockTypes.find(b => b.type === blockType);
+    const doc = iframe.contentDocument;
+    const newElement = doc.createElement('div');
+    newElement.innerHTML = block.template;
+    
+    const elementToAdd = newElement.firstElementChild;
+    
+    // מוסיף event listeners לאלמנט החדש
+    elementToAdd.addEventListener('click', (e) => {
+      e.preventDefault();
+      selectElement(elementToAdd);
+    });
+    
+    // מוסיף לסוף הגוף או אחרי האלמנט הנבחר
+    if (currentSelectedElement && currentSelectedElement.parentNode) {
+      currentSelectedElement.parentNode.insertBefore(elementToAdd, currentSelectedElement.nextSibling);
+    } else {
+      doc.body.appendChild(elementToAdd);
+    }
+    
+    // בוחר את האלמנט החדש
+    selectElement(elementToAdd);
+    
+    showNotification(`נוסף ${block.name} בהצלחה`, 'success');
+  }
+
+  // ===== טעינת אתר =====
+  function loadWebsite(id) {
+    const site = websites.find(w => w.id === id);
+    if (!site) {
+      showNotification('אתר לא נמצא', 'error');
+      return;
+    }
+    
+    currentWebsite = id;
+    const iframe = document.getElementById('canvas-iframe');
+    const overlay = document.getElementById('loading-overlay');
+    
+    // מציג loading
+    overlay.style.visibility = 'visible';
+    
+    // טוען את האתר
+    iframe.src = site.url;
+    
+    iframe.onload = () => {
+      overlay.style.visibility = 'hidden';
+      const doc = iframe.contentDocument;
+      
+      if (!doc) {
+        showNotification('שגיאה בטעינת האתר', 'error');
+        return;
+      }
+      
+      // מוסיף CSS לאתר עבור בחירה
+      const style = doc.createElement('style');
+      style.textContent = `
+        .selected {
+          outline: 2px solid #4f46e5 !important;
+          outline-offset: 2px;
+          background: rgba(79, 70, 229, 0.1) !important;
+          transition: all 0.2s ease;
+          position: relative;
+        }
+        .selected::before {
+          content: '✏️ עורך';
+          position: absolute;
+          top: -25px;
+          left: 0;
+          background: #4f46e5;
+          color: white;
+          padding: 2px 8px;
+          font-size: 11px;
+          border-radius: 4px;
+          font-weight: 600;
+          z-index: 1000;
+        }
+      `;
+      doc.head.appendChild(style);
+      
+      // מוסיף יכולת עריכה לכל האלמנטים הרלוונטיים
+      doc.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div.content, button, a').forEach(el => {
+        // מדלג על אלמנטים מסוימים
+        if (el.closest('nav') || el.closest('script') || el.closest('style')) return;
+        
+        el.setAttribute('data-editable', 'true');
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          selectElement(el);
         });
+      });
+      
+      showNotification(`נטען: ${site.name}`, 'success');
+    };
+    
+    iframe.onerror = () => {
+      overlay.style.visibility = 'hidden';
+      showNotification('שגיאה בטעינת האתר', 'error');
+    };
+  }
 
-        function initializeEditor() {
-            console.log('🚀 Initializing WebMaster Pro Ultimate Editor...');
-            
-            // Setup drag and drop
-            setupDragAndDrop();
-            
-            // Setup keyboard shortcuts
-            setupKeyboardShortcuts();
-            
-            // Load saved state
-            loadEditorState();
-            
-            console.log('✅ Editor initialized successfully!');
+  // ===== בחירת אלמנט =====
+  function selectElement(el) {
+    // מסיר בחירה קודמת
+    if (currentSelectedElement) {
+      currentSelectedElement.classList.remove('selected');
+    }
+    
+    // בוחר אלמנט חדש
+    currentSelectedElement = el;
+    el.classList.add('selected');
+    
+    // מעדכן panel מאפיינים
+    const textEditor = document.getElementById('text-editor');
+    const elementInfo = document.getElementById('element-info');
+    
+    textEditor.value = el.innerText || el.textContent || '';
+    
+    // מציג מידע על האלמנט
+    const tagName = el.tagName.toLowerCase();
+    const classes = el.className ? ` (${el.className})` : '';
+    elementInfo.innerHTML = `
+      <strong>אלמנט נבחר:</strong><br>
+      ${tagName}${classes}<br>
+      <small>לחץ על מאפיין לעריכה</small>
+    `;
+    
+    // מעדכן color pickers
+    const computedStyle = getComputedStyle(el);
+    document.getElementById('text-color').value = rgbToHex(computedStyle.color);
+    document.getElementById('bg-color').value = rgbToHex(computedStyle.backgroundColor);
+    
+    showNotification('אלמנט נבחר לעריכה', 'info');
+  }
+
+  // ===== עדכון מאפיין =====
+  function updateProperty(prop, val) {
+    if (!currentSelectedElement) {
+      showNotification('בחר אלמנט תחילה', 'warning');
+      return;
+    }
+    
+    if (prop === 'innerText') {
+      currentSelectedElement.innerText = val;
+    } else {
+      currentSelectedElement.style[prop] = val;
+    }
+    
+    saveChanges();
+    showNotification('המאפיין עודכן', 'success');
+  }
+
+  // ===== שמירה =====
+  function saveChanges() {
+    const iframe = document.getElementById('canvas-iframe');
+    if (!iframe.contentDocument) {
+      showNotification('אין אתר לשמירה', 'warning');
+      return;
+    }
+    
+    try {
+      const html = iframe.contentDocument.documentElement.outerHTML;
+      localStorage.setItem(`webmaster_pro_${currentWebsite}`, html);
+      localStorage.setItem('webmaster_pro_last_saved', new Date().toISOString());
+      showNotification('השינויים נשמרו בהצלחה', 'success');
+    } catch (error) {
+      console.error('Save error:', error);
+      showNotification('שגיאה בשמירה', 'error');
+    }
+  }
+
+  // ===== ייצוא =====
+  function exportWebsite() {
+    const iframe = document.getElementById('canvas-iframe');
+    if (!iframe.contentDocument) {
+      showNotification('אין אתר לייצוא', 'warning');
+      return;
+    }
+    
+    try {
+      const html = iframe.contentDocument.documentElement.outerHTML;
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${currentWebsite || 'website'}.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      showNotification('האתר יוצא בהצלחה', 'success');
+    } catch (error) {
+      console.error('Export error:', error);
+      showNotification('שגיאה בייצוא', 'error');
+    }
+  }
+
+  // ===== AI Assistant =====
+  async function aiAssistant(prompt) {
+    try {
+      if (typeof window.claude === 'undefined' || typeof window.claude.complete !== 'function') {
+        throw new Error('AI לא זמין במסגרת זו');
+      }
+      
+      const response = await window.claude.complete(`
+        אתה עוזר מקצועי לעיצוב אתרים ו-UX/UI. המשתמש עורך אתר עם האדיטור שלנו.
+        
+        שאלת המשתמש: ${prompt}
+        
+        תן תשובה מועילה ומקצועית. אם אתה מציע שינויי CSS או HTML, תן דוגמאות קונקרטיות.
+        
+        תשובה ב-JSON:
+        {
+          "suggestion": "העצה המקצועית שלך",
+          "code": "קוד CSS/HTML אם רלוונטי (או ריק)",
+          "explanation": "הסבר מפורט איך לישם"
         }
+      `);
+      
+      return JSON.parse(response);
+    } catch (error) {
+      console.error('AI Error:', error);
+      return {
+        suggestion: 'מצטער, יש בעיה בחיבור ל-AI. נסה שוב מאוחר יותר.',
+        code: '',
+        explanation: 'שירות ה-AI זמני לא זמין.'
+      };
+    }
+  }
 
-        function setupEventListeners() {
-            // Color picker events
-            document.querySelectorAll('.color-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const color = this.dataset.color || this.dataset.bg;
-                    const isBackground = this.dataset.bg !== undefined;
-                    applyColorToSelected(color, isBackground);
-                });
-            });
+  async function askAI() {
+    const input = document.getElementById('ai-input');
+    const question = input.value.trim();
+    
+    if (!question) {
+      showNotification('כתב שאלה תחילה', 'warning');
+      return;
+    }
+    
+    // מוסיף הודעת משתמש
+    addChatMessage(question, 'user');
+    input.value = '';
+    
+    // מציג שהAI חושב
+    const thinkingMsg = addChatMessage('AI חושב...', 'ai');
+    
+    try {
+      const response = await aiAssistant(question);
+      
+      // מסיר הודעת "חושב"
+      thinkingMsg.remove();
+      
+      // מוסיף תשובת AI
+      addChatMessage(response.suggestion || 'לא זמין כרגע', 'ai');
+      
+      // אם יש קוד, מציג אותו
+      if (response.code) {
+        addChatMessage(`קוד מוצע:\n${response.code}`, 'ai');
+      }
+      
+    } catch (error) {
+      thinkingMsg.remove();
+      addChatMessage('מצטער, יש בעיה בחיבור ל-AI', 'ai');
+    }
+  }
 
-            // Settings inputs
-            document.getElementById('elementText').addEventListener('input', function() {
-                if (selectedElement) {
-                    updateElementText(selectedElement, this.value);
-                }
-            });
+  // ===== הודעות צ'אט =====
+  function addChatMessage(msg, type) {
+    const box = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = `chat-message ${type}`;
+    div.style.whiteSpace = 'pre-wrap';
+    div.textContent = msg;
+    
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+    
+    return div; // מחזיר את האלמנט למחיקה אם נדרש
+  }
 
-            document.getElementById('fontSize').addEventListener('input', function() {
-                if (selectedElement) {
-                    updateElementStyle(selectedElement, 'fontSize', this.value + 'px');
-                }
-            });
+  // ===== פתיחת/סגירת AI צ'אט =====
+  function openAIChat() {
+    const chat = document.getElementById('ai-chat');
+    const isVisible = chat.style.display !== 'none';
+    chat.style.display = isVisible ? 'none' : 'block';
+    
+    if (!isVisible) {
+      // מתמקד בשדה הקלט
+      setTimeout(() => {
+        document.getElementById('ai-input').focus();
+      }, 100);
+    }
+  }
 
-            document.getElementById('elementPadding').addEventListener('input', function() {
-                if (selectedElement) {
-                    updateElementStyle(selectedElement, 'padding', this.value + 'px');
-                }
-            });
+  // ===== הודעות למשתמש =====
+  function showNotification(txt, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = txt;
+    
+    // צבעים לפי סוג
+    if (type === 'error') {
+      notification.style.background = 'linear-gradient(135deg, var(--error) 0%, #dc2626 100%)';
+    } else if (type === 'warning') {
+      notification.style.background = 'linear-gradient(135deg, var(--warning) 0%, #d97706 100%)';
+    } else if (type === 'info') {
+      notification.style.background = 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)';
+    }
+    
+    document.body.appendChild(notification);
+    
+    // מסיר אחרי 3 שניות
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+    }, 3000);
+  }
 
-            document.getElementById('elementMargin').addEventListener('input', function() {
-                if (selectedElement) {
-                    updateElementStyle(selectedElement, 'margin', this.value + 'px');
-                }
-            });
+  // ===== פונקציות עזר =====
+  function rgbToHex(rgb) {
+    if (!rgb || rgb === 'rgba(0, 0, 0, 0)' || rgb === 'transparent') return '#000000';
+    
+    const result = rgb.match(/\d+/g);
+    if (!result || result.length < 3) return '#000000';
+    
+    return "#" + ((1 << 24) + (+result[0] << 16) + (+result[1] << 8) + +result[2]).toString(16).slice(1);
+  }
 
-            document.getElementById('borderRadius').addEventListener('input', function() {
-                if (selectedElement) {
-                    updateElementStyle(selectedElement, 'borderRadius', this.value + 'px');
-                }
-            });
+  // ===== אתחול האפליקציה =====
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      initWebsites();
+      initBlocks();
+      
+      // מציג הודעת ברוכים הבאים
+      setTimeout(() => {
+        showNotification('🚀 WebMaster Pro AI מוכן לעבודה!', 'info');
+      }, 500);
+      
+      console.log('✅ WebMaster Pro AI Editor loaded successfully');
+      console.log(`📊 ${websites.length} websites available for editing`);
+      
+    } catch (error) {
+      console.error('Initialization error:', error);
+      showNotification('שגיאה באתחול המערכת', 'error');
+    }
+  });
 
-            document.getElementById('opacity').addEventListener('input', function() {
-                if (selectedElement) {
-                    updateElementStyle(selectedElement, 'opacity', this.value / 100);
-                }
-            });
+  // ===== Event Listeners נוספים =====
+  
+  // Enter ב-AI input
+  document.addEventListener('DOMContentLoaded', () => {
+    const aiInput = document.getElementById('ai-input');
+    aiInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        askAI();
+      }
+    });
+  });
 
-            document.getElementById('boxShadow').addEventListener('input', function() {
-                if (selectedElement) {
-                    updateElementStyle(selectedElement, 'boxShadow', `0 ${this.value}px ${this.value * 2}px rgba(0,0,0,0.1)`);
-                }
-            });
-        }
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Ctrl+S לשמירה
+    if (e.ctrlKey && e.key === 's') {
+      e.preventDefault();
+      saveChanges();
+    }
+    
+    // Ctrl+E לפתיחת AI
+    if (e.ctrlKey && e.key === 'e') {
+      e.preventDefault();
+      openAIChat();
+    }
+    
+    // ESC לביטול בחירה
+    if (e.key === 'Escape' && currentSelectedElement) {
+      currentSelectedElement.classList.remove('selected');
+      currentSelectedElement = null;
+      document.getElementById('element-info').textContent = 'בחר אלמנט לעריכה';
+    }
+  });
 
-        function loadWebsite() {
-            const selector = document.getElementById('websiteSelector');
-            const websiteId = selector.value;
-            
-            if (!websiteId) return;
-            
-            currentWebsite = websiteId;
-            const website = websites[websiteId];
-            
-            showToast('info', `טוען ${website.name}...`);
-            
-            const iframe = document.getElementById('websiteFrame');
-            const loading = document.querySelector('.loading');
-            
-            // Show loading
-            iframe.style.display = 'none';
-            loading.style.display = 'flex';
-            
-            // Load website
-            iframe.onload = function() {
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                    iframe.style.display = 'block';
-                    setupIframeEditor();
-                    showToast('success', `${website.name} נטען בהצלחה!`);
-                }, 1000);
-            };
-            
-            iframe.src = website.url;
-        }
+  // ===== הגנה מפני איבוד נתונים =====
+  window.addEventListener('beforeunload', (e) => {
+    if (currentWebsite) {
+      const message = 'יש לך שינויים שלא נשמרו. האם אתה בטוח שברצונך לעזוב?';
+      e.returnValue = message;
+      return message;
+    }
+  });
 
-        function setupIframeEditor() {
-            const iframe = document.getElementById('websiteFrame');
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            
-            // Make elements editable
-            const editableElements = iframeDoc.querySelectorAll('h1, h2, h3, p, button, a, span, div');
-            
-            editableElements.forEach(element => {
-                element.style.cursor = 'pointer';
-                element.style.outline = '2px solid transparent';
-                element.style.transition = 'outline 0.3s ease';
-                
-                element.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    selectElement(this);
-                });
-                
-                element.addEventListener('mouseenter', function() {
-                    if (this !== selectedElement) {
-                        this.style.outline = '2px solid rgba(0, 212, 255, 0.5)';
-                    }
-                });
-                
-                element.addEventListener('mouseleave', function() {
-                    if (this !== selectedElement) {
-                        this.style.outline = 'none';
-                    }
-                });
-            });
-        }
+  // Export functions for debugging
+  window.WebMasterPro = {
+    websites,
+    blockTypes,
+    loadWebsite,
+    saveChanges,
+    exportWebsite,
+    currentWebsite: () => currentWebsite,
+    currentElement: () => currentSelectedElement
+  };
+</script>
 
-        function selectElement(element) {
-            // Remove previous selection
-            if (selectedElement) {
-                selectedElement.style.outline = 'none';
-            }
-            
-            selectedElement = element;
-            element.style.outline = '2px solid #00d4ff';
-            
-            // Update settings panel
-            updateSettingsPanel(element);
-            
-            showToast('info', 'אלמנט נבחר לעריכה');
-        }
-
-        function updateSettingsPanel(element) {
-            // Update text input
-            const textInput = document.getElementById('elementText');
-            textInput.value = element.textContent || '';
-            
-            // Update font size
-            const fontSize = window.getComputedStyle(element).fontSize;
-            document.getElementById('fontSize').value = parseInt(fontSize);
-            
-            // Update other properties
-            const padding = window.getComputedStyle(element).padding;
-            document.getElementById('elementPadding').value = parseInt(padding) || 0;
-            
-            const margin = window.getComputedStyle(element).margin;
-            document.getElementById('elementMargin').value = parseInt(margin) || 0;
-            
-            const borderRadius = window.getComputedStyle(element).borderRadius;
-            document.getElementById('borderRadius').value = parseInt(borderRadius) || 0;
-            
-            const opacity = window.getComputedStyle(element).opacity;
-            document.getElementById('opacity').value = (parseFloat(opacity) * 100) || 100;
-        }
-
-        function updateElementText(element, text) {
-            element.textContent = text;
-            saveToHistory();
-        }
-
-        function updateElementStyle(element, property, value) {
-            element.style[property] = value;
-            saveToHistory();
-        }
-
-        function applyColorToSelected(color, isBackground = false) {
-            if (!selectedElement) {
-                showToast('error', 'אנא בחר אלמנט לעריכה');
-                return;
-            }
-            
-            if (isBackground) {
-                selectedElement.style.backgroundColor = color;
-            } else {
-                selectedElement.style.color = color;
-            }
-            
-            saveToHistory();
-            showToast('success', 'צבע עודכן בהצלחה');
-        }
-
-        function setView(view) {
-            currentView = view;
-            
-            // Update active button
-            document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            const canvas = document.getElementById('editorCanvas');
-            
-            switch(view) {
-                case 'mobile':
-                    canvas.style.maxWidth = '375px';
-                    canvas.style.margin = '20px auto';
-                    break;
-                case 'tablet':
-                    canvas.style.maxWidth = '768px';
-                    canvas.style.margin = '20px auto';
-                    break;
-                default:
-                    canvas.style.maxWidth = 'none';
-                    canvas.style.margin = '20px';
-            }
-            
-            showToast('info', `עבר לתצוגת ${view}`);
-        }
-
-        function togglePanel(side) {
-            const panel = document.getElementById(side + 'Panel');
-            panel.classList.toggle('show');
-        }
-
-        function saveWebsite() {
-            if (!currentWebsite) {
-                showToast('error', 'אין אתר טעון לשמירה');
-                return;
-            }
-            
-            showToast('info', 'שומר אתר...');
-            
-            // Simulate save
-            setTimeout(() => {
-                showToast('success', 'האתר נשמר בהצלחה!');
-                saveToHistory();
-            }, 1500);
-        }
-
-        function previewWebsite() {
-            if (!currentWebsite) {
-                showToast('error', 'אין אתר טעון לתצוגה מקדימה');
-                return;
-            }
-            
-            const iframe = document.getElementById('websiteFrame');
-            window.open(iframe.src, '_blank');
-        }
-
-        function exportWebsite() {
-            if (!currentWebsite) {
-                showToast('error', 'אין אתר טעון לייצוא');
-                return;
-            }
-            
-            showToast('info', 'מכין קבצים לייצוא...');
-            
-            // Simulate export
-            setTimeout(() => {
-                const link = document.createElement('a');
-                link.download = `${currentWebsite}-export.html`;
-                link.href = '#'; // Would be actual HTML content
-                link.click();
-                
-                showToast('success', 'הייצוא הושלם!');
-            }, 2000);
-        }
-
-        function toggleTheme() {
-            isDarkMode = !isDarkMode;
-            document.body.classList.toggle('light-mode', !isDarkMode);
-            
-            const btn = event.target.closest('.tool-btn');
-            const icon = btn.querySelector('i');
-            icon.className = isDarkMode ? 'fas fa-moon' : 'fas fa-sun';
-            
-            showToast('success', `עבר למצב ${isDarkMode ? 'כהה' : 'בהיר'}`);
-        }
-
-        function setupDragAndDrop() {
-            const components = document.querySelectorAll('.component-item');
-            const canvas = document.getElementById('editorCanvas');
-            
-            components.forEach(component => {
-                component.addEventListener('dragstart', function(e) {
-                    e.dataTransfer.setData('text/plain', this.dataset.component);
-                });
-            });
-            
-            canvas.addEventListener('dragover', function(e) {
-                e.preventDefault();
-            });
-            
-            canvas.addEventListener('drop', function(e) {
-                e.preventDefault();
-                const componentType = e.dataTransfer.getData('text/plain');
-                addComponent(componentType, e.clientX, e.clientY);
-            });
-        }
-
-        function addComponent(type, x, y) {
-            showToast('info', `מוסיף רכיב: ${type}`);
-            
-            // This would add the actual component to the iframe
-            // For now, just show a message
-            setTimeout(() => {
-                showToast('success', 'רכיב נוסף בהצלחה!');
-                saveToHistory();
-            }, 500);
-        }
-
-        function setupKeyboardShortcuts() {
-            document.addEventListener('keydown', function(e) {
-                if (e.ctrlKey || e.metaKey) {
-                    switch(e.key) {
-                        case 's':
-                            e.preventDefault();
-                            saveWebsite();
-                            break;
-                        case 'z':
-                            e.preventDefault();
-                            undoAction();
-                            break;
-                        case 'y':
-                            e.preventDefault();
-                            redoAction();
-                            break;
-                    }
-                }
-            });
-        }
-
-        function saveToHistory() {
-            const iframe = document.getElementById('websiteFrame');
-            if (iframe.contentDocument) {
-                const state = iframe.contentDocument.body.innerHTML;
-                editorHistory = editorHistory.slice(0, historyIndex + 1);
-                editorHistory.push(state);
-                historyIndex++;
-                
-                // Limit history size
-                if (editorHistory.length > 50) {
-                    editorHistory.shift();
-                    historyIndex--;
-                }
-            }
-        }
-
-        function undoAction() {
-            if (historyIndex > 0) {
-                historyIndex--;
-                const iframe = document.getElementById('websiteFrame');
-                if (iframe.contentDocument) {
-                    iframe.contentDocument.body.innerHTML = editorHistory[historyIndex];
-                    setupIframeEditor();
-                    showToast('info', 'פעולה בוטלה');
-                }
-            }
-        }
-
-        function redoAction() {
-            if (historyIndex < editorHistory.length - 1) {
-                historyIndex++;
-                const iframe = document.getElementById('websiteFrame');
-                if (iframe.contentDocument) {
-                    iframe.contentDocument.body.innerHTML = editorHistory[historyIndex];
-                    setupIframeEditor();
-                    showToast('info', 'פעולה שוחזרה');
-                }
-            }
-        }
-
-        function loadEditorState() {
-            const savedState = localStorage.getItem('webmaster-editor-state');
-            if (savedState) {
-                const state = JSON.parse(savedState);
-                currentWebsite = state.currentWebsite;
-                document.getElementById('websiteSelector').value = currentWebsite;
-                if (currentWebsite) {
-                    loadWebsite();
-                }
-            }
-        }
-
-        function saveEditorState() {
-            const state = {
-                currentWebsite: currentWebsite,
-                isDarkMode: isDarkMode,
-                currentView: currentView
-            };
-            localStorage.setItem('webmaster-editor-state', JSON.stringify(state));
-        }
-
-        // AI Functions
-        function toggleAI() {
-            const aiChat = document.getElementById('aiChat');
-            aiChat.classList.toggle('show');
-        }
-
-        function handleAIInput(event) {
-            if (event.key === 'Enter') {
-                const input = event.target;
-                const message = input.value.trim();
-                
-                if (message) {
-                    addAIMessage('user', message);
-                    input.value = '';
-                    
-                    // Simulate AI response
-                    setTimeout(() => {
-                        const response = generateAIResponse(message);
-                        addAIMessage('ai', response);
-                    }, 1000);
-                }
-            }
-        }
-
-        function addAIMessage(type, message) {
-            const messagesContainer = document.getElementById('aiMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'ai-message';
-            messageDiv.style.background = type === 'user' ? 'rgba(0, 212, 255, 0.2)' : 'rgba(0, 212, 255, 0.1)';
-            messageDiv.textContent = message;
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function generateAIResponse(message) {
-            const responses = [
-                'אני מציע לשנות את הצבע לכחול כדי ליצור ניגודיות טובה יותר.',
-                'כדאי להוסיף עוד תמונות כדי לעשות את האתר יותר אטרקטיבי.',
-                'הטקסט הזה יהיה טוב יותר אם תקצר אותו ותעשה אותו יותר ישיר.',
-                'אני ממליץ להוסיף כפתור call-to-action כאן.',
-                'התוכן שלך מעולה! אולי כדאי להוסיף סקציית המלצות לקוחות?'
-            ];
-            
-            return responses[Math.floor(Math.random() * responses.length)];
-        }
-
-        function generateContent() {
-            showToast('info', 'AI מכין תוכן...');
-            setTimeout(() => {
-                showToast('success', 'תוכן נוצר בהצלחה!');
-            }, 2000);
-        }
-
-        function optimizeSEO() {
-            showToast('info', 'מבצע אופטימיזציה SEO...');
-            setTimeout(() => {
-                showToast('success', 'SEO אופטימיזציה הושלמה!');
-            }, 2500);
-        }
-
-        function suggestDesign() {
-            showToast('info', 'AI מכין הצעות עיצוב...');
-            setTimeout(() => {
-                showToast('success', 'הצעות עיצוב מוכנות!');
-            }, 1500);
-        }
-
-        // Integration Functions
-        function setupAnalytics() {
-            showToast('info', 'מגדיר Google Analytics...');
-            setTimeout(() => {
-                showToast('success', 'Google Analytics מוגדר!');
-            }, 1500);
-        }
-
-        function setupSocial() {
-            showToast('info', 'מגדיר רשתות חברתיות...');
-            setTimeout(() => {
-                showToast('success', 'רשתות חברתיות מוגדרות!');
-            }, 1000);
-        }
-
-        function setupSEO() {
-            showToast('info', 'מגדיר כלי SEO...');
-            setTimeout(() => {
-                showToast('success', 'כלי SEO מוגדרים!');
-            }, 1200);
-        }
-
-        function toggleRuler() {
-            showToast('info', 'סרגל מדידה הופעל/בוטל');
-        }
-
-        // Utility Functions
-        function showToast(type, message, duration = 3000) {
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
-            
-            document.body.appendChild(toast);
-            
-            setTimeout(() => toast.classList.add('show'), 100);
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => document.body.removeChild(toast), 300);
-            }, duration);
-        }
-
-        // Auto-save every 30 seconds
-        setInterval(() => {
-            if (currentWebsite) {
-                saveEditorState();
-            }
-        }, 30000);
-
-        // Before page unload
-        window.addEventListener('beforeunload', saveEditorState);
-
-        console.log('🚀 WebMaster Pro Ultimate Editor loaded successfully!');
-    </script>
 </body>
 </html>
