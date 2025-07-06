@@ -23,20 +23,7 @@ import {
   Zap
 } from 'lucide-react';
 
-// Load Google Fonts
-const loadGoogleFonts = () => {
-  const link = document.createElement('link');
-  link.href = 'https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap';
-  link.rel = 'stylesheet';
-  document.head.appendChild(link);
-};
-
 const WebMasterProEditor = () => {
-  // Load fonts on component mount
-  useEffect(() => {
-    loadGoogleFonts();
-  }, []);
-
   const [selectedElement, setSelectedElement] = useState(null);
   const [aiMode, setAiMode] = useState(false);
   const [device, setDevice] = useState('desktop');
@@ -44,44 +31,20 @@ const WebMasterProEditor = () => {
   const [aiChat, setAiChat] = useState([]);
   const [aiInput, setAiInput] = useState('');
   const [isAiProcessing, setIsAiProcessing] = useState(false);
-  const [previewMode, setPreviewMode] = useState(false);
   const [currentSite, setCurrentSite] = useState('medical-aesthetic');
   const [isEditing, setIsEditing] = useState(null);
   const [siteData, setSiteData] = useState({});
   const [selectedFont, setSelectedFont] = useState('Assistant');
   const [selectedColor, setSelectedColor] = useState('#000000');
-  const [fontSize, setFontSize] = useState(16);
   const [lastSaved, setLastSaved] = useState(null);
-  const previewRef = useRef(null);
 
-  // Available fonts
-  const availableFonts = [
-    { name: 'Assistant', value: 'Assistant, sans-serif', type: 'עברית מודרני' },
-    { name: 'Heebo', value: 'Heebo, sans-serif', type: 'עברית נקי' },
-    { name: 'Rubik', value: 'Rubik, sans-serif', type: 'עברית עגול' },
-    { name: 'Open Sans', value: 'Open Sans, sans-serif', type: 'אנגלית קלאסי' },
-    { name: 'Montserrat', value: 'Montserrat, sans-serif', type: 'מודרני אלגנטי' },
-    { name: 'Poppins', value: 'Poppins, sans-serif', type: 'טרנדי ועכשווי' }
-  ];
-
-  // Color palettes
-  const colorPalettes = {
-    medical: ['#EC4899', '#F472B6', '#FBE2E3', '#1F2937', '#6B7280'],
-    business: ['#3B82F6', '#60A5FA', '#DBEAFE', '#1F2937', '#6B7280'],
-    fitness: ['#EF4444', '#F87171', '#FEE2E2', '#1F2937', '#6B7280'],
-    legal: ['#6B7280', '#9CA3AF', '#F3F4F6', '#1F2937', '#374151'],
-    creative: ['#8B5CF6', '#A78BFA', '#EDE9FE', '#1F2937', '#6B7280'],
-    nature: ['#10B981', '#34D399', '#D1FAE5', '#1F2937', '#6B7280']
-  };
-
-  // Real WebMaster Pro Sites - Simplified for demo
+  // Demo sites data
   const demoSites = {
     'medical-aesthetic': {
       name: 'ד"ר מיכל רוזן - רפואה אסתטית',
       category: 'רפואה',
       price: '₪2,800',
       color: '#EC4899',
-      palette: 'medical',
       content: {
         hero: {
           title: 'ד"ר מיכל רוזן',
@@ -108,7 +71,6 @@ const WebMasterProEditor = () => {
       category: 'כושר',
       price: '₪2,200',
       color: '#EF4444',
-      palette: 'fitness',
       content: {
         hero: {
           title: 'דני פיט',
@@ -135,7 +97,6 @@ const WebMasterProEditor = () => {
       category: 'משפטי',
       price: '₪2,500',
       color: '#6B7280',
-      palette: 'legal',
       content: {
         hero: {
           title: 'משרד ברקוביץ',
@@ -158,7 +119,7 @@ const WebMasterProEditor = () => {
     }
   };
 
-  // Initialize site data and update on site change
+  // Initialize site data
   useEffect(() => {
     const newSiteData = demoSites[currentSite];
     if (newSiteData) {
@@ -213,7 +174,7 @@ const WebMasterProEditor = () => {
     updateContent(path, value);
   };
 
-  // AI Chat with Claude
+  // AI Chat functionality
   const sendToAI = async () => {
     if (!aiInput.trim() || isAiProcessing) return;
     
@@ -225,20 +186,7 @@ const WebMasterProEditor = () => {
     
     try {
       const currentSiteInfo = siteData;
-      const prompt = `
-        אני עובד על עריכת אתר ב-WebMaster Pro עבור "${currentSiteInfo.name}".
-        
-        פרטי האתר:
-        - שם: ${currentSiteInfo.name}
-        - קטגוריה: ${currentSiteInfo.category}
-        - מחיר: ${currentSiteInfo.price}
-        - צבע ראשי: ${currentSiteInfo.color}
-        
-        השאלה/בקשה שלי: ${userMessage}
-        
-        תן לי תשובה מעשית וספציפית שתעזור לי לשפר את האתר הזה בדיוק.
-        תשובה קצרה, מקצועית ומותאמת לעסק הספציפי:
-      `;
+      const prompt = `אני עובד על עריכת אתר ב-WebMaster Pro עבור "${currentSiteInfo.name}". השאלה/בקשה שלי: ${userMessage}. תן לי תשובה מעשית וספציפית.`;
       
       const response = await window.claude.complete(prompt);
       setAiChat(prev => [...prev, { type: 'ai', content: response }]);
@@ -253,55 +201,7 @@ const WebMasterProEditor = () => {
     setIsAiProcessing(false);
   };
 
-  // Quick AI Actions
-  const quickAIActions = [
-    { 
-      icon: '✍️', 
-      text: `כתב תוכן עבור ${siteData.category}`,
-      prompt: `כתוב תוכן מקצועי לדף הבית של ${siteData.name} (${siteData.category})`
-    },
-    { 
-      icon: '🎨', 
-      text: `צבעים מתאימים ל${siteData.category}`,
-      prompt: `הצע פלטת צבעים מקצועית למעסק מסוג ${siteData.category}`
-    },
-    { 
-      icon: '📸', 
-      text: `רעיונות תמונות`,
-      prompt: `הצע רעיונות לתמונות מקצועיות לאתר ${siteData.name}`
-    },
-    { 
-      icon: '🔍', 
-      text: `SEO מותאם`,
-      prompt: `תן המלצות SEO לעסק ${siteData.name} בתחום ${siteData.category}`
-    }
-  ];
-
-  const executeQuickAction = async (action) => {
-    setAiInput(action.prompt);
-    setTimeout(() => sendToAI(), 100);
-  };
-
-  // Basic tools
-  const basicTools = {
-    sites: [
-      {
-        icon: Grid,
-        name: 'ניהול אתרים',
-        desc: `${Object.keys(demoSites).length} אתרים במערכת`,
-        action: () => setActivePanel('sites')
-      }
-    ],
-    text: [
-      { icon: Type, name: 'עריכת טקסט', desc: 'שינוי תוכן וכותרות', action: () => setActivePanel('text') },
-      { icon: Edit3, name: 'עיצוב פונטים', desc: 'גודל, צבע, סגנון', action: () => setActivePanel('text') }
-    ],
-    design: [
-      { icon: Palette, name: 'צבעים וגרדיאנטים', desc: 'פלטות מוכנות', action: () => setActivePanel('design') },
-      { icon: Image, name: 'רקעים ותמונות', desc: 'ספרייה מקצועית', action: () => setActivePanel('design') }
-    ]
-  };
-
+  // Device selector component
   const DeviceSelector = () => (
     <div className="flex bg-gray-100 rounded-lg p-1">
       {[
@@ -323,6 +223,7 @@ const WebMasterProEditor = () => {
     </div>
   );
 
+  // Editable text component
   const EditableText = ({ path, className, style, placeholder, multiline = false }) => {
     const value = path.split('.').reduce((obj, key) => obj?.[key], siteData) || placeholder;
     const isCurrentlyEditing = isEditing === path;
@@ -362,6 +263,7 @@ const WebMasterProEditor = () => {
     );
   };
 
+  // Preview frame component
   const PreviewFrame = () => {
     const site = siteData;
     if (!site || !site.content) return <div>טוען...</div>;
@@ -572,7 +474,7 @@ const WebMasterProEditor = () => {
       </div>
 
       <div className="flex h-[calc(100vh-73px)]">
-        {/* Left Panel - Basic Tools */}
+        {/* Left Panel */}
         <div className="w-80 bg-white border-l border-gray-200 overflow-y-auto">
           <div className="p-4">
             <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
@@ -581,98 +483,45 @@ const WebMasterProEditor = () => {
             </h3>
             
             <div className="space-y-4">
-              <div className="flex bg-gray-100 rounded-lg p-1">
-                {Object.keys(basicTools).map(tool => (
-                  <button
-                    key={tool}
-                    onClick={() => setActivePanel(tool)}
-                    className={`flex-1 py-2 px-2 rounded-md transition-all text-sm ${
-                      activePanel === tool ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600'
-                    }`}
-                  >
-                    {tool === 'sites' && 'אתרים'}
-                    {tool === 'text' && 'טקסט'}
-                    {tool === 'design' && 'עיצוב'}
-                  </button>
-                ))}
+              <div>
+                <h4 className="font-medium mb-2">בחירת פונט</h4>
+                <select 
+                  value={selectedFont}
+                  onChange={(e) => setSelectedFont(e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded-lg"
+                >
+                  <option value="Assistant">Assistant - עברית מודרני</option>
+                  <option value="Heebo">Heebo - עברית נקי</option>
+                  <option value="Rubik">Rubik - עברית עגול</option>
+                  <option value="Open Sans">Open Sans - אנגלית קלאסי</option>
+                </select>
               </div>
 
-              {/* Font Selection */}
-              {activePanel === 'text' && (
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium mb-2">בחירת פונט</h4>
-                    <select 
-                      value={selectedFont}
-                      onChange={(e) => setSelectedFont(e.target.value)}
-                      className="w-full p-2 border border-gray-300 rounded-lg"
-                    >
-                      {availableFonts.map(font => (
-                        <option key={font.name} value={font.value}>
-                          {font.name} - {font.type}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">צבע טקסט</h4>
-                    <input
-                      type="color"
-                      value={selectedColor}
-                      onChange={(e) => setSelectedColor(e.target.value)}
-                      className="w-full h-10 border border-gray-300 rounded-lg"
-                    />
-                  </div>
-                </div>
-              )}
+              <div>
+                <h4 className="font-medium mb-2">צבע טקסט</h4>
+                <input
+                  type="color"
+                  value={selectedColor}
+                  onChange={(e) => setSelectedColor(e.target.value)}
+                  className="w-full h-10 border border-gray-300 rounded-lg"
+                />
+              </div>
 
-              {/* Color Palette */}
-              {activePanel === 'design' && (
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium mb-2">פלטת צבעים</h4>
-                    <div className="grid grid-cols-5 gap-2">
-                      {colorPalettes[siteData.palette || 'business']?.map((color, idx) => (
-                        <div
-                          key={idx}
-                          className="w-10 h-10 rounded-lg cursor-pointer border-2 border-gray-200 hover:border-gray-400 transition-colors"
-                          style={{ backgroundColor: color }}
-                          onClick={() => setSelectedColor(color)}
-                          title={color}
-                        />
-                      ))}
-                    </div>
+              <div>
+                <h4 className="font-medium mb-2">רשימת אתרים</h4>
+                {Object.entries(demoSites).map(([key, site]) => (
+                  <div
+                    key={key}
+                    className={`p-2 mb-2 rounded-lg cursor-pointer transition-colors ${
+                      currentSite === key ? 'bg-blue-100 border border-blue-300' : 'bg-gray-50 hover:bg-gray-100'
+                    }`}
+                    onClick={() => setCurrentSite(key)}
+                  >
+                    <div className="font-medium text-sm">{site.name}</div>
+                    <div className="text-xs text-gray-500">{site.category} • {site.price}</div>
                   </div>
-                </div>
-              )}
-
-              {/* Sites Overview */}
-              {activePanel === 'sites' && (
-                <div className="space-y-4">
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <h4 className="font-bold mb-2">📊 סטטיסטיקות</h4>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div>אתרים: {Object.keys(demoSites).length}</div>
-                      <div>קטגוריות: 3</div>
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">רשימת אתרים</h4>
-                    {Object.entries(demoSites).map(([key, site]) => (
-                      <div
-                        key={key}
-                        className={`p-2 mb-2 rounded-lg cursor-pointer transition-colors ${
-                          currentSite === key ? 'bg-blue-100 border border-blue-300' : 'bg-gray-50 hover:bg-gray-100'
-                        }`}
-                        onClick={() => setCurrentSite(key)}
-                      >
-                        <div className="font-medium text-sm">{site.name}</div>
-                        <div className="text-xs text-gray-500">{site.category} • {site.price}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -720,25 +569,6 @@ const WebMasterProEditor = () => {
               <p className="text-sm text-purple-600">
                 שאל אותי כל שאלה על עיצוב, תוכן או קוד
               </p>
-            </div>
-
-            {/* Quick Actions */}
-            <div className="p-4 border-b border-purple-200">
-              <h4 className="font-medium mb-3 text-purple-800">פעולות מהירות</h4>
-              <div className="space-y-2">
-                {quickAIActions.map((action, index) => (
-                  <button
-                    key={index}
-                    onClick={() => executeQuickAction(action)}
-                    className="w-full text-right p-3 bg-white rounded-lg hover:bg-purple-50 transition-colors border border-purple-100"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">{action.icon}</span>
-                      <span className="text-sm">{action.text}</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
             </div>
 
             {/* Chat Area */}
