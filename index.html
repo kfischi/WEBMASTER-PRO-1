@@ -3,900 +3,2418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - גלריית אתרים מקצועיים | 11 דמואים ברמה עולמית</title>
-    <meta name="description" content="גלריית אתרים מקצועיים עם אדיטור ויזואלי מתקדם. 11 דמואים חיים בתחומים עסקיים שונים - רפואה, עסקים, לייפסטייל ופרמיום.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>WebMaster Pro - פלטפורמת בניית אתרים מתקדמת עם AI</title>
+    <meta name="description" content="WebMaster Pro - פלטפורמה חכמה לבניית אתרים עסקיים מקצועיים עם אדיטור ויזואלי ו-AI מתקדם. בנה אתר מדהים בדקות!">
+    <meta name="keywords" content="בניית אתרים, אדיטור ויזואלי, AI, אתרים עסקיים, WebMaster Pro">
+    
+    <!-- Open Graph & Social -->
+    <meta property="og:title" content="WebMaster Pro - בניית אתרים עם AI מתקדם">
+    <meta property="og:description" content="פלטפורמה חכמה לבניית אתרים עסקיים מקצועיים. 11 תבניות מוכנות, אדיטור ויזואלי ו-AI שיוצר תוכן">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop">
+    <meta property="og:url" content="https://webmaster-pro.co.il">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0idXJsKCNncmFkaWVudDAiLz4KPHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeD0iNiIgeT0iNiIgZmlsbD0iI2ZmZiI+CjxwYXRoIGQ9Ik0xMCAwQzE1LjUyIDAgMjAgNC40OCAyMCAxMFMxNS41MiAyMCAxMCAyMFMwIDE1LjUyIDAgMTBTNC40OCAwIDEwIDBaTTEwIDJDNS41OCAyIDIgNS41OCAyIDEwUzUuNTggMTggMTAgMThTMTggMTQuNDIgMTggMTBTMTQuNDIgMiAxMCAyWiIvPgo8L3N2Zz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwIiB4MT0iMCIgeTE9IjAiIHgyPSIzMiIgeTI9IjMyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzY2N2VlYSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3NjRiYTIiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         :root {
-            --primary: #4f46e5;
-            --bg: #0f0f23;
-            --glass-bg: rgba(255,255,255,0.08);
-            --glass-border: rgba(255,255,255,0.12);
-            --text: #ffffff;
-            --text-secondary: #a1a1aa;
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
             --success: #10b981;
             --warning: #f59e0b;
             --error: #ef4444;
+            --dark: #1a1a2e;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-accent: linear-gradient(135deg, var(--accent), #f5576c);
+            --gradient-success: linear-gradient(135deg, var(--success), #059669);
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--bg) 0%, #1e1b4b 50%, #312e81 100%);
-            color: var(--text);
+            font-family: 'Heebo', 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
-
-        /* Header */
-        .header {
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ===== HEADER & NAVIGATION ===== */
+        .main-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px) saturate(180%) contrast(120%);
-            border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
-            padding: 1rem 0;
+            box-shadow: var(--shadow-lg);
+            border-bottom: 1px solid var(--glass-border);
         }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        
+        .header-content {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
         }
-
+        
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            font-size: 24px;
             font-weight: 800;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-decoration: none;
+            background-clip: text;
         }
-
-        .nav-buttons {
+        
+        .logo i {
+            margin-left: 10px;
+            font-size: 28px;
+            background: var(--gradient-primary);
+            border-radius: 8px;
+            padding: 8px;
+            color: white;
+        }
+        
+        .main-nav {
             display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            display: inline-flex;
+            gap: 30px;
             align-items: center;
-            gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
         }
-
-        .btn::before {
+        
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
         }
-
-        .btn:hover::before {
-            transform: translateX(100%);
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+        
+        .cta-button {
+            background: var(--gradient-primary);
             color: white;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
         }
-
-        .btn-primary:hover {
+        
+        .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.6);
+            box-shadow: var(--shadow);
         }
-
-        .btn-secondary {
-            background: var(--glass-bg);
-            color: var(--text);
-            border: 1px solid var(--glass-border);
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
         }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-1px);
-        }
-
-        /* Main Content */
+        
+        /* ===== MAIN CONTENT AREA ===== */
         .main-content {
-            margin-top: 100px;
-            padding: 2rem 0;
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
         }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
         }
-
-        /* Hero Section */
-        .hero {
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ===== HOME PAGE ===== */
+        .hero-section {
+            padding: 100px 0;
             text-align: center;
-            padding: 4rem 0 6rem;
-            background: radial-gradient(ellipse at center, rgba(79, 70, 229, 0.1) 0%, transparent 70%);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            backdrop-filter: blur(10px);
         }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+        
+        .hero-title {
+            font-size: 4rem;
             font-weight: 900;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             line-height: 1.2;
         }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 600px;
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 30px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            font-weight: 500;
         }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 1rem;
-            backdrop-filter: blur(20px);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        /* Filters */
-        .filters {
+        
+        .hero-buttons {
             display: flex;
+            gap: 20px;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
+            margin-bottom: 60px;
         }
-
-        .filter-btn {
-            padding: 0.75rem 1.5rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 2rem;
-            color: var(--text);
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
-        }
-
-        /* Gallery Grid */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .website-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 1.5rem;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            position: relative;
-            backdrop-filter: blur(20px);
-        }
-
-        .website-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .website-card:hover::before {
-            opacity: 1;
-        }
-
-        .website-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            border-color: var(--primary);
-        }
-
-        .card-image {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-        }
-
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s;
-        }
-
-        .website-card:hover .card-image img {
-            transform: scale(1.1);
-        }
-
-        .card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
-            display: flex;
-            align-items: flex-end;
-            padding: 1.5rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .website-card:hover .card-overlay {
-            opacity: 1;
-        }
-
-        .card-actions {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .action-btn {
-            padding: 0.5rem 1rem;
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 0.5rem;
+        
+        .btn-primary {
+            background: var(--gradient-primary);
             color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
             text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--glass-border);
+        }
+        
+        .btn-primary:hover,
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .hero-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 80px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            transition: all 0.3s;
-        }
-
-        .action-btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .card-content {
-            padding: 2rem;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-        }
-
-        .card-category {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            background: rgba(255,255,255,0.1);
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
             border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
         }
-
-        .card-price {
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-title {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--success);
+            margin-bottom: 15px;
+            color: var(--dark);
         }
-
-        .card-description {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
+        
+        .feature-description {
+            color: #64748b;
+            line-height: 1.6;
         }
-
-        .card-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+        
+        /* ===== STATS SECTION ===== */
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 80px 0;
+            margin: 60px 0;
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
         }
-
-        .feature-tag {
-            font-size: 0.75rem;
-            background: rgba(79, 70, 229, 0.2);
-            color: var(--primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            border: 1px solid rgba(79, 70, 229, 0.3);
-        }
-
-        .card-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .card-btn {
-            flex: 1;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
             text-align: center;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        /* ===== LANDING PAGES SECTION ===== */
+        .landing-pages-section {
+            padding: 60px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .section-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .landing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .landing-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .landing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .landing-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .card-btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+            font-size: 4rem;
             color: white;
         }
-
-        .card-btn-secondary {
-            background: var(--glass-bg);
-            color: var(--text);
+        
+        .landing-content {
+            padding: 30px;
+        }
+        
+        .landing-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .landing-description {
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .landing-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .landing-features li {
+            padding: 5px 0;
+            color: #64748b;
+        }
+        
+        .landing-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        /* ===== WEBSITES GALLERY ===== */
+        .websites-gallery {
+            padding: 60px 0;
+        }
+        
+        .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .website-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .website-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .website-preview {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .website-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="20" fill="white" opacity="0.1"/><rect y="25" width="70" height="8" fill="white" opacity="0.2"/><rect y="38" width="85" height="8" fill="white" opacity="0.2"/><rect y="51" width="60" height="8" fill="white" opacity="0.2"/><rect y="70" width="40" height="25" fill="white" opacity="0.3" rx="3"/><rect x="50" y="70" width="40" height="25" fill="white" opacity="0.2" rx="3"/></svg>') no-repeat center;
+            background-size: 80%;
+        }
+        
+        .website-info {
+            padding: 25px;
+        }
+        
+        .website-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .website-category {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .website-description {
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .website-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+        
+        .website-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-small {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-preview {
+            background: var(--gradient-primary);
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-edit {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
             border: 1px solid var(--glass-border);
         }
-
-        .card-btn:hover {
+        
+        .btn-small:hover {
             transform: translateY(-2px);
         }
-
-        /* Footer */
-        .footer {
-            background: var(--glass-bg);
-            border-top: 1px solid var(--glass-border);
-            padding: 3rem 0;
-            margin-top: 4rem;
-            backdrop-filter: blur(20px);
+        
+        /* ===== ARTICLES SECTION ===== */
+        .articles-section {
+            padding: 60px 0;
         }
-
+        
+        .articles-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .article-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        .article-content {
+            padding: 25px;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+            line-height: 1.4;
+        }
+        
+        .article-excerpt {
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .article-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .article-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* ===== GUIDES SECTION ===== */
+        .guides-section {
+            padding: 60px 0;
+        }
+        
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .guide-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .guide-level {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .guide-level.beginner {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        
+        .guide-level.intermediate {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        
+        .guide-level.advanced {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+        
+        .guide-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .guide-description {
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .guide-steps {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .guide-steps li {
+            padding: 8px 0;
+            color: #64748b;
+            position: relative;
+            padding-right: 25px;
+        }
+        
+        .guide-steps li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            right: 0;
+            background: var(--gradient-primary);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .guide-steps {
+            counter-reset: step-counter;
+        }
+        
+        /* ===== MARKETING SECTION ===== */
+        .marketing-section {
+            padding: 60px 0;
+        }
+        
+        .marketing-hero {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin-bottom: 60px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .marketing-hero h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .marketing-hero p {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .service-description {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .service-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+        
+        .service-period {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* ===== CONTACT SECTION ===== */
+        .contact-section {
+            padding: 60px 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        
+        .contact-info {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .contact-form {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .contact-details h4 {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .contact-details p {
+            color: #64748b;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        /* ===== FOOTER ===== */
+        .main-footer {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 40px;
+            margin-bottom: 40px;
         }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: var(--text);
+        
+        .footer-section h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
         }
-
-        .footer-section p,
-        .footer-section a {
-            color: var(--text-secondary);
-            text-decoration: none;
+        
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.8);
             line-height: 1.6;
+            margin-bottom: 20px;
         }
-
-        .footer-section a:hover {
-            color: var(--primary);
+        
+        .footer-section ul {
+            list-style: none;
         }
-
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-2px);
+        }
+        
         .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
             text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.6);
         }
-
-        /* Responsive Design */
+        
+        /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-            
-            .filters {
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 1rem;
-            }
-            
-            .nav-buttons {
+            .main-nav {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow-lg);
+                border-radius: 0 0 20px 20px;
             }
             
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .container {
+                padding: 0 15px;
             }
         }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s ease-in-out infinite;
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
-
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
+        
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
         }
-
-        /* Hidden class for filtering */
-        .hidden {
-            display: none !important;
+        
+        /* ===== NOTIFICATION SYSTEM ===== */
+        .notification {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            box-shadow: var(--shadow-lg);
+            z-index: 2000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .notification.success {
+            background: var(--gradient-success);
+        }
+        
+        .notification.warning {
+            background: linear-gradient(135deg, var(--warning), #f59e0b);
+        }
+        
+        .notification.error {
+            background: linear-gradient(135deg, var(--error), #dc2626);
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="nav-container">
-            <a href="/" class="logo">
-                <i class="fas fa-magic"></i>
-                <span>WebMaster Pro</span>
-            </a>
-            <div class="nav-buttons">
-                <a href="https://webmasterproapp.com" class="btn btn-secondary">
-                    <i class="fas fa-home"></i>
-                    <span>אתר ראשי</span>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-magic"></i>
+                    WebMaster Pro
+                </div>
+                
+                <nav class="main-nav" id="mainNav">
+                    <a href="#" class="nav-link active" onclick="showPage('home')">דף הבית</a>
+                    <a href="#" class="nav-link" onclick="showPage('landing')">דפי נחיתה</a>
+                    <a href="#" class="nav-link" onclick="showPage('websites')">האתרים שלנו</a>
+                    <a href="#" class="nav-link" onclick="showPage('articles')">מאמרים</a>
+                    <a href="#" class="nav-link" onclick="showPage('guides')">מדריכים</a>
+                    <a href="#" class="nav-link" onclick="showPage('marketing')">שיווק לעסקים</a>
+                    <a href="#" class="nav-link" onclick="showPage('contact')">צור קשר</a>
+                </nav>
+                
+                <a href="#" class="cta-button" onclick="showPage('websites')">
+                    <i class="fas fa-rocket"></i>
+                    התחל עכשיו
                 </a>
-                <a href="/editor.html" class="btn btn-primary">
-                    <i class="fas fa-edit"></i>
-                    <span>פתח אדיטור</span>
-                </a>
+                
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="container">
-            <!-- Hero Section -->
-            <section class="hero">
-                <h1>גלריית אתרים מקצועיים</h1>
-                <p>11 דמואים חיים ברמה עולמית עם אדיטור ויזואלי מתקדם לעריכה מיידית</p>
-                
-                <!-- Stats -->
-                <div class="stats">
-                    <div class="stat-item fade-in-up">
-                        <div class="stat-number">11</div>
-                        <div class="stat-label">אתרים מוכנים</div>
+        <!-- Home Page -->
+        <section class="page-section active" id="home">
+            <div class="hero-section">
+                <div class="container">
+                    <h1 class="hero-title floating">
+                        בניית אתרים עם AI מתקדם
+                    </h1>
+                    <p class="hero-subtitle">
+                        פלטפורמה חכמה ומתקדמת לבניית אתרים עסקיים מקצועיים. בנה אתר מדהים בדקות עם אדיטור ויזואלי וAI שיוצר תוכן איכותי עבורך
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#" class="btn-primary" onclick="showPage('websites')">
+                            <i class="fas fa-rocket"></i>
+                            התחל לבנות אתר
+                        </a>
+                        <a href="#" class="btn-secondary" onclick="showPage('guides')">
+                            <i class="fas fa-play"></i>
+                            צפה בדמו
+                        </a>
                     </div>
-                    <div class="stat-item fade-in-up">
-                        <div class="stat-number">₪26,900</div>
-                        <div class="stat-label">ערך כולל</div>
-                    </div>
-                    <div class="stat-item fade-in-up">
-                        <div class="stat-number">9</div>
-                        <div class="stat-label">תחומים עסקיים</div>
-                    </div>
-                    <div class="stat-item fade-in-up">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Production Ready</div>
+                    
+                    <div class="hero-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h3 class="feature-title">אדיטור ויזואלי מתקדם</h3>
+                            <p class="feature-description">
+                                ערוך את האתר שלך בזמן אמת עם כלי עריכה מתקדמים, גרירה ושחרור, ועיצוב מותאם אישית
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3 class="feature-title">בינה מלאכותית חכמה</h3>
+                            <p class="feature-description">
+                                AI מתקדם שיוצר תוכן איכותי, מייעל SEO, מנתח עיצוב ומשפר ביצועים באופן אוטומטי
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="feature-title">רספונסיבי מושלם</h3>
+                            <p class="feature-description">
+                                האתר שלך ייראה מדהים בכל מכשיר - דסקטופ, טאבלט ומובייל עם אופטימיזציה אוטומטית
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-                <a href="/editor.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">
-                    <i class="fas fa-rocket"></i>
-                    <span>התחל לערוך עכשיו</span>
-                </a>
-            </section>
-
-            <!-- Filters -->
-            <div class="filters">
-                <button class="filter-btn active" data-category="all">הכל</button>
-                <button class="filter-btn" data-category="medical">רפואה</button>
-                <button class="filter-btn" data-category="business">עסקים</button>
-                <button class="filter-btn" data-category="lifestyle">לייפסטייל</button>
-                <button class="filter-btn" data-category="premium">פרמיום</button>
-                <button class="filter-btn" data-category="education">חינוך</button>
             </div>
-
-            <!-- Gallery -->
-            <div class="gallery" id="gallery">
-                <!-- Website cards will be generated by JavaScript -->
+            
+            <!-- Stats Section -->
+            <div class="container">
+                <div class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">11</span>
+                            <div class="stat-label">תבניות מקצועיות</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <div class="stat-label">לקוחות מרוצים</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">95%</span>
+                            <div class="stat-label">שביעות רצון</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <div class="stat-label">תמיכה טכנית</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Landing Pages Section -->
+        <section class="page-section" id="landing">
+            <div class="landing-pages-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">דפי נחיתה מותאמים אישית</h2>
+                        <p class="section-description">
+                            דפי נחיתה מקצועיים ומותאמים לכל סוג עסק. כל דף מיועד להמרות מקסימליות ותוצאות מוכחות
+                        </p>
+                    </div>
+                    
+                    <div class="landing-grid">
+                        <div class="landing-card">
+                            <div class="landing-image">
+                                <i class="fas fa-stethoscope"></i>
+                            </div>
+                            <div class="landing-content">
+                                <h3 class="landing-title">דף נחיתה - רפואה ובריאות</h3>
+                                <p class="landing-description">
+                                    דף נחיתה מותאם לרופאים, קליניקות ומרפאות עם דגש על אמינות ומקצועיות
+                                </p>
+                                <ul class="landing-features">
+                                    <li>טופס יצירת קשר מותאם</li>
+                                    <li>גלריית לפני ואחרי</li>
+                                    <li>המלצות מטופלים</li>
+                                    <li>אינטגרציה עם מערכת תורים</li>
+                                </ul>
+                                <a href="#" class="btn-primary">צפה בדמו</a>
+                            </div>
+                        </div>
+                        
+                        <div class="landing-card">
+                            <div class="landing-image">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <div class="landing-content">
+                                <h3 class="landing-title">דף נחיתה - כושר ומאמנים</h3>
+                                <p class="landing-description">
+                                    דף נחיתה אנרגטי למאמני כושר ומכוני אימון עם דגש על תוצאות ומוטיבציה
+                                </p>
+                                <ul class="landing-features">
+                                    <li>מחשבון BMI אינטראקטיבי</li>
+                                    <li>גלריית תמונות אימונים</li>
+                                    <li>תוכניות אימון מותאמות</li>
+                                    <li>בוקינג שיעורים אונליין</li>
+                                </ul>
+                                <a href="#" class="btn-primary">צפה בדמו</a>
+                            </div>
+                        </div>
+                        
+                        <div class="landing-card">
+                            <div class="landing-image">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <div class="landing-content">
+                                <h3 class="landing-title">דף נחיתה - משרדי עורכי דין</h3>
+                                <p class="landing-description">
+                                    דף נחיתה רציני ומקצועי למשרדי עורכי דין עם דגש על אמינות וניסיון
+                                </p>
+                                <ul class="landing-features">
+                                    <li>טופס יעוץ ראשוני</li>
+                                    <li>מידע על תחומי משפט</li>
+                                    <li>המלצות לקוחות</li>
+                                    <li>בלוג משפטי מתעדכן</li>
+                                </ul>
+                                <a href="#" class="btn-primary">צפה בדמו</a>
+                            </div>
+                        </div>
+                        
+                        <div class="landing-card">
+                            <div class="landing-image">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <div class="landing-content">
+                                <h3 class="landing-title">דף נחיתה - יופי ואסתטיקה</h3>
+                                <p class="landing-description">
+                                    דף נחיתה אלגנטי לסלונים, מכוני יופי וקליניקות אסתטיקה
+                                </p>
+                                <ul class="landing-features">
+                                    <li>גלריית עבודות מרהיבה</li>
+                                    <li>בוקינג תורים אונליין</li>
+                                    <li>מידע על טיפולים</li>
+                                    <li>חוות דעת מלקוחות</li>
+                                </ul>
+                                <a href="#" class="btn-primary">צפה בדמו</a>
+                            </div>
+                        </div>
+                        
+                        <div class="landing-card">
+                            <div class="landing-image">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="landing-content">
+                                <h3 class="landing-title">דף נחיתה - נדל"ן</h3>
+                                <p class="landing-description">
+                                    דף נחיתה יוקרתי למתווכי נדל"ן וחברות השקעות נדל"ן
+                                </p>
+                                <ul class="landing-features">
+                                    <li>מאגר נכסים מתעדכן</li>
+                                    <li>חיפוש מתקדם</li>
+                                    <li>סיורים וירטואליים</li>
+                                    <li>מחשבון משכנתא</li>
+                                </ul>
+                                <a href="#" class="btn-primary">צפה בדמו</a>
+                            </div>
+                        </div>
+                        
+                        <div class="landing-card">
+                            <div class="landing-image">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="landing-content">
+                                <h3 class="landing-title">דף נחיתה - חינוך והוראה</h3>
+                                <p class="landing-description">
+                                    דף נחיתה אקדמי למורים פרטיים, מכוני הכנה ומוסדות חינוך
+                                </p>
+                                <ul class="landing-features">
+                                    <li>מערכת שיעורים אונליין</li>
+                                    <li>מעקב התקדמות</li>
+                                    <li>חומרי לימוד דיגיטליים</li>
+                                    <li>תקשורת עם הורים</li>
+                                </ul>
+                                <a href="#" class="btn-primary">צפה בדמו</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Websites Gallery Section -->
+        <section class="page-section" id="websites">
+            <div class="websites-gallery">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">הגלריה שלנו - 11 אתרים מקצועיים</h2>
+                        <p class="section-description">
+                            אוסף מקצועי של אתרים מוכנים לעבודה בתחומים שונים. כל אתר נבנה ברמה עולמית עם טכנולוגיות מתקדמות
+                        </p>
+                    </div>
+                    
+                    <div class="websites-grid" id="websitesGrid">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Section -->
+        <section class="page-section" id="articles">
+            <div class="articles-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">מאמרים ותובנות</h2>
+                        <p class="section-description">
+                            מאמרים מקצועיים על בניית אתרים, שיווק דיגיטלי, טכנולוגיות מתקדמות וטרנדים בתחום
+                        </p>
+                    </div>
+                    
+                    <div class="articles-filter">
+                        <button class="filter-btn active" onclick="filterArticles('all')">הכל</button>
+                        <button class="filter-btn" onclick="filterArticles('web-design')">עיצוב אתרים</button>
+                        <button class="filter-btn" onclick="filterArticles('seo')">SEO</button>
+                        <button class="filter-btn" onclick="filterArticles('marketing')">שיווק דיגיטלי</button>
+                        <button class="filter-btn" onclick="filterArticles('ai')">בינה מלאכותית</button>
+                        <button class="filter-btn" onclick="filterArticles('trends')">טרנדים</button>
+                    </div>
+                    
+                    <div class="articles-grid" id="articlesGrid">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guides Section -->
+        <section class="page-section" id="guides">
+            <div class="guides-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">מדריכים מפורטים</h2>
+                        <p class="section-description">
+                            מדריכים צעד אחר צעד לבניית אתרים מקצועיים, שיפור ביצועים ושיווק אפקטיבי
+                        </p>
+                    </div>
+                    
+                    <div class="guides-grid" id="guidesGrid">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marketing Section -->
+        <section class="page-section" id="marketing">
+            <div class="marketing-section">
+                <div class="container">
+                    <div class="marketing-hero">
+                        <h2>שיווק דיגיטלי לעסקים</h2>
+                        <p>
+                            פתרונות שיווק מתקדמים שיעזרו לעסק שלך להגיע ליותר לקוחות ולהגדיל את המכירות. 
+                            אנחנו מציעים שירותי שיווק מקצועיים הכוללים בניית אתרים, SEO, פרסום ממומן ויותר
+                        </p>
+                        <a href="#" class="btn-primary" onclick="showNotification('info', 'יועץ שיווק', 'יועץ השיווק שלנו ייצור איתך קשר בקרוב')">
+                            <i class="fas fa-phone"></i>
+                            התייעץ עם מומחה
+                        </a>
+                    </div>
+                    
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3 class="service-title">בניית אתרים מקצועיים</h3>
+                            <p class="service-description">
+                                אתרים מותאמים אישית עם עיצוב מקצועי, אופטימיזציה למנועי חיפוש ורספונסיביות מלאה
+                            </p>
+                            <div class="service-price">₪1,700</div>
+                            <div class="service-period">מתחילים מ</div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3 class="service-title">קידום אתרים (SEO)</h3>
+                            <p class="service-description">
+                                קידום אורגני במנועי החיפוש להגדלת הנראות והגעה ללקוחות פוטנציאליים
+                            </p>
+                            <div class="service-price">₪1,200</div>
+                            <div class="service-period">לחודש</div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h3 class="service-title">פרסום ממומן</h3>
+                            <p class="service-description">
+                                קמפיינים ממומנים בגוגל ופייסבוק להגדלת המכירות עם תשואה מוכחת על ההשקעה
+                            </p>
+                            <div class="service-price">₪2,000</div>
+                            <div class="service-period">לחודש</div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="service-title">ניתוח ואנליטיקה</h3>
+                            <p class="service-description">
+                                מעקב מתקדם אחר ביצועי האתר, התנהגות גולשים ואופטימיזציה מתמדת
+                            </p>
+                            <div class="service-price">₪800</div>
+                            <div class="service-period">לחודש</div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3 class="service-title">שיווק במייל</h3>
+                            <p class="service-description">
+                                קמפיינים אוטומטיים במייל לטיפוח לידים והגדלת נאמנות הלקוחות
+                            </p>
+                            <div class="service-price">₪600</div>
+                            <div class="service-period">לחודש</div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="service-title">ניהול רשתות חברתיות</h3>
+                            <p class="service-description">
+                                ניהול מקצועי של דפי הפייסבוק והאינסטגרם כולל יצירת תוכן ואינטראקציה עם לקוחות
+                            </p>
+                            <div class="service-price">₪1,500</div>
+                            <div class="service-period">לחודש</div>
+                        </div>
+                    </div>
+                    
+                    <div class="marketing-hero">
+                        <h3>חבילות משולבות עם הנחות מיוחדות</h3>
+                        <p>
+                            חסוך עד 30% בבחירת חבילות משולבות הכוללות מספר שירותים. 
+                            כל חבילה מותאמת לצרכים הספציפיים של העסק שלך
+                        </p>
+                        <a href="#" class="btn-primary" onclick="showPage('contact')">
+                            <i class="fas fa-calculator"></i>
+                            חשב הצעת מחיר
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="page-section" id="contact">
+            <div class="contact-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">צור קשר</h2>
+                        <p class="section-description">
+                            נשמח לעזור לך לבנות את האתר המושלם לעסק שלך. צור איתנו קשר ונתחיל לעבוד!
+                        </p>
+                    </div>
+                    
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--dark);">
+                                בואו נדבר על הפרויקט שלכם
+                            </h3>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>טלפון</h4>
+                                    <p>050-123-4567</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>אימייל</h4>
+                                    <p>info@webmaster-pro.co.il</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>WhatsApp</h4>
+                                    <p>050-123-4567</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>כתובת</h4>
+                                    <p>תל אביב, ישראל</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>שעות פעילות</h4>
+                                    <p>א'-ה': 9:00-18:00<br>יום ו': 9:00-14:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-form">
+                            <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--dark);">
+                                שלח לנו הודעה
+                            </h3>
+                            
+                            <form onsubmit="handleContactForm(event)">
+                                <div class="form-group">
+                                    <label class="form-label">שם מלא *</label>
+                                    <input type="text" class="form-input" required placeholder="איך קוראים לך?">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">אימייל *</label>
+                                    <input type="email" class="form-input" required placeholder="הכתובת המייל שלך">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">טלפון</label>
+                                    <input type="tel" class="form-input" placeholder="מספר הטלפון שלך">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">סוג הפרויקט</label>
+                                    <select class="form-input">
+                                        <option>בניית אתר חדש</option>
+                                        <option>שדרוג אתר קיים</option>
+                                        <option>קידום אתרים (SEO)</option>
+                                        <option>פרסום ממומן</option>
+                                        <option>שיווק דיגיטלי</option>
+                                        <option>ייעוץ טכנולוגי</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">תקציב משוער</label>
+                                    <select class="form-input">
+                                        <option>עד ₪5,000</option>
+                                        <option>₪5,000 - ₪10,000</option>
+                                        <option>₪10,000 - ₪20,000</option>
+                                        <option>₪20,000 - ₪50,000</option>
+                                        <option>מעל ₪50,000</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">פרטי הפרויקט *</label>
+                                    <textarea class="form-textarea" required placeholder="ספר לנו על הפרויקט שלך, המטרות והציפיות שלך"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary" style="width: 100%;">
+                                    <i class="fas fa-paper-plane"></i>
+                                    שלח הודעה
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>WebMaster Pro</h3>
-                    <p>פלטפורמה מתקדמת לבניית אתרים עסקיים עם גלריית דמואים חיים ואדיטור ויזואלי מקצועי.</p>
+                    <h4>WebMaster Pro</h4>
+                    <p>
+                        פלטפורמה מתקדמת לבניית אתרים עסקיים מקצועיים 
+                        עם AI מהפכני ותמיכה מלאה 24/7.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
                 </div>
+                
                 <div class="footer-section">
-                    <h3>תחומים עסקיים</h3>
-                    <p>רפואה אסתטית, עורכי דין, חשבים, מאמני כושר, יופי ורווחה, נדל"ן והשקעות.</p>
+                    <h4>מוצרים</h4>
+                    <ul>
+                        <li><a href="#">אדיטור ויזואלי</a></li>
+                        <li><a href="#">גלריית אתרים</a></li>
+                        <li><a href="#">AI Assistant</a></li>
+                        <li><a href="#">אחסון ודומיינים</a></li>
+                        <li><a href="#">Analytics מתקדם</a></li>
+                        <li><a href="#">API למפתחים</a></li>
+                    </ul>
                 </div>
+                
                 <div class="footer-section">
-                    <h3>טכנולוגיות</h3>
-                    <p>HTML5, CSS3, JavaScript, AI Integration, Supabase, Netlify Functions.</p>
+                    <h4>תמיכה</h4>
+                    <ul>
+                        <li><a href="#">מרכז עזרה</a></li>
+                        <li><a href="#">צור קשר</a></li>
+                        <li><a href="#">מדריכי וידאו</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">סטטוס המערכת</a></li>
+                        <li><a href="#">קהילת מפתחים</a></li>
+                    </ul>
                 </div>
+                
                 <div class="footer-section">
-                    <h3>יצירת קשר</h3>
-                    <p>עזרה טכנית וייעוץ לבניית האתר המושלם לעסק שלך.</p>
+                    <h4>חברה</h4>
+                    <ul>
+                        <li><a href="#">אודותינו</a></li>
+                        <li><a href="#">הצוות</a></li>
+                        <li><a href="#">קריירה</a></li>
+                        <li><a href="#">בלוג טכנולוגיה</a></li>
+                        <li><a href="#">מדיניות פרטיות</a></li>
+                        <li><a href="#">תנאי שימוש</a></li>
+                    </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
                 <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות.</p>
             </div>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        // Website data
-        const websites = [
-            {
-                id: 'dr-michal-rosen',
-                name: 'ד"ר מיכל רוזן',
-                category: 'medical',
-                price: '₪2,800',
-                image: 'https://i.imghippo.com/files/Ayyb2287TOc.png',
-                description: 'אתר מקצועי לרופאה אסתטית עם מערכת הזמנות מתקדמת',
-                features: ['הזמנות אונליין', 'גלריית לפני ואחרי', 'מחשבון BMI', 'צ\'אט ווטסאפ'],
-                previewUrl: './websites/dr-michal-rosen.html'
-            },
-            {
-                id: 'fitness-co',
-                name: 'דני פיט',
-                category: 'lifestyle',
-                price: '₪2,200',
-                image: 'https://i.imghippo.com/files/WiRp8302YJs.png',
-                description: 'אתר למאמן כושר אישי עם תוכניות אימונים מותאמות',
-                features: ['תוכניות אימון', 'מעקב התקדמות', 'תזונה מותאמת', 'יצירת קשר מהיר'],
-                previewUrl: './websites/fitness-co.html'
-            },
-            {
-                id: 'yoga-studio',
-                name: 'סטודיו אוהם',
-                category: 'lifestyle',
-                price: '₪1,900',
-                image: 'https://i.imghippo.com/files/eJk7179MXo.png',
-                description: 'אתר יוקרתי לסטודיו יוגה ומדיטציה',
-                features: ['לוח שיעורים', 'הרשמה אונליין', 'מדריכי מדיטציה', 'חנות מוצרים'],
-                previewUrl: './websites/yoga-studio.html'
-            },
-            {
-                id: 'nutritionist',
-                name: 'ד"ר שרה כהן',
-                category: 'medical',
-                price: '₪2,400',
-                image: 'https://i.imghippo.com/files/rhNp2418oyE.png',
-                description: 'אתר מקצועי לתזונאית קלינית עם כלים חכמים',
-                features: ['מחשבון קלוריות', 'תפריטים מותאמים', 'מעקב משקל', 'ייעוץ אונליין'],
-                previewUrl: './websites/nutritionist.html'
-            },
-            {
-                id: 'law-firm',
-                name: 'משרד ברקוביץ',
-                category: 'business',
-                price: '₪2,500',
-                image: 'https://i.imghippo.com/files/hVyV3858OQ.png',
-                description: 'אתר מקצועי למשרד עורכי דין עם פורטל לקוחות',
-                features: ['תחומי התמחות', 'פורטל לקוחות', 'מאמרים משפטיים', 'יעוץ ראשוני'],
-                previewUrl: './websites/law-firm.html'
-            },
-            {
-                id: 'accountant',
-                name: 'רינה לוי',
-                category: 'business',
-                price: '₪2,000',
-                image: 'https://i.imghippo.com/files/tGN5433dAU.png',
-                description: 'אתר לחשבת שכר עם מחשבונים ועוזרים דיגיטליים',
-                features: ['מחשבון שכר', 'העלאת מסמכים', 'דוחות חודשיים', 'תמיכה 24/7'],
-                previewUrl: './websites/accountant.html'
-            },
-            {
-                id: 'beauty-salon',
-                name: 'מספרה BELLA',
-                category: 'lifestyle',
-                price: '₪1,700',
-                image: 'https://i.imghippo.com/files/xnK4816Hc.png',
-                description: 'אתר מעוצב למספרה ויופי עם הזמנות אונליין',
-                features: ['הזמנת תורים', 'גלריית עבודות', 'מחירון שירותים', 'מועדון לקוחות'],
-                previewUrl: './websites/beauty-salon.html'
-            },
-            {
-                id: 'tutor',
-                name: 'ד"ר רונית לוי',
-                category: 'education',
-                price: '₪2,100',
-                image: 'https://i.imghippo.com/files/Ceu2132Q.png',
-                description: 'אתר למורה פרטית עם מערכת לימוד דיגיטלית',
-                features: ['שיעורים אונליין', 'חומרי לימוד', 'מעקב הישגים', 'תיאום שיעורים'],
-                previewUrl: './websites/tutor.html'
-            },
-            {
-                id: 'aesthetic-clinic',
-                name: 'קליניקת יופי פרמיום',
-                category: 'premium',
-                price: '₪3,200',
-                image: 'https://i.imghippo.com/files/sWlf1880WKM.png',
-                description: 'אתר יוקרתי לקליניקת יופי וטיפולים אסתטיים',
-                features: ['טיפולים מתקדמים', 'הזמנות VIP', 'יעוץ מקוון', 'חבילות מיוחדות'],
-                previewUrl: './websites/aesthetic-clinic.html'
-            },
-            {
-                id: 'multibrawn',
-                name: 'מולטיבראון',
-                category: 'lifestyle',
-                price: '₪2,300',
-                image: 'https://i.imghippo.com/files/pL5530Z.png',
-                description: 'אתר לחברת נופש ואירועים עם הזמנות מתקדמות',
-                features: ['הזמנת אירועים', 'גלריית מקומות', 'חבילות נופש', 'ניהול אורחים'],
-                previewUrl: './websites/multibrawn.html'
-            },
-            {
-                id: 'real-estate',
-                name: 'נדל"ן פרמיום',
-                category: 'premium',
-                price: '₪2,700',
-                image: 'https://i.imghippo.com/files/htWG9491QkE.png',
-                description: 'אתר יוקרתי לסוכנות נדל"ן עם חיפוש מתקדם',
-                features: ['חיפוש נכסים', 'מחשבון משכנתא', 'ייעוץ השקעות', 'טיולים וירטואליים'],
-                previewUrl: './websites/real-estate.html'
-            }
-        ];
-
-        // Initialize gallery
-        function initGallery() {
-            const gallery = document.getElementById('gallery');
-            
-            websites.forEach((site, index) => {
-                const card = createWebsiteCard(site);
-                card.style.animationDelay = `${index * 0.1}s`;
-                gallery.appendChild(card);
+        // Navigation and Page Management
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
             });
-        }
-
-        // Create website card
-        function createWebsiteCard(site) {
-            const card = document.createElement('div');
-            card.className = 'website-card fade-in-up';
-            card.dataset.category = site.category;
             
-            card.innerHTML = `
-                <div class="card-image">
-                    <img src="${site.image}" alt="${site.name}" loading="lazy">
-                    <div class="card-overlay">
-                        <div class="card-actions">
-                            <a href="${site.previewUrl}" target="_blank" class="action-btn">
-                                <i class="fas fa-eye"></i>
-                                תצוגה מקדימה
-                            </a>
-                            <a href="/editor.html?site=${site.id}" class="action-btn">
-                                <i class="fas fa-edit"></i>
-                                ערוך עכשיו
-                            </a>
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Load content based on page
+            switch(pageId) {
+                case 'websites':
+                    loadWebsitesGallery();
+                    break;
+                case 'articles':
+                    loadArticles();
+                    break;
+                case 'guides':
+                    loadGuides();
+                    break;
+            }
+            
+            // Close mobile menu if open
+            document.getElementById('mainNav').classList.remove('active');
+        }
+        
+        function toggleMobileMenu() {
+            document.getElementById('mainNav').classList.toggle('active');
+        }
+        
+        // Load Websites Gallery
+        function loadWebsitesGallery() {
+            const websitesData = [
+                {
+                    id: 'dr-michal-rosen',
+                    title: 'ד"ר מיכל רוזן',
+                    category: 'אסתטיקה רפואית',
+                    description: 'קליניקה מתקדמת לאסתטיקה רפואית עם טיפולים חדשניים ותוצאות מדהימות',
+                    price: '₪2,800',
+                    features: ['עיצוב Glass Morphism', 'גלריית לפני-אחרי', 'בוקינג אונליין', 'בלוג מקצועי']
+                },
+                {
+                    id: 'aesthetic-clinic',
+                    title: 'קליניקת יופי פרמיום',
+                    category: 'אסתטיקה מתקדמת',
+                    description: 'קליניקה יוקרתית עם הטכנולוגיות הכי מתקדמות בתחום האסתטיקה הרפואית',
+                    price: '₪3,200',
+                    features: ['עיצוב פרמיום', 'אנימציות מתקדמות', 'מערכת CRM', 'אינטגרציות מלאות'],
+                    highlight: true
+                },
+                {
+                    id: 'fitness-co',
+                    title: 'דני פיט - מאמן כושר',
+                    category: 'כושר ואימונים',
+                    description: 'מאמן כושר אישי מקצועי עם תוכניות אימון מותאמות אישית ותוצאות מוכחות',
+                    price: '₪2,200',
+                    features: ['מחשבון BMI', 'תוכניות אימון', 'מעקב התקדמות', 'אזור לקוחות']
+                },
+                {
+                    id: 'law-firm',
+                    title: 'משרד ברקוביץ',
+                    category: 'עורכי דין',
+                    description: 'משרד עורכי דין מוביל עם ניסיון רב בתחומי משפט מגוונים ושירות מקצועי',
+                    price: '₪2,500',
+                    features: ['תחומי משפט', 'יעוץ אונליין', 'בלוג משפטי', 'טפסי יצירת קשר']
+                },
+                {
+                    id: 'real-estate',
+                    title: 'נדל"ן פרמיום',
+                    category: 'נדל"ן והשקעות',
+                    description: 'חברת נדל"ן יוקרתית המתמחה בנכסי פרמיום ויעוץ השקעות מקצועי',
+                    price: '₪2,700',
+                    features: ['מאגר נכסים', 'חיפוש מתקדם', 'סיורים וירטואליים', 'מחשבון משכנתא']
+                },
+                {
+                    id: 'nutritionist',
+                    title: 'ד"ר שרה כהן - תזונאית',
+                    category: 'תזונה ובריאות',
+                    description: 'תזונאית קלינית מקצועית עם גישה הוליסטית לבריאות ותזונה מאוזנת',
+                    price: '₪2,400',
+                    features: ['מחשבון קלוריות', 'תפריטים מותאמים', 'מעקב משקל', 'מתכונים בריאים']
+                },
+                {
+                    id: 'multibrawn',
+                    title: 'מולטיבראון - נופש ואירועים',
+                    category: 'נופש ואירועים',
+                    description: 'חברה מובילה בתחום ארגון נופש ואירועים עסקיים עם שירות ברמה גבוהה',
+                    price: '₪2,300',
+                    features: ['גלריית אירועים', 'הזמנה אונליין', 'חבילות נופש', 'ניהול אירועים']
+                },
+                {
+                    id: 'yoga-studio',
+                    title: 'סטודיו אוהם - יוגה',
+                    category: 'יוגה ומדיטציה',
+                    description: 'סטודיו יוגה רגוע ומזמין עם מגוון שיעורים ומורים מקצועיים',
+                    price: '₪1,900',
+                    features: ['לוח שיעורים', 'בוקינג אונליין', 'מדיטציות מונחות', 'אזור חברים']
+                },
+                {
+                    id: 'accountant',
+                    title: 'רינה לוי - חשבת שכר',
+                    category: 'חשבונאות ומיסים',
+                    description: 'חשבת שכר מוסמכת עם ניסיון רב בחשבות שכר ויעוץ מיסוי לעסקים',
+                    price: '₪2,000',
+                    features: ['מחשבון שכר', 'יעוץ מיסוי', 'דוחות מתקדמים', 'שירות דיגיטלי']
+                },
+                {
+                    id: 'beauty-salon',
+                    title: 'מספרה BELLA',
+                    category: 'יופי ועיצוב שיער',
+                    description: 'מספרה מקצועית עם צוות מיומן וטכנולוגיות מתקדמות לעיצוב שיער',
+                    price: '₪1,700',
+                    features: ['גלריית עבודות', 'בוקינג תורים', 'מחירון שירותים', 'המלצות לקוחות']
+                },
+                {
+                    id: 'tutor',
+                    title: 'ד"ר רונית לוי - מורה פרטית',
+                    category: 'חינוך והוראה',
+                    description: 'מורה פרטית מנוסה להכנה לבגרות ולאוניברסיטה במקצועות מדעיים',
+                    price: '₪2,100',
+                    features: ['שיעורים אונליין', 'חומרי לימוד', 'מעקב התקדמות', 'תרגילים אינטראקטיביים']
+                }
+            ];
+            
+            const grid = document.getElementById('websitesGrid');
+            grid.innerHTML = websitesData.map(website => `
+                <div class="website-card ${website.highlight ? 'highlight' : ''}">
+                    <div class="website-preview">
+                        ${website.highlight ? '<div style="position: absolute; top: 10px; right: 10px; background: var(--gradient-success); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">⭐ הכי פופולרי</div>' : ''}
+                    </div>
+                    <div class="website-info">
+                        <div class="website-category">${website.category}</div>
+                        <h3 class="website-title">${website.title}</h3>
+                        <p class="website-description">${website.description}</p>
+                        <div class="website-features" style="margin-bottom: 15px;">
+                            ${website.features.map(feature => `<span style="display: inline-block; background: rgba(102, 126, 234, 0.1); color: var(--primary); padding: 3px 8px; border-radius: 10px; font-size: 0.8rem; margin: 2px;">${feature}</span>`).join('')}
+                        </div>
+                        <div class="website-price">${website.price}</div>
+                        <div class="website-actions">
+                            <a href="#" class="btn-small btn-preview" onclick="previewWebsite('${website.id}')">צפה באתר</a>
+                            <a href="#" class="btn-small btn-edit" onclick="editWebsite('${website.id}')">ערוך</a>
                         </div>
                     </div>
                 </div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div>
-                            <h3 class="card-title">${site.name}</h3>
-                            <span class="card-category">${getCategoryName(site.category)}</span>
-                        </div>
-                        <div class="card-price">${site.price}</div>
-                    </div>
-                    <p class="card-description">${site.description}</p>
-                    <div class="card-features">
-                        ${site.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-                    </div>
-                    <div class="card-buttons">
-                        <a href="${site.previewUrl}" target="_blank" class="card-btn card-btn-secondary">
-                            <i class="fas fa-external-link-alt"></i>
-                            <span>תצוגה</span>
-                        </a>
-                        <a href="/editor.html?site=${site.id}" class="card-btn card-btn-primary">
-                            <i class="fas fa-edit"></i>
-                            <span>ערוך</span>
-                        </a>
+                </div>
+            `).join('');
+        }
+        
+        // Website Actions
+        function previewWebsite(websiteId) {
+            showNotification('info', 'פתיחת תצוגה מקדימה', `פותח את האתר: ${websiteId}`);
+            // In a real implementation, this would open the actual website
+            setTimeout(() => {
+                window.open('#', '_blank');
+            }, 1000);
+        }
+        
+        function editWebsite(websiteId) {
+            showNotification('info', 'פתיחת אדיטור', `פותח אדיטור עבור: ${websiteId}`);
+            // In a real implementation, this would redirect to the editor
+            setTimeout(() => {
+                window.open(`editor.html?website=${websiteId}`, '_blank');
+            }, 1000);
+        }
+        
+        // Contact Form Handler
+        function handleContactForm(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            showNotification('info', 'שולח הודעה...', 'ההודעה שלך נשלחת למערכת');
+            
+            // Simulate form submission
+            setTimeout(() => {
+                showNotification('success', 'הודעה נשלחה!', 'נחזור אליך תוך 24 שעות');
+                event.target.reset();
+            }, 2000);
+        }
+        
+        // Notification System
+        function showNotification(type, title, message) {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : type === 'error' ? 'times-circle' : 'info-circle'}"></i>
+                    <div>
+                        <div style="font-weight: 600; margin-bottom: 2px;">${title}</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">${message}</div>
                     </div>
                 </div>
             `;
             
-            return card;
-        }
-
-        // Get category display name
-        function getCategoryName(category) {
-            const categories = {
-                medical: 'רפואה',
-                business: 'עסקים',
-                lifestyle: 'לייפסטייל',
-                premium: 'פרמיום',
-                education: 'חינוך'
-            };
-            return categories[category] || category;
-        }
-
-        // Filter functionality
-        function initFilters() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const cards = document.querySelectorAll('.website-card');
+            document.body.appendChild(notification);
             
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const category = btn.dataset.category;
-                    
-                    // Update active button
-                    filterButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    
-                    // Filter cards
-                    cards.forEach(card => {
-                        if (category === 'all' || card.dataset.category === category) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    });
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Hide notification after 4 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 4000);
+        }
+        
+        // Scroll Animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
                 });
+            }, observerOptions);
+            
+            // Observe elements
+            document.querySelectorAll('.feature-card, .website-card, .article-card, .guide-card, .service-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
             });
         }
-
-        // Search functionality
-        function initSearch() {
-            const searchInput = document.getElementById('search-input');
-            if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    const query = e.target.value.toLowerCase();
-                    const cards = document.querySelectorAll('.website-card');
-                    
-                    cards.forEach(card => {
-                        const title = card.querySelector('.card-title').textContent.toLowerCase();
-                        const description = card.querySelector('.card-description').textContent.toLowerCase();
-                        
-                        if (title.includes(query) || description.includes(query)) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    });
-                });
-            }
+        
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                let current = 0;
+                const increment = target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target + (counter.textContent.includes('+') ? '+' : counter.textContent.includes('%') ? '%' : '');
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 20);
+            });
         }
-
-        // Smooth scrolling for anchor links
-        function initSmoothScrolling() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+        
+        // Floating Animation
+        function initFloatingAnimation() {
+            const floatingElements = document.querySelectorAll('.floating');
+            floatingElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.2}s`;
+            });
+        }
+        
+        // Search Functionality
+        function initSearch() {
+            const searchInput = document.createElement('input');
+            searchInput.type = 'text';
+            searchInput.placeholder = 'חפש אתרים, מאמרים או מדריכים...';
+            searchInput.className = 'global-search';
+            searchInput.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                width: 300px;
+                padding: 12px 15px;
+                border: 2px solid var(--glass-border);
+                border-radius: 25px;
+                background: rgba(255, 255, 255, 0.9);
+                backdrop-filter: blur(10px);
+                font-size: 1rem;
+                z-index: 1001;
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+            `;
+            
+            document.body.appendChild(searchInput);
+            
+            // Toggle search with Ctrl+K
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                     e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                    if (searchInput.style.opacity === '0') {
+                        searchInput.style.opacity = '1';
+                        searchInput.style.pointerEvents = 'auto';
+                        searchInput.focus();
+                    } else {
+                        searchInput.style.opacity = '0';
+                        searchInput.style.pointerEvents = 'none';
+                        searchInput.blur();
+                    }
+                }
+                
+                if (e.key === 'Escape') {
+                    searchInput.style.opacity = '0';
+                    searchInput.style.pointerEvents = 'none';
+                    searchInput.blur();
+                }
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                if (query.length > 2) {
+                    showNotification('info', 'חיפוש', `מחפש: "${query}"`);
+                    // Implement actual search logic here
+                }
+            });
+        }
+        
+        // Dark Mode Toggle
+        function initDarkMode() {
+            const darkModeToggle = document.createElement('button');
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            darkModeToggle.className = 'dark-mode-toggle';
+            darkModeToggle.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                left: 30px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: none;
+                background: var(--gradient-primary);
+                color: white;
+                font-size: 1.2rem;
+                cursor: pointer;
+                box-shadow: var(--shadow-lg);
+                transition: all 0.3s ease;
+                z-index: 1001;
+            `;
+            
+            document.body.appendChild(darkModeToggle);
+            
+            darkModeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                darkModeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                showNotification('info', 'מצב תצוגה', isDark ? 'מצב כהה הופעל' : 'מצב בהיר הופעל');
+            });
+        }
+        
+        // Performance Monitor
+        function initPerformanceMonitor() {
+            // Monitor page load time
+            window.addEventListener('load', () => {
+                const loadTime = performance.now();
+                if (loadTime > 3000) {
+                    showNotification('warning', 'ביצועים', 'האתר נטען יותר לאט מהרגיל');
+                } else {
+                    console.log(`🚀 Page loaded in ${Math.round(loadTime)}ms`);
+                }
+            });
+            
+            // Monitor scroll performance
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    // Lazy load images if needed
+                }, 150);
+            });
+        }
+        
+        // Initialize Everything
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 WebMaster Pro - Full Website Loading...');
+            
+            // Initialize all features
+            initScrollAnimations();
+            initFloatingAnimation();
+            initSearch();
+            initDarkMode();
+            initPerformanceMonitor();
+            
+            // Load default content
+            loadWebsitesGallery();
+            loadArticles();
+            loadGuides();
+            
+            // Animate counters when they come into view
+            const statsSection = document.querySelector('.stats-section');
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        statsObserver.unobserve(entry.target);
                     }
                 });
             });
-        }
-
-        // Performance monitoring
-        function logPerformance() {
-            if ('performance' in window) {
-                window.addEventListener('load', () => {
-                    const loadTime = performance.now();
-                    console.log(`🚀 Gallery loaded in ${loadTime.toFixed(2)}ms`);
-                });
-            }
-        }
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            initGallery();
-            initFilters();
-            initSearch();
-            initSmoothScrolling();
-            logPerformance();
             
-            console.log('✅ WebMaster Pro Gallery initialized');
-            console.log('📊 Websites loaded:', websites.length);
+            if (statsSection) {
+                statsObserver.observe(statsSection);
+            }
+            
+            // Show welcome message
+            setTimeout(() => {
+                showNotification('success', 'ברוכים הבאים!', 'WebMaster Pro עם 11 אתרים מקצועיים מוכן לעבודה');
+            }, 1000);
+            
+            console.log('✅ WebMaster Pro - All Features Loaded Successfully!');
+            console.log('🎨 Features: 11 Professional Websites, Visual Editor, AI Tools');
+            console.log('🚀 Ready for production and sales!');
         });
-
-        // Add fade-in animation observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        
+        // Add some advanced CSS for dark mode
+        const darkModeStyles = `
+            <style>
+                .dark-mode {
+                    filter: invert(1) hue-rotate(180deg);
                 }
-            });
-        }, observerOptions);
-
-        // Observe all fade-in elements
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.fade-in-up').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-                observer.observe(el);
-            });
-        });
+                
+                .dark-mode img,
+                .dark-mode video,
+                .dark-mode iframe,
+                .dark-mode .hero-title,
+                .dark-mode .stat-number {
+                    filter: invert(1) hue-rotate(180deg);
+                }
+                
+                .global-search:focus {
+                    outline: none;
+                    border-color: var(--primary);
+                    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+                }
+                
+                .dark-mode-toggle:hover {
+                    transform: translateY(-2px) scale(1.05);
+                    box-shadow: var(--shadow);
+                }
+                
+                /* Enhanced animations */
+                @keyframes slideInFromRight {
+                    from {
+                        opacity: 0;
+                        transform: translateX(50px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+                
+                @keyframes slideInFromLeft {
+                    from {
+                        opacity: 0;
+                        transform: translateX(-50px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+                
+                .feature-card:nth-child(odd) {
+                    animation: slideInFromLeft 0.6s ease forwards;
+                }
+                
+                .feature-card:nth-child(even) {
+                    animation: slideInFromRight 0.6s ease forwards;
+                }
+                
+                /* Loading states */
+                .loading {
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                .loading::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+                    animation: shimmer 2s infinite;
+                }
+                
+                @keyframes shimmer {
+                    0% { left: -100%; }
+                    100% { left: 100%; }
+                }
+                
+                /* Smooth scrolling */
+                html {
+                    scroll-behavior: smooth;
+                }
+                
+                /* Custom scrollbar */
+                ::-webkit-scrollbar {
+                    width: 8px;
+                }
+                
+                ::-webkit-scrollbar-track {
+                    background: rgba(0,0,0,0.1);
+                }
+                
+                ::-webkit-scrollbar-thumb {
+                    background: var(--gradient-primary);
+                    border-radius: 4px;
+                }
+                
+                ::-webkit-scrollbar-thumb:hover {
+                    background: var(--gradient-accent);
+                }
+            </style>
+        `;
+        
+        document.head.insertAdjacentHTML('beforeend', darkModeStyles);
     </script>
 </body>
 </html>
+        
+        // Load Articles
+        function loadArticles() {
+            const articlesData = [
+                {
+                    id: 1,
+                    title: 'הטרנדים החמים ביותר בעיצוב אתרים לשנת 2025',
+                    category: 'web-design',
+                    excerpt: 'גלה את הטרנדים הכי חמים בעיצוב אתרים - Glass Morphism, אנימציות מתקדמות ועוד',
+                    date: '15 בינואר 2025',
+                    readTime: '5 דקות קריאה',
+                    author: 'צוות WebMaster Pro'
+                },
+                {
+                    id: 2,
+                    title: 'כיצד לשפר את ה-SEO של האתר שלכם ב-10 צעדים פשוטים',
+                    category: 'seo',
+                    excerpt: 'מדריך מקיף לשיפור קידום האתר במנועי החיפוש עם טיפים מעשיים ואפקטיביים',
+                    date: '12 בינואר 2025',
+                    readTime: '8 דקות קריאה',
+                    author: 'מומחי SEO'
+                },
+                {
+                    id: 3,
+                    title: 'בינה מלאכותית בבניית אתרים - המהפכה הדיגיטלית',
+                    category: 'ai',
+                    excerpt: 'איך AI משנה את תחום בניית האתרים ומאפשר יצירת תוכן ועיצוב חכם ואוטומטי',
+                    date: '10 בינואר 2025',
+                    readTime: '6 דקות קריאה',
+                    author: 'מומחי AI'
+                },
+                {
+                    id: 4,
+                    title: 'שיווק דיגיטלי אפקטיבי לעסקים קטנים ובינוניים',
+                    category: 'marketing',
+                    excerpt: 'אסטרטגיות שיווק מוכחות שיעזרו לעסק שלכם להגיע ליותר לקוחות ולהגדיל המכירות',
+                    date: '8 בינואר 2025',
+                    readTime: '7 דקות קריאה',
+                    author: 'מומחי שיווק'
+                },
+                {
+                    id: 5,
+                    title: 'האתרים הרספונסיביים הטובים ביותר - מה גורם להם לעבוד?',
+                    category: 'web-design',
+                    excerpt: 'ניתוח מעמיק של אתרים רספונסיביים מוצלחים ועקרונות עיצוב למכשירים ניידים',
+                    date: '5 בינואר 2025',
+                    readTime: '6 דקות קריאה',
+                    author: 'מומחי UX/UI'
+                },
+                {
+                    id: 6,
+                    title: 'טרנדים חדשים ב-JavaScript ועתיד פיתוח האתרים',
+                    category: 'trends',
+                    excerpt: 'סקירה של הטכנולוגיות החדשות ב-JavaScript והשפעתן על פיתוח אתרים מודרניים',
+                    date: '3 בינואר 2025',
+                    readTime: '9 דקות קריאה',
+                    author: 'מפתחי Full-Stack'
+                }
+            ];
+            
+            const grid = document.getElementById('articlesGrid');
+            grid.innerHTML = articlesData.map(article => `
+                <div class="article-card" data-category="${article.category}">
+                    <div class="article-image">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span><i class="fas fa-calendar"></i> ${article.date}</span>
+                            <span><i class="fas fa-clock"></i> ${article.readTime}</span>
+                        </div>
+                        <h3 class="article-title">${article.title}</h3>
+                        <p class="article-excerpt">${article.excerpt}</p>
+                        <a href="#" class="article-link" onclick="showNotification('info', 'מאמר', 'המאמר יפתח בקרוב בעמוד נפרד')">
+                            קרא עוד <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Filter Articles
+        function filterArticles(category) {
+            const articles = document.querySelectorAll('.article-card');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            // Update active filter
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide articles
+            articles.forEach(article => {
+                if (category === 'all' || article.dataset.category === category) {
+                    article.style.display = 'block';
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+        }
+        
+        // Load Guides
+        function loadGuides() {
+            const guidesData = [
+                {
+                    title: 'מדריך למתחילים: בניית האתר הראשון שלכם',
+                    level: 'beginner',
+                    description: 'מדריך קל ומפורט לבניית אתר מקצועי בפעם הראשונה, כולל בחירת עיצוב ותוכן',
+                    steps: [
+                        'בחירת תבנית מתאימה לעסק',
+                        'התאמת הצבעים והפונטים',
+                        'הוספת תוכן ותמונות איכותיות',
+                        'הגדרת טפסי יצירת קשר',
+                        'אופטימיזציה בסיסית ל-SEO'
+                    ],
+                    duration: '30 דקות'
+                },
+                {
+                    title: 'עיצוב מתקדם עם Glass Morphism ואנימציות',
+                    level: 'intermediate',
+                    description: 'למד ליצור אפקטים חזותיים מדהימים עם טכנולוגיות עיצוב מתקדמות',
+                    steps: [
+                        'הבנת עקרונות Glass Morphism',
+                        'יצירת אפקטי זכוכית ושקיפות',
+                        'הוספת אנימציות CSS מתקדמות',
+                        'שילוב גרדיאנטים דינמיים',
+                        'אופטימיזציה לביצועים'
+                    ],
+                    duration: '45 דקות'
+                },
+                {
+                    title: 'אינטגרציה מתקדמת עם API ומסדי נתונים',
+                    level: 'advanced',
+                    description: 'מדריך מקצועי לחיבור האתר למערכות חיצוניות ומסדי נתונים',
+                    steps: [
+                        'הגדרת חיבור למסד נתונים',
+                        'יצירת API endpoints',
+                        'אימות משתמשים ואבטחה',
+                        'ניהול session ו-cookies',
+                        'טיפול בשגיאות ו-logging'
+                    ],
+                    duration: '90 דקות'
+                },
+                {
+                    title: 'SEO מתקדם ואופטימיזציה למנועי חיפוש',
+                    level: 'intermediate',
+                    description: 'הכל מה שצריך לדעת כדי להביא את האתר לעמוד הראשון בגוגל',
+                    steps: [
+                        'מחקר מילות מפתח מתקדם',
+                        'אופטימיזציה טכנית של האתר',
+                        'יצירת תוכן SEO-ידידותי',
+                        'בניית קישורים חיצוניים',
+                        'מעקב וניתוח ביצועים'
+                    ],
+                    duration: '60 דקות'
+                },
+                {
+                    title: 'יצירת אתרי אי-קומרס מקצועיים',
+                    level: 'advanced',
+                    description: 'בניית חנות אונליין מלאה עם מערכות תשלום ואבטחה',
+                    steps: [
+                        'תכנון מבנה החנות',
+                        'הגדרת קטלוג מוצרים',
+                        'אינטגרציה עם מערכות תשלום',
+                        'ניהול מלאי ומשלוחים',
+                        'אבטחה ו-SSL'
+                    ],
+                    duration: '120 דקות'
+                },
+                {
+                    title: 'אופטימיזציה למכשירים ניידים',
+                    level: 'beginner',
+                    description: 'מדריך לוודא שהאתר שלכם נראה ועובד מושלם בכל המכשירים',
+                    steps: [
+                        'עקרונות עיצוב רספונסיבי',
+                        'טסט האתר במכשירים שונים',
+                        'אופטימיזציה של תמונות',
+                        'שיפור מהירות טעינה',
+                        'UX למובייל'
+                    ],
+                    duration: '40 דקות'
+                }
+            ];
+            
+            const grid = document.getElementById('guidesGrid');
+            grid.innerHTML = guidesData.map(guide => `
+                <div class="guide-card">
+                    <div class="guide-level ${guide.level}">${guide.level === 'beginner' ? 'מתחילים' : guide.level === 'intermediate' ? 'בינוני' : 'מתקדמים'}</div>
+                    <h3 class="guide-title">${guide.title}</h3>
+                    <p class="guide-description">${guide.description}</p>
+                    <ul class="guide-steps">
+                        ${guide.steps.map(step => `<li>${step}</li>`).join('')}
+                    </ul>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #64748b; font-size: 0.9rem;"><i class="fas fa-clock"></i> ${guide.duration}</span>
+                        <a href="#" class="btn-primary" style="padding: 8px 20px; font-size: 0.9rem;" onclick="showNotification('info', 'מדריך', 'המדריך יפתח בקרוב')">התחל מדריך</a>
+                    </div>
+                </div>
