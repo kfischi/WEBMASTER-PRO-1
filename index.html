@@ -542,20 +542,49 @@
                 <div class="website-card premium">
                     <div class="premium-badge"><i class="fas fa-rocket"></i> גבוה ביותר</div>
                     <div class="website-preview">
-                        <div style="background: linear-gradient(45deg, #667eea, #764ba2); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
-                            <i class="fas fa-rocket"></i>
-                        </div>
+                        <img src="https://i.imghippo.com/files/sWlf1880WKM.png" alt="דף נחיתה פרמיום" class="preview-image">
                     </div>
                     <div class="website-info">
                         <div class="website-category">דף נחיתה מתקדם</div>
                         <h3 class="website-title">דף נחיתה לסטארטאפ</h3>
                         <p class="website-description">דף נחיתה מותאם לסטארטאפים עם conversion rate גבוה</p>
+                        <div class="website-features">
+                            <span class="feature-tag">A/B Testing</span>
+                            <span class="feature-tag">Analytics</span>
+                            <span class="feature-tag">Forms</span>
+                            <span class="feature-tag">CTA Optimization</span>
+                        </div>
                         <div class="website-price">₪3,500</div>
                         <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="showComingSoon()">
+                            <button class="btn-small btn-preview" onclick="showComingSoon('דף נחיתה')">
                                 <i class="fas fa-eye"></i> תצוגה מקדימה
                             </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon()">
+                            <button class="btn-small btn-edit" onclick="showComingSoon('דף נחיתה')">
+                                <i class="fas fa-edit"></i> ערוך
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="website-card">
+                    <div class="website-preview">
+                        <img src="https://i.imghippo.com/files/WiRp8302YJs.png" alt="דף נחיתה עסקי" class="preview-image">
+                    </div>
+                    <div class="website-info">
+                        <div class="website-category">דף נחיתה עסקי</div>
+                        <h3 class="website-title">דף נחיתה עסק קטן</h3>
+                        <p class="website-description">דף נחיתה פשוט ויעיל לעסקים קטנים ומקצועות חופשיים</p>
+                        <div class="website-features">
+                            <span class="feature-tag">נקי ופשוט</span>
+                            <span class="feature-tag">מהיר לטעינה</span>
+                            <span class="feature-tag">SEO Ready</span>
+                        </div>
+                        <div class="website-price">₪2,200</div>
+                        <div class="website-actions">
+                            <button class="btn-small btn-preview" onclick="showComingSoon('דף נחיתה עסקי')">
+                                <i class="fas fa-eye"></i> תצוגה מקדימה
+                            </button>
+                            <button class="btn-small btn-edit" onclick="showComingSoon('דף נחיתה עסקי')">
                                 <i class="fas fa-edit"></i> ערוך
                             </button>
                         </div>
@@ -576,21 +605,49 @@
             <div class="websites-grid">
                 <div class="website-card">
                     <div class="website-preview">
-                        <div style="background: var(--gradient-primary); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
+                        <img src="https://i.imghippo.com/files/htWG9491QkE.png" alt="דשבורד ניהול" class="preview-image">
                     </div>
                     <div class="website-info">
                         <div class="website-category">מערכת ניהול</div>
                         <h3 class="website-title">דשבורד ניהול</h3>
                         <p class="website-description">מערכת ניהול מתקדמת לכל הפרויקטים והלקוחות</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Analytics</span>
+                            <span class="feature-tag">CRM</span>
+                            <span class="feature-tag">Reporting</span>
+                        </div>
                         <div class="website-price">פנימי</div>
                         <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="showComingSoon()">
+                            <button class="btn-small btn-preview" onclick="openEditor()">
+                                <i class="fas fa-eye"></i> פתח מערכת
+                            </button>
+                            <button class="btn-small btn-edit" onclick="openEditor()">
+                                <i class="fas fa-cog"></i> ניהול
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="website-card">
+                    <div class="website-preview">
+                        <img src="https://i.imghippo.com/files/rhNp2418oyE.png" alt="אתר תדמיתי" class="preview-image">
+                    </div>
+                    <div class="website-info">
+                        <div class="website-category">אתר תדמיתי</div>
+                        <h3 class="website-title">אתר החברה</h3>
+                        <p class="website-description">האתר הראשי של WebMaster Pro - חברת פיתוח האתרים</p>
+                        <div class="website-features">
+                            <span class="feature-tag">תדמיתי</span>
+                            <span class="feature-tag">מקצועי</span>
+                            <span class="feature-tag">עדכני</span>
+                        </div>
+                        <div class="website-price">פנימי</div>
+                        <div class="website-actions">
+                            <button class="btn-small btn-preview" onclick="showComingSoon('אתר החברה')">
                                 <i class="fas fa-eye"></i> צפייה
                             </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon()">
-                                <i class="fas fa-cog"></i> ניהול
+                            <button class="btn-small btn-edit" onclick="showComingSoon('אתר החברה')">
+                                <i class="fas fa-edit"></i> עריכה
                             </button>
                         </div>
                     </div>
@@ -610,20 +667,48 @@
             <div class="websites-grid">
                 <div class="website-card">
                     <div class="website-preview">
-                        <div style="background: var(--gradient-accent); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
+                        <img src="https://i.imghippo.com/files/pL5530Z.png" alt="מדריך בניית אתרים" class="preview-image">
                     </div>
                     <div class="website-info">
                         <div class="website-category">מאמר מקצועי</div>
                         <h3 class="website-title">מדריך בניית אתרים 2025</h3>
                         <p class="website-description">המדריך המלא לבניית אתרים מקצועיים בשנת 2025</p>
+                        <div class="website-features">
+                            <span class="feature-tag">מלא ומפורט</span>
+                            <span class="feature-tag">עדכני</span>
+                            <span class="feature-tag">מעשי</span>
+                        </div>
                         <div class="website-price">חינם</div>
                         <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="showComingSoon()">
+                            <button class="btn-small btn-preview" onclick="showComingSoon('מדריך בניית אתרים')">
                                 <i class="fas fa-eye"></i> קרא
                             </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon()">
+                            <button class="btn-small btn-edit" onclick="showComingSoon('מדריך בניית אתרים')">
+                                <i class="fas fa-share"></i> שתף
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="website-card">
+                    <div class="website-preview">
+                        <img src="https://i.imghippo.com/files/Ceu2132Q.png" alt="SEO למתחילים" class="preview-image">
+                    </div>
+                    <div class="website-info">
+                        <div class="website-category">מאמר SEO</div>
+                        <h3 class="website-title">SEO למתחילים</h3>
+                        <p class="website-description">כל מה שצריך לדעת על קידום אתרים בגוגל</p>
+                        <div class="website-features">
+                            <span class="feature-tag">למתחילים</span>
+                            <span class="feature-tag">מעשי</span>
+                            <span class="feature-tag">דוגמאות</span>
+                        </div>
+                        <div class="website-price">חינם</div>
+                        <div class="website-actions">
+                            <button class="btn-small btn-preview" onclick="showComingSoon('מדריך SEO')">
+                                <i class="fas fa-eye"></i> קרא
+                            </button>
+                            <button class="btn-small btn-edit" onclick="showComingSoon('מדריך SEO')">
                                 <i class="fas fa-share"></i> שתף
                             </button>
                         </div>
@@ -644,20 +729,48 @@
             <div class="websites-grid">
                 <div class="website-card">
                     <div class="website-preview">
-                        <div style="background: linear-gradient(45deg, #10b981, #059669); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
-                            <i class="fas fa-book-open"></i>
-                        </div>
+                        <img src="https://i.imghippo.com/files/eJk7179MXo.png" alt="מדריך אדיטור" class="preview-image">
                     </div>
                     <div class="website-info">
                         <div class="website-category">מדריך מפורט</div>
                         <h3 class="website-title">שימוש באדיטור AI</h3>
                         <p class="website-description">מדריך מלא לשימוש באדיטור הויזואלי עם AI</p>
+                        <div class="website-features">
+                            <span class="feature-tag">שלב אחר שלב</span>
+                            <span class="feature-tag">וידאו</span>
+                            <span class="feature-tag">דוגמאות</span>
+                        </div>
                         <div class="website-price">חינם</div>
                         <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="showComingSoon()">
+                            <button class="btn-small btn-preview" onclick="openEditor()">
+                                <i class="fas fa-play"></i> התחל מדריך
+                            </button>
+                            <button class="btn-small btn-edit" onclick="showComingSoon('מדריך אדיטור')">
+                                <i class="fas fa-download"></i> הורד
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="website-card">
+                    <div class="website-preview">
+                        <img src="https://i.imghippo.com/files/xnK4816Hc.png" alt="מדריך מכירות" class="preview-image">
+                    </div>
+                    <div class="website-info">
+                        <div class="website-category">מדריך עסקי</div>
+                        <h3 class="website-title">מכירת אתרים ללקוחות</h3>
+                        <p class="website-description">איך למכור אתרים מקצועיים ולבנות עסק רווחי</p>
+                        <div class="website-features">
+                            <span class="feature-tag">עסקי</span>
+                            <span class="feature-tag">מכירות</span>
+                            <span class="feature-tag">רווחיות</span>
+                        </div>
+                        <div class="website-price">חינם</div>
+                        <div class="website-actions">
+                            <button class="btn-small btn-preview" onclick="showComingSoon('מדריך מכירות')">
                                 <i class="fas fa-eye"></i> צפה
                             </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon()">
+                            <button class="btn-small btn-edit" onclick="showComingSoon('מדריך מכירות')">
                                 <i class="fas fa-download"></i> הורד
                             </button>
                         </div>
@@ -903,18 +1016,41 @@
             grid.innerHTML = websiteCards;
         }
 
-        // Open Editor Function - Fixed!
+        // Open Editor Function - עם השם הנכון!
         function openEditor() {
-            // פתח את האדיטור שלנו (ההשם האמיתי)
-            window.open('webmaster_editor_fixed.html', '_blank', 'width=1400,height=900');
-            showNotification('success', 'פותח אדיטור AI', 'האדיטור נפתח בחלון חדש');
+            // השם הנכון של האדיטור
+            var editorFile = 'webmaster_editor_fixed.html';
+            
+            // נסה לפתוח את האדיטור
+            var newWindow = window.open(editorFile, '_blank', 'width=1400,height=900');
+            
+            // אם החלון לא נפתח או נחסם על ידי חוסם פופאפים
+            if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                // נסה לפתוח בטאב הנוכחי
+                alert('חוסם פופאפים זוהה. האדיטור ייפתח בטאב הנוכחי.');
+                window.location.href = editorFile;
+            } else {
+                showNotification('success', 'פותח אדיטור AI', 'האדיטור נפתח בחלון חדש');
+            }
         }
 
-        // Edit Website Function - Fixed!
+        // Edit Website Function - עם השם הנכון!
         function editWebsite(websiteId) {
-            // פתח את האדיטור עם האתר הספציפי
-            window.open(`webmaster_editor_fixed.html?website=${websiteId}`, '_blank', 'width=1400,height=900');
-            showNotification('success', 'פותח אדיטור', `עורך את ${websiteId} באדיטור AI`);
+            // השם הנכון של האדיטור עם פרמטר
+            var editorUrl = `webmaster_editor_fixed.html?website=${websiteId}`;
+            
+            // נסה לפתוח חלון חדש
+            var newWindow = window.open(editorUrl, '_blank', 'width=1400,height=900');
+            
+            // אם החלון לא נפתח או נחסם על ידי חוסם פופאפים
+            if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                // נסה לפתוח בטאב הנוכחי
+                if (confirm(`האם ברצונך לפתוח את האדיטור לעריכת ${websiteId} בטאב הנוכחי?`)) {
+                    window.location.href = editorUrl;
+                }
+            } else {
+                showNotification('success', 'פותח אדיטור', `עורך את ${websiteId} באדיטור AI`);
+            }
         }
 
         // Preview Website Function
@@ -927,8 +1063,8 @@
         }
 
         // Coming Soon Function
-        function showComingSoon() {
-            showNotification('info', 'בקרוב!', 'התכונה הזו תהיה זמינה בקרוב');
+        function showComingSoon(itemName) {
+            showNotification('info', `${itemName || 'התכונה הזו'} בקרוב!`, 'התכונה הזו תהיה זמינה בקרוב');
         }
 
         // Notification System
