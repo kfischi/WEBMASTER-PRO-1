@@ -6,7 +6,6 @@
     <title>WebMaster Pro - גלריית אתרים מקצועיים</title>
     <meta name="description" content="גלריה של 11 אתרים מקצועיים ברמה עולמית עם אדיטור ויזואלי מתקדם">
     
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -292,12 +291,6 @@
             transform: scale(1.05);
         }
         
-        .preview-placeholder {
-            font-size: 4rem;
-            color: white;
-            opacity: 0.8;
-        }
-        
         .website-info {
             padding: 25px;
         }
@@ -434,6 +427,10 @@
             .container {
                 padding: 0 15px;
             }
+            
+            .header-nav {
+                display: none;
+            }
         }
         
         /* Notification System */
@@ -473,16 +470,17 @@
                 </div>
                 
                 <nav class="header-nav">
-                    <a href="#gallery" class="nav-link">גלריה</a>
-                    <a href="#editor" class="nav-link">אדיטור</a>
-                    <a href="#pricing" class="nav-link">מחירים</a>
-                    <a href="#contact" class="nav-link">צור קשר</a>
+                    <a href="#gallery" class="nav-link">גלריית אתרים</a>
+                    <a href="#landing-pages" class="nav-link">דפי נחיתה</a>
+                    <a href="#our-sites" class="nav-link">האתרים שלנו</a>
+                    <a href="#articles" class="nav-link">מאמרים</a>
+                    <a href="#guides" class="nav-link">מדריכים</a>
                 </nav>
                 
-                <a href="#editor" class="btn btn-primary">
+                <button class="btn btn-primary" onclick="openEditor()">
                     <i class="fas fa-edit"></i>
-                    התחל לערוך
-                </a>
+                    פתח אדיטור AI
+                </button>
             </div>
         </div>
     </header>
@@ -532,6 +530,143 @@
         </div>
     </section>
 
+    <!-- Landing Pages Section -->
+    <section class="gallery-section" id="landing-pages" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">דפי נחיתה מתקדמים</h2>
+            <p class="section-description">
+                דפי נחיתה מקצועיים עם conversion גבוה ואופטימיזציה למכירות
+            </p>
+            
+            <div class="websites-grid">
+                <div class="website-card premium">
+                    <div class="premium-badge"><i class="fas fa-rocket"></i> גבוה ביותר</div>
+                    <div class="website-preview">
+                        <div style="background: linear-gradient(45deg, #667eea, #764ba2); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                    <div class="website-info">
+                        <div class="website-category">דף נחיתה מתקדם</div>
+                        <h3 class="website-title">דף נחיתה לסטארטאפ</h3>
+                        <p class="website-description">דף נחיתה מותאם לסטארטאפים עם conversion rate גבוה</p>
+                        <div class="website-price">₪3,500</div>
+                        <div class="website-actions">
+                            <button class="btn-small btn-preview" onclick="showComingSoon()">
+                                <i class="fas fa-eye"></i> תצוגה מקדימה
+                            </button>
+                            <button class="btn-small btn-edit" onclick="showComingSoon()">
+                                <i class="fas fa-edit"></i> ערוך
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Sites Section -->
+    <section class="gallery-section" id="our-sites" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">האתרים שלנו</h2>
+            <p class="section-description">
+                האתרים הפנימיים של WebMaster Pro ומערכות הניהול
+            </p>
+            
+            <div class="websites-grid">
+                <div class="website-card">
+                    <div class="website-preview">
+                        <div style="background: var(--gradient-primary); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="website-info">
+                        <div class="website-category">מערכת ניהול</div>
+                        <h3 class="website-title">דשבורד ניהול</h3>
+                        <p class="website-description">מערכת ניהול מתקדמת לכל הפרויקטים והלקוחות</p>
+                        <div class="website-price">פנימי</div>
+                        <div class="website-actions">
+                            <button class="btn-small btn-preview" onclick="showComingSoon()">
+                                <i class="fas fa-eye"></i> צפייה
+                            </button>
+                            <button class="btn-small btn-edit" onclick="showComingSoon()">
+                                <i class="fas fa-cog"></i> ניהול
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section class="gallery-section" id="articles" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">מאמרים מקצועיים</h2>
+            <p class="section-description">
+                מאמרים ומדריכים בתחום בניית אתרים ושיווק דיגיטלי
+            </p>
+            
+            <div class="websites-grid">
+                <div class="website-card">
+                    <div class="website-preview">
+                        <div style="background: var(--gradient-accent); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                    </div>
+                    <div class="website-info">
+                        <div class="website-category">מאמר מקצועי</div>
+                        <h3 class="website-title">מדריך בניית אתרים 2025</h3>
+                        <p class="website-description">המדריך המלא לבניית אתרים מקצועיים בשנת 2025</p>
+                        <div class="website-price">חינם</div>
+                        <div class="website-actions">
+                            <button class="btn-small btn-preview" onclick="showComingSoon()">
+                                <i class="fas fa-eye"></i> קרא
+                            </button>
+                            <button class="btn-small btn-edit" onclick="showComingSoon()">
+                                <i class="fas fa-share"></i> שתף
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guides Section -->
+    <section class="gallery-section" id="guides" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">מדריכים מפורטים</h2>
+            <p class="section-description">
+                מדריכים שלב-אחר-שלב לעבודה עם המערכת והאדיטור
+            </p>
+            
+            <div class="websites-grid">
+                <div class="website-card">
+                    <div class="website-preview">
+                        <div style="background: linear-gradient(45deg, #10b981, #059669); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                    </div>
+                    <div class="website-info">
+                        <div class="website-category">מדריך מפורט</div>
+                        <h3 class="website-title">שימוש באדיטור AI</h3>
+                        <p class="website-description">מדריך מלא לשימוש באדיטור הויזואלי עם AI</p>
+                        <div class="website-price">חינם</div>
+                        <div class="website-actions">
+                            <button class="btn-small btn-preview" onclick="showComingSoon()">
+                                <i class="fas fa-eye"></i> צפה
+                            </button>
+                            <button class="btn-small btn-edit" onclick="showComingSoon()">
+                                <i class="fas fa-download"></i> הורד
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -569,9 +704,8 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Website Data with Professional Images
+        // Website Data with Updated Images
         const websitesData = [
             {
                 id: 'aesthetic-clinic',
@@ -580,10 +714,8 @@
                 description: 'קליניקה יוקרתית עם הטכנולוגיות הכי מתקדמות בתחום האסתטיקה הרפואית',
                 price: '₪3,200',
                 features: ['עיצוב פרמיום', 'אנימציות מתקדמות', 'מערכת CRM', 'אינטגרציות מלאות'],
-                image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=250&fit=crop&crop=center',
-                isPremium: true,
-                demoUrl: 'aesthetic-clinic.html',
-                editorUrl: 'webmaster-editor.html?website=aesthetic-clinic'
+                image: 'https://i.imghippo.com/files/sWlf1880WKM.png',
+                isPremium: true
             },
             {
                 id: 'dr-michal-rosen',
@@ -592,10 +724,8 @@
                 description: 'קליניקה מתקדמת לאסתטיקה רפואית עם טיפולים חדשניים ותוצאות מדהימות',
                 price: '₪2,800',
                 features: ['עיצוב Glass Morphism', 'גלריית לפני-אחרי', 'בוקינג אונליין', 'בלוג מקצועי'],
-                image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop&crop=center',
-                isPremium: false,
-                demoUrl: 'dr-michal-rosen.html',
-                editorUrl: 'webmaster-editor.html?website=dr-michal-rosen'
+                image: 'https://i.imghippo.com/files/Ayyb2287TOc.png',
+                isPremium: false
             },
             {
                 id: 'real-estate',
@@ -604,10 +734,8 @@
                 description: 'חברת נדל"ן יוקרתית המתמחה בנכסי פרמיום ויעוץ השקעות מקצועי',
                 price: '₪2,700',
                 features: ['מאגר נכסים', 'חיפוש מתקדם', 'סיורים וירטואליים', 'מחשבון משכנתא'],
-                image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=250&fit=crop&crop=center',
-                isPremium: false,
-                demoUrl: 'real-estate.html',
-                editorUrl: 'webmaster-editor.html?website=real-estate'
+                image: 'https://i.imghippo.com/files/htWG9491QkE.png',
+                isPremium: false
             },
             {
                 id: 'law-firm',
@@ -616,10 +744,8 @@
                 description: 'משרד עורכי דין מוביל עם ניסיון רב בתחומי משפט מגוונים ושירות מקצועי',
                 price: '₪2,500',
                 features: ['תחומי משפט', 'יעוץ אונליין', 'בלוג משפטי', 'טפסי יצירת קשר'],
-                image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=250&fit=crop&crop=center',
-                isPremium: false,
-                demoUrl: 'law-firm.html',
-                editorUrl: 'webmaster-editor.html?website=law-firm'
+                image: 'https://i.imghippo.com/files/hVyV3858OQ.png',
+                isPremium: false
             },
             {
                 id: 'nutritionist',
@@ -628,10 +754,8 @@
                 description: 'תזונאית קלינית מקצועית עם גישה הוליסטית לבריאות ותזונה מאוזנת',
                 price: '₪2,400',
                 features: ['מחשבון קלוריות', 'תפריטים מותאמים', 'מעקב משקל', 'מתכונים בריאים'],
-                image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=250&fit=crop&crop=center',
-                isPremium: false,
-                demoUrl: 'nutritionist.html',
-                editorUrl: 'webmaster-editor.html?website=nutritionist'
+                image: 'https://i.imghippo.com/files/rhNp2418oyE.png',
+                isPremium: false
             },
             {
                 id: 'multibrawn',
@@ -640,10 +764,8 @@
                 description: 'חברה מובילה בתחום ארגון נופש ואירועים עסקיים עם שירות ברמה גבוהה',
                 price: '₪2,300',
                 features: ['גלריית אירועים', 'הזמנה אונליין', 'חבילות נופש', 'ניהול אירועים'],
-                image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=250&fit=crop&crop=center',
-                isPremium: false,
-                demoUrl: 'multibrawn.html',
-                editorUrl: 'webmaster-editor.html?website=multibrawn'
+                image: 'https://i.imghippo.com/files/pL5530Z.png',
+                isPremium: false
             },
             {
                 id: 'fitness-co',
@@ -652,10 +774,8 @@
                 description: 'מאמן כושר אישי מקצועי עם תוכניות אימון מותאמות אישית ותוצאות מוכחות',
                 price: '₪2,200',
                 features: ['מחשבון BMI', 'תוכניות אימון', 'מעקב התקדמות', 'אזור לקוחות'],
-                image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop&crop=center',
-                isPremium: false,
-                demoUrl: 'fitness-co.html',
-                editorUrl: 'webmaster-editor.html?website=fitness-co'
+                image: 'https://i.imghippo.com/files/WiRp8302YJs.png',
+                isPremium: false
             },
             {
                 id: 'tutor',
@@ -664,10 +784,8 @@
                 description: 'מורה פרטית מנוסה להכנה לבגרות ולאוניברסיטה במקצועות מדעיים',
                 price: '₪2,100',
                 features: ['שיעורים אונליין', 'חומרי לימוד', 'מעקב התקדמות', 'תרגילים אינטראקטיביים'],
-                image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=250&fit=crop&crop=center',
-                isPremium: false,
-                demoUrl: 'tutor.html',
-                editorUrl: 'webmaster-editor.html?website=tutor'
+                image: 'https://i.imghippo.com/files/Ceu2132Q.png',
+                isPremium: false
             },
             {
                 id: 'accountant',
@@ -676,10 +794,8 @@
                 description: 'חשבת שכר מוסמכת עם ניסיון רב בחשבות שכר ויעוץ מיסוי לעסקים',
                 price: '₪2,000',
                 features: ['מחשבון שכר', 'יעוץ מיסוי', 'דוחות מתקדמים', 'שירות דיגיטלי'],
-                image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop&crop=center',
-                isPremium: false,
-                demoUrl: 'accountant.html',
-                editorUrl: 'webmaster-editor.html?website=accountant'
+                image: 'https://i.imghippo.com/files/tGN5433dAU.png',
+                isPremium: false
             },
             {
                 id: 'yoga-studio',
@@ -688,10 +804,8 @@
                 description: 'סטודיו יוגה רגוע ומזמין עם מגוון שיעורים ומורים מקצועיים',
                 price: '₪1,900',
                 features: ['לוח שיעורים', 'בוקינג אונליין', 'מדיטציות מונחות', 'אזור חברים'],
-                image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=250&fit=crop&crop=center',
-                isPremium: false,
-                demoUrl: 'yoga-studio.html',
-                editorUrl: 'webmaster-editor.html?website=yoga-studio'
+                image: 'https://i.imghippo.com/files/eJk7179MXo.png',
+                isPremium: false
             },
             {
                 id: 'beauty-salon',
@@ -700,12 +814,54 @@
                 description: 'מספרה מקצועית עם צוות מיומן וטכנולוגיות מתקדמות לעיצוב שיער',
                 price: '₪1,700',
                 features: ['גלריית עבודות', 'בוקינג תורים', 'מחירון שירותים', 'המלצות לקוחות'],
-                image: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=250&fit=crop&crop=center',
-                isPremium: false,
-                demoUrl: 'beauty-salon.html',
-                editorUrl: 'webmaster-editor.html?website=beauty-salon'
+                image: 'https://i.imghippo.com/files/xnK4816Hc.png',
+                isPremium: false
             }
         ];
+
+        // Navigation Functions
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.gallery-section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+            
+            // Update nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.style.color = 'var(--dark)';
+            });
+            
+            // Highlight active nav
+            const activeLink = document.querySelector(`[href="#${sectionId}"]`);
+            if (activeLink) {
+                activeLink.style.color = 'var(--primary)';
+            }
+        }
+
+        // Add click events to navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    const sectionId = href.replace('#', '');
+                    showSection(sectionId);
+                });
+            });
+            
+            // Load gallery by default
+            loadGallery();
+            showNotification('success', 'גלריה טעונה!', 'כל 11 האתרים מוכנים לצפייה ועריכה');
+        });
 
         // Load Gallery
         function loadGallery() {
@@ -733,12 +889,12 @@
                         <div class="website-price">${website.price}</div>
                         
                         <div class="website-actions">
-                            <a href="#" class="btn-small btn-preview" onclick="previewWebsite('${website.id}', event)">
+                            <button class="btn-small btn-preview" onclick="previewWebsite('${website.id}')">
                                 <i class="fas fa-eye"></i> צפה באתר
-                            </a>
-                            <a href="#" class="btn-small btn-edit" onclick="editWebsite('${website.id}', event)">
+                            </button>
+                            <button class="btn-small btn-edit" onclick="editWebsite('${website.id}')">
                                 <i class="fas fa-edit"></i> ערוך אתר
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -747,26 +903,32 @@
             grid.innerHTML = websiteCards;
         }
 
+        // Open Editor Function - Fixed!
+        function openEditor() {
+            // פתח את האדיטור שלנו (ההשם האמיתי)
+            window.open('webmaster_editor_fixed.html', '_blank', 'width=1400,height=900');
+            showNotification('success', 'פותח אדיטור AI', 'האדיטור נפתח בחלון חדש');
+        }
+
+        // Edit Website Function - Fixed!
+        function editWebsite(websiteId) {
+            // פתח את האדיטור עם האתר הספציפי
+            window.open(`webmaster_editor_fixed.html?website=${websiteId}`, '_blank', 'width=1400,height=900');
+            showNotification('success', 'פותח אדיטור', `עורך את ${websiteId} באדיטור AI`);
+        }
+
         // Preview Website Function
-        function previewWebsite(websiteId, event) {
-            event.preventDefault();
-            showNotification('info', 'פותח תצוגה מקדימה', `פותח את האתר: ${websiteId}`);
+        function previewWebsite(websiteId) {
+            showNotification('info', 'תצוגה מקדימה', `פותח תצוגה מקדימה של ${websiteId}`);
             
             setTimeout(() => {
-                const websiteUrl = `${websiteId}.html`;
-                window.open(websiteUrl, '_blank');
+                window.open(`${websiteId}.html`, '_blank');
             }, 500);
         }
 
-        // Edit Website Function  
-        function editWebsite(websiteId, event) {
-            event.preventDefault();
-            showNotification('success', 'פותח אדיטור', `פותח אדיטור עבור: ${websiteId}`);
-            
-            setTimeout(() => {
-                const editorUrl = `webmaster-editor.html?website=${websiteId}`;
-                window.open(editorUrl, '_blank');
-            }, 500);
+        // Coming Soon Function
+        function showComingSoon() {
+            showNotification('info', 'בקרוב!', 'התכונה הזו תהיה זמינה בקרוב');
         }
 
         // Notification System
@@ -803,18 +965,6 @@
                 }, 300);
             }, 4000);
         }
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎯 WebMaster Pro Gallery Loading...');
-            loadGallery();
-            
-            setTimeout(() => {
-                showNotification('success', 'גלריה טעונה!', 'כל 11 האתרים מוכנים לצפייה ועריכה');
-            }, 1500);
-            
-            console.log('✅ Gallery loaded with 11 professional websites');
-        });
     </script>
 </body>
 </html>
