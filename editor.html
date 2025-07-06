@@ -246,26 +246,134 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* Gallery Styles */
+        .gallery-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .gallery-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        
+        .gallery-card-content {
+            padding: 25px;
+            color: #333;
+        }
+        
+        .gallery-card-category {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .gallery-card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .gallery-card-desc {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .gallery-card-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #10b981;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-card-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .gallery-btn {
+            flex: 1;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-btn.edit {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+        }
+        
+        .gallery-btn.preview {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .gallery-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
         @media (max-width: 1200px) { .ai-sidebar, .properties { width: 250px; } }
         @media (max-width: 768px) { .ai-sidebar, .properties { display: none; } }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">🤖 WebMaster Pro AI</div>
-        
-        <div>
-            <select class="website-select" id="websiteSelect">
-                <option value="">בחר אתר (11 זמינים)</option>
-            </select>
+    <!-- Gallery View -->
+    <div id="galleryView" style="display: none;">
+        <div class="header">
+            <div class="logo">🎯 WebMaster Pro - גלריית אתרים</div>
+            <div>
+                <button class="header-btn" onclick="showEditor()">🚀 עבר לאדיטור</button>
+            </div>
         </div>
         
-        <div>
-            <button class="header-btn" onclick="saveProject()">💾 שמירה</button>
-            <button class="header-btn" onclick="publishSite()">🚀 פרסום</button>
-            <button class="header-btn" onclick="previewSite()">👁️ תצוגה</button>
+        <div style="padding: 60px 20px; background: linear-gradient(135deg, #667eea, #764ba2); text-align: center; color: white;">
+            <h1 style="font-size: 3rem; margin-bottom: 20px;">11 אתרים מקצועיים מוכנים</h1>
+            <p style="font-size: 1.2rem; opacity: 0.9;">בחר אתר לעריכה באדיטור AI המתקדם</p>
+        </div>
+        
+        <div style="padding: 80px 20px; max-width: 1400px; margin: 0 auto;">
+            <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;"></div>
         </div>
     </div>
+
+    <!-- Editor View -->
+    <div id="editorView"
+    <!-- Editor View -->
+    <div id="editorView">
+        <div class="header">
+            <div class="logo">🤖 WebMaster Pro AI</div>
+            
+            <div>
+                <select class="website-select" id="websiteSelect">
+                    <option value="">בחר אתר (11 זמינים)</option>
+                </select>
+            </div>
+            
+            <div>
+                <button class="header-btn" onclick="showGallery()">🎯 חזור לגלריה</button>
+                <button class="header-btn" onclick="saveProject()">💾 שמירה</button>
+                <button class="header-btn" onclick="publishSite()">🚀 פרסום</button>
+                <button class="header-btn" onclick="previewSite()">👁️ תצוגה</button>
+            </div>
+        </div>
 
     <div class="main">
         <div class="ai-sidebar">
@@ -376,6 +484,7 @@
             <div class="loading" id="loading" style="display: none;"></div>
         </div>
     </div>
+    </div> <!-- End editorView -->
 
     <script>
         var currentWebsite = null;
@@ -384,23 +493,163 @@
         var zoomLevel = 100;
 
         var websites = {
-            'aesthetic-clinic': { name: 'קליניקת יופי פרמיום', price: 3200, category: 'אסתטיקה רפואית', phone: '052-0000000' },
-            'dr-michal-rosen': { name: 'ד"ר מיכל רוזן', price: 2800, category: 'אסתטיקה רפואית', phone: '052-1111111' },
-            'real-estate': { name: 'נדל"ן פרמיום', price: 2700, category: 'נדל"ן והשקעות', phone: '052-2222222' },
-            'law-firm': { name: 'משרד ברקוביץ', price: 2500, category: 'עורכי דין', phone: '052-3333333' },
-            'nutritionist': { name: 'ד"ר שרה כהן - תזונאית', price: 2400, category: 'תזונה ובריאות', phone: '052-4444444' },
-            'multibrawn': { name: 'מולטיבראון - נופש ואירועים', price: 2300, category: 'נופש ואירועים', phone: '052-5555555' },
-            'fitness-co': { name: 'דני פיט - מאמן כושר', price: 2200, category: 'כושר ואימונים', phone: '052-6666666' },
-            'tutor': { name: 'ד"ר רונית לוי - מורה פרטית', price: 2100, category: 'חינוך והוראה', phone: '052-7777777' },
-            'accountant': { name: 'רינה לוי - חשבת שכר', price: 2000, category: 'חשבונאות ומיסים', phone: '052-8888888' },
-            'yoga-studio': { name: 'סטודיו אוהם - יוגה', price: 1900, category: 'יוגה ומדיטציה', phone: '052-9999999' },
-            'beauty-salon': { name: 'מספרה BELLA', price: 1700, category: 'יופי ועיצוב שיער', phone: '052-0000001' }
+            'aesthetic-clinic': { 
+                name: 'קליניקת יופי פרמיום', 
+                price: 3200, 
+                category: 'אסתטיקה רפואית', 
+                phone: '052-0000000',
+                image: 'https://i.imghippo.com/files/sWlf1880WKM.png'
+            },
+            'dr-michal-rosen': { 
+                name: 'ד"ר מיכל רוזן', 
+                price: 2800, 
+                category: 'אסתטיקה רפואית', 
+                phone: '052-1111111',
+                image: 'https://i.imghippo.com/files/Ayyb2287TOc.png'
+            },
+            'real-estate': { 
+                name: 'נדל"ן פרמיום', 
+                price: 2700, 
+                category: 'נדל"ן והשקעות', 
+                phone: '052-2222222',
+                image: 'https://i.imghippo.com/files/htWG9491QkE.png'
+            },
+            'law-firm': { 
+                name: 'משרד ברקוביץ', 
+                price: 2500, 
+                category: 'עורכי דין', 
+                phone: '052-3333333',
+                image: 'https://i.imghippo.com/files/hVyV3858OQ.png'
+            },
+            'nutritionist': { 
+                name: 'ד"ר שרה כהן - תזונאית', 
+                price: 2400, 
+                category: 'תזונה ובריאות', 
+                phone: '052-4444444',
+                image: 'https://i.imghippo.com/files/rhNp2418oyE.png'
+            },
+            'multibrawn': { 
+                name: 'מולטיבראון - נופש ואירועים', 
+                price: 2300, 
+                category: 'נופש ואירועים', 
+                phone: '052-5555555',
+                image: 'https://i.imghippo.com/files/pL5530Z.png'
+            },
+            'fitness-co': { 
+                name: 'דני פיט - מאמן כושר', 
+                price: 2200, 
+                category: 'כושר ואימונים', 
+                phone: '052-6666666',
+                image: 'https://i.imghippo.com/files/WiRp8302YJs.png'
+            },
+            'tutor': { 
+                name: 'ד"ר רונית לוי - מורה פרטית', 
+                price: 2100, 
+                category: 'חינוך והוראה', 
+                phone: '052-7777777',
+                image: 'https://i.imghippo.com/files/Ceu2132Q.png'
+            },
+            'accountant': { 
+                name: 'רינה לוי - חשבת שכר', 
+                price: 2000, 
+                category: 'חשבונאות ומיסים', 
+                phone: '052-8888888',
+                image: 'https://i.imghippo.com/files/tGN5433dAU.png'
+            },
+            'yoga-studio': { 
+                name: 'סטודיו אוהם - יוגה', 
+                price: 1900, 
+                category: 'יוגה ומדיטציה', 
+                phone: '052-9999999',
+                image: 'https://i.imghippo.com/files/eJk7179MXo.png'
+            },
+            'beauty-salon': { 
+                name: 'מספרה BELLA', 
+                price: 1700, 
+                category: 'יופי ועיצוב שיער', 
+                phone: '052-0000001',
+                image: 'https://i.imghippo.com/files/xnK4816Hc.png'
+            }
         };
 
         document.addEventListener('DOMContentLoaded', function() {
+            // בדוק אם יש פרמטר website ב-URL
+            var urlParams = new URLSearchParams(window.location.search);
+            var websiteParam = urlParams.get('website');
+            
+            if (websiteParam && websites[websiteParam]) {
+                // אם יש פרמטר, עבור ישירות לאדיטור
+                showEditor();
+                loadWebsite(websiteParam);
+            } else {
+                // אחרת הצג את הגלריה
+                showGallery();
+            }
+            
             loadWebsiteOptions();
-            showNotification('success', 'אדיטור AI מוכן!', 'כל 11 האתרים זמינים');
+            loadGallery();
         });
+
+        function showGallery() {
+            document.getElementById('galleryView').style.display = 'block';
+            document.getElementById('editorView').style.display = 'none';
+        }
+
+        function showEditor() {
+            document.getElementById('galleryView').style.display = 'none';
+            document.getElementById('editorView').style.display = 'block';
+            showNotification('success', 'אדיטור AI מוכן!', 'כל 11 האתרים זמינים');
+        }
+
+        function loadGallery() {
+            var grid = document.getElementById('galleryGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            
+            for (var id in websites) {
+                var site = websites[id];
+                var card = document.createElement('div');
+                card.className = 'gallery-card';
+                
+                card.innerHTML = 
+                    '<div><img src="' + site.image + '" alt="' + site.name + '"></div>' +
+                    '<div class="gallery-card-content">' +
+                        '<div class="gallery-card-category">' + site.category + '</div>' +
+                        '<h3 class="gallery-card-title">' + site.name + '</h3>' +
+                        '<p class="gallery-card-desc">אתר מקצועי ברמה עולמית עם עיצוב מתקדם ופונקציונליות מלאה</p>' +
+                        '<div class="gallery-card-price">₪' + site.price.toLocaleString() + '</div>' +
+                        '<div class="gallery-card-actions">' +
+                            '<button onclick="editInEditor(\'' + id + '\')" class="gallery-btn edit">✏️ ערוך באדיטור</button>' +
+                            '<button onclick="previewWebsite(\'' + id + '\')" class="gallery-btn preview">👁️ תצוגה מקדימה</button>' +
+                        '</div>' +
+                    '</div>';
+                
+                grid.appendChild(card);
+            }
+        }
+
+        function editInEditor(websiteId) {
+            showEditor();
+            
+            // בחר את האתר בתפריט
+            document.getElementById('websiteSelect').value = websiteId;
+            
+            // טען את האתר
+            loadWebsite(websiteId);
+            
+            showNotification('success', 'עובר לאדיטור', 'האתר נטען באדיטור AI');
+        }
+
+        function previewWebsite(websiteId) {
+            var site = websites[websiteId];
+            var html = generateWebsiteHTML(site, websiteId);
+            var newWindow = window.open('', '_blank');
+            newWindow.document.write(html);
+            newWindow.document.close();
+            
+            showNotification('info', 'תצוגה מקדימה', 'האתר נפתח בחלון חדש');
+        }
 
         function loadWebsiteOptions() {
             var select = document.getElementById('websiteSelect');
