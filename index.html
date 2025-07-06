@@ -3,1103 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - גלריית אתרים מקצועיים</title>
-    <meta name="description" content="גלריה של 11 אתרים מקצועיים ברמה עולמית עם אדיטור ויזואלי מתקדם">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>WebMaster Pro - גלריה מתוקנת</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --accent: #f093fb;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
-            --dark: #1a1a2e;
-            --light: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
-            --gradient-accent: linear-gradient(135deg, var(--accent), #f5576c);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Heebo', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 20px 0;
-            box-shadow: var(--shadow-lg);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 28px;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .logo i {
-            margin-left: 10px;
-            font-size: 32px;
-            background: var(--gradient-primary);
-            border-radius: 10px;
-            padding: 10px;
-            color: white;
-        }
-        
-        .header-nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        
-        .nav-link {
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 8px 0;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary);
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: var(--gradient-primary);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .btn {
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 80px 0;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            backdrop-filter: blur(10px);
-        }
-        
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.2;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--dark);
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 500;
-        }
-        
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-        }
-        
-        .stat-label {
-            font-size: 1.1rem;
-            color: var(--dark);
-            font-weight: 600;
-        }
-        
-        /* Gallery Section */
-        .gallery-section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            font-size: 3rem;
-            font-weight: 800;
-            text-align: center;
-            color: white;
-            margin-bottom: 20px;
-        }
-        
-        .section-description {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 60px;
-        }
-        
-        .websites-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 30px;
-        }
-        
-        .website-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .website-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow);
-        }
-        
-        .website-card.premium {
-            border: 3px solid #f093fb;
-            background: linear-gradient(135deg, rgba(240, 147, 251, 0.1), rgba(255, 255, 255, 0.95));
-        }
-        
-        .premium-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--gradient-accent);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            z-index: 10;
-        }
-        
-        .website-preview {
-            width: 100%;
-            height: 220px;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .preview-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .website-card:hover .preview-image {
-            transform: scale(1.05);
-        }
-        
-        .website-info {
-            padding: 25px;
-        }
-        
-        .website-category {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .website-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--dark);
-        }
-        
-        .website-description {
-            color: #64748b;
-            margin-bottom: 15px;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-        
-        .website-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .feature-tag {
-            background: rgba(102, 126, 234, 0.1);
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        .website-price {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--success);
-            margin-bottom: 20px;
-        }
-        
-        .website-actions {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .btn-small {
-            padding: 10px 18px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            flex: 1;
-            text-align: center;
-        }
-        
-        .btn-preview {
-            background: var(--gradient-primary);
-            color: white;
-        }
-        
-        .btn-edit {
-            background: var(--gradient-accent);
-            color: white;
-        }
-        
-        .btn-small:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        /* Footer */
-        .footer {
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 60px 0 30px;
-            margin-top: 80px;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-section h4 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .footer-section p {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 30px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .websites-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .website-actions {
-                flex-direction: column;
-            }
-            
-            .container {
-                padding: 0 15px;
-            }
-            
-            .header-nav {
-                display: none;
-            }
-        }
-        
-        /* Notification System */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--gradient-primary);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: var(--shadow-lg);
-            z-index: 1000;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.3s ease;
-        }
-        
-        .notification.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .notification.success {
-            background: var(--gradient-primary);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Heebo', sans-serif; background: linear-gradient(135deg, #667eea, #764ba2); color: white; min-height: 100vh; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; padding: 40px 0; }
+        .header h1 { font-size: 4rem; font-weight: 800; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.4rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 40px 0; }
+        .stat-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.2); }
+        .stat-card h3 { font-size: 2.5rem; font-weight: 800; color: #f093fb; margin-bottom: 10px; }
+        .stat-card p { opacity: 0.9; }
+        .websites-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-top: 40px; }
+        .website-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); border-radius: 20px; padding: 30px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; position: relative; }
+        .website-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .website-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+        .website-title { font-size: 1.5rem; font-weight: 700; color: #f093fb; margin-bottom: 5px; }
+        .website-category { font-size: 0.9rem; opacity: 0.8; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 15px; }
+        .website-price { font-size: 1.8rem; font-weight: 800; color: #10b981; }
+        .website-description { margin-bottom: 20px; line-height: 1.6; opacity: 0.9; }
+        .website-features { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
+        .feature-tag { background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; }
+        .website-actions { display: flex; gap: 15px; }
+        .btn { padding: 12px 20px; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; }
+        .btn-primary { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(240,147,251,0.4); }
+        .btn-secondary { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+        .status-badge { position: absolute; top: 15px; right: 15px; padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: 600; }
+        .status-ready { background: #10b981; color: white; }
+        .status-premium { background: #f59e0b; color: white; }
+        .status-development { background: #3b82f6; color: white; }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-magic"></i>
-                    WebMaster Pro
-                </div>
-                
-                <nav class="header-nav">
-                    <a href="#gallery" class="nav-link">גלריית אתרים</a>
-                    <a href="#landing-pages" class="nav-link">דפי נחיתה</a>
-                    <a href="#our-sites" class="nav-link">האתרים שלנו</a>
-                    <a href="#articles" class="nav-link">מאמרים</a>
-                    <a href="#guides" class="nav-link">מדריכים</a>
-                </nav>
-                
-                <button class="btn btn-primary" onclick="openEditor()">
-                    <i class="fas fa-edit"></i>
-                    פתח אדיטור AI
-                </button>
-            </div>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-magic"></i> WebMaster Pro</h1>
+            <p>גלריית אתרים מקצועיים ברמה עולמית - מוכנים למכירה מיידית</p>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1 class="hero-title">גלריית אתרים מקצועיים</h1>
-            <p class="hero-subtitle">
-                11 אתרים מוכנים לעבודה ברמה עולמית עם אדיטור ויזואלי מתקדם.
-                כל אתר נבנה ברמה מקצועית עם טכנולוגיות מתקדמות ומוכן למכירה מיידית.
-            </p>
-            
-            <div class="hero-stats">
-                <div class="stat-card">
-                    <div class="stat-number">11</div>
-                    <div class="stat-label">אתרים מקצועיים</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">₪26,900</div>
-                    <div class="stat-label">שווי כולל</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">מוכנים למכירה</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">A+</div>
-                    <div class="stat-label">ציון אבטחה</div>
-                </div>
+        <div class="stats">
+            <div class="stat-card">
+                <h3>11</h3>
+                <p>אתרים מוכנים</p>
+            </div>
+            <div class="stat-card">
+                <h3>₪26,900</h3>
+                <p>סה"כ שווי</p>
+            </div>
+            <div class="stat-card">
+                <h3>100%</h3>
+                <p>רמה מקצועית</p>
+            </div>
+            <div class="stat-card">
+                <h3>24/7</h3>
+                <p>תמיכה מלאה</p>
             </div>
         </div>
-    </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery-section" id="gallery">
-        <div class="container">
-            <h2 class="section-title">הגלריה שלנו</h2>
-            <p class="section-description">
-                אוסף מקצועי של אתרים מוכנים לעבודה בתחומים שונים. כל אתר כולל עיצוב מתקדם, 
-                פונקציונליות מלאה וקוד נקי מוכן לפרסום.
-            </p>
-            
-            <div class="websites-grid" id="websitesGrid">
-                <!-- תוכן נטען דינמית -->
-            </div>
+        <div class="websites-grid" id="websitesGrid">
+            <!-- Website cards will be generated here -->
         </div>
-    </section>
-
-    <!-- Landing Pages Section -->
-    <section class="gallery-section" id="landing-pages" style="display: none;">
-        <div class="container">
-            <h2 class="section-title">דפי נחיתה מתקדמים</h2>
-            <p class="section-description">
-                דפי נחיתה מקצועיים עם conversion גבוה ואופטימיזציה למכירות
-            </p>
-            
-            <div class="websites-grid">
-                <div class="website-card premium">
-                    <div class="premium-badge"><i class="fas fa-rocket"></i> גבוה ביותר</div>
-                    <div class="website-preview">
-                        <img src="https://i.imghippo.com/files/sWlf1880WKM.png" alt="דף נחיתה פרמיום" class="preview-image">
-                    </div>
-                    <div class="website-info">
-                        <div class="website-category">דף נחיתה מתקדם</div>
-                        <h3 class="website-title">דף נחיתה לסטארטאפ</h3>
-                        <p class="website-description">דף נחיתה מותאם לסטארטאפים עם conversion rate גבוה</p>
-                        <div class="website-features">
-                            <span class="feature-tag">A/B Testing</span>
-                            <span class="feature-tag">Analytics</span>
-                            <span class="feature-tag">Forms</span>
-                            <span class="feature-tag">CTA Optimization</span>
-                        </div>
-                        <div class="website-price">₪3,500</div>
-                        <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="showComingSoon('דף נחיתה')">
-                                <i class="fas fa-eye"></i> תצוגה מקדימה
-                            </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon('דף נחיתה')">
-                                <i class="fas fa-edit"></i> ערוך
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="website-card">
-                    <div class="website-preview">
-                        <img src="https://i.imghippo.com/files/WiRp8302YJs.png" alt="דף נחיתה עסקי" class="preview-image">
-                    </div>
-                    <div class="website-info">
-                        <div class="website-category">דף נחיתה עסקי</div>
-                        <h3 class="website-title">דף נחיתה עסק קטן</h3>
-                        <p class="website-description">דף נחיתה פשוט ויעיל לעסקים קטנים ומקצועות חופשיים</p>
-                        <div class="website-features">
-                            <span class="feature-tag">נקי ופשוט</span>
-                            <span class="feature-tag">מהיר לטעינה</span>
-                            <span class="feature-tag">SEO Ready</span>
-                        </div>
-                        <div class="website-price">₪2,200</div>
-                        <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="showComingSoon('דף נחיתה עסקי')">
-                                <i class="fas fa-eye"></i> תצוגה מקדימה
-                            </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon('דף נחיתה עסקי')">
-                                <i class="fas fa-edit"></i> ערוך
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Our Sites Section -->
-    <section class="gallery-section" id="our-sites" style="display: none;">
-        <div class="container">
-            <h2 class="section-title">האתרים שלנו</h2>
-            <p class="section-description">
-                האתרים הפנימיים של WebMaster Pro ומערכות הניהול
-            </p>
-            
-            <div class="websites-grid">
-                <div class="website-card">
-                    <div class="website-preview">
-                        <img src="https://i.imghippo.com/files/htWG9491QkE.png" alt="דשבורד ניהול" class="preview-image">
-                    </div>
-                    <div class="website-info">
-                        <div class="website-category">מערכת ניהול</div>
-                        <h3 class="website-title">דשבורד ניהול</h3>
-                        <p class="website-description">מערכת ניהול מתקדמת לכל הפרויקטים והלקוחות</p>
-                        <div class="website-features">
-                            <span class="feature-tag">Analytics</span>
-                            <span class="feature-tag">CRM</span>
-                            <span class="feature-tag">Reporting</span>
-                        </div>
-                        <div class="website-price">פנימי</div>
-                        <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="openEditor()">
-                                <i class="fas fa-eye"></i> פתח מערכת
-                            </button>
-                            <button class="btn-small btn-edit" onclick="openEditor()">
-                                <i class="fas fa-cog"></i> ניהול
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="website-card">
-                    <div class="website-preview">
-                        <img src="https://i.imghippo.com/files/rhNp2418oyE.png" alt="אתר תדמיתי" class="preview-image">
-                    </div>
-                    <div class="website-info">
-                        <div class="website-category">אתר תדמיתי</div>
-                        <h3 class="website-title">אתר החברה</h3>
-                        <p class="website-description">האתר הראשי של WebMaster Pro - חברת פיתוח האתרים</p>
-                        <div class="website-features">
-                            <span class="feature-tag">תדמיתי</span>
-                            <span class="feature-tag">מקצועי</span>
-                            <span class="feature-tag">עדכני</span>
-                        </div>
-                        <div class="website-price">פנימי</div>
-                        <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="showComingSoon('אתר החברה')">
-                                <i class="fas fa-eye"></i> צפייה
-                            </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon('אתר החברה')">
-                                <i class="fas fa-edit"></i> עריכה
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Articles Section -->
-    <section class="gallery-section" id="articles" style="display: none;">
-        <div class="container">
-            <h2 class="section-title">מאמרים מקצועיים</h2>
-            <p class="section-description">
-                מאמרים ומדריכים בתחום בניית אתרים ושיווק דיגיטלי
-            </p>
-            
-            <div class="websites-grid">
-                <div class="website-card">
-                    <div class="website-preview">
-                        <img src="https://i.imghippo.com/files/pL5530Z.png" alt="מדריך בניית אתרים" class="preview-image">
-                    </div>
-                    <div class="website-info">
-                        <div class="website-category">מאמר מקצועי</div>
-                        <h3 class="website-title">מדריך בניית אתרים 2025</h3>
-                        <p class="website-description">המדריך המלא לבניית אתרים מקצועיים בשנת 2025</p>
-                        <div class="website-features">
-                            <span class="feature-tag">מלא ומפורט</span>
-                            <span class="feature-tag">עדכני</span>
-                            <span class="feature-tag">מעשי</span>
-                        </div>
-                        <div class="website-price">חינם</div>
-                        <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="showComingSoon('מדריך בניית אתרים')">
-                                <i class="fas fa-eye"></i> קרא
-                            </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon('מדריך בניית אתרים')">
-                                <i class="fas fa-share"></i> שתף
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="website-card">
-                    <div class="website-preview">
-                        <img src="https://i.imghippo.com/files/Ceu2132Q.png" alt="SEO למתחילים" class="preview-image">
-                    </div>
-                    <div class="website-info">
-                        <div class="website-category">מאמר SEO</div>
-                        <h3 class="website-title">SEO למתחילים</h3>
-                        <p class="website-description">כל מה שצריך לדעת על קידום אתרים בגוגל</p>
-                        <div class="website-features">
-                            <span class="feature-tag">למתחילים</span>
-                            <span class="feature-tag">מעשי</span>
-                            <span class="feature-tag">דוגמאות</span>
-                        </div>
-                        <div class="website-price">חינם</div>
-                        <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="showComingSoon('מדריך SEO')">
-                                <i class="fas fa-eye"></i> קרא
-                            </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon('מדריך SEO')">
-                                <i class="fas fa-share"></i> שתף
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Guides Section -->
-    <section class="gallery-section" id="guides" style="display: none;">
-        <div class="container">
-            <h2 class="section-title">מדריכים מפורטים</h2>
-            <p class="section-description">
-                מדריכים שלב-אחר-שלב לעבודה עם המערכת והאדיטור
-            </p>
-            
-            <div class="websites-grid">
-                <div class="website-card">
-                    <div class="website-preview">
-                        <img src="https://i.imghippo.com/files/eJk7179MXo.png" alt="מדריך אדיטור" class="preview-image">
-                    </div>
-                    <div class="website-info">
-                        <div class="website-category">מדריך מפורט</div>
-                        <h3 class="website-title">שימוש באדיטור AI</h3>
-                        <p class="website-description">מדריך מלא לשימוש באדיטור הויזואלי עם AI</p>
-                        <div class="website-features">
-                            <span class="feature-tag">שלב אחר שלב</span>
-                            <span class="feature-tag">וידאו</span>
-                            <span class="feature-tag">דוגמאות</span>
-                        </div>
-                        <div class="website-price">חינם</div>
-                        <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="openEditor()">
-                                <i class="fas fa-play"></i> התחל מדריך
-                            </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon('מדריך אדיטור')">
-                                <i class="fas fa-download"></i> הורד
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="website-card">
-                    <div class="website-preview">
-                        <img src="https://i.imghippo.com/files/xnK4816Hc.png" alt="מדריך מכירות" class="preview-image">
-                    </div>
-                    <div class="website-info">
-                        <div class="website-category">מדריך עסקי</div>
-                        <h3 class="website-title">מכירת אתרים ללקוחות</h3>
-                        <p class="website-description">איך למכור אתרים מקצועיים ולבנות עסק רווחי</p>
-                        <div class="website-features">
-                            <span class="feature-tag">עסקי</span>
-                            <span class="feature-tag">מכירות</span>
-                            <span class="feature-tag">רווחיות</span>
-                        </div>
-                        <div class="website-price">חינם</div>
-                        <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="showComingSoon('מדריך מכירות')">
-                                <i class="fas fa-eye"></i> צפה
-                            </button>
-                            <button class="btn-small btn-edit" onclick="showComingSoon('מדריך מכירות')">
-                                <i class="fas fa-download"></i> הורד
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>WebMaster Pro</h4>
-                    <p>
-                        פלטפורמה מתקדמת לבניית אתרים עסקיים מקצועיים 
-                        עם אדיטור ויזואלי ו-AI מתקדם.
-                    </p>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>צור קשר</h4>
-                    <p>
-                        📧 info@webmaster-pro.co.il<br>
-                        📱 050-123-4567<br>
-                        🌐 webmasterproapp.com
-                    </p>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>שירותים</h4>
-                    <p>
-                        בניית אתרים מקצועיים<br>
-                        אדיטור ויזואלי מתקדם<br>
-                        תמיכה טכנית 24/7
-                    </p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות.</p>
-            </div>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // Website Data with Updated Images
-        const websitesData = [
-            {
-                id: 'aesthetic-clinic',
-                title: 'קליניקת יופי פרמיום',
-                category: 'אסתטיקה רפואית',
-                description: 'קליניקה יוקרתית עם הטכנולוגיות הכי מתקדמות בתחום האסתטיקה הרפואית',
-                price: '₪3,200',
-                features: ['עיצוב פרמיום', 'אנימציות מתקדמות', 'מערכת CRM', 'אינטגרציות מלאות'],
-                image: 'https://i.imghippo.com/files/sWlf1880WKM.png',
-                isPremium: true
+        const websites = {
+            'dr-michal-rosen': {
+                name: 'ד"ר מיכל רוזן - רפואה אסתטית',
+                category: 'רפואה אסתטית',
+                price: 2800,
+                description: 'אתר מקצועי למומחית ברפואה אסתטית עם עיצוב יוקרתי ופונקציונליות מתקדמת',
+                features: ['בוטוקס מתקדם', 'חומצה היאלורונית', 'לייזר מתקדם', 'פילינג כימי'],
+                status: 'ready',
+                statusText: 'מוכן למכירה'
             },
-            {
-                id: 'dr-michal-rosen',
-                title: 'ד"ר מיכל רוזן',
-                category: 'אסתטיקה רפואית',
-                description: 'קליניקה מתקדמת לאסתטיקה רפואית עם טיפולים חדשניים ותוצאות מדהימות',
-                price: '₪2,800',
-                features: ['עיצוב Glass Morphism', 'גלריית לפני-אחרי', 'בוקינג אונליין', 'בלוג מקצועי'],
-                image: 'https://i.imghippo.com/files/Ayyb2287TOc.png',
-                isPremium: false
-            },
-            {
-                id: 'real-estate',
-                title: 'נדל"ן פרמיום',
-                category: 'נדל"ן והשקעות',
-                description: 'חברת נדל"ן יוקרתית המתמחה בנכסי פרמיום ויעוץ השקעות מקצועי',
-                price: '₪2,700',
-                features: ['מאגר נכסים', 'חיפוש מתקדם', 'סיורים וירטואליים', 'מחשבון משכנתא'],
-                image: 'https://i.imghippo.com/files/htWG9491QkE.png',
-                isPremium: false
-            },
-            {
-                id: 'law-firm',
-                title: 'משרד ברקוביץ',
-                category: 'עורכי דין',
-                description: 'משרד עורכי דין מוביל עם ניסיון רב בתחומי משפט מגוונים ושירות מקצועי',
-                price: '₪2,500',
-                features: ['תחומי משפט', 'יעוץ אונליין', 'בלוג משפטי', 'טפסי יצירת קשר'],
-                image: 'https://i.imghippo.com/files/hVyV3858OQ.png',
-                isPremium: false
-            },
-            {
-                id: 'nutritionist',
-                title: 'ד"ר שרה כהן - תזונאית',
-                category: 'תזונה ובריאות',
-                description: 'תזונאית קלינית מקצועית עם גישה הוליסטית לבריאות ותזונה מאוזנת',
-                price: '₪2,400',
-                features: ['מחשבון קלוריות', 'תפריטים מותאמים', 'מעקב משקל', 'מתכונים בריאים'],
-                image: 'https://i.imghippo.com/files/rhNp2418oyE.png',
-                isPremium: false
-            },
-            {
-                id: 'multibrawn',
-                title: 'מולטיבראון - נופש ואירועים',
-                category: 'נופש ואירועים',
-                description: 'חברה מובילה בתחום ארגון נופש ואירועים עסקיים עם שירות ברמה גבוהה',
-                price: '₪2,300',
-                features: ['גלריית אירועים', 'הזמנה אונליין', 'חבילות נופש', 'ניהול אירועים'],
-                image: 'https://i.imghippo.com/files/pL5530Z.png',
-                isPremium: false
-            },
-            {
-                id: 'fitness-co',
-                title: 'דני פיט - מאמן כושר',
+            'fitness-co': {
+                name: 'דני פיט - מאמן כושר אישי',
                 category: 'כושר ואימונים',
-                description: 'מאמן כושר אישי מקצועי עם תוכניות אימון מותאמות אישית ותוצאות מוכחות',
-                price: '₪2,200',
-                features: ['מחשבון BMI', 'תוכניות אימון', 'מעקב התקדמות', 'אזור לקוחות'],
-                image: 'https://i.imghippo.com/files/WiRp8302YJs.png',
-                isPremium: false
+                price: 2200,
+                description: 'אתר מאמן כושר עם מחשבון BMI פעיל ותוכניות אימון מותאמות אישית',
+                features: ['מחשבון BMI', 'תוכניות אימון', 'ייעוץ תזונה', 'מעקב התקדמות'],
+                status: 'ready',
+                statusText: 'מוכן למכירה'
             },
-            {
-                id: 'tutor',
-                title: 'ד"ר רונית לוי - מורה פרטית',
-                category: 'חינוך והוראה',
-                description: 'מורה פרטית מנוסה להכנה לבגרות ולאוניברסיטה במקצועות מדעיים',
-                price: '₪2,100',
-                features: ['שיעורים אונליין', 'חומרי לימוד', 'מעקב התקדמות', 'תרגילים אינטראקטיביים'],
-                image: 'https://i.imghippo.com/files/Ceu2132Q.png',
-                isPremium: false
-            },
-            {
-                id: 'accountant',
-                title: 'רינה לוי - חשבת שכר',
-                category: 'חשבונאות ומיסים',
-                description: 'חשבת שכר מוסמכת עם ניסיון רב בחשבות שכר ויעוץ מיסוי לעסקים',
-                price: '₪2,000',
-                features: ['מחשבון שכר', 'יעוץ מיסוי', 'דוחות מתקדמים', 'שירות דיגיטלי'],
-                image: 'https://i.imghippo.com/files/tGN5433dAU.png',
-                isPremium: false
-            },
-            {
-                id: 'yoga-studio',
-                title: 'סטודיו אוהם - יוגה',
+            'yoga-studio': {
+                name: 'סטודיו אוהם - יוגה ומדיטציה',
                 category: 'יוגה ומדיטציה',
-                description: 'סטודיו יוגה רגוע ומזמין עם מגוון שיעורים ומורים מקצועיים',
-                price: '₪1,900',
-                features: ['לוח שיעורים', 'בוקינג אונליין', 'מדיטציות מונחות', 'אזור חברים'],
-                image: 'https://i.imghippo.com/files/eJk7179MXo.png',
-                isPremium: false
+                price: 1900,
+                description: 'אתר יוקרתי לסטודיו יוגה עם לוח שיעורים אינטראקטיבי ועיצוב מרגיע',
+                features: ['לוח שיעורים', 'הזמנות אונליין', 'מדריכי מדיטציה', 'חנות מוצרים'],
+                status: 'ready',
+                statusText: 'מוכן למכירה'
             },
-            {
-                id: 'beauty-salon',
-                title: 'מספרה BELLA',
+            'nutritionist': {
+                name: 'ד"ר שרה כהן - תזונאית קלינית',
+                category: 'תזונה ובריאות',
+                price: 2400,
+                description: 'אתר תזונאית מוסמכת עם מחשבוני תזונה מתקדמים ותפריטים מותאמים',
+                features: ['מחשבון BMI', 'מחשבון קלוריות', 'תפריטים מותאמים', 'מעקב משקל'],
+                status: 'ready',
+                statusText: 'מוכן למכירה'
+            },
+            'law-firm': {
+                name: 'משרד ברקוביץ - עורכי דין',
+                category: 'שירותים משפטיים',
+                price: 2500,
+                description: 'אתר משרד עורכי דין מקצועי עם מידע מפורט על שירותים משפטיים',
+                features: ['ייעוץ חינם', 'טופס פנייה', 'תחומי התמחות', 'זמינות 24/7'],
+                status: 'ready',
+                statusText: 'מוכן למכירה'
+            },
+            'accountant': {
+                name: 'רינה לוי - חשבת שכר',
+                category: 'חשבונאות ומיסים',
+                price: 2000,
+                description: 'אתר חשבת שכר מוסמכת עם מחשבון שכר נטו ושירותי חשבונאות',
+                features: ['מחשבון שכר נטו', 'ייעוץ מיסוי', 'דוחות חודשיים', 'תמיכה טלפונית'],
+                status: 'ready',
+                statusText: 'מוכן למכירה'
+            },
+            'beauty-salon': {
+                name: 'מספרה BELLA - יופי ועיצוב שיער',
                 category: 'יופי ועיצוב שיער',
-                description: 'מספרה מקצועית עם צוות מיומן וטכנולוגיות מתקדמות לעיצוב שיער',
-                price: '₪1,700',
-                features: ['גלריית עבודות', 'בוקינג תורים', 'מחירון שירותים', 'המלצות לקוחות'],
-                image: 'https://i.imghippo.com/files/xnK4816Hc.png',
-                isPremium: false
+                price: 1700,
+                description: 'אתר מספרה מקצועית עם גלריית עבודות ומערכת הזמנות אונליין',
+                features: ['גלריית עבודות', 'הזמנת תורים', 'מחירון שירותים', 'טיפים ליופי'],
+                status: 'ready',
+                statusText: 'מוכן למכירה'
+            },
+            'tutor': {
+                name: 'ד"ר רונית לוי - מורה פרטית',
+                category: 'חינוך והוראה',
+                price: 2100,
+                description: 'אתר מורה פרטית מקצועית עם מערכת לימוד אונליין ומעקב התקדמות',
+                features: ['שיעורים אונליין', 'מעקב ציונים', 'חומרי לימוד', 'הכנה לבגרות'],
+                status: 'ready',
+                statusText: 'מוכן למכירה'
+            },
+            'aesthetic-clinic': {
+                name: 'קליניקת יופי פרמיום',
+                category: 'אסתטיקה רפואית',
+                price: 3200,
+                description: 'אתר פרמיום לקליניקה אסתטית עם עיצוב יוקרתי וטכנולוגיות מתקדמות',
+                features: ['טכנולוגיות מתקדמות', 'ייעוץ אונליין', 'גלריה לפני ואחרי', 'הזמנות VIP'],
+                status: 'premium',
+                statusText: 'פרמיום'
+            },
+            'multibrawn': {
+                name: 'מולטיבראון - נופש ואירועים',
+                category: 'נופש ואירועים',
+                price: 2300,
+                description: 'אתר יוקרתי לחברת נופש ואירועים עם גלריית יעדים ומערכת הזמנות',
+                features: ['גלריית יעדים', 'הזמנת חופשות', 'אירועים מיוחדים', 'מדריכי טיולים'],
+                status: 'development',
+                statusText: 'בפיתוח'
+            },
+            'real-estate': {
+                name: 'נדל"ן פרמיום - השקעות נדל"ן',
+                category: 'נדל"ן והשקעות',
+                price: 2700,
+                description: 'אתר חברת נדל"ן יוקרתית עם מחשבון משכנתא ומאגר נכסים מתקדם',
+                features: ['מחשבון משכנתא', 'מאגר נכסים', 'ייעוץ השקעות', 'סיורים וירטואליים'],
+                status: 'development',
+                statusText: 'בפיתוח'
             }
-        ];
+        };
 
-        // Navigation Functions
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.gallery-section');
-            sections.forEach(section => {
-                section.style.display = 'none';
-            });
-            
-            // Show selected section
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.style.display = 'block';
-            }
-            
-            // Update nav links
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.style.color = 'var(--dark)';
-            });
-            
-            // Highlight active nav
-            const activeLink = document.querySelector(`[href="#${sectionId}"]`);
-            if (activeLink) {
-                activeLink.style.color = 'var(--primary)';
-            }
-        }
-
-        // Add click events to navigation
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const href = this.getAttribute('href');
-                    const sectionId = href.replace('#', '');
-                    showSection(sectionId);
-                });
-            });
-            
-            // Load gallery by default
-            loadGallery();
-            showNotification('success', 'גלריה טעונה!', 'כל 11 האתרים מוכנים לצפייה ועריכה');
+            generateWebsiteCards();
         });
 
-        // Load Gallery
-        function loadGallery() {
+        function generateWebsiteCards() {
             const grid = document.getElementById('websitesGrid');
             
-            const websiteCards = websitesData.map(website => `
-                <div class="website-card ${website.isPremium ? 'premium' : ''}">
-                    ${website.isPremium ? '<div class="premium-badge"><i class="fas fa-crown"></i> פרמיום</div>' : ''}
-                    
-                    <div class="website-preview">
-                        <img src="${website.image}" alt="${website.title}" class="preview-image">
-                    </div>
-                    
-                    <div class="website-info">
-                        <div class="website-category">${website.category}</div>
-                        <h3 class="website-title">${website.title}</h3>
-                        <p class="website-description">${website.description}</p>
-                        
-                        <div class="website-features">
-                            ${website.features.map(feature => 
-                                `<span class="feature-tag">${feature}</span>`
-                            ).join('')}
+            for (const [id, website] of Object.entries(websites)) {
+                const card = document.createElement('div');
+                card.className = 'website-card';
+                
+                const statusClass = website.status === 'ready' ? 'status-ready' : 
+                                  website.status === 'premium' ? 'status-premium' : 'status-development';
+                
+                card.innerHTML = `
+                    <div class="status-badge ${statusClass}">${website.statusText}</div>
+                    <div class="website-header">
+                        <div>
+                            <div class="website-title">${website.name}</div>
+                            <div class="website-category">${website.category}</div>
                         </div>
-                        
-                        <div class="website-price">${website.price}</div>
-                        
-                        <div class="website-actions">
-                            <button class="btn-small btn-preview" onclick="previewWebsite('${website.id}')">
-                                <i class="fas fa-eye"></i> צפה באתר
-                            </button>
-                            <button class="btn-small btn-edit" onclick="editWebsite('${website.id}')">
-                                <i class="fas fa-edit"></i> ערוך אתר
-                            </button>
-                        </div>
+                        <div class="website-price">₪${website.price.toLocaleString()}</div>
                     </div>
-                </div>
-            `).join('');
-            
-            grid.innerHTML = websiteCards;
-        }
-
-        // Open Editor Function - עם השם הנכון!
-        function openEditor() {
-            // השם הנכון של האדיטור
-            var editorFile = 'webmaster_editor_fixed.html';
-            
-            // נסה לפתוח את האדיטור
-            var newWindow = window.open(editorFile, '_blank', 'width=1400,height=900');
-            
-            // אם החלון לא נפתח או נחסם על ידי חוסם פופאפים
-            if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-                // נסה לפתוח בטאב הנוכחי
-                alert('חוסם פופאפים זוהה. האדיטור ייפתח בטאב הנוכחי.');
-                window.location.href = editorFile;
-            } else {
-                showNotification('success', 'פותח אדיטור AI', 'האדיטור נפתח בחלון חדש');
+                    <div class="website-description">${website.description}</div>
+                    <div class="website-features">
+                        ${website.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                    </div>
+                    <div class="website-actions">
+                        <button class="btn btn-primary" onclick="openEditor('${id}')">
+                            <i class="fas fa-edit"></i> ערוך באדיטור
+                        </button>
+                        <button class="btn btn-secondary" onclick="previewWebsite('${id}')">
+                            <i class="fas fa-eye"></i> תצוגה מקדימה
+                        </button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
             }
         }
 
-        // Edit Website Function - עם השם הנכון!
-        function editWebsite(websiteId) {
-            // השם הנכון של האדיטור עם פרמטר
-            var editorUrl = `webmaster_editor_fixed.html?website=${websiteId}`;
+        function openEditor(websiteId) {
+            // שמירת האתר הנוכחי
+            localStorage.setItem('currentEditingWebsite', websiteId);
             
-            // נסה לפתוח חלון חדש
-            var newWindow = window.open(editorUrl, '_blank', 'width=1400,height=900');
+            // יצירת URL לאדיטור עם פרמטר האתר
+            const editorUrl = './WebMaster-Pro-Visual-Editor.html?website=' + websiteId;
             
-            // אם החלון לא נפתח או נחסם על ידי חוסם פופאפים
-            if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-                // נסה לפתוח בטאב הנוכחי
-                if (confirm(`האם ברצונך לפתוח את האדיטור לעריכת ${websiteId} בטאב הנוכחי?`)) {
-                    window.location.href = editorUrl;
-                }
-            } else {
-                showNotification('success', 'פותח אדיטור', `עורך את ${websiteId} באדיטור AI`);
-            }
+            // פתיחת האדיטור בחלון חדש
+            window.open(editorUrl, '_blank');
+            
+            // הודעה למשתמש
+            showNotification('success', 'פותח אדיטור', `עורך את ${websites[websiteId].name}`);
         }
 
-        // Preview Website Function
         function previewWebsite(websiteId) {
-            showNotification('info', 'תצוגה מקדימה', `פותח תצוגה מקדימה של ${websiteId}`);
+            const website = websites[websiteId];
             
-            setTimeout(() => {
-                window.open(`${websiteId}.html`, '_blank');
-            }, 500);
+            // יצירת HTML מלא לתצוגה מקדימה
+            const html = generatePreviewHTML(website, websiteId);
+            
+            // פתיחת תצוגה מקדימה בחלון חדש
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(html);
+            newWindow.document.close();
+            
+            showNotification('info', 'תצוגה מקדימה', 'האתר נפתח בחלון חדש');
         }
 
-        // Coming Soon Function
-        function showComingSoon(itemName) {
-            showNotification('info', `${itemName || 'התכונה הזו'} בקרוב!`, 'התכונה הזו תהיה זמינה בקרוב');
-        }
-
-        // Notification System
-        function showNotification(type, title, message) {
-            const existingNotification = document.querySelector('.notification');
-            if (existingNotification) {
-                existingNotification.remove();
-            }
-            
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
-                    <div>
-                        <div style="font-weight: 600; margin-bottom: 2px;">${title}</div>
-                        <div style="font-size: 0.9rem; opacity: 0.9;">${message}</div>
-                    </div>
+        function generatePreviewHTML(website, websiteId) {
+            return `<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${website.name}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; }
+        .hero { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 100px 20px; text-align: center; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 800; }
+        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .services { padding: 80px 20px; background: #f8f9fa; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: #333; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .service-card h3 { color: #667eea; font-size: 1.5rem; margin-bottom: 15px; }
+        .service-card p { color: #666; margin-bottom: 20px; }
+        .service-price { background: #667eea; color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; }
+        .contact { background: #333; color: white; padding: 60px 20px; text-align: center; }
+        .contact h2 { font-size: 2rem; margin-bottom: 20px; }
+        .contact-info { font-size: 1.1rem; margin-bottom: 10px; }
+        .whatsapp-btn { background: #25d366; color: white; padding: 15px 30px; border-radius: 25px; text-decoration: none; display: inline-block; margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <h1>${website.name}</h1>
+            <p>${website.description}</p>
+        </div>
+    </section>
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">השירותים שלנו</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>שירות מקצועי ראשון</h3>
+                    <p>תיאור מפורט של השירות הראשון עם כל הפרטים החשובים</p>
+                    <div class="service-price">החל מ-₪${Math.floor(website.price * 0.3)}</div>
                 </div>
+                <div class="service-card">
+                    <h3>יעוץ מקצועי מותאם</h3>
+                    <p>יעוץ מותאם אישית לצרכים שלכם עם ניסיון רב שנים</p>
+                    <div class="service-price">החל מ-₪${Math.floor(website.price * 0.4)}</div>
+                </div>
+                <div class="service-card">
+                    <h3>תמיכה וליווי מלא</h3>
+                    <p>תמיכה וליווי מלא לאורך כל התהליך עד לתוצאה המושלמת</p>
+                    <div class="service-price">החל מ-₪${Math.floor(website.price * 0.5)}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contact">
+        <div class="container">
+            <h2>צרו קשר לקבלת שירות מקצועי</h2>
+            <div class="contact-info">📞 052-1234567</div>
+            <div class="contact-info">📧 info@${websiteId}.co.il</div>
+            <div class="contact-info">📍 תל אביב, ישראל</div>
+            <a href="https://wa.me/972521234567" class="whatsapp-btn">💬 שלחו הודעה בווטסאפ</a>
+        </div>
+    </section>
+</body>
+</html>`;
+        }
+
+        function showNotification(type, title, message) {
+            // יצירת התראה
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 10000;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                transition: all 0.3s ease;
             `;
+            notification.innerHTML = `<strong>${title}</strong><br><small>${message}</small>`;
             
             document.body.appendChild(notification);
             
+            // הסרה אחרי 3 שניות
             setTimeout(() => {
-                notification.classList.add('show');
-            }, 100);
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.remove();
-                    }
-                }, 300);
-            }, 4000);
+                notification.remove();
+            }, 3000);
         }
     </script>
 </body>
