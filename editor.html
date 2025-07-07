@@ -1,9 +1,15 @@
+<!--
+🚀 WebMaster Pro - אדיטור ויזואלי מהפכני
+📁 שמור קובץ זה בשם: editor.html
+🔗 מתחבר לגלריה: index.html
+🎨 כלי AI מתקדמים + עריכה חיה
+-->
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - אדיטור ויזואלי מהפכני</title>
+    <title>WebMaster Pro - אדיטור ויזואלי מהפכני | עריכת אתרים</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -625,6 +631,9 @@
             </div>
             
             <div class="header-actions">
+                <button class="header-btn" onclick="goToGallery()">
+                    <i class="fas fa-home"></i> גלריה
+                </button>
                 <button class="header-btn" onclick="undoAction()">
                     <i class="fas fa-undo"></i> בטל
                 </button>
@@ -1008,15 +1017,22 @@
             // Set up event listeners
             setupEventListeners();
             
-            // Check for pre-selected website
-            const selectedWebsite = localStorage.getItem('selectedWebsite');
+            // Check for pre-selected website from gallery
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedFromUrl = urlParams.get('website');
+            const selectedFromStorage = localStorage.getItem('selectedWebsite');
+            
+            const selectedWebsite = selectedFromUrl || selectedFromStorage;
+            
             if (selectedWebsite) {
                 document.getElementById('websiteSelector').value = selectedWebsite;
                 loadWebsite(selectedWebsite);
+                // Clear storage to prevent issues
                 localStorage.removeItem('selectedWebsite');
+                console.log(`📄 Auto-loaded website: ${selectedWebsite}`);
             }
             
-            updateStatus('מוכן לעבודה', 'success');
+            updateStatus('מוכן לעבודה - בחר אתר לעריכה', 'success');
             console.log('✅ Editor initialized successfully!');
         }
 
@@ -1602,6 +1618,10 @@
         function toggleEditMode() {
             isEditMode = !isEditMode;
             showNotification(`מצב עריכה: ${isEditMode ? 'פעיל' : 'כבוי'}`, 'info');
+        }
+
+        function goToGallery() {
+            window.open('index.html', '_blank');
         }
 
         // Initialize when DOM is loaded
