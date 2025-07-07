@@ -1,340 +1,1101 @@
+<!--
+🎯 WebMaster Pro - הגלריה הראשית המתקדמת
+📁 שמור קובץ זה בשם: index.html
+🔗 מתחבר לאדיטור: editor.html
+💎 11 אתרים מקצועיים בשווי ₪26,200
+-->
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - גלריה מתוקנת</title>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>WebMaster Pro - מערכת מלאה לבניית אתרים מקצועיים</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="WebMaster Pro - מערכת מתקדמת לבניית אתרים עסקיים עם 11 תבניות מקצועיות ואדיטור ויזואלי">
+    <meta name="keywords" content="בניית אתרים, עיצוב אתרים, תבניות אתרים, עסקים קטנים, WebMaster Pro">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Heebo', sans-serif; background: linear-gradient(135deg, #667eea, #764ba2); color: white; min-height: 100vh; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; padding: 40px 0; }
-        .header h1 { font-size: 4rem; font-weight: 800; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .header p { font-size: 1.4rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
-        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 40px 0; }
-        .stat-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.2); }
-        .stat-card h3 { font-size: 2.5rem; font-weight: 800; color: #f093fb; margin-bottom: 10px; }
-        .stat-card p { opacity: 0.9; }
-        .websites-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-top: 40px; }
-        .website-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); border-radius: 20px; padding: 30px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; position: relative; }
-        .website-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-        .website-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
-        .website-title { font-size: 1.5rem; font-weight: 700; color: #f093fb; margin-bottom: 5px; }
-        .website-category { font-size: 0.9rem; opacity: 0.8; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 15px; }
-        .website-price { font-size: 1.8rem; font-weight: 800; color: #10b981; }
-        .website-description { margin-bottom: 20px; line-height: 1.6; opacity: 0.9; }
-        .website-features { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
-        .feature-tag { background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; }
-        .website-actions { display: flex; gap: 15px; }
-        .btn { padding: 12px 20px; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; }
-        .btn-primary { background: linear-gradient(135deg, #f093fb, #f5576c); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(240,147,251,0.4); }
-        .btn-secondary { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); }
-        .btn-secondary:hover { background: rgba(255,255,255,0.25); }
-        .status-badge { position: absolute; top: 15px; right: 15px; padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: 600; }
-        .status-ready { background: #10b981; color: white; }
-        .status-premium { background: #f59e0b; color: white; }
-        .status-development { background: #3b82f6; color: white; }
+        :root {
+            /* Modern Color Palette */
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --text-dark: #0f172a;
+            --text-medium: #475569;
+            --text-light: #64748b;
+            
+            /* Background */
+            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-card: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.1);
+            --border: #e2e8f0;
+            
+            /* Shadows */
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            
+            /* Gradients */
+            --gradient-main: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-success: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loading-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Main Container */
+        .main-container {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .main-container.loaded {
+            opacity: 1;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-main);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .logo-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+        }
+
+        .nav-btn.primary {
+            background: var(--gradient-main);
+            color: white;
+        }
+
+        .nav-btn.secondary {
+            background: var(--bg-glass);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 1.1s both;
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats-section {
+            padding: 4rem 2rem;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* ===== GALLERY SECTION ===== */
+        .gallery-section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* ===== WEBSITE CARDS ===== */
+        .website-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .website-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .website-image {
+            width: 100%;
+            height: 250px;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .website-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .website-content {
+            padding: 2rem;
+            color: white;
+        }
+
+        .website-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .website-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .website-category {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .website-price {
+            background: var(--gradient-success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .website-description {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .website-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .website-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 3rem 2rem 1rem;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-section p,
+        .footer-section li {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .websites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .website-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* ===== NOTIFICATIONS ===== */
+        .notification {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .notification.error {
+            background: var(--error);
+        }
+
+        .notification.warning {
+            background: var(--warning);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1><i class="fas fa-magic"></i> WebMaster Pro</h1>
-            <p>גלריית אתרים מקצועיים ברמה עולמית - מוכנים למכירה מיידית</p>
-        </div>
-
-        <div class="stats">
-            <div class="stat-card">
-                <h3>11</h3>
-                <p>אתרים מוכנים</p>
-            </div>
-            <div class="stat-card">
-                <h3>₪26,900</h3>
-                <p>סה"כ שווי</p>
-            </div>
-            <div class="stat-card">
-                <h3>100%</h3>
-                <p>רמה מקצועית</p>
-            </div>
-            <div class="stat-card">
-                <h3>24/7</h3>
-                <p>תמיכה מלאה</p>
-            </div>
-        </div>
-
-        <div class="websites-grid" id="websitesGrid">
-            <!-- Website cards will be generated here -->
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">WebMaster Pro</div>
+            <div class="loading-text">טוען את המערכת המתקדמת...</div>
+            <div class="loading-spinner"></div>
         </div>
     </div>
 
+    <!-- Main Container -->
+    <div class="main-container" id="mainContainer">
+        
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">WM</div>
+                    <div class="logo-text">
+                        <h1>WebMaster Pro</h1>
+                        <p>מערכת ניהול אתרים מקצועית</p>
+                    </div>
+                </div>
+                <nav class="header-nav">
+                    <button class="nav-btn primary" onclick="openEditor()">
+                        <i class="fas fa-edit"></i>
+                        פתח אדיטור
+                    </button>
+                    <button class="nav-btn secondary" onclick="showAbout()">
+                        <i class="fas fa-info-circle"></i>
+                        אודות
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-rocket"></i>
+                    הפלטפורמה המתקדמת ביותר לבניית אתרים
+                </div>
+                <h1 class="hero-title">
+                    בנה אתרים מקצועיים<br>
+                    עם <span style="color: #06b6d4;">טכנולוגיה מתקדמת</span>
+                </h1>
+                <p class="hero-subtitle">
+                    11 תבניות מקצועיות ברמה עולמית, אדיטור ויזואלי מתקדם וכלים חכמים
+                    שיוצרים את האתר המושלם עבור העסק שלך
+                </p>
+                <div class="hero-actions">
+                    <button class="nav-btn primary" onclick="scrollToGallery()">
+                        <i class="fas fa-eye"></i>
+                        צפה בדמואים
+                    </button>
+                    <button class="nav-btn secondary" onclick="openEditor()">
+                        <i class="fas fa-edit"></i>
+                        התחל לבנות
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">אתרים מקצועיים</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">₪26,200</div>
+                    <div class="stat-label">ערך כולל</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">תחומי התמחות</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">רספונסיבי</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section" id="gallerySection">
+            <div class="section-header">
+                <h2 class="section-title">הגלריה המקצועית שלנו</h2>
+                <p class="section-subtitle">
+                    11 אתרים מקצועיים ברמה עולמית, מוכנים לעריכה ולהתאמה אישית.
+                    כל אתר בנוי עם טכנולוגיות מתקדמות ועיצוב רספונסיבי.
+                </p>
+            </div>
+
+            <div class="websites-grid" id="websitesGrid">
+                <!-- האתרים יטענו כאן דינמית -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-magic"></i> WebMaster Pro</h4>
+                    <p>
+                        מערכת מתקדמת לבניית אתרים עסקיים עם 11 תבניות מקצועיות,
+                        אדיטור ויזואלי וכלים חכמים ליצירת אתרים ברמה עולמית.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>תבניות</h4>
+                    <ul>
+                        <li><a href="#">רפואה אסתטית</a></li>
+                        <li><a href="#">מאמן כושר</a></li>
+                        <li><a href="#">יוגה ומדיטציה</a></li>
+                        <li><a href="#">תזונאית</a></li>
+                        <li><a href="#">עורכי דין</a></li>
+                        <li><a href="#">חשבת שכר</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>כלים</h4>
+                    <ul>
+                        <li><a href="#">אדיטור ויזואלי</a></li>
+                        <li><a href="#">גלריית אתרים</a></li>
+                        <li><a href="#">מערכת ניהול</a></li>
+                        <li><a href="#">כלי עיצוב</a></li>
+                        <li><a href="#">ייצוא והורדה</a></li>
+                        <li><a href="#">תמיכה מקצועית</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>יצירת קשר</h4>
+                    <ul>
+                        <li>אימייל: info@webmaster-pro.co.il</li>
+                        <li>טלפון: 050-123-4567</li>
+                        <li>תמיכה: support@webmaster-pro.co.il</li>
+                        <li>שעות: א'-ה' 09:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות.</p>
+            </div>
+        </footer>
+    </div>
+
     <script>
+        // Websites Data
         const websites = {
             'dr-michal-rosen': {
-                name: 'ד"ר מיכל רוזן - רפואה אסתטית',
+                title: 'ד"ר מיכל רוזן',
                 category: 'רפואה אסתטית',
-                price: 2800,
-                description: 'אתר מקצועי למומחית ברפואה אסתטית עם עיצוב יוקרתי ופונקציונליות מתקדמת',
-                features: ['בוטוקס מתקדם', 'חומצה היאלורונית', 'לייזר מתקדם', 'פילינג כימי'],
-                status: 'ready',
-                statusText: 'מוכן למכירה'
+                price: '₪2,800',
+                icon: 'fa-user-md',
+                description: 'קליניקה מתקדמת לרפואה אסתטית עם טיפולי בוטוקס, מילוי וטיפולי לייזר מתקדמים.',
+                features: ['בוטוקס ומילוי', 'טיפולי לייזר', 'הזמנת תורים', 'גלריית לפני-אחרי', 'בלוג רפואי'],
+                colors: { primary: '#e11d48', secondary: '#fb7185' }
             },
             'fitness-co': {
-                name: 'דני פיט - מאמן כושר אישי',
-                category: 'כושר ואימונים',
-                price: 2200,
-                description: 'אתר מאמן כושר עם מחשבון BMI פעיל ותוכניות אימון מותאמות אישית',
-                features: ['מחשבון BMI', 'תוכניות אימון', 'ייעוץ תזונה', 'מעקב התקדמות'],
-                status: 'ready',
-                statusText: 'מוכן למכירה'
+                title: 'דני פיט',
+                category: 'מאמן כושר אישי',
+                price: '₪2,200',
+                icon: 'fa-dumbbell',
+                description: 'מאמן כושר מוסמך עם מחשבוני BMR, תוכניות אימון מותאמות אישית ומעקב התקדמות.',
+                features: ['מחשבון BMR', 'תוכניות אימון', 'מעקב התקדמות', 'מתכונים בריאים', 'הזמנת אימונים'],
+                colors: { primary: '#059669', secondary: '#10b981' }
             },
             'yoga-studio': {
-                name: 'סטודיו אוהם - יוגה ומדיטציה',
+                title: 'סטודיו אוהם',
                 category: 'יוגה ומדיטציה',
-                price: 1900,
-                description: 'אתר יוקרתי לסטודיו יוגה עם לוח שיעורים אינטראקטיבי ועיצוב מרגיע',
-                features: ['לוח שיעורים', 'הזמנות אונליין', 'מדריכי מדיטציה', 'חנות מוצרים'],
-                status: 'ready',
-                statusText: 'מוכן למכירה'
+                price: '₪1,900',
+                icon: 'fa-leaf',
+                description: 'סטודיו יוגה מקצועי עם לוח שיעורים, הזמנות אונליין ומדיטציות מודרכות.',
+                features: ['לוח שיעורים', 'הזמנות אונליין', 'מדיטציות מודרכות', 'בלוג רוחניות', 'מועדון חברים'],
+                colors: { primary: '#7c3aed', secondary: '#a855f7' }
             },
             'nutritionist': {
-                name: 'ד"ר שרה כהן - תזונאית קלינית',
-                category: 'תזונה ובריאות',
-                price: 2400,
-                description: 'אתר תזונאית מוסמכת עם מחשבוני תזונה מתקדמים ותפריטים מותאמים',
-                features: ['מחשבון BMI', 'מחשבון קלוריות', 'תפריטים מותאמים', 'מעקב משקל'],
-                status: 'ready',
-                statusText: 'מוכן למכירה'
+                title: 'ד"ר שרה כהן',
+                category: 'תזונאית קלינית',
+                price: '₪2,400',
+                icon: 'fa-apple-alt',
+                description: 'תזונאית מוסמכת עם מחשבון קלוריות, תפריטי תזונה מותאמים אישית ומעקב משקל.',
+                features: ['מחשבון קלוריות', 'תפריטי תזונה', 'מעקב משקל', 'מתכונים דיאטטיים', 'ייעוץ אישי'],
+                colors: { primary: '#f59e0b', secondary: '#fbbf24' }
             },
             'law-firm': {
-                name: 'משרד ברקוביץ - עורכי דין',
-                category: 'שירותים משפטיים',
-                price: 2500,
-                description: 'אתר משרד עורכי דין מקצועי עם מידע מפורט על שירותים משפטיים',
-                features: ['ייעוץ חינם', 'טופס פנייה', 'תחומי התמחות', 'זמינות 24/7'],
-                status: 'ready',
-                statusText: 'מוכן למכירה'
+                title: 'משרד ברקוביץ',
+                category: 'עורכי דין',
+                price: '₪2,500',
+                icon: 'fa-balance-scale',
+                description: 'משרד עורכי דין מוביל עם מחשבון פיצויים, ייעוץ משפטי ותחומי התמחות רחבים.',
+                features: ['מחשבון פיצויים', 'ייעוץ משפטי', 'תחומי התמחות', 'מאמרים משפטיים', 'הזמנת פגישות'],
+                colors: { primary: '#1e40af', secondary: '#3b82f6' }
             },
             'accountant': {
-                name: 'רינה לוי - חשבת שכר',
-                category: 'חשבונאות ומיסים',
-                price: 2000,
-                description: 'אתר חשבת שכר מוסמכת עם מחשבון שכר נטו ושירותי חשבונאות',
-                features: ['מחשבון שכר נטו', 'ייעוץ מיסוי', 'דוחות חודשיים', 'תמיכה טלפונית'],
-                status: 'ready',
-                statusText: 'מוכן למכירה'
+                title: 'רינה לוי',
+                category: 'חשבת שכר מוסמכת',
+                price: '₪2,000',
+                icon: 'fa-calculator',
+                description: 'חשבת שכר מקצועית עם מחשבון שכר, דוחות מס וניהול שכר מלא לעסקים.',
+                features: ['מחשבון שכר', 'דוחות מס', 'ניהול שכר', 'ייעוץ מקצועי', 'מערכת לקוחות'],
+                colors: { primary: '#dc2626', secondary: '#ef4444' }
             },
             'beauty-salon': {
-                name: 'מספרה BELLA - יופי ועיצוב שיער',
+                title: 'מספרה BELLA',
                 category: 'יופי ועיצוב שיער',
-                price: 1700,
-                description: 'אתר מספרה מקצועית עם גלריית עבודות ומערכת הזמנות אונליין',
-                features: ['גלריית עבודות', 'הזמנת תורים', 'מחירון שירותים', 'טיפים ליופי'],
-                status: 'ready',
-                statusText: 'מוכן למכירה'
+                price: '₪1,700',
+                icon: 'fa-cut',
+                description: 'מספרה יוקרתית עם הזמנת תורים, גלריית עבודות ושירותי יופי מקצועיים.',
+                features: ['הזמנת תורים', 'גלריית עבודות', 'מחירון שירותים', 'טיפוח ויופי', 'מועדון לקוחות'],
+                colors: { primary: '#be185d', secondary: '#ec4899' }
             },
             'tutor': {
-                name: 'ד"ר רונית לוי - מורה פרטית',
-                category: 'חינוך והוראה',
-                price: 2100,
-                description: 'אתר מורה פרטית מקצועית עם מערכת לימוד אונליין ומעקב התקדמות',
-                features: ['שיעורים אונליין', 'מעקב ציונים', 'חומרי לימוד', 'הכנה לבגרות'],
-                status: 'ready',
-                statusText: 'מוכן למכירה'
+                title: 'ד"ר רונית לוי',
+                category: 'מורה פרטית לבגרויות',
+                price: '₪2,100',
+                icon: 'fa-graduation-cap',
+                description: 'מורה פרטית מוסמכת למתמטיקה ופיזיקה עם לוח זמנים, מאמרים חינוכיים ומשאבי לימוד.',
+                features: ['לוח זמנים', 'מאמרים חינוכיים', 'משאבי לימוד', 'מעקב הישגים', 'הורים ותלמידים'],
+                colors: { primary: '#0891b2', secondary: '#06b6d4' }
             },
             'aesthetic-clinic': {
-                name: 'קליניקת יופי פרמיום',
+                title: 'קליניקת יופי פרמיום',
                 category: 'אסתטיקה רפואית',
-                price: 3200,
-                description: 'אתר פרמיום לקליניקה אסתטית עם עיצוב יוקרתי וטכנולוגיות מתקדמות',
-                features: ['טכנולוגיות מתקדמות', 'ייעוץ אונליין', 'גלריה לפני ואחרי', 'הזמנות VIP'],
-                status: 'premium',
-                statusText: 'פרמיום'
+                price: '₪3,200',
+                icon: 'fa-spa',
+                description: 'קליניקת יופי יוקרתית עם טיפולי פנים מתקדמים, הזמנות ויועדון VIP לקוחות.',
+                features: ['טיפולי פנים מתקדמים', 'גלריית לפני-אחרי', 'הזמנות מתקדמות', 'ייעוץ מקצועי', 'מועדון VIP'],
+                colors: { primary: '#7c2d12', secondary: '#ea580c' }
             },
             'multibrawn': {
-                name: 'מולטיבראון - נופש ואירועים',
+                title: 'מולטיבראון',
                 category: 'נופש ואירועים',
-                price: 2300,
-                description: 'אתר יוקרתי לחברת נופש ואירועים עם גלריית יעדים ומערכת הזמנות',
-                features: ['גלריית יעדים', 'הזמנת חופשות', 'אירועים מיוחדים', 'מדריכי טיולים'],
-                status: 'development',
-                statusText: 'בפיתוח'
+                price: '₪2,300',
+                icon: 'fa-calendar-alt',
+                description: 'אולמי אירועים יוקרתיים עם הזמנת אירועים, גלריית אולמות ותפריטי קייטרינג מגוונים.',
+                features: ['הזמנת אירועים', 'גלריית אולמות', 'מחירון מלא', 'תפריטי קייטרינג', 'ניהול הזמנות'],
+                colors: { primary: '#059669', secondary: '#34d399' }
             },
             'real-estate': {
-                name: 'נדל"ן פרמיום - השקעות נדל"ן',
-                category: 'נדל"ן והשקעות',
-                price: 2700,
-                description: 'אתר חברת נדל"ן יוקרתית עם מחשבון משכנתא ומאגר נכסים מתקדם',
-                features: ['מחשבון משכנתא', 'מאגר נכסים', 'ייעוץ השקעות', 'סיורים וירטואליים'],
-                status: 'development',
-                statusText: 'בפיתוח'
+                title: 'נדל"ן פרמיום',
+                category: 'נכסים יוקרתיים',
+                price: '₪2,700',
+                icon: 'fa-home',
+                description: 'סוכנות נדל"ן יוקרתית עם חיפוש נכסים, מחשבון משכנתא והערכת שווי מקצועית.',
+                features: ['חיפוש נכסים מתקדם', 'מחשבון משכנתא', 'גלריית דירות', 'ייעוץ השקעות', 'הערכת שווי'],
+                colors: { primary: '#1f2937', secondary: '#374151' }
             }
         };
 
-        document.addEventListener('DOMContentLoaded', function() {
-            generateWebsiteCards();
-        });
-
-        function generateWebsiteCards() {
-            const grid = document.getElementById('websitesGrid');
+        // Initialize the application
+        function initializeApp() {
+            console.log('🚀 Initializing WebMaster Pro Gallery...');
             
-            for (const [id, website] of Object.entries(websites)) {
+            // Simulate loading
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    document.getElementById('mainContainer').classList.add('loaded');
+                }, 500);
+            }, 2000);
+            
+            // Load websites
+            loadWebsites();
+            
+            console.log('✅ Gallery initialized successfully!');
+            console.log(`💎 ${Object.keys(websites).length} professional websites loaded`);
+            console.log('💰 Total portfolio value: ₪26,200');
+        }
+
+        // Load websites into gallery
+        function loadWebsites() {
+            const grid = document.getElementById('websitesGrid');
+            grid.innerHTML = '';
+            
+            Object.entries(websites).forEach(([key, website], index) => {
                 const card = document.createElement('div');
-                card.className = 'website-card';
-                
-                const statusClass = website.status === 'ready' ? 'status-ready' : 
-                                  website.status === 'premium' ? 'status-premium' : 'status-development';
+                card.className = 'website-card fade-in';
+                card.style.animationDelay = `${index * 0.1}s`;
                 
                 card.innerHTML = `
-                    <div class="status-badge ${statusClass}">${website.statusText}</div>
-                    <div class="website-header">
-                        <div>
-                            <div class="website-title">${website.name}</div>
-                            <div class="website-category">${website.category}</div>
+                    <div class="website-image" style="background: linear-gradient(135deg, ${website.colors.primary} 0%, ${website.colors.secondary} 100%);">
+                        <i class="fas ${website.icon}"></i>
+                    </div>
+                    <div class="website-content">
+                        <div class="website-header">
+                            <div>
+                                <h3 class="website-title">${website.title}</h3>
+                                <p class="website-category">${website.category}</p>
+                            </div>
+                            <div class="website-price">${website.price}</div>
                         </div>
-                        <div class="website-price">₪${website.price.toLocaleString()}</div>
-                    </div>
-                    <div class="website-description">${website.description}</div>
-                    <div class="website-features">
-                        ${website.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-                    </div>
-                    <div class="website-actions">
-                        <button class="btn btn-primary" onclick="openEditor('${id}')">
-                            <i class="fas fa-edit"></i> ערוך באדיטור
-                        </button>
-                        <button class="btn btn-secondary" onclick="previewWebsite('${id}')">
-                            <i class="fas fa-eye"></i> תצוגה מקדימה
-                        </button>
+                        <p class="website-description">${website.description}</p>
+                        <div class="website-features">
+                            ${website.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                        </div>
+                        <div class="website-actions">
+                            <button class="action-btn btn-primary" onclick="editWebsite('${key}')">
+                                <i class="fas fa-edit"></i>
+                                ערוך באדיטור
+                            </button>
+                            <button class="action-btn btn-secondary" onclick="previewWebsite('${key}')">
+                                <i class="fas fa-eye"></i>
+                                תצוגה מקדימה
+                            </button>
+                        </div>
                     </div>
                 `;
                 
                 grid.appendChild(card);
+            });
+        }
+
+        // Edit website in editor
+        function editWebsite(websiteKey) {
+            const website = websites[websiteKey];
+            if (!website) {
+                showNotification('שגיאה: האתר לא נמצא', 'error');
+                return;
+            }
+            
+            // Store website selection
+            localStorage.setItem('selectedWebsite', websiteKey);
+            
+            // Open editor
+            const editorUrl = `editor.html`;
+            const editorWindow = window.open(editorUrl, '_blank', 'width=1400,height=900');
+            
+            if (editorWindow) {
+                showNotification(`🎨 פותח אדיטור עבור ${website.title}`, 'success');
+            } else {
+                showNotification('שגיאה: לא ניתן לפתוח את האדיטור. אנא אפשר חלונות קופצים.', 'error');
             }
         }
 
-        function openEditor(websiteId) {
-            // שמירת האתר הנוכחי
-            localStorage.setItem('currentEditingWebsite', websiteId);
+        // Preview website
+        function previewWebsite(websiteKey) {
+            const website = websites[websiteKey];
+            if (!website) {
+                showNotification('שגיאה: האתר לא נמצא', 'error');
+                return;
+            }
             
-            // יצירת URL לאדיטור עם פרמטר האתר
-            const editorUrl = './WebMaster-Pro-Visual-Editor.html?website=' + websiteId;
+            // Generate preview HTML
+            const previewHTML = generatePreviewHTML(website);
             
-            // פתיחת האדיטור בחלון חדש
-            window.open(editorUrl, '_blank');
+            // Open preview in new window
+            const previewWindow = window.open('', '_blank', 'width=1200,height=800');
+            previewWindow.document.write(previewHTML);
+            previewWindow.document.close();
             
-            // הודעה למשתמש
-            showNotification('success', 'פותח אדיטור', `עורך את ${websites[websiteId].name}`);
+            showNotification(`👁️ פותח תצוגה מקדימה של ${website.title}`, 'success');
         }
 
-        function previewWebsite(websiteId) {
-            const website = websites[websiteId];
-            
-            // יצירת HTML מלא לתצוגה מקדימה
-            const html = generatePreviewHTML(website, websiteId);
-            
-            // פתיחת תצוגה מקדימה בחלון חדש
-            const newWindow = window.open('', '_blank');
-            newWindow.document.write(html);
-            newWindow.document.close();
-            
-            showNotification('info', 'תצוגה מקדימה', 'האתר נפתח בחלון חדש');
-        }
-
-        function generatePreviewHTML(website, websiteId) {
-            return `<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${website.name}</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; }
-        .hero { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 100px 20px; text-align: center; }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 800; }
-        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .services { padding: 80px 20px; background: #f8f9fa; }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: #333; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .service-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
-        .service-card h3 { color: #667eea; font-size: 1.5rem; margin-bottom: 15px; }
-        .service-card p { color: #666; margin-bottom: 20px; }
-        .service-price { background: #667eea; color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; }
-        .contact { background: #333; color: white; padding: 60px 20px; text-align: center; }
-        .contact h2 { font-size: 2rem; margin-bottom: 20px; }
-        .contact-info { font-size: 1.1rem; margin-bottom: 10px; }
-        .whatsapp-btn { background: #25d366; color: white; padding: 15px 30px; border-radius: 25px; text-decoration: none; display: inline-block; margin-top: 20px; font-weight: bold; }
-    </style>
-</head>
-<body>
-    <section class="hero">
-        <div class="container">
-            <h1>${website.name}</h1>
-            <p>${website.description}</p>
-        </div>
-    </section>
-    <section class="services">
-        <div class="container">
-            <h2 class="section-title">השירותים שלנו</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>שירות מקצועי ראשון</h3>
-                    <p>תיאור מפורט של השירות הראשון עם כל הפרטים החשובים</p>
-                    <div class="service-price">החל מ-₪${Math.floor(website.price * 0.3)}</div>
-                </div>
-                <div class="service-card">
-                    <h3>יעוץ מקצועי מותאם</h3>
-                    <p>יעוץ מותאם אישית לצרכים שלכם עם ניסיון רב שנים</p>
-                    <div class="service-price">החל מ-₪${Math.floor(website.price * 0.4)}</div>
-                </div>
-                <div class="service-card">
-                    <h3>תמיכה וליווי מלא</h3>
-                    <p>תמיכה וליווי מלא לאורך כל התהליך עד לתוצאה המושלמת</p>
-                    <div class="service-price">החל מ-₪${Math.floor(website.price * 0.5)}</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="contact">
-        <div class="container">
-            <h2>צרו קשר לקבלת שירות מקצועי</h2>
-            <div class="contact-info">📞 052-1234567</div>
-            <div class="contact-info">📧 info@${websiteId}.co.il</div>
-            <div class="contact-info">📍 תל אביב, ישראל</div>
-            <a href="https://wa.me/972521234567" class="whatsapp-btn">💬 שלחו הודעה בווטסאפ</a>
-        </div>
-    </section>
-</body>
-</html>`;
-        }
-
-        function showNotification(type, title, message) {
-            // יצירת התראה
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
-                color: white;
-                padding: 15px 25px;
-                border-radius: 10px;
-                z-index: 10000;
-                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-                transition: all 0.3s ease;
+        // Generate preview HTML
+        function generatePreviewHTML(website) {
+            return `
+                <!DOCTYPE html>
+                <html lang="he" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${website.title} - ${website.category}</title>
+                    <style>
+                        * { margin: 0; padding: 0; box-sizing: border-box; }
+                        body { 
+                            font-family: 'Heebo', Arial, sans-serif; 
+                            line-height: 1.6; 
+                            color: #333; 
+                            background: linear-gradient(135deg, ${website.colors.primary} 0%, ${website.colors.secondary} 100%);
+                            min-height: 100vh;
+                            color: white;
+                        }
+                        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; text-align: center; }
+                        h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+                        h2 { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; }
+                        p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+                        .features { 
+                            display: grid; 
+                            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+                            gap: 1rem; 
+                            margin: 3rem 0; 
+                        }
+                        .feature { 
+                            background: rgba(255,255,255,0.1); 
+                            padding: 2rem; 
+                            border-radius: 15px; 
+                            backdrop-filter: blur(10px);
+                            border: 1px solid rgba(255,255,255,0.2);
+                        }
+                        .btn { 
+                            background: white; 
+                            color: ${website.colors.primary}; 
+                            padding: 1rem 2rem; 
+                            border: none; 
+                            border-radius: 25px; 
+                            font-weight: 600; 
+                            text-decoration: none; 
+                            display: inline-block; 
+                            margin: 1rem; 
+                            font-size: 1.1rem;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                        }
+                        .icon { font-size: 4rem; margin-bottom: 1rem; }
+                    </style>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="icon">
+                            <i class="fas ${website.icon}"></i>
+                        </div>
+                        <h1>${website.title}</h1>
+                        <h2>${website.category}</h2>
+                        <p>${website.description}</p>
+                        
+                        <div class="features">
+                            ${website.features.map(feature => `
+                                <div class="feature">
+                                    <h3>${feature}</h3>
+                                    <p>שירות מקצועי ואמין עם הטכנולוגיה המתקדמת ביותר</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <a href="#" class="btn">צור קשר עכשיו</a>
+                        <a href="#" class="btn">הזמן שירות</a>
+                        
+                        <p style="margin-top: 3rem; opacity: 0.8;">
+                            🌟 אתר זה נבנה עם WebMaster Pro - ${website.price}
+                        </p>
+                    </div>
+                </body>
+                </html>
             `;
-            notification.innerHTML = `<strong>${title}</strong><br><small>${message}</small>`;
+        }
+
+        // Open editor (general)
+        function openEditor() {
+            const editorUrl = 'editor.html';
+            const editorWindow = window.open(editorUrl, '_blank', 'width=1400,height=900');
+            
+            if (editorWindow) {
+                showNotification('🚀 פותח את האדיטור הויזואלי', 'success');
+            } else {
+                showNotification('שגיאה: לא ניתן לפתוח את האדיטור. אנא אפשר חלונות קופצים.', 'error');
+            }
+        }
+
+        // Scroll to gallery
+        function scrollToGallery() {
+            document.getElementById('gallerySection').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Show about
+        function showAbout() {
+            showNotification('📋 WebMaster Pro - מערכת מתקדמת לבניית אתרים עסקיים', 'success');
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
             
             document.body.appendChild(notification);
             
-            // הסרה אחרי 3 שניות
             setTimeout(() => {
-                notification.remove();
+                notification.style.animation = 'slideIn 0.3s ease-out reverse';
+                setTimeout(() => notification.remove(), 300);
             }, 3000);
         }
+
+        // Smooth scrolling for anchor links
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize app
+            initializeApp();
+            
+            // Add smooth scrolling to all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            console.log('🎯 WebMaster Pro Gallery fully loaded!');
+            console.log('💼 Ready for business with 11 professional websites');
+            console.log('🔗 Connected to editor.html for seamless editing');
+        });
     </script>
 </body>
 </html>
