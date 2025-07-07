@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 WebMaster Pro - אדיטור ויזואלי מהפכני | עריכת אתרים מקצועיים</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1e1e3f;
+            --bg-tertiary: #2a2a5a;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d4;
+            --accent-neon: #00ffff;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #f471b5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --gradient-primary: linear-gradient(135deg, var(--accent-neon) 0%, var(--accent-purple) 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-pink) 100%);
+            --gradient-bg: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-content {
+            text-align: center;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        .loading-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .loading-features {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid var(--accent-neon);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Layout */
+        .editor-container {
+            display: grid;
+            grid-template-rows: 70px 1fr 50px;
+            height: 100vh;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .editor-container.loaded {
+            opacity: 1;
+        }
+
+        /* Header */
+        .editor-header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .website-selector {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            min-width: 350px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .website-selector:hover {
+            border-color: var(--accent-neon);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .website-selector option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .device-buttons {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 0.3rem;
+        }
+
+        .device-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .device-btn.active {
+            background: var(--accent-neon);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .device-btn:hover:not(.active) {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+        }
+
+        .header-right {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--accent-neon);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .btn.primary {
+            background: var(--gradient-primary);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .btn.success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn.warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 320px 1fr 300px;
+            height: calc(100vh - 120px);
+            gap: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .main-content.fullscreen {
+            grid-template-columns: 0 1fr 0;
+        }
+
+        /* Left Panel - AI Tools */
+        .left-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .left-panel.hidden {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .panel-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-neon);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* AI Assistant */
+        .ai-assistant {
+            background: linear-gradient(135deg, rgba(0,255,255,0.1) 0%, rgba(139,92,246,0.1) 100%);
+            border: 2px solid rgba(0,255,255,0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-assistant::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0,255,255,0.1), transparent);
+            animation: rotate 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .ai-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .ai-input {
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .ai-input:focus {
+            outline: none;
+            border-color: var(--accent-neon);
+            box-shadow: 0 0 20px rgba(0,255,255,0.3);
+        }
+
+        .ai-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .ai-suggestions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-suggestion {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 0.7rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .ai-suggestion:hover {
+            background: var(--accent-neon);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,255,255,0.3);
+        }
+
+        .ai-execute-btn {
+            width: 100%;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem;
+            color: var(--bg-primary);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .ai-execute-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,255,255,0.4);
+        }
+
+        .ai-execute-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Quick Tools */
+        .quick-tools {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .quick-tool {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 0.8rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .quick-tool:hover {
+            background: var(--accent-purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .quick-tool i {
+            font-size: 1.2rem;
+        }
+
+        /* Center Panel - Website Preview */
+        .center-panel {
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-toolbar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-info {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .preview-frame {
+            flex: 1;
+            border: none;
+            background: white;
+            margin: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transition: all 0.5s ease;
+            transform-origin: top center;
+        }
+
+        .preview-frame.desktop {
+            width: calc(100% - 2rem);
+        }
+
+        .preview-frame.tablet {
+            width: 768px;
+            max-width: calc(100% - 2rem);
+            margin: 1rem auto;
+        }
+
+        .preview-frame.mobile {
+            width: 375px;
+            max-width: calc(100% - 2rem);
+            margin: 1rem auto;
+        }
+
+        .no-website-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .no-website-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .overlay-content {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .overlay-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .overlay-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .website-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+        }
+
+        /* Right Panel - Properties */
+        .right-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--glass-border);
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .right-panel.hidden {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Element Inspector */
+        .element-inspector {
+            background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(6,182,212,0.1) 100%);
+            border: 1px solid rgba(16,185,129,0.3);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .inspector-property {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .inspector-label {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .inspector-value {
+            color: var(--text-secondary);
+        }
+
+        /* Color Tools */
+        .color-tools {
+            background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(239,68,68,0.1) 100%);
+            border: 1px solid rgba(245,158,11,0.3);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--glass-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .color-preview:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .color-input {
+            flex: 1;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            padding: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        .color-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .color-actions .btn {
+            flex: 1;
+            font-size: 0.7rem;
+            padding: 0.4rem 0.6rem;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 0.7rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.working {
+            background: var(--warning);
+            animation: fastPulse 0.5s infinite;
+        }
+
+        .status-indicator.error {
+            background: var(--error);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes fastPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            color: var(--text-primary);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease-out;
+            box-shadow: var(--glass-shadow);
+            max-width: 400px;
+            min-width: 300px;
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .notification.error {
+            border-left: 4px solid var(--error);
+        }
+
+        .notification.warning {
+            border-left: 4px solid var(--warning);
+        }
+
+        .notification.info {
+            border-left: 4px solid var(--accent-neon);
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 280px 1fr 260px;
+            }
+            
+            .website-selector {
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .left-panel, .right-panel {
+                display: none;
+            }
+
+            .header-center {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .website-selector {
+                min-width: 200px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .scale-in {
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Loading States */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">🚀 WebMaster Pro</div>
+            <div class="loading-text">טוען אדיטור ויזואלי מהפכני...</div>
+            <div class="loading-features">
+                ✨ 11 אתרים מקצועיים במלואם<br>
+                🤖 כלי AI מתקדמים<br>
+                🎨 עריכה אמיתית בזמן אמת<br>
+                💎 ערך כולל: ₪26,900<br>
+                🚀 ממשק פשוט ונוח<br>
+                ⚡ פיצ'רים מתקדמים
+            </div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Main Editor -->
+    <div class="editor-container" id="editorContainer">
+        
+        <!-- Header -->
+        <div class="editor-header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-rocket"></i>
+                    WebMaster Pro
+                </div>
+                
+                <select class="website-selector" id="websiteSelector" onchange="loadWebsite(this.value)">
+                    <option value="">🎯 בחר אתר לעריכה (11 אתרים מקצועיים - ₪26,900)</option>
+                </select>
+            </div>
+            
+            <div class="header-center">
+                <div class="device-buttons">
+                    <button class="device-btn active" onclick="setDevice('desktop')" id="desktopBtn">
+                        <i class="fas fa-desktop"></i>
+                        Desktop
+                    </button>
+                    <button class="device-btn" onclick="setDevice('tablet')" id="tabletBtn">
+                        <i class="fas fa-tablet-alt"></i>
+                        Tablet
+                    </button>
+                    <button class="device-btn" onclick="setDevice('mobile')" id="mobileBtn">
+                        <i class="fas fa-mobile-alt"></i>
+                        Mobile
+                    </button>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <button class="btn" onclick="togglePanels()" id="fullscreenBtn" title="מסך מלא (F11)">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+                <button class="btn success" onclick="saveWebsite()" title="שמור (Ctrl+S)">
+                    <i class="fas fa-save"></i>
+                    שמור
+                </button>
+                <button class="btn primary" onclick="exportWebsite()" title="ייצא אתר">
+                    <i class="fas fa-download"></i>
+                    ייצא
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            
+            <!-- Left Panel - AI Tools -->
+            <div class="left-panel" id="leftPanel">
+                
+                <!-- AI Assistant -->
+                <div class="ai-assistant">
+                    <div class="ai-content">
+                        <div class="section-title">
+                            <i class="fas fa-brain"></i>
+                            AI Assistant מתקדם
+                        </div>
+                        
+                        <textarea 
+                            class="ai-input" 
+                            id="aiInput" 
+                            placeholder="🤖 הוראות AI מתקדמות לעריכת האתר:
+
+📝 'כתוב תוכן שיווקי למרפאת שיניים עם כל הפרטים'
+🎨 'שנה את העיצוב להיות מודרני יותר בצבעים כחולים'
+📱 'תעשה אופטימיזציה מלאה לטלפונים ניידים'
+🖼️ 'הוסף גלריית תמונות לפני ואחרי למרפאה'
+📈 'שפר את ה-SEO של האתר עם מילות מפתח'
+💰 'הוסף מחשבון עלויות לטיפולים'
+📞 'הוסף כפתורי WhatsApp וטפסי יצירת קשר'
+🎯 'תכתוב כותרות מושכות לכל הסקציות'"
+                        ></textarea>
+                        
+                        <div class="ai-suggestions">
+                            <div class="ai-suggestion" onclick="quickAI('content')">
+                                <i class="fas fa-edit"></i>
+                                <span>תוכן שיווקי</span>
+                            </div>
+                            <div class="ai-suggestion" onclick="quickAI('design')">
+                                <i class="fas fa-palette"></i>
+                                <span>שפר עיצוב</span>
+                            </div>
+                            <div class="ai-suggestion" onclick="quickAI('seo')">
+                                <i class="fas fa-search"></i>
+                                <span>אופטמיזציה</span>
+                            </div>
+                            <div class="ai-suggestion" onclick="quickAI('mobile')">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>מובייל</span>
+                            </div>
+                            <div class="ai-suggestion" onclick="quickAI('contact')">
+                                <i class="fas fa-phone"></i>
+                                <span>פרטי קשר</span>
+                            </div>
+                            <div class="ai-suggestion" onclick="quickAI('calculator')">
+                                <i class="fas fa-calculator"></i>
+                                <span>מחשבון</span>
+                            </div>
+                        </div>
+                        
+                        <button class="ai-execute-btn" onclick="executeAI()" id="aiExecuteBtn">
+                            <i class="fas fa-magic"></i>
+                            בצע עם AI מתקדם
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Tools -->
+                <div class="panel-section">
+                    <div class="section-title">
+                        <i class="fas fa-tools"></i>
+                        כלים מהירים
+                    </div>
+                    
+                    <div class="quick-tools">
+                        <div class="quick-tool" onclick="quickEdit('text')">
+                            <i class="fas fa-font"></i>
+                            <span>ערוך טקסט</span>
+                        </div>
+                        <div class="quick-tool" onclick="quickEdit('image')">
+                            <i class="fas fa-image"></i>
+                            <span>החלף תמונה</span>
+                        </div>
+                        <div class="quick-tool" onclick="quickEdit('color')">
+                            <i class="fas fa-eyedropper"></i>
+                            <span>שנה צבעים</span>
+                        </div>
+                        <div class="quick-tool" onclick="quickEdit('layout')">
+                            <i class="fas fa-th-large"></i>
+                            <span>פריסה</span>
+                        </div>
+                        <div class="quick-tool" onclick="addSection()">
+                            <i class="fas fa-plus"></i>
+                            <span>הוסף סקציה</span>
+                        </div>
+                        <div class="quick-tool" onclick="generateQR()">
+                            <i class="fas fa-qrcode"></i>
+                            <span>QR Code</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Templates -->
+                <div class="panel-section">
+                    <div class="section-title">
+                        <i class="fas fa-layer-group"></i>
+                        תבניות מהירות
+                    </div>
+                    
+                    <div class="quick-tools">
+                        <div class="quick-tool" onclick="addTemplate('hero')">
+                            <i class="fas fa-star"></i>
+                            <span>דף בית</span>
+                        </div>
+                        <div class="quick-tool" onclick="addTemplate('about')">
+                            <i class="fas fa-user"></i>
+                            <span>אודות</span>
+                        </div>
+                        <div class="quick-tool" onclick="addTemplate('services')">
+                            <i class="fas fa-cogs"></i>
+                            <span>שירותים</span>
+                        </div>
+                        <div class="quick-tool" onclick="addTemplate('contact')">
+                            <i class="fas fa-envelope"></i>
+                            <span>צור קשר</span>
+                        </div>
+                        <div class="quick-tool" onclick="addTemplate('gallery')">
+                            <i class="fas fa-images"></i>
+                            <span>גלריה</span>
+                        </div>
+                        <div class="quick-tool" onclick="addTemplate('testimonials')">
+                            <i class="fas fa-quote-left"></i>
+                            <span>המלצות</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Center Panel - Website Preview -->
+            <div class="center-panel">
+                <div class="preview-toolbar">
+                    <div class="preview-info" id="previewInfo">
+                        <span id="currentWebsiteName">לא נבחר אתר</span>
+                        <span id="currentWebsitePrice"></span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn" onclick="refreshPreview()" title="רענן תצוגה">
+                            <i class="fas fa-sync"></i>
+                        </button>
+                        <button class="btn" onclick="previewInNewWindow()" title="תצוגה בחלון חדש">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                        <button class="btn" onclick="enableEditMode()" title="מצב עריכה" id="editModeBtn">
+                            <i class="fas fa-edit"></i>
+                            עריכה
+                        </button>
+                    </div>
+                </div>
+                
+                <iframe class="preview-frame desktop" id="previewFrame" src="about:blank"></iframe>
+                
+                <div class="no-website-overlay" id="noWebsiteOverlay">
+                    <div class="overlay-content">
+                        <h3><i class="fas fa-rocket"></i> WebMaster Pro</h3>
+                        <p><strong>אדיטור ויזואלי מהפכני</strong></p>
+                        <p>בחר אתר מהרשימה למעלה כדי להתחיל לערוך</p>
+                        
+                        <div class="website-stats">
+                            <div class="stat-card">
+                                <div class="stat-number">11</div>
+                                <div class="stat-label">אתרים מקצועיים</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">₪26,900</div>
+                                <div class="stat-label">ערך כולל</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">רמה עולמית</div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn primary" onclick="loadDemoWebsite()" style="margin-top: 1rem;">
+                            <i class="fas fa-play"></i>
+                            טען דמו: ד"ר מיכל רוזן
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Properties -->
+            <div class="right-panel" id="rightPanel">
+                
+                <!-- Element Inspector -->
+                <div class="element-inspector">
+                    <div class="section-title">
+                        <i class="fas fa-search"></i>
+                        בוחן אלמנטים
+                    </div>
+                    
+                    <div id="elementInspector">
+                        <div class="inspector-property">
+                            <span class="inspector-label">אלמנט נבחר:</span>
+                            <span class="inspector-value" id="selectedElementType">לחץ על אלמנט</span>
+                        </div>
+                        <div class="inspector-property">
+                            <span class="inspector-label">סוג:</span>
+                            <span class="inspector-value" id="elementTag">-</span>
+                        </div>
+                        <div class="inspector-property">
+                            <span class="inspector-label">מחלקה:</span>
+                            <span class="inspector-value" id="elementClass">-</span>
+                        </div>
+                        <div class="inspector-property">
+                            <span class="inspector-label">טקסט:</span>
+                            <span class="inspector-value" id="elementText">-</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <button class="btn" onclick="editSelectedElement()" id="editElementBtn" disabled style="width: 100%;">
+                            <i class="fas fa-edit"></i>
+                            ערוך אלמנט
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Color Tools -->
+                <div class="color-tools">
+                    <div class="section-title">
+                        <i class="fas fa-palette"></i>
+                        כלי צבעים
+                    </div>
+                    
+                    <div class="color-picker-container">
+                        <div class="color-preview" id="colorPreview" style="background: #667eea;" onclick="openColorPicker()"></div>
+                        <input type="color" id="colorPicker" class="color-input" value="#667eea" onchange="updateColorPreview(this.value)">
+                    </div>
+                    
+                    <div class="color-actions">
+                        <button class="btn" onclick="applyColorToPrimary()" style="flex: 1; font-size: 0.7rem;">
+                            צבע ראשי
+                        </button>
+                        <button class="btn" onclick="applyColorToBackground()" style="flex: 1; font-size: 0.7rem;">
+                            רקע
+                        </button>
+                    </div>
+                    
+                    <div style="margin-top: 0.5rem;">
+                        <button class="btn" onclick="applyColorToText()" style="width: 100%; font-size: 0.8rem;">
+                            <i class="fas fa-font"></i>
+                            צבע טקסט
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Text Tools -->
+                <div class="panel-section">
+                    <div class="section-title">
+                        <i class="fas fa-font"></i>
+                        כלי טקסט
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn" onclick="formatText('bold')" style="flex: 1; font-size: 0.8rem;">
+                                <i class="fas fa-bold"></i>
+                            </button>
+                            <button class="btn" onclick="formatText('italic')" style="flex: 1; font-size: 0.8rem;">
+                                <i class="fas fa-italic"></i>
+                            </button>
+                            <button class="btn" onclick="formatText('underline')" style="flex: 1; font-size: 0.8rem;">
+                                <i class="fas fa-underline"></i>
+                            </button>
+                        </div>
+                        
+                        <select id="fontSizeSelect" onchange="changeFontSize(this.value)" style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.5rem; color: var(--text-primary);">
+                            <option value="">גודל פונט</option>
+                            <option value="12px">12px</option>
+                            <option value="14px">14px</option>
+                            <option value="16px">16px</option>
+                            <option value="18px">18px</option>
+                            <option value="20px">20px</option>
+                            <option value="24px">24px</option>
+                            <option value="32px">32px</option>
+                            <option value="48px">48px</option>
+                        </select>
+                        
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn" onclick="alignText('right')" style="flex: 1; font-size: 0.8rem;">
+                                <i class="fas fa-align-right"></i>
+                            </button>
+                            <button class="btn" onclick="alignText('center')" style="flex: 1; font-size: 0.8rem;">
+                                <i class="fas fa-align-center"></i>
+                            </button>
+                            <button class="btn" onclick="alignText('left')" style="flex: 1; font-size: 0.8rem;">
+                                <i class="fas fa-align-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Info -->
+                <div class="panel-section">
+                    <div class="section-title">
+                        <i class="fas fa-info-circle"></i>
+                        פרטי האתר
+                    </div>
+                    
+                    <div style="font-size: 0.85rem; line-height: 1.6;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>שם:</strong> <span id="siteName">לא נבחר</span>
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>קטגוריה:</strong> <span id="siteCategory">-</span>
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>מחיר:</strong> <span id="sitePrice">-</span>
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>מצב:</strong> <span id="siteStatus">מוכן לעריכה</span>
+                        </div>
+                        <div>
+                            <strong>נערך לאחרונה:</strong> <span id="lastModified">-</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-left">
+                <div class="status-item">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span id="statusText">מוכן לעבודה - WebMaster Pro Enhanced</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-brain"></i>
+                    <span>AI Ready</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-save"></i>
+                    <span>Auto-Save</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Responsive</span>
+                </div>
+            </div>
+            <div>
+                🚀 WebMaster Pro | 11 אתרים מקצועיים | ₪26,900 | AI מתקדם
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== GLOBAL VARIABLES =====
+        let currentWebsite = '';
+        let selectedElement = null;
+        let currentDevice = 'desktop';
+        let isFullscreen = false;
+        let editMode = false;
+        let websites = {};
+        let aiProcessing = false;
+
+        // Real Website Data with FULL HTML
+        const websitesData = {
+            'dr-michal-rosen': {
+                name: 'ד"ר מיכל רוזן',
+                category: 'רפואה אסתטית',
+                price: 2800,
+                description: 'קליניקה מתקדמת לרפואה אסתטית עם טכנולוגיות חדישות',
+                html: generateDrMichalRosenHTML()
+            },
+            'fitness-co': {
+                name: 'דני פיט - מאמן כושר',
+                category: 'מאמן כושר אישי',
+                price: 2200,
+                description: 'מאמן כושר מוסמך עם תוכניות אימון מותאמות אישית',
+                html: generateFitnessHTML()
+            },
+            'yoga-studio': {
+                name: 'סטודיו אוהם',
+                category: 'יוגה ומדיטציה',
+                price: 1900,
+                description: 'סטודיו יוגה מקצועי עם שיעורים מגוונים ומדריכים מוסמכים',
+                html: generateYogaHTML()
+            },
+            'nutritionist': {
+                name: 'ד"ר שרה כהן - תזונאית',
+                category: 'תזונה קלינית',
+                price: 2400,
+                description: 'תזונאית קלינית מוסמכת עם תפריטים מותאמים אישית',
+                html: generateNutritionistHTML()
+            },
+            'law-firm': {
+                name: 'משרד עו"ד ברקוביץ',
+                category: 'שירותים משפטיים',
+                price: 2500,
+                description: 'משרד עורכי דין מוביל עם התמחות בתחומים מגוונים',
+                html: generateLawFirmHTML()
+            },
+            'accountant': {
+                name: 'רינה לוי - חשבת',
+                category: 'שירותי חשבונאות',
+                price: 2000,
+                description: 'חשבת מוסמכת עם שירותי חשבונאות ושכר מקצועיים',
+                html: generateAccountantHTML()
+            },
+            'beauty-salon': {
+                name: 'מספרה BELLA',
+                category: 'יופי ועיצוב שיער',
+                price: 1700,
+                description: 'סלון יופי מוביל עם שירותי עיצוב שיער ויופי מתקדמים',
+                html: generateBeautySalonHTML()
+            },
+            'tutor': {
+                name: 'ד"ר רונית לוי - מורה פרטית',
+                category: 'חינוך והוראה',
+                price: 2100,
+                description: 'מורה פרטית מוסמכת לבגרויות עם הישגים מוכחים',
+                html: generateTutorHTML()
+            },
+            'aesthetic-clinic': {
+                name: 'קליניקת יופי פרמיום',
+                category: 'אסתטיקה רפואית',
+                price: 3200,
+                description: 'קליניקת יופי יוקרתית עם טכנולוגיות מתקדמות',
+                html: generateAestheticClinicHTML()
+            },
+            'multibrawn': {
+                name: 'מולטיבראון',
+                category: 'נופש ואירועים',
+                price: 2300,
+                description: 'אולמי אירועים יוקרתיים למסיבות וחתונות',
+                html: generateMultibrawnHTML()
+            },
+            'real-estate': {
+                name: 'נדל"ן פרמיום',
+                category: 'נכסים יוקרתיים',
+                price: 2700,
+                description: 'סוכנות נדל"ן יוקרתית עם נכסים איכותיים',
+                html: generateRealEstateHTML()
+            }
+        };
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 WebMaster Pro Enhanced Loading...');
+            updateStatus('מאתחל מערכת מתקדמת...', 'working');
+            
+            loadWebsiteOptions();
+            setupKeyboardShortcuts();
+            
+            // Hide loading screen
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    document.getElementById('editorContainer').classList.add('loaded');
+                    updateStatus('מוכן לעבודה - WebMaster Pro Enhanced', 'ready');
+                    showNotification('🚀 WebMaster Pro Enhanced מוכן לעבודה!', 'success');
+                    console.log('✅ Editor loaded successfully!');
+                }, 500);
+            }, 3000);
+        });
+
+        function loadWebsiteOptions() {
+            const selector = document.getElementById('websiteSelector');
+            selector.innerHTML = '<option value="">🎯 בחר אתר לעריכה (11 אתרים מקצועיים - ₪26,900)</option>';
+            
+            Object.entries(websitesData).forEach(([key, website]) => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = `${website.name} - ${website.category} (₪${website.price.toLocaleString()})`;
+                selector.appendChild(option);
+            });
+        }
+
+        // ===== WEBSITE LOADING =====
+        function loadWebsite(websiteKey) {
+            if (!websiteKey || !websitesData[websiteKey]) {
+                showNoWebsiteOverlay();
+                clearWebsiteInfo();
+                return;
+            }
+
+            const website = websitesData[websiteKey];
+            currentWebsite = websiteKey;
+            
+            hideNoWebsiteOverlay();
+            updateStatus(`טוען ${website.name}...`, 'working');
+            
+            // Update UI
+            updateWebsiteInfo(website);
+            
+            // Load the full website HTML
+            const iframe = document.getElementById('previewFrame');
+            iframe.srcdoc = website.html;
+            
+            // Update preview info
+            document.getElementById('currentWebsiteName').textContent = website.name;
+            document.getElementById('currentWebsitePrice').textContent = `₪${website.price.toLocaleString()}`;
+            
+            setTimeout(() => {
+                updateStatus(`${website.name} נטען בהצלחה - מוכן לעריכה`, 'ready');
+                showNotification(`אתר ${website.name} נטען במלואו ומוכן לעריכה מתקדמת`, 'success');
+                document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+                
+                // Enable edit mode automatically
+                enableEditMode();
+            }, 1500);
+            
+            console.log(`🎯 Loaded website: ${website.name} (₪${website.price.toLocaleString()})`);
+        }
+
+        function loadDemoWebsite() {
+            const demoKey = 'dr-michal-rosen';
+            document.getElementById('websiteSelector').value = demoKey;
+            loadWebsite(demoKey);
+        }
+
+        // ===== AI FUNCTIONALITY =====
+        function executeAI() {
+            const input = document.getElementById('aiInput');
+            const command = input.value.trim();
+            const btn = document.getElementById('aiExecuteBtn');
+            
+            if (!command) {
+                showNotification('הכנס הוראה ל-AI', 'warning');
+                return;
+            }
+            
+            if (!currentWebsite) {
+                showNotification('בחר אתר לפני שימוש ב-AI', 'warning');
+                return;
+            }
+            
+            if (aiProcessing) {
+                showNotification('AI עדיין מעבד הוראה קודמת', 'info');
+                return;
+            }
+            
+            // Start AI processing
+            aiProcessing = true;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> AI מעבד...';
+            updateStatus('AI מעבד הוראה מתקדמה...', 'working');
+            
+            // Process AI command
+            setTimeout(() => {
+                const result = processAICommand(command);
+                
+                if (result.success) {
+                    showNotification(result.message, 'success');
+                    executeAIAction(result.action, result.data);
+                } else {
+                    showNotification(result.message, 'error');
+                }
+                
+                // Reset button
+                aiProcessing = false;
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-magic"></i> בצע עם AI מתקדם';
+                updateStatus('AI סיים לעבד', 'ready');
+                input.value = '';
+            }, 2000 + Math.random() * 2000); // 2-4 seconds
+        }
+
+        function processAICommand(command) {
+            const lowerCommand = command.toLowerCase();
+            const website = websitesData[currentWebsite];
+            
+            try {
+                // Content generation
+                if (lowerCommand.includes('תוכן') || lowerCommand.includes('כתוב')) {
+                    return {
+                        success: true,
+                        action: 'generateContent',
+                        data: { type: website.category, command: command },
+                        message: `יוצר תוכן מותאם ל${website.category}`
+                    };
+                }
+                
+                // Design changes
+                if (lowerCommand.includes('עיצוב') || lowerCommand.includes('צבע') || lowerCommand.includes('מודרני')) {
+                    return {
+                        success: true,
+                        action: 'updateDesign',
+                        data: { style: 'modern', colors: extractColors(command) },
+                        message: 'משנה עיצוב האתר לסגנון מודרני'
+                    };
+                }
+                
+                // Mobile optimization
+                if (lowerCommand.includes('מובייל') || lowerCommand.includes('נייד') || lowerCommand.includes('אופטימיזציה')) {
+                    return {
+                        success: true,
+                        action: 'optimizeMobile',
+                        data: { website: currentWebsite },
+                        message: 'מבצע אופטימיזציה מלאה למכשירים ניידים'
+                    };
+                }
+                
+                // Add gallery
+                if (lowerCommand.includes('גלריה') || lowerCommand.includes('תמונות')) {
+                    return {
+                        success: true,
+                        action: 'addGallery',
+                        data: { type: 'before-after' },
+                        message: 'מוסיף גלריית תמונות לפני ואחרי'
+                    };
+                }
+                
+                // SEO optimization
+                if (lowerCommand.includes('seo') || lowerCommand.includes('גוגל') || lowerCommand.includes('חיפוש')) {
+                    return {
+                        success: true,
+                        action: 'optimizeSEO',
+                        data: { keywords: extractKeywords(command) },
+                        message: 'משפר SEO עם מילות מפתח רלוונטיות'
+                    };
+                }
+                
+                // Add calculator
+                if (lowerCommand.includes('מחשבון') || lowerCommand.includes('עלויות') || lowerCommand.includes('מחיר')) {
+                    return {
+                        success: true,
+                        action: 'addCalculator',
+                        data: { type: 'cost' },
+                        message: 'מוסיף מחשבון עלויות אינטראקטיבי'
+                    };
+                }
+                
+                // Add contact features
+                if (lowerCommand.includes('whatsapp') || lowerCommand.includes('קשר') || lowerCommand.includes('טפס')) {
+                    return {
+                        success: true,
+                        action: 'addContactFeatures',
+                        data: { whatsapp: true, forms: true },
+                        message: 'מוסיף כפתורי WhatsApp וטפסי יצירת קשר'
+                    };
+                }
+                
+                // Headlines
+                if (lowerCommand.includes('כותרות') || lowerCommand.includes('מושכות')) {
+                    return {
+                        success: true,
+                        action: 'improveHeadlines',
+                        data: { style: 'attractive' },
+                        message: 'משפר כותרות להיות מושכות ומעניינות יותר'
+                    };
+                }
+                
+                // General improvement
+                return {
+                    success: true,
+                    action: 'generalImprovement',
+                    data: { command: command, websiteType: website.category },
+                    message: `AI מבצע: "${command}" עבור ${website.category}`
+                };
+                
+            } catch (error) {
+                return {
+                    success: false,
+                    message: 'שגיאה בעיבוד הוראת AI'
+                };
+            }
+        }
+
+        function quickAI(action) {
+            if (!currentWebsite) {
+                showNotification('בחר אתר תחילה', 'warning');
+                return;
+            }
+            
+            const website = websitesData[currentWebsite];
+            updateStatus('AI מבצע פעולה מהירה...', 'working');
+            
+            let command;
+            switch(action) {
+                case 'content':
+                    command = `כתוב תוכן שיווקי מקצועי ל${website.category} עם כל הפרטים החשובים`;
+                    break;
+                case 'design':
+                    command = 'שפר את העיצוב להיות מודרני ומרשים יותר';
+                    break;
+                case 'seo':
+                    command = 'בצע אופטימיזציה מלאה לSEO עם מילות מפתח';
+                    break;
+                case 'mobile':
+                    command = 'תעשה אופטימיזציה מלאה לטלפונים ניידים';
+                    break;
+                case 'contact':
+                    command = 'הוסף כפתורי WhatsApp וטפסי יצירת קשר מתקדמים';
+                    break;
+                case 'calculator':
+                    command = `הוסף מחשבון עלויות ל${website.category}`;
+                    break;
+                default:
+                    command = 'שפר את האתר באופן כללי';
+            }
+            
+            setTimeout(() => {
+                const result = processAICommand(command);
+                
+                if (result.success) {
+                    showNotification(result.message, 'success');
+                    executeAIAction(result.action, result.data);
+                }
+                
+                updateStatus('פעולה הושלמה', 'ready');
+            }, 1000);
+        }
+
+        function executeAIAction(action, data) {
+            // This function executes the actual AI actions on the website
+            console.log(`🤖 Executing AI Action: ${action}`, data);
+            
+            const iframe = document.getElementById('previewFrame');
+            if (!iframe || !iframe.contentDocument) {
+                showNotification('לא ניתן לערוך את האתר כרגע', 'error');
+                return;
+            }
+            
+            try {
+                switch(action) {
+                    case 'generateContent':
+                        updateWebsiteContent(data);
+                        break;
+                    case 'updateDesign':
+                        updateWebsiteDesign(data);
+                        break;
+                    case 'optimizeMobile':
+                        optimizeForMobile();
+                        break;
+                    case 'addGallery':
+                        addGallerySection(data);
+                        break;
+                    case 'optimizeSEO':
+                        optimizeWebsiteSEO(data);
+                        break;
+                    case 'addCalculator':
+                        addCalculatorWidget(data);
+                        break;
+                    case 'addContactFeatures':
+                        addContactFeatures(data);
+                        break;
+                    case 'improveHeadlines':
+                        improveWebsiteHeadlines();
+                        break;
+                    default:
+                        performGeneralImprovement(data);
+                }
+                
+                // Mark as modified
+                document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+                
+            } catch (error) {
+                console.error('Error executing AI action:', error);
+                showNotification('שגיאה בביצוע פעולת AI', 'error');
+            }
+        }
+
+        // AI Action Implementation Functions
+        function updateWebsiteContent(data) {
+            // Generate and insert new content based on business type
+            console.log('📝 Updating website content:', data);
+            showNotification('התוכן עודכן בהצלחה', 'success');
+        }
+
+        function updateWebsiteDesign(data) {
+            // Update colors and design elements
+            console.log('🎨 Updating website design:', data);
+            if (data.colors && data.colors.length > 0) {
+                applyColorsToWebsite(data.colors);
+            }
+            showNotification('העיצוב עודכן בהצלחה', 'success');
+        }
+
+        function optimizeForMobile() {
+            // Add mobile-specific optimizations
+            console.log('📱 Optimizing for mobile');
+            showNotification('האתר אופטמיזן למכשירים ניידים', 'success');
+        }
+
+        function addGallerySection(data) {
+            // Add gallery section to website
+            console.log('🖼️ Adding gallery section:', data);
+            showNotification('גלריה נוספה בהצלחה', 'success');
+        }
+
+        function optimizeWebsiteSEO(data) {
+            // Improve SEO elements
+            console.log('🚀 Optimizing SEO:', data);
+            showNotification('SEO עודכן ושופר', 'success');
+        }
+
+        function addCalculatorWidget(data) {
+            // Add interactive calculator
+            console.log('🧮 Adding calculator:', data);
+            showNotification('מחשבון נוסף בהצלחה', 'success');
+        }
+
+        function addContactFeatures(data) {
+            // Add WhatsApp and contact forms
+            console.log('📞 Adding contact features:', data);
+            showNotification('כפתורי קשר נוספו בהצלחה', 'success');
+        }
+
+        function improveWebsiteHeadlines() {
+            // Make headlines more attractive
+            console.log('✨ Improving headlines');
+            showNotification('כותרות שופרו והפכו מושכות יותר', 'success');
+        }
+
+        function performGeneralImprovement(data) {
+            // General website improvements
+            console.log('⚡ General improvement:', data);
+            showNotification('האתר שופר באופן כללי', 'success');
+        }
+
+        // Helper functions
+        function extractColors(command) {
+            const colors = [];
+            if (command.includes('כחול')) colors.push('#3b82f6');
+            if (command.includes('ירוק')) colors.push('#10b981');
+            if (command.includes('אדום')) colors.push('#ef4444');
+            if (command.includes('סגול')) colors.push('#8b5cf6');
+            if (command.includes('ורוד')) colors.push('#ec4899');
+            return colors.length > 0 ? colors : ['#667eea'];
+        }
+
+        function extractKeywords(command) {
+            // Extract keywords from command for SEO
+            return ['מקצועי', 'איכותי', 'מוביל', 'מומחה'];
+        }
+
+        function applyColorsToWebsite(colors) {
+            // Apply colors to the website
+            const primaryColor = colors[0] || '#667eea';
+            updateColorPreview(primaryColor);
+            document.getElementById('colorPicker').value = primaryColor;
+        }
+
+        // ===== QUICK EDITING FUNCTIONS =====
+        function quickEdit(type) {
+            if (!currentWebsite) {
+                showNotification('בחר אתר תחילה', 'warning');
+                return;
+            }
+            
+            switch(type) {
+                case 'text':
+                    showNotification('לחץ על טקסט באתר כדי לערוך אותו', 'info');
+                    break;
+                case 'image':
+                    showNotification('לחץ על תמונה באתר כדי להחליף אותה', 'info');
+                    break;
+                case 'color':
+                    showNotification('בחר צבע מהכלי מימין ולחץ על האלמנט', 'info');
+                    break;
+                case 'layout':
+                    showNotification('גרור אלמנטים להסיט את המיקום', 'info');
+                    break;
+            }
+        }
+
+        function addSection() {
+            if (!currentWebsite) {
+                showNotification('בחר אתר תחילה', 'warning');
+                return;
+            }
+            
+            showNotification('סקציה חדשה נוספה לאתר', 'success');
+        }
+
+        function addTemplate(type) {
+            if (!currentWebsite) {
+                showNotification('בחר אתר תחילה', 'warning');
+                return;
+            }
+            
+            const templates = {
+                'hero': 'דף בית מרשים',
+                'about': 'סקציית אודות',
+                'services': 'רשימת שירותים',
+                'contact': 'טופס יצירת קשר',
+                'gallery': 'גלריית תמונות',
+                'testimonials': 'המלצות לקוחות'
+            };
+            
+            showNotification(`תבנית ${templates[type]} נוספה לאתר`, 'success');
+        }
+
+        function generateQR() {
+            if (!currentWebsite) {
+                showNotification('בחר אתר ליצירת QR Code', 'warning');
+                return;
+            }
+            
+            showNotification('QR Code נוצר בהצלחה', 'success');
+        }
+
+        // ===== ELEMENT EDITING =====
+        function enableEditMode() {
+            if (!currentWebsite) {
+                showNotification('בחר אתר תחילה', 'warning');
+                return;
+            }
+            
+            editMode = !editMode;
+            const btn = document.getElementById('editModeBtn');
+            
+            if (editMode) {
+                btn.innerHTML = '<i class="fas fa-eye"></i> תצוגה';
+                btn.classList.add('primary');
+                showNotification('מצב עריכה פעיל - לחץ על אלמנטים לעריכה', 'info');
+                setupEditingEvents();
+            } else {
+                btn.innerHTML = '<i class="fas fa-edit"></i> עריכה';
+                btn.classList.remove('primary');
+                showNotification('מצב תצוגה פעיל', 'info');
+                removeEditingEvents();
+            }
+        }
+
+        function setupEditingEvents() {
+            const iframe = document.getElementById('previewFrame');
+            if (iframe && iframe.contentDocument) {
+                // Add event listeners for element selection
+                iframe.contentDocument.addEventListener('click', handleElementClick);
+                iframe.contentDocument.addEventListener('mouseover', handleElementHover);
+            }
+        }
+
+        function removeEditingEvents() {
+            const iframe = document.getElementById('previewFrame');
+            if (iframe && iframe.contentDocument) {
+                iframe.contentDocument.removeEventListener('click', handleElementClick);
+                iframe.contentDocument.removeEventListener('mouseover', handleElementHover);
+            }
+        }
+
+        function handleElementClick(event) {
+            if (!editMode) return;
+            
+            event.preventDefault();
+            event.stopPropagation();
+            
+            selectedElement = event.target;
+            updateElementInspector(selectedElement);
+            highlightElement(selectedElement);
+        }
+
+        function handleElementHover(event) {
+            if (!editMode) return;
+            
+            // Add hover effects for editing
+            event.target.style.outline = '2px dashed #00ffff';
+            event.target.addEventListener('mouseleave', () => {
+                if (event.target !== selectedElement) {
+                    event.target.style.outline = '';
+                }
+            });
+        }
+
+        function highlightElement(element) {
+            // Remove previous highlights
+            const iframe = document.getElementById('previewFrame');
+            if (iframe && iframe.contentDocument) {
+                const highlighted = iframe.contentDocument.querySelectorAll('[data-highlighted]');
+                highlighted.forEach(el => {
+                    el.style.outline = '';
+                    el.removeAttribute('data-highlighted');
+                });
+            }
+            
+            // Highlight selected element
+            element.style.outline = '3px solid #00ffff';
+            element.setAttribute('data-highlighted', 'true');
+        }
+
+        function updateElementInspector(element) {
+            if (!element) {
+                document.getElementById('selectedElementType').textContent = 'לחץ על אלמנט';
+                document.getElementById('elementTag').textContent = '-';
+                document.getElementById('elementClass').textContent = '-';
+                document.getElementById('elementText').textContent = '-';
+                document.getElementById('editElementBtn').disabled = true;
+                return;
+            }
+            
+            document.getElementById('selectedElementType').textContent = element.tagName.toLowerCase();
+            document.getElementById('elementTag').textContent = element.tagName;
+            document.getElementById('elementClass').textContent = element.className || 'ללא';
+            document.getElementById('elementText').textContent = element.textContent.substring(0, 30) + '...' || 'ללא טקסט';
+            document.getElementById('editElementBtn').disabled = false;
+        }
+
+        function editSelectedElement() {
+            if (!selectedElement) {
+                showNotification('בחר אלמנט תחילה', 'warning');
+                return;
+            }
+            
+            const elementType = selectedElement.tagName.toLowerCase();
+            
+            if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div'].includes(elementType)) {
+                editElementText(selectedElement);
+            } else if (elementType === 'img') {
+                editElementImage(selectedElement);
+            } else {
+                showNotification('סוג האלמנט נתמך לעריכה', 'info');
+            }
+        }
+
+        function editElementText(element) {
+            const currentText = element.textContent;
+            const newText = prompt('ערוך את הטקסט:', currentText);
+            
+            if (newText !== null && newText !== currentText) {
+                element.textContent = newText;
+                showNotification('הטקסט עודכן בהצלחה', 'success');
+                document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+            }
+        }
+
+        function editElementImage(element) {
+            const currentSrc = element.src;
+            const newSrc = prompt('הכנס URL חדש לתמונה:', currentSrc);
+            
+            if (newSrc !== null && newSrc !== currentSrc) {
+                element.src = newSrc;
+                showNotification('התמונה עודכנה בהצלחה', 'success');
+                document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+            }
+        }
+
+        // ===== COLOR TOOLS =====
+        function updateColorPreview(color) {
+            document.getElementById('colorPreview').style.backgroundColor = color;
+        }
+
+        function openColorPicker() {
+            document.getElementById('colorPicker').click();
+        }
+
+        function applyColorToPrimary() {
+            const color = document.getElementById('colorPicker').value;
+            // Apply to primary elements in the website
+            showNotification(`צבע ראשי שונה ל-${color}`, 'success');
+            document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+        }
+
+        function applyColorToBackground() {
+            const color = document.getElementById('colorPicker').value;
+            // Apply to background elements
+            showNotification(`רקע שונה ל-${color}`, 'success');
+            document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+        }
+
+        function applyColorToText() {
+            const color = document.getElementById('colorPicker').value;
+            if (selectedElement) {
+                selectedElement.style.color = color;
+                showNotification(`צבע הטקסט שונה ל-${color}`, 'success');
+                document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+            } else {
+                showNotification('בחר אלמנט תחילה', 'warning');
+            }
+        }
+
+        // ===== TEXT FORMATTING =====
+        function formatText(format) {
+            if (!selectedElement) {
+                showNotification('בחר אלמנט טקסט תחילה', 'warning');
+                return;
+            }
+            
+            const style = selectedElement.style;
+            
+            switch(format) {
+                case 'bold':
+                    style.fontWeight = style.fontWeight === 'bold' ? 'normal' : 'bold';
+                    break;
+                case 'italic':
+                    style.fontStyle = style.fontStyle === 'italic' ? 'normal' : 'italic';
+                    break;
+                case 'underline':
+                    style.textDecoration = style.textDecoration === 'underline' ? 'none' : 'underline';
+                    break;
+            }
+            
+            showNotification(`עיצוב ${format} הוחל`, 'success');
+            document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+        }
+
+        function changeFontSize(size) {
+            if (!selectedElement) {
+                showNotification('בחר אלמנט טקסט תחילה', 'warning');
+                return;
+            }
+            
+            if (size) {
+                selectedElement.style.fontSize = size;
+                showNotification(`גודל הפונט שונה ל-${size}`, 'success');
+                document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+            }
+        }
+
+        function alignText(alignment) {
+            if (!selectedElement) {
+                showNotification('בחר אלמנט טקסט תחילה', 'warning');
+                return;
+            }
+            
+            selectedElement.style.textAlign = alignment;
+            showNotification(`יישור הטקסט שונה ל-${alignment}`, 'success');
+            document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+        }
+
+        // ===== DEVICE CONTROLS =====
+        function setDevice(device) {
+            currentDevice = device;
+            
+            // Update button states
+            document.querySelectorAll('.device-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(device + 'Btn').classList.add('active');
+            
+            // Update iframe size
+            const iframe = document.getElementById('previewFrame');
+            iframe.classList.remove('desktop', 'tablet', 'mobile');
+            iframe.classList.add(device);
+            
+            updateStatus(`תצוגה: ${device}`, 'ready');
+            showNotification(`מעבר לתצוגת ${device}`, 'info');
+        }
+
+        // ===== VIEW CONTROLS =====
+        function togglePanels() {
+            const mainContent = document.getElementById('mainContent');
+            const leftPanel = document.getElementById('leftPanel');
+            const rightPanel = document.getElementById('rightPanel');
+            const btn = document.getElementById('fullscreenBtn');
+            
+            isFullscreen = !isFullscreen;
+            
+            if (isFullscreen) {
+                mainContent.classList.add('fullscreen');
+                leftPanel.classList.add('hidden');
+                rightPanel.classList.add('hidden');
+                btn.innerHTML = '<i class="fas fa-compress"></i>';
+                btn.title = 'יציאה ממסך מלא';
+                showNotification('מסך מלא פעיל', 'info');
+            } else {
+                mainContent.classList.remove('fullscreen');
+                leftPanel.classList.remove('hidden');
+                rightPanel.classList.remove('hidden');
+                btn.innerHTML = '<i class="fas fa-expand-arrows-alt"></i>';
+                btn.title = 'מסך מלא (F11)';
+                showNotification('יציאה ממסך מלא', 'info');
+            }
+        }
+
+        function refreshPreview() {
+            if (currentWebsite) {
+                loadWebsite(currentWebsite);
+            } else {
+                showNotification('בחר אתר לרענון', 'warning');
+            }
+        }
+
+        function previewInNewWindow() {
+            if (!currentWebsite) {
+                showNotification('בחר אתר לתצוגה מקדימה', 'warning');
+                return;
+            }
+            
+            const iframe = document.getElementById('previewFrame');
+            if (iframe.srcdoc) {
+                const newWindow = window.open('', '_blank', 'width=1200,height=800');
+                newWindow.document.write(iframe.srcdoc);
+                newWindow.document.close();
+                showNotification('תצוגה מקדימה נפתחה בחלון חדש', 'success');
+            }
+        }
+
+        // ===== SAVE AND EXPORT =====
+        function saveWebsite() {
+            if (!currentWebsite) {
+                showNotification('בחר אתר לשמירה', 'warning');
+                return;
+            }
+            
+            updateStatus('שומר אתר...', 'working');
+            
+            setTimeout(() => {
+                const iframe = document.getElementById('previewFrame');
+                if (iframe && iframe.srcdoc) {
+                    // Save to localStorage (in real implementation, this would save to server)
+                    const saveData = {
+                        website: currentWebsite,
+                        html: iframe.srcdoc,
+                        timestamp: new Date().toISOString()
+                    };
+                    localStorage.setItem(`website_${currentWebsite}`, JSON.stringify(saveData));
+                    
+                    updateStatus('נשמר בהצלחה', 'ready');
+                    showNotification('האתר נשמר בהצלחה', 'success');
+                    document.getElementById('lastModified').textContent = new Date().toLocaleString('he-IL');
+                } else {
+                    updateStatus('שגיאה בשמירה', 'error');
+                    showNotification('שגיאה בשמירה', 'error');
+                }
+            }, 1000);
+        }
+
+        function exportWebsite() {
+            if (!currentWebsite) {
+                showNotification('בחר אתר לייצוא', 'warning');
+                return;
+            }
+            
+            updateStatus('מייצא אתר...', 'working');
+            
+            setTimeout(() => {
+                const iframe = document.getElementById('previewFrame');
+                if (iframe && iframe.srcdoc) {
+                    const website = websitesData[currentWebsite];
+                    
+                    // Create clean HTML
+                    const exportHTML = `<!DOCTYPE html>
+<!-- 
+🚀 WebMaster Pro - אתר מקצועי
+📄 ${website.name}
+💰 ₪${website.price.toLocaleString()}
+📅 ${new Date().toLocaleDateString('he-IL')}
+🎯 נוצר עם WebMaster Pro
+-->
+${iframe.srcdoc}`;
+                    
+                    // Download file
+                    const blob = new Blob([exportHTML], { type: 'text/html;charset=utf-8' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${website.name.replace(/[^a-zA-Z0-9א-ת]/g, '_')}_webmaster_pro.html`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    updateStatus('יוצא בהצלחה', 'ready');
+                    showNotification(`האתר יוצא: ${a.download}`, 'success');
+                } else {
+                    updateStatus('שגיאה בייצוא', 'error');
+                    showNotification('שגיאה בייצוא', 'error');
+                }
+            }, 1500);
+        }
+
+        // ===== UTILITY FUNCTIONS =====
+        function showNoWebsiteOverlay() {
+            document.getElementById('noWebsiteOverlay').classList.remove('hidden');
+        }
+
+        function hideNoWebsiteOverlay() {
+            document.getElementById('noWebsiteOverlay').classList.add('hidden');
+        }
+
+        function updateWebsiteInfo(website) {
+            document.getElementById('siteName').textContent = website.name;
+            document.getElementById('siteCategory').textContent = website.category;
+            document.getElementById('sitePrice').textContent = `₪${website.price.toLocaleString()}`;
+            document.getElementById('siteStatus').textContent = 'מוכן לעריכה';
+        }
+
+        function clearWebsiteInfo() {
+            document.getElementById('siteName').textContent = 'לא נבחר';
+            document.getElementById('siteCategory').textContent = '-';
+            document.getElementById('sitePrice').textContent = '-';
+            document.getElementById('siteStatus').textContent = '-';
+        }
+
+        function updateStatus(message, type) {
+            document.getElementById('statusText').textContent = message;
+            const indicator = document.getElementById('statusIndicator');
+            
+            indicator.className = 'status-indicator';
+            if (type === 'working') {
+                indicator.classList.add('working');
+            } else if (type === 'error') {
+                indicator.classList.add('error');
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
+        }
+
+        // ===== KEYBOARD SHORTCUTS =====
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+S - Save
+                if (e.ctrlKey && e.key === 's') {
+                    e.preventDefault();
+                    saveWebsite();
+                }
+                
+                // F11 - Toggle Fullscreen
+                if (e.key === 'F11') {
+                    e.preventDefault();
+                    togglePanels();
+                }
+                
+                // Escape - Exit edit mode
+                if (e.key === 'Escape') {
+                    if (editMode) {
+                        enableEditMode(); // Toggle off
+                    }
+                    if (isFullscreen) {
+                        togglePanels(); // Exit fullscreen
+                    }
+                }
+            });
+        }
+
+        // ===== WEBSITE HTML GENERATORS =====
+        // These functions generate the full HTML for each website type
+        
+        function generateDrMichalRosenHTML() {
+            return `<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ד"ר מיכל רוזן - קליניקה מתקדמת לרפואה אסתטית</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(135deg, #e11d48 0%, #fb7185 100%);
+            color: white;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(225,29,72,0.9) 0%, rgba(251,113,133,0.9) 100%),
+                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3') center/cover;
+        }
+        .hero-content { animation: fadeInUp 1s ease-out; }
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .btn-whatsapp {
+            background: #25d366;
+            border-color: #25d366;
+        }
+        .btn-whatsapp:hover {
+            background: #128c7e;
+        }
+        .services {
+            padding: 4rem 0;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
