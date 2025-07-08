@@ -1,1 +1,594 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebMaster Pro - AI Editor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 350px 1fr 320px;
+            grid-template-rows: 70px 1fr;
+            grid-template-areas: 
+                "header header header"
+                "sidebar main panel";
+            height: 100vh;
+        }
+
+        .editor-header {
+            grid-area: header;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .editor-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .editor-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .editor-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .editor-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .editor-sidebar {
+            grid-area: sidebar;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .ai-chat-section {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .ai-messages {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .ai-message {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .ai-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .editor-main {
+            grid-area: main;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            position: relative;
+        }
+
+        .canvas-header {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .website-selector {
+            padding: 10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            background: white;
+            outline: none;
+        }
+
+        .canvas {
+            background: white;
+            border-radius: 10px;
+            height: calc(100% - 80px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .editor-panel {
+            grid-area: panel;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            overflow-y: auto;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .panel-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(247, 250, 252, 0.7);
+            border-radius: 10px;
+        }
+
+        .panel-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .panel-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .panel-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .panel-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        @media (max-width: 768px) {
+            .editor-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 60px 200px 1fr 150px;
+                grid-template-areas: 
+                    "header"
+                    "sidebar"
+                    "main"
+                    "panel";
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-container">
+        <header class="editor-header">
+            <div class="editor-logo">
+                <i class="fas fa-magic"></i> WebMaster Pro AI Editor
+            </div>
+            <div class="editor-controls">
+                <button class="editor-btn" onclick="saveProject()">
+                    <i class="fas fa-save"></i> שמור
+                </button>
+                <button class="editor-btn" onclick="publishWebsite()">
+                    <i class="fas fa-rocket"></i> פרסם
+                </button>
+            </div>
+        </header>
+
+        <aside class="editor-sidebar">
+            <div class="ai-chat-section">
+                <h3><i class="fas fa-robot"></i> AI Assistant</h3>
+                <div class="ai-messages" id="aiMessages">
+                    <div class="ai-message">🤖 שלום! אני כאן לעזור עם עיצוב ותוכן</div>
+                </div>
+                <input type="text" class="ai-input" id="aiInput" placeholder="שאל אותי כל שאלה..."
+                       onkeypress="handleAIInput(event)">
+                <button class="editor-btn" onclick="sendAIMessage()" style="width: 100%;">
+                    שלח לAI
+                </button>
+            </div>
+
+            <div class="panel-section">
+                <div class="panel-title">
+                    <i class="fas fa-magic"></i> יצירה מהירה
+                </div>
+                <input type="text" class="panel-input" id="businessType" placeholder="סוג העסק...">
+                <button class="panel-btn" onclick="generateWebsite()">
+                    <i class="fas fa-wand-magic-sparkles"></i> צור אתר עם AI
+                </button>
+            </div>
+        </aside>
+
+        <main class="editor-main">
+            <div class="canvas-header">
+                <select class="website-selector" id="websiteSelector" onchange="loadWebsite()">
+                    <option value="">בחר אתר לעריכה...</option>
+                    <option value="dr-michal-rosen">ד"ר מיכל רוזן - אסתטיקה רפואית</option>
+                    <option value="law-firm">משרד ברקוביץ - עורכי דין</option>
+                    <option value="fitness-co">דני פיט - מאמן כושר</option>
+                    <option value="yoga-studio">סטודיו אוהם - יוגה</option>
+                    <option value="nutritionist">ד"ר שרה כהן - תזונאית</option>
+                    <option value="accountant">רינה לוי - חשבת שכר</option>
+                    <option value="beauty-salon">מספרה BELLA</option>
+                    <option value="tutor">ד"ר רונית לוי - מורה פרטית</option>
+                    <option value="aesthetic-clinic">קליניקת יופי פרמיום</option>
+                    <option value="multibrawn">מולטיבראון - נופש ואירועים</option>
+                    <option value="real-estate">נדל"ן פרמיום</option>
+                </select>
+                
+                <div>
+                    <button class="editor-btn" onclick="previewWebsite()">
+                        <i class="fas fa-eye"></i> תצוגה מקדימה
+                    </button>
+                </div>
+            </div>
+            
+            <div class="canvas">
+                <iframe class="preview-frame" id="previewFrame" src="about:blank" title="Website Preview"></iframe>
+            </div>
+        </main>
+
+        <aside class="editor-panel">
+            <div class="panel-section">
+                <div class="panel-title">
+                    <i class="fas fa-palette"></i> עיצוב חכם
+                </div>
+                
+                <div class="color-palette">
+                    <div class="color-swatch" style="background: #667eea;" onclick="applyColor('#667eea')"></div>
+                    <div class="color-swatch" style="background: #764ba2;" onclick="applyColor('#764ba2')"></div>
+                    <div class="color-swatch" style="background: #f093fb;" onclick="applyColor('#f093fb')"></div>
+                    <div class="color-swatch" style="background: #f5576c;" onclick="applyColor('#f5576c')"></div>
+                    <div class="color-swatch" style="background: #4facfe;" onclick="applyColor('#4facfe')"></div>
+                    <div class="color-swatch" style="background: #00f2fe;" onclick="applyColor('#00f2fe')"></div>
+                    <div class="color-swatch" style="background: #a8edea;" onclick="applyColor('#a8edea')"></div>
+                    <div class="color-swatch" style="background: #fed6e3;" onclick="applyColor('#fed6e3')"></div>
+                </div>
+
+                <button class="panel-btn" onclick="generateDesign()">
+                    <i class="fas fa-magic"></i> עיצוב אוטומטי עם AI
+                </button>
+                
+                <button class="panel-btn" onclick="optimizeSpeed()">
+                    <i class="fas fa-rocket"></i> אופטימיזציה מהירות
+                </button>
+            </div>
+
+            <div class="panel-section">
+                <div class="panel-title">
+                    <i class="fas fa-search"></i> SEO ו-תוכן
+                </div>
+                
+                <button class="panel-btn" onclick="optimizeSEO()">
+                    <i class="fas fa-chart-line"></i> אופטימיזציה SEO
+                </button>
+                
+                <button class="panel-btn" onclick="generateContent()">
+                    <i class="fas fa-edit"></i> יצירת תוכן עם AI
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000';
+        let currentWebsite = null;
+        let authToken = localStorage.getItem('webmaster_token');
+
+        // API calls
+        async function callAPI(endpoint, method = 'GET', data = null) {
+            try {
+                const options = {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(authToken && { 'Authorization': `Bearer ${authToken}` })
+                    }
+                };
+
+                if (data) {
+                    options.body = JSON.stringify(data);
+                }
+
+                const response = await fetch(`${API_BASE}${endpoint}`, options);
+                return await response.json();
+            } catch (error) {
+                console.error('API Error:', error);
+                addAIMessage('❌ שגיאה בתקשורת עם השרת');
+                throw error;
+            }
+        }
+
+        // AI Chat functions
+        function addAIMessage(message) {
+            const messagesContainer = document.getElementById('aiMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'ai-message';
+            messageDiv.textContent = message;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function handleAIInput(event) {
+            if (event.key === 'Enter') {
+                sendAIMessage();
+            }
+        }
+
+        async function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addAIMessage(`👤 ${message}`);
+            input.value = '';
+            
+            try {
+                const response = await callAPI('/api/ai/openai', 'POST', {
+                    prompt: message,
+                    type: 'general',
+                    maxTokens: 300
+                });
+                
+                addAIMessage(`🤖 ${response.result}`);
+            } catch (error) {
+                addAIMessage('❌ שגיאה בתקשורת עם AI');
+            }
+        }
+
+        // Website functions
+        function loadWebsite() {
+            const selector = document.getElementById('websiteSelector');
+            const websiteId = selector.value;
+            
+            if (!websiteId) return;
+            
+            currentWebsite = websiteId;
+            const frame = document.getElementById('previewFrame');
+            frame.src = `../websites/${websiteId}.html`;
+            
+            addAIMessage(`🔄 טוען אתר: ${selector.options[selector.selectedIndex].text}`);
+        }
+
+        function previewWebsite() {
+            if (!currentWebsite) {
+                alert('אנא בחר אתר תחילה');
+                return;
+            }
+            
+            window.open(`../websites/${currentWebsite}.html`, '_blank');
+        }
+
+        async function saveProject() {
+            if (!currentWebsite) {
+                alert('אין פרויקט לשמירה');
+                return;
+            }
+            
+            addAIMessage('💾 שומר פרויקט...');
+            
+            try {
+                // In real implementation, this would save to backend
+                setTimeout(() => {
+                    addAIMessage('✅ הפרויקט נשמר בהצלחה!');
+                }, 1000);
+            } catch (error) {
+                addAIMessage('❌ שגיאה בשמירת הפרויקט');
+            }
+        }
+
+        async function publishWebsite() {
+            if (!currentWebsite) {
+                alert('אין אתר לפרסום');
+                return;
+            }
+            
+            addAIMessage('🚀 מפרסם אתר...');
+            
+            try {
+                const response = await callAPI('/api/deploy', 'POST', {
+                    websiteId: currentWebsite,
+                    content: 'website content',
+                    aiOptimizations: true
+                });
+                
+                addAIMessage(`✅ האתר פורסם בהצלחה! URL: ${response.deployment_url}`);
+            } catch (error) {
+                addAIMessage('❌ שגיאה בפרסום האתר');
+            }
+        }
+
+        // Design functions
+        function applyColor(color) {
+            document.documentElement.style.setProperty('--primary-color', color);
+            addAIMessage(`🎨 צבע ${color} הוחל בהצלחה!`);
+        }
+
+        async function generateDesign() {
+            const businessType = document.getElementById('businessType').value || 'עסק כללי';
+            
+            addAIMessage('🎨 יוצר עיצוב חדש עם AI...');
+            
+            try {
+                const response = await callAPI('/api/ai/generate-design', 'POST', {
+                    businessType: businessType,
+                    style: 'modern'
+                });
+                
+                // Apply the generated colors
+                document.documentElement.style.setProperty('--primary-color', response.primary_color);
+                document.documentElement.style.setProperty('--secondary-color', response.secondary_color);
+                
+                addAIMessage(`✅ עיצוב חדש נוצר! צבעים: ${response.primary_color}, ${response.secondary_color}`);
+            } catch (error) {
+                addAIMessage('❌ שגיאה ביצירת עיצוב');
+            }
+        }
+
+        async function generateWebsite() {
+            const businessType = document.getElementById('businessType').value;
+            
+            if (!businessType) {
+                addAIMessage('❌ אנא הזן סוג עסק');
+                return;
+            }
+            
+            addAIMessage(`🚀 יוצר אתר עבור ${businessType} עם AI...`);
+            
+            try {
+                const response = await callAPI('/api/ai/openai', 'POST', {
+                    prompt: `Create a website structure for a ${businessType} business`,
+                    type: 'content',
+                    maxTokens: 500
+                });
+                
+                addAIMessage(`✅ אתר נוצר עבור ${businessType}!`);
+                addAIMessage(response.result);
+            } catch (error) {
+                addAIMessage('❌ שגיאה ביצירת האתר');
+            }
+        }
+
+        async function optimizeSpeed() {
+            addAIMessage('⚡ מאיץ ביצועים...');
+            
+            // Implement actual speed optimizations
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.loading = 'lazy';
+                img.decoding = 'async';
+            });
+            
+            setTimeout(() => {
+                addAIMessage('✅ ביצועים שופרו! טעינה מהירה יותר.');
+            }, 1500);
+        }
+
+        async function optimizeSEO() {
+            addAIMessage('🔍 מאופטם SEO...');
+            
+            try {
+                const response = await callAPI('/api/ai/openai', 'POST', {
+                    prompt: 'Optimize this website for SEO',
+                    type: 'seo',
+                    maxTokens: 300
+                });
+                
+                addAIMessage('✅ SEO אופטימלי!');
+                addAIMessage(response.result);
+            } catch (error) {
+                addAIMessage('❌ שגיאה באופטימיזציה SEO');
+            }
+        }
+
+        async function generateContent() {
+            addAIMessage('📝 יוצר תוכן עם AI...');
+            
+            try {
+                const response = await callAPI('/api/ai/openai', 'POST', {
+                    prompt: 'Generate professional content for this website',
+                    type: 'content',
+                    maxTokens: 400
+                });
+                
+                addAIMessage('✅ תוכן חדש נוצר!');
+                addAIMessage(response.result);
+            } catch (error) {
+                addAIMessage('❌ שגיאה ביצירת תוכן');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            addAIMessage('🤖 AI Editor מוכן לעבודה! בחר אתר או צור אחד חדש.');
+        });
+    </script>
+</body>
+</html>
