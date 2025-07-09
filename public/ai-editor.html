@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebMaster Pro - AI Editor</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,393 +11,737 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-color: #667eea;
-            --secondary-color: #764ba2;
-            --accent-color: #f093fb;
-            --success-color: #10b981;
-            --error-color: #ef4444;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            min-height: 100vh;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f23;
+            color: #e2e8f0;
+            overflow: hidden;
         }
 
         .editor-container {
-            display: grid;
-            grid-template-columns: 350px 1fr 320px;
-            grid-template-rows: 70px 1fr;
-            grid-template-areas: 
-                "header header header"
-                "sidebar main panel";
+            display: flex;
             height: 100vh;
+            direction: rtl;
         }
 
-        .editor-header {
-            grid-area: header;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+        /* AI Panel */
+        .ai-panel {
+            width: 350px;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-left: 1px solid #2d3748;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .ai-header {
+            padding: 1rem;
+            border-bottom: 1px solid #2d3748;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .ai-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-status {
+            font-size: 0.9rem;
+            color: #e2e8f0;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            gap: 0.5rem;
         }
 
-        .editor-logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #48bb78;
+            animation: pulse 2s infinite;
         }
 
-        .editor-controls {
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .ai-chat {
+            flex: 1;
             display: flex;
-            gap: 10px;
-        }
-
-        .editor-btn {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .editor-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .editor-sidebar {
-            grid-area: sidebar;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            overflow-y: auto;
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .ai-chat-section {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         .ai-messages {
-            max-height: 200px;
+            flex: 1;
             overflow-y: auto;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .ai-message {
-            margin-bottom: 10px;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            font-size: 0.9rem;
+            max-width: 85%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ai-message.user {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .ai-message.assistant {
+            background: #2d3748;
+            color: #e2e8f0;
+            align-self: flex-start;
+            border: 1px solid #4a5568;
+        }
+
+        .ai-input-area {
+            padding: 1rem;
+            border-top: 1px solid #2d3748;
+        }
+
+        .ai-input-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-end;
         }
 
         .ai-input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 6px;
+            flex: 1;
+            min-height: 40px;
+            max-height: 120px;
+            padding: 0.75rem;
+            border: 1px solid #4a5568;
+            border-radius: 1rem;
+            background: #2d3748;
+            color: #e2e8f0;
+            resize: none;
+            font-family: inherit;
+            font-size: 0.9rem;
             outline: none;
-            margin-bottom: 10px;
+            transition: all 0.2s;
         }
 
-        .editor-main {
-            grid-area: main;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            position: relative;
+        .ai-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .canvas-header {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+        .ai-send-btn {
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .ai-send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .ai-send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .ai-quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quick-action-btn {
+            padding: 0.5rem 0.75rem;
+            background: #4a5568;
+            border: 1px solid #2d3748;
+            border-radius: 0.5rem;
+            color: #e2e8f0;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-action-btn:hover {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+        }
+
+        /* Canvas Area */
+        .canvas-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #1a202c;
+        }
+
+        .canvas-toolbar {
+            display: flex;
+            align-items: center;
             justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: #2d3748;
+            border-bottom: 1px solid #4a5568;
+        }
+
+        .canvas-title {
+            font-weight: bold;
+            color: #e2e8f0;
+        }
+
+        .canvas-controls {
+            display: flex;
+            gap: 0.5rem;
             align-items: center;
         }
 
-        .website-selector {
-            padding: 10px;
-            border: 2px solid var(--primary-color);
-            border-radius: 6px;
-            background: white;
-            outline: none;
+        .device-selector {
+            display: flex;
+            background: #4a5568;
+            border-radius: 0.5rem;
+            overflow: hidden;
         }
 
-        .canvas {
+        .device-btn {
+            padding: 0.5rem 0.75rem;
+            background: transparent;
+            border: none;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .device-btn.active {
+            background: #667eea;
+        }
+
+        .canvas-viewport {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow: auto;
+        }
+
+        .canvas-frame {
             background: white;
-            border-radius: 10px;
-            height: calc(100% - 80px);
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .preview-frame {
+        .canvas-frame.desktop {
+            width: 1200px;
+            height: 800px;
+        }
+
+        .canvas-frame.tablet {
+            width: 768px;
+            height: 1024px;
+        }
+
+        .canvas-frame.mobile {
+            width: 375px;
+            height: 667px;
+        }
+
+        .canvas-content {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 10px;
+            display: block;
         }
 
-        .editor-panel {
-            grid-area: panel;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            overflow-y: auto;
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .panel-section {
-            margin-bottom: 25px;
-            padding: 15px;
-            background: rgba(247, 250, 252, 0.7);
-            border-radius: 10px;
-        }
-
-        .panel-title {
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 15px;
+        /* Properties Panel */
+        .properties-panel {
+            width: 300px;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-right: 1px solid #2d3748;
             display: flex;
+            flex-direction: column;
+        }
+
+        .properties-header {
+            padding: 1rem;
+            border-bottom: 1px solid #2d3748;
+            background: linear-gradient(90deg, #764ba2, #667eea);
+        }
+
+        .properties-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .properties-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .property-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .property-group-title {
+            font-weight: bold;
+            color: #e2e8f0;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #4a5568;
+        }
+
+        .property-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .property-label {
+            display: block;
+            color: #a0aec0;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .property-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #4a5568;
+            border-radius: 0.25rem;
+            background: #2d3748;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        .property-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .color-picker-container {
+            display: flex;
+            gap: 0.5rem;
             align-items: center;
-            gap: 8px;
         }
 
-        .color-palette {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .color-swatch {
+        .color-picker {
             width: 40px;
             height: 40px;
-            border-radius: 8px;
+            border: 1px solid #4a5568;
+            border-radius: 0.25rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.8);
         }
 
-        .color-swatch:hover {
-            transform: scale(1.1);
+        /* Loading states */
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #a0aec0;
         }
 
-        .panel-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #4a5568;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Collaboration indicators */
+        .collaborator {
+            position: absolute;
+            background: #667eea;
             color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+            z-index: 1000;
+            pointer-events: none;
         }
 
-        .panel-btn:hover {
-            transform: translateY(-1px);
+        .cursor-indicator {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: #667eea;
+            z-index: 1001;
+            animation: blink 1s infinite;
         }
 
-        .panel-input {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid rgba(102, 126, 234, 0.3);
-            border-radius: 6px;
-            margin-bottom: 10px;
-            outline: none;
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            max-width: 300px;
+            z-index: 10000;
+            animation: slideInNotification 0.3s ease-out;
+        }
+
+        .notification.success {
+            border-color: #48bb78;
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+
+        .notification.error {
+            border-color: #f56565;
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+        }
+
+        @keyframes slideInNotification {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .ai-panel {
+                width: 300px;
+            }
+            .properties-panel {
+                width: 250px;
+            }
         }
 
         @media (max-width: 768px) {
             .editor-container {
-                grid-template-columns: 1fr;
-                grid-template-rows: 60px 200px 1fr 150px;
-                grid-template-areas: 
-                    "header"
-                    "sidebar"
-                    "main"
-                    "panel";
+                flex-direction: column;
+            }
+            .ai-panel {
+                width: 100%;
+                height: 40vh;
+            }
+            .properties-panel {
+                width: 100%;
+                height: 30vh;
+            }
+            .canvas-area {
+                height: 30vh;
             }
         }
     </style>
 </head>
 <body>
     <div class="editor-container">
-        <header class="editor-header">
-            <div class="editor-logo">
-                <i class="fas fa-magic"></i> WebMaster Pro AI Editor
+        <!-- AI Panel -->
+        <div class="ai-panel">
+            <div class="ai-header">
+                <div class="ai-title">🤖 AI Assistant</div>
+                <div class="ai-status">
+                    <span class="status-indicator"></span>
+                    <span id="aiStatus">מחובר ומוכן לעבודה</span>
+                </div>
             </div>
-            <div class="editor-controls">
-                <button class="editor-btn" onclick="saveProject()">
-                    <i class="fas fa-save"></i> שמור
-                </button>
-                <button class="editor-btn" onclick="publishWebsite()">
-                    <i class="fas fa-rocket"></i> פרסם
-                </button>
-            </div>
-        </header>
-
-        <aside class="editor-sidebar">
-            <div class="ai-chat-section">
-                <h3><i class="fas fa-robot"></i> AI Assistant</h3>
+            
+            <div class="ai-chat">
                 <div class="ai-messages" id="aiMessages">
-                    <div class="ai-message">🤖 שלום! אני כאן לעזור עם עיצוב ותוכן</div>
+                    <div class="ai-message assistant">
+                        <strong>AI Assistant:</strong><br>
+                        שלום! אני כאן לעזור לך לבנות את האתר המושלם. איך אני יכול לעזור לך היום?
+                    </div>
                 </div>
-                <input type="text" class="ai-input" id="aiInput" placeholder="שאל אותי כל שאלה..."
-                       onkeypress="handleAIInput(event)">
-                <button class="editor-btn" onclick="sendAIMessage()" style="width: 100%;">
-                    שלח לAI
-                </button>
-            </div>
-
-            <div class="panel-section">
-                <div class="panel-title">
-                    <i class="fas fa-magic"></i> יצירה מהירה
-                </div>
-                <input type="text" class="panel-input" id="businessType" placeholder="סוג העסק...">
-                <button class="panel-btn" onclick="generateWebsite()">
-                    <i class="fas fa-wand-magic-sparkles"></i> צור אתר עם AI
-                </button>
-            </div>
-        </aside>
-
-        <main class="editor-main">
-            <div class="canvas-header">
-                <select class="website-selector" id="websiteSelector" onchange="loadWebsite()">
-                    <option value="">בחר אתר לעריכה...</option>
-                    <option value="dr-michal-rosen">ד"ר מיכל רוזן - אסתטיקה רפואית</option>
-                    <option value="law-firm">משרד ברקוביץ - עורכי דין</option>
-                    <option value="fitness-co">דני פיט - מאמן כושר</option>
-                    <option value="yoga-studio">סטודיו אוהם - יוגה</option>
-                    <option value="nutritionist">ד"ר שרה כהן - תזונאית</option>
-                    <option value="accountant">רינה לוי - חשבת שכר</option>
-                    <option value="beauty-salon">מספרה BELLA</option>
-                    <option value="tutor">ד"ר רונית לוי - מורה פרטית</option>
-                    <option value="aesthetic-clinic">קליניקת יופי פרמיום</option>
-                    <option value="multibrawn">מולטיבראון - נופש ואירועים</option>
-                    <option value="real-estate">נדל"ן פרמיום</option>
-                </select>
                 
-                <div>
-                    <button class="editor-btn" onclick="previewWebsite()">
-                        <i class="fas fa-eye"></i> תצוגה מקדימה
+                <div class="ai-input-area">
+                    <div class="ai-quick-actions">
+                        <button class="quick-action-btn" onclick="quickAIAction('improve-design')">
+                            ✨ שפר עיצוב
+                        </button>
+                        <button class="quick-action-btn" onclick="quickAIAction('generate-content')">
+                            📝 צור תוכן
+                        </button>
+                        <button class="quick-action-btn" onclick="quickAIAction('optimize-seo')">
+                            🔍 SEO
+                        </button>
+                        <button class="quick-action-btn" onclick="quickAIAction('mobile-optimize')">
+                            📱 מובייל
+                        </button>
+                    </div>
+                    
+                    <div class="ai-input-container">
+                        <textarea 
+                            id="aiInput" 
+                            class="ai-input" 
+                            placeholder="שאל אותי כל שאלה על העיצוב או בקש ממני לשפר משהו..."
+                            rows="1"
+                        ></textarea>
+                        <button id="aiSendBtn" class="ai-send-btn" onclick="sendAIMessage()">
+                            ➤
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Area -->
+        <div class="canvas-area">
+            <div class="canvas-toolbar">
+                <div class="canvas-title" id="canvasTitle">אתר חדש - ללא שם</div>
+                
+                <div class="canvas-controls">
+                    <div class="device-selector">
+                        <button class="device-btn active" data-device="desktop" onclick="switchDevice('desktop')">
+                            🖥️ Desktop
+                        </button>
+                        <button class="device-btn" data-device="tablet" onclick="switchDevice('tablet')">
+                            📱 Tablet
+                        </button>
+                        <button class="device-btn" data-device="mobile" onclick="switchDevice('mobile')">
+                            📱 Mobile
+                        </button>
+                    </div>
+                    
+                    <button class="quick-action-btn" onclick="saveWebsite()">
+                        💾 שמור
+                    </button>
+                    <button class="quick-action-btn" onclick="previewWebsite()">
+                        👁️ תצוגה מקדימה
+                    </button>
+                    <button class="quick-action-btn" onclick="publishWebsite()">
+                        🚀 פרסם
                     </button>
                 </div>
             </div>
             
-            <div class="canvas">
-                <iframe class="preview-frame" id="previewFrame" src="about:blank" title="Website Preview"></iframe>
+            <div class="canvas-viewport">
+                <div class="canvas-frame desktop" id="canvasFrame">
+                    <iframe id="canvasContent" class="canvas-content" src="about:blank"></iframe>
+                </div>
             </div>
-        </main>
+        </div>
 
-        <aside class="editor-panel">
-            <div class="panel-section">
-                <div class="panel-title">
-                    <i class="fas fa-palette"></i> עיצוב חכם
+        <!-- Properties Panel -->
+        <div class="properties-panel">
+            <div class="properties-header">
+                <div class="properties-title">⚙️ מאפיינים</div>
+            </div>
+            
+            <div class="properties-content" id="propertiesContent">
+                <div class="property-group">
+                    <div class="property-group-title">עיצוב כללי</div>
+                    
+                    <div class="property-item">
+                        <label class="property-label">צבע ראשי</label>
+                        <div class="color-picker-container">
+                            <input type="color" class="color-picker" id="primaryColor" value="#667eea">
+                            <input type="text" class="property-input" value="#667eea" style="flex: 1;">
+                        </div>
+                    </div>
+                    
+                    <div class="property-item">
+                        <label class="property-label">צבע משני</label>
+                        <div class="color-picker-container">
+                            <input type="color" class="color-picker" id="secondaryColor" value="#764ba2">
+                            <input type="text" class="property-input" value="#764ba2" style="flex: 1;">
+                        </div>
+                    </div>
+                    
+                    <div class="property-item">
+                        <label class="property-label">פונט</label>
+                        <select class="property-input" id="fontFamily">
+                            <option value="Arial">Arial</option>
+                            <option value="Helvetica">Helvetica</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                        </select>
+                    </div>
                 </div>
                 
-                <div class="color-palette">
-                    <div class="color-swatch" style="background: #667eea;" onclick="applyColor('#667eea')"></div>
-                    <div class="color-swatch" style="background: #764ba2;" onclick="applyColor('#764ba2')"></div>
-                    <div class="color-swatch" style="background: #f093fb;" onclick="applyColor('#f093fb')"></div>
-                    <div class="color-swatch" style="background: #f5576c;" onclick="applyColor('#f5576c')"></div>
-                    <div class="color-swatch" style="background: #4facfe;" onclick="applyColor('#4facfe')"></div>
-                    <div class="color-swatch" style="background: #00f2fe;" onclick="applyColor('#00f2fe')"></div>
-                    <div class="color-swatch" style="background: #a8edea;" onclick="applyColor('#a8edea')"></div>
-                    <div class="color-swatch" style="background: #fed6e3;" onclick="applyColor('#fed6e3')"></div>
-                </div>
-
-                <button class="panel-btn" onclick="generateDesign()">
-                    <i class="fas fa-magic"></i> עיצוב אוטומטי עם AI
-                </button>
-                
-                <button class="panel-btn" onclick="optimizeSpeed()">
-                    <i class="fas fa-rocket"></i> אופטימיזציה מהירות
-                </button>
-            </div>
-
-            <div class="panel-section">
-                <div class="panel-title">
-                    <i class="fas fa-search"></i> SEO ו-תוכן
+                <div class="property-group">
+                    <div class="property-group-title">פריסה</div>
+                    
+                    <div class="property-item">
+                        <label class="property-label">רוחב מקסימלי</label>
+                        <input type="text" class="property-input" placeholder="1200px" id="maxWidth">
+                    </div>
+                    
+                    <div class="property-item">
+                        <label class="property-label">ריווח</label>
+                        <input type="range" class="property-input" min="0" max="50" value="20" id="spacing">
+                    </div>
                 </div>
                 
-                <button class="panel-btn" onclick="optimizeSEO()">
-                    <i class="fas fa-chart-line"></i> אופטימיזציה SEO
-                </button>
-                
-                <button class="panel-btn" onclick="generateContent()">
-                    <i class="fas fa-edit"></i> יצירת תוכן עם AI
-                </button>
+                <div class="property-group">
+                    <div class="property-group-title">אנימציות</div>
+                    
+                    <div class="property-item">
+                        <label class="property-label">אפקט כניסה</label>
+                        <select class="property-input" id="entranceAnimation">
+                            <option value="none">ללא</option>
+                            <option value="fadeIn">הופעה הדרגתית</option>
+                            <option value="slideUp">הזזה מלמטה</option>
+                            <option value="zoomIn">זום פנימה</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-        </aside>
+        </div>
     </div>
 
     <script>
-        const API_BASE = 'http://localhost:3000';
+        // Global state
         let currentWebsite = null;
-        let authToken = localStorage.getItem('webmaster_token');
+        let aiConnected = false;
+        let websocket = null;
+        let collaborators = new Map();
+        let selectedElement = null;
 
-        // API calls
-        async function callAPI(endpoint, method = 'GET', data = null) {
-            try {
-                const options = {
-                    method,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        ...(authToken && { 'Authorization': `Bearer ${authToken}` })
+        // Initialize editor
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeEditor();
+            setupWebSocket();
+            loadWebsite();
+        });
+
+        // Initialize editor components
+        function initializeEditor() {
+            setupAIInput();
+            setupPropertyListeners();
+            setupCanvasListeners();
+            
+            // Setup auto-resize for AI input
+            const aiInput = document.getElementById('aiInput');
+            aiInput.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            });
+            
+            // Setup keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case 's':
+                            e.preventDefault();
+                            saveWebsite();
+                            break;
+                        case 'Enter':
+                            if (e.target.id === 'aiInput') {
+                                e.preventDefault();
+                                sendAIMessage();
+                            }
+                            break;
                     }
-                };
-
-                if (data) {
-                    options.body = JSON.stringify(data);
                 }
+            });
+        }
 
-                const response = await fetch(`${API_BASE}${endpoint}`, options);
-                return await response.json();
-            } catch (error) {
-                console.error('API Error:', error);
-                addAIMessage('❌ שגיאה בתקשורת עם השרת');
-                throw error;
+        // Setup WebSocket connection
+        function setupWebSocket() {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                showNotification('Authentication required', 'error');
+                return;
+            }
+
+            const wsUrl = `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws?token=${token}`;
+            
+            websocket = new WebSocket(wsUrl);
+            
+            websocket.onopen = function() {
+                console.log('WebSocket connected');
+                showNotification('Real-time collaboration enabled', 'success');
+            };
+            
+            websocket.onmessage = function(event) {
+                const message = JSON.parse(event.data);
+                handleWebSocketMessage(message);
+            };
+            
+            websocket.onclose = function() {
+                console.log('WebSocket disconnected');
+                setTimeout(setupWebSocket, 5000); // Reconnect after 5 seconds
+            };
+            
+            websocket.onerror = function(error) {
+                console.error('WebSocket error:', error);
+            };
+        }
+
+        // Handle WebSocket messages
+        function handleWebSocketMessage(message) {
+            switch(message.type) {
+                case 'user_joined':
+                    showCollaborator(message.userId, message.userName);
+                    break;
+                case 'user_left':
+                    removeCollaborator(message.userId);
+                    break;
+                case 'website_edit':
+                    handleRemoteEdit(message);
+                    break;
+                case 'cursor_move':
+                    updateCollaboratorCursor(message);
+                    break;
+                case 'ai_response':
+                    handleAIResponse(message);
+                    break;
+                case 'notification':
+                    showNotification(message.notification.message, message.notification.type);
+                    break;
             }
         }
 
-        // AI Chat functions
-        function addAIMessage(message) {
-            const messagesContainer = document.getElementById('aiMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'ai-message';
-            messageDiv.textContent = message;
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function handleAIInput(event) {
-            if (event.key === 'Enter') {
-                sendAIMessage();
-            }
+        // AI Functions
+        function setupAIInput() {
+            const aiInput = document.getElementById('aiInput');
+            const aiSendBtn = document.getElementById('aiSendBtn');
+            
+            aiInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendAIMessage();
+                }
+            });
         }
 
         async function sendAIMessage() {
@@ -407,188 +750,338 @@
             
             if (!message) return;
             
-            addAIMessage(`👤 ${message}`);
+            // Add user message to chat
+            addAIMessage('user', message);
             input.value = '';
+            input.style.height = 'auto';
+            
+            // Show AI thinking
+            const thinkingId = addAIMessage('assistant', '<div class="loading"><div class="spinner"></div> חושב...</div>');
             
             try {
-                const response = await callAPI('/api/ai/openai', 'POST', {
-                    prompt: message,
-                    type: 'general',
-                    maxTokens: 300
+                // Send to AI API
+                const response = await fetch('/api/ai/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        context: 'website_editing',
+                        businessType: currentWebsite?.businessType || 'general',
+                        websiteId: currentWebsite?.id
+                    })
                 });
                 
-                addAIMessage(`🤖 ${response.result}`);
+                const data = await response.json();
+                
+                // Remove thinking message and add response
+                removeAIMessage(thinkingId);
+                
+                if (data.success) {
+                    addAIMessage('assistant', data.response);
+                    
+                    // If AI suggests changes, offer to apply them
+                    if (data.suggestions) {
+                        addAISuggestions(data.suggestions);
+                    }
+                } else {
+                    addAIMessage('assistant', 'סליחה, אירעה שגיאה. אנא נסה שוב.');
+                }
+                
             } catch (error) {
-                addAIMessage('❌ שגיאה בתקשורת עם AI');
+                console.error('AI request failed:', error);
+                removeAIMessage(thinkingId);
+                addAIMessage('assistant', 'אירעה שגיאה בחיבור ל-AI. אנא בדוק את החיבור לאינטרנט.');
             }
         }
 
-        // Website functions
+        function addAIMessage(sender, content) {
+            const messagesContainer = document.getElementById('aiMessages');
+            const messageElement = document.createElement('div');
+            const messageId = 'msg_' + Date.now();
+            
+            messageElement.id = messageId;
+            messageElement.className = `ai-message ${sender}`;
+            messageElement.innerHTML = sender === 'user' ? content : `<strong>AI:</strong><br>${content}`;
+            
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            return messageId;
+        }
+
+        function removeAIMessage(messageId) {
+            const messageElement = document.getElementById(messageId);
+            if (messageElement) {
+                messageElement.remove();
+            }
+        }
+
+        function quickAIAction(action) {
+            const actions = {
+                'improve-design': 'שפר את העיצוב של האתר שלי',
+                'generate-content': 'צור תוכן מקצועי לאתר',
+                'optimize-seo': 'אופטם את האתר ל-SEO',
+                'mobile-optimize': 'בדוק את התאמת האתר למובייל'
+            };
+            
+            const input = document.getElementById('aiInput');
+            input.value = actions[action];
+            sendAIMessage();
+        }
+
+        // Canvas Functions
+        function switchDevice(device) {
+            const frame = document.getElementById('canvasFrame');
+            const buttons = document.querySelectorAll('.device-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-device="${device}"]`).classList.add('active');
+            
+            // Update frame size
+            frame.className = `canvas-frame ${device}`;
+            
+            // Notify about device change
+            showNotification(`עברת לתצוגת ${device}`, 'success');
+        }
+
         function loadWebsite() {
-            const selector = document.getElementById('websiteSelector');
-            const websiteId = selector.value;
+            // Load website content into iframe
+            const iframe = document.getElementById('canvasContent');
             
-            if (!websiteId) return;
+            // For demo, load a basic HTML template
+            const demoHTML = `
+                <!DOCTYPE html>
+                <html lang="he" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>אתר לדוגמה</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 0;
+                            padding: 0;
+                            direction: rtl;
+                        }
+                        .hero {
+                            background: linear-gradient(135deg, #667eea, #764ba2);
+                            color: white;
+                            text-align: center;
+                            padding: 4rem 2rem;
+                        }
+                        .hero h1 {
+                            font-size: 3rem;
+                            margin-bottom: 1rem;
+                        }
+                        .hero p {
+                            font-size: 1.2rem;
+                            margin-bottom: 2rem;
+                        }
+                        .btn {
+                            background: white;
+                            color: #667eea;
+                            padding: 1rem 2rem;
+                            border: none;
+                            border-radius: 0.5rem;
+                            font-size: 1.1rem;
+                            cursor: pointer;
+                        }
+                        .content {
+                            padding: 4rem 2rem;
+                            max-width: 1200px;
+                            margin: 0 auto;
+                        }
+                        .grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                            gap: 2rem;
+                            margin-top: 3rem;
+                        }
+                        .card {
+                            padding: 2rem;
+                            border: 1px solid #e2e8f0;
+                            border-radius: 0.5rem;
+                            text-align: center;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <section class="hero">
+                        <h1>ברוכים הבאים לאתר שלנו</h1>
+                        <p>אנחנו כאן כדי לספק לכם את השירות הטוב ביותר</p>
+                        <button class="btn">צור קשר</button>
+                    </section>
+                    
+                    <section class="content">
+                        <h2>השירותים שלנו</h2>
+                        <div class="grid">
+                            <div class="card">
+                                <h3>שירות 1</h3>
+                                <p>תיאור השירות הראשון שלנו</p>
+                            </div>
+                            <div class="card">
+                                <h3>שירות 2</h3>
+                                <p>תיאור השירות השני שלנו</p>
+                            </div>
+                            <div class="card">
+                                <h3>שירות 3</h3>
+                                <p>תיאור השירות השלישי שלנו</p>
+                            </div>
+                        </div>
+                    </section>
+                </body>
+                </html>
+            `;
             
-            currentWebsite = websiteId;
-            const frame = document.getElementById('previewFrame');
-            frame.src = `../websites/${websiteId}.html`;
+            iframe.srcdoc = demoHTML;
+        }
+
+        // Website Actions
+        async function saveWebsite() {
+            showNotification('שומר...', 'info');
             
-            addAIMessage(`🔄 טוען אתר: ${selector.options[selector.selectedIndex].text}`);
+            try {
+                // Get website content
+                const iframe = document.getElementById('canvasContent');
+                const content = iframe.contentDocument.documentElement.outerHTML;
+                
+                const response = await fetch('/api/websites/current', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    },
+                    body: JSON.stringify({
+                        content: content,
+                        lastModified: new Date().toISOString()
+                    })
+                });
+                
+                if (response.ok) {
+                    showNotification('האתר נשמר בהצלחה!', 'success');
+                } else {
+                    throw new Error('Save failed');
+                }
+                
+            } catch (error) {
+                console.error('Save error:', error);
+                showNotification('שגיאה בשמירה', 'error');
+            }
         }
 
         function previewWebsite() {
-            if (!currentWebsite) {
-                alert('אנא בחר אתר תחילה');
-                return;
-            }
+            const iframe = document.getElementById('canvasContent');
+            const content = iframe.srcdoc;
             
-            window.open(`../websites/${currentWebsite}.html`, '_blank');
-        }
-
-        async function saveProject() {
-            if (!currentWebsite) {
-                alert('אין פרויקט לשמירה');
-                return;
-            }
-            
-            addAIMessage('💾 שומר פרויקט...');
-            
-            try {
-                // In real implementation, this would save to backend
-                setTimeout(() => {
-                    addAIMessage('✅ הפרויקט נשמר בהצלחה!');
-                }, 1000);
-            } catch (error) {
-                addAIMessage('❌ שגיאה בשמירת הפרויקט');
-            }
+            // Open preview in new window
+            const previewWindow = window.open('', '_blank');
+            previewWindow.document.write(content);
+            previewWindow.document.close();
         }
 
         async function publishWebsite() {
-            if (!currentWebsite) {
-                alert('אין אתר לפרסום');
-                return;
-            }
-            
-            addAIMessage('🚀 מפרסם אתר...');
-            
-            try {
-                const response = await callAPI('/api/deploy', 'POST', {
-                    websiteId: currentWebsite,
-                    content: 'website content',
-                    aiOptimizations: true
-                });
+            if (confirm('האם אתה בטוח שברצונך לפרסם את האתר?')) {
+                showNotification('מפרסם אתר...', 'info');
                 
-                addAIMessage(`✅ האתר פורסם בהצלחה! URL: ${response.deployment_url}`);
-            } catch (error) {
-                addAIMessage('❌ שגיאה בפרסום האתר');
+                try {
+                    const response = await fetch('/api/websites/current/publish', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        showNotification(`האתר פורסם בהצלחה! ${data.url}`, 'success');
+                    } else {
+                        throw new Error('Publish failed');
+                    }
+                    
+                } catch (error) {
+                    console.error('Publish error:', error);
+                    showNotification('שגיאה בפרסום האתר', 'error');
+                }
             }
         }
 
-        // Design functions
-        function applyColor(color) {
-            document.documentElement.style.setProperty('--primary-color', color);
-            addAIMessage(`🎨 צבע ${color} הוחל בהצלחה!`);
-        }
-
-        async function generateDesign() {
-            const businessType = document.getElementById('businessType').value || 'עסק כללי';
+        // Property Panel Functions
+        function setupPropertyListeners() {
+            const properties = ['primaryColor', 'secondaryColor', 'fontFamily', 'maxWidth', 'spacing'];
             
-            addAIMessage('🎨 יוצר עיצוב חדש עם AI...');
-            
-            try {
-                const response = await callAPI('/api/ai/generate-design', 'POST', {
-                    businessType: businessType,
-                    style: 'modern'
-                });
-                
-                // Apply the generated colors
-                document.documentElement.style.setProperty('--primary-color', response.primary_color);
-                document.documentElement.style.setProperty('--secondary-color', response.secondary_color);
-                
-                addAIMessage(`✅ עיצוב חדש נוצר! צבעים: ${response.primary_color}, ${response.secondary_color}`);
-            } catch (error) {
-                addAIMessage('❌ שגיאה ביצירת עיצוב');
-            }
-        }
-
-        async function generateWebsite() {
-            const businessType = document.getElementById('businessType').value;
-            
-            if (!businessType) {
-                addAIMessage('❌ אנא הזן סוג עסק');
-                return;
-            }
-            
-            addAIMessage(`🚀 יוצר אתר עבור ${businessType} עם AI...`);
-            
-            try {
-                const response = await callAPI('/api/ai/openai', 'POST', {
-                    prompt: `Create a website structure for a ${businessType} business`,
-                    type: 'content',
-                    maxTokens: 500
-                });
-                
-                addAIMessage(`✅ אתר נוצר עבור ${businessType}!`);
-                addAIMessage(response.result);
-            } catch (error) {
-                addAIMessage('❌ שגיאה ביצירת האתר');
-            }
-        }
-
-        async function optimizeSpeed() {
-            addAIMessage('⚡ מאיץ ביצועים...');
-            
-            // Implement actual speed optimizations
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
-                img.loading = 'lazy';
-                img.decoding = 'async';
+            properties.forEach(prop => {
+                const element = document.getElementById(prop);
+                if (element) {
+                    element.addEventListener('change', function() {
+                        applyPropertyChange(prop, this.value);
+                    });
+                }
             });
+        }
+
+        function applyPropertyChange(property, value) {
+            // Apply property changes to the iframe content
+            const iframe = document.getElementById('canvasContent');
+            const doc = iframe.contentDocument;
+            
+            if (!doc) return;
+            
+            // Create or update CSS variables
+            let style = doc.getElementById('dynamic-styles');
+            if (!style) {
+                style = doc.createElement('style');
+                style.id = 'dynamic-styles';
+                doc.head.appendChild(style);
+            }
+            
+            // Update CSS based on property
+            const cssRules = {
+                primaryColor: `:root { --primary-color: ${value}; }`,
+                secondaryColor: `:root { --secondary-color: ${value}; }`,
+                fontFamily: `body { font-family: ${value}, sans-serif; }`,
+                maxWidth: `.content { max-width: ${value}; }`,
+                spacing: `:root { --spacing: ${value}px; }`
+            };
+            
+            if (cssRules[property]) {
+                style.textContent += cssRules[property];
+            }
+            
+            // Notify about change
+            showNotification(`${property} עודכן`, 'success');
+        }
+
+        // Utility Functions
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
             
             setTimeout(() => {
-                addAIMessage('✅ ביצועים שופרו! טעינה מהירה יותר.');
-            }, 1500);
+                notification.remove();
+            }, 3000);
         }
 
-        async function optimizeSEO() {
-            addAIMessage('🔍 מאופטם SEO...');
-            
-            try {
-                const response = await callAPI('/api/ai/openai', 'POST', {
-                    prompt: 'Optimize this website for SEO',
-                    type: 'seo',
-                    maxTokens: 300
-                });
-                
-                addAIMessage('✅ SEO אופטימלי!');
-                addAIMessage(response.result);
-            } catch (error) {
-                addAIMessage('❌ שגיאה באופטימיזציה SEO');
-            }
+        function showCollaborator(userId, userName) {
+            collaborators.set(userId, { name: userName, online: true });
+            updateCollaboratorsList();
         }
 
-        async function generateContent() {
-            addAIMessage('📝 יוצר תוכן עם AI...');
-            
-            try {
-                const response = await callAPI('/api/ai/openai', 'POST', {
-                    prompt: 'Generate professional content for this website',
-                    type: 'content',
-                    maxTokens: 400
-                });
-                
-                addAIMessage('✅ תוכן חדש נוצר!');
-                addAIMessage(response.result);
-            } catch (error) {
-                addAIMessage('❌ שגיאה ביצירת תוכן');
-            }
+        function removeCollaborator(userId) {
+            collaborators.delete(userId);
+            updateCollaboratorsList();
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            addAIMessage('🤖 AI Editor מוכן לעבודה! בחר אתר או צור אחד חדש.');
-        });
+        function updateCollaboratorsList() {
+            // This would update a collaborators list UI if we had one
+            console.log('Active collaborators:', Array.from(collaborators.entries()));
+        }
     </script>
 </body>
 </html>
