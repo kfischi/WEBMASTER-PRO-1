@@ -1,469 +1,334 @@
-# 🚀 WebMaster Pro - מערכת בניית אתרים מקצועית
+# 🚀 WebMaster Pro - AI-Powered Website Builder
 
-> **מערכת מתקדמת לבניית ועריכת אתרים עסקיים עם אדיטור ויזואלי וAI Assistant**
+**The ultimate website builder platform with real AI integration using OpenAI GPT-4 and Anthropic Claude.**
 
-[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/webmaster-pro)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org)
-[![Status](https://img.shields.io/badge/status-production--ready-success.svg)](#)
+## ✨ Features
 
----
+- **🤖 Real AI Integration**: OpenAI GPT-4 & Anthropic Claude APIs
+- **🎨 Visual Editor**: Drag & drop with real-time preview
+- **🌈 Smart Design**: AI-generated color palettes and layouts
+- **⚡ Auto Deployment**: One-click publishing to web
+- **🔧 Performance Optimization**: Speed & SEO optimization
+- **📱 11 Professional Templates**: Ready-to-use business websites
+- **💾 Auto-Save**: Real-time saving to database
+- **🔐 Authentication**: User management and security
+- **📊 Analytics**: Built-in website analytics
+- **☁️ Cloud Storage**: File upload and management
 
-## 💎 **מה זה WebMaster Pro?**
+## 🏗️ Architecture
 
-WebMaster Pro היא מערכת מתקדמת לבניית אתרים עסקיים שכוללת:
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   🌐 Frontend Layer                         │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐           │
+│  │    Index    │ │   Editor    │ │ Templates   │           │
+│  │    Page     │ │   Studio    │ │  Gallery    │           │
+│  └─────────────┘ └─────────────┘ └─────────────┘           │
+└─────────────────────┬───────────────────────────────────────┘
+                      │ REST API / WebSocket
+┌─────────────────────▼───────────────────────────────────────┐
+│                 🔄 Backend (Node.js)                        │
+│        Authentication • AI Services • File Management       │
+└─┬───────────┬───────────┬───────────┬───────────┬──────────┘
+  │           │           │           │           │
+  ▼           ▼           ▼           ▼           ▼
+┌─────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐
+│Auth │ │Website  │ │AI APIs  │ │File     │ │Database │
+│JWT  │ │Manager  │ │GPT/Claude│ │Upload   │ │PostgreSQL│
+└─────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘
+```
 
-- 🌐 **11 אתרים מקצועיים מוכנים** בשווי כולל של ₪26,900
-- 🎨 **אדיטור ויזואלי מתקדם** לעריכה בזמן אמת
-- 🤖 **AI Assistant מובנה** ליצירת תוכן ועיצוב
-- 💾 **מערכת שמירה מלאה** עם Supabase או מקומית
-- 📱 **רספונסיבי מושלם** לכל המכשירים
-- ⚡ **ביצועים מעולים** עם אופטימיזציה מתקדמת
+## 📁 Project Structure
 
----
+```
+webmaster-pro/
+├── backend/                    # Node.js Backend
+│   ├── src/
+│   │   ├── middleware/         # Authentication & Security
+│   │   ├── routes/            # API Endpoints
+│   │   └── utils/             # Helper Functions
+│   ├── server.js              # Main Server
+│   ├── setup.js               # Database Setup
+│   ├── test-system.js         # System Tests
+│   └── package.json           # Dependencies
+├── public/                    # Static Files
+│   └── uploads/               # User Uploads
+├── websites/                  # 11 Template Websites
+│   ├── dr-michal-rosen.html
+│   ├── fitness-co.html
+│   ├── yoga-studio.html
+│   └── ... (8 more)
+├── assets/                    # Images & Resources
+├── docs/                      # Documentation
+├── editor.html                # Main Visual Editor
+├── index.html                 # Landing Page
+├── netlify.toml              # Netlify Config
+├── railway.toml              # Railway Config
+└── README.md                 # This File
+```
 
-## 🎯 **למי זה מיועד?**
+## 🚀 Quick Start
 
-### 💼 **לעסקים:**
-- סוכנויות עיצוב ופיתוח
-- פרילנסרים בתחום הדיגיטל
-- יזמים שרוצים להקים עסק באתרים
-- מעצבים שרוצים כלי מקצועי
+### 1. Prerequisites
+- Node.js 18+ 
+- PostgreSQL database (Railway recommended)
+- OpenAI API key
+- Anthropic Claude API key
 
-### 🎨 **למקצועות חופשיים:**
-- רופאים ורופאי שיניים
-- עורכי דין וחשבונאיות
-- מאמני כושר ותזונאיות
-- מעצבי שיער ואסתטיקאיות
-
----
-
-## 💰 **הערך הכלכלי**
-
-| קטגוריה | מספר אתרים | ערך ממוצע | ערך כולל |
-|----------|-------------|-----------|----------|
-| 🏥 רפואה ואסתטיקה | 4 | ₪2,800 | ₪11,200 |
-| ⚖️ שירותים מקצועיים | 3 | ₪2,300 | ₪6,900 |
-| 🏃‍♂️ בריאות וכושר | 2 | ₪2,050 | ₪4,100 |
-| 🎨 יופי ועיצוב | 2 | ₪1,850 | ₪3,700 |
-| **📊 סה"כ** | **11** | **₪2,445** | **₪26,900** |
-
-### 🚀 **פוטנציאל רווח:**
-- **עלות תפעול חודשית:** ~₪400
-- **מרווח רווח:** 85-90%
-- **ROI פוטנציאלי:** 600%+ בחודש ראשון
-- **מכירת אתר אחד:** החזר השקעה מלא
-
----
-
-## 🌟 **האתרים המקצועיים**
-
-### 🏥 **רפואה ואסתטיקה:**
-1. **קליניקת יופי פרמיום** - ₪3,200 ⭐
-   - עיצוב Glass Morphism מתקדם
-   - גלריית לפני-אחרי מרשימה
-   - מערכת המלצות עם דירוגים
-   - בלוג מאמרים מקצועיים
-
-2. **ד"ר מיכל רוזן - אסתטיקה רפואית** - ₪2,800
-   - עיצוב רפואי מקצועי
-   - מחשבון התאמת טיפולים
-   - אזור שאלות נפוצות
-
-3. **ד"ר שרה כהן - תזונאית קלינית** - ₪2,400
-   - מחשבון BMI אינטראקטיבי
-   - תפריטים מותאמים אישית
-   - בלוג תזונה מקצועי
-
-### ⚖️ **שירותים מקצועיים:**
-4. **משרד ברקוביץ ושות - עורכי דין** - ₪2,500
-   - עיצוב אלגנטי ומקצועי
-   - אזור התמחויות משפטיות
-   - טפסי יעוץ מקוונים
-
-5. **רינה לוי - חשבת שכר** - ₪2,000
-   - מחשבון שכר מתקדם
-   - עיצוב עסקי נקי
-   - אזור שירותים כלכליים
-
-6. **ד"ר רונית לוי - מורה פרטית** - ₪2,100
-   - עיצוב חינוכי מזמין
-   - מערכת הזמנת שיעורים
-   - פורטפוליו הישגים
-
-### 🏃‍♂️ **בריאות וכושר:**
-7. **דני פיט - מאמן כושר אישי** - ₪2,200
-   - עיצוב אנרגטי ומעורר השראה
-   - מחשבון קלוריות מתקדם
-   - תוכניות אימון מותאמות
-
-8. **סטודיו אוהם - יוגה ומדיטציה** - ₪1,900
-   - עיצוב רגוע ומרגיע
-   - לוח שיעורים אינטראקטיבי
-   - בלוג מדיטציה ותרגילים
-
-### 🎨 **יופי ועיצוב:**
-9. **מספרה BELLA - יופי ועיצוב שיער** - ₪1,700
-   - גלריית תסרוקות מרשימה
-   - מערכת הזמנות אונליין
-   - עיצוב צעיר ומודרני
-
-### 🏖️ **נופש ואירועים:**
-10. **מולטיבראון - נופש ואירועים** - ₪2,300
-    - גלריית אירועים מרשימה
-    - מערכת הזמנות מתקדמת
-    - עיצוב יוקרתי ומפואר
-
-11. **נדל"ן פרמיום** - ₪2,700
-    - גלריית נכסים מתקדמת
-    - מחשבון משכנתא
-    - עיצוב יוקרתי ומקצועי
-
----
-
-## 🛠️ **התכונות הטכניות**
-
-### 🎨 **אדיטור ויזואלי מתקדם:**
-- **עריכה בזמן אמת** - רואים שינויים מיד
-- **ממשק drag & drop** - גרירה ושחרור פשוט
-- **מצבי תצוגה** - Desktop/Tablet/Mobile
-- **כלי עיצוב מתקדמים** - צבעים, גופנים, פריסה
-- **מערכת Undo/Redo** - ביטול וחזרה על פעולות
-- **תצוגה מקדימה** - בדיקה לפני פרסום
-
-### 🤖 **AI Assistant חכם:**
-- **יצירת תוכן אוטומטית** - כותרות, תיאורים, מאמרים
-- **הצעות עיצוב** - צבעים, פריסה, טיפוגרפיה
-- **אופטימיזציית SEO** - מילות מפתח, מטא תגים
-- **שיפור נגישות** - בדיקה ותיקון אוטומטי
-- **חיבור ל-Claude API** - AI המתקדם בעולם
-
-### 💾 **מערכת שמירה מלאה:**
-- **Supabase integration** - מסד נתונים בענן
-- **גיבוי מקומי** - שמירה על השרת
-- **היסטוריית שינויים** - מעקב אחר כל עדכון
-- **ייצוא קבצים** - HTML מוכן לפרסום
-- **שמירה אוטומטית** - כל 30 שניות
-
-### 📱 **רספונסיבי מושלם:**
-- **Mobile First** - מתחיל ממובייל
-- **Breakpoints חכמים** - נקודות שבירה אוטומטיות
-- **Touch Gestures** - תמיכה במגע
-- **Cross Browser** - תמיכה בכל הדפדפנים
-
----
-
-## 🚀 **התקנה והפעלה**
-
-### 📋 **דרישות מערכת:**
-- **Node.js 16+** - [הורד כאן](https://nodejs.org)
-- **npm או yarn** - מגיע עם Node.js
-- **דפדפן מודרני** - Chrome, Firefox, Safari, Edge
-- **זיכרון:** 4GB RAM מינימום
-- **דיסק:** 2GB שטח פנוי
-
-### ⚡ **התקנה מהירה (5 דקות):**
-
+### 2. Installation
 ```bash
-# 1. שכפול הפרויקט
-git clone https://github.com/webmaster-pro/webmaster-pro.git
+# Clone the repository
+git clone https://github.com/your-username/webmaster-pro.git
 cd webmaster-pro
 
-# 2. התקנת dependencies
-npm install
+# Install dependencies
+npm run setup
 
-# 3. הגדרת סביבה
-cp .env.example .env
-nano .env  # ערוך עם הפרטים שלך
-
-# 4. הפעלת השרת
-npm start
-
-# 5. פתיחת האדיטור
-open http://localhost:3000/editor.html
+# Configure environment variables
+cp backend/.env.example backend/.env
+# Edit backend/.env with your API keys
 ```
 
-### 🔧 **הגדרת Supabase (אופציונלי):**
+### 3. Environment Configuration
+Edit `backend/.env` with your keys:
+```env
+# API Keys
+OPENAI_API_KEY=sk-proj-your-openai-key
+ANTHROPIC_API_KEY=sk-ant-your-anthropic-key
 
-1. **יצירת פרויקט:**
-   - כנס ל-[Supabase](https://supabase.com)
-   - צור פרויקט חדש: "webmaster-pro"
-   - בחר אזור: Europe West
+# Database (Railway)
+DATABASE_URL=postgresql://user:password@host:port/database
 
-2. **הגדרת טבלאות:**
-   ```sql
-   -- הדבק ב-SQL Editor של Supabase
-   CREATE TABLE websites (
-       id VARCHAR(50) PRIMARY KEY,
-       name VARCHAR(200) NOT NULL,
-       category VARCHAR(100) NOT NULL,
-       price VARCHAR(20) NOT NULL,
-       path VARCHAR(500) NOT NULL,
-       html_content TEXT,
-       metadata JSONB DEFAULT '{}',
-       created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-   );
-   ```
+# JWT Secret
+JWT_SECRET=your-super-secret-key
 
-3. **עדכון .env:**
-   ```bash
-   SUPABASE_URL=https://your-project.supabase.co
-   SUPABASE_SERVICE_KEY=your-service-key
-   ```
-
----
-
-## 🧪 **בדיקות ואימות**
-
-### 🔍 **בדיקה מהירה:**
-```bash
-# בדיקת תקינות מערכת
-npm run test
-
-# בדיקת שרת
-curl http://localhost:3000/api/health
-
-# בדיקת אתרים
-curl http://localhost:3000/api/websites
+# Server Settings
+PORT=3000
+NODE_ENV=development
 ```
 
-### 🧪 **בדיקות מלאות:**
+### 4. Database Setup
 ```bash
-# הרצת כל הבדיקות
+# Initialize database
+npm run migrate
+
+# Test the system
+npm test
+```
+
+### 5. Start Development Server
+```bash
+# Start the backend server
+npm run dev
+
+# Open your browser
+# http://localhost:3000/         - Landing page
+# http://localhost:3000/editor.html - Visual editor
+```
+
+## 🔑 Required API Keys
+
+### OpenAI API Key
+1. Go to [OpenAI Platform](https://platform.openai.com/api-keys)
+2. Create new secret key
+3. Add to `backend/.env`: `OPENAI_API_KEY=sk-proj-...`
+
+### Anthropic Claude API Key
+1. Go to [Anthropic Console](https://console.anthropic.com/)
+2. Create API key
+3. Add to `backend/.env`: `ANTHROPIC_API_KEY=sk-ant-...`
+
+### Railway Database
+1. Go to [Railway](https://railway.app)
+2. Create new project
+3. Add PostgreSQL service
+4. Copy `DATABASE_URL` to `backend/.env`
+
+## 🧪 Testing
+
+### Automated Tests
+```bash
+# Run all system tests
+npm test
+
+# Test specific components
+cd backend
 node test-system.js
-
-# בדיקות מהירות בלבד
-node test-system.js --quick
-
-# צפייה בדוח מפורט
-cat test-report.json
 ```
 
-### ✅ **רשימת בדיקות:**
-- [x] קבצי מערכת קיימים
-- [x] Dependencies מותקנים
-- [x] השרת עולה בהצלחה
-- [x] API endpoints עובדים
-- [x] האדיטור נטען
-- [x] האתרים נגישים
-- [x] מערכת שמירה פועלת
-- [x] AI Assistant מגיב
+### Manual Testing
+1. Open `http://localhost:3000/editor.html`
+2. Try the AI assistant
+3. Test design generation
+4. Save/load websites
+5. Upload files
 
----
+## 🚀 Deployment
 
-## 📖 **מדריך שימוש**
-
-### 🎯 **תחילת עבודה:**
-
-1. **פתח את האדיטור:**
-   ```
-   http://localhost:3000/editor.html
-   ```
-
-2. **בחר אתר לעריכה:**
-   - השתמש בתפריט הנפתח עליון
-   - או לחץ על אתר בסיידבר השמאלי
-
-3. **התחל לערוך:**
-   - לחץ על טקסט לעריכה
-   - שנה צבעים בסיידבר
-   - הוסף תמונות חדשות
-   - שאל את ה-AI שאלות
-
-### 🖱️ **פעולות עיקריות:**
-
-| פעולה | קיצור מקלדת | תיאור |
-|--------|-------------|--------|
-| שמירה | `Ctrl + S` | שמירת שינויים |
-| תצוגה | `Ctrl + P` | פתיחה בחלון חדש |
-| ביטול | `Ctrl + Z` | ביטול פעולה אחרונה |
-| חזרה | `Ctrl + Y` | חזרה על פעולה |
-| AI | `Ctrl + I` | פתיחת chat AI |
-
-### 🎨 **עריכת עיצוב:**
-
-```javascript
-// דוגמה לשינוי צבע רקע
-updateBackgroundColor('#4f46e5');
-
-// שינוי גודל גופן
-updateFontSize(18);
-
-// הוספת אנימציה
-addAnimation('fadeIn');
-```
-
-### 🤖 **שימוש ב-AI:**
-
-```
-שאלות לדוגמה:
-• "שפר את העיצוב של האתר"
-• "כתוב תוכן חדש לדף הבית"
-• "מה הצבעים הכי טובים לרופא שיניים?"
-• "איך לשפר את ה-SEO?"
-```
-
----
-
-## 🔧 **פתרון בעיות**
-
-### ❌ **בעיות נפוצות:**
-
-1. **השרת לא עולה:**
-   ```bash
-   # בדוק שהפורט פנוי
-   lsof -i :3000
-   
-   # שנה פורט ב-.env
-   PORT=3001
-   ```
-
-2. **מודולים חסרים:**
-   ```bash
-   # התקנה מחדש
-   rm -rf node_modules package-lock.json
-   npm install
-   ```
-
-3. **בעיות CORS:**
-   ```bash
-   # עדכן ב-.env
-   FRONTEND_URL=http://localhost:3000
-   ```
-
-4. **האתרים לא נטענים:**
-   ```bash
-   # וודא שהתיקייה קיימת
-   ls -la websites/
-   
-   # בדוק הרשאות
-   chmod 755 websites/*.html
-   ```
-
-### 🆘 **קבלת עזרה:**
-
-- **תיעוד מלא:** `/docs` בפרויקט
-- **דוגמאות קוד:** `/examples`
-- **וידאו מדריכים:** [YouTube Channel](#)
-- **קהילה:** [Discord Server](#)
-- **תמיכה טכנית:** support@webmaster-pro.com
-
----
-
-## 🚀 **פריסה לפרודקשן**
-
-### 🌐 **אפשרויות פריסה:**
-
-1. **Netlify (מומלץ):**
-   ```bash
-   # התקנת Netlify CLI
-   npm install -g netlify-cli
-   
-   # פריסה
-   netlify deploy --prod
-   ```
-
-2. **Vercel:**
-   ```bash
-   # התקנת Vercel CLI
-   npm install -g vercel
-   
-   # פריסה
-   vercel --prod
-   ```
-
-3. **VPS/Dedicated Server:**
-   ```bash
-   # עם PM2
-   npm install -g pm2
-   pm2 start server.js --name webmaster-pro
-   pm2 startup
-   pm2 save
-   ```
-
-### 🔒 **אבטחה:**
-
+### Backend (Railway)
 ```bash
-# הגדרות אבטחה ב-.env
-NODE_ENV=production
-ENABLE_HTTPS=true
-SECURE_COOKIES=true
-RATE_LIMIT=100
+# Install Railway CLI
+npm install -g @railway/cli
+
+# Login and deploy
+railway login
+railway link
+railway deploy
 ```
 
+### Frontend (Netlify)
+1. Connect your GitHub repository to Netlify
+2. Build settings:
+   - Build command: `npm run build`
+   - Publish directory: `./`
+3. Environment variables: Add your API keys
+4. Deploy!
+
+### Domain Setup
+1. Configure your custom domain in Railway/Netlify
+2. Update `FRONTEND_URL` in environment variables
+3. Test API endpoints
+
+## 📊 System Requirements
+
+- **Node.js**: 18.0.0 or higher
+- **Memory**: 2GB RAM minimum
+- **Storage**: 1GB free space
+- **Network**: Internet connection for AI APIs
+
+## 🔧 Development
+
+### Available Scripts
+```bash
+npm start          # Start production server
+npm run dev        # Start development server
+npm run setup      # Install dependencies & setup database
+npm test           # Run system tests
+npm run migrate    # Run database migrations
+npm run deploy     # Deploy to Railway
+```
+
+### Adding New Features
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open Pull Request
+
+## 📝 API Documentation
+
+### Health Check
+```bash
+GET /api/health
+```
+
+### AI Chat
+```bash
+POST /api/ai/chat
+{
+  "message": "Create a header for my restaurant",
+  "provider": "openai",
+  "context": "restaurant website",
+  "businessType": "restaurant"
+}
+```
+
+### Design Generation
+```bash
+POST /api/ai/design
+{
+  "businessType": "restaurant",
+  "colorPreference": "warm",
+  "style": "modern"
+}
+```
+
+### Website Management
+```bash
+GET /api/websites           # Get all websites
+POST /api/websites          # Create new website
+PUT /api/websites/:id       # Update website
+DELETE /api/websites/:id    # Delete website
+```
+
+## 🔒 Security
+
+- JWT authentication
+- Rate limiting
+- Input validation
+- SQL injection protection
+- XSS protection
+- CORS configuration
+- Helmet security headers
+
+## 📈 Performance
+
+- Database query optimization
+- Image compression
+- CSS/JS minification
+- CDN integration
+- Caching strategies
+- Real-time auto-save
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Port 3000 already in use:**
+```bash
+lsof -ti:3000 | xargs kill -9
+```
+
+**Database connection failed:**
+```bash
+# Check DATABASE_URL in .env
+# Run setup again
+npm run setup
+```
+
+**AI API not working:**
+```bash
+# Verify API keys are correct
+# Check account credits
+# Test with curl:
+curl -X POST http://localhost:3000/api/ai/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message":"test","provider":"openai"}'
+```
+
+### Getting Help
+1. Check the [Issues](https://github.com/your-username/webmaster-pro/issues) page
+2. Run system tests: `npm test`
+3. Check logs in `backend/logs/`
+4. Open new issue with error details
+
+## 🤝 Contributing
+
+We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development Setup
+1. Fork the repository
+2. Clone your fork
+3. Install dependencies: `npm run setup`
+4. Create feature branch
+5. Make changes
+6. Run tests: `npm test`
+7. Submit Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- OpenAI for GPT-4 API
+- Anthropic for Claude API
+- Railway for database hosting
+- Netlify for frontend hosting
+- All contributors and testers
+
 ---
 
-## 📈 **מדדי ביצועים**
+**Made with ❤️ by the WebMaster Pro Team**
 
-### ⚡ **מהירות:**
-- **זמן טעינה:** < 2 שניות
-- **First Paint:** < 1 שנייה
-- **Time to Interactive:** < 3 שניות
-- **Lighthouse Score:** 90+
-
-### 📊 **אופטימיזציה:**
-- **תמונות:** דחיסה אוטומטית עם Sharp
-- **CSS/JS:** מינימיזציה בפרודקשן
-- **Caching:** Headers מתקדמים
-- **CDN:** תמיכה מלאה
-
----
-
-## 🤝 **תרומה לפרויקט**
-
-### 🌟 **איך לתרום:**
-
-1. **Fork הפרויקט**
-2. **צור branch חדש:** `git checkout -b feature/amazing-feature`
-3. **Commit השינויים:** `git commit -m 'Add amazing feature'`
-4. **Push ל-branch:** `git push origin feature/amazing-feature`
-5. **פתח Pull Request**
-
-### 📋 **סטנדרטים:**
-- **Code Style:** ESLint + Prettier
-- **Testing:** Jest + Supertest
-- **Documentation:** JSDoc
-- **Commits:** Conventional Commits
-
----
-
-## 📄 **רישיון**
-
-הפרויקט מופץ תחת רישיון MIT. ראה `LICENSE` לפרטים נוספים.
-
----
-
-## 📞 **יצירת קשר**
-
-- **אתר:** https://webmaster-pro.com
-- **מייל:** info@webmaster-pro.com
-- **Discord:** [WebMaster Pro Community](#)
-- **YouTube:** [WebMaster Pro Tutorials](#)
-- **GitHub:** [webmaster-pro](https://github.com/webmaster-pro)
-
----
-
-## 🙏 **תודות**
-
-תודה מיוחדת ל:
-- **Claude AI** - על הכוח הטכנולוגי
-- **Supabase** - על מסד הנתונים המעולה
-- **Open Source Community** - על כל הספריות המדהימות
-
----
-
-<div align="center">
-
-### 🚀 **מוכן להתחיל?**
-
-[![Start Now](https://img.shields.io/badge/התחל%20עכשיו-4f46e5?style=for-the-badge&logo=rocket)](http://localhost:3000/editor.html)
-[![Documentation](https://img.shields.io/badge/תיעוד-10b981?style=for-the-badge&logo=book)](docs/)
-[![Support](https://img.shields.io/badge/תמיכה-f59e0b?style=for-the-badge&logo=help-circle)](mailto:support@webmaster-pro.com)
-
-**⭐ אם הפרויקט עזר לך, אל תשכח לתת כוכב ב-GitHub!**
-
-</div>
-
----
-
-*נבנה עם ❤️ על ידי WebMaster Pro Team*
+For more information, visit our [website](https://webmaster-pro.co.il) or contact us at [hello@webmaster-pro.co.il](mailto:hello@webmaster-pro.co.il).
