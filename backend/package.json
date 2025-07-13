@@ -11,24 +11,16 @@
   "dependencies": {
     "express": "^4.18.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "axios": "^1.6.0",
-    "openai": "^4.20.1",
-    "@google/generative-ai": "^0.2.1"
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
   "engines": {
-    "node": "18.x"
+    "node": ">=18.0.0"
   },
   "keywords": [
-    "ai",
-    "openai",
-    "claude",
-    "gemini",
-    "dalle",
-    "website-builder"
+    "ai", "website-builder", "backend"
   ],
   "author": "WebMaster Pro",
   "license": "MIT"
