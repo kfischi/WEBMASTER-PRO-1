@@ -1,1 +1,18 @@
+[build]
+builder = "nixpacks"
 
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[environments.production]
+variables = { NODE_ENV = "production" }
+
+# Railway will automatically set PORT
+# Railway will automatically set DATABASE_URL if PostgreSQL is added
+
+[build.env]
+# Build-time environment variables if needed
