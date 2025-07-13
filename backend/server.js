@@ -1,133 +1,209 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+// ===================================
+// WebMaster Pro Simple Server - Works Immediately
+// ===================================
+
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// מידע על המערכת
-console.log("🚀 WebMaster Pro Multi-AI Engine Starting...");
-console.log("🧠 Available Engines: Claude, GPT-4, Gemini, DALL-E");
+// Basic middleware
+app.use(cors());
+app.use(express.json());
 
-// CORS - מאפשר גישה מהפרונט אנד
-app.use(cors({
-  origin: [
-    "https://webmaster-pro.netlify.app",
-    "https://kfischi.github.io",
-    "http://localhost:3000", 
-    "http://127.0.0.1:5500",
-    "http://localhost:5500"
-  ],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
-}));
-
-// Middleware
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
-
-// Logging middleware
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
-  next();
+// Health check
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        services: {
+            openai: process.env.OPENAI_API_KEY ? 'configured' : 'not_configured',
+            anthropic: process.env.ANTHROPIC_API_KEY ? 'configured' : 'not_configured'
+        }
+    });
 });
 
-// Routes
-app.use("/api/ai", require("./routes/ai"));
-
-// Health check - דף בית של ה-API
-app.get("/", (req, res) => {
-  res.json({ 
-    status: "🚀 WebMaster Pro Multi-AI Engine",
-    version: "1.0.0",
-    engines: {
-      "Claude 3.5 Sonnet": process.env.CLAUDE_API_KEY ? "✅ Ready" : "❌ Missing Key",
-      "GPT-4": process.env.OPENAI_API_KEY ? "✅ Ready" : "❌ Missing Key", 
-      "Gemini Pro": process.env.GEMINI_API_KEY ? "✅ Ready" : "❌ Missing Key",
-      "DALL-E 3": process.env.OPENAI_API_KEY ? "✅ Ready" : "❌ Missing Key"
-    },
-    endpoints: [
-      "POST /api/ai/multi - Multi-engine AI processing",
-      "POST /api/ai/claude - Claude only",
-      "POST /api/ai/gpt - GPT-4 only", 
-      "POST /api/ai/gemini - Gemini only",
-      "POST /api/ai/dalle - DALL-E image generation"
-    ],
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || "development"
-  });
-});
-
-// API Documentation
-app.get("/docs", (req, res) => {
-  res.json({
-    title: "WebMaster Pro Multi-AI API",
-    description: "Professional AI-powered website building API",
-    examples: {
-      "Multi-AI Request": {
-        method: "POST",
-        url: "/api/ai/multi",
-        body: {
-          prompt: "כתוב תוכן לעמוד אודות של קליניקה אסתטית",
-          engines: ["claude", "gpt", "gemini"],
-          context: "aesthetic-clinic-assistant"
+// Simple AI Chat endpoint
+app.post('/api/quick-chat', async (req, res) => {
+    try {
+        const { message, model = 'gpt' } = req.body;
+        
+        if (!message) {
+            return res.status(400).json({ error: 'Message is required' });
         }
-      },
-      "Image Generation": {
-        method: "POST", 
-        url: "/api/ai/dalle",
-        body: {
-          prompt: "Professional medical clinic interior, modern design",
-          context: "aesthetic-clinic-assistant"
+
+        let response = '';
+        
+        // Try OpenAI
+        if (model === 'gpt' && process.env.OPENAI_API_KEY) {
+            try {
+                const { OpenAI } = require('openai');
+                const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+                
+                const completion = await openai.chat.completions.create({
+                    model: 'gpt-4',
+                    messages: [
+                        {
+                            role: 'system',
+                            content: 'You are a helpful AI assistant for website building. Respond in Hebrew when the user writes in Hebrew.'
+                        },
+                        {
+                            role: 'user',
+                            content: message
+                        }
+                    ],
+                    max_tokens: 1000,
+                    temperature: 0.7
+                });
+                
+                response = completion.choices[0].message.content;
+            } catch (openaiError) {
+                console.error('OpenAI Error:', openaiError.message);
+                throw new Error('OpenAI request failed');
+            }
         }
-      }
+        // Try Claude
+        else if (model === 'claude' && process.env.ANTHROPIC_API_KEY) {
+            try {
+                const Anthropic = require('@anthropic-ai/sdk');
+                const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+                
+                const result = await anthropic.messages.create({
+                    model: 'claude-3-sonnet-20240229',
+                    max_tokens: 1000,
+                    system: 'You are a helpful AI assistant for website building. Respond in Hebrew when the user writes in Hebrew.',
+                    messages: [
+                        {
+                            role: 'user',
+                            content: message
+                        }
+                    ]
+                });
+                
+                response = result.content[0].text;
+            } catch (claudeError) {
+                console.error('Claude Error:', claudeError.message);
+                throw new Error('Claude request failed');
+            }
+        }
+        else {
+            // Fallback response if no AI is available
+            response = `🤖 Multi-AI Assistant מגיב:\n\nקיבלתי את ההודעה: "${message}"\n\nכרגע אני עובד במצב דמו. לחיבור מלא לAI, יש לוודא שמפתחות ה-API מוגדרים נכון ב-Railway.\n\n✅ שרת פעיל ומוכן לקבלת בקשות\n🔧 זמין לעריכת אתרים ושיפורים\n🎯 מוכן לעבודה עם Multi-AI Engine`;
+        }
+
+        res.json({
+            success: true,
+            response,
+            model: model,
+            timestamp: new Date().toISOString()
+        });
+
+    } catch (error) {
+        console.error('API Error:', error.message);
+        res.status(500).json({ 
+            success: false, 
+            error: error.message,
+            fallback_response: `🔧 הגעתה בקשה נתקלה בבעיה טכנית, אבל השרת פועל!\n\nההודעה שלך: "${req.body.message}"\n\nהשרת WebMaster Pro פעיל ומוכן. יתכן שמפתחות ה-AI זקוקים להגדרה או שיש בעיה זמנית ברשת.`
+        });
     }
-  });
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error("❌ Server Error:", err);
-  res.status(500).json({ 
-    error: 'Internal server error',
-    message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
-  });
+// Simple test endpoints
+app.post('/api/test/openai', async (req, res) => {
+    try {
+        if (!process.env.OPENAI_API_KEY) {
+            return res.json({ 
+                success: false, 
+                message: 'OpenAI API key not configured',
+                configured: false 
+            });
+        }
+
+        const { OpenAI } = require('openai');
+        const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+        
+        const completion = await openai.chat.completions.create({
+            model: 'gpt-4',
+            messages: [{ role: 'user', content: 'Say hello briefly' }],
+            max_tokens: 50
+        });
+
+        res.json({
+            success: true,
+            message: 'OpenAI is working perfectly',
+            response: completion.choices[0].message.content,
+            configured: true
+        });
+    } catch (error) {
+        res.json({ 
+            success: false, 
+            message: 'OpenAI test failed',
+            error: error.message,
+            configured: false
+        });
+    }
+});
+
+app.post('/api/test/claude', async (req, res) => {
+    try {
+        if (!process.env.ANTHROPIC_API_KEY) {
+            return res.json({ 
+                success: false, 
+                message: 'Claude API key not configured',
+                configured: false 
+            });
+        }
+
+        const Anthropic = require('@anthropic-ai/sdk');
+        const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+        
+        const message = await anthropic.messages.create({
+            model: 'claude-3-sonnet-20240229',
+            max_tokens: 50,
+            messages: [{ role: 'user', content: 'Say hello briefly' }]
+        });
+
+        res.json({
+            success: true,
+            message: 'Claude is working perfectly',
+            response: message.content[0].text,
+            configured: true
+        });
+    } catch (error) {
+        res.json({ 
+            success: false, 
+            message: 'Claude test failed',
+            error: error.message,
+            configured: false
+        });
+    }
 });
 
 // 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({
-    error: 'Endpoint not found',
-    message: `The endpoint ${req.method} ${req.originalUrl} does not exist`,
-    availableEndpoints: [
-      'GET /',
-      'GET /docs', 
-      'POST /api/ai/multi',
-      'POST /api/ai/claude',
-      'POST /api/ai/gpt',
-      'POST /api/ai/gemini',
-      'POST /api/ai/dalle'
-    ]
-  });
+app.use((req, res) => {
+    res.status(404).json({ error: 'Endpoint not found' });
 });
 
 // Start server
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📡 Health check: http://localhost:${PORT}/`);
-  console.log(`📚 API docs: http://localhost:${PORT}/docs`);
-  console.log(`🔗 Multi-AI endpoint: http://localhost:${PORT}/api/ai/multi`);
-  
-  // Check API keys on startup
-  const keys = {
-    OpenAI: !!process.env.OPENAI_API_KEY,
-    Claude: !!process.env.CLAUDE_API_KEY,
-    Gemini: !!process.env.GEMINI_API_KEY
-  };
-  
-  console.log("🔑 API Keys Status:", keys);
-  
-  if (!keys.OpenAI && !keys.Claude && !keys.Gemini) {
-    console.warn("⚠️ Warning: No AI API keys found! Please check your .env file");
-  }
+    console.log(`🚀 WebMaster Pro Backend running on port ${PORT}`);
+    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`📊 Health check: http://localhost:${PORT}/health`);
+    
+    // AI status
+    console.log(`🤖 AI Status:`);
+    console.log(`   OpenAI: ${process.env.OPENAI_API_KEY ? '✅ Configured' : '❌ Missing'}`);
+    console.log(`   Claude: ${process.env.ANTHROPIC_API_KEY ? '✅ Configured' : '❌ Missing'}`);
+    
+    console.log(`\n🎯 Available endpoints:`);
+    console.log(`   GET  /health`);
+    console.log(`   POST /api/quick-chat`);
+    console.log(`   POST /api/test/openai`);
+    console.log(`   POST /api/test/claude`);
+    
+    console.log(`\n✨ WebMaster Pro Multi-AI Ready!`);
 });
+
+module.exports = app;
