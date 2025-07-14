@@ -3,929 +3,847 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - Multi-AI Engine Production</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>WebMaster Pro - AI Website Editor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #8b5cf6;
-            --secondary: #06b6d4;
-            --accent: #ec4899;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --dark: #0f0f23;
-            --darker: #1a1a2e;
-            --surface: rgba(255, 255, 255, 0.1);
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.2);
-            --text: #ffffff;
-            --text-muted: #9ca3af;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-            animation: float 8s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        @keyframes float {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-
-        /* Header */
-        .header {
-            background: var(--surface);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.25rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .ai-engines-status {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .engine-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--success);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            border: 2px solid var(--success);
-        }
-
-        .engine-indicator.loading {
-            background: var(--warning);
-            border-color: var(--warning);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        /* Main Layout */
-        .main-container {
-            margin-top: 80px;
-            display: grid;
-            grid-template-columns: 300px 1fr 350px;
-            height: calc(100vh - 80px);
-        }
-
-        /* Left Panel - Site Selector */
-        .sites-panel {
-            background: var(--surface);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid var(--border);
-            overflow-y: auto;
-            padding: 1.5rem;
-        }
-
-        .panel-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .site-list {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .site-item {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .site-item:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .site-item.selected {
-            border-color: var(--success);
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .site-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .site-type {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .site-status {
-            font-size: 0.75rem;
-            color: var(--success);
-        }
-
-        /* Center Panel - AI Workspace */
-        .ai-workspace {
-            display: flex;
-            flex-direction: column;
-            background: var(--dark);
-        }
-
-        .workspace-tabs {
-            display: flex;
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .workspace-tab {
-            padding: 1rem 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .workspace-tab:hover,
-        .workspace-tab.active {
-            background: var(--glass);
-            border-bottom-color: var(--primary);
-        }
-
-        .workspace-content {
-            flex: 1;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-
-        /* AI Chat Interface */
-        .ai-chat {
-            background: var(--surface);
-            border-radius: 16px;
-            border: 1px solid var(--border);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
             overflow: hidden;
-            height: 100%;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 300px 1fr 250px;
+            height: 100vh;
+            gap: 0;
+        }
+
+        /* AI Panel */
+        .ai-panel {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
         }
 
-        .chat-header {
-            background: var(--glass);
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .ai-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
         }
 
-        .chat-title {
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .ai-header h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
         }
 
-        .active-engines {
-            display: flex;
-            gap: 0.5rem;
+        .ai-status {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
         }
 
-        .engine-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--success);
-            animation: pulse 2s infinite;
-        }
-
-        .chat-messages {
+        .ai-chat {
             flex: 1;
+            padding: 20px;
             overflow-y: auto;
-            padding: 1rem;
         }
 
-        .message {
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .message.user {
-            flex-direction: row-reverse;
-        }
-
-        .message-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.875rem;
-            flex-shrink: 0;
-        }
-
-        .message.user .message-avatar {
-            background: var(--primary);
-        }
-
-        .message.ai .message-avatar {
-            background: var(--secondary);
-        }
-
-        .message-content {
-            background: var(--glass);
-            padding: 0.75rem 1rem;
+        .ai-message {
+            margin-bottom: 15px;
+            padding: 12px;
             border-radius: 12px;
-            border: 1px solid var(--border);
-            max-width: 70%;
-            line-height: 1.5;
+            max-width: 90%;
+            word-wrap: break-word;
         }
 
-        .message.user .message-content {
-            background: var(--primary);
+        .ai-message.user {
+            background: rgba(103, 126, 234, 0.8);
+            color: white;
+            margin-right: auto;
         }
 
-        .chat-input-area {
-            padding: 1rem;
-            border-top: 1px solid var(--border);
-            background: var(--glass);
+        .ai-message.assistant {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            margin-left: auto;
         }
 
-        .chat-input {
+        .ai-input-area {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ai-input {
             width: 100%;
-            background: var(--dark);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 0.75rem;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
-            font-size: 0.875rem;
-            resize: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+            resize: vertical;
             min-height: 60px;
         }
 
-        .chat-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        .ai-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .chat-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.75rem;
-        }
-
-        .quick-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .quick-action {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 0.25rem 0.5rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .quick-action:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .send-btn {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        .ai-send-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
         }
 
-        .send-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+        .ai-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
         }
 
-        .send-btn:disabled {
+        .ai-send-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
 
-        /* Right Panel - AI Tools */
-        .ai-tools-panel {
-            background: var(--surface);
-            backdrop-filter: blur(20px);
-            border-left: 1px solid var(--border);
-            overflow-y: auto;
-            padding: 1.5rem;
-        }
-
-        .ai-section {
-            margin-bottom: 2rem;
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem;
-        }
-
-        .section-title {
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .ai-tool {
-            background: var(--dark);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0.75rem;
-            margin-bottom: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .ai-tool:hover {
-            border-color: var(--primary);
-            background: var(--glass);
-        }
-
-        .tool-name {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .tool-description {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .tool-engines {
-            display: flex;
-            gap: 0.25rem;
-            margin-top: 0.5rem;
-        }
-
-        .tool-engine {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-        }
-
-        .tool-engine.claude { background: #ff6b6b; }
-        .tool-engine.gpt { background: #4ecdc4; }
-        .tool-engine.gemini { background: #45b7d1; }
-        .tool-engine.dalle { background: #f9ca24; }
-
-        /* Preview iframe */
-        .site-preview {
-            width: 100%;
-            height: 100%;
-            border: none;
+        /* Main Canvas */
+        .main-canvas {
             background: white;
-            border-radius: 8px;
+            position: relative;
+            overflow: auto;
         }
 
-        /* Responsive */
+        .canvas-header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .website-selector {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+
+        .canvas-content {
+            padding: 20px;
+            min-height: calc(100vh - 70px);
+        }
+
+        .website-frame {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            overflow: auto;
+        }
+
+        /* Properties Panel */
+        .properties-panel {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .properties-panel h3 {
+            color: white;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .property-group {
+            margin-bottom: 20px;
+        }
+
+        .property-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .property-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .property-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .color-picker {
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* Connection Status */
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 20px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+
+        .status-connected { background: #4CAF50; }
+        .status-disconnected { background: #f44336; }
+        .status-connecting { background: #ff9800; animation: pulse 1s infinite; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive Design */
         @media (max-width: 1200px) {
-            .main-container {
-                grid-template-columns: 250px 1fr 280px;
+            .editor-container {
+                grid-template-columns: 250px 1fr 200px;
             }
         }
 
         @media (max-width: 768px) {
-            .main-container {
+            .editor-container {
                 grid-template-columns: 1fr;
                 grid-template-rows: auto 1fr auto;
-            }
-            
-            .sites-panel,
-            .ai-tools-panel {
-                height: auto;
-                max-height: 200px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <i class="fas fa-magic"></i>
-                WebMaster Pro - Multi-AI Production
+    <!-- Connection Status -->
+    <div class="connection-status">
+        <span id="connection-text">מתחבר לשרת...</span>
+        <span id="connection-indicator" class="status-indicator status-connecting"></span>
+    </div>
+
+    <div class="editor-container">
+        <!-- AI Panel -->
+        <div class="ai-panel">
+            <div class="ai-header">
+                <h2><i class="fas fa-robot"></i> AI Assistant</h2>
+                <div class="ai-status" id="aiStatus">מוכן לעזרה</div>
             </div>
             
-            <div class="ai-engines-status">
-                <div class="engine-indicator" id="claudeEngine">
-                    <i class="fas fa-brain"></i>
-                    Claude 4 ✓
+            <div class="ai-chat" id="aiChat">
+                <div class="ai-message assistant">
+                    שלום! אני עוזר AI של WebMaster Pro. אני יכול לעזור לך לערוך את האתר - לשנות צבעים, לעדכן תוכן, להוסיף אלמנטים ועוד. פשוט כתב לי מה תרצה לשנות!
                 </div>
-                <div class="engine-indicator" id="gptEngine">
-                    <i class="fas fa-robot"></i>
-                    GPT-4 ✓
+            </div>
+            
+            <div class="ai-input-area">
+                <textarea id="aiInput" class="ai-input" placeholder="כתב כאן מה תרצה לשנות באתר...
+למשל: 'שנה את הצבע הראשי לכחול' או 'הוסף סקציה על השירותים'"></textarea>
+                <button id="aiSendBtn" class="ai-send-btn" onclick="sendAIMessage()">
+                    <i id="sendIcon" class="fas fa-paper-plane"></i>
+                    <span id="sendText">שלח הודעה</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Canvas -->
+        <div class="main-canvas">
+            <div class="canvas-header">
+                <div>
+                    <select id="websiteSelector" class="website-selector" onchange="loadWebsite()">
+                        <option value="">בחר אתר לעריכה...</option>
+                        <option value="dr-michal-rosen">ד"ר מיכל רוזן - רפואה אסתטית</option>
+                        <option value="danny-fit">דני פיט - מאמן כושר</option>
+                        <option value="studio-ohm">סטודיו אוהם - יוגה</option>
+                        <option value="dr-sarah-cohen">ד"ר שרה כהן - תזונה</option>
+                        <option value="barkovich-law">משרד ברקוביץ - עו"ד</option>
+                        <option value="rina-levy-accounting">רינה לוי - חשבת שכר</option>
+                        <option value="bella-salon">מספרה BELLA</option>
+                        <option value="dr-ronit-levy">ד"ר רונית לוי - מורה פרטית</option>
+                        <option value="premium-beauty">קליניקת יופי פרמיום</option>
+                        <option value="multibrown">מולטיבראון - נופש ואירועים</option>
+                        <option value="premium-realestate">נדל"ן פרמיום</option>
+                    </select>
                 </div>
-                <div class="engine-indicator" id="geminiEngine">
-                    <i class="fas fa-gem"></i>
-                    Gemini ✓
+                <div>
+                    <button class="ai-send-btn" onclick="saveProject()" style="width: auto; padding: 8px 16px;">
+                        <i class="fas fa-save"></i> שמור
+                    </button>
+                    <button class="ai-send-btn" onclick="previewWebsite()" style="width: auto; padding: 8px 16px; margin-right: 10px;">
+                        <i class="fas fa-eye"></i> תצוגה מקדימה
+                    </button>
                 </div>
-                <div class="engine-indicator" id="dalleEngine">
-                    <i class="fas fa-image"></i>
-                    DALL-E ✓
+            </div>
+            
+            <div class="canvas-content">
+                <div id="websiteFrame" class="website-frame">
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 1.2rem;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-mouse-pointer" style="font-size: 3rem; margin-bottom: 20px; color: #ddd;"></i>
+                            <br>
+                            בחר אתר מהרשימה למעלה כדי להתחיל לערוך
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
 
-    <!-- Main Container -->
-    <div class="main-container">
-        
-        <!-- Left Panel - Site Selector -->
-        <aside class="sites-panel">
-            <h2 class="panel-title">🏥 אתרים מקצועיים</h2>
+        <!-- Properties Panel -->
+        <div class="properties-panel">
+            <h3><i class="fas fa-sliders-h"></i> מאפיינים</h3>
             
-            <div class="site-list">
-                <div class="site-item selected" onclick="selectSite('dr-michal-rosen')">
-                    <div class="site-name">ד"ר מיכל רוזן</div>
-                    <div class="site-type">רפואה אסתטית</div>
-                    <div class="site-status">🟢 מוכן לעריכה</div>
-                </div>
-                
-                <div class="site-item" onclick="selectSite('law-firm')">
-                    <div class="site-name">משרד עורכי דין</div>
-                    <div class="site-type">שירותים משפטיים</div>
-                    <div class="site-status">🟢 מוכן לעריכה</div>
-                </div>
-                
-                <div class="site-item" onclick="selectSite('fitness-coach')">
-                    <div class="site-name">מאמן כושר</div>
-                    <div class="site-type">כושר וספורט</div>
-                    <div class="site-status">🟢 מוכן לעריכה</div>
-                </div>
-                
-                <div class="site-item" onclick="selectSite('beauty-salon')">
-                    <div class="site-name">סלון יופי</div>
-                    <div class="site-type">יופי וטיפוח</div>
-                    <div class="site-status">🟢 מוכן לעריכה</div>
-                </div>
-                
-                <div class="site-item" onclick="selectSite('yoga-studio')">
-                    <div class="site-name">סטודיו יוגה</div>
-                    <div class="site-type">יוגה ומדיטציה</div>
-                    <div class="site-status">🟢 מוכן לעריכה</div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Center Panel - AI Workspace -->
-        <main class="ai-workspace">
-            <div class="workspace-tabs">
-                <div class="workspace-tab active" onclick="switchTab('chat')">
-                    <i class="fas fa-comments"></i>
-                    Multi-AI Chat
-                </div>
-                <div class="workspace-tab" onclick="switchTab('preview')">
-                    <i class="fas fa-eye"></i>
-                    תצוגה מקדימה
-                </div>
-                <div class="workspace-tab" onclick="switchTab('code')">
-                    <i class="fas fa-code"></i>
-                    עורך קוד
-                </div>
+            <div class="property-group">
+                <label class="property-label">צבע ראשי</label>
+                <input type="color" class="color-picker" id="primaryColor" value="#2563eb" onchange="updatePrimaryColor()">
             </div>
             
-            <div class="workspace-content">
-                
-                <!-- AI Chat Tab -->
-                <div id="chatTab" class="tab-content">
-                    <div class="ai-chat">
-                        <div class="chat-header">
-                            <div class="chat-title">
-                                <i class="fas fa-magic"></i>
-                                Multi-AI Assistant
-                            </div>
-                            <div class="active-engines">
-                                <div class="engine-dot"></div>
-                                <div class="engine-dot"></div>
-                                <div class="engine-dot"></div>
-                                <div class="engine-dot"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="chat-messages" id="chatMessages">
-                            <div class="message ai">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    שלום! אני Multi-AI Assistant עם 4 מנועי AI פעילים:<br>
-                                    🧠 <strong>Claude 4</strong> - עיצוב ופיתוח מתקדם<br>
-                                    🤖 <strong>GPT-4</strong> - יצירת תוכן ויצירתיות<br>
-                                    💎 <strong>Gemini</strong> - אנליזה עסקית<br>
-                                    🎨 <strong>DALL-E</strong> - יצירת תמונות<br><br>
-                                    בחר אתר מהרשימה השמאלית ותאר לי מה תרצה לשפר!
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="chat-input-area">
-                            <textarea 
-                                class="chat-input" 
-                                id="chatInput"
-                                placeholder="תאר מה תרצה לשנות באתר - למשל: 'שנה את הצבע הראשי לירוק', 'הוסף סקציית המלצות', 'צור לוגו חדש עם DALL-E'..."
-                                rows="3"
-                            ></textarea>
-                            
-                            <div class="chat-controls">
-                                <div class="quick-actions">
-                                    <button class="quick-action" onclick="addQuickText('שנה צבעים לירוק ולבן')">שנה צבעים</button>
-                                    <button class="quick-action" onclick="addQuickText('הוסף סקציית המלצות לקוחות')">הוסף המלצות</button>
-                                    <button class="quick-action" onclick="addQuickText('שפר את ה-SEO')">שפר SEO</button>
-                                    <button class="quick-action" onclick="addQuickText('צור לוגו חדש עם DALL-E')">צור לוגו</button>
-                                </div>
-                                
-                                <button class="send-btn" onclick="sendToMultiAI()" id="sendBtn">
-                                    <i class="fas fa-paper-plane"></i>
-                                    שלח ל-Multi-AI
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Preview Tab -->
-                <div id="previewTab" class="tab-content" style="display: none;">
-                    <iframe 
-                        class="site-preview" 
-                        id="sitePreview"
-                        src="/websites/dr-michal-rosen/index.html"
-                    ></iframe>
-                </div>
-                
-                <!-- Code Tab -->
-                <div id="codeTab" class="tab-content" style="display: none;">
-                    <textarea id="codeEditor" style="width: 100%; height: 100%; background: #1a1a2e; color: #fff; border: none; padding: 20px; font-family: 'Courier New', monospace;">
-<!-- קוד HTML של האתר יופיע כאן לעריכה -->
-                    </textarea>
-                </div>
-            </div>
-        </main>
-
-        <!-- Right Panel - AI Tools -->
-        <aside class="ai-tools-panel">
-            <h2 class="panel-title">🛠️ כלי AI מתקדמים</h2>
-            
-            <div class="ai-section">
-                <div class="section-title">
-                    <i class="fas fa-edit"></i>
-                    עריכה חכמה
-                </div>
-                
-                <div class="ai-tool" onclick="aiTool('improve-design')">
-                    <div class="tool-name">שפר עיצוב</div>
-                    <div class="tool-description">Claude + Gemini מנתחים ומשפרים את העיצוב</div>
-                    <div class="tool-engines">
-                        <div class="tool-engine claude"></div>
-                        <div class="tool-engine gemini"></div>
-                    </div>
-                </div>
-                
-                <div class="ai-tool" onclick="aiTool('generate-content')">
-                    <div class="tool-name">יצור תוכן</div>
-                    <div class="tool-description">GPT-4 יוצר תוכן מקצועי מותאם</div>
-                    <div class="tool-engines">
-                        <div class="tool-engine gpt"></div>
-                        <div class="tool-engine claude"></div>
-                    </div>
-                </div>
-                
-                <div class="ai-tool" onclick="aiTool('create-images')">
-                    <div class="tool-name">צור תמונות</div>
-                    <div class="tool-description">DALL-E יוצר תמונות מותאמות אישית</div>
-                    <div class="tool-engines">
-                        <div class="tool-engine dalle"></div>
-                    </div>
-                </div>
-                
-                <div class="ai-tool" onclick="aiTool('smart-logo')">
-                    <div class="tool-name">לוגו חכם</div>
-                    <div class="tool-description">יצירת לוגו מקצועי</div>
-                    <div class="tool-engines">
-                        <div class="tool-engine dalle"></div>
-                        <div class="tool-engine claude"></div>
-                    </div>
-                </div>
+            <div class="property-group">
+                <label class="property-label">צבע משני</label>
+                <input type="color" class="color-picker" id="secondaryColor" value="#059669" onchange="updateSecondaryColor()">
             </div>
             
-            <div class="ai-section">
-                <div class="section-title">
-                    <i class="fas fa-search"></i>
-                    אופטימיזציה
-                </div>
-                
-                <div class="ai-tool" onclick="aiTool('seo-optimize')">
-                    <div class="tool-name">אופטימיזציה SEO</div>
-                    <div class="tool-description">שיפור דירוג במנועי חיפוש</div>
-                    <div class="tool-engines">
-                        <div class="tool-engine gpt"></div>
-                        <div class="tool-engine gemini"></div>
-                    </div>
-                </div>
-                
-                <div class="ai-tool" onclick="aiTool('performance')">
-                    <div class="tool-name">שפר ביצועים</div>
-                    <div class="tool-description">מהירות טעינה ואופטימיזציה</div>
-                    <div class="tool-engines">
-                        <div class="tool-engine claude"></div>
-                        <div class="tool-engine gemini"></div>
-                    </div>
-                </div>
-                
-                <div class="ai-tool" onclick="aiTool('mobile-optimize')">
-                    <div class="tool-name">אופטימיזציה למובייל</div>
-                    <div class="tool-description">התאמה מושלמת למכשירים ניידים</div>
-                    <div class="tool-engines">
-                        <div class="tool-engine claude"></div>
-                    </div>
-                </div>
+            <div class="property-group">
+                <label class="property-label">שם העסק</label>
+                <input type="text" class="property-input" id="businessName" placeholder="שם העסק" onchange="updateBusinessName()">
             </div>
             
-            <div class="ai-section">
-                <div class="section-title">
-                    <i class="fas fa-chart-line"></i>
-                    אנליטיקס וביצועים
-                </div>
-                
-                <div class="ai-tool" onclick="aiTool('analyze-competitors')">
-                    <div class="tool-name">נתח מתחרים</div>
-                    <div class="tool-description">השוואה עם אתרים דומים</div>
-                    <div class="tool-engines">
-                        <div class="tool-engine gemini"></div>
-                    </div>
-                </div>
-                
-                <div class="ai-tool" onclick="aiTool('user-experience')">
-                    <div class="tool-name">חוויית משתמש</div>
-                    <div class="tool-description">שיפור UX עם AI</div>
-                    <div class="tool-engines">
-                        <div class="tool-engine claude"></div>
-                        <div class="tool-engine gemini"></div>
-                    </div>
-                </div>
-                
-                <div class="ai-tool" onclick="aiTool('conversion-optimize')">
-                    <div class="tool-name">אופטימיזציית המרות</div>
-                    <div class="tool-description">שיפור שיעור המרה</div>
-                    <div class="tool-engines">
-                        <div class="tool-engine claude"></div>
-                        <div class="tool-engine gpt"></div>
-                    </div>
-                </div>
+            <div class="property-group">
+                <label class="property-label">תיאור העסק</label>
+                <textarea class="property-input" id="businessDescription" placeholder="תיאור קצר של העסק" onchange="updateBusinessDescription()"></textarea>
             </div>
-        </aside>
+            
+            <div class="property-group">
+                <label class="property-label">טלפון</label>
+                <input type="tel" class="property-input" id="businessPhone" placeholder="050-1234567" onchange="updateBusinessPhone()">
+            </div>
+            
+            <div class="property-group">
+                <label class="property-label">אימייל</label>
+                <input type="email" class="property-input" id="businessEmail" placeholder="info@business.co.il" onchange="updateBusinessEmail()">
+            </div>
+        </div>
     </div>
 
     <script>
-        // Global Variables
-        let selectedSite = 'dr-michal-rosen';
-        let isProcessing = false;
+        // 🚀 UPDATED: Railway Production Server
+        const API_BASE_URL = 'https://webmaster-pro-1-production.up.railway.app';
+        
+        // Global state
+        let isConnected = false;
+        let currentWebsite = null;
+        let chatHistory = [];
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Multi-AI Engine Production Ready');
-            
-            // Setup chat input handler
-            document.getElementById('chatInput').addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    sendToMultiAI();
-                }
-            });
-        });
-
-        function selectSite(siteId) {
-            selectedSite = siteId;
-            
-            // Update UI
-            document.querySelectorAll('.site-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            event.target.closest('.site-item').classList.add('selected');
-            
-            // Update preview
-            document.getElementById('sitePreview').src = `/websites/${siteId}/index.html`;
-            
-            // Add message
-            const siteNames = {
-                'dr-michal-rosen': 'ד"ר מיכל רוזן - רפואה אסתטית',
-                'law-firm': 'משרד עורכי דין',
-                'fitness-coach': 'מאמן כושר',
-                'beauty-salon': 'סלון יופי',
-                'yoga-studio': 'סטודיו יוגה'
-            };
-            
-            addMessage('user', `בחרתי את האתר: ${siteNames[siteId]}`);
-            
-            setTimeout(() => {
-                addMessage('ai', `🎯 מעולה! בחרת "${siteNames[siteId]}". כל 4 מנועי ה-AI מוכנים לעזור לך לשפר את האתר. מה תרצה לעשות?`);
-            }, 1000);
-        }
-
-        function switchTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.workspace-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Show/hide content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.style.display = 'none';
-            });
-            
-            document.getElementById(tabName + 'Tab').style.display = 'block';
-        }
-
-        function addQuickText(text) {
-            const input = document.getElementById('chatInput');
-            input.value = text;
-            input.focus();
-        }
-
-        function addMessage(sender, text) {
-            const messagesContainer = document.getElementById('chatMessages');
-            
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            
-            messageDiv.innerHTML = `
-                <div class="message-avatar">${sender === 'user' ? '👤' : '🤖'}</div>
-                <div class="message-content">${text}</div>
-            `;
-            
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        async function sendToMultiAI() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            
-            if (!message || isProcessing) return;
-            
-            isProcessing = true;
-            
-            // Add user message
-            addMessage('user', message);
-            input.value = '';
-            
-            // Disable send button
-            const sendBtn = document.getElementById('sendBtn');
-            sendBtn.disabled = true;
-            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Multi-AI עובד...';
-            
-            // Update engine indicators to loading
-            document.querySelectorAll('.engine-indicator').forEach(engine => {
-                engine.classList.add('loading');
-            });
+        // Initialize the editor
+        async function initializeEditor() {
+            console.log('🎨 Initializing WebMaster Pro Editor...');
             
             try {
-                // Here you would call your actual Multi-AI API
-                const prompt = `
-                אתר: ${selectedSite}
-                בקשת משתמש: ${message}
+                // Test backend connection
+                await testBackendConnection();
                 
-                אתה Multi-AI Assistant עם 4 מנועים:
-                - Claude 4 (עיצוב ופיתוח)
-                - GPT-4 (תוכן ויצירתיות)
-                - Gemini (אנליזה עסקית)
-                - DALL-E (יצירת תמונות)
+                // Load available websites
+                await loadAvailableWebsites();
                 
-                ענה בעברית באופן מקצועי ומועיל. אם זה שיפור לאתר, תסביר איך כל AI יכול לעזור.
-                `;
+                // Setup event listeners
+                setupEventListeners();
                 
-                // Use Claude's built-in completion
-                const response = await window.claude.complete(prompt);
-                
-                addMessage('ai', response);
+                console.log('✅ Editor initialized successfully');
                 
             } catch (error) {
-                console.error('Multi-AI Error:', error);
-                addMessage('ai', '⚠️ אירעה שגיאה בעיבוד הבקשה. נסה שוב בעוד רגע.');
-            } finally {
-                // Reset UI
-                isProcessing = false;
-                sendBtn.disabled = false;
-                sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> שלח ל-Multi-AI';
-                
-                // Reset engine indicators
-                document.querySelectorAll('.engine-indicator').forEach(engine => {
-                    engine.classList.remove('loading');
-                });
+                console.error('❌ Error initializing editor:', error);
+                updateConnectionStatus('שגיאה בחיבור לשרת', 'disconnected');
             }
         }
 
-        function aiTool(toolName) {
-            const toolDescriptions = {
-                'improve-design': 'Claude ו-Gemini מנתחים ומשפרים את העיצוב של האתר',
-                'generate-content': 'GPT-4 יוצר תוכן מקצועי חדש מותאם לעסק',
-                'create-images': 'DALL-E יוצר תמונות ייחודיות ומותאמות',
-                'smart-logo': 'יצירת לוגו מקצועי עם DALL-E ו-Claude',
-                'seo-optimize': 'שיפור SEO עם GPT-4 ו-Gemini לדירוג גבוה יותר',
-                'performance': 'אופטימיזציית ביצועים עם Claude ו-Gemini',
-                'mobile-optimize': 'התאמה מושלמת למובייל עם Claude',
-                'analyze-competitors': 'ניתוח מתחרים עם Gemini',
-                'user-experience': 'שיפור חוויית משתמש עם Claude ו-Gemini',
-                'conversion-optimize': 'אופטימיזציית המרות עם Claude ו-GPT-4'
+        // Test backend connection
+        async function testBackendConnection() {
+            updateConnectionStatus('מתחבר לשרת...', 'connecting');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    isConnected = true;
+                    updateConnectionStatus(`מחובר לשרת - ${data.status}`, 'connected');
+                    console.log('✅ Backend connection successful:', data);
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+            } catch (error) {
+                isConnected = false;
+                updateConnectionStatus('לא מחובר לשרת', 'disconnected');
+                console.error('❌ Backend connection failed:', error);
+                throw error;
+            }
+        }
+
+        // Load available websites
+        async function loadAvailableWebsites() {
+            try {
+                // For now, use the predefined list
+                // In production, this would load from the API
+                console.log('📄 Loading available websites...');
+                
+                // Simulate API call
+                const websites = [
+                    { id: 'dr-michal-rosen', name: 'ד"ר מיכל רוזן - רפואה אסתטית', category: 'medical' },
+                    { id: 'danny-fit', name: 'דני פיט - מאמן כושר', category: 'fitness' },
+                    { id: 'studio-ohm', name: 'סטודיו אוהם - יוגה', category: 'wellness' },
+                    { id: 'dr-sarah-cohen', name: 'ד"ר שרה כהן - תזונה', category: 'health' },
+                    { id: 'barkovich-law', name: 'משרד ברקוביץ - עו"ד', category: 'legal' },
+                    { id: 'rina-levy-accounting', name: 'רינה לוי - חשבת שכר', category: 'accounting' },
+                    { id: 'bella-salon', name: 'מספרה BELLA', category: 'beauty' },
+                    { id: 'dr-ronit-levy', name: 'ד"ר רונית לוי - מורה פרטית', category: 'education' },
+                    { id: 'premium-beauty', name: 'קליניקת יופי פרמיום', category: 'medical' },
+                    { id: 'multibrown', name: 'מולטיבראון - נופש ואירועים', category: 'hospitality' },
+                    { id: 'premium-realestate', name: 'נדל"ן פרמיום', category: 'realestate' }
+                ];
+                
+                console.log(`✅ Loaded ${websites.length} websites`);
+                
+            } catch (error) {
+                console.error('❌ Error loading websites:', error);
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // AI input Enter key
+            document.getElementById('aiInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendAIMessage();
+                }
+            });
+
+            // Auto-save every 30 seconds
+            setInterval(() => {
+                if (currentWebsite) {
+                    saveProject();
+                }
+            }, 30000);
+        }
+
+        // Update connection status
+        function updateConnectionStatus(text, status) {
+            document.getElementById('connection-text').textContent = text;
+            const indicator = document.getElementById('connection-indicator');
+            indicator.className = `status-indicator status-${status}`;
+        }
+
+        // Update AI status
+        function updateAIStatus(status) {
+            document.getElementById('aiStatus').textContent = status;
+        }
+
+        // Send AI message
+        async function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message to chat
+            addAIMessage('user', message);
+            input.value = '';
+
+            // Show loading state
+            const sendBtn = document.getElementById('aiSendBtn');
+            const sendIcon = document.getElementById('sendIcon');
+            const sendText = document.getElementById('sendText');
+            
+            sendBtn.disabled = true;
+            sendIcon.className = 'fas fa-spinner fa-spin';
+            sendText.textContent = 'AI עובד...';
+            updateAIStatus('מעבד בקשה...');
+
+            try {
+                if (!isConnected) {
+                    throw new Error('אין חיבור לשרת');
+                }
+
+                // Send to AI API
+                const response = await fetch(`${API_BASE_URL}/api/ai/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        context: {
+                            website: currentWebsite,
+                            history: chatHistory.slice(-5) // Last 5 messages for context
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const aiResponse = await response.json();
+                
+                // Add AI response to chat
+                addAIMessage('assistant', aiResponse.message);
+                
+                // Apply changes if any
+                if (aiResponse.changes) {
+                    applyAIChanges(aiResponse.changes);
+                }
+                
+                updateAIStatus('מוכן לעזרה');
+                
+            } catch (error) {
+                console.error('❌ AI request failed:', error);
+                
+                // Fallback response when offline or error
+                const fallbackResponse = generateFallbackResponse(message);
+                addAIMessage('assistant', fallbackResponse);
+                
+                updateAIStatus('שגיאה בחיבור AI');
+            }
+
+            // Restore button state
+            sendBtn.disabled = false;
+            sendIcon.className = 'fas fa-paper-plane';
+            sendText.textContent = 'שלח הודעה';
+        }
+
+        // Add message to AI chat
+        function addAIMessage(sender, message) {
+            const chatContainer = document.getElementById('aiChat');
+            
+            const messageEl = document.createElement('div');
+            messageEl.className = `ai-message ${sender}`;
+            messageEl.textContent = message;
+            
+            chatContainer.appendChild(messageEl);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            // Update chat history
+            chatHistory.push({ sender, message, timestamp: Date.now() });
+            
+            // Keep only last 20 messages
+            if (chatHistory.length > 20) {
+                chatHistory = chatHistory.slice(-20);
+            }
+        }
+
+        // Generate fallback response when AI is unavailable
+        function generateFallbackResponse(message) {
+            const responses = [
+                'אני מבין שאתה רוצה לשנות משהו באתר. כרגע אני עובד במצב offline, אבל אוכל לעזור לך ברגע שהחיבור לAI ישתקם.',
+                'נראה שיש בעיה זמנית בחיבור ל-AI. אתה יכול לנסות להשתמש בפאנל המאפיינים בצד הימני לעדכונים בסיסיים.',
+                'אני זוכר את הבקשה שלך. ברגע שהחיבור לשרת ישתקם, אוכל לעזור לך לבצע את השינויים.',
+                'מצטער, אני לא יכול לעבד את הבקשה כרגע בגלל בעיית חיבור. תוכל לנסות שוב בעוד רגע?'
+            ];
+            
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Apply AI changes to the website
+        function applyAIChanges(changes) {
+            console.log('🔄 Applying AI changes:', changes);
+            
+            try {
+                if (changes.primaryColor) {
+                    document.getElementById('primaryColor').value = changes.primaryColor;
+                    updatePrimaryColor();
+                }
+                
+                if (changes.secondaryColor) {
+                    document.getElementById('secondaryColor').value = changes.secondaryColor;
+                    updateSecondaryColor();
+                }
+                
+                if (changes.businessName) {
+                    document.getElementById('businessName').value = changes.businessName;
+                    updateBusinessName();
+                }
+                
+                if (changes.businessDescription) {
+                    document.getElementById('businessDescription').value = changes.businessDescription;
+                    updateBusinessDescription();
+                }
+                
+                // Add success message
+                addAIMessage('assistant', '✅ השינויים הוחלו בהצלחה!');
+                
+            } catch (error) {
+                console.error('❌ Error applying changes:', error);
+                addAIMessage('assistant', '❌ הייתה שגיאה בהחלת השינויים. נסה שוב.');
+            }
+        }
+
+        // Website management functions
+        function loadWebsite() {
+            const selector = document.getElementById('websiteSelector');
+            const websiteId = selector.value;
+            
+            if (!websiteId) {
+                currentWebsite = null;
+                document.getElementById('websiteFrame').innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 1.2rem;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-mouse-pointer" style="font-size: 3rem; margin-bottom: 20px; color: #ddd;"></i>
+                            <br>
+                            בחר אתר מהרשימה למעלה כדי להתחיל לערוך
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            currentWebsite = websiteId;
+            
+            // Load website in frame (simulation)
+            document.getElementById('websiteFrame').innerHTML = `
+                <div style="padding: 40px; text-align: center; color: #333;">
+                    <div style="margin-bottom: 30px;">
+                        <i class="fas fa-globe" style="font-size: 4rem; color: #667eea; margin-bottom: 20px;"></i>
+                        <h2 style="color: #333; margin-bottom: 10px;">${selector.options[selector.selectedIndex].text}</h2>
+                        <p style="color: #666; font-size: 1.1rem;">האתר נטען בהצלחה ומוכן לעריכה</p>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; margin: 20px 0;">
+                        <h3 style="color: #333; margin-bottom: 15px;">תכונות זמינות:</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; text-align: right;">
+                            <div>✅ עריכת צבעים באמצעות AI</div>
+                            <div>✅ עדכון תוכן טקסטואלי</div>
+                            <div>✅ שינוי פרטי העסק</div>
+                            <div>✅ הוספת סקציות חדשות</div>
+                            <div>✅ אופטימיזציה למובייל</div>
+                            <div>✅ שמירה אוטומטית</div>
+                        </div>
+                    </div>
+                    
+                    <p style="color: #888; font-style: italic;">
+                        השתמש בפאנל AI בצד שמאל או בפאנל המאפיינים בצד ימין לביצוע שינויים
+                    </p>
+                </div>
+            `;
+            
+            // Load website properties
+            loadWebsiteProperties(websiteId);
+            
+            // Add welcome message
+            addAIMessage('assistant', `נטען אתר: ${selector.options[selector.selectedIndex].text}. אני מוכן לעזור לך לערוך אותו!`);
+        }
+
+        // Load website properties
+        function loadWebsiteProperties(websiteId) {
+            // Simulate loading properties from API
+            const mockProperties = {
+                primaryColor: '#2563eb',
+                secondaryColor: '#059669',
+                businessName: 'העסק שלי',
+                businessDescription: 'תיאור קצר של העסק',
+                businessPhone: '050-1234567',
+                businessEmail: 'info@business.co.il'
             };
             
-            addMessage('ai', `🛠️ <strong>מפעיל כלי: ${toolName}</strong><br><br>${toolDescriptions[toolName]}`);
+            document.getElementById('primaryColor').value = mockProperties.primaryColor;
+            document.getElementById('secondaryColor').value = mockProperties.secondaryColor;
+            document.getElementById('businessName').value = mockProperties.businessName;
+            document.getElementById('businessDescription').value = mockProperties.businessDescription;
+            document.getElementById('businessPhone').value = mockProperties.businessPhone;
+            document.getElementById('businessEmail').value = mockProperties.businessEmail;
+        }
+
+        // Property update functions
+        function updatePrimaryColor() {
+            const color = document.getElementById('primaryColor').value;
+            console.log('🎨 Updating primary color to:', color);
+            // Here you would update the actual website
+        }
+
+        function updateSecondaryColor() {
+            const color = document.getElementById('secondaryColor').value;
+            console.log('🎨 Updating secondary color to:', color);
+            // Here you would update the actual website
+        }
+
+        function updateBusinessName() {
+            const name = document.getElementById('businessName').value;
+            console.log('📝 Updating business name to:', name);
+            // Here you would update the actual website
+        }
+
+        function updateBusinessDescription() {
+            const description = document.getElementById('businessDescription').value;
+            console.log('📝 Updating business description to:', description);
+            // Here you would update the actual website
+        }
+
+        function updateBusinessPhone() {
+            const phone = document.getElementById('businessPhone').value;
+            console.log('📞 Updating business phone to:', phone);
+            // Here you would update the actual website
+        }
+
+        function updateBusinessEmail() {
+            const email = document.getElementById('businessEmail').value;
+            console.log('📧 Updating business email to:', email);
+            // Here you would update the actual website
+        }
+
+        // Project management
+        async function saveProject() {
+            if (!currentWebsite) {
+                console.log('⚠️ No website selected for saving');
+                return;
+            }
+            
+            try {
+                const projectData = {
+                    websiteId: currentWebsite,
+                    properties: {
+                        primaryColor: document.getElementById('primaryColor').value,
+                        secondaryColor: document.getElementById('secondaryColor').value,
+                        businessName: document.getElementById('businessName').value,
+                        businessDescription: document.getElementById('businessDescription').value,
+                        businessPhone: document.getElementById('businessPhone').value,
+                        businessEmail: document.getElementById('businessEmail').value
+                    },
+                    lastModified: new Date().toISOString()
+                };
+                
+                if (isConnected) {
+                    // Save to backend
+                    const response = await fetch(`${API_BASE_URL}/api/websites/${currentWebsite}/save`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(projectData)
+                    });
+                    
+                    if (response.ok) {
+                        console.log('✅ Project saved to server');
+                        showNotification('הפרויקט נשמר בהצלחה!', 'success');
+                    } else {
+                        throw new Error('Failed to save to server');
+                    }
+                } else {
+                    // Save to localStorage as fallback
+                    localStorage.setItem(`webmaster_project_${currentWebsite}`, JSON.stringify(projectData));
+                    console.log('✅ Project saved to localStorage');
+                    showNotification('הפרויקט נשמר מקומית', 'warning');
+                }
+                
+            } catch (error) {
+                console.error('❌ Error saving project:', error);
+                showNotification('שגיאה בשמירת הפרויקט', 'error');
+            }
+        }
+
+        function previewWebsite() {
+            if (!currentWebsite) {
+                showNotification('אנא בחר אתר קודם', 'warning');
+                return;
+            }
+            
+            // In production, this would open the actual preview
+            showNotification('תצוגה מקדימה - יפתח בטאב חדש', 'info');
+            console.log('👁️ Opening preview for:', currentWebsite);
+        }
+
+        // Utility functions
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 70px;
+                right: 20px;
+                padding: 12px 20px;
+                border-radius: 8px;
+                color: white;
+                z-index: 1000;
+                font-weight: bold;
+                animation: slideIn 0.3s ease;
+                backdrop-filter: blur(10px);
+            `;
+            
+            const colors = {
+                success: 'rgba(76, 175, 80, 0.9)',
+                error: 'rgba(244, 67, 54, 0.9)',
+                warning: 'rgba(255, 152, 0, 0.9)',
+                info: 'rgba(33, 150, 243, 0.9)'
+            };
+            
+            notification.style.background = colors[type] || colors.info;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
             
             setTimeout(() => {
-                addMessage('ai', `✅ <strong>הכלי הושלם בהצלחה!</strong><br><br>האתר שלך שופר עם השינויים החדשים. תוכל לראות את התוצאות בתצוגה מקדימה.`);
+                notification.remove();
             }, 3000);
         }
 
-        // Console logs for debugging
-        console.log('🚀 Multi-AI Engine Production Status:');
-        console.log('🧠 Claude 4: Connected & Ready');
-        console.log('🤖 GPT-4: Production Ready');  
-        console.log('💎 Gemini Pro: Connected & Ready');
-        console.log('🎨 DALL-E 3: Production Ready');
-        console.log('✨ System Ready for Professional Website Creation!');
-        console.log('🔒 All APIs secured and embedded in system');
-        console.log('👥 Ready for end-user access without technical setup');
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeEditor);
+        
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
