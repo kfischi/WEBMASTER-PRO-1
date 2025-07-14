@@ -9,10 +9,37 @@ restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
 
 [environments.production]
-variables = { NODE_ENV = "production" }
+variables = { 
+  NODE_ENV = "production",
+  PORT = "$PORT"
+}
 
-# Railway will automatically set PORT
-# Railway will automatically set DATABASE_URL if PostgreSQL is added
+# Service configuration
+[[services]]
+name = "webmaster-pro-backend"
 
-[build.env]
-# Build-time environment variables if needed
+[services.build]
+builder = "nixpacks"
+
+[services.deploy]
+startCommand = "npm start"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+# Environment variables that need to be set in Railway dashboard
+# OPENAI_API_KEY=sk-your-openai-key-here
+# ANTHROPIC_API_KEY=sk-ant-your-anthropic-key-here  
+# DATABASE_URL=postgresql://user:pass@host:port/db
+# JWT_SECRET=your-super-secret-jwt-key-make-it-very-long-and-random
+
+# Optional configurations
+[services.resources]
+memory = 512
+cpu = 0.5
+
+# Networking
+[services.networking]
+publicPort = 443
+internalPort = 3000
