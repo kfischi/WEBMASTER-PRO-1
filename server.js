@@ -4,49 +4,47 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-console.log('🚀 WebMaster Pro starting...');
+// IMPORTANT: This log will show if the fix worked
+console.log('🔥 FIXED SERVER STARTING - NOT LOCALHOST!');
 console.log(`📡 Port: ${PORT}`);
-console.log(`🌐 Host: 0.0.0.0 - Railway Compatible!`);
+console.log(`🌐 Host: 0.0.0.0 (RAILWAY EXTERNAL ACCESS)`);
 
 app.use(cors());
 app.use(express.json());
 
-// Health Check
 app.get('/health', (req, res) => {
-    console.log('🏥 Health check - SUCCESS!');
+    console.log('🏥 Health check - FIXED VERSION!');
     res.json({
-        message: 'WebMaster Pro Backend',
+        message: 'WebMaster Pro Backend - FIXED!',
         status: 'running',
-        timestamp: new Date().toISOString(),
         host: '0.0.0.0',
-        port: PORT
+        port: PORT,
+        version: 'FIXED_VERSION',
+        timestamp: new Date().toISOString()
     });
 });
 
-// Root
 app.get('/', (req, res) => {
-    console.log('🏠 Root accessed');
     res.json({
-        name: 'WebMaster Pro',
-        status: 'working',
-        host: '0.0.0.0'
+        name: 'WebMaster Pro - FIXED',
+        host: '0.0.0.0',
+        status: 'working'
     });
 });
 
-// Ping
 app.get('/ping', (req, res) => {
-    console.log('🏓 Ping!');
-    res.send('pong');
+    res.send('pong-fixed');
 });
 
-// Start Server - CRITICAL LINE!
+// THIS IS THE CRITICAL LINE THAT FIXES EVERYTHING!
 app.listen(PORT, '0.0.0.0', () => {
-    console.log('✅ ================================');
-    console.log('🎉 SERVER STARTED SUCCESSFULLY!');
-    console.log(`🌐 Host: 0.0.0.0 (NOT localhost!)`);
+    console.log('🎉 ========================================');
+    console.log('✅ FIXED SERVER STARTED SUCCESSFULLY!');
+    console.log('🌐 Host: 0.0.0.0 (NOT localhost!)');
     console.log(`📡 Port: ${PORT}`);
-    console.log(`🔗 Health: http://0.0.0.0:${PORT}/health`);
-    console.log('✅ ================================');
+    console.log('🔗 Health: http://0.0.0.0:' + PORT + '/health');
+    console.log('✅ THIS IS THE FIXED VERSION!');
+    console.log('🎉 ========================================');
 });
 
 module.exports = app;
