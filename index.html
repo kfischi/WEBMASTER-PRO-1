@@ -1,10 +1,13 @@
 <!--
 🎯 WebMaster Pro - הגלריה הראשית המתקדמת והמושלמת
 📁 שמור קובץ זה בשם: index.html
-🔗 מתחבר לאדיטור: editor.html
+🔗 מתחבר לאדיטור: ai-editor.html
 💎 11 אתרים מקצועיים בשווי ₪26,200 עם תמונות אמיתיות
+🌟 UPDATED: עיצוב שחור יוקרתי + Render Backend
 
 ✨ מה חדש בגרסה זו:
+- עיצוב שחור יוקרתי עם זהב ונחושת
+- חיבור לRender Backend החדש
 - תמונות אמיתיות של כל האתרים מ-ImgHippo
 - 4 דפים מלאים: דף הבית, גלריה, אודות, צור קשר
 - רשימת אתרים נפתחת לבחירה מהירה לעריכה
@@ -12,13 +15,6 @@
 - עיצוב מתקדם עם אנימציות ו-Glass Morphism
 - טופס יצירת קשר פונקציונלי
 - רספונסיבי מושלם לכל המכשירים
-
-🚀 איך להשתמש:
-1. פתח את index.html בדפדפן
-2. נווט בין הדפים עם התפריט העליון
-3. לחץ על "בחר אתר לעריכה" לרשימה נפתחת
-4. או לחץ על "ערוך באדיטור" בכל כרטיס אתר
-5. האדיטור ייפתח אוטומטי עם האתר שבחרת
 -->
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -39,33 +35,40 @@
     
     <style>
         :root {
-            /* Modern Color Palette */
-            --primary: #2563eb;
-            --secondary: #7c3aed;
-            --accent: #06b6d4;
-            --success: #10b981;
+            /* Dark Luxury Color Palette */
+            --primary: #000000;
+            --secondary: #1a1a1a;
+            --accent: #d4af37;
+            --accent-copper: #b87333;
+            --accent-silver: #c0c0c0;
+            --success: #22c55e;
             --warning: #f59e0b;
             --error: #ef4444;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --text-dark: #0f172a;
-            --text-medium: #475569;
-            --text-light: #64748b;
+            --dark: #0a0a0a;
+            --medium: #2d2d2d;
+            --light: #404040;
+            --text-primary: #ffffff;
+            --text-secondary: #e5e5e5;
+            --text-tertiary: #b3b3b3;
             
-            /* Background */
-            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --bg-card: #ffffff;
-            --bg-glass: rgba(255, 255, 255, 0.1);
-            --border: #e2e8f0;
+            /* Dark Background */
+            --bg-primary: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+            --bg-secondary: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            --bg-card: #1a1a1a;
+            --bg-glass: rgba(255, 255, 255, 0.05);
+            --bg-glass-strong: rgba(255, 255, 255, 0.1);
+            --border: #333333;
             
-            /* Shadows */
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            /* Luxury Shadows */
+            --shadow-gold: 0 10px 40px rgba(212, 175, 55, 0.3);
+            --shadow-dark: 0 10px 40px rgba(0, 0, 0, 0.8);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
             
-            /* Gradients */
-            --gradient-main: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            --gradient-success: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-            --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            /* Gold Gradients */
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4d03f  50%, #d4af37 100%);
+            --gradient-copper: linear-gradient(135deg, #b87333 0%, #cd853f 50%, #b87333 100%);
+            --gradient-dark: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #333333 100%);
+            --gradient-accent: linear-gradient(135deg, #d4af37 0%, #b87333 100%);
         }
 
         * {
@@ -77,7 +80,7 @@
         body {
             font-family: 'Heebo', 'Inter', sans-serif;
             background: var(--bg-primary);
-            color: var(--text-dark);
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -99,13 +102,17 @@
 
         .loading-content {
             text-align: center;
-            color: white;
+            color: var(--text-primary);
         }
 
         .loading-logo {
             font-size: 3rem;
             font-weight: 900;
             margin-bottom: 1rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             animation: pulse 2s infinite;
         }
 
@@ -113,13 +120,14 @@
             font-size: 1.2rem;
             margin-bottom: 2rem;
             opacity: 0.9;
+            color: var(--text-secondary);
         }
 
         .loading-spinner {
             width: 50px;
             height: 50px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top: 3px solid white;
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--accent);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto;
@@ -148,11 +156,12 @@
         /* ===== HEADER ===== */
         .header {
             background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: var(--shadow-dark);
         }
 
         .header-content {
@@ -173,27 +182,28 @@
         .logo-icon {
             width: 50px;
             height: 50px;
-            background: var(--gradient-main);
+            background: var(--gradient-gold);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--primary);
             font-weight: 900;
             font-size: 1.2rem;
+            box-shadow: var(--shadow-gold);
         }
 
         .logo-text h1 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            background: var(--gradient-main);
+            background: var(--gradient-gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .logo-text p {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
@@ -212,16 +222,16 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background: var(--bg-glass);
+            background: var(--bg-card);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--border);
             border-radius: 12px;
             min-width: 280px;
             max-height: 400px;
             overflow-y: auto;
             z-index: 1000;
             display: none;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-card);
         }
 
         .website-selector-dropdown.show {
@@ -230,14 +240,15 @@
 
         .website-option {
             padding: 0.75rem 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--border);
             cursor: pointer;
             transition: all 0.3s ease;
-            color: white;
+            color: var(--text-primary);
         }
 
         .website-option:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--bg-glass-strong);
+            border-left: 3px solid var(--accent);
         }
 
         .website-option:last-child {
@@ -247,6 +258,7 @@
         .website-option-title {
             font-weight: 600;
             margin-bottom: 0.2rem;
+            color: var(--text-primary);
         }
 
         .website-option-details {
@@ -255,6 +267,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: var(--text-tertiary);
         }
 
         /* Pages */
@@ -270,7 +283,7 @@
             padding: 6rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            color: white;
+            color: var(--text-primary);
             text-align: center;
         }
 
@@ -283,6 +296,10 @@
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
             margin-bottom: 2rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .about-text {
@@ -290,13 +307,14 @@
             line-height: 1.8;
             margin-bottom: 2rem;
             opacity: 0.9;
+            color: var(--text-secondary);
         }
 
         .contact-section {
             padding: 6rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            color: white;
+            color: var(--text-primary);
         }
 
         .contact-content {
@@ -311,6 +329,10 @@
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             margin-bottom: 2rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .contact-item {
@@ -322,24 +344,26 @@
             background: var(--bg-glass);
             border-radius: 12px;
             backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
         }
 
         .contact-icon {
             width: 50px;
             height: 50px;
-            background: var(--gradient-main);
+            background: var(--gradient-gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--primary);
             font-size: 1.2rem;
+            box-shadow: var(--shadow-gold);
         }
 
         .contact-form {
             background: var(--bg-glass);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--border);
             border-radius: 20px;
             padding: 2rem;
         }
@@ -351,28 +375,28 @@
         .form-label {
             display: block;
             margin-bottom: 0.5rem;
-            color: white;
+            color: var(--text-primary);
             font-weight: 600;
         }
 
         .form-input {
             width: 100%;
             padding: 0.75rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid var(--border);
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
+            background: var(--bg-card);
+            color: var(--text-primary);
             font-family: inherit;
         }
 
         .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-tertiary);
         }
 
         .form-input:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
 
         .form-textarea {
@@ -395,26 +419,31 @@
         }
 
         .nav-btn.primary {
-            background: var(--gradient-main);
-            color: white;
+            background: var(--gradient-gold);
+            color: var(--primary);
+            box-shadow: var(--shadow-gold);
         }
 
         .nav-btn.secondary {
             background: var(--bg-glass);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
         }
 
         .nav-btn:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .nav-btn.primary:hover {
+            box-shadow: var(--shadow-gold);
         }
 
         /* ===== HERO SECTION ===== */
         .hero-section {
             padding: 6rem 2rem 4rem;
             text-align: center;
-            color: white;
+            color: var(--text-primary);
         }
 
         .hero-content {
@@ -426,12 +455,13 @@
             display: inline-block;
             background: var(--bg-glass);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--border);
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
             font-size: 0.9rem;
             margin-bottom: 2rem;
             animation: fadeInUp 1s ease-out 0.5s both;
+            color: var(--text-secondary);
         }
 
         .hero-title {
@@ -443,6 +473,13 @@
             animation: fadeInUp 1s ease-out 0.7s both;
         }
 
+        .hero-title .accent {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .hero-subtitle {
             font-size: 1.3rem;
             margin-bottom: 3rem;
@@ -451,6 +488,7 @@
             margin-left: auto;
             margin-right: auto;
             animation: fadeInUp 1s ease-out 0.9s both;
+            color: var(--text-secondary);
         }
 
         .hero-actions {
@@ -466,6 +504,11 @@
             padding: 4rem 2rem;
             background: var(--bg-glass);
             backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            margin: 2rem 0;
+            border-radius: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .stats-grid {
@@ -478,13 +521,24 @@
 
         .stat-card {
             text-align: center;
-            color: white;
+            color: var(--text-primary);
+            padding: 2rem 1rem;
+            background: var(--bg-glass);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: 900;
-            background: var(--gradient-main);
+            background: var(--gradient-gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -494,6 +548,7 @@
         .stat-label {
             font-size: 1.1rem;
             opacity: 0.9;
+            color: var(--text-secondary);
         }
 
         /* ===== GALLERY SECTION ===== */
@@ -506,7 +561,7 @@
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
-            color: white;
+            color: var(--text-primary);
         }
 
         .section-title {
@@ -514,6 +569,10 @@
             font-size: 3rem;
             font-weight: 800;
             margin-bottom: 1rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .section-subtitle {
@@ -521,6 +580,7 @@
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
+            color: var(--text-secondary);
         }
 
         .websites-grid {
@@ -532,9 +592,9 @@
 
         /* ===== WEBSITE CARDS ===== */
         .website-card {
-            background: var(--bg-glass);
+            background: var(--bg-card);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border);
             border-radius: 20px;
             overflow: hidden;
             transition: all 0.4s ease;
@@ -544,8 +604,8 @@
 
         .website-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: var(--shadow-card);
+            border-color: var(--accent);
         }
 
         .website-image {
@@ -574,7 +634,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
             transition: opacity 0.3s ease;
         }
 
@@ -584,7 +644,7 @@
 
         .website-content {
             padding: 2rem;
-            color: white;
+            color: var(--text-primary);
         }
 
         .website-header {
@@ -598,26 +658,30 @@
             font-size: 1.4rem;
             font-weight: 700;
             margin-bottom: 0.3rem;
+            color: var(--text-primary);
         }
 
         .website-category {
             font-size: 0.9rem;
             opacity: 0.8;
+            color: var(--text-tertiary);
         }
 
         .website-price {
-            background: var(--gradient-success);
-            color: white;
+            background: var(--gradient-gold);
+            color: var(--primary);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-weight: 700;
             font-size: 1.1rem;
+            box-shadow: var(--shadow-gold);
         }
 
         .website-description {
             margin-bottom: 1.5rem;
             opacity: 0.9;
             line-height: 1.6;
+            color: var(--text-secondary);
         }
 
         .website-features {
@@ -628,11 +692,13 @@
         }
 
         .feature-tag {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--bg-glass);
             padding: 0.3rem 0.8rem;
             border-radius: 12px;
             font-size: 0.8rem;
             opacity: 0.9;
+            color: var(--text-tertiary);
+            border: 1px solid var(--border);
         }
 
         .website-actions {
@@ -652,28 +718,34 @@
         }
 
         .btn-primary {
-            background: var(--gradient-main);
-            color: white;
+            background: var(--gradient-gold);
+            color: var(--primary);
+            box-shadow: var(--shadow-gold);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--bg-glass);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
         }
 
         .action-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-card);
+        }
+
+        .btn-primary:hover {
+            box-shadow: var(--shadow-gold);
         }
 
         /* ===== FOOTER ===== */
         .footer {
-            background: rgba(0, 0, 0, 0.2);
+            background: var(--bg-card);
             backdrop-filter: blur(10px);
             padding: 3rem 2rem 1rem;
-            color: white;
+            color: var(--text-primary);
             margin-top: 4rem;
+            border-top: 1px solid var(--border);
         }
 
         .footer-content {
@@ -687,7 +759,11 @@
         .footer-section h4 {
             font-size: 1.2rem;
             margin-bottom: 1rem;
-            color: white;
+            color: var(--text-primary);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .footer-section p,
@@ -695,6 +771,7 @@
             opacity: 0.8;
             line-height: 1.6;
             margin-bottom: 0.5rem;
+            color: var(--text-secondary);
         }
 
         .footer-section ul {
@@ -702,7 +779,7 @@
         }
 
         .footer-section a {
-            color: white;
+            color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -715,8 +792,9 @@
             text-align: center;
             margin-top: 2rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border);
             opacity: 0.7;
+            color: var(--text-tertiary);
         }
 
         /* ===== ANIMATIONS ===== */
@@ -787,7 +865,7 @@
             color: white;
             padding: 1rem 1.5rem;
             border-radius: 10px;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-card);
             z-index: 10000;
             animation: slideIn 0.3s ease-out;
         }
@@ -809,6 +887,24 @@
                 transform: translateX(0);
                 opacity: 1;
             }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-card);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-copper);
         }
     </style>
 </head>
@@ -852,7 +948,7 @@
                         <i class="fas fa-envelope"></i>
                         צור קשר
                     </button>
-                    <button class="nav-btn secondary" onclick="testEditorConnection()" title="בדוק חיבור לאדיטור">
+                    <button class="nav-btn secondary" onclick="testBackendConnection()" title="בדוק חיבור לשרת">
                         <i class="fas fa-plug"></i>
                         בדוק חיבור
                     </button>
@@ -879,7 +975,7 @@
                 </div>
                 <h1 class="hero-title">
                     בנה אתרים מקצועיים<br>
-                    עם <span style="color: #06b6d4;">טכנולוגיה מתקדמת</span>
+                    עם <span class="accent">טכנולוגיה מתקדמת</span>
                 </h1>
                 <p class="hero-subtitle">
                     11 תבניות מקצועיות ברמה עולמית, אדיטור ויזואלי מתקדם וכלים חכמים
@@ -952,15 +1048,15 @@
                     עם כלי ניהול ועריכה פשוטים שמאפשרים עדכון וקסטומיזציה מלאה של האתר.
                 </p>
                 
-                <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 2rem; margin: 2rem 0; text-align: right;">
-                    <h3 style="color: #06b6d4; margin-bottom: 1rem;">📋 הוראות התקנה מהירה</h3>
+                <div style="background: var(--bg-glass); border-radius: 15px; padding: 2rem; margin: 2rem 0; text-align: right; border: 1px solid var(--border);">
+                    <h3 style="color: var(--accent); margin-bottom: 1rem;">📋 הוראות התקנה מהירה</h3>
                     <p style="margin-bottom: 0.5rem;"><strong>1.</strong> ודא שיש לך 2 קבצים באותה תיקייה:</p>
-                    <p style="margin-bottom: 0.5rem; font-family: monospace; background: rgba(0,0,0,0.3); padding: 0.3rem; border-radius: 5px;">• index.html (הגלריה הזו)</p>
-                    <p style="margin-bottom: 1rem; font-family: monospace; background: rgba(0,0,0,0.3); padding: 0.3rem; border-radius: 5px;">• editor.html (האדיטור)</p>
+                    <p style="margin-bottom: 0.5rem; font-family: monospace; background: var(--bg-card); padding: 0.3rem; border-radius: 5px; color: var(--text-secondary);">• index.html (הגלריה הזו)</p>
+                    <p style="margin-bottom: 1rem; font-family: monospace; background: var(--bg-card); padding: 0.3rem; border-radius: 5px; color: var(--text-secondary);">• ai-editor.html (האדיטור)</p>
                     <p style="margin-bottom: 0.5rem;"><strong>2.</strong> פתח את index.html בדפדפן</p>
                     <p style="margin-bottom: 0.5rem;"><strong>3.</strong> אפשר חלונות קופצים (Popups) בדפדפן</p>
                     <p style="margin-bottom: 1rem;"><strong>4.</strong> לחץ על "בדוק חיבור" למעלה כדי לוודא שהכל עובד</p>
-                    <p style="color: #10b981;"><strong>✅ אם הכל תקין, לחיצה על "ערוך באדיטור" תפתח את האדיטור אוטומטית!</strong></p>
+                    <p style="color: var(--success);"><strong>✅ אם הכל תקין, לחיצה על "ערוך באדיטור" תפתח את האדיטור אוטומטית!</strong></p>
                 </div>
                 
                 <div class="stats-grid" style="margin-top: 3rem;">
@@ -1134,6 +1230,9 @@
     </div>
 
     <script>
+        // 🚀 UPDATED: Render Production Backend
+        const API_BASE_URL = 'https://webmaster-pro-1.onrender.com';
+        
         // Websites Data
         const websites = {
             'dr-michal-rosen': {
@@ -1250,7 +1349,7 @@
 
         // Initialize the application
         function initializeApp() {
-            console.log('🚀 Initializing WebMaster Pro Gallery...');
+            console.log('🚀 Initializing WebMaster Pro Gallery with Dark Luxury Theme...');
             
             // Simulate loading
             setTimeout(() => {
@@ -1273,6 +1372,28 @@
             console.log('✅ Gallery initialized successfully!');
             console.log(`💎 ${Object.keys(websites).length} professional websites loaded`);
             console.log('💰 Total portfolio value: ₪26,200');
+            console.log('🎨 Dark luxury theme applied');
+            console.log('🔗 Connected to Render Backend:', API_BASE_URL);
+        }
+
+        // Test backend connection
+        async function testBackendConnection() {
+            console.log('🧪 Testing backend connection...');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    showNotification(`✅ חיבור תקין! שרת: ${data.status}`, 'success');
+                    console.log('✅ Backend connection successful:', data);
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                console.error('❌ Backend connection failed:', error);
+                showNotification('❌ שגיאה בחיבור לשרת', 'error');
+            }
         }
 
         // Load website selector dropdown
@@ -1438,6 +1559,7 @@
             
             // Try to open editor - check multiple possible filenames
             const possibleEditorUrls = [
+                'ai-editor.html',
                 'editor.html',
                 'webmaster-editor.html', 
                 'webmaster_editor.html',
@@ -1486,25 +1608,26 @@
                     top: 50%; 
                     left: 50%; 
                     transform: translate(-50%, -50%);
-                    background: rgba(0,0,0,0.9); 
-                    color: white; 
+                    background: var(--bg-card); 
+                    color: var(--text-primary); 
                     padding: 2rem; 
                     border-radius: 15px; 
                     max-width: 500px; 
                     z-index: 10000;
                     backdrop-filter: blur(10px);
-                    border: 1px solid rgba(255,255,255,0.2);
+                    border: 1px solid var(--border);
+                    box-shadow: var(--shadow-card);
                 " onclick="this.remove()">
-                    <h3 style="margin-bottom: 1rem; color: #06b6d4;">🔧 הוראות פתיחת האדיטור</h3>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent);">🔧 הוראות פתיחת האדיטור</h3>
                     <p style="margin-bottom: 1rem;">לא ניתן לפתוח את האדיטור אוטומטית. בדוק:</p>
                     <ul style="margin-bottom: 1rem; padding-right: 1rem;">
-                        <li>✅ הקובץ editor.html נמצא באותה תיקייה</li>
+                        <li>✅ הקובץ ai-editor.html נמצא באותה תיקייה</li>
                         <li>✅ הדפדפן מאפשר חלונות קופצים</li>
                         <li>✅ השמות של הקבצים נכונים</li>
                     </ul>
                     <p style="margin-bottom: 1rem;"><strong>פתח ידנית:</strong></p>
-                    <p style="background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 5px; font-family: monospace;">
-                        editor.html
+                    <p style="background: var(--bg-glass); padding: 0.5rem; border-radius: 5px; font-family: monospace;">
+                        ai-editor.html
                     </p>
                     <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
                         האתר הנבחר: <strong>${website.title}</strong><br>
@@ -1518,11 +1641,11 @@
             
             document.body.insertAdjacentHTML('beforeend', instructionsHTML);
             
-            showNotification(`❌ לא ניתן לפתוח אדיטור. בדוק שהקובץ editor.html קיים`, 'error');
+            showNotification(`❌ לא ניתן לפתוח אדיטור. בדוק שהקובץ ai-editor.html קיים`, 'error');
             
             console.log('❌ Could not open editor automatically');
             console.log('💡 Manual steps needed:');
-            console.log('1. Ensure editor.html is in the same folder');
+            console.log('1. Ensure ai-editor.html is in the same folder');
             console.log('2. Enable popups in browser');
             console.log('3. Check file names are correct');
             console.log(`Selected website data stored for: ${websiteKey}`);
@@ -1561,10 +1684,9 @@
                         body { 
                             font-family: 'Heebo', Arial, sans-serif; 
                             line-height: 1.6; 
-                            color: #333; 
+                            color: white; 
                             background: linear-gradient(135deg, ${website.colors.primary} 0%, ${website.colors.secondary} 100%);
                             min-height: 100vh;
-                            color: white;
                         }
                         .container { max-width: 1200px; margin: 0 auto; padding: 2rem; text-align: center; }
                         h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
@@ -1584,8 +1706,8 @@
                             border: 1px solid rgba(255,255,255,0.2);
                         }
                         .btn { 
-                            background: white; 
-                            color: ${website.colors.primary}; 
+                            background: rgba(255,255,255,0.2); 
+                            color: white; 
                             padding: 1rem 2rem; 
                             border: none; 
                             border-radius: 25px; 
@@ -1595,6 +1717,8 @@
                             margin: 1rem; 
                             font-size: 1.1rem;
                             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                            backdrop-filter: blur(10px);
+                            border: 1px solid rgba(255,255,255,0.3);
                         }
                         .icon { font-size: 4rem; margin-bottom: 1rem; }
                     </style>
@@ -1636,6 +1760,7 @@
             
             // Try to open editor with various possible names
             const possibleEditorUrls = [
+                'ai-editor.html',
                 'editor.html',
                 'webmaster-editor.html', 
                 'webmaster_editor.html',
@@ -1662,43 +1787,6 @@
             if (!editorOpened) {
                 showDetailedInstructions('general', { title: 'אדיטור כללי' });
             }
-        }
-
-        // Test editor connection
-        function testEditorConnection() {
-            console.log('🧪 Testing editor connection...');
-            
-            const possibleEditorUrls = [
-                'editor.html',
-                'webmaster-editor.html', 
-                'webmaster_editor.html',
-                'visual-editor.html'
-            ];
-            
-            const results = [];
-            
-            possibleEditorUrls.forEach(url => {
-                fetch(url)
-                    .then(response => {
-                        if (response.ok) {
-                            results.push(`✅ ${url} - קיים`);
-                            console.log(`✅ Found: ${url}`);
-                        } else {
-                            results.push(`❌ ${url} - לא נמצא`);
-                            console.log(`❌ Not found: ${url}`);
-                        }
-                    })
-                    .catch(error => {
-                        results.push(`❌ ${url} - שגיאה`);
-                        console.log(`❌ Error checking ${url}:`, error);
-                    })
-                    .finally(() => {
-                        if (results.length === possibleEditorUrls.length) {
-                            showNotification(`🧪 בדיקת חיבור הושלמה - בדוק Console`, 'success');
-                            console.log('🧪 Connection test results:', results);
-                        }
-                    });
-            });
         }
 
         // Scroll to gallery
@@ -1744,25 +1832,27 @@
                 });
             });
             
-            console.log('🎯 WebMaster Pro Gallery fully loaded and enhanced!');
+            console.log('🎯 WebMaster Pro Gallery fully loaded with Dark Luxury Theme!');
+            console.log('🖤 Beautiful dark theme with gold accents applied');
+            console.log('🔗 Connected to Render Backend:', API_BASE_URL);
             console.log('📸 Real website images loaded from ImgHippo');
             console.log('📄 4 full pages: Home, Gallery, About, Contact');
             console.log('🔗 Website selector dropdown ready');
             console.log('💼 Ready for business with 11 professional websites');
-            console.log('🔗 Connected to editor.html for seamless editing');
+            console.log('🔗 Connected to ai-editor.html for seamless editing');
             console.log('💰 Total portfolio value: ₪26,200');
             console.log('');
             console.log('🔧 TROUBLESHOOTING GUIDE:');
-            console.log('• If editor doesn\'t open: Check that editor.html is in the same folder');
+            console.log('• If editor doesn\'t open: Check that ai-editor.html is in the same folder');
             console.log('• If popups blocked: Enable popups in browser settings');
             console.log('• If connection issues: Click "בדוק חיבור" button in header');
             console.log('• Check browser console for detailed error messages');
             console.log('');
             console.log('📁 Required files:');
             console.log('• index.html (this gallery)');
-            console.log('• editor.html (the visual editor)');
+            console.log('• ai-editor.html (the visual editor)');
             console.log('');
-            console.log('🧪 To test: Click "בדוק חיבור" in the header menu');
+            console.log('🧪 To test backend: Click "בדוק חיבור" in the header menu');
         });
     </script>
 </body>
