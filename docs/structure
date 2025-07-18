@@ -1,0 +1,655 @@
+# 🏗️ WebMaster Pro - ארכיטקטורה טכנית מפורטת
+
+## 🔧 **מפת החיבורים הטכניים**
+
+```mermaid
+graph TB
+    subgraph "🌐 Frontend Layer"
+        A[Landing Page<br/>index.html] --> B[AI Editor<br/>ai-editor.html]
+        A --> C[Gallery<br/>templates.html]
+        A --> D[Admin Dashboard<br/>dashboard.html]
+        B --> E[Drag & Drop Engine<br/>drag-drop.js]
+        B --> F[AI Assistant<br/>ai-assistant.js]
+    end
+
+    subgraph "🔄 API Gateway"
+        G[Express.js Server<br/>Port 3000]
+        H[Authentication Middleware<br/>JWT + Auth0]
+        I[Rate Limiting<br/>Express Rate Limit]
+    end
+
+    subgraph "🤖 AI Services"
+        J[OpenAI GPT-4<br/>Content Generation]
+        K[Anthropic Claude<br/>Design Assistant]
+        L[Stability AI<br/>Image Generation]
+    end
+
+    subgraph "💳 Payment Systems"
+        M[Stripe API<br/>Subscriptions]
+        N[Payment Webhooks<br/>Event Processing]
+        O[Invoice Generation<br/>PDF Creator]
+    end
+
+    subgraph "🌐 Domain Management"
+        P[Namecheap API<br/>Domain Registration]
+        Q[DNS Management<br/>Cloudflare API]
+        R[SSL Certificates<br/>Let's Encrypt]
+    end
+
+    subgraph "☁️ Cloud Services"
+        S[Supabase<br/>PostgreSQL Database]
+        T[Netlify<br/>Static Hosting]
+        U[Vercel<br/>Serverless Functions]
+        V[AWS S3<br/>File Storage]
+    end
+
+    subgraph "📊 Analytics & Monitoring"
+        W[Google Analytics 4<br/>User Tracking]
+        X[Mixpanel<br/>Event Analytics]
+        Y[Sentry<br/>Error Monitoring]
+        Z[DataDog<br/>Performance Monitoring]
+    end
+
+    A --> G
+    B --> G
+    C --> G
+    D --> G
+    G --> H
+    G --> I
+    G --> J
+    G --> K
+    G --> L
+    G --> M
+    G --> P
+    G --> S
+    M --> N
+    N --> O
+    P --> Q
+    Q --> R
+    S --> T
+    S --> U
+    S --> V
+    G --> W
+    G --> X
+    G --> Y
+    G --> Z
+```
+
+---
+
+## 🔗 **API Endpoints מפורטים**
+
+### 🔐 **Authentication APIs**
+```javascript
+// Auth0 + JWT Integration
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/logout
+POST /api/auth/refresh
+GET  /api/auth/profile
+PUT  /api/auth/profile
+POST /api/auth/forgot-password
+POST /api/auth/reset-password
+```
+
+### 🎨 **Website Management APIs**
+```javascript
+// CRUD operations for websites
+GET    /api/websites              // Get all user's websites
+POST   /api/websites              // Create new website
+GET    /api/websites/:id          // Get specific website
+PUT    /api/websites/:id          // Update website
+DELETE /api/websites/:id          // Delete website
+POST   /api/websites/:id/clone    // Clone existing website
+POST   /api/websites/:id/preview  // Generate preview
+POST   /api/websites/:id/deploy   // Deploy to production
+```
+
+### 🤖 **AI Integration APIs**
+```javascript
+// OpenAI GPT-4 Integration
+POST /api/ai/generate-content
+{
+  "type": "homepage_copy",
+  "businessType": "restaurant",
+  "tone": "professional",
+  "length": "medium"
+}
+
+// Anthropic Claude Integration  
+POST /api/ai/design-suggestions
+{
+  "currentDesign": {...},
+  "businessType": "medical",
+  "preferences": ["modern", "trustworthy"]
+}
+
+// Image AI Processing
+POST /api/ai/optimize-image
+POST /api/ai/remove-background
+POST /api/ai/generate-alt-text
+```
+
+### 💳 **Stripe Payment APIs**
+```javascript
+// Subscription Management
+POST /api/payments/create-subscription
+POST /api/payments/update-subscription
+POST /api/payments/cancel-subscription
+GET  /api/payments/invoices
+POST /api/payments/payment-methods
+POST /api/webhooks/stripe          // Webhook handler
+
+// One-time Purchases
+POST /api/payments/purchase-template
+POST /api/payments/purchase-addon
+```
+
+### 🌐 **Domain Management APIs**
+```javascript
+// Namecheap Integration
+GET  /api/domains/check-availability/:domain
+POST /api/domains/register
+GET  /api/domains/list
+POST /api/domains/renew/:domain
+POST /api/domains/transfer/:domain
+
+// DNS Management (Cloudflare)
+GET  /api/dns/records/:domain
+POST /api/dns/records
+PUT  /api/dns/records/:id
+DELETE /api/dns/records/:id
+```
+
+---
+
+## 🗄️ **מבנה מסד נתונים מפורט**
+
+```sql
+-- ==========================================
+-- Users & Authentication
+-- ==========================================
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255),
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    phone VARCHAR(20),
+    company VARCHAR(100),
+    auth0_id VARCHAR(50) UNIQUE,
+    email_verified BOOLEAN DEFAULT false,
+    plan_type VARCHAR(20) DEFAULT 'free',
+    trial_ends_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW(),
+    last_login_at TIMESTAMP
+);
+
+-- ==========================================
+-- Website Templates & User Websites
+-- ==========================================
+CREATE TABLE templates (
+    id VARCHAR(50) PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    description TEXT,
+    price INTEGER DEFAULT 0,
+    preview_url VARCHAR(500),
+    thumbnail_url VARCHAR(500),
+    features JSONB,
+    tags VARCHAR(255)[],
+    is_premium BOOLEAN DEFAULT false,
+    download_count INTEGER DEFAULT 0,
+    rating DECIMAL(3,2) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE user_websites (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    template_id VARCHAR(50) REFERENCES templates(id),
+    name VARCHAR(200) NOT NULL,
+    subdomain VARCHAR(100) UNIQUE,
+    custom_domain VARCHAR(100) UNIQUE,
+    status VARCHAR(20) DEFAULT 'draft', -- draft, published, archived
+    content JSONB, -- Website content and settings
+    seo_settings JSONB, -- SEO metadata
+    analytics_id VARCHAR(50), -- Google Analytics ID
+    ssl_enabled BOOLEAN DEFAULT false,
+    backup_frequency VARCHAR(20) DEFAULT 'daily',
+    last_deployed_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ==========================================
+-- Subscriptions & Payments
+-- ==========================================
+CREATE TABLE subscriptions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    stripe_subscription_id VARCHAR(100) UNIQUE,
+    stripe_customer_id VARCHAR(100),
+    plan_type VARCHAR(20) NOT NULL, -- basic, pro, enterprise
+    status VARCHAR(20) NOT NULL, -- active, cancelled, past_due
+    current_period_start TIMESTAMP,
+    current_period_end TIMESTAMP,
+    trial_end TIMESTAMP,
+    cancel_at_period_end BOOLEAN DEFAULT false,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE invoices (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    subscription_id UUID REFERENCES subscriptions(id),
+    stripe_invoice_id VARCHAR(100) UNIQUE,
+    amount_due INTEGER, -- In cents
+    amount_paid INTEGER,
+    currency VARCHAR(3) DEFAULT 'ILS',
+    status VARCHAR(20), -- draft, open, paid, void
+    invoice_pdf VARCHAR(500), -- PDF URL
+    due_date TIMESTAMP,
+    paid_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ==========================================
+-- Domain Management
+-- ==========================================
+CREATE TABLE domains (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    website_id UUID REFERENCES user_websites(id) ON DELETE CASCADE,
+    domain_name VARCHAR(255) NOT NULL,
+    registrar VARCHAR(50) DEFAULT 'namecheap',
+    status VARCHAR(20) DEFAULT 'pending', -- pending, active, expired, transferred
+    auto_renew BOOLEAN DEFAULT true,
+    nameservers JSONB,
+    dns_records JSONB,
+    ssl_certificate JSONB,
+    expires_at TIMESTAMP,
+    registered_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ==========================================
+-- File Management & CDN
+-- ==========================================
+CREATE TABLE user_files (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    website_id UUID REFERENCES user_websites(id) ON DELETE SET NULL,
+    filename VARCHAR(255) NOT NULL,
+    original_filename VARCHAR(255),
+    file_size BIGINT, -- In bytes
+    mime_type VARCHAR(100),
+    file_path VARCHAR(500), -- S3/CDN path
+    thumbnail_path VARCHAR(500),
+    alt_text VARCHAR(255),
+    is_optimized BOOLEAN DEFAULT false,
+    optimization_settings JSONB,
+    upload_source VARCHAR(50) DEFAULT 'user', -- user, ai_generated, stock
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ==========================================
+-- AI Usage Tracking
+-- ==========================================
+CREATE TABLE ai_usage (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    website_id UUID REFERENCES user_websites(id) ON DELETE SET NULL,
+    service_type VARCHAR(50) NOT NULL, -- openai, anthropic, stability
+    action_type VARCHAR(50) NOT NULL, -- generate_content, design_suggest, image_optimize
+    input_data JSONB,
+    output_data JSONB,
+    tokens_used INTEGER,
+    cost_usd DECIMAL(10,4),
+    processing_time_ms INTEGER,
+    success BOOLEAN DEFAULT true,
+    error_message TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ==========================================
+-- Analytics & Events
+-- ==========================================
+CREATE TABLE website_analytics (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    website_id UUID REFERENCES user_websites(id) ON DELETE CASCADE,
+    event_type VARCHAR(50) NOT NULL, -- page_view, click, form_submit
+    event_data JSONB,
+    visitor_id VARCHAR(100),
+    session_id VARCHAR(100),
+    ip_address INET,
+    user_agent TEXT,
+    referrer VARCHAR(500),
+    page_url VARCHAR(500),
+    country VARCHAR(2),
+    city VARCHAR(100),
+    device_type VARCHAR(20), -- desktop, mobile, tablet
+    browser VARCHAR(50),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ==========================================
+-- System Settings & Configuration
+-- ==========================================
+CREATE TABLE system_settings (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    setting_key VARCHAR(100) UNIQUE NOT NULL,
+    setting_value JSONB,
+    description TEXT,
+    is_public BOOLEAN DEFAULT false,
+    updated_by UUID REFERENCES users(id),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ==========================================
+-- Audit Log
+-- ==========================================
+CREATE TABLE audit_log (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE SET NULL,
+    action VARCHAR(100) NOT NULL,
+    resource_type VARCHAR(50),
+    resource_id VARCHAR(100),
+    old_values JSONB,
+    new_values JSONB,
+    ip_address INET,
+    user_agent TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ==========================================
+-- Indexes for Performance
+-- ==========================================
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_auth0_id ON users(auth0_id);
+CREATE INDEX idx_user_websites_user_id ON user_websites(user_id);
+CREATE INDEX idx_user_websites_template_id ON user_websites(template_id);
+CREATE INDEX idx_user_websites_subdomain ON user_websites(subdomain);
+CREATE INDEX idx_user_websites_custom_domain ON user_websites(custom_domain);
+CREATE INDEX idx_subscriptions_user_id ON subscriptions(user_id);
+CREATE INDEX idx_subscriptions_stripe_id ON subscriptions(stripe_subscription_id);
+CREATE INDEX idx_domains_user_id ON domains(user_id);
+CREATE INDEX idx_domains_website_id ON domains(website_id);
+CREATE INDEX idx_domains_domain_name ON domains(domain_name);
+CREATE INDEX idx_user_files_user_id ON user_files(user_id);
+CREATE INDEX idx_user_files_website_id ON user_files(website_id);
+CREATE INDEX idx_ai_usage_user_id ON ai_usage(user_id);
+CREATE INDEX idx_ai_usage_created_at ON ai_usage(created_at);
+CREATE INDEX idx_website_analytics_website_id ON website_analytics(website_id);
+CREATE INDEX idx_website_analytics_created_at ON website_analytics(created_at);
+CREATE INDEX idx_audit_log_user_id ON audit_log(user_id);
+CREATE INDEX idx_audit_log_created_at ON audit_log(created_at);
+```
+
+---
+
+## ⚙️ **Environment Variables ומערכת קונפיגורציה**
+
+```bash
+# ==========================================
+# Database Configuration
+# ==========================================
+DATABASE_URL=postgresql://username:password@host:port/database
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+
+# ==========================================
+# Authentication (Auth0)
+# ==========================================
+AUTH0_DOMAIN=your-domain.auth0.com
+AUTH0_CLIENT_ID=your-client-id
+AUTH0_CLIENT_SECRET=your-client-secret
+AUTH0_AUDIENCE=your-api-identifier
+JWT_SECRET=your-super-secret-jwt-key
+
+# ==========================================
+# AI Services
+# ==========================================
+OPENAI_API_KEY=sk-proj-your-openai-key
+ANTHROPIC_API_KEY=sk-ant-your-anthropic-key
+STABILITY_AI_KEY=sk-your-stability-key
+
+# ==========================================
+# Payment Processing (Stripe)
+# ==========================================
+STRIPE_PUBLISHABLE_KEY=pk_live_your-publishable-key
+STRIPE_SECRET_KEY=sk_live_your-secret-key
+STRIPE_WEBHOOK_SECRET=whsec_your-webhook-secret
+STRIPE_PRICE_BASIC=price_basic-plan-id
+STRIPE_PRICE_PRO=price_pro-plan-id
+STRIPE_PRICE_ENTERPRISE=price_enterprise-plan-id
+
+# ==========================================
+# Domain Management
+# ==========================================
+NAMECHEAP_API_USER=your-namecheap-username
+NAMECHEAP_API_KEY=your-namecheap-api-key
+NAMECHEAP_SANDBOX=true  # false for production
+CLOUDFLARE_API_TOKEN=your-cloudflare-token
+CLOUDFLARE_ZONE_ID=your-zone-id
+
+# ==========================================
+# File Storage & CDN
+# ==========================================
+AWS_ACCESS_KEY_ID=your-aws-access-key
+AWS_SECRET_ACCESS_KEY=your-aws-secret-key
+AWS_S3_BUCKET=webmaster-pro-files
+AWS_S3_REGION=us-east-1
+AWS_CLOUDFRONT_DISTRIBUTION=your-distribution-id
+
+# ==========================================
+# Email Services
+# ==========================================
+SENDGRID_API_KEY=SG.your-sendgrid-key
+SENDGRID_FROM_EMAIL=noreply@webmaster-pro.co.il
+SENDGRID_FROM_NAME=WebMaster Pro
+
+# ==========================================
+# Analytics & Monitoring
+# ==========================================
+GOOGLE_ANALYTICS_ID=G-YOUR-GA4-ID
+MIXPANEL_TOKEN=your-mixpanel-token
+SENTRY_DSN=https://your-sentry-dsn
+DATADOG_API_KEY=your-datadog-key
+
+# ==========================================
+# Application Settings
+# ==========================================
+NODE_ENV=production
+PORT=3000
+APP_URL=https://webmaster-pro.co.il
+API_URL=https://api.webmaster-pro.co.il
+FRONTEND_URL=https://webmaster-pro.co.il
+
+# ==========================================
+# Rate Limiting & Security
+# ==========================================
+RATE_LIMIT_WINDOW_MS=900000  # 15 minutes
+RATE_LIMIT_MAX_REQUESTS=100
+CORS_ORIGIN=https://webmaster-pro.co.il
+SESSION_SECRET=your-session-secret
+
+# ==========================================
+# Feature Flags
+# ==========================================
+ENABLE_AI_FEATURES=true
+ENABLE_DOMAIN_REGISTRATION=true
+ENABLE_ADVANCED_ANALYTICS=true
+ENABLE_WHITE_LABEL=false
+MAINTENANCE_MODE=false
+```
+
+---
+
+## 🔄 **CI/CD Pipeline & Deployment**
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy WebMaster Pro
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm run test
+      - run: npm run lint
+      - run: npm run type-check
+
+  deploy-staging:
+    needs: test
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to Staging
+        run: |
+          # Deploy to staging environment
+          npm run deploy:staging
+
+  deploy-production:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to Production
+        run: |
+          # Deploy to production
+          npm run deploy:production
+          # Run smoke tests
+          npm run test:smoke
+```
+
+---
+
+## 📊 **מוניטורינג ולוגים**
+
+```javascript
+// logger.js - Centralized Logging
+const winston = require('winston');
+const { combine, timestamp, printf, colorize } = winston.format;
+
+const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: combine(
+    timestamp(),
+    printf(({ timestamp, level, message, ...meta }) => {
+      return `${timestamp} [${level}]: ${message} ${Object.keys(meta).length ? JSON.stringify(meta) : ''}`;
+    })
+  ),
+  transports: [
+    new winston.transports.Console({
+      format: combine(colorize(), printf(({ timestamp, level, message }) => {
+        return `${timestamp} [${level}]: ${message}`;
+      }))
+    }),
+    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'logs/combined.log' })
+  ]
+});
+
+// Performance Monitoring
+const performance = {
+  trackAPICall: (endpoint, duration, statusCode) => {
+    logger.info('API Call', {
+      endpoint,
+      duration: `${duration}ms`,
+      statusCode,
+      timestamp: new Date().toISOString()
+    });
+  },
+  
+  trackAIUsage: (service, tokens, cost) => {
+    logger.info('AI Usage', {
+      service,
+      tokens,
+      cost: `$${cost}`,
+      timestamp: new Date().toISOString()
+    });
+  }
+};
+```
+
+---
+
+## 🔒 **אבטחה ופרטיות**
+
+```javascript
+// security.js - Security Middleware
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const cors = require('cors');
+
+// Security Headers
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      scriptSrc: ["'self'"]
+    }
+  }
+}));
+
+// Rate Limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP'
+});
+app.use('/api/', limiter);
+
+// CORS Configuration
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+  optionsSuccessStatus: 200
+}));
+
+// Input Validation & Sanitization
+const { body, validationResult } = require('express-validator');
+
+const validateWebsiteCreation = [
+  body('name').isLength({ min: 1, max: 200 }).trim().escape(),
+  body('template_id').isAlphanumeric(),
+  body('subdomain').isLength({ min: 3, max: 50 }).matches(/^[a-z0-9-]+$/),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  }
+];
+```
+
+---
+
+**📋 זוהי הסכמה הטכנית המלאה לפיתוח WebMaster Pro!**
+
+**🎯 המסמך הזה + ה-Master Plan = המדריך המלא להקמת העסק!**
+
+**שמור את שני הקבצים בתיקיית docs/ של הפרויקט! 📁**
