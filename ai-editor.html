@@ -3,847 +3,777 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - AI Website Editor</title>
+    <title>WebMaster Pro - Visual Editor</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .editor-container {
-            display: grid;
-            grid-template-columns: 300px 1fr 250px;
-            height: 100vh;
-            gap: 0;
-        }
-
-        /* AI Panel */
-        .ai-panel {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             flex-direction: column;
-        }
-
-        .ai-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        .ai-header h2 {
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
             color: white;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
         }
 
-        .ai-status {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
         }
 
-        .ai-chat {
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a202c;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            color: #f56565;
+            margin-bottom: 20px;
+        }
+
+        .main-container {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #48bb78;
+            animation: pulse 2s infinite;
+        }
+
+        .content-area {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .editor-area {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
         }
 
-        .ai-message {
-            margin-bottom: 15px;
-            padding: 12px;
-            border-radius: 12px;
-            max-width: 90%;
-            word-wrap: break-word;
+        .website-list {
+            display: grid;
+            gap: 15px;
         }
 
-        .ai-message.user {
-            background: rgba(103, 126, 234, 0.8);
-            color: white;
-            margin-right: auto;
-        }
-
-        .ai-message.assistant {
+        .website-card {
             background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            margin-left: auto;
-        }
-
-        .ai-input-area {
-            padding: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .ai-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            margin-bottom: 10px;
-            resize: vertical;
-            min-height: 60px;
-        }
-
-        .ai-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .ai-send-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #4CAF50, #8BC34A);
-            color: white;
-            border: none;
-            border-radius: 8px;
+            border-radius: 10px;
+            padding: 15px;
             cursor: pointer;
-            font-size: 1rem;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
-        .ai-send-btn:hover {
+        .website-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #667eea;
         }
 
-        .ai-send-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
+        .website-card.active {
+            border-color: #48bb78;
+            background: rgba(72, 187, 120, 0.1);
         }
 
-        /* Main Canvas */
-        .main-canvas {
-            background: white;
-            position: relative;
-            overflow: auto;
+        .website-name {
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
         }
 
-        .canvas-header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px 20px;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        .website-price {
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 1.1rem;
         }
 
-        .website-selector {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            min-width: 200px;
-        }
-
-        .canvas-content {
-            padding: 20px;
-            min-height: calc(100vh - 70px);
-        }
-
-        .website-frame {
-            width: 100%;
-            height: 800px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: white;
-            overflow: auto;
-        }
-
-        /* Properties Panel */
-        .properties-panel {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .properties-panel h3 {
-            color: white;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .property-group {
+        .editor-panel {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
             margin-bottom: 20px;
         }
 
-        .property-label {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.9rem;
-            margin-bottom: 5px;
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
             display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2d3748;
         }
 
-        .property-input {
+        .form-input {
             width: 100%;
-            padding: 8px 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: #667eea;
             color: white;
-            margin-bottom: 10px;
-        }
-
-        .property-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .color-picker {
-            width: 100%;
-            height: 40px;
             border: none;
-            border-radius: 6px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
         }
 
-        /* Connection Status */
-        .connection-status {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+        .btn:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: #48bb78;
+        }
+
+        .btn-success:hover {
+            background: #38a169;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .message.success {
+            background: #f0fff4;
+            color: #22543d;
+            border: 1px solid #48bb78;
+        }
+
+        .message.error {
+            background: #fed7d7;
+            color: #c53030;
+            border: 1px solid #f56565;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .demo-mode-banner {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #8b4513;
             padding: 10px 20px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            border-radius: 20px;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-
-        .status-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-left: 8px;
-        }
-
-        .status-connected { background: #4CAF50; }
-        .status-disconnected { background: #f44336; }
-        .status-connecting { background: #ff9800; animation: pulse 1s infinite; }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .editor-container {
-                grid-template-columns: 250px 1fr 200px;
-            }
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-radius: 5px;
         }
 
         @media (max-width: 768px) {
-            .editor-container {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto 1fr auto;
+            .content-area {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Connection Status -->
-    <div class="connection-status">
-        <span id="connection-text">מתחבר לשרת...</span>
-        <span id="connection-indicator" class="status-indicator status-connecting"></span>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <h2>🚀 WebMaster Pro</h2>
+        <p id="loadingMessage">מתחבר למסד הנתונים...</p>
     </div>
 
-    <div class="editor-container">
-        <!-- AI Panel -->
-        <div class="ai-panel">
-            <div class="ai-header">
-                <h2><i class="fas fa-robot"></i> AI Assistant</h2>
-                <div class="ai-status" id="aiStatus">מוכן לעזרה</div>
-            </div>
-            
-            <div class="ai-chat" id="aiChat">
-                <div class="ai-message assistant">
-                    שלום! אני עוזר AI של WebMaster Pro. אני יכול לעזור לך לערוך את האתר - לשנות צבעים, לעדכן תוכן, להוסיף אלמנטים ועוד. פשוט כתב לי מה תרצה לשנות!
-                </div>
-            </div>
-            
-            <div class="ai-input-area">
-                <textarea id="aiInput" class="ai-input" placeholder="כתב כאן מה תרצה לשנות באתר...
-למשל: 'שנה את הצבע הראשי לכחול' או 'הוסף סקציה על השירותים'"></textarea>
-                <button id="aiSendBtn" class="ai-send-btn" onclick="sendAIMessage()">
-                    <i id="sendIcon" class="fas fa-paper-plane"></i>
-                    <span id="sendText">שלח הודעה</span>
-                </button>
+    <!-- Error Screen -->
+    <div class="error-screen" id="errorScreen">
+        <div class="error-icon">❌</div>
+        <h2>שגיאה בחיבור ל-Supabase</h2>
+        <p id="errorMessage">לא ניתן להתחבר למסד הנתונים</p>
+        <button class="btn" onclick="switchToDemoMode()" style="margin-top: 20px;">
+            🎮 עבור למצב Demo
+        </button>
+        <button class="btn" onclick="location.reload()" style="margin-top: 10px; background: #48bb78;">
+            🔄 נסה שוב
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container" id="mainContainer">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">WebMaster Pro</div>
+            <div class="status-indicator">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="connectionStatus">מתחבר...</span>
             </div>
         </div>
 
-        <!-- Main Canvas -->
-        <div class="main-canvas">
-            <div class="canvas-header">
-                <div>
-                    <select id="websiteSelector" class="website-selector" onchange="loadWebsite()">
-                        <option value="">בחר אתר לעריכה...</option>
-                        <option value="dr-michal-rosen">ד"ר מיכל רוזן - רפואה אסתטית</option>
-                        <option value="danny-fit">דני פיט - מאמן כושר</option>
-                        <option value="studio-ohm">סטודיו אוהם - יוגה</option>
-                        <option value="dr-sarah-cohen">ד"ר שרה כהן - תזונה</option>
-                        <option value="barkovich-law">משרד ברקוביץ - עו"ד</option>
-                        <option value="rina-levy-accounting">רינה לוי - חשבת שכר</option>
-                        <option value="bella-salon">מספרה BELLA</option>
-                        <option value="dr-ronit-levy">ד"ר רונית לוי - מורה פרטית</option>
-                        <option value="premium-beauty">קליניקת יופי פרמיום</option>
-                        <option value="multibrown">מולטיבראון - נופש ואירועים</option>
-                        <option value="premium-realestate">נדל"ן פרמיום</option>
-                    </select>
-                </div>
-                <div>
-                    <button class="ai-send-btn" onclick="saveProject()" style="width: auto; padding: 8px 16px;">
-                        <i class="fas fa-save"></i> שמור
-                    </button>
-                    <button class="ai-send-btn" onclick="previewWebsite()" style="width: auto; padding: 8px 16px; margin-right: 10px;">
-                        <i class="fas fa-eye"></i> תצוגה מקדימה
-                    </button>
-                </div>
-            </div>
-            
-            <div class="canvas-content">
-                <div id="websiteFrame" class="website-frame">
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 1.2rem;">
-                        <div style="text-align: center;">
-                            <i class="fas fa-mouse-pointer" style="font-size: 3rem; margin-bottom: 20px; color: #ddd;"></i>
-                            <br>
-                            בחר אתר מהרשימה למעלה כדי להתחיל לערוך
-                        </div>
+        <!-- Demo Mode Banner -->
+        <div class="demo-mode-banner" id="demoModeBanner" style="display: none;">
+            🎮 מצב Demo פעיל - נתונים מדומים
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h3 style="color: white; margin-bottom: 20px;">רשימת אתרים</h3>
+                
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="websiteCount">-</div>
+                        <div class="stat-label">אתרים</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalValue">-</div>
+                        <div class="stat-label">ערך כולל</div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Properties Panel -->
-        <div class="properties-panel">
-            <h3><i class="fas fa-sliders-h"></i> מאפיינים</h3>
-            
-            <div class="property-group">
-                <label class="property-label">צבע ראשי</label>
-                <input type="color" class="color-picker" id="primaryColor" value="#2563eb" onchange="updatePrimaryColor()">
+                <!-- Website List -->
+                <div class="website-list" id="websiteList">
+                    <!-- תטען דינמית -->
+                </div>
             </div>
-            
-            <div class="property-group">
-                <label class="property-label">צבע משני</label>
-                <input type="color" class="color-picker" id="secondaryColor" value="#059669" onchange="updateSecondaryColor()">
-            </div>
-            
-            <div class="property-group">
-                <label class="property-label">שם העסק</label>
-                <input type="text" class="property-input" id="businessName" placeholder="שם העסק" onchange="updateBusinessName()">
-            </div>
-            
-            <div class="property-group">
-                <label class="property-label">תיאור העסק</label>
-                <textarea class="property-input" id="businessDescription" placeholder="תיאור קצר של העסק" onchange="updateBusinessDescription()"></textarea>
-            </div>
-            
-            <div class="property-group">
-                <label class="property-label">טלפון</label>
-                <input type="tel" class="property-input" id="businessPhone" placeholder="050-1234567" onchange="updateBusinessPhone()">
-            </div>
-            
-            <div class="property-group">
-                <label class="property-label">אימייל</label>
-                <input type="email" class="property-input" id="businessEmail" placeholder="info@business.co.il" onchange="updateBusinessEmail()">
+
+            <!-- Editor Area -->
+            <div class="editor-area">
+                <div class="editor-panel">
+                    <h2>עריכת אתר</h2>
+                    <div id="messageArea"></div>
+                    
+                    <div id="editorForm">
+                        <div class="form-group">
+                            <label class="form-label">שם האתר</label>
+                            <input type="text" id="siteName" class="form-input" placeholder="הכנס שם אתר">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">קטגוריה</label>
+                            <select id="siteCategory" class="form-input">
+                                <option value="רפואה">רפואה</option>
+                                <option value="ספורט">ספורט</option>
+                                <option value="בריאות">בריאות</option>
+                                <option value="משפטים">משפטים</option>
+                                <option value="כספים">כספים</option>
+                                <option value="יופי">יופי</option>
+                                <option value="חינוך">חינוך</option>
+                                <option value="נדלן">נדל"ן</option>
+                                <option value="נופש">נופש</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">מחיר (₪)</label>
+                            <input type="number" id="sitePrice" class="form-input" placeholder="2500">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">שם העסק</label>
+                            <input type="text" id="businessName" class="form-input" placeholder="שם העסק">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">טלפון</label>
+                            <input type="text" id="businessPhone" class="form-input" placeholder="052-1234567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">אימייל</label>
+                            <input type="email" id="businessEmail" class="form-input" placeholder="info@business.co.il">
+                        </div>
+                        
+                        <button class="btn btn-success" onclick="saveChanges()">
+                            💾 שמור שינויים
+                        </button>
+                        
+                        <button class="btn" onclick="previewSite()" style="margin-right: 10px;">
+                            👁️ תצוגה מקדימה
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 🚀 UPDATED: Render Production Server
-        const API_BASE_URL = 'https://webmaster-pro-1.onrender.com';
-        
-        // Global state
-        let isConnected = false;
+        // Global variables
+        let supabase = null;
+        let websites = [];
         let currentWebsite = null;
-        let chatHistory = [];
+        let isDemoMode = false;
 
-        // Initialize the editor
-        async function initializeEditor() {
-            console.log('🎨 Initializing WebMaster Pro Editor...');
-            
-            try {
-                // Test backend connection
-                await testBackendConnection();
-                
-                // Load available websites
-                await loadAvailableWebsites();
-                
-                // Setup event listeners
-                setupEventListeners();
-                
-                console.log('✅ Editor initialized successfully');
-                
-            } catch (error) {
-                console.error('❌ Error initializing editor:', error);
-                updateConnectionStatus('שגיאה בחיבור לשרת', 'disconnected');
+        // Demo data
+        const demoWebsites = [
+            {
+                id: 'dr-michal-rosen',
+                name: 'ד"ר מיכל רוזן - רפואה אסתטית',
+                category: 'רפואה',
+                price: 2800,
+                business_name: 'ד"ר מיכל רוזן',
+                phone: '052-1234567',
+                email: 'info@dr-michal-rosen.co.il',
+                description: 'מרכז רפואה אסתטית מוביל'
+            },
+            {
+                id: 'fitness-coach',
+                name: 'דני פיט - מאמן כושר',
+                category: 'ספורט',
+                price: 2200,
+                business_name: 'דני פיט',
+                phone: '054-1234567',
+                email: 'danny@fitness.co.il',
+                description: 'מאמן כושר מוסמך'
+            },
+            {
+                id: 'yoga-studio',
+                name: 'סטודיו אוהם - יוגה',
+                category: 'בריאות',
+                price: 1900,
+                business_name: 'סטודיו אוהם',
+                phone: '053-1234567',
+                email: 'info@ohm-studio.co.il',
+                description: 'סטודיו יוגה ומדיטציה'
+            },
+            {
+                id: 'law-office',
+                name: 'משרד עורכי דין ברקוביץ',
+                category: 'משפטים',
+                price: 2500,
+                business_name: 'עו"ד דן ברקוביץ',
+                phone: '050-1234567',
+                email: 'info@law-office.co.il',
+                description: 'משרד עורכי דין מוביל'
+            },
+            {
+                id: 'accountant',
+                name: 'רינה לוי - חשבת',
+                category: 'כספים',
+                price: 2000,
+                business_name: 'רינה לוי',
+                phone: '056-1234567',
+                email: 'rina@accounting.co.il',
+                description: 'חשבת מוסמכת'
+            },
+            {
+                id: 'beauty-salon',
+                name: 'BELLA - מספרה',
+                category: 'יופי',
+                price: 1700,
+                business_name: 'בלה יופי',
+                phone: '057-1234567',
+                email: 'info@bella.co.il',
+                description: 'מספרה מקצועית'
+            },
+            {
+                id: 'private-teacher',
+                name: 'ד"ר רונית לוי - מורה פרטית',
+                category: 'חינוך',
+                price: 2100,
+                business_name: 'ד"ר רונית לוי',
+                phone: '058-1234567',
+                email: 'ronit@teacher.co.il',
+                description: 'מורה פרטית מנוסה'
+            },
+            {
+                id: 'premium-clinic',
+                name: 'קליניקת יופי פרמיום',
+                category: 'רפואה',
+                price: 3200,
+                business_name: 'קליניקת פרמיום',
+                phone: '052-0000000',
+                email: 'info@premium-clinic.co.il',
+                description: 'מרכז רפואה אסתטית מתקדמת'
+            },
+            {
+                id: 'multibrawn',
+                name: 'מולטיבראון - נופש',
+                category: 'נופש',
+                price: 2300,
+                business_name: 'מולטיבראון',
+                phone: '052-1111111',
+                email: 'info@multibrawn.co.il',
+                description: 'חברת נופש ואירועים'
+            },
+            {
+                id: 'real-estate',
+                name: 'נדל"ן פרמיום',
+                category: 'נדלן',
+                price: 2700,
+                business_name: 'נדל"ן פרמיום',
+                phone: '052-2222222',
+                email: 'info@real-estate.co.il',
+                description: 'חברת נדל"ן מובילה'
+            },
+            {
+                id: 'dentist-clinic',
+                name: 'ד"ר אבי דנט - רופא שיניים',
+                category: 'רפואה',
+                price: 2600,
+                business_name: 'ד"ר אבי דנט',
+                phone: '052-3333333',
+                email: 'info@avi-dent.co.il',
+                description: 'מרפאת שיניים מתקדמת'
             }
-        }
+        ];
 
-        // Test backend connection
-        async function testBackendConnection() {
-            updateConnectionStatus('מתחבר לשרת...', 'connecting');
-            
+        // Initialize app
+        async function initializeApp() {
+            console.log('🚀 Initializing WebMaster Pro with Supabase...');
+            updateLoadingMessage('מתחבר לSupabase...');
+
             try {
-                const response = await fetch(`${API_BASE_URL}/health`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    isConnected = true;
-                    updateConnectionStatus(`מחובר לשרת - ${data.status}`, 'connected');
-                    console.log('✅ Backend connection successful:', data);
-                } else {
-                    throw new Error(`HTTP ${response.status}`);
+                // Try to get Supabase credentials
+                const supabaseUrl = getSupabaseUrl();
+                const supabaseKey = getSupabaseKey();
+
+                if (!supabaseUrl || !supabaseKey) {
+                    throw new Error('No Supabase credentials found');
                 }
-                
-            } catch (error) {
-                isConnected = false;
-                updateConnectionStatus('לא מחובר לשרת', 'disconnected');
-                console.error('❌ Backend connection failed:', error);
-                throw error;
-            }
-        }
 
-        // Load available websites
-        async function loadAvailableWebsites() {
-            try {
-                // For now, use the predefined list
-                // In production, this would load from the API
-                console.log('📄 Loading available websites...');
-                
-                // Simulate API call
-                const websites = [
-                    { id: 'dr-michal-rosen', name: 'ד"ר מיכל רוזן - רפואה אסתטית', category: 'medical' },
-                    { id: 'danny-fit', name: 'דני פיט - מאמן כושר', category: 'fitness' },
-                    { id: 'studio-ohm', name: 'סטודיו אוהם - יוגה', category: 'wellness' },
-                    { id: 'dr-sarah-cohen', name: 'ד"ר שרה כהן - תזונה', category: 'health' },
-                    { id: 'barkovich-law', name: 'משרד ברקוביץ - עו"ד', category: 'legal' },
-                    { id: 'rina-levy-accounting', name: 'רינה לוי - חשבת שכר', category: 'accounting' },
-                    { id: 'bella-salon', name: 'מספרה BELLA', category: 'beauty' },
-                    { id: 'dr-ronit-levy', name: 'ד"ר רונית לוי - מורה פרטית', category: 'education' },
-                    { id: 'premium-beauty', name: 'קליניקת יופי פרמיום', category: 'medical' },
-                    { id: 'multibrown', name: 'מולטיבראון - נופש ואירועים', category: 'hospitality' },
-                    { id: 'premium-realestate', name: 'נדל"ן פרמיום', category: 'realestate' }
-                ];
-                
-                console.log(`✅ Loaded ${websites.length} websites`);
-                
-            } catch (error) {
-                console.error('❌ Error loading websites:', error);
-            }
-        }
+                // Initialize Supabase
+                supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+                console.log('✅ WebMaster Pro loaded with Supabase integration!');
+                console.log('🔗 Supabase URL:', supabaseUrl);
+                console.log('🔑 Supabase Key configured');
 
-        // Setup event listeners
-        function setupEventListeners() {
-            // AI input Enter key
-            document.getElementById('aiInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    sendAIMessage();
+                updateLoadingMessage('טוען נתונים...');
+
+                // Test connection and load data
+                const { data, error } = await supabase
+                    .from('websites')
+                    .select('*')
+                    .limit(1);
+
+                if (error) {
+                    console.error('❌ Supabase connection failed:', error);
+                    throw error;
                 }
+
+                // Load all websites
+                const { data: websitesData, error: websitesError } = await supabase
+                    .from('websites')
+                    .select('*')
+                    .order('created_at', { ascending: true });
+
+                if (websitesError) {
+                    console.error('❌ Failed to load websites:', websitesError);
+                    throw websitesError;
+                }
+
+                websites = websitesData || [];
+                console.log(`📊 All data loaded from PostgreSQL database`);
+                console.log(`📋 4 full pages: Home, Gallery, About, Contact`);
+                console.log(`🔗 Connected to ai-editor.html for editing`);
+
+                if (websites.length === 0) {
+                    console.warn('⚠️ No websites found in database');
+                    switchToDemoMode();
+                    return;
+                }
+
+                initializeMainApp();
+
+            } catch (error) {
+                console.error('❌ Failed to connect to Supabase:', error);
+                
+                // Show error screen
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('errorScreen').style.display = 'flex';
+                document.getElementById('errorMessage').textContent = 
+                    `שגיאה: ${error.message || 'לא ניתן להתחבר למסד הנתונים'}`;
+            }
+        }
+
+        function getSupabaseUrl() {
+            // Try multiple sources for Supabase URL
+            return window.SUPABASE_URL || 
+                   'https://snawyhsrrqxpuwlunscb.supabase.co' || 
+                   prompt('הזן Supabase URL:');
+        }
+
+        function getSupabaseKey() {
+            // Try multiple sources for Supabase Key
+            return window.SUPABASE_ANON_KEY || 
+                   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuYXd5aHNycnF4cHV3bHVuc2NiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwMjM3NDEsImV4cCI6MjA2NjU5OTc0MX0.ohACXAqDd9zFf_S8CX6ryHm3ZQTcVEAlKZ3VqWAOOgw' ||
+                   prompt('הזן Supabase API Key:');
+        }
+
+        function switchToDemoMode() {
+            console.log('🎮 Switching to Demo Mode');
+            isDemoMode = true;
+            websites = demoWebsites;
+            
+            // Show demo banner
+            document.getElementById('demoModeBanner').style.display = 'block';
+            
+            initializeMainApp();
+        }
+
+        function initializeMainApp() {
+            // Hide loading/error screens
+            document.getElementById('loadingScreen').style.display = 'none';
+            document.getElementById('errorScreen').style.display = 'none';
+            document.getElementById('mainContainer').style.display = 'block';
+
+            // Update connection status
+            const statusText = isDemoMode ? 'מצב Demo' : 'מחובר לSupabase';
+            const statusColor = isDemoMode ? '#ffd700' : '#48bb78';
+            
+            document.getElementById('connectionStatus').textContent = statusText;
+            document.getElementById('statusDot').style.background = statusColor;
+
+            // Load website list
+            loadWebsiteList();
+            
+            // Select first website
+            if (websites.length > 0) {
+                selectWebsite(websites[0]);
+            }
+
+            console.log('✅ WebMaster Pro ready!');
+        }
+
+        function updateLoadingMessage(message) {
+            document.getElementById('loadingMessage').textContent = message;
+        }
+
+        function loadWebsiteList() {
+            const websiteList = document.getElementById('websiteList');
+            const websiteCount = document.getElementById('websiteCount');
+            const totalValue = document.getElementById('totalValue');
+
+            websiteList.innerHTML = '';
+
+            websites.forEach(website => {
+                const card = document.createElement('div');
+                card.className = 'website-card';
+                card.innerHTML = `
+                    <div class="website-name">${website.name}</div>
+                    <div class="website-price">₪${website.price?.toLocaleString() || '0'}</div>
+                `;
+                card.onclick = () => selectWebsite(website);
+                websiteList.appendChild(card);
             });
 
-            // Auto-save every 30 seconds
-            setInterval(() => {
-                if (currentWebsite) {
-                    saveProject();
-                }
-            }, 30000);
+            // Update stats
+            websiteCount.textContent = websites.length;
+            const total = websites.reduce((sum, site) => sum + (site.price || 0), 0);
+            totalValue.textContent = `₪${total.toLocaleString()}`;
         }
 
-        // Update connection status
-        function updateConnectionStatus(text, status) {
-            document.getElementById('connection-text').textContent = text;
-            const indicator = document.getElementById('connection-indicator');
-            indicator.className = `status-indicator status-${status}`;
+        function selectWebsite(website) {
+            currentWebsite = website;
+
+            // Update active card
+            document.querySelectorAll('.website-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event?.target?.closest('.website-card')?.classList.add('active');
+
+            // Fill form
+            document.getElementById('siteName').value = website.name || '';
+            document.getElementById('siteCategory').value = website.category || '';
+            document.getElementById('sitePrice').value = website.price || '';
+            document.getElementById('businessName').value = website.business_name || '';
+            document.getElementById('businessPhone').value = website.phone || '';
+            document.getElementById('businessEmail').value = website.email || '';
         }
 
-        // Update AI status
-        function updateAIStatus(status) {
-            document.getElementById('aiStatus').textContent = status;
-        }
-
-        // Send AI message
-        async function sendAIMessage() {
-            const input = document.getElementById('aiInput');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            // Add user message to chat
-            addAIMessage('user', message);
-            input.value = '';
-
-            // Show loading state
-            const sendBtn = document.getElementById('aiSendBtn');
-            const sendIcon = document.getElementById('sendIcon');
-            const sendText = document.getElementById('sendText');
-            
-            sendBtn.disabled = true;
-            sendIcon.className = 'fas fa-spinner fa-spin';
-            sendText.textContent = 'AI עובד...';
-            updateAIStatus('מעבד בקשה...');
-
-            try {
-                if (!isConnected) {
-                    throw new Error('אין חיבור לשרת');
-                }
-
-                // Send to AI API
-                const response = await fetch(`${API_BASE_URL}/api/ai/chat`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        context: {
-                            website: currentWebsite,
-                            history: chatHistory.slice(-5) // Last 5 messages for context
-                        }
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-
-                const aiResponse = await response.json();
-                
-                // Add AI response to chat
-                addAIMessage('assistant', aiResponse.message);
-                
-                // Apply changes if any
-                if (aiResponse.changes) {
-                    applyAIChanges(aiResponse.changes);
-                }
-                
-                updateAIStatus('מוכן לעזרה');
-                
-            } catch (error) {
-                console.error('❌ AI request failed:', error);
-                
-                // Fallback response when offline or error
-                const fallbackResponse = generateFallbackResponse(message);
-                addAIMessage('assistant', fallbackResponse);
-                
-                updateAIStatus('שגיאה בחיבור AI');
-            }
-
-            // Restore button state
-            sendBtn.disabled = false;
-            sendIcon.className = 'fas fa-paper-plane';
-            sendText.textContent = 'שלח הודעה';
-        }
-
-        // Add message to AI chat
-        function addAIMessage(sender, message) {
-            const chatContainer = document.getElementById('aiChat');
-            
-            const messageEl = document.createElement('div');
-            messageEl.className = `ai-message ${sender}`;
-            messageEl.textContent = message;
-            
-            chatContainer.appendChild(messageEl);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-            
-            // Update chat history
-            chatHistory.push({ sender, message, timestamp: Date.now() });
-            
-            // Keep only last 20 messages
-            if (chatHistory.length > 20) {
-                chatHistory = chatHistory.slice(-20);
-            }
-        }
-
-        // Generate fallback response when AI is unavailable
-        function generateFallbackResponse(message) {
-            const responses = [
-                'אני מבין שאתה רוצה לשנות משהו באתר. כרגע אני עובד במצב offline, אבל אוכל לעזור לך ברגע שהחיבור לAI ישתקם.',
-                'נראה שיש בעיה זמנית בחיבור ל-AI. אתה יכול לנסות להשתמש בפאנל המאפיינים בצד הימני לעדכונים בסיסיים.',
-                'אני זוכר את הבקשה שלך. ברגע שהחיבור לשרת ישתקם, אוכל לעזור לך לבצע את השינויים.',
-                'מצטער, אני לא יכול לעבד את הבקשה כרגע בגלל בעיית חיבור. תוכל לנסות שוב בעוד רגע?'
-            ];
-            
-            return responses[Math.floor(Math.random() * responses.length)];
-        }
-
-        // Apply AI changes to the website
-        function applyAIChanges(changes) {
-            console.log('🔄 Applying AI changes:', changes);
-            
-            try {
-                if (changes.primaryColor) {
-                    document.getElementById('primaryColor').value = changes.primaryColor;
-                    updatePrimaryColor();
-                }
-                
-                if (changes.secondaryColor) {
-                    document.getElementById('secondaryColor').value = changes.secondaryColor;
-                    updateSecondaryColor();
-                }
-                
-                if (changes.businessName) {
-                    document.getElementById('businessName').value = changes.businessName;
-                    updateBusinessName();
-                }
-                
-                if (changes.businessDescription) {
-                    document.getElementById('businessDescription').value = changes.businessDescription;
-                    updateBusinessDescription();
-                }
-                
-                // Add success message
-                addAIMessage('assistant', '✅ השינויים הוחלו בהצלחה!');
-                
-            } catch (error) {
-                console.error('❌ Error applying changes:', error);
-                addAIMessage('assistant', '❌ הייתה שגיאה בהחלת השינויים. נסה שוב.');
-            }
-        }
-
-        // Website management functions
-        function loadWebsite() {
-            const selector = document.getElementById('websiteSelector');
-            const websiteId = selector.value;
-            
-            if (!websiteId) {
-                currentWebsite = null;
-                document.getElementById('websiteFrame').innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 1.2rem;">
-                        <div style="text-align: center;">
-                            <i class="fas fa-mouse-pointer" style="font-size: 3rem; margin-bottom: 20px; color: #ddd;"></i>
-                            <br>
-                            בחר אתר מהרשימה למעלה כדי להתחיל לערוך
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-            
-            currentWebsite = websiteId;
-            
-            // Load website in frame (simulation)
-            document.getElementById('websiteFrame').innerHTML = `
-                <div style="padding: 40px; text-align: center; color: #333;">
-                    <div style="margin-bottom: 30px;">
-                        <i class="fas fa-globe" style="font-size: 4rem; color: #667eea; margin-bottom: 20px;"></i>
-                        <h2 style="color: #333; margin-bottom: 10px;">${selector.options[selector.selectedIndex].text}</h2>
-                        <p style="color: #666; font-size: 1.1rem;">האתר נטען בהצלחה ומוכן לעריכה</p>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; margin: 20px 0;">
-                        <h3 style="color: #333; margin-bottom: 15px;">תכונות זמינות:</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; text-align: right;">
-                            <div>✅ עריכת צבעים באמצעות AI</div>
-                            <div>✅ עדכון תוכן טקסטואלי</div>
-                            <div>✅ שינוי פרטי העסק</div>
-                            <div>✅ הוספת סקציות חדשות</div>
-                            <div>✅ אופטימיזציה למובייל</div>
-                            <div>✅ שמירה אוטומטית</div>
-                        </div>
-                    </div>
-                    
-                    <p style="color: #888; font-style: italic;">
-                        השתמש בפאנל AI בצד שמאל או בפאנל המאפיינים בצד ימין לביצוע שינויים
-                    </p>
-                </div>
-            `;
-            
-            // Load website properties
-            loadWebsiteProperties(websiteId);
-            
-            // Add welcome message
-            addAIMessage('assistant', `נטען אתר: ${selector.options[selector.selectedIndex].text}. אני מוכן לעזור לך לערוך אותו!`);
-        }
-
-        // Load website properties
-        function loadWebsiteProperties(websiteId) {
-            // Simulate loading properties from API
-            const mockProperties = {
-                primaryColor: '#2563eb',
-                secondaryColor: '#059669',
-                businessName: 'העסק שלי',
-                businessDescription: 'תיאור קצר של העסק',
-                businessPhone: '050-1234567',
-                businessEmail: 'info@business.co.il'
-            };
-            
-            document.getElementById('primaryColor').value = mockProperties.primaryColor;
-            document.getElementById('secondaryColor').value = mockProperties.secondaryColor;
-            document.getElementById('businessName').value = mockProperties.businessName;
-            document.getElementById('businessDescription').value = mockProperties.businessDescription;
-            document.getElementById('businessPhone').value = mockProperties.businessPhone;
-            document.getElementById('businessEmail').value = mockProperties.businessEmail;
-        }
-
-        // Property update functions
-        function updatePrimaryColor() {
-            const color = document.getElementById('primaryColor').value;
-            console.log('🎨 Updating primary color to:', color);
-            // Here you would update the actual website
-        }
-
-        function updateSecondaryColor() {
-            const color = document.getElementById('secondaryColor').value;
-            console.log('🎨 Updating secondary color to:', color);
-            // Here you would update the actual website
-        }
-
-        function updateBusinessName() {
-            const name = document.getElementById('businessName').value;
-            console.log('📝 Updating business name to:', name);
-            // Here you would update the actual website
-        }
-
-        function updateBusinessDescription() {
-            const description = document.getElementById('businessDescription').value;
-            console.log('📝 Updating business description to:', description);
-            // Here you would update the actual website
-        }
-
-        function updateBusinessPhone() {
-            const phone = document.getElementById('businessPhone').value;
-            console.log('📞 Updating business phone to:', phone);
-            // Here you would update the actual website
-        }
-
-        function updateBusinessEmail() {
-            const email = document.getElementById('businessEmail').value;
-            console.log('📧 Updating business email to:', email);
-            // Here you would update the actual website
-        }
-
-        // Project management
-        async function saveProject() {
+        async function saveChanges() {
             if (!currentWebsite) {
-                console.log('⚠️ No website selected for saving');
+                showMessage('בחר אתר לעריכה', 'error');
                 return;
             }
-            
-            try {
-                const projectData = {
-                    websiteId: currentWebsite,
-                    properties: {
-                        primaryColor: document.getElementById('primaryColor').value,
-                        secondaryColor: document.getElementById('secondaryColor').value,
-                        businessName: document.getElementById('businessName').value,
-                        businessDescription: document.getElementById('businessDescription').value,
-                        businessPhone: document.getElementById('businessPhone').value,
-                        businessEmail: document.getElementById('businessEmail').value
-                    },
-                    lastModified: new Date().toISOString()
-                };
-                
-                if (isConnected) {
-                    // Save to backend
-                    const response = await fetch(`${API_BASE_URL}/api/websites/${currentWebsite}/save`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(projectData)
-                    });
-                    
-                    if (response.ok) {
-                        console.log('✅ Project saved to server');
-                        showNotification('הפרויקט נשמר בהצלחה!', 'success');
-                    } else {
-                        throw new Error('Failed to save to server');
-                    }
-                } else {
-                    // Save to localStorage as fallback
-                    localStorage.setItem(`webmaster_project_${currentWebsite}`, JSON.stringify(projectData));
-                    console.log('✅ Project saved to localStorage');
-                    showNotification('הפרויקט נשמר מקומית', 'warning');
-                }
-                
-            } catch (error) {
-                console.error('❌ Error saving project:', error);
-                showNotification('שגיאה בשמירת הפרויקט', 'error');
-            }
-        }
 
-        function previewWebsite() {
-            if (!currentWebsite) {
-                showNotification('אנא בחר אתר קודם', 'warning');
-                return;
-            }
-            
-            // In production, this would open the actual preview
-            showNotification('תצוגה מקדימה - יפתח בטאב חדש', 'info');
-            console.log('👁️ Opening preview for:', currentWebsite);
-        }
-
-        // Utility functions
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 70px;
-                right: 20px;
-                padding: 12px 20px;
-                border-radius: 8px;
-                color: white;
-                z-index: 1000;
-                font-weight: bold;
-                animation: slideIn 0.3s ease;
-                backdrop-filter: blur(10px);
-            `;
-            
-            const colors = {
-                success: 'rgba(76, 175, 80, 0.9)',
-                error: 'rgba(244, 67, 54, 0.9)',
-                warning: 'rgba(255, 152, 0, 0.9)',
-                info: 'rgba(33, 150, 243, 0.9)'
+            const updatedData = {
+                name: document.getElementById('siteName').value,
+                category: document.getElementById('siteCategory').value,
+                price: parseInt(document.getElementById('sitePrice').value) || 0,
+                business_name: document.getElementById('businessName').value,
+                phone: document.getElementById('businessPhone').value,
+                email: document.getElementById('businessEmail').value,
+                updated_at: new Date().toISOString()
             };
-            
-            notification.style.background = colors[type] || colors.info;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
+
+            if (isDemoMode) {
+                // Update local data in demo mode
+                Object.assign(currentWebsite, updatedData);
+                loadWebsiteList();
+                showMessage('✅ שינויים נשמרו (מצב Demo)', 'success');
+                return;
+            }
+
+            try {
+                const { error } = await supabase
+                    .from('websites')
+                    .update(updatedData)
+                    .eq('id', currentWebsite.id);
+
+                if (error) throw error;
+
+                // Update local data
+                Object.assign(currentWebsite, updatedData);
+                loadWebsiteList();
+                showMessage('✅ שינויים נשמרו בהצלחה!', 'success');
+
+            } catch (error) {
+                console.error('Error saving changes:', error);
+                showMessage(`❌ שגיאה בשמירה: ${error.message}`, 'error');
+            }
+        }
+
+        function previewSite() {
+            if (!currentWebsite) {
+                showMessage('בחר אתר לתצוגה מקדימה', 'error');
+                return;
+            }
+
+            const previewUrl = `https://webmasterproapp.com/websites/${currentWebsite.id}.html`;
+            window.open(previewUrl, '_blank');
+        }
+
+        function showMessage(message, type = 'info') {
+            const messageArea = document.getElementById('messageArea');
+            messageArea.innerHTML = `<div class="message ${type}">${message}</div>`;
             
             setTimeout(() => {
-                notification.remove();
-            }, 3000);
+                messageArea.innerHTML = '';
+            }, 5000);
         }
 
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', initializeEditor);
-        
-        // Add CSS animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
+        // Initialize app when page loads
+        document.addEventListener('DOMContentLoaded', initializeApp);
+
+        // Auto-refresh connection
+        setInterval(() => {
+            if (!isDemoMode && supabase) {
+                supabase.from('websites').select('count').limit(1)
+                    .then(() => {
+                        document.getElementById('statusDot').style.background = '#48bb78';
+                    })
+                    .catch(() => {
+                        document.getElementById('statusDot').style.background = '#f56565';
+                    });
             }
-        `;
-        document.head.appendChild(style);
+        }, 30000);
     </script>
 </body>
 </html>
