@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>WebMaster Pro - Supabase Connected</title>
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+        const supabaseUrl = 'https://snawyhsrrqxpuwlunscb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuYXd5aHNycnF4cHV3bHVuc2NiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwMjM3NDEsImV4cCI6MjA2NjU5OTc0MX0.ohACXAqDd9zFf_S8CX6ryHm3ZQTcVEAlKZ3VqWAOOgw';
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        async function testConnection() {
+            const { data, error } = await supabase.from('websites').select('*').limit(5);
+            if (error) {
+                console.error('❌ Supabase Error:', error);
+                document.getElementById('result').innerText = 'שגיאה: ' + error.message;
+            } else {
+                console.log('✅ Data:', data);
+                document.getElementById('result').innerText = 'התחברות הצליחה! נמצאו ' + data.length + ' רשומות.';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', testConnection);
+    </script>
+</head>
+<body style="font-family: sans-serif; direction: rtl; padding: 2rem;">
+    <h1>בדיקת חיבור ל-Supabase</h1>
+    <p id="result">טוען נתונים...</p>
+</body>
+</html>
