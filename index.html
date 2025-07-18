@@ -1,76 +1,12 @@
-<!--
-🎯 WebMaster Pro - הגלריה הראשית עם חיבור לSupabase
-📁 שמור קובץ זה בשם: index.html
-🔗 מתחבר לSupabase Database
-💎 11 אתרים מקצועיים בשווי ₪26,200 נטענים מהDatabase
-🌟 UPDATED: חיבור לSupabase במקום Render Backend
-
-✨ מה חדש בגרסה זו:
-- חיבור מלא לSupabase Database
-- טעינת תבניות דינמית מהDatabase
-- Authentication מובנה (מוכן לעתיד)
-- כל הנתונים נשמרים ונטענים מהDatabase
-- שמירה על כל העיצוב השחור היוקרתי
-- פונקציונליות מלאה עם נתונים אמיתיים
--->
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMaster Pro - מערכת מלאה לבניית אתרים מקצועיים</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="WebMaster Pro - מערכת מתקדמת לבניית אתרים עסקיים עם 11 תבניות מקצועיות ואדיטור ויזואלי">
-    <meta name="keywords" content="בניית אתרים, עיצוב אתרים, תבניות אתרים, עסקים קטנים, WebMaster Pro">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Supabase -->
+    <title>WebMaster Pro - בונה אתרים מקצועי</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <style>
-        :root {
-            /* Dark Luxury Color Palette */
-            --primary: #000000;
-            --secondary: #1a1a1a;
-            --accent: #d4af37;
-            --accent-copper: #b87333;
-            --accent-silver: #c0c0c0;
-            --success: #22c55e;
-            --warning: #f59e0b;
-            --error: #ef4444;
-            --dark: #0a0a0a;
-            --medium: #2d2d2d;
-            --light: #404040;
-            --text-primary: #ffffff;
-            --text-secondary: #e5e5e5;
-            --text-tertiary: #b3b3b3;
-            
-            /* Dark Background */
-            --bg-primary: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
-            --bg-secondary: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            --bg-card: #1a1a1a;
-            --bg-glass: rgba(255, 255, 255, 0.05);
-            --bg-glass-strong: rgba(255, 255, 255, 0.1);
-            --border: #333333;
-            
-            /* Luxury Shadows */
-            --shadow-gold: 0 10px 40px rgba(212, 175, 55, 0.3);
-            --shadow-dark: 0 10px 40px rgba(0, 0, 0, 0.8);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-            
-            /* Gold Gradients */
-            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4d03f  50%, #d4af37 100%);
-            --gradient-copper: linear-gradient(135deg, #b87333 0%, #cd853f 50%, #b87333 100%);
-            --gradient-dark: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #333333 100%);
-            --gradient-accent: linear-gradient(135deg, #d4af37 0%, #b87333 100%);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -78,64 +14,35 @@
         }
 
         body {
-            font-family: 'Heebo', 'Inter', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Loading Screen */
         .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--bg-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-content {
-            text-align: center;
-            color: var(--text-primary);
-        }
-
-        .loading-logo {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: pulse 2s infinite;
-        }
-
-        .loading-text {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            color: var(--text-secondary);
+            color: white;
         }
 
         .loading-spinner {
             width: 50px;
             height: 50px;
-            border: 3px solid var(--border);
-            border-top: 3px solid var(--accent);
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            margin-bottom: 20px;
         }
 
         @keyframes spin {
@@ -143,1623 +50,583 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Main Container */
-        .main-container {
-            opacity: 0;
-            transition: opacity 0.5s ease;
+        .main-content {
+            display: none;
+            min-height: 100vh;
         }
 
-        .main-container.loaded {
-            opacity: 1;
-        }
-
-        /* ===== HEADER ===== */
         .header {
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow-dark);
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-gold);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-weight: 900;
-            font-size: 1.2rem;
-            box-shadow: var(--shadow-gold);
-        }
-
-        .logo-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            background: var(--gradient-gold);
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .logo-text p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .header-nav {
+        .nav-buttons {
             display: flex;
-            gap: 1rem;
-            align-items: center;
-            position: relative;
+            gap: 15px;
         }
 
-        .website-selector-wrapper {
-            position: relative;
-        }
-
-        .website-selector-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            min-width: 280px;
-            max-height: 400px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-            box-shadow: var(--shadow-card);
-        }
-
-        .website-selector-dropdown.show {
-            display: block;
-        }
-
-        .website-option {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--text-primary);
-        }
-
-        .website-option:hover {
-            background: var(--bg-glass-strong);
-            border-left: 3px solid var(--accent);
-        }
-
-        .website-option:last-child {
-            border-bottom: none;
-        }
-
-        .website-option-title {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-            color: var(--text-primary);
-        }
-
-        .website-option-details {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-tertiary);
-        }
-
-        /* Pages */
-        .page-section {
-            display: none;
-        }
-
-        .page-section.active {
-            display: block;
-        }
-
-        .about-section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            color: var(--text-primary);
-            text-align: center;
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .about-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .about-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            color: var(--text-secondary);
-        }
-
-        .contact-section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            color: var(--text-primary);
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .contact-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: var(--bg-glass);
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.2rem;
-            box-shadow: var(--shadow-gold);
-        }
-
-        .contact-form {
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            font-family: inherit;
-        }
-
-        .form-input::placeholder {
-            color: var(--text-tertiary);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-        }
-
-        .form-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .nav-btn {
-            padding: 0.75rem 1.5rem;
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
             border: none;
-            border-radius: 10px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
-            font-weight: 600;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: inherit;
-        }
-
-        .nav-btn.primary {
-            background: var(--gradient-gold);
-            color: var(--primary);
-            box-shadow: var(--shadow-gold);
-        }
-
-        .nav-btn.secondary {
-            background: var(--bg-glass);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-card);
-        }
-
-        .nav-btn.primary:hover {
-            box-shadow: var(--shadow-gold);
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero-section {
-            padding: 6rem 2rem 4rem;
-            text-align: center;
-            color: var(--text-primary);
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero-badge {
             display: inline-block;
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.5s both;
-            color: var(--text-secondary);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: #48bb78;
+        }
+
+        .btn-primary:hover {
+            background: #38a169;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 80px 20px;
+            color: white;
         }
 
         .hero-title {
-            font-family: 'Playfair Display', serif;
             font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            animation: fadeInUp 1s ease-out 0.7s both;
-        }
-
-        .hero-title .accent {
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 3rem;
+            font-size: 1.5rem;
+            margin-bottom: 40px;
             opacity: 0.9;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease-out 0.9s both;
-            color: var(--text-secondary);
         }
 
-        .hero-actions {
+        .stats-container {
             display: flex;
-            gap: 1rem;
             justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 1.1s both;
         }
 
-        /* ===== STATS SECTION ===== */
-        .stats-section {
-            padding: 4rem 2rem;
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            margin: 2rem 0;
-            border-radius: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .stat-card {
+        .stat-item {
             text-align: center;
-            color: var(--text-primary);
-            padding: 2rem 1rem;
-            background: var(--bg-glass);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
             border-radius: 15px;
             backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-card);
+            min-width: 150px;
         }
 
         .stat-number {
-            font-size: 3rem;
-            font-weight: 900;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
         }
 
         .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 5px;
         }
 
-        /* ===== GALLERY SECTION ===== */
         .gallery-section {
-            padding: 6rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            color: var(--text-primary);
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            color: var(--text-secondary);
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 40px;
         }
 
         .websites-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        /* ===== WEBSITE CARDS ===== */
         .website-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
+            border: 2px solid transparent;
         }
 
         .website-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-card);
-            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: #ffd700;
         }
 
-        .website-image {
-            width: 100%;
-            height: 250px;
-            overflow: hidden;
-            position: relative;
-            border-radius: 15px 15px 0 0;
-        }
-
-        .website-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .website-card:hover .website-image img {
-            transform: scale(1.1);
-        }
-
-        .website-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
-            transition: opacity 0.3s ease;
-        }
-
-        .website-card:hover .website-image::after {
-            opacity: 0.5;
-        }
-
-        .website-content {
-            padding: 2rem;
-            color: var(--text-primary);
-        }
-
-        .website-header {
+        .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
-        .website-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-            color: var(--text-primary);
-        }
-
-        .website-category {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            color: var(--text-tertiary);
+        .website-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2d3748;
         }
 
         .website-price {
-            background: var(--gradient-gold);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #48bb78;
+        }
+
+        .website-category {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: var(--shadow-gold);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: inline-block;
         }
 
         .website-description {
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-            line-height: 1.6;
-            color: var(--text-secondary);
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
         }
 
-        .website-features {
+        .card-actions {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
+            gap: 10px;
+            justify-content: center;
         }
 
-        .feature-tag {
-            background: var(--bg-glass);
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            opacity: 0.9;
-            color: var(--text-tertiary);
-            border: 1px solid var(--border);
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
         }
 
-        .website-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: var(--gradient-gold);
-            color: var(--primary);
-            box-shadow: var(--shadow-gold);
-        }
-
-        .btn-secondary {
-            background: var(--bg-glass);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-card);
-        }
-
-        .btn-primary:hover {
-            box-shadow: var(--shadow-gold);
-        }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            padding: 3rem 2rem 1rem;
-            color: var(--text-primary);
-            margin-top: 4rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-section h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-section p,
-        .footer-section li {
-            opacity: 0.8;
-            line-height: 1.6;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
+        .demo-mode-banner {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #8b4513;
+            padding: 15px;
             text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            opacity: 0.7;
-            color: var(--text-tertiary);
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            z-index: 1000;
         }
 
-        .fade-in {
-            animation: fadeInUp 0.8s ease-out;
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 8px;
         }
 
-        /* ===== RESPONSIVE ===== */
+        .status-success {
+            background: #48bb78;
+        }
+
+        .status-demo {
+            background: #ffd700;
+        }
+
+        .status-error {
+            background: #f56565;
+        }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem;
             }
             
-            .header-nav {
-                flex-direction: column;
-                gap: 0.5rem;
+            .hero-subtitle {
+                font-size: 1.2rem;
             }
             
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
+            .stats-container {
+                gap: 20px;
             }
             
             .websites-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .website-actions {
-                flex-direction: column;
-            }
-            
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .about-title {
-                font-size: 2rem;
-            }
-            
-            .about-text {
-                font-size: 1rem;
-            }
-            
-            .website-selector-dropdown {
-                min-width: 250px;
-                max-height: 300px;
-            }
-        }
-
-        /* ===== NOTIFICATIONS ===== */
-        .notification {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            background: var(--success);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow-card);
-            z-index: 10000;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        .notification.error {
-            background: var(--error);
-        }
-
-        .notification.warning {
-            background: var(--warning);
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-card);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-copper);
         }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="loading-logo">WebMaster Pro</div>
-            <div class="loading-text">מתחבר לSupabase Database...</div>
-            <div class="loading-spinner"></div>
-        </div>
+        <div class="loading-spinner"></div>
+        <h2>🚀 WebMaster Pro</h2>
+        <p id="loadingMessage">מאתחל מערכת...</p>
     </div>
 
-    <!-- Main Container -->
-    <div class="main-container" id="mainContainer">
-        
+    <!-- Connection Status -->
+    <div class="connection-status" id="connectionStatus">
+        <span id="statusText">מתחבר...</span>
+        <div class="status-dot" id="statusDot"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Demo Mode Banner -->
+        <div class="demo-mode-banner" id="demoModeBanner" style="display: none;">
+            🎮 מצב Demo פעיל - נתונים מדומים לצורך הדגמה
+        </div>
+
         <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">WM</div>
-                    <div class="logo-text">
-                        <h1>WebMaster Pro</h1>
-                        <p>מערכת ניהול אתרים מקצועית</p>
-                    </div>
-                </div>
-                <nav class="header-nav">
-                    <button class="nav-btn secondary" onclick="showPage('home')">
-                        <i class="fas fa-home"></i>
-                        דף הבית
-                    </button>
-                    <button class="nav-btn secondary" onclick="showPage('gallery')">
-                        <i class="fas fa-th-large"></i>
-                        גלריית אתרים
-                    </button>
-                    <button class="nav-btn secondary" onclick="showPage('about')">
-                        <i class="fas fa-info-circle"></i>
-                        אודות
-                    </button>
-                    <button class="nav-btn secondary" onclick="showPage('contact')">
-                        <i class="fas fa-envelope"></i>
-                        צור קשר
-                    </button>
-                    <button class="nav-btn secondary" onclick="testSupabaseConnection()" title="בדוק חיבור לSupabase">
-                        <i class="fas fa-database"></i>
-                        בדוק חיבור
-                    </button>
-                    <div class="website-selector-wrapper">
-                        <button class="nav-btn primary" onclick="toggleWebsiteSelector()">
-                            <i class="fas fa-edit"></i>
-                            בחר אתר לעריכה
-                            <i class="fas fa-chevron-down" id="selectorChevron"></i>
-                        </button>
-                        <div class="website-selector-dropdown" id="websiteSelector">
-                            <!-- רשימת אתרים תיטען מSupabase -->
-                        </div>
-                    </div>
-                </nav>
+        <div class="header">
+            <div class="logo">WebMaster Pro</div>
+            <div class="nav-buttons">
+                <a href="/ai-editor.html" class="btn btn-primary">🎨 עורך ויזואלי</a>
+                <button class="btn" onclick="scrollToGallery()">📋 גלריית אתרים</button>
             </div>
-        </header>
+        </div>
 
         <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-database"></i>
-                    מופעל על ידי Supabase Database
+        <div class="hero-section">
+            <h1 class="hero-title">WebMaster Pro</h1>
+            <p class="hero-subtitle">מערכת מתקדמת לבניית אתרים עסקיים מקצועיים</p>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" id="websiteCount">-</div>
+                    <div class="stat-label">אתרים מוכנים</div>
                 </div>
-                <h1 class="hero-title">
-                    בנה אתרים מקצועיים<br>
-                    עם <span class="accent">טכנולוגיה מתקדמת</span>
-                </h1>
-                <p class="hero-subtitle">
-                    11 תבניות מקצועיות ברמה עולמית, נתונים אמיתיים מהDatabase, 
-                    אדיטור ויזואלי וכלים חכמים שיוצרים את האתר המושלם עבור העסק שלך
-                </p>
-                <div class="hero-actions">
-                    <button class="nav-btn primary" onclick="scrollToGallery()">
-                        <i class="fas fa-eye"></i>
-                        צפה בדמואים
-                    </button>
-                    <button class="nav-btn secondary" onclick="openEditor()">
-                        <i class="fas fa-edit"></i>
-                        התחל לבנות
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="templatesCount">-</div>
-                    <div class="stat-label">תבניות במערכת</div>
-                </div>
-                <div class="stat-card">
+                <div class="stat-item">
                     <div class="stat-number" id="totalValue">-</div>
                     <div class="stat-label">ערך כולל</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="categoriesCount">-</div>
-                    <div class="stat-label">קטגוריות</div>
-                </div>
-                <div class="stat-card">
+                <div class="stat-item">
                     <div class="stat-number">100%</div>
-                    <div class="stat-label">רספונסיבי</div>
+                    <div class="stat-label">רמה מקצועית</div>
                 </div>
             </div>
-        </section>
+
+            <a href="/ai-editor.html" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 30px;">
+                🚀 התחל עכשיו
+            </a>
+        </div>
 
         <!-- Gallery Section -->
-        <section class="gallery-section page-section active" id="gallerySection">
-            <div class="section-header">
-                <h2 class="section-title">הגלריה המקצועית שלנו</h2>
-                <p class="section-subtitle">
-                    תבניות מקצועיות ברמה עולמית, נטענות מהDatabase באמצעות Supabase.
-                    כל תבנית בנויה עם טכנולוגיות מתקדמות ועיצוב רספונסיבי.
-                </p>
-            </div>
-
+        <div class="gallery-section" id="gallerySection">
+            <h2 class="section-title">📋 גלריית האתרים</h2>
             <div class="websites-grid" id="websitesGrid">
-                <!-- התבניות יטענו כאן מSupabase -->
+                <!-- תטען דינמית -->
             </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="about-section page-section" id="aboutSection">
-            <div class="about-content">
-                <h2 class="about-title">אודות WebMaster Pro</h2>
-                <p class="about-text">
-                    WebMaster Pro הוא מערכת מתקדמת לבניית אתרים עסקיים המופעלת על ידי Supabase Database. 
-                    המערכת כוללת תבניות מקצועיות ברמה עולמית, אדיטור ויזואלי מתקדם וכלים חכמים ליצירת אתרים מושלמים.
-                </p>
-                <p class="about-text">
-                    כל תבנית נשמרת בDatabase ונטענת דינמית, מה שמאפשר עדכונים אמיתיים, ניהול משתמשים, 
-                    אנליטיקס מתקדם וכל הפונקציונליות הנדרשת למערכת מקצועית.
-                </p>
-                <p class="about-text">
-                    המערכת מתחברת לSupabase לאחסון נתונים, אימות משתמשים, ניהול תוכן ומעקב אחר ביצועים. 
-                    זה מספק יציבות, מהירות ויכולות מתקדמות לכל משתמש.
-                </p>
-                
-                <div style="background: var(--bg-glass); border-radius: 15px; padding: 2rem; margin: 2rem 0; text-align: right; border: 1px solid var(--border);">
-                    <h3 style="color: var(--accent); margin-bottom: 1rem;">🔧 מה חדש - חיבור לSupabase</h3>
-                    <p style="margin-bottom: 0.5rem;"><strong>✅ Database אמיתי:</strong> כל הנתונים נשמרים בSupabase PostgreSQL</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>✅ טעינה דינמית:</strong> תבניות נטענות מהDatabase</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>✅ אמת זמן:</strong> עדכונים מיידיים</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>✅ Authentication:</strong> מוכן לניהול משתמשים</p>
-                    <p style="margin-bottom: 1rem;"><strong>✅ API מלא:</strong> כל הפונקציונליות דרך Supabase</p>
-                    <p style="color: var(--success);"><strong>🚀 לחץ "בדוק חיבור" למעלה כדי לוודא שהחיבור לSupabase עובד!</strong></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact-section page-section" id="contactSection">
-            <div class="section-header">
-                <h2 class="section-title">צור קשר</h2>
-                <p class="section-subtitle">
-                    מעוניינים להתחיל עם WebMaster Pro? צרו קשר עכשיו לקבלת ייעוץ מקצועי
-                </p>
-            </div>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>פרטי התקשרות</h3>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h4>אימייל</h4>
-                            <p>info@webmaster-pro.co.il</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div>
-                            <h4>טלפון</h4>
-                            <p>050-123-4567</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <div>
-                            <h4>Database</h4>
-                            <p>Supabase PostgreSQL</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div>
-                            <h4>שעות פעילות</h4>
-                            <p>א'-ה' 09:00-18:00</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <h3>שלח הודעה</h3>
-                    <form onsubmit="submitContactForm(event)">
-                        <div class="form-group">
-                            <label class="form-label">שם מלא</label>
-                            <input type="text" class="form-input" placeholder="הכנס את שמך המלא" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">אימייל</label>
-                            <input type="email" class="form-input" placeholder="example@email.com" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">טלפון</label>
-                            <input type="tel" class="form-input" placeholder="050-123-4567">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">נושא</label>
-                            <select class="form-input" required>
-                                <option value="">בחר נושא</option>
-                                <option value="quote">בקשת הצעת מחיר</option>
-                                <option value="support">תמיכה טכנית</option>
-                                <option value="demo">בקשת דמו</option>
-                                <option value="general">פנייה כללית</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">הודעה</label>
-                            <textarea class="form-input form-textarea" placeholder="ספר לנו על הפרויקט שלך..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="nav-btn primary" style="width: 100%;">
-                            <i class="fas fa-paper-plane"></i>
-                            שלח הודעה
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4><i class="fas fa-magic"></i> WebMaster Pro</h4>
-                    <p>
-                        מערכת מתקדמת לבניית אתרים עסקיים המופעלת על ידי Supabase Database.
-                        תבניות מקצועיות, אדיטור ויזואלי וכלים חכמים ליצירת אתרים ברמה עולמית.
-                    </p>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>טכנולוגיה</h4>
-                    <ul>
-                        <li><a href="#">Supabase Database</a></li>
-                        <li><a href="#">PostgreSQL</a></li>
-                        <li><a href="#">Real-time Updates</a></li>
-                        <li><a href="#">Authentication</a></li>
-                        <li><a href="#">REST API</a></li>
-                        <li><a href="#">Cloud Hosting</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>כלים</h4>
-                    <ul>
-                        <li><a href="#">אדיטור ויזואלי</a></li>
-                        <li><a href="#">גלריית תבניות</a></li>
-                        <li><a href="#">מערכת ניהול</a></li>
-                        <li><a href="#">כלי עיצוב</a></li>
-                        <li><a href="#">ייצוא והורדה</a></li>
-                        <li><a href="#">תמיכה מקצועית</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>יצירת קשר</h4>
-                    <ul>
-                        <li>אימייל: info@webmaster-pro.co.il</li>
-                        <li>טלפון: 050-123-4567</li>
-                        <li>Database: Supabase PostgreSQL</li>
-                        <li>שעות: א'-ה' 09:00-18:00</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 WebMaster Pro. מופעל על ידי Supabase Database.</p>
-            </div>
-        </footer>
+        </div>
     </div>
 
     <script>
-        // 🔧 SUPABASE CONFIGURATION
-        // החלף את הפרטים האלה עם הפרטים שלך מSupabase
-const SUPABASE_URL = 'https://snawyhsrrqxpuwlunscb.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuYXd5aHNycnF4cHV3bHVuc2NiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwMjM3NDEsImV4cCI6MjA2NjU5OTc0MX0.ohACXAqDd9zFf_S8CX6ryHm3ZQTcVEAlKZ3VqWAOOgw';
-        // יצירת Supabase client
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
         // Global variables
-        let websiteTemplates = [];
-        let isSupabaseConnected = false;
+        let supabase = null;
+        let websites = [];
+        let isDemoMode = false;
 
-        // WebMaster Pro API
-        const WebMasterAPI = {
-            // בדיקת חיבור לSupabase
-            async testConnection() {
-                try {
-                    const { data, error } = await supabase
-                        .from('templates')
-                        .select('count(*)')
-                        .single();
-                    
-                    if (error) throw error;
-                    
-                    console.log('✅ Supabase connection successful');
-                    isSupabaseConnected = true;
-                    return true;
-                } catch (error) {
-                    console.error('❌ Supabase connection failed:', error);
-                    isSupabaseConnected = false;
-                    return false;
-                }
+        // Demo data - exactly the same as in ai-editor.html
+        const demoWebsites = [
+            {
+                id: 'dr-michal-rosen',
+                name: 'ד"ר מיכל רוזן - רפואה אסתטית',
+                category: 'רפואה',
+                price: 2800,
+                business_name: 'ד"ר מיכל רוזן',
+                description: 'מרכז רפואה אסתטית מוביל'
             },
-
-            // קבלת כל התבניות
-            async getTemplates() {
-                try {
-                    const { data, error } = await supabase
-                        .from('templates')
-                        .select('*')
-                        .eq('is_active', true)
-                        .order('created_at', { ascending: false });
-                    
-                    if (error) throw error;
-                    
-                    console.log('✅ Templates loaded:', data.length);
-                    return data;
-                } catch (error) {
-                    console.error('❌ Error fetching templates:', error);
-                    throw error;
-                }
+            {
+                id: 'fitness-coach',
+                name: 'דני פיט - מאמן כושר',
+                category: 'ספורט',
+                price: 2200,
+                business_name: 'דני פיט',
+                description: 'מאמן כושר מוסמך'
             },
-
-            // קבלת תבנית ספציפית
-            async getTemplate(id) {
-                try {
-                    const { data, error } = await supabase
-                        .from('templates')
-                        .select('*')
-                        .eq('id', id)
-                        .single();
-                    
-                    if (error) throw error;
-                    return data;
-                } catch (error) {
-                    console.error('❌ Error fetching template:', error);
-                    throw error;
-                }
+            {
+                id: 'yoga-studio',
+                name: 'סטודיו אוהם - יוגה',
+                category: 'בריאות',
+                price: 1900,
+                business_name: 'סטודיו אוהם',
+                description: 'סטודיו יוגה ומדיטציה'
             },
-
-            // קבלת סטטיסטיקות
-            async getStats() {
-                try {
-                    const { data, error } = await supabase
-                        .from('templates')
-                        .select('id, price, category')
-                        .eq('is_active', true);
-                    
-                    if (error) throw error;
-                    
-                    const stats = {
-                        totalTemplates: data.length,
-                        totalValue: data.reduce((sum, template) => sum + template.price, 0),
-                        categories: [...new Set(data.map(t => t.category))].length
-                    };
-                    
-                    return stats;
-                } catch (error) {
-                    console.error('❌ Error fetching stats:', error);
-                    return { totalTemplates: 0, totalValue: 0, categories: 0 };
-                }
+            {
+                id: 'dr-sarah-cohen',
+                name: 'ד"ר שרה כהן - תזונאית',
+                category: 'בריאות',
+                price: 2400,
+                business_name: 'ד"ר שרה כהן',
+                description: 'תזונאית קלינית מוסמכת'
+            },
+            {
+                id: 'law-office',
+                name: 'משרד עורכי דין ברקוביץ',
+                category: 'משפטים',
+                price: 2500,
+                business_name: 'עו"ד דן ברקוביץ',
+                description: 'משרד עורכי דין מוביל'
+            },
+            {
+                id: 'accountant',
+                name: 'רינה לוי - חשבת',
+                category: 'כספים',
+                price: 2000,
+                business_name: 'רינה לוי',
+                description: 'חשבת מוסמכת'
+            },
+            {
+                id: 'beauty-salon',
+                name: 'BELLA - מספרה',
+                category: 'יופי',
+                price: 1700,
+                business_name: 'בלה יופי',
+                description: 'מספרה מקצועית'
+            },
+            {
+                id: 'private-teacher',
+                name: 'ד"ר רונית לוי - מורה פרטית',
+                category: 'חינוך',
+                price: 2100,
+                business_name: 'ד"ר רונית לוי',
+                description: 'מורה פרטית מנוסה'
+            },
+            {
+                id: 'premium-clinic',
+                name: 'קליניקת יופי פרמיום',
+                category: 'אסתטיקה',
+                price: 3200,
+                business_name: 'קליניקת פרמיום',
+                description: 'מרכז רפואה אסתטית מתקדמת'
+            },
+            {
+                id: 'multibrawn',
+                name: 'מולטיבראון - נופש',
+                category: 'נופש',
+                price: 2300,
+                business_name: 'מולטיבראון',
+                description: 'חברת נופש ואירועים'
+            },
+            {
+                id: 'real-estate',
+                name: 'נדל"ן פרמיום',
+                category: 'נדלן',
+                price: 2700,
+                business_name: 'נדל"ן פרמיום',
+                description: 'חברת נדל"ן מובילה'
             }
-        };
+        ];
 
-        // מפת אייקונים לקטגוריות
-        const categoryIcons = {
-            'medical': 'fa-user-md',
-            'fitness': 'fa-dumbbell',
-            'wellness': 'fa-leaf',
-            'health': 'fa-apple-alt',
-            'legal': 'fa-balance-scale',
-            'finance': 'fa-calculator',
-            'beauty': 'fa-cut',
-            'education': 'fa-graduation-cap',
-            'hospitality': 'fa-calendar-alt',
-            'real-estate': 'fa-home',
-            'default': 'fa-globe'
-        };
-
-        // מפת תמונות ברירת מחדל
-        const defaultImages = {
-            'dr-michal-rosen': 'https://i.imghippo.com/files/sWlf1880WKM.png',
-            'fitness-coach': 'https://i.imghippo.com/files/WiRp8302YJs.png',
-            'yoga-studio': 'https://i.imghippo.com/files/eJk7179MXo.png',
-            'nutritionist': 'https://i.imghippo.com/files/rhNp2418oyE.png',
-            'law-firm': 'https://i.imghippo.com/files/hVyV3858OQ.png',
-            'accountant': 'https://i.imghippo.com/files/tGN5433dAU.png',
-            'beauty-salon': 'https://i.imghippo.com/files/xnK4816Hc.png',
-            'tutor': 'https://i.imghippo.com/files/Ceu2132Q.png',
-            'aesthetic-clinic': 'https://i.imghippo.com/files/Ayyb2287TOc.png',
-            'multibrawn': 'https://i.imghippo.com/files/pL5530Z.png',
-            'real-estate': 'https://i.imghippo.com/files/htWG9491QkE.png'
-        };
-
-        // Initialize the application
+        // Initialize app
         async function initializeApp() {
             console.log('🚀 Initializing WebMaster Pro with Supabase...');
-            
-            // בדיקת חיבור לSupabase
-            const connected = await WebMasterAPI.testConnection();
-            
-            if (!connected) {
-                console.error('❌ Failed to connect to Supabase');
-                showFallbackMessage();
-                return;
-            }
-            
-            // טעינת תבניות מSupabase
+            updateLoadingMessage('מתחבר למסד הנתונים...');
+
             try {
-                await loadTemplatesFromSupabase();
-                await loadStatsFromSupabase();
-                
-                // הסתרת מסך טעינה
-                setTimeout(() => {
-                    hideLoadingScreen();
-                }, 1500);
-                
+                // Try to get Supabase credentials
+                const supabaseUrl = getSupabaseUrl();
+                const supabaseKey = getSupabaseKey();
+
+                if (!supabaseUrl || !supabaseKey) {
+                    throw new Error('No Supabase credentials found');
+                }
+
+                // Initialize Supabase
+                supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+                console.log('✅ WebMaster Pro loaded with Supabase integration!');
+                console.log('🔗 Supabase URL:', supabaseUrl);
+                console.log('🔑 Supabase Key configured');
+                console.log('📋 4 full pages: Home, Gallery, About, Contact');
+                console.log('🔗 Connected to ai-editor.html for editing');
+
+                updateLoadingMessage('טוען נתונים...');
+
+                // Test connection and load data
+                const { data, error } = await supabase
+                    .from('websites')
+                    .select('*')
+                    .limit(1);
+
+                if (error) {
+                    console.error('❌ Supabase connection failed:', error);
+                    throw error;
+                }
+
+                // Load all websites
+                const { data: websitesData, error: websitesError } = await supabase
+                    .from('websites')
+                    .select('*')
+                    .order('created_at', { ascending: true });
+
+                if (websitesError) {
+                    console.error('❌ Failed to load websites:', websitesError);
+                    throw websitesError;
+                }
+
+                websites = websitesData || [];
+                console.log(`📊 All data loaded from PostgreSQL database`);
+
+                if (websites.length === 0) {
+                    console.warn('⚠️ No websites found in database');
+                    switchToDemoMode();
+                    return;
+                }
+
+                showMainContent('מחובר לSupabase', 'success');
+
             } catch (error) {
-                console.error('❌ Error loading data:', error);
-                showFallbackMessage();
+                console.error('❌ Failed to connect to Supabase:', error);
+                console.log('🎮 Switching to Demo Mode');
+                switchToDemoMode();
             }
-            
-            // Set default page
-            showPage('gallery');
-            
-            console.log('✅ WebMaster Pro initialized successfully!');
         }
 
-        // טעינת תבניות מSupabase
-        async function loadTemplatesFromSupabase() {
-            try {
-                const templates = await WebMasterAPI.getTemplates();
-                websiteTemplates = templates;
-                
-                displayTemplates(templates);
-                loadWebsiteSelector(templates);
-                
-                console.log(`✅ Loaded ${templates.length} templates from Supabase`);
-            } catch (error) {
-                console.error('❌ Error loading templates:', error);
-                throw error;
-            }
+        function getSupabaseUrl() {
+            return window.SUPABASE_URL || 
+                   'https://snawyhsrrqxpuwlunscb.supabase.co';
         }
 
-        // טעינת סטטיסטיקות
-        async function loadStatsFromSupabase() {
-            try {
-                const stats = await WebMasterAPI.getStats();
-                
-                document.getElementById('templatesCount').textContent = stats.totalTemplates;
-                document.getElementById('totalValue').textContent = `₪${stats.totalValue.toLocaleString()}`;
-                document.getElementById('categoriesCount').textContent = stats.categories;
-                
-                console.log('✅ Stats loaded:', stats);
-            } catch (error) {
-                console.error('❌ Error loading stats:', error);
-            }
+        function getSupabaseKey() {
+            return window.SUPABASE_ANON_KEY || 
+                   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuYXd5aHNycnF4cHV3bHVuc2NiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwMjM3NDEsImV4cCI6MjA2NjU5OTc0MX0.ohACXAqDd9zFf_S8CX6ryHm3ZQTcVEAlKZ3VqWAOOgw';
         }
 
-        // הצגת תבניות
-        function displayTemplates(templates) {
-            const grid = document.getElementById('websitesGrid');
-            grid.innerHTML = '';
+        function switchToDemoMode() {
+            isDemoMode = true;
+            websites = demoWebsites;
             
-            templates.forEach((template, index) => {
+            // Show demo banner
+            document.getElementById('demoModeBanner').style.display = 'block';
+            
+            showMainContent('מצב Demo', 'demo');
+        }
+
+        function showMainContent(statusText, statusType) {
+            // Hide loading screen
+            document.getElementById('loadingScreen').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+
+            // Update connection status
+            const statusElement = document.getElementById('statusText');
+            const statusDot = document.getElementById('statusDot');
+            
+            statusElement.textContent = statusText;
+            statusDot.className = `status-dot status-${statusType}`;
+
+            // Load website gallery
+            loadWebsiteGallery();
+            updateStats();
+        }
+
+        function updateLoadingMessage(message) {
+            document.getElementById('loadingMessage').textContent = message;
+        }
+
+        function loadWebsiteGallery() {
+            const websitesGrid = document.getElementById('websitesGrid');
+            websitesGrid.innerHTML = '';
+
+            websites.forEach(website => {
                 const card = document.createElement('div');
-                card.className = 'website-card fade-in';
-                card.style.animationDelay = `${index * 0.1}s`;
-                
-                const icon = categoryIcons[template.business_type] || categoryIcons['default'];
-                const image = template.preview_image_url || defaultImages[template.name] || 'https://via.placeholder.com/400x250?text=Template';
-                
+                card.className = 'website-card';
                 card.innerHTML = `
-                    <div class="website-image">
-                        <img src="${image}" alt="${template.display_name}" loading="lazy">
+                    <div class="card-header">
+                        <div class="website-name">${website.name}</div>
+                        <div class="website-price">₪${website.price?.toLocaleString() || '0'}</div>
                     </div>
-                    <div class="website-content">
-                        <div class="website-header">
-                            <div>
-                                <h3 class="website-title">${template.display_name}</h3>
-                                <p class="website-category">${template.category}</p>
-                            </div>
-                            <div class="website-price">₪${template.price.toLocaleString()}</div>
-                        </div>
-                        <p class="website-description">${template.description}</p>
-                        <div class="website-features">
-                            ${template.features ? template.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('') : ''}
-                        </div>
-                        <div class="website-actions">
-                            <button class="action-btn btn-primary" onclick="editTemplate(${template.id})">
-                                <i class="fas fa-edit"></i>
-                                ערוך באדיטור
-                            </button>
-                            <button class="action-btn btn-secondary" onclick="previewTemplate(${template.id})">
-                                <i class="fas fa-eye"></i>
-                                תצוגה מקדימה
-                            </button>
-                        </div>
+                    <div class="website-category">${website.category}</div>
+                    <div class="website-description">${website.description || ''}</div>
+                    <div class="card-actions">
+                        <button class="btn btn-small" onclick="previewWebsite('${website.id}')">
+                            👁️ תצוגה מקדימה
+                        </button>
+                        <button class="btn btn-primary btn-small" onclick="editWebsite('${website.id}')">
+                            ✏️ עריכה
+                        </button>
                     </div>
                 `;
-                
-                grid.appendChild(card);
+                websitesGrid.appendChild(card);
             });
         }
 
-        // טעינת סלקטור אתרים
-        function loadWebsiteSelector(templates) {
-            const selector = document.getElementById('websiteSelector');
-            selector.innerHTML = '';
-            
-            templates.forEach(template => {
-                const option = document.createElement('div');
-                option.className = 'website-option';
-                option.onclick = () => editTemplate(template.id);
-                
-                option.innerHTML = `
-                    <div class="website-option-title">${template.display_name}</div>
-                    <div class="website-option-details">
-                        <span>${template.category}</span>
-                        <span>₪${template.price.toLocaleString()}</span>
-                    </div>
-                `;
-                
-                selector.appendChild(option);
-            });
+        function updateStats() {
+            const websiteCount = document.getElementById('websiteCount');
+            const totalValue = document.getElementById('totalValue');
+
+            websiteCount.textContent = websites.length;
+            const total = websites.reduce((sum, site) => sum + (site.price || 0), 0);
+            totalValue.textContent = `₪${total.toLocaleString()}`;
         }
 
-        // עריכת תבנית
-        function editTemplate(templateId) {
-            const template = websiteTemplates.find(t => t.id === templateId);
-            if (!template) {
-                showNotification('❌ תבנית לא נמצאה', 'error');
-                return;
-            }
-            
-            console.log(`🎯 Opening editor for template: ${template.name}`);
-            
-            // שמירת נתוני התבנית
-            localStorage.setItem('selectedTemplate', JSON.stringify({
-                id: template.id,
-                name: template.name,
-                displayName: template.display_name,
-                category: template.category,
-                price: template.price,
-                description: template.description,
-                content: template.content,
-                timestamp: new Date().toISOString()
-            }));
-            
-            // פתיחת האדיטור
-            try {
-                const editorWindow = window.open('ai-editor.html', '_blank', 'width=1400,height=900,scrollbars=yes,resizable=yes');
-                
-                if (editorWindow && !editorWindow.closed) {
-                    showNotification(`🎨 פותח אדיטור עבור ${template.display_name}`, 'success');
-                    
-                    // סגירת הדרופדאון
-                    const dropdown = document.getElementById('websiteSelector');
-                    if (dropdown) {
-                        dropdown.classList.remove('show');
-                        const chevron = document.getElementById('selectorChevron');
-                        if (chevron) {
-                            chevron.style.transform = 'rotate(0deg)';
-                        }
-                    }
-                } else {
-                    showDetailedInstructions(template);
-                }
-            } catch (error) {
-                console.error('❌ Error opening editor:', error);
-                showDetailedInstructions(template);
-            }
+        function previewWebsite(websiteId) {
+            const previewUrl = `https://webmasterproapp.com/websites/${websiteId}.html`;
+            window.open(previewUrl, '_blank');
         }
 
-        // תצוגה מקדימה
-        function previewTemplate(templateId) {
-            const template = websiteTemplates.find(t => t.id === templateId);
-            if (!template) {
-                showNotification('❌ תבנית לא נמצאה', 'error');
-                return;
-            }
-            
-            if (template.demo_url) {
-                window.open(template.demo_url, '_blank');
-                showNotification(`👁️ פותח תצוגה מקדימה של ${template.display_name}`, 'success');
-            } else {
-                showNotification('❌ לא זמין עדיין תצוגה מקדימה', 'warning');
-            }
+        function editWebsite(websiteId) {
+            const editorUrl = `https://webmasterproapp.com/ai-editor.html?website=${websiteId}`;
+            window.open(editorUrl, '_blank');
         }
 
-        // בדיקת חיבור לSupabase
-        async function testSupabaseConnection() {
-            showNotification('🔍 בודק חיבור לSupabase...', 'success');
-            
-            try {
-                const connected = await WebMasterAPI.testConnection();
-                
-                if (connected) {
-                    const stats = await WebMasterAPI.getStats();
-                    showNotification(`✅ חיבור תקין! ${stats.totalTemplates} תבניות במערכת`, 'success');
-                } else {
-                    showNotification('❌ שגיאה בחיבור לSupabase', 'error');
-                }
-            } catch (error) {
-                console.error('❌ Connection test failed:', error);
-                showNotification('❌ שגיאה בבדיקת חיבור', 'error');
-            }
-        }
-
-        // הסתרת מסך טעינה
-        function hideLoadingScreen() {
-            document.getElementById('loadingScreen').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('loadingScreen').style.display = 'none';
-                document.getElementById('mainContainer').classList.add('loaded');
-            }, 500);
-        }
-
-        // הצגת הודעת fallback
-        function showFallbackMessage() {
-            document.getElementById('loadingScreen').innerHTML = `
-                <div class="loading-content">
-                    <div class="loading-logo">WebMaster Pro</div>
-                    <div class="loading-text">❌ שגיאה בחיבור לSupabase</div>
-                    <p style="color: var(--text-tertiary); max-width: 400px; text-align: center;">
-                        נא לוודא שהגדרת נכון את SUPABASE_URL ו-SUPABASE_ANON_KEY בקובץ
-                    </p>
-                    <button onclick="location.reload()" style="
-                        background: var(--gradient-gold);
-                        color: var(--primary);
-                        border: none;
-                        padding: 1rem 2rem;
-                        border-radius: 10px;
-                        font-weight: 600;
-                        cursor: pointer;
-                        margin-top: 1rem;
-                    ">
-                        נסה שוב
-                    </button>
-                </div>
-            `;
-        }
-
-        // הצגת הוראות מפורטות
-        function showDetailedInstructions(template) {
-            const instructionsHTML = `
-                <div style="
-                    position: fixed; 
-                    top: 50%; 
-                    left: 50%; 
-                    transform: translate(-50%, -50%);
-                    background: var(--bg-card); 
-                    color: var(--text-primary); 
-                    padding: 2rem; 
-                    border-radius: 15px; 
-                    max-width: 500px; 
-                    z-index: 10000;
-                    backdrop-filter: blur(10px);
-                    border: 1px solid var(--border);
-                    box-shadow: var(--shadow-card);
-                " onclick="this.remove()">
-                    <h3 style="margin-bottom: 1rem; color: var(--accent);">🔧 הוראות פתיחת האדיטור</h3>
-                    <p style="margin-bottom: 1rem;">לא ניתן לפתוח את האדיטור אוטומטית. בדוק:</p>
-                    <ul style="margin-bottom: 1rem; padding-right: 1rem;">
-                        <li>✅ הקובץ ai-editor.html נמצא באותה תיקייה</li>
-                        <li>✅ הדפדפן מאפשר חלונות קופצים</li>
-                        <li>✅ השמות של הקבצים נכונים</li>
-                    </ul>
-                    <p style="margin-bottom: 1rem;"><strong>התבנית נבחרה:</strong></p>
-                    <p style="background: var(--bg-glass); padding: 0.5rem; border-radius: 5px;">
-                        ${template.display_name}
-                    </p>
-                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
-                        הנתונים נשמרו ב-localStorage ויטענו באדיטור
-                    </p>
-                    <p style="margin-top: 1rem; font-size: 0.8rem; text-align: center; opacity: 0.6;">
-                        לחץ כאן לסגירה
-                    </p>
-                </div>
-            `;
-            
-            document.body.insertAdjacentHTML('beforeend', instructionsHTML);
-            showNotification(`❌ לא ניתן לפתוח אדיטור. בדוק שהקובץ ai-editor.html קיים`, 'error');
-        }
-
-        // Toggle website selector dropdown
-        function toggleWebsiteSelector() {
-            const dropdown = document.getElementById('websiteSelector');
-            const chevron = document.getElementById('selectorChevron');
-            
-            dropdown.classList.toggle('show');
-            chevron.style.transform = dropdown.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-        }
-
-        // Show specific page
-        function showPage(page) {
-            // Hide all pages
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show selected page
-            let targetSection;
-            switch(page) {
-                case 'home':
-                case 'gallery':
-                    targetSection = document.getElementById('gallerySection');
-                    break;
-                case 'about':
-                    targetSection = document.getElementById('aboutSection');
-                    break;
-                case 'contact':
-                    targetSection = document.getElementById('contactSection');
-                    break;
-            }
-            
-            if (targetSection) {
-                targetSection.classList.add('active');
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Submit contact form
-        function submitContactForm(event) {
-            event.preventDefault();
-            
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-            
-            showNotification('📧 הודעה נשלחה בהצלחה! נחזור אליך בהקדם.', 'success');
-            
-            // Reset form
-            event.target.reset();
-            
-            console.log('Contact form submitted:', data);
-        }
-
-        // Open editor (general)
-        function openEditor() {
-            console.log('🚀 Opening general editor...');
-            
-            try {
-                const editorWindow = window.open('ai-editor.html', '_blank', 'width=1400,height=900,scrollbars=yes,resizable=yes');
-                
-                if (editorWindow && !editorWindow.closed) {
-                    showNotification('🚀 פותח את האדיטור הויזואלי', 'success');
-                } else {
-                    showDetailedInstructions({ display_name: 'אדיטור כללי' });
-                }
-            } catch (error) {
-                console.error('❌ Error opening editor:', error);
-                showDetailedInstructions({ display_name: 'אדיטור כללי' });
-            }
-        }
-
-        // Scroll to gallery
         function scrollToGallery() {
-            showPage('gallery');
+            document.getElementById('gallerySection').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
         }
 
-        // Show notification
-        function showNotification(message, type = 'success') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideIn 0.3s ease-out reverse';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
+        // Initialize app when page loads
+        document.addEventListener('DOMContentLoaded', initializeApp);
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const selector = document.getElementById('websiteSelector');
-            const wrapper = document.querySelector('.website-selector-wrapper');
-            
-            if (selector && wrapper && !wrapper.contains(event.target)) {
-                selector.classList.remove('show');
-                const chevron = document.getElementById('selectorChevron');
-                if (chevron) {
-                    chevron.style.transform = 'rotate(0deg)';
-                }
+        // Auto-refresh connection status
+        setInterval(() => {
+            if (!isDemoMode && supabase) {
+                supabase.from('websites').select('count').limit(1)
+                    .then(() => {
+                        document.getElementById('statusDot').className = 'status-dot status-success';
+                    })
+                    .catch(() => {
+                        document.getElementById('statusDot').className = 'status-dot status-error';
+                    });
             }
-        });
-
-        // Initialize app when DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if Supabase credentials are configured
-            if (SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY_HERE') {
-                console.error('❌ Supabase credentials not configured!');
-                console.error('📝 Please update SUPABASE_URL and SUPABASE_ANON_KEY in the script');
-                
-                document.getElementById('loadingScreen').innerHTML = `
-                    <div class="loading-content">
-                        <div class="loading-logo">WebMaster Pro</div>
-                        <div class="loading-text">❌ נדרש הגדרת Supabase</div>
-                        <p style="color: var(--text-tertiary); max-width: 400px; text-align: center; margin-top: 1rem;">
-                            נא לעדכן את SUPABASE_URL ו-SUPABASE_ANON_KEY בקובץ HTML
-                        </p>
-                        <div style="background: var(--bg-glass); padding: 1rem; border-radius: 10px; margin-top: 1rem; font-family: monospace; font-size: 0.9rem;">
-                            <p>const SUPABASE_URL = 'https://xxxxx.supabase.co';</p>
-                            <p>const SUPABASE_ANON_KEY = 'eyJhbGciOiJ...';</p>
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-            
-            // Initialize app
-            initializeApp();
-            
-            console.log('🎯 WebMaster Pro loaded with Supabase integration!');
-            console.log('🔗 Supabase URL:', SUPABASE_URL);
-            console.log('🔑 Supabase Key configured');
-            console.log('📄 4 full pages: Home, Gallery, About, Contact');
-            console.log('🔗 Connected to ai-editor.html for editing');
-            console.log('💾 All data loaded from PostgreSQL database');
-        });
+        }, 30000);
     </script>
 </body>
 </html>
