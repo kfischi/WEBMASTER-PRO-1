@@ -4,33 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebMaster Pro - פלטפורמה לבניית אתרים עסקיים מקצועיים</title>
-    <meta name="description" content="מערכת מתקדמת לבניית אתרים עסקיים עם 11 דמואים חיים, אדיטור ויזואלי ו-AI Assistant. ערך כולל ₪26,900.">
+    <meta name="description" content="פלטפורמה מקצועית לבניית אתרים עסקיים עם גלריית דמואים חיים ואדיטור ויזואלי. מאגר תבניות מוכנות בתחומים עסקיים מגוונים.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Varela+Round&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #0066ff;
-            --primary-light: #3399ff;
+            --primary-color: #2563eb;
+            --primary-light: #3b82f6;
             --secondary-color: #f8f9fa;
             --accent-gold: #d4af37;
             --accent-gold-light: #e6c651;
+            --accent-silver: #c0c0c0;
             --text-primary: #1a1a1a;
             --text-secondary: #4a4a4a;
+            --text-muted: #6b7280;
+            --text-light: #9ca3af;
             --bg-white: #ffffff;
             --bg-light: #f8f9fa;
             --bg-dark: #1a1a1a;
             --border-light: #e5e7eb;
+            --border-gold: rgba(212, 175, 55, 0.3);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
             --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
             --shadow-luxury: 0 25px 50px -12px rgb(0 0 0 / 0.25);
             --gradient-luxury: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             --gradient-gold: linear-gradient(135deg, #d4af37 0%, #e6c651 100%);
-            --gradient-blue: linear-gradient(135deg, #0066ff 0%, #003dcc 100%);
+            --gradient-blue: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
         }
 
         * {
@@ -53,52 +60,43 @@
             padding: 0 24px;
         }
 
-        /* ===== ANIMATIONS ===== */
+        /* Luxury animations */
+        @keyframes luxuryFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes luxuryFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ===== HOLOGRAPHIC LOGO ANIMATIONS ===== */
         @keyframes holoRotate {
             0% { transform: rotateX(0deg) rotateY(0deg); }
-            25% { transform: rotateX(90deg) rotateY(90deg); }
-            50% { transform: rotateX(180deg) rotateY(180deg); }
-            75% { transform: rotateX(270deg) rotateY(270deg); }
             100% { transform: rotateX(360deg) rotateY(360deg); }
         }
 
         @keyframes holoShine {
-            0% { 
-                opacity: 0.7; 
-                box-shadow: 0 0 20px currentColor; 
-                filter: brightness(1);
-            }
-            50% { 
-                opacity: 1; 
-                box-shadow: 0 0 40px currentColor, 0 0 60px currentColor, 0 0 80px currentColor; 
-                filter: brightness(1.3);
-            }
-            100% { 
-                opacity: 0.8; 
-                box-shadow: 0 0 30px currentColor, 0 0 50px currentColor; 
-                filter: brightness(1.1);
-            }
+            0% { opacity: 0.6; box-shadow: 0 0 20px currentColor; }
+            100% { opacity: 1; box-shadow: 0 0 40px currentColor, 0 0 60px currentColor; }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes textGlow {
-            0%, 100% { 
-                text-shadow: 0 0 30px rgba(0, 102, 255, 0.6), 0 0 60px rgba(0, 102, 255, 0.4);
-            }
-            50% { 
-                text-shadow: 0 0 40px rgba(0, 102, 255, 0.9), 0 0 80px rgba(0, 102, 255, 0.6);
-            }
-        }
-
-        /* ===== HEADER ===== */
+        /* Header */
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            box-shadow: var(--shadow-md);
             position: fixed;
             top: 0;
             left: 0;
@@ -115,14 +113,13 @@
             padding: 1.5rem 0;
         }
 
-        /* ===== HOLOGRAPHIC LOGO ===== */
+        /* ===== UPDATED LOGO - כחול בולט ויפה ===== */
         .logo {
             display: flex;
             align-items: center;
             gap: 20px;
             text-decoration: none;
             font-family: 'Orbitron', monospace;
-            transition: all 0.3s ease;
         }
 
         .logo-holographic {
@@ -130,41 +127,32 @@
             height: 60px;
             position: relative;
             transform-style: preserve-3d;
-            animation: holoRotate 6s linear infinite;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover .logo-holographic {
-            animation-duration: 2s;
-            transform: scale(1.1);
+            animation: holoRotate 4s linear infinite;
         }
 
         .holo-layer {
             position: absolute;
             width: 100%;
             height: 100%;
-            border: 3px solid;
+            border: 2px solid;
             border-radius: 15px;
             animation: holoShine 2s ease-in-out infinite alternate;
         }
 
         .holo-layer:nth-child(1) {
-            border-color: #0040ff;
-            box-shadow: 0 0 20px #0040ff, inset 0 0 20px #0040ff;
-            transform: rotateX(0deg) rotateY(0deg) translateZ(15px);
+            border-color: #2563eb;
+            transform: rotateX(0deg) rotateY(0deg) translateZ(10px);
         }
 
         .holo-layer:nth-child(2) {
-            border-color: #0080ff;
-            box-shadow: 0 0 25px #0080ff, inset 0 0 25px #0080ff;
-            transform: rotateX(45deg) rotateY(45deg) translateZ(10px);
+            border-color: #3b82f6;
+            transform: rotateX(45deg) rotateY(45deg) translateZ(5px);
             animation-delay: 0.3s;
         }
 
         .holo-layer:nth-child(3) {
-            border-color: #00bfff;
-            box-shadow: 0 0 30px #00bfff, inset 0 0 30px #00bfff;
-            transform: rotateX(90deg) rotateY(90deg) translateZ(5px);
+            border-color: #1d4ed8;
+            transform: rotateX(90deg) rotateY(90deg) translateZ(0px);
             animation-delay: 0.6s;
         }
 
@@ -176,20 +164,20 @@
         .logo-text .main-title {
             font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #0040ff 0%, #0080ff 30%, #00bfff 60%, #00ccff 100%);
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #1d4ed8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: textGlow 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
             letter-spacing: -0.02em;
         }
 
         .logo-text .sub-title {
-            font-size: 0.85rem;
-            color: #0080ff;
-            font-weight: 600;
+            font-size: 1rem;
+            color: #2563eb;
+            font-weight: 700;
             margin-top: 0.2rem;
             font-family: 'Inter', sans-serif;
-            text-shadow: 0 0 15px rgba(0, 128, 255, 0.6);
+            text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
         }
 
         .nav-links {
@@ -244,10 +232,26 @@
             font-family: 'Rubik', 'Alef', sans-serif;
         }
 
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
         .btn-primary {
-            background: var(--gradient-blue);
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             color: white;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
+            border: 2px solid transparent;
         }
 
         .btn-primary:hover {
@@ -259,18 +263,20 @@
             background: transparent;
             color: var(--primary-color);
             border: 2px solid var(--primary-color);
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
             background: var(--primary-color);
             color: white;
             transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
         .btn-gold {
             background: var(--gradient-gold);
             color: var(--primary-color);
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
             font-weight: 700;
         }
 
@@ -279,65 +285,26 @@
             box-shadow: var(--shadow-luxury);
         }
 
-        .btn-white {
-            background: white;
-            color: var(--primary-color);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .btn-white:hover {
-            background: var(--bg-light);
-            transform: translateY(-3px);
-        }
-
-        /* ===== SECTIONS ===== */
-        .section {
-            padding: 120px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0, 102, 255, 0.12);
-            color: var(--primary-color);
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            border: 2px solid rgba(0, 102, 255, 0.3);
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            font-family: 'Inter', 'Alef', serif;
-            letter-spacing: -0.02em;
-        }
-
-        .section-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        /* ===== HERO SECTION ===== */
+        /* Hero Section */
         .hero {
             padding: 140px 0 100px 0;
             background: var(--gradient-luxury);
             text-align: center;
             position: relative;
             overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(26, 26, 26, 0.05) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .hero-content {
@@ -351,15 +318,16 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: rgba(0, 102, 255, 0.12);
+            background: rgba(37, 99, 235, 0.1);
             color: var(--primary-color);
             padding: 12px 24px;
             border-radius: 50px;
             font-size: 1rem;
             font-weight: 600;
             margin-bottom: 2.5rem;
-            border: 2px solid rgba(0, 102, 255, 0.3);
-            animation: fadeIn 1s ease 0.2s both;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(10px);
+            animation: luxuryFadeIn 1s ease 0.2s both;
         }
 
         .hero-title {
@@ -370,26 +338,19 @@
             line-height: 1.1;
             font-family: 'Inter', 'Alef', serif;
             letter-spacing: -0.02em;
-            animation: fadeIn 1s ease 0.4s both;
-        }
-
-        .hero-title .blue-text {
-            background: linear-gradient(135deg, #0040ff 0%, #0080ff 25%, #00bfff 50%, #00ccff 75%, #00ffff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(0, 102, 255, 0.6);
-            animation: textGlow 4s ease-in-out infinite;
+            animation: luxuryFadeIn 1s ease 0.4s both;
         }
 
         .hero-subtitle {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: var(--text-secondary);
             margin-bottom: 3rem;
             line-height: 1.6;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            animation: fadeIn 1s ease 0.6s both;
+            font-weight: 500;
+            animation: luxuryFadeIn 1s ease 0.6s both;
         }
 
         .hero-cta {
@@ -398,7 +359,7 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 4rem;
-            animation: fadeIn 1s ease 0.8s both;
+            animation: luxuryFadeIn 1s ease 0.8s both;
         }
 
         .hero-stats {
@@ -409,7 +370,7 @@
             max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
-            animation: fadeIn 1s ease 1s both;
+            animation: luxuryFadeIn 1s ease 1s both;
         }
 
         .stat-item {
@@ -454,8 +415,9 @@
             font-size: 1.1rem;
         }
 
-        /* ===== ABOUT SECTION ===== */
+        /* About Section */
         .about {
+            padding: 120px 0;
             background: white;
         }
 
@@ -473,6 +435,7 @@
             margin-bottom: 2rem;
             line-height: 1.2;
             font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
         }
 
         .about-text p {
@@ -502,20 +465,20 @@
 
         .feature-item:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
         }
 
         .feature-icon {
             width: 48px;
             height: 48px;
-            background: var(--gradient-blue);
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.2rem;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-md);
         }
 
         .feature-text {
@@ -548,15 +511,14 @@
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-light);
             transition: all 0.3s ease;
-            background-size: cover;
-            background-position: center;
         }
 
         .visual-item:hover {
             transform: scale(1.05);
+            animation: luxuryFloat 2s ease-in-out infinite;
         }
 
         .visual-caption {
@@ -565,83 +527,32 @@
             font-size: 1.1rem;
         }
 
-        /* ===== SERVICES SECTION ===== */
-        .services {
+        /* Portfolio Section */
+        .portfolio {
+            padding: 120px 0;
             background: var(--bg-light);
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 24px;
-            padding: 3rem 2rem;
-            box-shadow: var(--shadow-xl);
-            border: 1px solid var(--border-light);
-            transition: all 0.4s ease;
+        .section-header {
             text-align: center;
+            margin-bottom: 4rem;
         }
 
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-luxury);
-        }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-blue);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin: 0 auto 2rem auto;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .service-title {
-            font-size: 1.5rem;
+        .section-title {
+            font-size: 3rem;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-family: 'Inter', 'Alef', serif;
-        }
-
-        .service-description {
-            color: var(--text-secondary);
-            line-height: 1.7;
             margin-bottom: 1.5rem;
+            font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
         }
 
-        .service-features {
-            list-style: none;
-            text-align: right;
-        }
-
-        .service-features li {
+        .section-subtitle {
+            font-size: 1.3rem;
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-right: 1.5rem;
-        }
-
-        .service-features li::before {
-            content: '✓';
-            position: absolute;
-            right: 0;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        /* ===== PORTFOLIO SECTION ===== */
-        .portfolio {
-            background: white;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
         .portfolio-grid {
@@ -658,6 +569,7 @@
             border: 1px solid var(--border-light);
             transition: all 0.4s ease;
             cursor: pointer;
+            position: relative;
         }
 
         .portfolio-card:hover {
@@ -711,6 +623,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
         }
 
         .card-content {
@@ -739,13 +652,13 @@
         }
 
         .feature-tag {
-            background: rgba(0, 102, 255, 0.1);
+            background: rgba(37, 99, 235, 0.1);
             color: var(--primary-color);
             padding: 6px 12px;
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 600;
-            border: 1px solid rgba(0, 102, 255, 0.2);
+            border: 1px solid rgba(37, 99, 235, 0.2);
         }
 
         .card-price {
@@ -763,7 +676,7 @@
 
         .card-btn {
             padding: 12px 24px;
-            background: var(--gradient-blue);
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             color: white;
             border: none;
             border-radius: 10px;
@@ -771,136 +684,18 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.95rem;
+            text-decoration: none;
         }
 
         .card-btn:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* ===== TECHNOLOGY SECTION ===== */
-        .technology {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
-        .tech-card {
-            background: white;
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            box-shadow: var(--shadow-xl);
-            border: 1px solid var(--border-light);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .tech-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-        }
-
-        .tech-card:nth-child(1)::before {
-            background: var(--gradient-blue);
-        }
-
-        .tech-card:nth-child(2)::before {
-            background: var(--gradient-gold);
-        }
-
-        .tech-card:nth-child(3)::before {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-        }
-
-        .tech-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-luxury);
-        }
-
-        .tech-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        .tech-card:nth-child(1) .tech-icon {
-            background: var(--gradient-blue);
-        }
-
-        .tech-card:nth-child(2) .tech-icon {
-            background: var(--gradient-gold);
-        }
-
-        .tech-card:nth-child(3) .tech-icon {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-        }
-
-        .tech-icon i {
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .tech-card:nth-child(2) .tech-icon i {
-            color: var(--text-primary);
-        }
-
-        .tech-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-family: 'Inter', 'Alef', serif;
-        }
-
-        .tech-description {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tech-tag {
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .tech-card:nth-child(1) .tech-tag {
-            background: rgba(0, 102, 255, 0.1);
-            color: var(--primary-color);
-        }
-
-        .tech-card:nth-child(2) .tech-tag {
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--accent-gold);
-        }
-
-        .tech-card:nth-child(3) .tech-tag {
-            background: rgba(5, 150, 105, 0.1);
-            color: #059669;
-        }
-
-        /* ===== PROCESS SECTION ===== */
+        /* Process Section */
         .process {
+            padding: 120px 0;
             background: white;
         }
 
@@ -908,6 +703,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
+            margin-top: 4rem;
         }
 
         .process-step {
@@ -916,8 +712,9 @@
             background: var(--gradient-luxury);
             border-radius: 24px;
             border: 1px solid var(--border-light);
+            position: relative;
             transition: all 0.4s ease;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
         }
 
         .process-step:hover {
@@ -928,7 +725,7 @@
         .step-number {
             width: 80px;
             height: 80px;
-            background: var(--gradient-blue);
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             color: white;
             border-radius: 50%;
             display: flex;
@@ -937,7 +734,7 @@
             font-size: 2rem;
             font-weight: 800;
             margin: 0 auto 2rem auto;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
             font-family: 'Inter', 'Alef', serif;
         }
 
@@ -955,11 +752,32 @@
             font-size: 1.1rem;
         }
 
-        /* ===== CTA SECTION ===== */
+        /* CTA Section */
         .cta {
+            padding: 120px 0;
             background: var(--gradient-dark);
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at top, rgba(212, 175, 55, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(192, 192, 192, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
         }
 
         .cta h2 {
@@ -967,6 +785,7 @@
             font-weight: 700;
             margin-bottom: 1.5rem;
             font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
         }
 
         .cta p {
@@ -976,7 +795,19 @@
             line-height: 1.6;
         }
 
-        /* ===== FOOTER ===== */
+        .btn-white {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-white:hover {
+            background: var(--bg-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        /* Footer */
         .footer {
             padding: 3rem 0;
             background: var(--primary-color);
@@ -989,10 +820,15 @@
             font-size: 1rem;
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* Mobile Responsive */
         @media (max-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+
             .portfolio-grid {
                 grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 2rem;
             }
         }
 
@@ -1007,6 +843,10 @@
 
             .hero-title {
                 font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
             }
 
             .hero-cta {
@@ -1037,11 +877,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .services-grid,
-            .tech-grid {
-                grid-template-columns: 1fr;
-            }
-
             .section-title {
                 font-size: 2.2rem;
             }
@@ -1064,8 +899,20 @@
             }
 
             .logo-text .sub-title {
-                font-size: 0.75rem;
+                font-size: 0.85rem;
             }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -1087,10 +934,11 @@
             
             <ul class="nav-links">
                 <li><a href="#about">אודות</a></li>
-                <li><a href="#services">השירותים</a></li>
                 <li><a href="#portfolio">גלריה</a></li>
-                <li><a href="#technology">טכנולוגיה</a></li>
-                <li><a href="#process">התהליך</a></li>
+                <li><a href="#landing-pages">דפי נחיתה</a></li>
+                <li><a href="#automation">אוטומציות</a></li>
+                <li><a href="#clients">לקוחות</a></li>
+                <li><a href="#articles">מאמרים</a></li>
                 <li><a href="#contact">צור קשר</a></li>
                 <li><a href="#editor" class="btn btn-primary">התחל עכשיו</a></li>
             </ul>
@@ -1103,26 +951,25 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <i class="fas fa-star"></i>
-                    מערכת #1 לבניית אתרים עסקיים בישראל
+                    פלטפורמה מקצועית לעסקים
                 </div>
                 
                 <h1 class="hero-title">
                     פלטפורמה מתקדמת<br>
-                    <span class="blue-text">לעיצוב ובניית</span><br>
+                    <span style="background: var(--gradient-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">לעיצוב ובניית</span><br>
                     אתרים עסקיים
                 </h1>
                 
                 <p class="hero-subtitle">
-                    11 אתרים מקצועיים בערך ₪26,900 עם אדיטור ויזואלי מתקדם, AI Assistant<br>
-                    ופונקציונליות מלאה. מוכן למכירה ללקוחות היום!
+                    11 תבניות אתרים מקצועיות בתחומים עסקיים מגוונים עם אדיטור ויזואלי להתאמה אישית מלאה ובינה מלאכותית מתקדמת.
                 </p>
                 
                 <div class="hero-cta">
                     <a href="#portfolio" class="btn btn-gold">
                         <i class="fas fa-play"></i>
-                        צפה ב-11 האתרים
+                        צפה בגלריה
                     </a>
-                    <a href="#services" class="btn btn-secondary">
+                    <a href="#technology" class="btn btn-secondary">
                         <i class="fas fa-info-circle"></i>
                         איך זה עובד?
                     </a>
@@ -1132,11 +979,7 @@
             <div class="hero-stats">
                 <div class="stat-item">
                     <span class="stat-number">11</span>
-                    <span class="stat-label">אתרים מוכנים</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">₪26,900</span>
-                    <span class="stat-label">ערך כולל</span>
+                    <span class="stat-label">תבניות מוכנות</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">9</span>
@@ -1144,67 +987,71 @@
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">100%</span>
-                    <span class="stat-label">מוכן למכירה</span>
+                    <span class="stat-label">רספונסיבי</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">זמינות</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about section">
+    <section id="about" class="about fade-in">
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
                     <h2>מובילי הטכנולוגיה הדיגיטלית</h2>
                     <p>
-                        WebMaster Pro הוא מערכת מתקדמת לבניית אתרים עסקיים עם גלריית דמואים חיים 
-                        ואדיטור ויזואלי מהפכני. המטרה: יצירת עסק רווחי במכירת אתרים מקצועיים 
-                        לעסקים קטנים ומקצועות חופשיים.
+                        WebMaster Pro מפתחת פתרונות מתקדמים לבניית אתרים עסקיים. 
+                        הפלטפורמה שלנו משלבת בינה מלאכותית מתקדמת עם עיצוב חדשני 
+                        ליצירת אתרים מקצועיים ומותאמים אישית.
                     </p>
-                    <p style="padding: 1.5rem; background: rgba(0, 102, 255, 0.1); border-radius: 12px; border-left: 4px solid var(--primary-color); margin: 1.5rem 0;">
-                        <strong>עסק אמיתי ורווחי:</strong> 11 אתרים ברמה עולמית בשווי ₪26,900, 
-                        מוכנים למכירה ללקוחות עם מרווח רווח של 85%+. זה לא סתם תרגיל - זה עסק אמיתי!
+                    <p style="padding: 1.5rem; background: rgba(37, 99, 235, 0.1); border-radius: 12px; border-left: 4px solid var(--primary-color); margin: 1.5rem 0;">
+                        <strong>שותפות טכנולוגית:</strong> אנחנו עובדים עם מובילי התחום הטכנולוגי 
+                        כדי לספק פתרונות מותאמים אישית מקצה לקצה.
                     </p>
                     
                     <div class="about-features">
                         <div class="feature-item">
                             <div class="feature-icon">
-                                <i class="fas fa-brain"></i>
+                                <i class="fas fa-microchip"></i>
                             </div>
-                            <span class="feature-text">AI Assistant מתקדם</span>
+                            <span class="feature-text">טכנולוגיה חדשנית</span>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon">
-                                <i class="fas fa-palette"></i>
+                                <i class="fas fa-shield-alt"></i>
                             </div>
-                            <span class="feature-text">אדיטור ויזואלי</span>
+                            <span class="feature-text">מוכח בשטח</span>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon">
-                                <i class="fas fa-globe"></i>
+                                <i class="fas fa-cogs"></i>
                             </div>
-                            <span class="feature-text">רמה עולמית</span>
+                            <span class="feature-text">גמישות ללא תחרות</span>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon">
-                                <i class="fas fa-chart-line"></i>
+                                <i class="fas fa-users"></i>
                             </div>
-                            <span class="feature-text">עסק רווחי</span>
+                            <span class="feature-text">תמיכה אסטרטגית</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="about-visual">
                     <div class="visual-grid">
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/sWlf1880WKM.png');"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/WiRp8302YJs.png');"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/hVyV3858OQ.png');"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/eJk7179MXo.png');"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/rhNp2418oyE.png');"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/xnK4816Hc.png');"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/htWG9491QkE.png');"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/Ceu2132Q.png');"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/tGN5433dAU.png');"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/sWlf1880WKM.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/WiRp8302YJs.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/hVyV3858OQ.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/eJk7179MXo.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/rhNp2418oyE.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/xnK4816Hc.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/htWG9491QkE.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/Ceu2132Q.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/tGN5433dAU.png'); background-size: cover; background-position: center;"></div>
                     </div>
                     <p class="visual-caption">9 תחומים עסקיים מגוונים והמבוקשים ביותר בישראל</p>
                 </div>
@@ -1212,92 +1059,88 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services section">
+    <!-- Technology Section -->
+    <section id="technology" class="technology fade-in" style="padding: 120px 0; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge">השירותים שלנו</div>
-                <h2 class="section-title">פתרונות מלאים לכל עסק</h2>
+                <h2 class="section-title">הטכנולוגיה שלנו</h2>
                 <p class="section-subtitle">
-                    מגלריית דמואים מקצועיים ועד אדיטור ויזואלי מתקדם - הכל במקום אחד
+                    פתרונות מתקדמים ומוכחים לבניית אתרים עסקיים מקצועיים
                 </p>
             </div>
             
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3 class="service-title">אתרים מותאמים אישית</h3>
-                    <p class="service-description">
-                        11 אתרים מקצועיים ברמה עולמית בתחומים עסקיים מגוונים, 
-                        מוכנים להתאמה אישית עם אדיטור ויזואלי מתקדם.
-                    </p>
-                    <ul class="service-features">
-                        <li>רפואה אסתטית ובריאות</li>
-                        <li>שירותים משפטיים וחשבונאיים</li>
-                        <li>כושר, יוגה ותזונה</li>
-                        <li>חינוך ואימונים</li>
-                        <li>יופי ועיצוב</li>
-                        <li>נדל"ן ונופש</li>
-                    </ul>
-                </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 4rem;">
                 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-brain"></i>
+                <!-- Advanced Technology Card -->
+                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-blue);"></div>
+                    <div style="width: 60px; height: 60px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                        <i class="fas fa-brain" style="color: white; font-size: 1.5rem;"></i>
                     </div>
-                    <h3 class="service-title">AI Assistant מתקדם</h3>
-                    <p class="service-description">
-                        בינה מלאכותית מתקדמת לייצירת תוכן, אופטימיזציית SEO, 
-                        הצעות עיצוב והתאמה אוטומטית לתחום העסק.
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">טכנולוגיית AI מתקדמת</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                        WebMaster Pro משלבת בינה מלאכותית מתקדמת ליצירת אתרים אוטומטית, 
+                        אופטימיזציה חכמה ואנליטיקה מובנית .
                     </p>
-                    <ul class="service-features">
-                        <li>יצירת תוכן אוטומטית</li>
-                        <li>אופטימיזציית SEO חכמה</li>
-                        <li>הצעות עיצוב מותאמות</li>
-                        <li>ניתוח ושיפור ביצועים</li>
-                        <li>התאמה לקהל יעד</li>
-                        <li>תמיכה 24/7</li>
-                    </ul>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">יצירה אוטומטית</span>
+                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">SEO חכם</span>
+                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">אנליטיקה מתקדמת</span>
+                    </div>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-edit"></i>
+
+                <!-- Field-Proven Solutions Card -->
+                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-gold);"></div>
+                    <div style="width: 60px; height: 60px; background: var(--gradient-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                        <i class="fas fa-award" style="color: var(--text-primary); font-size: 1.5rem;"></i>
                     </div>
-                    <h3 class="service-title">אדיטור ויזואלי</h3>
-                    <p class="service-description">
-                        כלי עריכה מתקדם לעיצוב האתר בזמן אמת ללא צורך בידע טכני. 
-                        שינוי צבעים, טקסטים, תמונות ופריסה בקלקה אחת.
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">פתרונות מוכחים בשטח</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                        11 תבניות אתרים שנבדקו ואומתו בפועל אצל לקוחות, 
+                        עם שיעור הצלחה של 97% ושביעות רצון מקסימלית.
                     </p>
-                    <ul class="service-features">
-                        <li>עריכה חיה בזמן אמת</li>
-                        <li>שינוי צבעים ופונטים</li>
-                        <li>העלאת תמונות והחלפה</li>
-                        <li>עריכת טקסטים ותוכן</li>
-                        <li>תצוגה מקדימה למכשירים</li>
-                        <li>שמירה ויצוא קבצים</li>
-                    </ul>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">97% הצלחה</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">נבדק בפועל</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">מוכח איכות</span>
+                    </div>
+                </div>
+
+                <!-- Flexible Technology Card -->
+                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(135deg, #059669 0%, #047857 100%);"></div>
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                        <i class="fas fa-rocket" style="color: white; font-size: 1.5rem;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">גמישות ותגובה מהירה</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                        הפלטפורמה שלנו מספקת גמישות ללא תחרות ותגובה מהירה לצרכים הספציפיים של הלקוחות, 
+                        כולל פתרונות מותאמים אישית מקצה לקצה.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">פתרונות מותאמים</span>
+                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">תגובה מהירה</span>
+                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">פתרון שלם</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
+    
+    <section id="portfolio" class="portfolio fade-in">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge">הגלריה שלנו</div>
-                <h2 class="section-title">11 אתרים מקצועיים בערך ₪26,900</h2>
+                <h2 class="section-title">הגלריה שלנו</h2>
                 <p class="section-subtitle">
-                    כל אתר כולל קוד production-ready, עיצוב רספונסיבי ופונקציונליות מלאה
+                    WebMaster Pro מעצבת ובונה אתרים עסקיים ביצועים גבוהים 
+                    לענות על צרכי השוק העסקי המגוון
                 </p>
             </div>
             
             <div class="portfolio-grid">
                 <!-- Medical Aesthetics - Dr. Michal Rosen -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-website="dr-michal-rosen">
                     <div class="card-image" style="background-image: url('https://i.imghippo.com/files/sWlf1880WKM.png');">
                         <div class="card-overlay">
                             <div class="card-category">רפואה אסתטית</div>
@@ -1315,13 +1158,13 @@
                         </div>
                         <div class="card-price">
                             <span class="price">₪2,800</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <a href="websites/dr-michal-rosen.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Fitness Coach - Danny Pit -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-website="fitness-coach">
                     <div class="card-image" style="background-image: url('https://i.imghippo.com/files/WiRp8302YJs.png');">
                         <div class="card-overlay">
                             <div class="card-category">כושר וספורט</div>
@@ -1339,13 +1182,13 @@
                         </div>
                         <div class="card-price">
                             <span class="price">₪2,200</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <a href="websites/fitness-co.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Yoga Studio -->
-                <div class="portfolio-card">
+                <!-- Yoga Studio - Studio Ohm -->
+                <div class="portfolio-card" data-website="yoga-studio">
                     <div class="card-image" style="background-image: url('https://i.imghippo.com/files/eJk7179MXo.png');">
                         <div class="card-overlay">
                             <div class="card-category">יוגה ומדיטציה</div>
@@ -1363,13 +1206,13 @@
                         </div>
                         <div class="card-price">
                             <span class="price">₪1,900</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <a href="websites/yoga-studio.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Nutritionist -->
-                <div class="portfolio-card">
+                <!-- Nutritionist - Dr. Sarah Cohen -->
+                <div class="portfolio-card" data-website="nutritionist">
                     <div class="card-image" style="background-image: url('https://i.imghippo.com/files/rhNp2418oyE.png');">
                         <div class="card-overlay">
                             <div class="card-category">תזונה ובריאות</div>
@@ -1387,13 +1230,13 @@
                         </div>
                         <div class="card-price">
                             <span class="price">₪2,400</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <a href="websites/nutritionist.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Law Firm -->
-                <div class="portfolio-card">
+                <!-- Law Firm - Barkovich Office -->
+                <div class="portfolio-card" data-website="law-firm">
                     <div class="card-image" style="background-image: url('https://i.imghippo.com/files/hVyV3858OQ.png');">
                         <div class="card-overlay">
                             <div class="card-category">משפטים</div>
@@ -1411,13 +1254,13 @@
                         </div>
                         <div class="card-price">
                             <span class="price">₪2,500</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <a href="websites/law-firm.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Accountant -->
-                <div class="portfolio-card">
+                <!-- Accountant - Rina Levy -->
+                <div class="portfolio-card" data-website="accountant">
                     <div class="card-image" style="background-image: url('https://i.imghippo.com/files/tGN5433dAU.png');">
                         <div class="card-overlay">
                             <div class="card-category">חשבונאות</div>
@@ -1435,13 +1278,13 @@
                         </div>
                         <div class="card-price">
                             <span class="price">₪2,000</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <a href="websites/accountant.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Beauty Salon -->
-                <div class="portfolio-card">
+                <!-- Beauty Salon - Bella -->
+                <div class="portfolio-card" data-website="beauty-salon">
                     <div class="card-image" style="background-image: url('https://i.imghippo.com/files/xnK4816Hc.png');">
                         <div class="card-overlay">
                             <div class="card-category">יופי ועיצוב</div>
@@ -1459,13 +1302,13 @@
                         </div>
                         <div class="card-price">
                             <span class="price">₪1,700</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <a href="websites/beauty-salon.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Private Tutor -->
-                <div class="portfolio-card">
+                <!-- Private Tutor - Dr. Ronit Levy -->
+                <div class="portfolio-card" data-website="tutor">
                     <div class="card-image" style="background-image: url('https://i.imghippo.com/files/Ceu2132Q.png');">
                         <div class="card-overlay">
                             <div class="card-category">חינוך והוראה</div>
@@ -1483,37 +1326,37 @@
                         </div>
                         <div class="card-price">
                             <span class="price">₪2,100</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <a href="websites/tutor.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Aesthetic Clinic Premium -->
-                <div class="portfolio-card">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/Ayyb2287TOc.png');">
+                <!-- Real Estate Premium -->
+                <div class="portfolio-card" data-website="real-estate">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/htWG9491QkE.png');">
                         <div class="card-overlay">
-                            <div class="card-category">אסתטיקה פרמיום</div>
-                            <h3 class="card-title-overlay">קליניקת יופי פרמיום</h3>
+                            <div class="card-category">נדל"ן</div>
+                            <h3 class="card-title-overlay">נדל"ן פרמיום</h3>
                         </div>
                     </div>
                     <div class="card-content">
-                        <h3 class="card-title">קליניקת יופי יוקרתי</h3>
-                        <p class="card-description">האתר היקר ביותר - עיצוב זהוב פרמיום עם 6 טיפולים מתקדמים וחוויית VIP</p>
+                        <h3 class="card-title">תיווך נדל"ן יוקרתי</h3>
+                        <p class="card-description">פלטפורמה מתקדמת עם גלריית נכסים, חיפוש מתקדם ומחשבון משכנתאות</p>
                         <div class="card-features">
-                            <span class="feature-tag">בוטוקס פרמיום</span>
-                            <span class="feature-tag">לייזר פרקציונלי</span>
-                            <span class="feature-tag">פילינג יהלום</span>
-                            <span class="feature-tag">חוויית VIP</span>
+                            <span class="feature-tag">גלריית נכסים</span>
+                            <span class="feature-tag">חיפוש מתקדם</span>
+                            <span class="feature-tag">מחשבון משכנתאות</span>
+                            <span class="feature-tag">השוואת נכסים</span>
                         </div>
                         <div class="card-price">
-                            <span class="price">₪3,200</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <span class="price">₪2,700</span>
+                            <a href="websites/real-estate.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Multibrown Travel -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-website="multibrawn">
                     <div class="card-image" style="background-image: url('https://i.imghippo.com/files/pL5530Z.png');">
                         <div class="card-overlay">
                             <div class="card-category">נופש ואירועים</div>
@@ -1521,141 +1364,94 @@
                         </div>
                     </div>
                     <div class="card-content">
-                        <h3 class="card-title">מרכז נופש ואירועים</h3>
-                        <p class="card-description">אתר יוקרתי למרכז נופש עם חתונות, אירועי חברה וקייטרינג מקצועי</p>
+                        <h3 class="card-title">נופש ואירועים מותאמים</h3>
+                        <p class="card-description">פלטפורמה מקצועית לתכנון נופשים ואירועים עם הזמנות ותכנון מותאם</p>
                         <div class="card-features">
-                            <span class="feature-tag">חתונות יוקרתיות</span>
-                            <span class="feature-tag">אירועי חברה</span>
-                            <span class="feature-tag">נופש פרמיום</span>
-                            <span class="feature-tag">קייטרינג מקצועי</span>
+                            <span class="feature-tag">תכנון נופשים</span>
+                            <span class="feature-tag">ארגון אירועים</span>
+                            <span class="feature-tag">הזמנות אונליין</span>
+                            <span class="feature-tag">ייעוץ אישי</span>
                         </div>
                         <div class="card-price">
                             <span class="price">₪2,300</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <a href="websites/multibrawn.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Real Estate Premium -->
-                <div class="portfolio-card">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/htWG9491QkE.png');">
+                <!-- Aesthetic Face Clinic -->
+                <div class="portfolio-card" data-website="aesthetic-clinic">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/Ayyb2287TOc.png');">
                         <div class="card-overlay">
-                            <div class="card-category">נדל"ן פרמיום</div>
-                            <h3 class="card-title-overlay">נדל"ן יוקרתי</h3>
+                            <div class="card-category">אסתטיקה פנים</div>
+                            <h3 class="card-title-overlay">קליניקת יופי פרמיום</h3>
                         </div>
                     </div>
                     <div class="card-content">
-                        <h3 class="card-title">השקעות נדל"ן יוקרתיות</h3>
-                        <p class="card-description">פלטפורמה מתקדמת עם נכסי פרמיום, מחשבון השקעה ושירותים מקצועיים</p>
+                        <h3 class="card-title">קליניקה לאסתטיקת פנים</h3>
+                        <p class="card-description">עיצוב יוקרתי עם מגוון טיפולי פנים מתקדמים, הזמנות וייעוץ מקצועי</p>
                         <div class="card-features">
-                            <span class="feature-tag">נכסי פרמיום</span>
-                            <span class="feature-tag">מחשבון השקעה</span>
-                            <span class="feature-tag">ניתוח שוק</span>
-                            <span class="feature-tag">ייעוץ השקעות</span>
+                            <span class="feature-tag">טיפולי פנים</span>
+                            <span class="feature-tag">הזמנות מתקדמות</span>
+                            <span class="feature-tag">ייעוץ מקצועי</span>
+                            <span class="feature-tag">גלריית תוצאות</span>
                         </div>
                         <div class="card-price">
-                            <span class="price">₪2,700</span>
-                            <button class="card-btn">צפה בדמו</button>
+                            <span class="price">₪3,200</span>
+                            <a href="websites/aesthetic-clinic.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: rgba(0, 102, 255, 0.05); border-radius: 20px;">
-                <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.8rem;">סיכום פיננסי</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0;">
-                    <div>
-                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-gold);">₪26,900</div>
-                        <div style="color: var(--text-secondary);">ערך כולל</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-color);">₪2,445</div>
-                        <div style="color: var(--text-secondary);">מחיר ממוצע</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 2.5rem; font-weight: 800; color: #059669;">85%+</div>
-                        <div style="color: var(--text-secondary);">מרווח רווח</div>
-                    </div>
-                </div>
+            <div style="text-align: center; margin-top: 4rem;">
                 <a href="#editor" class="btn btn-gold">
                     <i class="fas fa-edit"></i>
-                    פתח אדיטור ויזואלי
+                    התחל עריכה עכשיו
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Technology Section -->
-    <section id="technology" class="technology section">
+    <!-- Strategic Partnerships Section -->
+    <section class="partnerships fade-in" style="padding: 80px 0; background: var(--gradient-dark); color: white;">
         <div class="container">
-            <div class="section-header">
-                <div class="section-badge">הטכנולוגיה שלנו</div>
-                <h2 class="section-title">פתרונות מתקדמים ומוכחים</h2>
-                <p class="section-subtitle">
-                    טכנולוגיות חדשניות לבניית אתרים עסקיים ברמה עולמית
+            <div style="text-align: center;">
+                <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; opacity: 0.9;">הטכנולוגיות שלנו</h3>
+                <p style="font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                    פלטפורמה מתקדמת עם טכנולוגיות מובילות 
+                    לבניית אתרים מקצועיים ומהירים
                 </p>
             </div>
             
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 class="tech-title">טכנולוגיית AI מתקדמת</h3>
-                    <p class="tech-description">
-                        WebMaster Pro משלבת בינה מלאכותית מתקדמת ליצירת תוכן אוטומטית, 
-                        אופטימיזציה חכמה ואנליטיקה מובנית.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">יצירה אוטומטית</span>
-                        <span class="tech-tag">SEO חכם</span>
-                        <span class="tech-tag">אנליטיקה מתקדמת</span>
-                    </div>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 4rem; margin-top: 3rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
+                    <i class="fas fa-cloud" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                    <span style="font-size: 1.1rem; font-weight: 600;">Netlify Platform</span>
                 </div>
-
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h3 class="tech-title">פתרונות מוכחים בשטח</h3>
-                    <p class="tech-description">
-                        11 תבניות אתרים שנבדקו ואומתו בפועל אצל לקוחות, 
-                        עם שיעור הצלחה של 97% ושביעות רצון מקסימלית.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">97% הצלחה</span>
-                        <span class="tech-tag">נבדק בפועל</span>
-                        <span class="tech-tag">מוכח איכות</span>
-                    </div>
+                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
+                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                    <span style="font-size: 1.1rem; font-weight: 600;">Cloudflare CDN</span>
                 </div>
-
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3 class="tech-title">גמישות ותגובה מהירה</h3>
-                    <p class="tech-description">
-                        הפלטפורמה שלנו מספקת גמישות ללא תחרות ותגובה מהירה לצרכים 
-                        הספציפיים של הלקוחות, כולל פתרונות מותאמים אישית.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">פתרונות מותאמים</span>
-                        <span class="tech-tag">תגובה מהירה</span>
-                        <span class="tech-tag">פתרון שלם</span>
-                    </div>
+                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
+                    <i class="fas fa-code" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                    <span style="font-size: 1.1rem; font-weight: 600;">HTML5 & CSS3</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
+                    <i class="fas fa-mobile-alt" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                    <span style="font-size: 1.1rem; font-weight: 600;">Responsive Design</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Process Section -->
-    <section id="process" class="process section">
+    <section id="process" class="process fade-in">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge">איך זה עובד?</div>
-                <h2 class="section-title">תהליך פשוט ומהיר</h2>
+                <h2 class="section-title">איך זה עובד?</h2>
                 <p class="section-subtitle">
-                    מבחירת תבנית ועד אתר מוכן - הכל תוך דקות ספורות
+                    תהליך פשוט ומהיר ליצירת אתר מקצועי
                 </p>
             </div>
             
@@ -1664,8 +1460,7 @@
                     <div class="step-number">1</div>
                     <h3 class="step-title">בחירת תבנית</h3>
                     <p class="step-description">
-                        בחר את התבנית המתאימה לתחום העסקי שלך מתוך 11 האפשרויות 
-                        המקצועיות שלנו בערך ₪26,900.
+                        בחר את התבנית המתאימה לתחום העסקי שלך מתוך 11 האפשרויות המקצועיות שלנו
                     </p>
                 </div>
                 
@@ -1673,8 +1468,7 @@
                     <div class="step-number">2</div>
                     <h3 class="step-title">התאמה אישית</h3>
                     <p class="step-description">
-                        השתמש באדיטור הויזואלי שלנו עם AI Assistant כדי להתאים את התוכן, 
-                        הצבעים, התמונות והטקסט לעסק שלך.
+                        השתמש באדיטור הויזואלי שלנו כדי להתאים את התוכן, הצבעים, התמונות והטקסט
                     </p>
                 </div>
                 
@@ -1682,8 +1476,7 @@
                     <div class="step-number">3</div>
                     <h3 class="step-title">פרסום מיידי</h3>
                     <p class="step-description">
-                        האתר מוכן לפרסום מיידי עם כל התכונות המתקדמות - 
-                        רספונסיבי, מהיר, מאובטח ומותאם SEO.
+                        האתר מוכן לפרסום מיידי עם כל התכונות המתקדמות - רספונסיבי, מהיר ומאובטח
                     </p>
                 </div>
             </div>
@@ -1691,22 +1484,24 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta section">
+    <section class="cta">
         <div class="container">
-            <h2>מוכן להתחיל?</h2>
-            <p>
-                הצטרף לעסקים שכבר בחרו ב-WebMaster Pro<br>
-                ויצרו נוכחות דיגיטלית מקצועית ומרשימה בערך ₪26,900
-            </p>
-            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                <a href="#portfolio" class="btn btn-white">
-                    <i class="fas fa-eye"></i>
-                    צפה ב-11 האתרים
-                </a>
-                <a href="#editor" class="btn btn-gold">
-                    <i class="fas fa-rocket"></i>
-                    פתח אדיטור ויזואלי
-                </a>
+            <div class="cta-content">
+                <h2>מוכן להתחיל?</h2>
+                <p>
+                    הצטרף לעסקים שכבר בחרו ב-WebMaster Pro<br>
+                    ויצרו נוכחות דיגיטלית מקצועית ומרשימה
+                </p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#portfolio" class="btn btn-white">
+                        <i class="fas fa-eye"></i>
+                        צפה בגלריה
+                    </a>
+                    <a href="#editor" class="btn btn-gold">
+                        <i class="fas fa-rocket"></i>
+                        התחל עכשיו
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1714,7 +1509,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות. • 11 אתרים מקצועיים בערך ₪26,900 • אדיטור ויזואלי עם AI</p>
+            <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות.</p>
         </div>
     </footer>
 
@@ -1724,7 +1519,11 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const href = this.getAttribute('href');
-                if (href === '#' || href.length <= 1) return;
+                
+                // Skip if href is just '#' or empty
+                if (href === '#' || href.length <= 1) {
+                    return;
+                }
                 
                 const target = document.querySelector(href);
                 if (target) {
@@ -1741,52 +1540,101 @@
             const header = document.querySelector('.header');
             if (window.scrollY > 100) {
                 header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = '0 20px 25px -5px rgb(0 0 0 / 0.1)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.boxShadow = 'var(--shadow-xl)';
             } else {
                 header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.boxShadow = 'var(--shadow-md)';
             }
         });
 
-        // Portfolio card clicks
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Portfolio card clicks - מעבר לדמואים האמיתיים
         document.querySelectorAll('.portfolio-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const title = this.querySelector('.card-title').textContent;
-                alert(`פותח דמו: ${title}\n(בקרוב יהיה חיבור לדמואים האמיתיים)`);
+            card.addEventListener('click', function(e) {
+                // אם לחצו על הכפתור, תן לו לפעול בצורה רגילה
+                if (e.target.classList.contains('card-btn')) {
+                    return;
+                }
+                
+                // אחרת, פתח את הדמו בטאב חדש
+                const websiteId = this.getAttribute('data-website');
+                let websiteUrl = '';
+                
+                switch(websiteId) {
+                    case 'dr-michal-rosen':
+                        websiteUrl = 'dr-michal-rosen.html';
+                        break;
+                    case 'fitness-coach':
+                        websiteUrl = 'fitness-co.html';
+                        break;
+                    case 'yoga-studio':
+                        websiteUrl = 'yoga-studio.html';
+                        break;
+                    case 'nutritionist':
+                        websiteUrl = 'nutritionist.html';
+                        break;
+                    case 'law-firm':
+                        websiteUrl = 'law-firm.html';
+                        break;
+                    case 'accountant':
+                        websiteUrl = 'accountant.html';
+                        break;
+                    case 'beauty-salon':
+                        websiteUrl = 'beauty-salon.html';
+                        break;
+                    case 'tutor':
+                        websiteUrl = 'tutor.html';
+                        break;
+                    case 'real-estate':
+                        websiteUrl = 'real-estate.html';
+                        break;
+                    case 'multibrawn':
+                        websiteUrl = 'multibrawn.html';
+                        break;
+                    case 'aesthetic-clinic':
+                        websiteUrl = 'aesthetic-clinic.html';
+                        break;
+                }
+                
+                if (websiteUrl) {
+                    window.open(websiteUrl, '_blank');
+                }
             });
         });
 
-        // Enhanced Logo Interactions
-        const logo = document.querySelector('.logo');
-        const logoHolo = document.querySelector('.logo-holographic');
-        
-        if (logo && logoHolo) {
-            logo.addEventListener('mouseenter', function() {
-                logoHolo.style.animationDuration = '1s';
-                logoHolo.style.transform = 'scale(1.15)';
-            });
-            
-            logo.addEventListener('mouseleave', function() {
-                logoHolo.style.animationDuration = '6s';
-                logoHolo.style.transform = 'scale(1)';
-            });
-        }
-
-        // Service cards hover effects
-        document.querySelectorAll('.service-card, .tech-card, .process-step').forEach(card => {
+        // Add luxury hover effects
+        document.querySelectorAll('.portfolio-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px)';
+                this.style.transform = 'translateY(-12px) scale(1.02)';
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
+                this.style.transform = 'translateY(0) scale(1)';
             });
         });
 
-        console.log('🚀 WebMaster Pro - אתר מלא ומקיף נטען בהצלחה!');
-        console.log('💎 11 אתרים מקצועיים בערך ₪26,900');
-        console.log('🎨 אדיטור ויזואלי עם AI Assistant');
-        console.log('⚡ עסק רווחי ומוכן למכירה!');
+        console.log('🚀 WebMaster Pro עם לוגו כחול בולט נטען בהצלחה!');
+        console.log('✨ אתרים שבונים עסקים!');
+        console.log('🎯 11 דמואים חיים מחוברים לקישורים אמיתיים!');
     </script>
 </body>
 </html>
