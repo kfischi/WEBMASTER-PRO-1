@@ -3,11 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>סטודיו נויה - עיצוב פנים יוקרתי</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>WebMaster Pro - פלטפורמה לבניית אתרים עסקיים מקצועיים</title>
+    <meta name="description" content="פלטפורמה מקצועית לבניית אתרים עסקיים עם גלריית דמואים חיים ואדיטור ויזואלי. מאגר תבניות מוכנות בתחומים עסקיים מגוונים.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Varela+Round&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-light: #3b82f6;
+            --secondary-color: #f8f9fa;
+            --accent-gold: #d4af37;
+            --accent-gold-light: #e6c651;
+            --accent-silver: #c0c0c0;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #6b7280;
+            --text-light: #9ca3af;
+            --bg-white: #ffffff;
+            --bg-light: #f8f9fa;
+            --bg-dark: #1a1a1a;
+            --border-light: #e5e7eb;
+            --border-gold: rgba(212, 175, 55, 0.3);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+            --shadow-luxury: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --gradient-luxury: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #e6c651 100%);
+            --gradient-blue: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,86 +47,251 @@
         }
 
         body {
-            font-family: 'Rubik', sans-serif;
+            font-family: 'Rubik', 'Alef', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #fff;
+            color: var(--text-primary);
+            background-color: var(--bg-white);
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
+        }
+
+        /* Luxury animations */
+        @keyframes luxuryFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes luxuryFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ===== HOLOGRAPHIC LOGO ANIMATIONS ===== */
+        @keyframes holoRotate {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        @keyframes holoShine {
+            0% { opacity: 0.6; box-shadow: 0 0 20px currentColor; }
+            100% { opacity: 1; box-shadow: 0 0 40px currentColor, 0 0 60px currentColor; }
         }
 
         /* Header */
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #8b5cf6;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .nav {
             display: flex;
-            list-style: none;
-            gap: 2rem;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
         }
 
-        .nav a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav a:hover {
-            color: #8b5cf6;
-        }
-
-        .contact-btn {
-            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s;
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(59, 130, 246, 0.8)), url('https://i.imghippo.com/files/sYOd2887hwk.png');
-            background-size: cover;
-            background-position: center;
+        /* ===== UPDATED LOGO - כחול בולט ויפה ===== */
+        .logo {
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
+            gap: 20px;
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .logo-holographic {
+            width: 60px;
+            height: 60px;
             position: relative;
+            transform-style: preserve-3d;
+            animation: holoRotate 4s linear infinite;
+        }
+
+        .holo-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid;
+            border-radius: 15px;
+            animation: holoShine 2s ease-in-out infinite alternate;
+        }
+
+        .holo-layer:nth-child(1) {
+            border-color: #2563eb;
+            transform: rotateX(0deg) rotateY(0deg) translateZ(10px);
+        }
+
+        .holo-layer:nth-child(2) {
+            border-color: #3b82f6;
+            transform: rotateX(45deg) rotateY(45deg) translateZ(5px);
+            animation-delay: 0.3s;
+        }
+
+        .holo-layer:nth-child(3) {
+            border-color: #1d4ed8;
+            transform: rotateX(90deg) rotateY(90deg) translateZ(0px);
+            animation-delay: 0.6s;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .main-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #1d4ed8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text .sub-title {
+            font-size: 1rem;
+            color: #2563eb;
+            font-weight: 700;
+            margin-top: 0.2rem;
+            font-family: 'Inter', sans-serif;
+            text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Rubik', 'Alef', sans-serif;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-gold {
+            background: var(--gradient-gold);
+            color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+            font-weight: 700;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 100px 0;
+            background: var(--gradient-luxury);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero::before {
@@ -104,80 +301,236 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
+            background: 
+                radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(26, 26, 26, 0.05) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
             position: relative;
             z-index: 2;
-            max-width: 800px;
-            padding: 0 20px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(10px);
+            animation: luxuryFadeIn 1s ease 0.2s both;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(3rem, 6vw, 4.5rem);
             font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
+            animation: luxuryFadeIn 1s ease 0.4s both;
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.6rem;
+            color: var(--text-secondary);
             margin-bottom: 3rem;
-            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+            animation: luxuryFadeIn 1s ease 0.6s both;
         }
 
-        .hero-actions {
+        .hero-cta {
             display: flex;
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+            animation: luxuryFadeIn 1s ease 0.8s both;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 5rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: luxuryFadeIn 1s ease 1s both;
         }
 
-        .btn-primary {
-            background: rgba(255, 255, 255, 0.95);
-            color: #8b5cf6;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-image {
-            max-width: 600px;
-            width: 100%;
+        .stat-item {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: white;
             border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            margin-top: 2rem;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Section */
-        .section {
-            padding: 5rem 0;
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-gold);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', 'Alef', serif;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-text {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .about-visual {
+            background: var(--gradient-luxury);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .visual-item {
+            aspect-ratio: 1;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .visual-item:hover {
+            transform: scale(1.05);
+            animation: luxuryFloat 2s ease-in-out infinite;
+        }
+
+        .visual-caption {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 120px 0;
+            background: var(--bg-light);
         }
 
         .section-header {
@@ -186,840 +539,992 @@
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: #333;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
         }
 
         .section-subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 600px;
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
             margin: 0 auto;
-        }
-
-        /* About */
-        .about {
-            background: #f8fafc;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: #8b5cf6;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            color: #666;
-            line-height: 1.8;
-        }
-
-        .about-img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Services */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .service-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .service-content {
-            padding: 2rem;
-        }
-
-        .service-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .service-description {
-            color: #666;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #8b5cf6;
-        }
-
-        /* Portfolio */
-        .portfolio {
-            background: #f8fafc;
+            line-height: 1.6;
         }
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
         }
 
-        .portfolio-item {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .portfolio-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
-            padding: 2rem;
-            transform: translateY(50%);
-            transition: transform 0.3s;
-        }
-
-        .portfolio-item:hover .portfolio-overlay {
-            transform: translateY(0);
-        }
-
-        .portfolio-overlay h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Extended Portfolio */
-        .extended-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .extended-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .extended-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .extended-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .extended-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
-            padding: 1.5rem;
-            font-weight: 500;
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial-card {
+        .portfolio-card {
             background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        .card-image {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-card:hover .card-image::before {
+            background: linear-gradient(45deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 100%);
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            color: white;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        }
+
+        .card-category {
+            color: var(--accent-gold-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .card-title-overlay {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .card-content {
             padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', 'Alef', serif;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-tag {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .card-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            font-family: 'Inter', 'Alef', serif;
+        }
+
+        .card-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .card-btn:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 120px 0;
+            background: white;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .process-step {
             text-align: center;
-            transition: transform 0.3s;
+            padding: 3rem 2rem;
+            background: var(--gradient-luxury);
+            border-radius: 24px;
+            border: 1px solid var(--border-light);
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-lg);
         }
 
-        .testimonial-card:hover {
-            transform: translateY(-5px);
+        .process-step:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-luxury);
         }
 
-        .testimonial-avatar {
+        .step-number {
             width: 80px;
             height: 80px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
             border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto 1.5rem;
-            border: 4px solid #a78bfa;
-        }
-
-        .testimonial-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #666;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-
-        .testimonial-author h4 {
-            font-size: 1.2rem;
-            color: #333;
-            margin-bottom: 0.3rem;
-        }
-
-        .testimonial-author span {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .rating {
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 0.3rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 auto 2rem auto;
+            box-shadow: var(--shadow-lg);
+            font-family: 'Inter', 'Alef', serif;
         }
 
-        .star {
-            color: #f59e0b;
-            font-size: 1.2rem;
-        }
-
-        /* Contact */
-        .contact {
-            background: #f8fafc;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .contact-info h3 {
+        .step-title {
             font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
             margin-bottom: 1.5rem;
-            color: #8b5cf6;
+            font-family: 'Inter', 'Alef', serif;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-        }
-
-        .contact-details h4 {
+        .step-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
             font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-            color: #333;
         }
 
-        .contact-details p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .contact-form {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-            background: #f8fafc;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #8b5cf6;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            height: 120px;
-        }
-
-        .whatsapp-btn {
-            background: #25d366;
+        /* CTA Section */
+        .cta {
+            padding: 120px 0;
+            background: var(--gradient-dark);
             color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            transition: all 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .whatsapp-btn:hover {
-            background: #128c7e;
-            transform: translateY(-2px);
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at top, rgba(212, 175, 55, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(192, 192, 192, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-white:hover {
+            background: var(--bg-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-luxury);
         }
 
         /* Footer */
         .footer {
-            background: #1f2937;
+            padding: 3rem 0;
+            background: var(--primary-color);
             color: white;
-            padding: 3rem 0 1.5rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #a78bfa;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: #94a3b8;
-            text-decoration: none;
-            line-height: 1.6;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #374151;
-            padding-top: 1.5rem;
             text-align: center;
-            color: #6b7280;
         }
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+        .footer p {
+            opacity: 0.8;
+            font-size: 1rem;
         }
 
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: transform 0.3s;
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 2rem;
+            }
         }
 
-        .social-link:hover {
-            transform: scale(1.1);
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .nav {
+            .nav-links {
                 display: none;
             }
 
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .hero {
+                padding: 120px 0 80px 0;
             }
 
             .hero-title {
                 font-size: 2.5rem;
             }
 
-            .section {
-                padding: 3rem 0;
+            .hero-subtitle {
+                font-size: 1.3rem;
             }
 
-            .container {
-                padding: 0 15px;
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
             }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .about-text h2 {
+                font-size: 2.2rem;
+            }
+
+            .cta h2 {
+                font-size: 2.2rem;
+            }
+
+            .logo-holographic {
+                width: 50px;
+                height: 50px;
+            }
+
+            .logo-text .main-title {
+                font-size: 1.5rem;
+            }
+
+            .logo-text .sub-title {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">סטודיו נויה</div>
-                <nav class="nav">
-                    <a href="#home">בית</a>
-                    <a href="#about">אודות</a>
-                    <a href="#services">שירותים</a>
-                    <a href="#portfolio">פורטפוליו</a>
-                    <a href="#testimonials">המלצות</a>
-                    <a href="#contact">צור קשר</a>
-                </nav>
-                <a href="#contact" class="contact-btn">
-                    <i class="fas fa-phone"></i>
-                    יצירת קשר
-                </a>
-            </div>
-        </div>
+        <nav class="nav container">
+            <a href="#" class="logo">
+                <div class="logo-holographic">
+                    <div class="holo-layer"></div>
+                    <div class="holo-layer"></div>
+                    <div class="holo-layer"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="main-title">WebMaster Pro</div>
+                    <div class="sub-title">אתרים שבונים עסקים</div>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#about">אודות</a></li>
+                <li><a href="#portfolio">גלריה</a></li>
+                <li><a href="#landing-pages">דפי נחיתה</a></li>
+                <li><a href="#automation">אוטומציות</a></li>
+                <li><a href="#clients">לקוחות</a></li>
+                <li><a href="#articles">מאמרים</a></li>
+                <li><a href="#contact">צור קשר</a></li>
+                <li><a href="#editor" class="btn btn-primary">התחל עכשיו</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Hero -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">יוצרים חללים שמשנים חיים</h1>
-            <p class="hero-subtitle">
-                מתמחים בעיצוב פנים יוקרתי ומקצועי עם ניסיון של מעל 15 שנה
-            </p>
-            <div class="hero-actions">
-                <a href="#portfolio" class="btn btn-primary">
-                    <i class="fas fa-images"></i>
-                    צפה בעבודות שלנו
-                </a>
-                <a href="#contact" class="btn btn-outline">
-                    <i class="fas fa-calendar"></i>
-                    קבע פגישת ייעוץ
-                </a>
-            </div>
-            <img src="https://i.imghippo.com/files/wxV2916aak.png" alt="עיצוב פנים יוקרתי" class="hero-image">
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="section about">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">סטודיו נויה - המומחים לעיצוב פנים יוקרתי</h2>
-                <p class="section-subtitle">
-                    עם ניסיון של מעל 15 שנה בתחום העיצוב, אנחנו מביאים לכם יצירתיות ומקצועיות
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    פלטפורמה מקצועית לעסקים
+                </div>
+                
+                <h1 class="hero-title">
+                    פלטפורמה מתקדמת<br>
+                    <span style="background: var(--gradient-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">לעיצוב ובניית</span><br>
+                    אתרים עסקיים
+                </h1>
+                
+                <p class="hero-subtitle">
+                    12 תבניות אתרים מקצועיות בתחומים עסקיים מגוונים עם אדיטור ויזואלי להתאמה אישית מלאה ובינה מלאכותית מתקדמת.
                 </p>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>הגישה שלנו לעיצוב</h3>
-                    <p>
-                        אנחנו מאמינים שכל בית מספר סיפור ייחודי. הגישה שלנו מתבססת על הבנה עמוקה של צרכי הלקוח, 
-                        שילוב של פונקציונליות עם יופי אסתטי, ויצירת חללים שמשקפים את האישיות של בעלי הבית.
-                    </p>
-                    <p>
-                        אנחנו עובדים עם חומרי הגלם הטובים ביותר, קבלנים מהימנים וספקים מובחרים כדי להבטיח 
-                        תוצאה מושלמת שתעמוד במבחן הזמן.
-                    </p>
-                </div>
                 
-                <div class="about-image">
-                    <img src="https://i.imghippo.com/files/zmE5570pk.png" alt="מטבח יוקרתי מעוצב" class="about-img">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">מגוון שירותי עיצוב מקצועיים</h2>
-                <p class="section-subtitle">
-                    מתכננים ומעצבים כל סוג של מרחב - מבתים פרטיים ועד משרדים עסקיים
-                </p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <img src="https://i.imghippo.com/files/YS1138arI.png" alt="עיצוב סלונים" class="service-image">
-                    <div class="service-content">
-                        <h3 class="service-title">עיצוב סלונים</h3>
-                        <p class="service-description">
-                            יצירת סלונים מרווחים ומזמינים שמשקפים את האישיות שלכם
-                        </p>
-                        <div class="service-price">החל מ-₪25,000</div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <img src="https://i.imghippo.com/files/wn3007S.png" alt="עיצוב מטבחים" class="service-image">
-                    <div class="service-content">
-                        <h3 class="service-title">עיצוב מטבחים</h3>
-                        <p class="service-description">
-                            מטבחים פונקציונליים ויפים שמשלבים טכנולוגיה מתקדמת
-                        </p>
-                        <div class="service-price">החל מ-₪35,000</div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <img src="https://i.imghippo.com/files/biG2738dVA.png" alt="עיצוב חדרי שינה" class="service-image">
-                    <div class="service-content">
-                        <h3 class="service-title">עיצוב חדרי שינה</h3>
-                        <p class="service-description">
-                            חדרי שינה רגועים ומזמינים שיוצרים אטמוספירה של שלווה
-                        </p>
-                        <div class="service-price">החל מ-₪18,000</div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <img src="https://i.imghippo.com/files/bwx3700PtU.png" alt="עיצוב משרדים" class="service-image">
-                    <div class="service-content">
-                        <h3 class="service-title">עיצוב משרדים</h3>
-                        <p class="service-description">
-                            משרדים מקצועיים ויעילים שמעודדים יצירתיות ופרודוקטיביות
-                        </p>
-                        <div class="service-price">החל מ-₪30,000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio -->
-    <section id="portfolio" class="section portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">21 פרויקטים מרהיבים שהשלמנו</h2>
-                <p class="section-subtitle">
-                    כל פרויקט הוא סיפור ייחודי של יצירתיות ומקצועיות
-                </p>
-            </div>
-            
-            <!-- Featured Projects -->
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://i.imghippo.com/files/fQvz7289bc.png" alt="דירה ברמת השרון" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h3>דירה ברמת השרון</h3>
-                        <p>סלון מודרני ויוקרתי עם עיצוב מינימליסטי</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <img src="https://i.imghippo.com/files/JRo3876Gs.png" alt="משרדי הייטק" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h3>משרדי הייטק בתל אביב</h3>
-                        <p>עיצוב משרד טכנולוגי וחדשני</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <img src="https://i.imghippo.com/files/ICjz7749xy.png" alt="בוטיק תל אביב" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h3>בוטיק יוקרה בתל אביב</h3>
-                        <p>עיצוב מסחרי אלגנטי ויוקרתי</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <img src="https://i.imghippo.com/files/mWL6327pc.png" alt="פנטהאוס הרצליה" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h3>פנטהאוס הרצליה</h3>
-                        <p>עיצוב יוקרתי מרהיב עם נוף לים</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Extended Portfolio -->
-            <h3 style="text-align: center; margin: 4rem 0 2rem; font-size: 2rem; color: #8b5cf6;">
-                עוד פרויקטים מהפורטפוליו שלנו
-            </h3>
-            <div class="extended-grid">
-                <div class="extended-item">
-                    <img src="https://i.imghippo.com/files/eoS3409zU.png" alt="וילה בקיסריה" class="extended-image">
-                    <div class="extended-caption">וילה יוקרתית בקיסריה</div>
-                </div>
-                
-                <div class="extended-item">
-                    <img src="https://i.imghippo.com/files/oqZ8393Gak.png" alt="דירת גג ברמת אביב" class="extended-image">
-                    <div class="extended-caption">דירת גג ברמת אביב</div>
-                </div>
-                
-                <div class="extended-item">
-                    <img src="https://i.imghippo.com/files/OXOh6805oTw.png" alt="לופט בנווה צדק" class="extended-image">
-                    <div class="extended-caption">לופט מודרני בנווה צדק</div>
-                </div>
-                
-                <div class="extended-item">
-                    <img src="https://i.imghippo.com/files/Pk3182Ps.png" alt="דירה בגבעתיים" class="extended-image">
-                    <div class="extended-caption">דירה משפחתית בגבעתיים</div>
-                </div>
-                
-                <div class="extended-item">
-                    <img src="https://i.imghippo.com/files/uIhJ5918Q.png" alt="משרד בראש העין" class="extended-image">
-                    <div class="extended-caption">משרד מנהלים בראש העין</div>
-                </div>
-                
-                <div class="extended-item">
-                    <img src="https://i.imghippo.com/files/PLjN5103DFg.png" alt="דירה בתל אביב" class="extended-image">
-                    <div class="extended-caption">דירה צעירה בתל אביב</div>
-                </div>
-                
-                <div class="extended-item">
-                    <img src="https://i.imghippo.com/files/yiP9207qMI.png" alt="בית ברעננה" class="extended-image">
-                    <div class="extended-caption">בית משפחתי ברעננה</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section id="testimonials" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">המלצות מלקוחות מרוצים</h2>
-                <p class="section-subtitle">
-                    השביעות רצון של הלקוחות שלנו היא המדד החשוב ביותר להצלחה
-                </p>
-            </div>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar">
-                        <img src="https://i.imghippo.com/files/pBud7581GU.png" alt="דוד ומיכל כהן">
-                    </div>
-                    <div class="rating">
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "נויה עיצבה לנו את הבית החלומי. העיצוב מושלם, איכות הביצוע מעולה והתוצאה עלתה על כל הציפיות!"
-                    </p>
-                    <div class="testimonial-author">
-                        <h4>דוד ומיכל כהן</h4>
-                        <span>רמת השרון</span>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar">
-                        <img src="https://i.imghippo.com/files/lBB1127O.png" alt="ענת לוי">
-                    </div>
-                    <div class="rating">
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "המקצועיות והיחס האישי של סטודיו נויה הפכו את תהליך העיצוב לחוויה מהנה ומרגשת. ממליצה בחום!"
-                    </p>
-                    <div class="testimonial-author">
-                        <h4>ענת לוי</h4>
-                        <span>תל אביב</span>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar">
-                        <img src="https://i.imghippo.com/files/dm3112IDI.png" alt="אמיר רוזנברג">
-                    </div>
-                    <div class="rating">
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "פתרונות יצירתיים, עיצוב חכם וביצוע מושלם. הבית שלנו הפך למרחב מחלומות בזכות נויה."
-                    </p>
-                    <div class="testimonial-author">
-                        <h4>אמיר רוזנברג</h4>
-                        <span>הרצליה</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">בואו נתחיל לתכנן את הבית החלומי שלכם</h2>
-                <p class="section-subtitle">
-                    מחכים לשמוע ממכם ולעזור לכם להגשים את החלום על הבית המושלם
-                </p>
-            </div>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>פרטי התקשרות</h3>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>טלפון</h4>
-                            <p>050-123-4567</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>דואר אלקטרוני</h4>
-                            <p>info@studio-noya.co.il</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>כתובת</h4>
-                            <p>רחוב הדקל 15, תל אביב</p>
-                        </div>
-                    </div>
-                    
-                    <a href="https://wa.me/972501234567?text=שלום, אני מעוניין/ת בייעוץ לעיצוב פנים" class="whatsapp-btn" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                        שלח הודעה בווטסאפ
+                <div class="hero-cta">
+                    <a href="#portfolio" class="btn btn-gold">
+                        <i class="fas fa-play"></i>
+                        צפה בגלריה
+                    </a>
+                    <a href="#technology" class="btn btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        איך זה עובד?
                     </a>
                 </div>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">תבניות מוכנות</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">תחומים עסקיים</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">רספונסיבי</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">זמינות</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about fade-in">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>מובילי הטכנולוגיה הדיגיטלית</h2>
+                    <p>
+                        WebMaster Pro מפתחת פתרונות מתקדמים לבניית אתרים עסקיים. 
+                        הפלטפורמה שלנו משלבת בינה מלאכותית מתקדמת עם עיצוב חדשני 
+                        ליצירת אתרים מקצועיים ומותאמים אישית.
+                    </p>
+                    <p style="padding: 1.5rem; background: rgba(37, 99, 235, 0.1); border-radius: 12px; border-left: 4px solid var(--primary-color); margin: 1.5rem 0;">
+                        <strong>שותפות טכנולוגית:</strong> אנחנו עובדים עם מובילי התחום הטכנולוגי 
+                        כדי לספק פתרונות מותאמים אישית מקצה לקצה.
+                    </p>
+                    
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <span class="feature-text">טכנולוגיה חדשנית</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <span class="feature-text">מוכח בשטח</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <span class="feature-text">גמישות ללא תחרות</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span class="feature-text">תמיכה אסטרטגית</span>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">שם מלא *</label>
-                            <input type="text" id="name" name="name" required>
+                <div class="about-visual">
+                    <div class="visual-grid">
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/sWlf1880WKM.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/WiRp8302YJs.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/hVyV3858OQ.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/eJk7179MXo.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/rhNp2418oyE.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/xnK4816Hc.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/htWG9491QkE.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/Ceu2132Q.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/yiP9207qMI.png'); background-size: cover; background-position: center;"></div>
+                    </div>
+                    <p class="visual-caption">10 תחומים עסקיים מגוונים והמבוקשים ביותר בישראל</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="technology fade-in" style="padding: 120px 0; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">הטכנולוגיה שלנו</h2>
+                <p class="section-subtitle">
+                    פתרונות מתקדמים ומוכחים לבניית אתרים עסקיים מקצועיים
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 4rem;">
+                
+                <!-- Advanced Technology Card -->
+                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-blue);"></div>
+                    <div style="width: 60px; height: 60px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                        <i class="fas fa-brain" style="color: white; font-size: 1.5rem;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">טכנולוגיית AI מתקדמת</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                        WebMaster Pro משלבת בינה מלאכותית מתקדמת ליצירת אתרים אוטומטית, 
+                        אופטימיזציה חכמה ואנליטיקה מובנית .
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">יצירה אוטומטית</span>
+                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">SEO חכם</span>
+                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">אנליטיקה מתקדמת</span>
+                    </div>
+                </div>
+
+                <!-- Field-Proven Solutions Card -->
+                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-gold);"></div>
+                    <div style="width: 60px; height: 60px; background: var(--gradient-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                        <i class="fas fa-award" style="color: var(--text-primary); font-size: 1.5rem;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">פתרונות מוכחים בשטח</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                        12 תבניות אתרים שנבדקו ואומתו בפועל אצל לקוחות, 
+                        עם שיעור הצלחה של 97% ושביעות רצון מקסימלית.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">97% הצלחה</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">נבדק בפועל</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">מוכח איכות</span>
+                    </div>
+                </div>
+
+                <!-- Flexible Technology Card -->
+                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(135deg, #059669 0%, #047857 100%);"></div>
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                        <i class="fas fa-rocket" style="color: white; font-size: 1.5rem;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">גמישות ותגובה מהירה</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                        הפלטפורמה שלנו מספקת גמישות ללא תחרות ותגובה מהירה לצרכים הספציפיים של הלקוחות, 
+                        כולל פתרונות מותאמים אישית מקצה לקצה.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">פתרונות מותאמים</span>
+                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">תגובה מהירה</span>
+                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">פתרון שלם</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="portfolio" class="portfolio fade-in">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">הגלריה שלנו</h2>
+                <p class="section-subtitle">
+                    WebMaster Pro מעצבת ובונה אתרים עסקיים ביצועים גבוהים 
+                    לענות על צרכי השוק העסקי המגוון
+                </p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Medical Aesthetics - Dr. Michal Rosen -->
+                <div class="portfolio-card" data-website="dr-michal-rosen">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/sWlf1880WKM.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">רפואה אסתטית</div>
+                            <h3 class="card-title-overlay">ד"ר מיכל רוזן</h3>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">טלפון *</label>
-                            <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">קליניקה לרפואה אסתטית</h3>
+                        <p class="card-description">עיצוב יוקרתי עם גלריית טיפולים, הזמנות אונליין ותוצאות לפני ואחרי</p>
+                        <div class="card-features">
+                            <span class="feature-tag">הזמנות אונליין</span>
+                            <span class="feature-tag">גלריית טיפולים</span>
+                            <span class="feature-tag">לפני ואחרי</span>
+                            <span class="feature-tag">ייעוץ מקוון</span>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="email">דואר אלקטרוני</label>
-                            <input type="email" id="email" name="email">
+                        <div class="card-price">
+                            <span class="price">₪2,800</span>
+                            <a href="websites/dr-michal-rosen.html" target="_blank" class="card-btn">צפה בדמו</a>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="project">סוג הפרויקט</label>
-                            <select id="project" name="project">
-                                <option value="">בחר סוג פרויקט</option>
-                                <option value="living-room">עיצוב סלון</option>
-                                <option value="kitchen">עיצוב מטבח</option>
-                                <option value="bedroom">עיצוב חדר שינה</option>
-                                <option value="office">עיצוב משרד</option>
-                                <option value="full-house">עיצוב בית שלם</option>
-                                <option value="consultation">ייעוץ כללי</option>
-                            </select>
+                    </div>
+                </div>
+
+                <!-- Fitness Coach - Danny Pit -->
+                <div class="portfolio-card" data-website="fitness-coach">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/WiRp8302YJs.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">כושר וספורט</div>
+                            <h3 class="card-title-overlay">דני פיט</h3>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="message">הודעה</label>
-                            <textarea id="message" name="message" placeholder="ספרו לנו על הפרויקט שלכם..."></textarea>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">מאמן כושר אישי</h3>
+                        <p class="card-description">אתר אנרגטי עם תוכניות אימון, מחשבון BMI וגלריית הצלחות</p>
+                        <div class="card-features">
+                            <span class="feature-tag">מחשבון BMI</span>
+                            <span class="feature-tag">תוכניות אימון</span>
+                            <span class="feature-tag">הצלחות לקוחות</span>
+                            <span class="feature-tag">הזמנת אימונים</span>
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">
-                            <i class="fas fa-paper-plane"></i>
-                            שלח הודעה
-                        </button>
-                    </form>
+                        <div class="card-price">
+                            <span class="price">₪2,200</span>
+                            <a href="websites/fitness-co.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yoga Studio - Studio Ohm -->
+                <div class="portfolio-card" data-website="yoga-studio">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/eJk7179MXo.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">יוגה ומדיטציה</div>
+                            <h3 class="card-title-overlay">סטודיו אוהם</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">סטודיו יוגה ומדיטציה</h3>
+                        <p class="card-description">עיצוב רגוע עם לוח שיעורים, הרשמה לשיעורים ותוכן הדרכה</p>
+                        <div class="card-features">
+                            <span class="feature-tag">לוח שיעורים</span>
+                            <span class="feature-tag">הרשמה אונליין</span>
+                            <span class="feature-tag">וידאוי הדרכה</span>
+                            <span class="feature-tag">מדיטציה מודרכת</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">₪1,900</span>
+                            <a href="websites/yoga-studio.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nutritionist - Dr. Sarah Cohen -->
+                <div class="portfolio-card" data-website="nutritionist">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/rhNp2418oyE.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">תזונה ובריאות</div>
+                            <h3 class="card-title-overlay">ד"ר שרה כהן</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">תזונאית קלינית מומחית</h3>
+                        <p class="card-description">אתר מקצועי עם מחשבון קלוריות, תפריטים אישיים ויעוץ תזונתי</p>
+                        <div class="card-features">
+                            <span class="feature-tag">מחשבון קלוריות</span>
+                            <span class="feature-tag">תפריטים אישיים</span>
+                            <span class="feature-tag">יעוץ תזונתי</span>
+                            <span class="feature-tag">מעקב התקדמות</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">₪2,400</span>
+                            <a href="websites/nutritionist.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Law Firm - Barkovich Office -->
+                <div class="portfolio-card" data-website="law-firm">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/hVyV3858OQ.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">משפטים</div>
+                            <h3 class="card-title-overlay">משרד ברקוביץ</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">משרד עורכי דין מקצועי</h3>
+                        <p class="card-description">עיצוב מקצועי עם תחומי מומחיות, צוות עורכי דין וייעוץ מקוון</p>
+                        <div class="card-features">
+                            <span class="feature-tag">תחומי מומחיות</span>
+                            <span class="feature-tag">צוות עורכי דין</span>
+                            <span class="feature-tag">ייעוץ מקוון</span>
+                            <span class="feature-tag">קביעת פגישות</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">₪2,500</span>
+                            <a href="websites/law-firm.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accountant - Rina Levy -->
+                <div class="portfolio-card" data-website="accountant">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/tGN5433dAU.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">חשבונאות</div>
+                            <h3 class="card-title-overlay">רינה לוי</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">חשבת שכר מוסמכת</h3>
+                        <p class="card-description">פתרונות חשבונאיים מקיפים עם מחשבון שכר, דיווחים ושירותים מתקדמים</p>
+                        <div class="card-features">
+                            <span class="feature-tag">מחשבון שכר</span>
+                            <span class="feature-tag">דיווחים ממשלתיים</span>
+                            <span class="feature-tag">ייעוץ מקוון</span>
+                            <span class="feature-tag">ניהול ספרים</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">₪2,000</span>
+                            <a href="websites/accountant.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beauty Salon - Bella -->
+                <div class="portfolio-card" data-website="beauty-salon">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/xnK4816Hc.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">יופי ועיצוב</div>
+                            <h3 class="card-title-overlay">מספרה BELLA</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">סלון יופי ועיצוב שיער</h3>
+                        <p class="card-description">עיצוב אלגנטי עם הזמנת תורים, גלריית עבודות ומחירון שירותים</p>
+                        <div class="card-features">
+                            <span class="feature-tag">הזמנת תורים</span>
+                            <span class="feature-tag">גלריית עבודות</span>
+                            <span class="feature-tag">מחירון שירותים</span>
+                            <span class="feature-tag">ייעוץ אופנה</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">₪1,700</span>
+                            <a href="websites/beauty-salon.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Private Tutor - Dr. Ronit Levy -->
+                <div class="portfolio-card" data-website="tutor">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/Ceu2132Q.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">חינוך והוראה</div>
+                            <h3 class="card-title-overlay">ד"ר רונית לוי</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">מורה פרטית מומחית</h3>
+                        <p class="card-description">שיעורים פרטיים ברמה גבוהה עם חומרי לימוד, מערכת שיעורים ומעקב התקדמות</p>
+                        <div class="card-features">
+                            <span class="feature-tag">שיעורים פרטיים</span>
+                            <span class="feature-tag">חומרי לימוד</span>
+                            <span class="feature-tag">מעקב התקדמות</span>
+                            <span class="feature-tag">יעוץ חינוכי</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">₪2,100</span>
+                            <a href="websites/tutor.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real Estate Premium -->
+                <div class="portfolio-card" data-website="real-estate">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/htWG9491QkE.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">נדל"ן</div>
+                            <h3 class="card-title-overlay">נדל"ן פרמיום</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">תיווך נדל"ן יוקרתי</h3>
+                        <p class="card-description">פלטפורמה מתקדמת עם גלריית נכסים, חיפוש מתקדם ומחשבון משכנתאות</p>
+                        <div class="card-features">
+                            <span class="feature-tag">גלריית נכסים</span>
+                            <span class="feature-tag">חיפוש מתקדם</span>
+                            <span class="feature-tag">מחשבון משכנתאות</span>
+                            <span class="feature-tag">השוואת נכסים</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">₪2,700</span>
+                            <a href="websites/real-estate.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multibrown Travel -->
+                <div class="portfolio-card" data-website="multibrawn">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/pL5530Z.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">נופש ואירועים</div>
+                            <h3 class="card-title-overlay">מולטיבראון</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">נופש ואירועים מותאמים</h3>
+                        <p class="card-description">פלטפורמה מקצועית לתכנון נופשים ואירועים עם הזמנות ותכנון מותאם</p>
+                        <div class="card-features">
+                            <span class="feature-tag">תכנון נופשים</span>
+                            <span class="feature-tag">ארגון אירועים</span>
+                            <span class="feature-tag">הזמנות אונליין</span>
+                            <span class="feature-tag">ייעוץ אישי</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">₪2,300</span>
+                            <a href="websites/multibrawn.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aesthetic Face Clinic -->
+                <div class="portfolio-card" data-website="aesthetic-clinic">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/Ayyb2287TOc.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">אסתטיקה פנים</div>
+                            <h3 class="card-title-overlay">קליניקת יופי פרמיום</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">קליניקה לאסתטיקת פנים</h3>
+                        <p class="card-description">עיצוב יוקרתי עם מגוון טיפולי פנים מתקדמים, הזמנות וייעוץ מקצועי</p>
+                        <div class="card-features">
+                            <span class="feature-tag">טיפולי פנים</span>
+                            <span class="feature-tag">הזמנות מתקדמות</span>
+                            <span class="feature-tag">ייעוץ מקצועי</span>
+                            <span class="feature-tag">גלריית תוצאות</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">₪3,200</span>
+                            <a href="websites/aesthetic-clinic.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Studio Noya - Interior Design - NEW! -->
+                <div class="portfolio-card" data-website="studio-noya">
+                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/yiP9207qMI.png');">
+                        <div class="card-overlay">
+                            <div class="card-category">עיצוב פנים</div>
+                            <h3 class="card-title-overlay">סטודיו נויה</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">עיצוב פנים יוקרתי</h3>
+                        <p class="card-description">סטודיו מתמחה בעיצוב פנים יוקרתי עם 21 פרויקטים מרהיבים ועיצוב מקצועי</p>
+                        <div class="card-features">
+                            <span class="feature-tag">21 פרויקטים</span>
+                            <span class="feature-tag">עיצוב יוקרתי</span>
+                            <span class="feature-tag">המלצות לקוחות</span>
+                            <span class="feature-tag">ייעוץ WhatsApp</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">₪2,400</span>
+                            <a href="interior-design-studio.html" target="_blank" class="card-btn">צפה בדמו</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="#editor" class="btn btn-gold">
+                    <i class="fas fa-edit"></i>
+                    התחל עריכה עכשיו
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Partnerships Section -->
+    <section class="partnerships fade-in" style="padding: 80px 0; background: var(--gradient-dark); color: white;">
+        <div class="container">
+            <div style="text-align: center;">
+                <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; opacity: 0.9;">הטכנולוגיות שלנו</h3>
+                <p style="font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                    פלטפורמה מתקדמת עם טכנולוגיות מובילות 
+                    לבניית אתרים מקצועיים ומהירים
+                </p>
+            </div>
+            
+            <div style="display: flex; justify-content: center; align-items: center; gap: 4rem; margin-top: 3rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
+                    <i class="fas fa-cloud" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                    <span style="font-size: 1.1rem; font-weight: 600;">Netlify Platform</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
+                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                    <span style="font-size: 1.1rem; font-weight: 600;">Cloudflare CDN</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
+                    <i class="fas fa-code" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                    <span style="font-size: 1.1rem; font-weight: 600;">HTML5 & CSS3</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
+                    <i class="fas fa-mobile-alt" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                    <span style="font-size: 1.1rem; font-weight: 600;">Responsive Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process fade-in">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">איך זה עובד?</h2>
+                <p class="section-subtitle">
+                    תהליך פשוט ומהיר ליצירת אתר מקצועי
+                </p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">בחירת תבנית</h3>
+                    <p class="step-description">
+                        בחר את התבנית המתאימה לתחום העסקי שלך מתוך 12 האפשרויות המקצועיות שלנו
+                    </p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">התאמה אישית</h3>
+                    <p class="step-description">
+                        השתמש באדיטור הויזואלי שלנו כדי להתאים את התוכן, הצבעים, התמונות והטקסט
+                    </p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">פרסום מיידי</h3>
+                    <p class="step-description">
+                        האתר מוכן לפרסום מיידי עם כל התכונות המתקדמות - רספונסיבי, מהיר ומאובטח
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>מוכן להתחיל?</h2>
+                <p>
+                    הצטרף לעסקים שכבר בחרו ב-WebMaster Pro<br>
+                    ויצרו נוכחות דיגיטלית מקצועית ומרשימה
+                </p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#portfolio" class="btn btn-white">
+                        <i class="fas fa-eye"></i>
+                        צפה בגלריה
+                    </a>
+                    <a href="#editor" class="btn btn-gold">
+                        <i class="fas fa-rocket"></i>
+                        התחל עכשיו
+                    </a>
                 </div>
             </div>
         </div>
@@ -1028,75 +1533,23 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>סטודיו נויה</h3>
-                    <p>
-                        מתמחים בעיצוב פנים יוקרתי ומקצועי מעל 15 שנה. 
-                        יוצרים חללים מרהיבים שמשנים חיים.
-                    </p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>השירותים שלנו</h3>
-                    <p><a href="#services">עיצוב סלונים</a></p>
-                    <p><a href="#services">עיצוב מטבחים</a></p>
-                    <p><a href="#services">עיצוב חדרי שינה</a></p>
-                    <p><a href="#services">עיצוב משרדים</a></p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>קישורים מהירים</h3>
-                    <p><a href="#about">אודות</a></p>
-                    <p><a href="#portfolio">פורטפוליו</a></p>
-                    <p><a href="#testimonials">המלצות</a></p>
-                    <p><a href="#contact">צור קשר</a></p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>צור קשר</h3>
-                    <p><i class="fas fa-phone"></i> 050-123-4567</p>
-                    <p><i class="fas fa-envelope"></i> info@studio-noya.co.il</p>
-                    <p><i class="fas fa-map-marker-alt"></i> רחוב הדקל 15, תל אביב</p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 סטודיו נויה - עיצוב פנים יוקרתי. כל הזכויות שמורות.</p>
-                <p>פותח במסגרת פרויקט WebMaster Pro | אתר #12 בפורטפוליו - ₪2,400</p>
-            </div>
+            <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות.</p>
         </div>
     </footer>
 
     <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.boxShadow = 'none';
-            }
-        });
-
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const href = this.getAttribute('href');
+                
+                // Skip if href is just '#' or empty
+                if (href === '#' || href.length <= 1) {
+                    return;
+                }
+                
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
@@ -1106,36 +1559,110 @@
             });
         });
 
-        // Contact form
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const phone = formData.get('phone');
-            const project = formData.get('project');
-            const message = formData.get('message');
-            
-            const whatsappMessage = `שלום! אני ${name}, מעוניין/ת בעיצוב פנים.
-
-פרטי התקשרות:
-• טלפון: ${phone}
-• סוג פרויקט: ${project || 'לא צוין'}
-
-הודעה: ${message || 'אשמח לקבל ייעוץ ופרטים נוספים'}`;
-
-            const whatsappUrl = `https://wa.me/972501234567?text=${encodeURIComponent(whatsappMessage)}`;
-            window.open(whatsappUrl, '_blank');
-            
-            alert('תודה רבה! ההודעה נשלחה בהצלחה לווטסאפ. נחזור אליכם בהקדם!');
-            this.reset();
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.boxShadow = 'var(--shadow-xl)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.boxShadow = 'var(--shadow-md)';
+            }
         });
 
-        // Console messages
-        console.log('🎨 סטודיו נויה - עיצוב פנים יוקרתי נטען בהצלחה!');
-        console.log('✅ כל 21 התמונות נטענו מ-ImgHippo');
-        console.log('💎 אתר #12 ב-WebMaster Pro - ₪2,400');
-        console.log('🚀 עכשיו יש לך 12 אתרים מוכנים בערך ₪28,600!');
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Portfolio card clicks - מעבר לדמואים האמיתיים
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // אם לחצו על הכפתור, תן לו לפעול בצורה רגילה
+                if (e.target.classList.contains('card-btn')) {
+                    return;
+                }
+                
+                // אחרת, פתח את הדמו בטאב חדש
+                const websiteId = this.getAttribute('data-website');
+                let websiteUrl = '';
+                
+                switch(websiteId) {
+                    case 'dr-michal-rosen':
+                        websiteUrl = 'dr-michal-rosen.html';
+                        break;
+                    case 'fitness-coach':
+                        websiteUrl = 'fitness-co.html';
+                        break;
+                    case 'yoga-studio':
+                        websiteUrl = 'yoga-studio.html';
+                        break;
+                    case 'nutritionist':
+                        websiteUrl = 'nutritionist.html';
+                        break;
+                    case 'law-firm':
+                        websiteUrl = 'law-firm.html';
+                        break;
+                    case 'accountant':
+                        websiteUrl = 'accountant.html';
+                        break;
+                    case 'beauty-salon':
+                        websiteUrl = 'beauty-salon.html';
+                        break;
+                    case 'tutor':
+                        websiteUrl = 'tutor.html';
+                        break;
+                    case 'real-estate':
+                        websiteUrl = 'real-estate.html';
+                        break;
+                    case 'multibrawn':
+                        websiteUrl = 'multibrawn.html';
+                        break;
+                    case 'aesthetic-clinic':
+                        websiteUrl = 'aesthetic-clinic.html';
+                        break;
+                    case 'studio-noya':
+                        websiteUrl = 'interior-design-studio.html';
+                        break;
+                }
+                
+                if (websiteUrl) {
+                    window.open(websiteUrl, '_blank');
+                }
+            });
+        });
+
+        // Add luxury hover effects
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        console.log('🚀 WebMaster Pro עם לוגו כחול בולט נטען בהצלחה!');
+        console.log('✨ אתרים שבונים עסקים!');
+        console.log('🎯 12 דמואים חיים מחוברים לקישורים אמיתיים!');
+        console.log('🆕 סטודיו נויה מחובר ל-interior-design-studio.html!');
     </script>
 </body>
 </html>
