@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebMaster Pro | AI Website Wizard</title>
+    <meta name="description" content="AI Website Wizard - בנה אתר עסקי מותאם אישית באמצעות בינה מלאכותית.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Varela+Round&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* העתק לכאן את כל קוד ה-CSS מתוך ה-<style> tag בקובץ index.html שלך */
+        /* וודא שכל המשתנים (:root) מועתקים גם */
+        :root {
+            --primary-color: #2563eb;
+            --primary-light: #3b82f6;
+            --secondary-color: #f8f9fa;
+            --accent-gold: #d4af37;
+            --accent-gold-light: #e6c651;
+            --accent-silver: #c0c0c0;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #6b7280;
+            --text-light: #9ca3af;
+            --bg-white: #ffffff;
+            --bg-light: #f8f9fa;
+            --bg-dark: #1a1a1a;
+            --border-light: #e5e7eb;
+            --border-gold: rgba(212, 175, 55, 0.3);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+            --shadow-luxury: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --gradient-luxury: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #e6c651 100%);
+            --gradient-blue: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rubik', 'Alef', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Basic Styles for AI Wizard Page */
+        .ai-wizard-section {
+            padding: 80px 0;
+            text-align: center;
+            flex-grow: 1; /* Makes the section take available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ai-wizard-header {
+            margin-bottom: 40px;
+        }
+
+        .ai-wizard-header h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .ai-wizard-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .ai-wizard-content {
+            background: var(--bg-white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: right;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            direction: rtl;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-light);
+        }
+
+        #ai-response-container {
+            margin-top: 40px;
+            border-top: 1px solid var(--border-light);
+            padding-top: 40px;
+            display: none; /* Hidden by default */
+        }
+
+        #ai-response-container h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        #ai-generated-site-preview {
+            width: 100%;
+            height: 600px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        #ai-chat-input {
+            width: calc(100% - 120px);
+            padding: 10px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            direction: rtl;
+        }
+
+        #ai-chat-send-btn {
+            width: 100px;
+            padding: 10px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #ai-chat-send-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+<body>
+    <div class="ai-wizard-section">
+        <div class="container">
+            <div class="ai-wizard-header">
+                <h1>AI Website Wizard</h1>
+                <p>בנה אתר עסקי מותאם אישית תוך דקות באמצעות בינה מלאכותית מתקדמת.</p>
+                <p>בחרת בתבנית: <span id="selected-template-name"></span></p>
+            </div>
+            
+            <div class="ai-wizard-content">
+                <h2>ספר לנו על העסק שלך:</h2>
+                <form id="business-info-form">
+                    <div class="form-group">
+                        <label for="business-name">שם העסק המלא:</label>
+                        <input type="text" id="business-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="business-description">תאר את העסק שלך בקצרה (כמה משפטים):</label>
+                        <textarea id="business-description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="business-services">מהם השירותים/מוצרים העיקריים שאתה מציע? (פרט כל אחד במשפט קצר):</label>
+                        <textarea id="business-services" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-phone">מספר טלפון ליצירת קשר (כולל קידומת):</label>
+                        <input type="tel" id="contact-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">כתובת אימייל ליצירת קשר:</label>
+                        <input type="email" id="contact-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="logo-url">קישור ללוגו (אם יש, אופציונלי):</label>
+                        <input type="url" id="logo-url">
+                    </div>
+                    <button type="submit" class="btn-submit">בנה את האתר הראשוני</button>
+                </form>
+
+                <div id="ai-response-container">
+                    <h2>האתר שנוצר:</h2>
+                    <iframe id="ai-generated-site-preview" sandbox="allow-same-origin allow-scripts allow-forms"></iframe>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="ai-chat-input" placeholder="בקש שינויים מה-AI: 'שנה את הכותרת ל...', 'הוסף גלריה', 'שנה צבעים'...">
+                        <button id="ai-chat-send-btn">שלח ל-AI</button>
+                    </div>
+                    <div class="loading-spinner" id="ai-spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ========== הגדרות Supabase שלך - כאן הפרטים האמיתיים שלך! ==========
+        const SUPABASE_URL = 'https://pooeneoileludqtdecig.supabase.co'; 
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VuZW9pbGVsdWRxdGRlY2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4NjU0MDAsImV4cCI6MjA2ODQ0MTQwMH0.Rs579QAksLWTBuDiMo6laa8j4qThKHzlkggrHZagliI'; 
+
+        const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let selectedTemplateSlug = ''; // ישמור את ה-slug של התבנית שנבחרה
+        let initialAiPrompt = ''; // ישמור את הפרומפט הראשוני מה-DB
+
+        // פונקציית עזר לקבלת פרמטרים מה-URL (כמו ה-slug)
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const selectedTemplateNameSpan = document.getElementById('selected-template-name');
+            const businessInfoForm = document.getElementById('business-info-form');
+            const aiResponseContainer = document.getElementById('ai-response-container');
+            const aiGeneratedSitePreview = document.getElementById('ai-generated-site-preview');
+            const aiChatInput = document.getElementById('ai-chat-input');
+            const aiChatSendBtn = document.getElementById('ai-chat-send-btn');
+            const aiSpinner = document.getElementById('ai-spinner');
+
+            // --- 1. קבל את ה-slug מה-URL ומשוך את פרטי התבנית ---
+            selectedTemplateSlug = getUrlParameter('slug');
+            if (selectedTemplateSlug) {
+                const { data: template, error } = await supabase
+                    .from('templates')
+                    .select('name, initial_ai_prompt')
+                    .eq('slug', selectedTemplateSlug)
+                    .single(); // single() מצפה לרשומה אחת
+
+                if (error || !template) {
+                    console.error('שגיאה במשיכת פרטי תבנית:', error ? error.message : 'תבנית לא נמצאה.');
+                    selectedTemplateNameSpan.textContent = 'שגיאה בטעינת תבנית.';
+                    alert('שגיאה בטעינת פרטי התבנית. אנא נסה שוב.');
+                    return;
+                }
+
+                selectedTemplateNameSpan.textContent = template.name;
+                initialAiPrompt = template.initial_ai_prompt;
+                console.log('טוען תבנית:', template.name);
+                console.log('פרומפט התחלתי:', initialAiPrompt.substring(0, 100) + '...'); // הדפסת חלק מהפרומפט ללוג
+            } else {
+                selectedTemplateNameSpan.textContent = 'לא נבחרה תבנית.';
+                alert('אנא בחר תבנית מדף הבית.');
+                // ניתן להפנות בחזרה לדף הבית: window.location.href = 'index.html';
+                return;
+            }
+
+            // --- 2. טיפול בהגשת טופס מידע עסקי ---
+            businessInfoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                aiSpinner.style.display = 'block'; // הצג ספינר טעינה
+                aiResponseContainer.style.display = 'none'; // הסתר תוצאה קודמת
+
+                const businessName = document.getElementById('business-name').value;
+                const businessDescription = document.getElementById('business-description').value;
+                const businessServices = document.getElementById('business-services').value;
+                const contactPhone = document.getElementById('contact-phone').value;
+                const contactEmail = document.getElementById('contact-email').value;
+                const logoUrl = document.getElementById('logo-url').value;
+
+                // יצירת פרומפט מורכב ל-AI
+                const fullAiPrompt = `${initialAiPrompt}\n\nנתוני העסק:\nשם העסק: ${businessName}\nתיאור: ${businessDescription}\nשירותים: ${businessServices}\nטלפון: ${contactPhone}\nאימייל: ${contactEmail}\n${logoUrl ? `לוגו: ${logoUrl}` : ''}\n\nבנה את האתר המלא בהתבסס על הנתונים הללו.`
+                
+                console.log('שולח פרומפט ל-AI:', fullAiPrompt.substring(0, 200) + '...');
+
+                // *** כאן תהיה קריאת ה-API ל-Backend (Supabase Function / שרת Node.js) ***
+                // כרגע, נדמה יצירת אתר עם קוד HTML פשוט כדוגמה.
+                // נניח שקריאה ל-Backend נראית כך:
+                // const response = await fetch('/.netlify/functions/generate-website', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ prompt: fullAiPrompt, templateSlug: selectedTemplateSlug })
+                // });
+                // const data = await response.json();
+                // const generatedHtml = data.html; // או data.site_code
+
+                // קוד זמני לדימוי אתר שנוצר ע"י AI
+                const generatedHtml = `
+                    <!DOCTYPE html>
+                    <html lang="he" dir="rtl">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>${businessName}</title>
+                        <style>
+                            body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f0f8ff; color: #333; }
+                            h1 { color: var(--primary-color, #2563eb); }
+                            p { color: var(--text-secondary, #4a4a4a); }
+                            .section { background: white; margin: 20px auto; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 600px;}
+                        </style>
+                    </head>
+                    <body>
+                        <div class="section">
+                            <h1>${businessName}</h1>
+                            <p>${businessDescription}</p>
+                            <p>שירותים: ${businessServices}</p>
+                            <p>טלפון: ${contactPhone}</p>
+                            <p>אימייל: ${contactEmail}</p>
+                            ${logoUrl ? `<img src="${logoUrl}" alt="לוגו העסק" style="max-width: 150px; margin-top: 20px;">` : ''}
+                            <p>האתר נוצר בהתבסס על תבנית ${selectedTemplateNameSpan.textContent} ובינה מלאכותית!</p>
+                        </div>
+                    </body>
+                    </html>
+                `;
+
+                // הצגת האתר שנוצר ב-iframe
+                aiGeneratedSitePreview.srcdoc = generatedHtml;
+                aiResponseContainer.style.display = 'block'; // הצג את קונטיינר התגובה
+                aiSpinner.style.display = 'none'; // הסתר ספינר
+
+                // שמירת הקוד שנוצר ב-Supabase (בשלב מאוחר יותר, דרך Backend)
+                // const { error: saveError } = await supabase.from('user_sites').insert({...});
+                
+            });
+
+            // --- 3. טיפול בשינויים באמצעות צ'אט AI ---
+            aiChatSendBtn.addEventListener('click', async () => {
+                const userMessage = aiChatInput.value;
+                if (!userMessage) return;
+
+                aiSpinner.style.display = 'block';
+                // כאן נשלח את הבקשה ל-AI לשינוי האתר הקיים ב-iframe
+                // ונציג את התוצאה המעודכנת ב-iframe.
+                // נצטרך לשמור את היסטוריית הצ'אט וקוד האתר האחרון.
+                console.log('בקשת שינוי ל-AI:', userMessage);
+
+                // דימוי שינוי - רק מציג שהבקשה נקלטה
+                const currentHtml = aiGeneratedSitePreview.srcdoc;
+                const modifiedHtml = currentHtml.replace('נוצר בהתבסס על תבנית', 'עודכן ע"י AI לפי בקשתך');
+                aiGeneratedSitePreview.srcdoc = modifiedHtml; // עדכן את ה-iframe
+                aiSpinner.style.display = 'none';
+                aiChatInput.value = ''; // נקה את תיבת הקלט
+            });
+        });
+
+        // פונקציית הודעות למשתמש
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(37, 99, 235, 0.95);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 10000;
+                font-weight: 600;
+                backdrop-filter: blur(10px);
+                transform: translateX(400px);
+                transition: all 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
