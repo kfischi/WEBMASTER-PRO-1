@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebMaster Pro - פלטפורמה לבניית אתרים עסקיים מקצועיים</title>
+    <meta name="description" content="פלטפורמה מקצועית לבניית אתרים עסקיים עם גלריית דמואים חיים ואדיטור ויזואלי. מאגר תבניות מוכנות בתחומים עסקיים מגוונים.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Varela+Round&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-light: #3b82f6;
+            --secondary-color: #f8f9fa;
+            --accent-gold: #d4af37;
+            --accent-gold-light: #e6c651;
+            --accent-silver: #c0c0c0;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #6b7280;
+            --text-light: #9ca3af;
+            --bg-white: #ffffff;
+            --bg-light: #f8f9fa;
+            --bg-dark: #1a1a1a;
+            --border-light: #e5e7eb;
+            --border-gold: rgba(212, 175, 55, 0.3);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+            --shadow-luxury: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --gradient-luxury: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #e6c651 100%);
+            --gradient-blue: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rubik', 'Alef', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Luxury animations */
+        @keyframes luxuryFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes luxuryFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ===== HOLOGRAPHIC LOGO ANIMATIONS ===== */
+        @keyframes holoRotate {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        @keyframes holoShine {
+            0% { opacity: 0.6; box-shadow: 0 0 20px currentColor; }
+            100% { opacity: 1; box-shadow: 0 0 40px currentColor, 0 0 60px currentColor; }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        /* ===== UPDATED LOGO - כחול בולט ויפה ===== */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .logo-holographic {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: holoRotate 4s linear infinite;
+        }
+
+        .holo-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid;
+            border-radius: 15px;
+            animation: holoShine 2s ease-in-out infinite alternate;
+        }
+
+        .holo-layer:nth-child(1) {
+            border-color: #2563eb;
+            transform: rotateX(0deg) rotateY(0deg) translateZ(10px);
+        }
+
+        .holo-layer:nth-child(2) {
+            border-color: #3b82f6;
+            transform: rotateX(45deg) rotateY(45deg) translateZ(5px);
+            animation-delay: 0.3s;
+        }
+
+        .holo-layer:nth-child(3) {
+            border-color: #1d4ed8;
+            transform: rotateX(90deg) rotateY(90deg) translateZ(0px);
+            animation-delay: 0.6s;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .main-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #1d4ed8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text .sub-title {
+            font-size: 1rem;
+            color: #2563eb;
+            font-weight: 700;
+            margin-top: 0.2rem;
+            font-family: 'Inter', sans-serif;
+            text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Rubik', 'Alef', sans-serif;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-gold {
+            background: var(--gradient-gold);
+            color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+            font-weight: 700;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 100px 0;
+            background: var(--gradient-luxury);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(26, 26, 26, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(10px);
+            animation: luxuryFadeIn 1s ease 0.2s both;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
+            animation: luxuryFadeIn 1s ease 0.4s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.6rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+            animation: luxuryFadeIn 1s ease 0.6s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+            animation: luxuryFadeIn 1s ease 0.8s both;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 5rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: luxuryFadeIn 1s ease 1s both;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-gold);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', 'Alef', serif;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-text {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .about-visual {
+            background: var(--gradient-luxury);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .visual-item {
+            aspect-ratio: 1;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .visual-item:hover {
+            transform: scale(1.05);
+            animation: luxuryFloat 2s ease-in-out infinite;
+        }
+
+        .visual-caption {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 120px 0;
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .portfolio-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        .card-image {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-card:hover .card-image::before {
+            background: linear-gradient(45deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 100%);
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            color: white;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        }
+
+        .card-category {
+            color: var(--accent-gold-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .card-title-overlay {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .card-content {
+            padding: 2.5rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', 'Alef', serif;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-tag {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .card-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            font-family: 'Inter', 'Alef', serif;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-btn {
+            flex: 1;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .card-btn.view {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            border: 2px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .card-btn.edit {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-btn.view:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .card-btn.edit:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 120px 0;
+            background: white;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--gradient-luxury);
+            border-radius: 24px;
+            border: 1px solid var(--border-light);
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .process-step:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 auto 2rem auto;
+            box-shadow: var(--shadow-lg);
+            font-family: 'Inter', 'Alef', serif;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', 'Alef', serif;
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 120px 0;
+            background: var(--gradient-dark);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at top, rgba(212, 175, 55, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(192, 192, 192, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', 'Alef', serif;
+            letter-spacing: -0.02em;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-white:hover {
+            background: var(--bg-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-luxury);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 0;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 120px 0 80px 0;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .about-text h2 {
+                font-size: 2.2rem;
+            }
+
+            .cta h2 {
+                font-size: 2.2rem;
+            }
+
+            .logo-holographic {
+                width: 50px;
+                height: 50px;
+            }
+
+            .logo-text .main-title {
+                font-size: 1.5rem;
+            }
+
+            .logo-text .sub-title {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">
+                <div class="logo-holographic">
+                    <div class="holo-layer"></div>
+                    <div class="holo-layer"></div>
+                    <div class="holo-layer"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="main-title">WebMaster Pro</div>
+                    <div class="sub-title">אתרים שבונים עסקים</div>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#about">אודות</a></li>
+                <li><a href="#portfolio">גלריה</a></li>
+                <li><a href="#landing-pages">דפי נחיתה</a></li>
+                <li><a href="#automation">אוטומציות</a></li>
+                <li><a href="#clients">לקוחות</a></li>
+                <li><a href="#articles">מאמרים</a></li>
+                <li><a href="#contact">צור קשר</a></li>
+                <li><a href="#editor" class="btn btn-primary">התחל עכשיו</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    פלטפורמה מקצועית לעסקים
+                </div>
+                
+                <h1 class="hero-title">
+                    פלטפורמה מתקדמת<br>
+                    <span style="background: var(--gradient-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">לעיצוב ובניית</span><br>
+                    אתרים עסקיים
+                </h1>
+                
+                <p class="hero-subtitle">
+                    12 תבניות אתרים מקצועיות בתחומים עסקיים מגוונים עם אדיטור ויזואלי להתאמה אישית מלאה ובינה מלאכותית מתקדמת.
+                </p>
+                
+                <div class="hero-cta">
+                    <a href="#portfolio" class="btn btn-gold">
+                        <i class="fas fa-play"></i>
+                        צפה בגלריה
+                    </a>
+                    <a href="#technology" class="btn btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        איך זה עובד?
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">תבניות מוכנות</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">תחומים עסקיים</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">רספונסיבי</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">זמינות</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about fade-in">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>מובילי הטכנולוגיה הדיגיטלית</h2>
+                    <p>
+                        WebMaster Pro מפתחת פתרונות מתקדמים לבניית אתרים עסקיים. 
+                        הפלטפורמה שלנו משלבת בינה מלאכותית מתקדמת עם עיצוב חדשני 
+                        ליצירת אתרים מקצועיים ומותאמים אישית.
+                    </p>
+                    <p style="padding: 1.5rem; background: rgba(37, 99, 235, 0.1); border-radius: 12px; border-left: 4px solid var(--primary-color); margin: 1.5rem 0;">
+                        <strong>שותפות טכנולוגית:</strong> אנחנו עובדים עם מובילי התחום הטכנולוגי 
+                        כדי לספק פתרונות מותאמים אישית מקצה לקצה.
+                    </p>
+                    
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <span class="feature-text">טכנולוגיה חדשנית</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <span class="feature-text">מוכח בשטח</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <span class="feature-text">גמישות ללא תחרות</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span class="feature-text">תמיכה אסטרטגית</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="visual-grid">
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/sWlf1880WKM.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/WiRp8302YJs.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/hVyV3858OQ.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/eJk7179MXo.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/rhNp2418oyE.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/xnK4816Hc.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/htWG9491QkE.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/Ceu2132Q.png'); background-size: cover; background-position: center;"></div>
+                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/yiP9207qMI.png'); background-size: cover; background-position: center;"></div>
+                    </div>
+                    <p class="visual-caption">10 תחומים עסקיים מגוונים והמבוקשים ביותר בישראל</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technology" class="technology fade-in" style="padding: 120px 0; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">הטכנולוגיה שלנו</h2>
+                <p class="section-subtitle">
+                    פתרונות מתקדמים ומוכחים לבניית אתרים עסקיים מקצועיים
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 4rem;">
+                
+                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-blue);"></div>
+                    <div style="width: 60px; height: 60px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                        <i class="fas fa-brain" style="color: white; font-size: 1.5rem;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">טכנולוגיית AI מתקדמת</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                        WebMaster Pro משלבת בינה מלאכותית מתקדמת ליצירת אתרים אוטומטית, 
+                        אופטימיזציה חכמה ואנליטיקה מובנית .
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">יצירה אוטומטית</span>
+                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">SEO חכם</span>
+                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">אנליטיקה מתקדמת</span>
+                    </div>
+                </div>
+
+                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-gold);"></div>
+                    <div style="width: 60px; height: 60px; background: var(--gradient-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                        <i class="fas fa-award" style="color: var(--text-primary); font-size: 1.5rem;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">פתרונות מוכחים בשטח</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                        12 תבניות אתרים שנבדקו ואומתו בפועל אצל לקוחות, 
+                        עם שיעור הצלחה של 97% ושביעות רצון מקסימלית.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">97% הצלחה</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">נבדק בפועל</span>
+                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">מוכח איכות</span>
+                    </div>
+                </div>
+
+                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(135deg, #059669 0%, #047857 100%);"></div>
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                        <i class="fas fa-rocket" style="color: white; font-size: 1.5rem;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">גמישות ותגובה מהירה</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                        הפלטפורמה שלנו מספקת גמישות ללא תחרות ותגובה מהירה לצרכים הספציפיים של הלקוחות, 
+                        כולל פתרונות מותאמים אישית מקצה לקצה.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">פתרונות מותאמים</span>
+                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">תגובה מהירה</span>
+                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">פתרון שלם</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="portfolio" class="portfolio fade-in">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">הגלריה שלנו</h2>
+                <p class="section-subtitle">
+                    WebMaster Pro מעצבת ובונה אתרים עסקיים ביצועים גבוהים 
+                    לענות על צרכי השוק העסקי המגוון
+                </p>
+            </div>
+            
+            <div id="templates-grid" class="portfolio-grid">
+                </div>
+
+            <div id="loading-message" style="text-align: center; padding: 50px; font-size: 1.5rem; color: var(--text-muted);">טוען תבניות...</div>
+            <div id="error-message" style="display: none; text-align: center; padding: 50px; font-size: 1.5rem; color: #dc2626; background-color: #fee2e2; border-radius: 8px; margin: 50px auto; max-width: 600px;"></div>
+
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="#editor" class="btn btn-gold">
+                    <i class="fas fa-edit"></i>
+                    התחל עריכה עכשיו
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="process fade-in">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">איך זה עובד?</h2>
+                <p class="section-subtitle">
+                    תהליך פשוט ומהיר ליצירת אתר מקצועי
+                </p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">בחירת תבנית</h3>
+                    <p class="step-description">
+                        בחר את התבנית המתאימה לתחום העסקי שלך מתוך 12 האפשרויות המקצועיות שלנו
+                    </p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">התאמה אישית</h3>
+                    <p class="step-description">
+                        השתמש באדיטור הויזואלי שלנו כדי להתאים את התוכן, הצבעים, התמונות והטקסט
+                    </p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">פרסום מיידי</h3>
+                    <p class="step-description">
+                        האתר מוכן לפרסום מיידי עם כל התכונות המתקדמות - רספונסיבי, מהיר ומאובטח
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>מוכן להתחיל?</h2>
+                <p>
+                    הצטרף לעסקים שכבר בחרו ב-WebMaster Pro<br>
+                    ויצרו נוכחות דיגיטלית מקצועית ומרשימה
+                </p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#portfolio" class="btn btn-white">
+                        <i class="fas fa-eye"></i>
+                        צפה בגלריה
+                    </a>
+                    <a href="#editor" class="btn btn-gold">
+                        <i class="fas fa-rocket"></i>
+                        התחל עכשיו
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // ========== הגדרות Supabase שלך - כאן הפרטים האמיתיים שלך! ==========
+        const SUPABASE_URL = 'https://pooeneoileludqtdecig.supabase.co'; // ה-URL שלך
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VuZW9pbGVsdWRxdGRlY2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4NjU0MDAsImV4cCI6MjA2ODQ0MTQwMH0.Rs579QAksLWTBuDiMo6laa8j4qThKHzlkggrHZagliI'; // המפתח הציבורי שלך
+
+        const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const templatesGrid = document.getElementById('templates-grid');
+            const loadingMessage = document.getElementById('loading-message');
+            const errorMessage = document.getElementById('error-message');
+
+            // --- 1. הסתר הודעות שגיאה וטעינה בהתחלה ---
+            errorMessage.style.display = 'none';
+            loadingMessage.style.display = 'block'; // הצג הודעת טעינה
+
+            try {
+                // --- 2. שלוף את התבניות מ-Supabase ---
+                const { data: templates, error } = await supabase
+                    .from('templates')
+                    .select('id, name, slug, description, preview_image_url, category, price, is_premium'); 
+
+                if (error) {
+                    throw error;
+                }
+
+                loadingMessage.style.display = 'none'; // הסתר הודעת טעינה לאחר הטעינה
+
+                // --- 3. הצג את התבניות בגלריה ---
+                if (templates && templates.length > 0) {
+                    templatesGrid.innerHTML = ''; // נקה את התוכן הסטטי הקיים
+
+                    templates.forEach(template => {
+                        const templateCard = document.createElement('div');
+                        templateCard.className = 'portfolio-card fade-in'; // הוסף את הקלאסים הקיימים
+                        templateCard.style.cssText = `
+                            /* סגנונות מתוך portfolio-card ב-CSS הראשי שלך */
+                            background: white;
+                            border-radius: 24px;
+                            box-shadow: var(--shadow-xl);
+                            border: 1px solid var(--border-light);
+                            transition: all 0.4s ease;
+                            cursor: pointer;
+                            position: relative;
+                        `;
+                        // הוסיף את אנימציית ה-hover מחדש, מכיוון שהיא אבדה ב-cssText
+                        templateCard.onmouseover = (e) => {
+                            templateCard.style.transform = 'translateY(-12px)';
+                            templateCard.style.boxShadow = 'var(--shadow-luxury)';
+                            const imageOverlay = templateCard.querySelector('.card-image');
+                            if (imageOverlay) {
+                                imageOverlay.style.setProperty('--overlay-start-color', 'rgba(0,0,0,0.5)');
+                                imageOverlay.style.setProperty('--overlay-end-color', 'rgba(0,0,0,0.1)');
+                            }
+                        };
+                        templateCard.onmouseout = (e) => {
+                            templateCard.style.transform = 'translateY(0px)';
+                            templateCard.style.boxShadow = 'var(--shadow-xl)';
+                            const imageOverlay = templateCard.querySelector('.card-image');
+                            if (imageOverlay) {
+                                imageOverlay.style.setProperty('--overlay-start-color', 'rgba(0,0,0,0.7)');
+                                imageOverlay.style.setProperty('--overlay-end-color', 'rgba(0,0,0,0.3)');
+                            }
+                        };
+
+
+                        templateCard.innerHTML = `
+                            <div class="card-image" style="background-image: url('${template.preview_image_url}');">
+                                <div class="card-overlay">
+                                    <div class="card-category">${template.category}</div>
+                                    <h3 class="card-title-overlay">${template.name}</h3>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">${template.name}</h3>
+                                <p class="card-description">${template.description}</p>
+                                <div class="card-features">
+                                    </div>
+                                <div class="card-price">
+                                    <span class="price">₪${(template.price / 100).toLocaleString()}</span>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="card-btn view" data-slug="${template.slug}">
+                                        <i class="fas fa-eye"></i>
+                                        צפה בדמו
+                                    </button>
+                                    <button class="card-btn edit" data-slug="${template.slug}">
+                                        <i class="fas fa-edit"></i>
+                                        ערוך באדיטור
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        templatesGrid.appendChild(templateCard);
+
+                        // Attach event listeners to the dynamically created buttons
+                        templateCard.querySelector('.card-btn.view').addEventListener('click', (e) => {
+                            e.stopPropagation(); // Prevent card click from firing
+                            handleViewWebsite(template.slug);
+                        });
+                        templateCard.querySelector('.card-btn.edit').addEventListener('click', (e) => {
+                            e.stopPropagation(); // Prevent card click from firing
+                            handleEditWebsite(template.slug);
+                        });
+                    });
+
+                    // הוסף קלאס 'visible' לכל הקלפים לאחר הטעינה
+                    setTimeout(() => {
+                        document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+                    }, 100);
+
+                } else {
+                    templatesGrid.innerHTML = '<div style="text-align: center; padding: 50px; font-size: 1.5rem; color: var(--text-muted); grid-column: 1 / -1;">לא נמצאו תבניות להצגה. אנא וודא שהנתונים הוזנו ל-Supabase.</div>';
+                }
+
+            } catch (err) {
+                console.error('שגיאה במשיכת תבניות:', err.message);
+                loadingMessage.style.display = 'none'; // הסתר הודעת טעינה
+                errorMessage.textContent = 'אירעה שגיאה בטעינת התבניות. אנא וודא ש-URL המפתח והרשאות ה-RLS תקינים. פרטי שגיאה: ' + err.message;
+                errorMessage.style.display = 'block';
+                templatesGrid.innerHTML = ''; // נקה את הרשת
+            }
+        });
+
+        // ========== פונקציות לחיבור לאדיטור החדש (AI Wizard) ==========
+        function handleViewWebsite(slug) {
+            // לדמוג, פותח את קובץ ה-HTML המקורי של הדמו
+            // זה דורש שקובצי הדמו יהיו נגישים בתיקיית 'websites/'
+            const demoUrl = `/websites/${slug}.html`; // נתיב תלוי במיקום הקבצים שלך ב-Netlify
+            showNotification(`👁️ פותח תצוגה מקדימה של: ${slug}`);
+            window.open(demoUrl, '_blank');
+        }
+
+        function handleEditWebsite(slug) {
+            // כאן נצטרך לפתח את דף השאלון של ה-AI Wizard.
+            // נצטרך לשמור את ה-slug של התבנית הנבחרת ולנווט לדף השאלון.
+            showNotification(`✏️ מכין את שאלון ה-AI עבור תבנית: ${slug}`);
+            
+            // דוגמה לשמירת ה-slug וניווט:
+            localStorage.setItem('selectedTemplateSlug', slug);
+            window.location.href = `ai-wizard.html?slug=${slug}`; // נניח ש ai-wizard.html הוא דף השאלון
+
+            // כרגע, אנחנו רק מדפיסים לקונסול ומציגים אלרט.
+            // בהמשך, נרחיב את הפונקציה הזו.
+        }
+
+        // הודעות למשתמש
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(37, 99, 235, 0.95);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 10000;
+                font-weight: 600;
+                backdrop-filter: blur(10px);
+                transform: translateX(400px);
+                transition: all 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Console log for updates (הודעות אלה יוחלפו בגלריה הדינמית)
+        console.log('🚀 WebMaster Pro גלריה מחוברת ל-Supabase נטענה בהצלחה!');
+        // שאר ההודעות בקונסול כבר לא רלוונטיות כאן, כי הנתונים באים מ-DB
+    </script>
+</body>
+</html>
