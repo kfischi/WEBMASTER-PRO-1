@@ -1,6 +1,7 @@
 {
   "name": "webmaster-pro-backend",
   "version": "1.0.0",
+  "type": "module",  
   "description": "Multi-AI Backend for WebMaster Pro",
   "main": "server.js",
   "scripts": {
@@ -11,7 +12,8 @@
   "dependencies": {
     "express": "^4.18.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "@supabase/supabase-js": "^2.x" 
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
