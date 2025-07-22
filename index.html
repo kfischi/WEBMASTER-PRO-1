@@ -846,7 +846,7 @@
         <script>
             // ========== הגדרות Supabase שלך - כאן הפרטים האמיתיים שלך! ==========
             const SUPABASE_URL = 'https://pooeneoileludqtdecig.supabase.co'; // ה-URL שלך
-            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VuZW9pbGVsdWRxdGRlY2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4NjU0MDAsImV4cCI6MjA2ODQ0MTQwMH0.Rs579QAksLWTBuDiMo6laa8j4qThKHzlkggrHZagliI'; // המפתח הציבורי שלך
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNud2F5aHNycnF4cHV3bHVuc2NiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwMjM3NDEsImV4cCI6MjA2NjU5OTc0MX0.ohACXAqDd9zFf_S8CX6ryHm3ZQTcVEAlKZ3VqWAOOgw'; // המפתח הציבורי שלך
 
             const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -1031,66 +1031,3 @@
         </script>
     </body>
     </html>
-    ```
----
-
-אני רואה את קוד ה-HTML ששלחת לי. זה מעולה!
-
-הבעיה שמופיעה בקונסולה (`Uncaught ReferenceError: Supabase is not defined`) אומרת שהדפדפן מנסה להשתמש באובייקט `Supabase` **לפני** שהספרייה עצמה נטענה.
-
-בקוד ששלחת, אני רואה שתג ה-`<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>` נמצא **ממש לפני תג הסגירה `</body>`**. זהו מיקום נפוץ מאוד לסקריפטים, אבל הוא גורם לבעיה כשקוד ה-JavaScript הראשי שלך מנסה לרוץ **מיידית** כשמוצג ה-DOM (דף ה-HTML).
-
-### 🛠️ **התיקון הסופי לבעיית הטעינה: העברת תג `<script>` ל-`<head>`**
-
-כדי לפתור את זה בוודאות, אנחנו חייבים להבטיח שספריית Supabase נטענת ומוכנה **לפני שכל קוד אחר בדף מנסה להשתמש בה**. המקום הבטוח ביותר לכך הוא בתוך תג ה-`<head>`.
-
-**אנא בצע את השינוי הבא בתוך קובץ ה-`index.html` שלך בדיוק:**
-
-1.  **מחק את השורה הבאה** מתחת לתג ה-`<footer>` (ממש לפני `</body>`):
-    ```html
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    ```
-
-2.  **הדבק את אותה שורה בדיוק בתוך תג ה-`<head>` שלך**, אחרי כל תגי ה-`<link>` (של הפונטים וה-CSS), ולפני תג הסגירה `</head>`.
-
-    זה אמור להיראות כך (שים לב לשורה המודגשת):
-
-    ```html
-    <!DOCTYPE html>
-    <html lang="he" dir="rtl">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WebMaster Pro - פלטפורמה לבניית אתרים עסקיים מקצועיים</title>
-        <meta name="description" content="פלטפורמה מקצועית לבניית אתרים עסקיים עם גלריית דמואים חיים ואדיטור ויזואלי. מאגר תבניות מוכנות בתחומים עסקיים מגוונים.">
-        
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Varela+Round&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-        
-        <style>
-            /* כל קוד ה-CSS שלך כאן */
-        </style>
-
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    </head>
-    <body>
-        ... (כל שאר ה-HTML)
-        
-        <script>
-            // כל קוד ה-JavaScript שלך (כולל ה-createClient) נשאר כאן
-        </script>
-    </body>
-    </html>
-    ```
-
-3.  **שמור את קובץ `index.html`.**
-4.  **העלה את הקובץ המעודכן ל-Netlify.** (דרך `git push` ל-GitHub, אם זה מה שאתה משתמש בו).
-5.  **פתח את האתר שלך בדפדפן** ו**פתח את קונסולת המפתחים** (Console).
-
----
-
-אני מאוד מקווה שזה יפתור את הבעיה אחת ולתמיד. מיקום הסקריפט הוא הגורם הסביר ביותר.
-
-**אנא עדכן אותי מיד מה אתה רואה בקונסולה לאחר ביצוע השלבים.**
