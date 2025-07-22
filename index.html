@@ -664,7 +664,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
         }
 
         .price {
@@ -837,591 +836,189 @@
         }
 
         /* Footer */
-        .footer {
-            padding: 3rem 0;
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-        }
-
-        .footer p {
-            opacity: 0.8;
-            font-size: 1rem;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .container {
-                padding: 0 20px;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero {
-                padding: 120px 0 80px 0;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.3rem;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .about-features {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-
-            .process-steps {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .about-text h2 {
-                font-size: 2.2rem;
-            }
-
-            .cta h2 {
-                font-size: 2.2rem;
-            }
-
-            .logo-holographic {
-                width: 50px;
-                height: 50px;
-            }
-
-            .logo-text .main-title {
-                font-size: 1.5rem;
-            }
-
-            .logo-text .sub-title {
-                font-size: 0.85rem;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
-</head>
-<body>
-    <header class="header">
-        <nav class="nav container">
-            <a href="#" class="logo">
-                <div class="logo-holographic">
-                    <div class="holo-layer"></div>
-                    <div class="holo-layer"></div>
-                    <div class="holo-layer"></div>
-                </div>
-                <div class="logo-text">
-                    <div class="main-title">WebMaster Pro</div>
-                    <div class="sub-title">אתרים שבונים עסקים</div>
-                </div>
-            </a>
-            
-            <ul class="nav-links">
-                <li><a href="#about">אודות</a></li>
-                <li><a href="#portfolio">גלריה</a></li>
-                <li><a href="#landing-pages">דפי נחיתה</a></li>
-                <li><a href="#automation">אוטומציות</a></li>
-                <li><a href="#clients">לקוחות</a></li>
-                <li><a href="#articles">מאמרים</a></li>
-                <li><a href="#contact">צור קשר</a></li>
-                <li><a href="#editor" class="btn btn-primary">התחל עכשיו</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-star"></i>
-                    פלטפורמה מקצועית לעסקים
-                </div>
-                
-                <h1 class="hero-title">
-                    פלטפורמה מתקדמת<br>
-                    <span style="background: var(--gradient-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">לעיצוב ובניית</span><br>
-                    אתרים עסקיים
-                </h1>
-                
-                <p class="hero-subtitle">
-                    12 תבניות אתרים מקצועיות בתחומים עסקיים מגוונים עם אדיטור ויזואלי להתאמה אישית מלאה ובינה מלאכותית מתקדמת.
-                </p>
-                
-                <div class="hero-cta">
-                    <a href="#portfolio" class="btn btn-gold">
-                        <i class="fas fa-play"></i>
-                        צפה בגלריה
-                    </a>
-                    <a href="#technology" class="btn btn-secondary">
-                        <i class="fas fa-info-circle"></i>
-                        איך זה עובד?
-                    </a>
-                </div>
+        <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות.</p>
             </div>
-            
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">12</span>
-                    <span class="stat-label">תבניות מוכנות</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">10</span>
-                    <span class="stat-label">תחומים עסקיים</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">רספונסיבי</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">זמינות</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </footer>
 
-    <section id="about" class="about fade-in">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>מובילי הטכנולוגיה הדיגיטלית</h2>
-                    <p>
-                        WebMaster Pro מפתחת פתרונות מתקדמים לבניית אתרים עסקיים. 
-                        הפלטפורמה שלנו משלבת בינה מלאכותית מתקדמת עם עיצוב חדשני 
-                        ליצירת אתרים מקצועיים ומותאמים אישית.
-                    </p>
-                    <p style="padding: 1.5rem; background: rgba(37, 99, 235, 0.1); border-radius: 12px; border-left: 4px solid var(--primary-color); margin: 1.5rem 0;">
-                        <strong>שותפות טכנולוגית:</strong> אנחנו עובדים עם מובילי התחום הטכנולוגי 
-                        כדי לספק פתרונות מותאמים אישית מקצה לקצה.
-                    </p>
-                    
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-microchip"></i>
-                            </div>
-                            <span class="feature-text">טכנולוגיה חדשנית</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <span class="feature-text">מוכח בשטח</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <span class="feature-text">גמישות ללא תחרות</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <span class="feature-text">תמיכה אסטרטגית</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="about-visual">
-                    <div class="visual-grid">
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/sWlf1880WKM.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/WiRp8302YJs.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/hVyV3858OQ.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/eJk7179MXo.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/rhNp2418oyE.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/xnK4816Hc.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/htWG9491QkE.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/Ceu2132Q.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/yiP9207qMI.png'); background-size: cover; background-position: center;"></div>
-                    </div>
-                    <p class="visual-caption">10 תחומים עסקיים מגוונים והמבוקשים ביותר בישראל</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <section id="technology" class="technology fade-in" style="padding: 120px 0; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">הטכנולוגיה שלנו</h2>
-                <p class="section-subtitle">
-                    פתרונות מתקדמים ומוכחים לבניית אתרים עסקיים מקצועיים
-                </p>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 4rem;">
-                
-                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-blue);"></div>
-                    <div style="width: 60px; height: 60px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
-                        <i class="fas fa-brain" style="color: white; font-size: 1.5rem;"></i>
-                    </div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">טכנולוגיית AI מתקדמת</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
-                        WebMaster Pro משלבת בינה מלאכותית מתקדמת ליצירת אתרים אוטומטית, 
-                        אופטימיזציה חכמה ואנליטיקה מובנית .
-                    </p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">יצירה אוטומטית</span>
-                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">SEO חכם</span>
-                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">אנליטיקה מתקדמת</span>
-                    </div>
-                </div>
+        <script>
+            // ========== הגדרות Supabase שלך - כאן הפרטים האמיתיים שלך! ==========
+            const SUPABASE_URL = 'https://pooeneoileludqtdecig.supabase.co'; // ה-URL שלך
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VuZW9pbGVsdWRxdGRlY2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4NjU0MDAsImV4cCI6MjA2ODQ0MTQwMH0.Rs579QAksLWTBuDiMo6laa8j4qThKHzlkggrHZagliI'; // המפתח הציבורי שלך
 
-                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-gold);"></div>
-                    <div style="width: 60px; height: 60px; background: var(--gradient-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
-                        <i class="fas fa-award" style="color: var(--text-primary); font-size: 1.5rem;"></i>
-                    </div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">פתרונות מוכחים בשטח</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
-                        12 תבניות אתרים שנבדקו ואומתו בפועל אצל לקוחות, 
-                        עם שיעור הצלחה של 97% ושביעות רצון מקסימלית.
-                    </p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">97% הצלחה</span>
-                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">נבדק בפועל</span>
-                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">מוכח איכות</span>
-                    </div>
-                </div>
+            const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(135deg, #059669 0%, #047857 100%);"></div>
-                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
-                        <i class="fas fa-rocket" style="color: white; font-size: 1.5rem;"></i>
-                    </div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">גמישות ותגובה מהירה</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
-                        הפלטפורמה שלנו מספקת גמישות ללא תחרות ותגובה מהירה לצרכים הספציפיים של הלקוחות, 
-                        כולל פתרונות מותאמים אישית מקצה לקצה.
-                    </p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">פתרונות מותאמים</span>
-                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">תגובה מהירה</span>
-                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">פתרון שלם</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="portfolio" class="portfolio fade-in">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">הגלריה שלנו</h2>
-                <p class="section-subtitle">
-                    WebMaster Pro מעצבת ובונה אתרים עסקיים ביצועים גבוהים 
-                    לענות על צרכי השוק העסקי המגוון
-                </p>
-            </div>
-            
-            <div id="templates-grid" class="portfolio-grid">
-                </div>
+            document.addEventListener('DOMContentLoaded', async () => {
+                const templatesGrid = document.getElementById('templates-grid');
+                const loadingMessage = document.getElementById('loading-message');
+                const errorMessage = document.getElementById('error-message');
 
-            <div id="loading-message" style="text-align: center; padding: 50px; font-size: 1.5rem; color: var(--text-muted);">טוען תבניות...</div>
-            <div id="error-message" style="display: none; text-align: center; padding: 50px; font-size: 1.5rem; color: #dc2626; background-color: #fee2e2; border-radius: 8px; margin: 50px auto; max-width: 600px;"></div>
+                // --- 1. הסתר הודעות שגיאה וטעינה בהתחלה ---
+                errorMessage.style.display = 'none';
+                loadingMessage.style.display = 'block'; // הצג הודעת טעינה
 
-            <div style="text-align: center; margin-top: 4rem;">
-                <a href="#editor" class="btn btn-gold">
-                    <i class="fas fa-edit"></i>
-                    התחל עריכה עכשיו
-                </a>
-            </div>
-        </div>
-    </section>
+                try {
+                    // --- 2. שלוף את התבניות מ-Supabase ---
+                    const { data: templates, error } = await supabase
+                        .from('templates')
+                        .select('id, name, slug, description, preview_image_url, category, price, is_premium'); 
 
-    <section id="process" class="process fade-in">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">איך זה עובד?</h2>
-                <p class="section-subtitle">
-                    תהליך פשוט ומהיר ליצירת אתר מקצועי
-                </p>
-            </div>
-            
-            <div class="process-steps">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">בחירת תבנית</h3>
-                    <p class="step-description">
-                        בחר את התבנית המתאימה לתחום העסקי שלך מתוך 12 האפשרויות המקצועיות שלנו
-                    </p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">התאמה אישית</h3>
-                    <p class="step-description">
-                        השתמש באדיטור הויזואלי שלנו כדי להתאים את התוכן, הצבעים, התמונות והטקסט
-                    </p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">פרסום מיידי</h3>
-                    <p class="step-description">
-                        האתר מוכן לפרסום מיידי עם כל התכונות המתקדמות - רספונסיבי, מהיר ומאובטח
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>מוכן להתחיל?</h2>
-                <p>
-                    הצטרף לעסקים שכבר בחרו ב-WebMaster Pro<br>
-                    ויצרו נוכחות דיגיטלית מקצועית ומרשימה
-                </p>
-                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="#portfolio" class="btn btn-white">
-                        <i class="fas fa-eye"></i>
-                        צפה בגלריה
-                    </a>
-                    <a href="#editor" class="btn btn-gold">
-                        <i class="fas fa-rocket"></i>
-                        התחל עכשיו
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <script>
-        // ========== הגדרות Supabase שלך - כאן תכניס את הפרטים האמיתיים שלך! ==========
-        const SUPABASE_URL = 'YOUR_SUPABASE_URL'; // לדוגמה: https://abcdefg12345.supabase.co
-        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // מפתח ה-Anon Public שלך (מ-Supabase Dashboard -> Project Settings -> API)
-
-        const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            const templatesGrid = document.getElementById('templates-grid');
-            const loadingMessage = document.getElementById('loading-message');
-            const errorMessage = document.getElementById('error-message');
-
-            // --- 1. הסתר הודעות שגיאה וטעינה בהתחלה ---
-            errorMessage.style.display = 'none';
-            loadingMessage.style.display = 'block'; // הצג הודעת טעינה
-
-            try {
-                // --- 2. שלוף את התבניות מ-Supabase ---
-                const { data: templates, error } = await supabase
-                    .from('templates')
-                    .select('id, name, slug, description, preview_image_url, category, price, is_premium'); 
-
-                if (error) {
-                    throw error;
-                }
-
-                loadingMessage.style.display = 'none'; // הסתר הודעת טעינה לאחר הטעינה
-
-                // --- 3. הצג את התבניות בגלריה ---
-                if (templates && templates.length > 0) {
-                    templatesGrid.innerHTML = ''; // נקה את התוכן הסטטי הקיים
-
-                    templates.forEach(template => {
-                        const templateCard = document.createElement('div');
-                        templateCard.className = 'portfolio-card fade-in'; // הוסף את הקלאסים הקיימים
-                        templateCard.style.cssText = `
-                            /* סגנונות מתוך portfolio-card ב-CSS הראשי שלך */
-                            background: white;
-                            border-radius: 24px;
-                            overflow: hidden;
-                            box-shadow: var(--shadow-xl);
-                            border: 1px solid var(--border-light);
-                            transition: all 0.4s ease;
-                            cursor: pointer;
-                            position: relative;
-                        `;
-                        // הוסיף את אנימציית ה-hover מחדש, מכיוון שהיא אבדה ב-cssText
-                        templateCard.onmouseover = (e) => {
-                             templateCard.style.transform = 'translateY(-12px)';
-                             templateCard.style.boxShadow = 'var(--shadow-luxury)';
-                             const overlay = templateCard.querySelector('.card-image::before');
-                             if(overlay) overlay.style.background = 'linear-gradient(45deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 100%)';
-                        };
-                        templateCard.onmouseout = (e) => {
-                             templateCard.style.transform = 'translateY(0px)';
-                             templateCard.style.boxShadow = 'var(--shadow-xl)';
-                             const overlay = templateCard.querySelector('.card-image::before');
-                             if(overlay) overlay.style.background = 'linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)';
-                        };
-
-
-                        templateCard.innerHTML = `
-                            <div class="card-image" style="background-image: url('${template.preview_image_url}');">
-                                <div class="card-overlay">
-                                    <div class="card-category">${template.category}</div>
-                                    <h3 class="card-title-overlay">${template.name}</h3>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <h3 class="card-title">${template.name}</h3>
-                                <p class="card-description">${template.description}</p>
-                                <div class="card-features">
-                                    </div>
-                                <div class="card-price">
-                                    <span class="price">₪${(template.price / 100).toLocaleString()}</span>
-                                </div>
-                                <div class="card-actions">
-                                    <button class="card-btn view" data-slug="${template.slug}">
-                                        <i class="fas fa-eye"></i>
-                                        צפה בדמו
-                                    </button>
-                                    <button class="card-btn edit" data-slug="${template.slug}">
-                                        <i class="fas fa-edit"></i>
-                                        ערוך באדיטור
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                        templatesGrid.appendChild(templateCard);
-
-                        // Attach event listeners to the dynamically created buttons
-                        templateCard.querySelector('.card-btn.view').addEventListener('click', (e) => {
-                            e.stopPropagation(); // Prevent card click from firing
-                            handleViewWebsite(template.slug);
-                        });
-                        templateCard.querySelector('.card-btn.edit').addEventListener('click', (e) => {
-                            e.stopPropagation(); // Prevent card click from firing
-                            handleEditWebsite(template.slug);
-                        });
-                    });
-
-                    // הוסף קלאס 'visible' לכל הקלפים לאחר הטעינה
-                    setTimeout(() => {
-                        document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
-                    }, 100);
-
-                } else {
-                    templatesGrid.innerHTML = '<div style="text-align: center; padding: 50px; font-size: 1.5rem; color: var(--text-muted); grid-column: 1 / -1;">לא נמצאו תבניות להצגה. אנא וודא שהנתונים הוזנו ל-Supabase.</div>';
-                }
-
-            } catch (err) {
-                console.error('שגיאה במשיכת תבניות:', err.message);
-                loadingMessage.style.display = 'none'; // הסתר הודעת טעינה
-                errorMessage.textContent = 'אירעה שגיאה בטעינת התבניות. אנא וודא ש-URL המפתח והרשאות ה-RLS תקינים. פרטי שגיאה: ' + err.message;
-                errorMessage.style.display = 'block';
-                templatesGrid.innerHTML = ''; // נקה את הרשת
-            }
-        });
-
-        // ========== פונקציות לחיבור לאדיטור החדש (AI Wizard) ==========
-        function handleViewWebsite(slug) {
-            // לדמוג, פותח את קובץ ה-HTML המקורי של הדמו
-            // זה דורש שקובצי הדמו יהיו נגישים בתיקיית 'websites/'
-            const demoUrl = `/websites/${slug}.html`; // נתיב תלוי במיקום הקבצים שלך ב-Netlify
-            showNotification(`👁️ פותח תצוגה מקדימה של: ${slug}`);
-            window.open(demoUrl, '_blank');
-        }
-
-        function handleEditWebsite(slug) {
-            // כאן נצטרך לפתח את דף השאלון של ה-AI Wizard.
-            // נצטרך להעביר את ה-slug של התבנית הנבחרת לדף ה-AI Wizard.
-            showNotification(`✏️ מכין את שאלון ה-AI עבור תבנית: ${slug}`);
-            
-            // דוגמה לניווט לדף חדש עם פרמטר:
-            // window.location.href = `/ai-wizard.html?slug=${slug}`;
-
-            // כרגע, רק אלרט וקונסול לוג
-            alert(`תבנית ${slug} נבחרה לעריכת AI. כאן נפעיל את שאלון ה-AI!`);
-            console.log(`Ready to start AI Wizard for: ${slug}`);
-        }
-
-        // הודעות למשתמש
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: rgba(37, 99, 235, 0.95);
-                color: white;
-                padding: 15px 20px;
-                border-radius: 10px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-                z-index: 10000;
-                font-weight: 600;
-                backdrop-filter: blur(10px);
-                transform: translateX(400px);
-                transition: all 0.3s ease;
-            `;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 100);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(400px)';
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
+                    if (error) {
+                        throw error;
                     }
-                }, 300);
-            }, 3000);
-        }
 
-        // Console log for updates (הודעות אלה יוחלפו בגלריה הדינמית)
-        console.log('🚀 WebMaster Pro גלריה מחוברת ל-Supabase נטענה בהצלחה!');
-        // שאר ההודעות בקונסול כבר לא רלוונטיות כאן, כי הנתונים באים מ-DB
-    </script>
-</body>
-</html>
+                    loadingMessage.style.display = 'none'; // הסתר הודעת טעינה לאחר הטעינה
+
+                    // --- 3. הצג את התבניות בגלריה ---
+                    if (templates && templates.length > 0) {
+                        templatesGrid.innerHTML = ''; // נקה את התוכן הסטטי הקיים
+
+                        templates.forEach(template => {
+                            const templateCard = document.createElement('div');
+                            templateCard.className = 'portfolio-card fade-in'; // הוסף את הקלאסים הקיימים
+                            templateCard.style.cssText = `
+                                /* סגנונות מתוך portfolio-card ב-CSS הראשי שלך */
+                                background: white;
+                                border-radius: 24px;
+                                box-shadow: var(--shadow-xl);
+                                border: 1px solid var(--border-light);
+                                transition: all 0.4s ease;
+                                cursor: pointer;
+                                position: relative;
+                            `;
+                            // הוסיף את אנימציית ה-hover מחדש, מכיוון שהיא אבדה ב-cssText
+                            templateCard.onmouseover = (e) => {
+                                templateCard.style.transform = 'translateY(-12px)';
+                                templateCard.style.boxShadow = 'var(--shadow-luxury)';
+                                const imageOverlay = templateCard.querySelector('.card-image');
+                                if (imageOverlay) {
+                                    imageOverlay.style.setProperty('--overlay-start-color', 'rgba(0,0,0,0.5)');
+                                    imageOverlay.style.setProperty('--overlay-end-color', 'rgba(0,0,0,0.1)');
+                                }
+                            };
+                            templateCard.onmouseout = (e) => {
+                                templateCard.style.transform = 'translateY(0px)';
+                                templateCard.style.boxShadow = 'var(--shadow-xl)';
+                                const imageOverlay = templateCard.querySelector('.card-image');
+                                if (imageOverlay) {
+                                    imageOverlay.style.setProperty('--overlay-start-color', 'rgba(0,0,0,0.7)');
+                                    imageOverlay.style.setProperty('--overlay-end-color', 'rgba(0,0,0,0.3)');
+                                }
+                            };
+
+
+                            templateCard.innerHTML = `
+                                <div class="card-image" style="background-image: url('${template.preview_image_url}');">
+                                    <div class="card-overlay">
+                                        <div class="card-category">${template.category}</div>
+                                        <h3 class="card-title-overlay">${template.name}</h3>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="card-title">${template.name}</h3>
+                                    <p class="card-description">${template.description}</p>
+                                    <div class="card-features">
+                                        </div>
+                                    <div class="card-price">
+                                        <span class="price">₪${(template.price / 100).toLocaleString()}</span>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="card-btn view" data-slug="${template.slug}">
+                                            <i class="fas fa-eye"></i>
+                                            צפה בדמו
+                                        </button>
+                                        <button class="card-btn edit" data-slug="${template.slug}">
+                                            <i class="fas fa-edit"></i>
+                                            ערוך באדיטור
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                            templatesGrid.appendChild(templateCard);
+
+                            // Attach event listeners to the dynamically created buttons
+                            templateCard.querySelector('.card-btn.view').addEventListener('click', (e) => {
+                                e.stopPropagation(); // Prevent card click from firing
+                                handleViewWebsite(template.slug);
+                            });
+                            templateCard.querySelector('.card-btn.edit').addEventListener('click', (e) => {
+                                e.stopPropagation(); // Prevent card click from firing
+                                handleEditWebsite(template.slug);
+                            });
+                        });
+
+                        // הוסף קלאס 'visible' לכל הקלפים לאחר הטעינה
+                        setTimeout(() => {
+                            document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+                        }, 100);
+
+                    } else {
+                        templatesGrid.innerHTML = '<div style="text-align: center; padding: 50px; font-size: 1.5rem; color: var(--text-muted); grid-column: 1 / -1;">לא נמצאו תבניות להצגה. אנא וודא שהנתונים הוזנו ל-Supabase.</div>';
+                    }
+
+                } catch (err) {
+                    console.error('שגיאה במשיכת תבניות:', err.message);
+                    loadingMessage.style.display = 'none'; // הסתר הודעת טעינה
+                    errorMessage.textContent = 'אירעה שגיאה בטעינת התבניות. אנא וודא ש-URL המפתח והרשאות ה-RLS תקינים. פרטי שגיאה: ' + err.message;
+                    errorMessage.style.display = 'block';
+                    templatesGrid.innerHTML = ''; // נקה את הרשת
+                }
+            });
+
+            // ========== פונקציות לחיבור לאדיטור החדש (AI Wizard) ==========
+            // פונקציות אלה צריכות להיות מוגדרות מחוץ ל-DOMContentLoaded אם הן נקראות מחוץ לו.
+            // אם הן נקראות רק מתוך ה-DOMContentLoaded, אז זה בסדר.
+
+            function handleViewWebsite(slug) {
+                // לדמוג, פותח את קובץ ה-HTML המקורי של הדמו
+                const demoUrl = `/websites/${slug}.html`; 
+                showNotification(`👁️ פותח תצוגה מקדימה של: ${slug}`);
+                window.open(demoUrl, '_blank');
+            }
+
+            function handleEditWebsite(slug) {
+                showNotification(`✏️ מכין את שאלון ה-AI עבור תבנית: ${slug}`);
+                localStorage.setItem('selectedTemplateSlug', slug);
+                window.location.href = `ai-wizard.html?slug=${slug}`;
+            }
+
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(37, 99, 235, 0.95);
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                    z-index: 10000;
+                    font-weight: 600;
+                    backdrop-filter: blur(10px);
+                    transform: translateX(400px);
+                    transition: all 0.3s ease;
+                `;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(0)';
+                }, 100);
+                
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(400px)';
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+
+            console.log('🚀 WebMaster Pro גלריה מחוברת ל-Supabase נטענה בהצלחה!');
+        </script>
+    </body>
+    </html>
