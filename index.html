@@ -6,7 +6,6 @@
     <title>WebMaster Pro - פלטפורמה לבניית אתרים עסקיים מקצועיים</title>
     <meta name="description" content="פלטפורמה מקצועית לבניית אתרים עסקיים עם גלריית דמואים חיים ואדיטור ויזואלי. מאגר תבניות מוכנות בתחומים עסקיים מגוונים.">
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Varela+Round&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -665,6 +664,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 1.5rem;
         }
 
         .price {
@@ -674,23 +674,52 @@
             font-family: 'Inter', 'Alef', serif;
         }
 
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
         .card-btn {
+            flex: 1;
             padding: 12px 24px;
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: white;
-            border: none;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.95rem;
             text-decoration: none;
+            text-align: center;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .card-btn.view {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            border: 2px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .card-btn.edit {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            border: 2px solid transparent;
         }
 
         .card-btn:hover {
-            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
+        }
+
+        .card-btn.view:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .card-btn.edit:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
         }
 
         /* Process Section */
@@ -917,7 +946,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <nav class="nav container">
             <a href="#" class="logo">
@@ -945,7 +973,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
@@ -997,7 +1024,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="about fade-in">
         <div class="container">
             <div class="about-content">
@@ -1059,7 +1085,6 @@
         </div>
     </section>
 
-    <!-- Technology Section -->
     <section id="technology" class="technology fade-in" style="padding: 120px 0; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
         <div class="container">
             <div class="section-header">
@@ -1071,7 +1096,6 @@
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 4rem;">
                 
-                <!-- Advanced Technology Card -->
                 <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
                     <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-blue);"></div>
                     <div style="width: 60px; height: 60px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
@@ -1089,7 +1113,6 @@
                     </div>
                 </div>
 
-                <!-- Field-Proven Solutions Card -->
                 <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
                     <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-gold);"></div>
                     <div style="width: 60px; height: 60px; background: var(--gradient-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
@@ -1107,7 +1130,6 @@
                     </div>
                 </div>
 
-                <!-- Flexible Technology Card -->
                 <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
                     <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(135deg, #059669 0%, #047857 100%);"></div>
                     <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
@@ -1138,295 +1160,11 @@
                 </p>
             </div>
             
-            <div class="portfolio-grid">
-                <!-- Medical Aesthetics - Dr. Michal Rosen -->
-                <div class="portfolio-card" data-website="dr-michal-rosen">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/sWlf1880WKM.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">רפואה אסתטית</div>
-                            <h3 class="card-title-overlay">ד"ר מיכל רוזן</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">קליניקה לרפואה אסתטית</h3>
-                        <p class="card-description">עיצוב יוקרתי עם גלריית טיפולים, הזמנות אונליין ותוצאות לפני ואחרי</p>
-                        <div class="card-features">
-                            <span class="feature-tag">הזמנות אונליין</span>
-                            <span class="feature-tag">גלריית טיפולים</span>
-                            <span class="feature-tag">לפני ואחרי</span>
-                            <span class="feature-tag">ייעוץ מקוון</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪2,800</span>
-                            <a href="websites/dr-michal-rosen.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
+            <div id="templates-grid" class="portfolio-grid">
                 </div>
 
-                <!-- Fitness Coach - Danny Pit -->
-                <div class="portfolio-card" data-website="fitness-coach">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/WiRp8302YJs.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">כושר וספורט</div>
-                            <h3 class="card-title-overlay">דני פיט</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">מאמן כושר אישי</h3>
-                        <p class="card-description">אתר אנרגטי עם תוכניות אימון, מחשבון BMI וגלריית הצלחות</p>
-                        <div class="card-features">
-                            <span class="feature-tag">מחשבון BMI</span>
-                            <span class="feature-tag">תוכניות אימון</span>
-                            <span class="feature-tag">הצלחות לקוחות</span>
-                            <span class="feature-tag">הזמנת אימונים</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪2,200</span>
-                            <a href="websites/fitness-co.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Yoga Studio - Studio Ohm -->
-                <div class="portfolio-card" data-website="yoga-studio">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/eJk7179MXo.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">יוגה ומדיטציה</div>
-                            <h3 class="card-title-overlay">סטודיו אוהם</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">סטודיו יוגה ומדיטציה</h3>
-                        <p class="card-description">עיצוב רגוע עם לוח שיעורים, הרשמה לשיעורים ותוכן הדרכה</p>
-                        <div class="card-features">
-                            <span class="feature-tag">לוח שיעורים</span>
-                            <span class="feature-tag">הרשמה אונליין</span>
-                            <span class="feature-tag">וידאוי הדרכה</span>
-                            <span class="feature-tag">מדיטציה מודרכת</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪1,900</span>
-                            <a href="websites/yoga-studio.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Nutritionist - Dr. Sarah Cohen -->
-                <div class="portfolio-card" data-website="nutritionist">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/rhNp2418oyE.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">תזונה ובריאות</div>
-                            <h3 class="card-title-overlay">ד"ר שרה כהן</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">תזונאית קלינית מומחית</h3>
-                        <p class="card-description">אתר מקצועי עם מחשבון קלוריות, תפריטים אישיים ויעוץ תזונתי</p>
-                        <div class="card-features">
-                            <span class="feature-tag">מחשבון קלוריות</span>
-                            <span class="feature-tag">תפריטים אישיים</span>
-                            <span class="feature-tag">יעוץ תזונתי</span>
-                            <span class="feature-tag">מעקב התקדמות</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪2,400</span>
-                            <a href="websites/nutritionist.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Law Firm - Barkovich Office -->
-                <div class="portfolio-card" data-website="law-firm">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/hVyV3858OQ.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">משפטים</div>
-                            <h3 class="card-title-overlay">משרד ברקוביץ</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">משרד עורכי דין מקצועי</h3>
-                        <p class="card-description">עיצוב מקצועי עם תחומי מומחיות, צוות עורכי דין וייעוץ מקוון</p>
-                        <div class="card-features">
-                            <span class="feature-tag">תחומי מומחיות</span>
-                            <span class="feature-tag">צוות עורכי דין</span>
-                            <span class="feature-tag">ייעוץ מקוון</span>
-                            <span class="feature-tag">קביעת פגישות</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪2,500</span>
-                            <a href="websites/law-firm.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Accountant - Rina Levy -->
-                <div class="portfolio-card" data-website="accountant">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/tGN5433dAU.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">חשבונאות</div>
-                            <h3 class="card-title-overlay">רינה לוי</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">חשבת שכר מוסמכת</h3>
-                        <p class="card-description">פתרונות חשבונאיים מקיפים עם מחשבון שכר, דיווחים ושירותים מתקדמים</p>
-                        <div class="card-features">
-                            <span class="feature-tag">מחשבון שכר</span>
-                            <span class="feature-tag">דיווחים ממשלתיים</span>
-                            <span class="feature-tag">ייעוץ מקוון</span>
-                            <span class="feature-tag">ניהול ספרים</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪2,000</span>
-                            <a href="websites/accountant.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Beauty Salon - Bella -->
-                <div class="portfolio-card" data-website="beauty-salon">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/xnK4816Hc.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">יופי ועיצוב</div>
-                            <h3 class="card-title-overlay">מספרה BELLA</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">סלון יופי ועיצוב שיער</h3>
-                        <p class="card-description">עיצוב אלגנטי עם הזמנת תורים, גלריית עבודות ומחירון שירותים</p>
-                        <div class="card-features">
-                            <span class="feature-tag">הזמנת תורים</span>
-                            <span class="feature-tag">גלריית עבודות</span>
-                            <span class="feature-tag">מחירון שירותים</span>
-                            <span class="feature-tag">ייעוץ אופנה</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪1,700</span>
-                            <a href="websites/beauty-salon.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Private Tutor - Dr. Ronit Levy -->
-                <div class="portfolio-card" data-website="tutor">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/Ceu2132Q.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">חינוך והוראה</div>
-                            <h3 class="card-title-overlay">ד"ר רונית לוי</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">מורה פרטית מומחית</h3>
-                        <p class="card-description">שיעורים פרטיים ברמה גבוהה עם חומרי לימוד, מערכת שיעורים ומעקב התקדמות</p>
-                        <div class="card-features">
-                            <span class="feature-tag">שיעורים פרטיים</span>
-                            <span class="feature-tag">חומרי לימוד</span>
-                            <span class="feature-tag">מעקב התקדמות</span>
-                            <span class="feature-tag">יעוץ חינוכי</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪2,100</span>
-                            <a href="websites/tutor.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Real Estate Premium -->
-                <div class="portfolio-card" data-website="real-estate">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/htWG9491QkE.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">נדל"ן</div>
-                            <h3 class="card-title-overlay">נדל"ן פרמיום</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">תיווך נדל"ן יוקרתי</h3>
-                        <p class="card-description">פלטפורמה מתקדמת עם גלריית נכסים, חיפוש מתקדם ומחשבון משכנתאות</p>
-                        <div class="card-features">
-                            <span class="feature-tag">גלריית נכסים</span>
-                            <span class="feature-tag">חיפוש מתקדם</span>
-                            <span class="feature-tag">מחשבון משכנתאות</span>
-                            <span class="feature-tag">השוואת נכסים</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪2,700</span>
-                            <a href="websites/real-estate.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Multibrown Travel -->
-                <div class="portfolio-card" data-website="multibrawn">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/pL5530Z.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">נופש ואירועים</div>
-                            <h3 class="card-title-overlay">מולטיבראון</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">נופש ואירועים מותאמים</h3>
-                        <p class="card-description">פלטפורמה מקצועית לתכנון נופשים ואירועים עם הזמנות ותכנון מותאם</p>
-                        <div class="card-features">
-                            <span class="feature-tag">תכנון נופשים</span>
-                            <span class="feature-tag">ארגון אירועים</span>
-                            <span class="feature-tag">הזמנות אונליין</span>
-                            <span class="feature-tag">ייעוץ אישי</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪2,300</span>
-                            <a href="websites/multibrawn.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Aesthetic Face Clinic -->
-                <div class="portfolio-card" data-website="aesthetic-clinic">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/Ayyb2287TOc.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">אסתטיקה פנים</div>
-                            <h3 class="card-title-overlay">קליניקת יופי פרמיום</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">קליניקה לאסתטיקת פנים</h3>
-                        <p class="card-description">עיצוב יוקרתי עם מגוון טיפולי פנים מתקדמים, הזמנות וייעוץ מקצועי</p>
-                        <div class="card-features">
-                            <span class="feature-tag">טיפולי פנים</span>
-                            <span class="feature-tag">הזמנות מתקדמות</span>
-                            <span class="feature-tag">ייעוץ מקצועי</span>
-                            <span class="feature-tag">גלריית תוצאות</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪3,200</span>
-                            <a href="websites/aesthetic-clinic.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Studio Noya - Interior Design - NEW! -->
-                <div class="portfolio-card" data-website="studio-noya">
-                    <div class="card-image" style="background-image: url('https://i.imghippo.com/files/yiP9207qMI.png');">
-                        <div class="card-overlay">
-                            <div class="card-category">עיצוב פנים</div>
-                            <h3 class="card-title-overlay">סטודיו נויה</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">עיצוב פנים יוקרתי</h3>
-                        <p class="card-description">סטודיו מתמחה בעיצוב פנים יוקרתי עם 21 פרויקטים מרהיבים ועיצוב מקצועי</p>
-                        <div class="card-features">
-                            <span class="feature-tag">21 פרויקטים</span>
-                            <span class="feature-tag">עיצוב יוקרתי</span>
-                            <span class="feature-tag">המלצות לקוחות</span>
-                            <span class="feature-tag">ייעוץ WhatsApp</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">₪2,400</span>
-                      <a href="websites/interior-design-studio.html" target="_blank" class="card-btn">צפה בדמו</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="loading-message" style="text-align: center; padding: 50px; font-size: 1.5rem; color: var(--text-muted);">טוען תבניות...</div>
+            <div id="error-message" style="display: none; text-align: center; padding: 50px; font-size: 1.5rem; color: #dc2626; background-color: #fee2e2; border-radius: 8px; margin: 50px auto; max-width: 600px;"></div>
 
             <div style="text-align: center; margin-top: 4rem;">
                 <a href="#editor" class="btn btn-gold">
@@ -1437,39 +1175,6 @@
         </div>
     </section>
 
-    <!-- Strategic Partnerships Section -->
-    <section class="partnerships fade-in" style="padding: 80px 0; background: var(--gradient-dark); color: white;">
-        <div class="container">
-            <div style="text-align: center;">
-                <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; opacity: 0.9;">הטכנולוגיות שלנו</h3>
-                <p style="font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
-                    פלטפורמה מתקדמת עם טכנולוגיות מובילות 
-                    לבניית אתרים מקצועיים ומהירים
-                </p>
-            </div>
-            
-            <div style="display: flex; justify-content: center; align-items: center; gap: 4rem; margin-top: 3rem; flex-wrap: wrap;">
-                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
-                    <i class="fas fa-cloud" style="font-size: 2rem; color: var(--accent-gold);"></i>
-                    <span style="font-size: 1.1rem; font-weight: 600;">Netlify Platform</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
-                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--accent-gold);"></i>
-                    <span style="font-size: 1.1rem; font-weight: 600;">Cloudflare CDN</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
-                    <i class="fas fa-code" style="font-size: 2rem; color: var(--accent-gold);"></i>
-                    <span style="font-size: 1.1rem; font-weight: 600;">HTML5 & CSS3</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
-                    <i class="fas fa-mobile-alt" style="font-size: 2rem; color: var(--accent-gold);"></i>
-                    <span style="font-size: 1.1rem; font-weight: 600;">Responsive Design</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Process Section -->
     <section id="process" class="process fade-in">
         <div class="container">
             <div class="section-header">
@@ -1507,7 +1212,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta">
         <div class="container">
             <div class="cta-content">
@@ -1530,139 +1234,194 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות.</p>
         </div>
     </footer>
 
-    <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                
-                // Skip if href is just '#' or empty
-                if (href === '#' || href.length <= 1) {
-                    return;
-                }
-                
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.backdropFilter = 'blur(20px)';
-                header.style.boxShadow = 'var(--shadow-xl)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(20px)';
-                header.style.boxShadow = 'var(--shadow-md)';
+    <script>
+        // ========== הגדרות Supabase שלך - כאן תכניס את הפרטים האמיתיים שלך! ==========
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL'; // לדוגמה: https://abcdefg12345.supabase.co
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // מפתח ה-Anon Public שלך (מ-Supabase Dashboard -> Project Settings -> API)
+
+        const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const templatesGrid = document.getElementById('templates-grid');
+            const loadingMessage = document.getElementById('loading-message');
+            const errorMessage = document.getElementById('error-message');
+
+            // --- 1. הסתר הודעות שגיאה וטעינה בהתחלה ---
+            errorMessage.style.display = 'none';
+            loadingMessage.style.display = 'block'; // הצג הודעת טעינה
+
+            try {
+                // --- 2. שלוף את התבניות מ-Supabase ---
+                const { data: templates, error } = await supabase
+                    .from('templates')
+                    .select('id, name, slug, description, preview_image_url, category, price, is_premium'); 
+
+                if (error) {
+                    throw error;
+                }
+
+                loadingMessage.style.display = 'none'; // הסתר הודעת טעינה לאחר הטעינה
+
+                // --- 3. הצג את התבניות בגלריה ---
+                if (templates && templates.length > 0) {
+                    templatesGrid.innerHTML = ''; // נקה את התוכן הסטטי הקיים
+
+                    templates.forEach(template => {
+                        const templateCard = document.createElement('div');
+                        templateCard.className = 'portfolio-card fade-in'; // הוסף את הקלאסים הקיימים
+                        templateCard.style.cssText = `
+                            /* סגנונות מתוך portfolio-card ב-CSS הראשי שלך */
+                            background: white;
+                            border-radius: 24px;
+                            overflow: hidden;
+                            box-shadow: var(--shadow-xl);
+                            border: 1px solid var(--border-light);
+                            transition: all 0.4s ease;
+                            cursor: pointer;
+                            position: relative;
+                        `;
+                        // הוסיף את אנימציית ה-hover מחדש, מכיוון שהיא אבדה ב-cssText
+                        templateCard.onmouseover = (e) => {
+                             templateCard.style.transform = 'translateY(-12px)';
+                             templateCard.style.boxShadow = 'var(--shadow-luxury)';
+                             const overlay = templateCard.querySelector('.card-image::before');
+                             if(overlay) overlay.style.background = 'linear-gradient(45deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 100%)';
+                        };
+                        templateCard.onmouseout = (e) => {
+                             templateCard.style.transform = 'translateY(0px)';
+                             templateCard.style.boxShadow = 'var(--shadow-xl)';
+                             const overlay = templateCard.querySelector('.card-image::before');
+                             if(overlay) overlay.style.background = 'linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)';
+                        };
+
+
+                        templateCard.innerHTML = `
+                            <div class="card-image" style="background-image: url('${template.preview_image_url}');">
+                                <div class="card-overlay">
+                                    <div class="card-category">${template.category}</div>
+                                    <h3 class="card-title-overlay">${template.name}</h3>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">${template.name}</h3>
+                                <p class="card-description">${template.description}</p>
+                                <div class="card-features">
+                                    </div>
+                                <div class="card-price">
+                                    <span class="price">₪${(template.price / 100).toLocaleString()}</span>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="card-btn view" data-slug="${template.slug}">
+                                        <i class="fas fa-eye"></i>
+                                        צפה בדמו
+                                    </button>
+                                    <button class="card-btn edit" data-slug="${template.slug}">
+                                        <i class="fas fa-edit"></i>
+                                        ערוך באדיטור
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        templatesGrid.appendChild(templateCard);
+
+                        // Attach event listeners to the dynamically created buttons
+                        templateCard.querySelector('.card-btn.view').addEventListener('click', (e) => {
+                            e.stopPropagation(); // Prevent card click from firing
+                            handleViewWebsite(template.slug);
+                        });
+                        templateCard.querySelector('.card-btn.edit').addEventListener('click', (e) => {
+                            e.stopPropagation(); // Prevent card click from firing
+                            handleEditWebsite(template.slug);
+                        });
+                    });
+
+                    // הוסף קלאס 'visible' לכל הקלפים לאחר הטעינה
+                    setTimeout(() => {
+                        document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+                    }, 100);
+
+                } else {
+                    templatesGrid.innerHTML = '<div style="text-align: center; padding: 50px; font-size: 1.5rem; color: var(--text-muted); grid-column: 1 / -1;">לא נמצאו תבניות להצגה. אנא וודא שהנתונים הוזנו ל-Supabase.</div>';
+                }
+
+            } catch (err) {
+                console.error('שגיאה במשיכת תבניות:', err.message);
+                loadingMessage.style.display = 'none'; // הסתר הודעת טעינה
+                errorMessage.textContent = 'אירעה שגיאה בטעינת התבניות. אנא וודא ש-URL המפתח והרשאות ה-RLS תקינים. פרטי שגיאה: ' + err.message;
+                errorMessage.style.display = 'block';
+                templatesGrid.innerHTML = ''; // נקה את הרשת
             }
         });
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // ========== פונקציות לחיבור לאדיטור החדש (AI Wizard) ==========
+        function handleViewWebsite(slug) {
+            // לדמוג, פותח את קובץ ה-HTML המקורי של הדמו
+            // זה דורש שקובצי הדמו יהיו נגישים בתיקיית 'websites/'
+            const demoUrl = `/websites/${slug}.html`; // נתיב תלוי במיקום הקבצים שלך ב-Netlify
+            showNotification(`👁️ פותח תצוגה מקדימה של: ${slug}`);
+            window.open(demoUrl, '_blank');
+        }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Portfolio card clicks - מעבר לדמואים האמיתיים
-        document.querySelectorAll('.portfolio-card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                // אם לחצו על הכפתור, תן לו לפעול בצורה רגילה
-                if (e.target.classList.contains('card-btn')) {
-                    return;
-                }
-                
-                // אחרת, פתח את הדמו בטאב חדש
-                const websiteId = this.getAttribute('data-website');
-                let websiteUrl = '';
-                
-                switch(websiteId) {
-                    case 'dr-michal-rosen':
-                        websiteUrl = 'dr-michal-rosen.html';
-                        break;
-                    case 'fitness-coach':
-                        websiteUrl = 'fitness-co.html';
-                        break;
-                    case 'yoga-studio':
-                        websiteUrl = 'yoga-studio.html';
-                        break;
-                    case 'nutritionist':
-                        websiteUrl = 'nutritionist.html';
-                        break;
-                    case 'law-firm':
-                        websiteUrl = 'law-firm.html';
-                        break;
-                    case 'accountant':
-                        websiteUrl = 'accountant.html';
-                        break;
-                    case 'beauty-salon':
-                        websiteUrl = 'beauty-salon.html';
-                        break;
-                    case 'tutor':
-                        websiteUrl = 'tutor.html';
-                        break;
-                    case 'real-estate':
-                        websiteUrl = 'real-estate.html';
-                        break;
-                    case 'multibrawn':
-                        websiteUrl = 'multibrawn.html';
-                        break;
-                    case 'aesthetic-clinic':
-                        websiteUrl = 'aesthetic-clinic.html';
-                        break;
-                    case 'studio-noya':
-                  websiteUrl = 'websites/interior-design-studio.html';
-                        break;
-                }
-                
-                if (websiteUrl) {
-                    window.open(websiteUrl, '_blank');
-                }
-            });
-        });
-
-        // Add luxury hover effects
-        document.querySelectorAll('.portfolio-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-12px) scale(1.02)';
-            });
+        function handleEditWebsite(slug) {
+            // כאן נצטרך לפתח את דף השאלון של ה-AI Wizard.
+            // נצטרך להעביר את ה-slug של התבנית הנבחרת לדף ה-AI Wizard.
+            showNotification(`✏️ מכין את שאלון ה-AI עבור תבנית: ${slug}`);
             
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+            // דוגמה לניווט לדף חדש עם פרמטר:
+            // window.location.href = `/ai-wizard.html?slug=${slug}`;
 
-        console.log('🚀 WebMaster Pro עם לוגו כחול בולט נטען בהצלחה!');
-        console.log('✨ אתרים שבונים עסקים!');
-        console.log('🎯 12 דמואים חיים מחוברים לקישורים אמיתיים!');
-        console.log('🆕 סטודיו נויה מחובר ל-interior-design-studio.html!');
+            // כרגע, רק אלרט וקונסול לוג
+            alert(`תבנית ${slug} נבחרה לעריכת AI. כאן נפעיל את שאלון ה-AI!`);
+            console.log(`Ready to start AI Wizard for: ${slug}`);
+        }
+
+        // הודעות למשתמש
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(37, 99, 235, 0.95);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 10000;
+                font-weight: 600;
+                backdrop-filter: blur(10px);
+                transform: translateX(400px);
+                transition: all 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Console log for updates (הודעות אלה יוחלפו בגלריה הדינמית)
+        console.log('🚀 WebMaster Pro גלריה מחוברת ל-Supabase נטענה בהצלחה!');
+        // שאר ההודעות בקונסול כבר לא רלוונטיות כאן, כי הנתונים באים מ-DB
     </script>
 </body>
 </html>
