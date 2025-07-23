@@ -266,8 +266,8 @@
 
         const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        let selectedTemplateSlug = ''; // ישמור את ה-slug של התבנית שנבחרה
-        let initialAiPrompt = ''; // ישמור את הפרומפט הראשוני מה-DB
+        let selectedTemplateSlug = '';
+        let initialAiPrompt = '';
 
         // פונקציית עזר לקבלת פרמטרים מה-URL (כמו ה-slug)
         function getUrlParameter(name) {
@@ -293,7 +293,7 @@
                     .from('templates')
                     .select('name, initial_ai_prompt')
                     .eq('slug', selectedTemplateSlug)
-                    .single(); // single() מצפה לרשומה אחת
+                    .single(); 
 
                 if (error || !template) {
                     console.error('שגיאה במשיכת פרטי תבנית:', error ? error.message : 'תבנית לא נמצאה.');
@@ -305,19 +305,18 @@
                 selectedTemplateNameSpan.textContent = template.name;
                 initialAiPrompt = template.initial_ai_prompt;
                 console.log('טוען תבנית:', template.name);
-                console.log('פרומפט התחלתי:', initialAiPrompt.substring(0, 100) + '...'); // הדפסת חלק מהפרומפט ללוג
+                console.log('פרומפט התחלתי:', initialAiPrompt.substring(0, 100) + '...');
             } else {
                 selectedTemplateNameSpan.textContent = 'לא נבחרה תבנית.';
                 alert('אנא בחר תבנית מדף הבית.');
-                // ניתן להפנות בחזרה לדף הבית: window.location.href = 'index.html';
                 return;
             }
 
             // --- 2. טיפול בהגשת טופס מידע עסקי ---
             businessInfoForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                aiSpinner.style.display = 'block'; // הצג ספינר טעינה
-                aiResponseContainer.style.display = 'none'; // הסתר תוצאה קודמת
+                aiSpinner.style.display = 'block'; 
+                aiResponseContainer.style.display = 'none'; 
 
                 const businessName = document.getElementById('business-name').value;
                 const businessDescription = document.getElementById('business-description').value;
@@ -331,54 +330,46 @@
                 
                 console.log('שולח פרומפט ל-AI:', fullAiPrompt.substring(0, 200) + '...');
 
-                // *** כאן תהיה קריאת ה-API ל-Backend (Supabase Function / שרת Node.js) ***
-                // כרגע, נדמה יצירת אתר עם קוד HTML פשוט כדוגמה.
-                // נניח שקריאה ל-Backend נראית כך:
-                // const response = await fetch('/.netlify/functions/generate-website', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify({ prompt: fullAiPrompt, templateSlug: selectedTemplateSlug })
-                // });
-                // const data = await response.json();
-                // const generatedHtml = data.html; // או data.site_code
+                // *** כאן תהיה קריאת ה-API ל-Backend (Supabase Function) ***
+                const backendFunctionUrl = 'YOUR_GENERATION_FUNCTION_URL_HERE'; // *** זה ה-URL של הפונקציה generate-ai-website ב-Supabase ***
 
-                // קוד זמני לדימוי אתר שנוצר ע"י AI
-                const generatedHtml = `
-                    <!DOCTYPE html>
-                    <html lang="he" dir="rtl">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>${businessName}</title>
-                        <style>
-                            body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f0f8ff; color: #333; }
-                            h1 { color: var(--primary-color, #2563eb); }
-                            p { color: var(--text-secondary, #4a4a4a); }
-                            .section { background: white; margin: 20px auto; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 600px;}
-                        </style>
-                    </head>
-                    <body>
-                        <div class="section">
-                            <h1>${businessName}</h1>
-                            <p>${businessDescription}</p>
-                            <p>שירותים: ${businessServices}</p>
-                            <p>טלפון: ${contactPhone}</p>
-                            <p>אימייל: ${contactEmail}</p>
-                            ${logoUrl ? `<img src="${logoUrl}" alt="לוגו העסק" style="max-width: 150px; margin-top: 20px;">` : ''}
-                            <p>האתר נוצר בהתבסס על תבנית ${selectedTemplateNameSpan.textContent} ובינה מלאכותית!</p>
-                        </div>
-                    </body>
-                    </html>
-                `;
+                try {
+                    const response = await fetch(backendFunctionUrl, {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}` // שימוש במפתח הציבורי עבור פונקציה
+                        },
+                        body: JSON.stringify({ 
+                            templateSlug: selectedTemplateSlug, 
+                            businessData: {
+                                businessName,
+                                businessDescription,
+                                businessServices,
+                                contactPhone,
+                                contactEmail,
+                                logoUrl
+                            },
+                            aiModel: 'openai' // ניתן לשנות למודל AI אחר כמו 'claude' או 'gemini'
+                        })
+                    });
 
-                // הצגת האתר שנוצר ב-iframe
-                aiGeneratedSitePreview.srcdoc = generatedHtml;
-                aiResponseContainer.style.display = 'block'; // הצג את קונטיינר התגובה
-                aiSpinner.style.display = 'none'; // הסתר ספינר
+                    const data = await response.json();
 
-                // שמירת הקוד שנוצר ב-Supabase (בשלב מאוחר יותר, דרך Backend)
-                // const { error: saveError } = await supabase.from('user_sites').insert({...});
-                
+                    if (!response.ok) {
+                        throw new Error(data.error || 'שגיאה ביצירת אתר AI');
+                    }
+
+                    // הצגת האתר שנוצר ב-iframe
+                    aiGeneratedSitePreview.srcdoc = data.html;
+                    aiResponseContainer.style.display = 'block'; 
+
+                } catch (error) {
+                    console.error('שגיאה בחיבור ל-Backend AI או ביצירת אתר:', error);
+                    alert('שגיאה ביצירת אתר AI: ' + error.message);
+                } finally {
+                    aiSpinner.style.display = 'none'; // הסתר ספינר תמיד
+                }
             });
 
             // --- 3. טיפול בשינויים באמצעות צ'אט AI ---
@@ -387,21 +378,21 @@
                 if (!userMessage) return;
 
                 aiSpinner.style.display = 'block';
-                // כאן נשלח את הבקשה ל-AI לשינוי האתר הקיים ב-iframe
-                // ונציג את התוצאה המעודכנת ב-iframe.
-                // נצטרך לשמור את היסטוריית הצ'אט וקוד האתר האחרון.
-                console.log('בקשת שינוי ל-AI:', userMessage);
-
-                // דימוי שינוי - רק מציג שהבקשה נקלטה
+                // *** כאן תהיה קריאת ה-API ל-Backend עבור ליטוש AI ***
+                // נניח שיש פונקציה אחרת לליטוש, או שזו אותה פונקציה עם פרמטר אחר.
+                // לדוגמה: const refineFunctionUrl = 'YOUR_REFINEMENT_FUNCTION_URL_HERE';
+                
+                // קוד זמני לדימוי שינוי (הוחלף בקריאת API אמיתית בהמשך)
                 const currentHtml = aiGeneratedSitePreview.srcdoc;
                 const modifiedHtml = currentHtml.replace('נוצר בהתבסס על תבנית', 'עודכן ע"י AI לפי בקשתך');
                 aiGeneratedSitePreview.srcdoc = modifiedHtml; // עדכן את ה-iframe
                 aiSpinner.style.display = 'none';
-                aiChatInput.value = ''; // נקה את תיבת הקלט
+                aiChatInput.value = '';
+                console.log('בקשת שינוי ל-AI:', userMessage);
             });
         });
 
-        // פונקציית הודעות למשתמש
+        // פונקציית הודעות למשתמש (לא קשורה ל-Supabase)
         function showNotification(message) {
             const notification = document.createElement('div');
             notification.style.cssText = `
