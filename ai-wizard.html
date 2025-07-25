@@ -260,7 +260,6 @@
     </div>
     
     <script>
-        // ========== הגדרות Supabase שלך - כאן הפרטים האמיתיים שלך! ==========
         const SUPABASE_URL = 'https://pooeneoileludqtdecig.supabase.co'; 
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VuZW9pbGVsdWRxdGRlY2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4NjU0MDAsImV4cCI6MjA2ODQ0MTQwMH0.Rs579QAksLWTBuDiMo6laa8j4qThKHzlkggrHZagliI'; 
 
@@ -331,14 +330,15 @@
                 console.log('שולח פרומפט ל-AI:', fullAiPrompt.substring(0, 200) + '...');
 
                 // *** כאן תהיה קריאת ה-API ל-Backend (Supabase Function) ***
-                const backendFunctionUrl = 'YOUR_GENERATION_FUNCTION_URL_HERE'; // *** זה ה-URL של הפונקציה generate-ai-website ב-Supabase ***
+                // *** זו השורה שאתה צריך למלא ב-URL האמיתי של פונקציית generate-ai-website ***
+                const backendFunctionUrl = 'YOUR_GENERATION_FUNCTION_URL_HERE'; 
 
                 try {
                     const response = await fetch(backendFunctionUrl, {
                         method: 'POST',
                         headers: { 
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}` // שימוש במפתח הציבורי עבור פונקציה
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}` 
                         },
                         body: JSON.stringify({ 
                             templateSlug: selectedTemplateSlug, 
@@ -350,83 +350,4 @@
                                 contactEmail,
                                 logoUrl
                             },
-                            aiModel: 'openai' // ניתן לשנות למודל AI אחר כמו 'claude' או 'gemini'
-                        })
-                    });
-
-                    const data = await response.json();
-
-                    if (!response.ok) {
-                        throw new Error(data.error || 'שגיאה ביצירת אתר AI');
-                    }
-
-                    // הצגת האתר שנוצר ב-iframe
-                    aiGeneratedSitePreview.srcdoc = data.html;
-                    aiResponseContainer.style.display = 'block'; 
-
-                } catch (error) {
-                    console.error('שגיאה בחיבור ל-Backend AI או ביצירת אתר:', error);
-                    alert('שגיאה ביצירת אתר AI: ' + error.message);
-                } finally {
-                    aiSpinner.style.display = 'none'; // הסתר ספינר תמיד
-                }
-            });
-
-            // --- 3. טיפול בשינויים באמצעות צ'אט AI ---
-            aiChatSendBtn.addEventListener('click', async () => {
-                const userMessage = aiChatInput.value;
-                if (!userMessage) return;
-
-                aiSpinner.style.display = 'block';
-                // *** כאן תהיה קריאת ה-API ל-Backend עבור ליטוש AI ***
-                // נניח שיש פונקציה אחרת לליטוש, או שזו אותה פונקציה עם פרמטר אחר.
-                // לדוגמה: const refineFunctionUrl = 'YOUR_REFINEMENT_FUNCTION_URL_HERE';
-                
-                // קוד זמני לדימוי שינוי (הוחלף בקריאת API אמיתית בהמשך)
-                const currentHtml = aiGeneratedSitePreview.srcdoc;
-                const modifiedHtml = currentHtml.replace('נוצר בהתבסס על תבנית', 'עודכן ע"י AI לפי בקשתך');
-                aiGeneratedSitePreview.srcdoc = modifiedHtml; // עדכן את ה-iframe
-                aiSpinner.style.display = 'none';
-                aiChatInput.value = '';
-                console.log('בקשת שינוי ל-AI:', userMessage);
-            });
-        });
-
-        // פונקציית הודעות למשתמש (לא קשורה ל-Supabase)
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: rgba(37, 99, 235, 0.95);
-                color: white;
-                padding: 15px 20px;
-                border-radius: 10px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-                z-index: 10000;
-                font-weight: 600;
-                backdrop-filter: blur(10px);
-                transform: translateX(400px);
-                transition: all 0.3s ease;
-            `;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 100);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(400px)';
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
-        }
-    </script>
-</body>
-</html>
+                            aiModel: 'openai'
