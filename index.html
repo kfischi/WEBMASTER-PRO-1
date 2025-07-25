@@ -6,7 +6,6 @@
     <title>WebMaster Pro - פלטפורמה לבניית אתרים עסקיים מקצועיים</title>
     <meta name="description" content="פלטפורמה מקצועית לבניית אתרים עסקיים עם גלריית דמואים חיים ואדיטור ויזואלי. מאגר תבניות מוכנות בתחומים עסקיים מגוונים.">
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Varela+Round&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -214,6 +213,7 @@
             top: 0;
             left: 0;
             right: 0;
+            bottom: auto; /* Changed from right:0 to bottom:auto to correctly fix header visibility */
             z-index: 1000;
             transition: all 0.3s ease;
             border-bottom: 1px solid var(--border-light);
@@ -504,8 +504,9 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            bottom: 0;
             background: var(--gradient-gold);
+            height: 4px;
         }
 
         .stat-item:hover {
@@ -958,939 +959,1310 @@
             }
 
             .hero {
-                padding: 120px 0 80px 0;
+                padding: 10rem 0 6rem; /* Adjust padding for mobile */
             }
 
             .hero-title {
-                font-size: 2.5rem;
+                font-size: clamp(2.5rem, 8vw, 4rem);
+                margin-bottom: 2rem;
             }
 
             .hero-subtitle {
-                font-size: 1.3rem;
+                font-size: clamp(1.2rem, 4vw, 1.8rem);
+                margin-bottom: 2rem;
+                padding: 1.5rem; /* Add padding for readability */
+                border-radius: 20px; /* Add border radius */
             }
 
-            .hero-cta {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .about-features {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-stats {
+            .domains-preview {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1.5rem;
             }
 
-            .process-steps {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .domain-card {
+                padding: 2rem 1.5rem;
             }
 
-            .portfolio-grid {
+            .domain-icon {
+                width: 70px;
+                height: 70px;
+                border-radius: 20px;
+            }
+
+            .domain-icon i {
+                font-size: 1.8rem;
+            }
+
+            .business-card {
+                padding: 3rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+
+            .testimonials-grid {
                 grid-template-columns: 1fr;
             }
 
-            .section-title {
-                font-size: 2.2rem;
+            .achievements {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 500px;
+                justify-content: center;
+            }
+
+            /* Enable video on small screens with better visibility */
+            .hero-video {
+                display: block;
+                opacity: 0.85;
+                filter: brightness(0.7) contrast(1.2);
+            }
+            
+            .hero {
+                background: linear-gradient(135deg, #000000 0%, #1A1A1A 50%, #000000 100%); /* Fallback if video fails */
+            }
+
+            /* About Section */
+            .about-erdit {
+                padding: 8rem 0; /* Adjust padding */
+            }
+
+            .about-content {
+                grid-template-columns: 1fr; /* Stack columns */
+                gap: 4rem; /* Adjust gap */
+                text-align: center;
+            }
+
+            .about-image {
+                margin-bottom: 3rem; /* Space between image and text */
             }
 
             .about-text h2 {
-                font-size: 2.2rem;
+                font-size: clamp(2.5rem, 8vw, 4rem);
+                margin-bottom: 1.5rem;
             }
 
-            .cta h2 {
-                font-size: 2.2rem;
+            .about-text .subtitle {
+                font-size: 1.3rem;
+                margin-bottom: 2rem;
             }
 
-            .logo-holographic {
-                width: 50px;
-                height: 50px;
+            .about-text p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
             }
 
-            .logo-text .main-title {
+            .achievements {
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            /* Business Domains Section */
+            .section-title {
+                margin-bottom: 4rem;
+            }
+
+            .section-title h2 {
+                font-size: clamp(2.5rem, 8vw, 4rem);
+                margin-bottom: 2rem;
+            }
+
+            .section-title p {
+                font-size: 1.1rem;
+            }
+
+            .domains-grid {
+                gap: 2rem;
+            }
+
+            .business-card {
+                padding: 2.5rem;
+            }
+
+            .business-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .business-icon i {
+                font-size: 2rem;
+            }
+
+            .business-card h3 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .business-card .subtitle {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .business-card p {
+                font-size: 0.95rem;
+                margin-bottom: 2rem;
+            }
+
+            .business-features li {
+                padding: 1rem 0;
+                font-size: 1rem;
+                padding-right: 3rem;
+            }
+
+            .business-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            /* Stats Section */
+            .stats {
+                padding: 6rem 0;
+            }
+
+            .stat-item {
+                padding: 2rem;
+            }
+
+            .stat-item h3 {
+                font-size: clamp(2.5rem, 8vw, 3.5rem);
+                margin-bottom: 0.8rem;
+            }
+
+            .stat-item p {
+                font-size: 1.1rem;
+            }
+
+            /* Testimonials Section */
+            .testimonials {
+                padding: 8rem 0;
+            }
+
+            .testimonials-grid {
+                gap: 2rem;
+                margin-top: 3rem;
+            }
+
+            .testimonial-card {
+                padding: 3rem;
+            }
+
+            .testimonial-card::before {
+                font-size: 4rem;
+                top: -15px;
+                left: 20px;
+            }
+
+            .testimonial-text {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .testimonial-author {
+                font-size: 1.1rem;
+            }
+
+            .testimonial-role {
+                font-size: 0.9rem;
+                margin-top: 0.8rem;
+            }
+
+            /* Contact Section */
+            .contact {
+                padding: 8rem 0;
+            }
+
+            .contact-content {
+                gap: 4rem;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 3rem;
+            }
+
+            .contact-info h3,
+            .contact-form h3 {
+                font-size: 2.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .contact-item {
+                gap: 2rem;
+                margin-bottom: 2rem;
+                padding: 1.5rem;
+            }
+
+            .contact-item i {
+                width: 60px;
+                height: 60px;
                 font-size: 1.5rem;
             }
 
-            .logo-text .sub-title {
-                font-size: 0.85rem;
+            .form-group {
+                margin-bottom: 2rem;
             }
 
-            .connection-status {
-                position: relative;
-                bottom: 0;
-                left: 0;
-                margin: 20px auto;
-                width: fit-content;
+            .form-group label {
+                font-size: 1rem;
+                margin-bottom: 1rem;
             }
-        }
 
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 1.2rem;
+                font-size: 0.95rem;
+            }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            .form-group textarea {
+                height: 120px;
+            }
+
+            .submit-btn {
+                padding: 1.2rem 2.5rem;
+                font-size: 1.1rem;
+            }
+
+            .whatsapp-float {
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
+                bottom: 30px;
+                left: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                margin-bottom: 3rem;
+            }
+
+            .footer-section h4 {
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .footer-section a {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-logo {
+                margin-bottom: 3rem;
+            }
+
+            .footer-logo-image {
+                width: 70px;
+                height: 70px;
+            }
+
+            .footer-bottom {
+                padding-top: 2rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div>
-            <div class="loading-spinner"></div>
-            <div class="loading-text" id="loadingText">טוען נתונים...</div>
-        </div>
+    <div class="page-loader" id="pageLoader">
+        <img src="https://i.imgur.com/04x9Rfw.jpg" alt="Multi Brawn Loading" class="loader-logo">
+        <div class="loader-text">MULTIBRAWN</div>
+        <div class="loader-subtitle">טוען את החוויה המושלמת...</div>
     </div>
 
-    <!-- Connection Status -->
-    <div class="connection-status" id="connectionStatus">
-        <div class="status-dot" id="statusDot"></div>
-        <span id="statusText">מתחבר למסד נתונים...</span>
-    </div>
-
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav container">
-            <a href="#" class="logo">
-                <div class="logo-holographic">
-                    <div class="holo-layer"></div>
-                    <div class="holo-layer"></div>
-                    <div class="holo-layer"></div>
-                </div>
-                <div class="logo-text">
-                    <div class="main-title">WebMaster Pro</div>
-                    <div class="sub-title">אתרים שבונים עסקים</div>
-                </div>
-            </a>
-            
-            <ul class="nav-links">
-                <li><a href="#about">אודות</a></li>
-                <li><a href="#portfolio">גלריה</a></li>
-                <li><a href="#landing-pages">דפי נחיתה</a></li>
-                <li><a href="#automation">אוטומציות</a></li>
-                <li><a href="#clients">לקוחות</a></li>
-                <li><a href="#articles">מאמרים</a></li>
-                <li><a href="#contact">צור קשר</a></li>
-                <li><a href="#editor" class="btn btn-primary">התחל עכשיו</a></li>
-            </ul>
+    <header class="header" id="header">
+        <nav class="container">
+            <div class="nav">
+                <a href="#" class="logo">
+                    <img src="https://i.imgur.com/04x9Rfw.jpg" alt="Multi Brawn Logo" class="logo-image">
+                    <span class="logo-text">MULTIBRAWN</span>
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">בית</a></li>
+                    <li><a href="#about">אודות</a></li>
+                    <li><a href="#domains">תחומי עסק</a></li>
+                    <li><a href="#testimonials">המלצות</a></li>
+                    <li><a href="#contact">צור קשר</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <section id="home" class="hero">
+        <video 
+            class="hero-video"
+            autoplay 
+            muted 
+            loop 
+            playsinline
+            poster="https://i.imgur.com/04x9Rfw.jpg"
+        >
+            <source src="https://i.imgur.com/04x9Rfw.mp4" type="video/mp4">
+            <source src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4" type="video/mp4">
+            <source src="https://videos.pexels.com/video-files/3128671/3128671-uhd_2560_1440_25fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-particles"></div>
+        
         <div class="container">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-star"></i>
-                    פלטפורמה מקצועית לעסקים
+                <div class="luxury-badge fade-in-up">
+                    <i class="fas fa-crown"></i>
+                    האקוסיסטם העסקי המושלם
                 </div>
-                
-                <h1 class="hero-title">
-                    פלטפורמה מתקדמת<br>
-                    <span style="background: var(--gradient-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">לעיצוב ובניית</span><br>
-                    אתרים עסקיים
-                </h1>
-                
-                <p class="hero-subtitle">
-                    <span id="templateCount">12</span> תבניות אתרים מקצועיות בתחומים עסקיים מגוונים עם אדיטור ויזואלי להתאמה אישית מלאה ובינה מלאכותית מתקדמת.
+                <h1>MULTIBRAWN</h1>
+                <p class="subtitle">6 תחומים • פתרון אחד מושלם</p>
+                <p class="description">
+                    ברוכים הבאים לעולם שבו כל חלום הופך למציאות. מנופש יוקרתי ואירועים בלתי נשכחים, 
+                    דרך הפקות מדיה מרהיבות וניהול קהילות, נדל״ן וקרקעות, ועד לשיווק דיגיטלי מתקדם - כל מה שאתם צריכים במקום אחד.
                 </p>
-                
-                <div class="hero-cta">
-                    <a href="#portfolio" class="btn btn-gold">
-                        <i class="fas fa-play"></i>
-                        צפה בגלריה
+
+                <div class="domains-preview">
+                    <div class="domain-card fade-in-up">
+                        <div class="domain-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h4>MultiStay</h4>
+                        <p>וילות וצימרים יוקרתיים</p>
+                    </div>
+                    <div class="domain-card fade-in-up">
+                        <div class="domain-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>MultiEvents</h4>
+                        <p>אירועים פרטיים וחתונות</p>
+                    </div>
+                    <div class="domain-card fade-in-up">
+                        <div class="domain-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h4>MultiMedia</h4>
+                        <p>הפקת סרטונים אומנותיים</p>
+                    </div>
+                    <div class="domain-card fade-in-up">
+                        <div class="domain-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>MultiCommunity</h4>
+                        <p>ניהול קהילות דיגיטליות</p>
+                    </div>
+                    <div class="domain-card fade-in-up">
+                        <div class="domain-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4>MultiEstate</h4>
+                        <p>נדל״ן וקרקעות</p>
+                    </div>
+                    <div class="domain-card fade-in-up">
+                        <div class="domain-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4>MultiMarketing</h4>
+                        <p>שיווק דיגיטלי ואתרים</p>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#domains" class="btn btn-primary fade-in-up">
+                        <i class="fas fa-arrow-down"></i>
+                        גלו את התחומים שלנו
                     </a>
-                    <a href="#technology" class="btn btn-secondary">
-                        <i class="fas fa-info-circle"></i>
-                        איך זה עובד?
+                    <a href="https://wa.me/972500000000" class="btn btn-secondary fade-in-up" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        יצירת קשר מיידית
                     </a>
-                </div>
-            </div>
-            
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number" id="statTemplates">12</span>
-                    <span class="stat-label">תבניות מוכנות</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">10</span>
-                    <span class="stat-label">תחומים עסקיים</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">רספונסיבי</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">זמינות</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about fade-in">
+    <section id="about" class="about-erdit">
         <div class="container">
+            <div class="about-brand">
+                <img src="https://i.imgur.com/04x9Rfw.jpg" alt="Multi Brawn Brand" class="about-brand-logo">
+                <h3>המותג שמחבר הכל</h3>
+                <p>
+                    מולטיבראון לא רק חברה - זה אקוסיסטם שלם שמביא פתרונות מושלמים בכל תחום. 
+                    כמו קובייה של רוביק, כל צד מייצג תחום אחר, אבל הכל עובד יחד בהרמוניה מושלמת.
+                </p>
+            </div>
+
             <div class="about-content">
+                <div class="about-image">
+                    <div class="image-frame">
+                        <img src="https://i.imghippo.com/files/FSCk5519To.jpg" alt="ערדית בראון - מייסדת מולטיבראון" class="erdit-photo">
+                    </div>
+                </div>
                 <div class="about-text">
-                    <h2>מובילי הטכנולוגיה הדיגיטלית</h2>
+                    <h2>ערדית בראון</h2>
+                    <p class="subtitle">מייסדת ומנכ"לית מולטיבראון</p>
                     <p>
-                        WebMaster Pro מפתחת פתרונות מתקדמים לבניית אתרים עסקיים. 
-                        הפלטפורמה שלנו משלבת בינה מלאכותית מתקדמת עם עיצוב חדשני 
-                        ליצירת אתרים מקצועיים ומותאמים אישית.
+                        <strong>"החלום שלי היה ליצור אקוסיסטם שלם שבו כל לקוח יקבל פתרון מושלם לכל צורך."</strong>
                     </p>
-                    <p style="padding: 1.5rem; background: rgba(37, 99, 235, 0.1); border-radius: 12px; border-left: 4px solid var(--primary-color); margin: 1.5rem 0;">
-                        <strong>שותפות טכנולוגית:</strong> אנחנו עובדים עם מובילי התחום הטכנולוגי 
-                        כדי לספק פתרונות מותאמים אישית מקצה לקצה.
+                    <p>
+                        עם למעלה מ-15 שנות ניסיון בתחום האירוח והשיווק הדיגיטלי, ערדית בראון בנתה את מולטיבראון 
+                        כחזון מהפכני - חברה אחת שמציעה 6 תחומי שירות משלימים ברמה הגבוהה ביותר.
+                    </p>
+                    <p>
+                        מהתמחות ראשונית בנופש יוקרתי, דרך הרחבה לאירועים פרטיים והפקות מדיה, נדל״ן וקרקעות, 
+                        ועד לחדשנות בניהול קהילות ושיווק דיגיטלי - ערדית הוכיחה שאפשר להיות מצוינים בהכל.
+                    </p>
+                    <p>
+                        <strong>"אני מאמינה שכל לקוח ראוי לחוויה מושלמת, לא משנה איזה שירות הוא בוחר."</strong>
                     </p>
                     
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-microchip"></i>
-                            </div>
-                            <span class="feature-text">טכנולוגיה חדשנית</span>
+                    <div class="achievements">
+                        <div class="achievement">
+                            <h4 data-target="500">0</h4>
+                            <p>פרויקטים מוצלחים</p>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <span class="feature-text">מוכח בשטח</span>
+                        <div class="achievement">
+                            <h4 data-target="15">0</h4>
+                            <p>שנות ניסיון</p>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <span class="feature-text">גמישות ללא תחרות</span>
+                        <div class="achievement">
+                            <h4 data-target="6">0</h4>
+                            <p>תחומי מומחיות</p>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <span class="feature-text">תמיכה אסטרטגית</span>
+                        <div class="achievement">
+                            <h4 data-target="98">0</h4>
+                            <p>% שביעות רצון</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="about-visual">
-                    <div class="visual-grid">
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/sWlf1880WKM.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/WiRp8302YJs.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/hVyV3858OQ.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/eJk7179MXo.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/rhNp2418oyE.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/xnK4816Hc.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/htWG9491QkE.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/Ceu2132Q.png'); background-size: cover; background-position: center;"></div>
-                        <div class="visual-item" style="background-image: url('https://i.imghippo.com/files/yiP9207qMI.png'); background-size: cover; background-position: center;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="domains" class="business-domains">
+        <div class="container">
+            <div class="section-title">
+                <h2>תחומי העסק שלנו</h2>
+                <p>שישה תחומים מתקדמים, כל אחד מנוהל ברמה הגבוהה ביותר עם מומחיות ייעודית ושירות אישי</p>
+            </div>
+
+            <div class="domains-grid">
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=240&fit=crop&crop=center&auto=format&q=80" alt="MultiStay - וילות וצימרים יוקרתיים" class="business-image">
                     </div>
-                    <p class="visual-caption">10 תחומים עסקיים מגוונים והמבוקשים ביותר בישראל</p>
+                    <h3>MultiStay</h3>
+                    <p class="subtitle">וילות וצימרים יוקרתיים להשכרה יומית</p>
+                    <p>
+                        נופש שמתחיל באיכות. ב'מולטי בראון' אנחנו מאמינים שנופש מושלם מתחיל בפרטים הקטנים - 
+                        ולכן אנו מתמקדים בהצעת נכסים נבחרים בלבד: וילות, צימרים ודירות נופש מעוצבים ברמה גבוהה.
+                    </p>
+                    <ul class="business-features">
+                        <li>וילות יוקרה עם בריכות פרטיות</li>
+                        <li>צימרים רומנטיים מעוצבים</li>
+                        <li>דירות נופש משפחתיות</li>
+                        <li>ליווי אישי בבחירת המקום</li>
+                        <li>שירות 24/7 ותמיכה מלאה</li>
+                        <li>הזמנה אונליין מהירה וקלה</li>
+                    </ul>
+                    <button class="business-btn" onclick="openDomain('multistay')">
+                        כנסו לאתר MultiStay →
+                    </button>
+                </div>
+
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=240&fit=crop&crop=center&auto=format&q=80" alt="MultiEvents - אירועים פרטיים" class="business-image">
+                    </div>
+                    <h3>MultiEvents</h3>
+                    <p class="subtitle">שבתות חתן ואירועים פרטיים</p>
+                    <p>
+                        האירוע שלכם - בידיים טובות. שבת חתן, חתונה קטנה, בר מצווה או כל שמחה אינטימית - 
+                        אנחנו כאן כדי להפוך את היום שלכם לחוויה בלתי נשכחת עם תשומת לב מושלמת לכל פרט.
+                    </p>
+                    <ul class="business-features">
+                        <li>שבתות חתן מותאמות אישית</li>
+                        <li>חתונות קטנות ואירועים פרטיים</li>
+                        <li>בר/בת מצווה חגיגיים</li>
+                        <li>התאמה לציבור דתי וחרדי</li>
+                        <li>מטבח כשר למהדרין</li>
+                        <li>ליווי מלא מהתכנון ועד הביצוע</li>
+                    </ul>
+                    <button class="business-btn" onclick="openDomain('multievents')">
+                        כנסו לאתר MultiEvents →
+                    </button>
+                </div>
+
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=400&h=240&fit=crop&crop=center&auto=format&q=80" alt="MultiMedia - הפקת סרטונים" class="business-image">
+                    </div>
+                    <h3>MultiMedia</h3>
+                    <p class="subtitle">הפקת סרטונים אומנותיים לאירוח</p>
+                    <p>
+                        החיים הם סרט - אנחנו מפיקים אותו. אם אתם בעלי נכס או מארחים שמעוניינים להציג את המקום 
+                        שלכם בצורה ייחודית, שירות הפקת הסרטונים האומנותיים שלנו נועד בדיוק עבורכם.
+                    </p>
+                    <ul class="business-features">
+                        <li>סרטונים שיווקיים ברמה אומנותית</li>
+                        <li>תסריט חכם וצילום מקצועי</li>
+                        <li>עריכה מתקדמת ואפקטים ויזואליים</li>
+                        <li>הפקה מלאה מהרעיון ועד התוצר</li>
+                        <li>התאמה לפלטפורמות דיגיטליות שונות</li>
+                        <li>ליווי בקמפיינים ושיווק התוכן</li>
+                    </ul>
+                    <button class="business-btn" onclick="openDomain('multimedia')">
+                        כנסו לאתר MultiMedia →
+                    </button>
+                </div>
+
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=240&fit=crop&crop=center&auto=format&q=80" alt="MultiCommunity - קהילות דיגיטליות" class="business-image">
+                    </div>
+                    <h3>MultiCommunity</h3>
+                    <p class="subtitle">קשרים חברתיים וקהילתיים</p>
+                    <p>
+                        חיבורים שעושים את ההבדל. הכוח של קהילה הוא עצום - וב'מולטי בראון' אנחנו יודעות איך לרתום 
+                        אותו לשירות הלקוחות שלנו באמצעות ניהול קהילות דיגיטליות מתקדם ויעיל.
+                    </p>
+                    <ul class="business-features">
+                        <li>ניהול קבוצות פייסבוק ייעודיות</li>
+                        <li>דפי אינסטגרם פעילים ומעורבים</li>
+                        <li>ערוצי וואטסאפ סגורים ומקצועיים</li>
+                        <li>חיבור בין לקוחות לספקים איכותיים</li>
+                        <li>מיקוד בקהלי יעד ספציפיים</li>
+                        <li>גישה אותנטית ולא פרסומית</li>
+                    </ul>
+                    <button class="business-btn" onclick="openDomain('multicommunity')">
+                        כנסו לאתר MultiCommunity →
+                    </button>
+                </div>
+
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=240&fit=crop&crop=center&auto=format&q=80" alt="MultiEstate - נדל״ן וקרקעות" class="business-image">
+                    </div>
+                    <h3>MultiEstate</h3>
+                    <p class="subtitle">נדל״ן וקרקעות - השקעות וייעוץ</p>
+                    <p>
+                        השקעות חכמות בנדל״ן מתחילות בייעוץ מקצועי. אנחנו מתמחים בזיהוי הזדמנויות השקעה, 
+                        ליווי עסקאות מורכבות וייעוץ אסטרטגי בתחום הנדל״ן והקרקעות בישראל.
+                    </p>
+                    <ul class="business-features">
+                        <li>זיהוי הזדמנויות השקעה בנדל״ן</li>
+                        <li>ייעוץ בקניית קרקעות לפיתוח</li>
+                        <li>ליווי עסקאות מורכבות</li>
+                        <li>בדיקות משפטיות ורגולטוריות</li>
+                        <li>הערכת שווי ואמדן תשואות</li>
+                        <li>חיבור למשקיעים ויזמים</li>
+                    </ul>
+                    <button class="business-btn" onclick="openDomain('multiestate')">
+                        כנסו לאתר MultiEstate →
+                    </button>
+                </div>
+
+                <div class="business-card">
+                    <div class="business-header">
+                        <div class="business-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=240&fit=crop&crop=center&auto=format&q=80" alt="MultiMarketing - שיווק דיגיטלי" class="business-image">
+                    </div>
+                    <h3>MultiMarketing</h3>
+                    <p class="subtitle">פלטפורמת שיווק דיגיטלי ואתרים עסקיים</p>
+                    <p>
+                        המהפכה הדיגיטלית שלכם מתחילה כאן. MultiMarketing משלב את פלטפורמת WebMaster Pro לבניית אתרים 
+                        עסקיים מתקדמים עם שירותי שיווק דיגיטלי מלאים ואוטומציות חכמות.
+                    </p>
+                    <ul class="business-features">
+                        <li>בניית אתרים עסקיים מקצועיים (WebMaster Pro)</li>
+                        <li>קמפיינים ממוקדים ברשתות החברתיות</li>
+                        <li>SEO מתקדם ואופטימיזציה</li>
+                        <li>אוטומציות שיווק ו-CRM מתקדם</li>
+                        <li>כלי AI ליצירת תוכן</li>
+                        <li>ניהול מוניטין דיגיטלי</li>
+                    </ul>
+                    <button class="business-btn" onclick="openDomain('multimarketing')">
+                        כנסו לאתר MultiMarketing →
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Technology Section -->
-    <section id="technology" class="technology fade-in" style="padding: 120px 0; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+    <section class="stats">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">הטכנולוגיה שלנו</h2>
-                <p class="section-subtitle">
-                    פתרונות מתקדמים ומוכחים לבניית אתרים עסקיים מקצועיים
-                </p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 data-target="500">0</h3>
+                    <p>פרויקטים מוצלחים</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-target="15">0</h3>
+                    <p>שנות ניסיון</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-target="6">0</h3>
+                    <p>תחומי מומחיות</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-target="98">0</h3>
+                    <p>% שביעות רצון</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>מה אומרים עלינו</h2>
+                <p>המלצות מלקוחות מרוצים שחוו איתנו את השירות ברמה הגבוהה ביותר</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "עבדנו עם ערדית על שבת החתן שלנו והיא פשוט הפכה את החלום שלנו למציאות. 
+                        כל פרט היה מושלם, השירות היה ברמה עולמית והתוצאה עלתה על כל הציפיות. 
+                        ערדית ומולטיבראון - זה פשוט מקצועיות ללא פשרות!"
+                    </p>
+                    <div class="testimonial-author">דוד ושרה כהן</div>
+                    <div class="testimonial-role">זוג מרוצה • MultiEvents</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "כשהחלטנו להשכיר את הוילה שלנו לא ידענו איך להתחיל. ערדית לא רק עזרה לנו 
+                        עם השיווק והניהול, היא גם הפיקה לנו סרטון מדהים שהפך את המקום שלנו למבוקש ביותר באזור. 
+                        תוך חודשיים היינו עם תפוסה מלאה!"
+                    </p>
+                    <div class="testimonial-author">אבי מזרחי</div>
+                    <div class="testimonial-role">בעל וילה • MultiMedia + MultiStay</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "העסק שלנו קיבל חיים חדשים הודות לMultiMarketing. האתר החדש שבנו עם WebMaster Pro 
+                        הכפיל את המכירות שלנו, והקמפיינים שערדית ניהלה הביאו לנו לקוחות איכותיים בדיוק כמו שרצינו. 
+                        זה שיווק דיגיטלי ברמה אחרת לגמרי!"
+                    </p>
+                    <div class="testimonial-author">רונית לוי</div>
+                    <div class="testimonial-role">בעלת עסק • MultiMarketing</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "ערדית עזרה לנו למצוא את קרקע החלומות שלנו ולהוציא לפועל פרויקט נדל״ן מרווח. 
+                        המקצועיות שלה בתחום והקשרים שלה חסכו לנו זמן יקר וכסף רב. 
+                        בזכותה הפרויקט שלנו הצליח מעבר לכל הציפיות!"
+                    </p>
+                    <div class="testimonial-author">משה וענת דוד</div>
+                    <div class="testimonial-role">משקיעי נדל״ן • MultiEstate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>בואו נתחיל לעבוד יחד</h2>
+                <p>צרו קשר עוד היום ונבחר יחד את התחום או השירות המתאים בדיוק לצרכים שלכם</p>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 4rem;">
-                
-                <!-- Advanced Technology Card -->
-                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-blue);"></div>
-                    <div style="width: 60px; height: 60px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
-                        <i class="fas fa-brain" style="color: white; font-size: 1.5rem;"></i>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>פרטי יצירת קשר</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>טלפון נייד</strong>
+                            <p>050-0000000</p>
+                        </div>
                     </div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">טכנולוגיית AI מתקדמת</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
-                        WebMaster Pro משלבת בינה מלאכותית מתקדמת ליצירת אתרים אוטומטית, 
-                        אופטימיזציה חכמה ואנליטיקה מובנית .
-                    </p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">יצירה אוטומטית</span>
-                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">SEO חכם</span>
-                        <span style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">אנליטיקה מתקדמת</span>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>אימייל עסקי</strong>
+                            <p>erdit@multibrawn.co.il</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <strong>WhatsApp</strong>
+                            <p>050-0000000</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>כתובת</strong>
+                            <p>ישראל</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>שעות פעילות</strong>
+                            <p>א'-ה': 8:00-18:00<br>ו': 8:00-14:00</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Field-Proven Solutions Card -->
-                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-gold);"></div>
-                    <div style="width: 60px; height: 60px; background: var(--gradient-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
-                        <i class="fas fa-award" style="color: var(--text-primary); font-size: 1.5rem;"></i>
-                    </div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">פתרונות מוכחים בשטח</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
-                        12 תבניות אתרים שנבדקו ואומתו בפועל אצל לקוחות, 
-                        עם שיעור הצלחה של 97% ושביעות רצון מקסימלית.
-                    </p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">97% הצלחה</span>
-                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">נבדק בפועל</span>
-                        <span style="background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">מוכח איכות</span>
-                    </div>
-                </div>
-
-                <!-- Flexible Technology Card -->
-                <div style="background: white; border-radius: 20px; padding: 3rem 2rem; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(135deg, #059669 0%, #047857 100%);"></div>
-                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
-                        <i class="fas fa-rocket" style="color: white; font-size: 1.5rem;"></i>
-                    </div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; font-family: 'Inter', 'Alef', serif;">גמישות ותגובה מהירה</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
-                        הפלטפורמה שלנו מספקת גמישות ללא תחרות ותגובה מהירה לצרכים הספציפיים של הלקוחות, 
-                        כולל פתרונות מותאמים אישית מקצה לקצה.
-                    </p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">פתרונות מותאמים</span>
-                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">תגובה מהירה</span>
-                        <span style="background: rgba(5, 150, 105, 0.1); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">פתרון שלם</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio fade-in">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">הגלריה שלנו</h2>
-                <p class="section-subtitle">
-                    WebMaster Pro מעצבת ובונה אתרים עסקיים ביצועים גבוהים 
-                    לענות על צרכי השוק העסקי המגוון
-                </p>
-            </div>
-            
-            <!-- תיווספנה כאן התבניות דינמית -->
-            <div class="portfolio-grid" id="portfolioGrid">
-                <!-- Templates will be loaded here -->
-            </div>
-
-            <div style="text-align: center; margin-top: 4rem;">
-                <a href="#editor" class="btn btn-gold">
-                    <i class="fas fa-edit"></i>
-                    התחל עריכה עכשיו
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Strategic Partnerships Section -->
-    <section class="partnerships fade-in" style="padding: 80px 0; background: var(--gradient-dark); color: white;">
-        <div class="container">
-            <div style="text-align: center;">
-                <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; opacity: 0.9;">הטכנולוגיות שלנו</h3>
-                <p style="font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
-                    פלטפורמה מתקדמת עם טכנולוגיות מובילות 
-                    לבניית אתרים מקצועיים ומהירים
-                </p>
-            </div>
-            
-            <div style="display: flex; justify-content: center; align-items: center; gap: 4rem; margin-top: 3rem; flex-wrap: wrap;">
-                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
-                    <i class="fas fa-cloud" style="font-size: 2rem; color: var(--accent-gold);"></i>
-                    <span style="font-size: 1.1rem; font-weight: 600;">Netlify Platform</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
-                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--accent-gold);"></i>
-                    <span style="font-size: 1.1rem; font-weight: 600;">Cloudflare CDN</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
-                    <i class="fas fa-code" style="font-size: 2rem; color: var(--accent-gold);"></i>
-                    <span style="font-size: 1.1rem; font-weight: 600;">HTML5 & CSS3</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 1rem; opacity: 0.8;">
-                    <i class="fas fa-mobile-alt" style="font-size: 2rem; color: var(--accent-gold);"></i>
-                    <span style="font-size: 1.1rem; font-weight: 600;">Responsive Design</span>
+                <div class="contact-form">
+                    <h3>שלחו הודעה</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">שם מלא *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">טלפון *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">אימייל *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="domain">איזה תחום מעניין אתכם?</label>
+                            <select id="domain" name="domain" required>
+                                <option value="">בחרו תחום</option>
+                                <option value="multistay">MultiStay - וילות וצימרים</option>
+                                <option value="multievents">MultiEvents - אירועים פרטיים</option>
+                                <option value="multimedia">MultiMedia - הפקת סרטונים</option>
+                                <option value="multicommunity">MultiCommunity - ניהול קהילות</option>
+                                <option value="multiestate">MultiEstate - נדל״ן וקרקעות</option>
+                                <option value="multimarketing">MultiMarketing - שיווק דיגיטלי</option>
+                                <option value="general">ייעוץ כללי</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">פרטים נוספים</label>
+                            <textarea id="message" name="message" placeholder="ספרו לנו על הפרויקט או השירות שאתם מחפשים..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            שלחו הודעה
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Process Section -->
-    <section id="process" class="process fade-in">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">איך זה עובד?</h2>
-                <p class="section-subtitle">
-                    תהליך פשוט ומהיר ליצירת אתר מקצועי
-                </p>
-            </div>
-            
-            <div class="process-steps">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">בחירת תבנית</h3>
-                    <p class="step-description">
-                        בחר את התבנית המתאימה לתחום העסקי שלך מתוך 12 האפשרויות המקצועיות שלנו
-                    </p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">התאמה אישית</h3>
-                    <p class="step-description">
-                        השתמש באדיטור הויזואלי שלנו כדי להתאים את התוכן, הצבעים, התמונות והטקסט
-                    </p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">פרסום מיידי</h3>
-                    <p class="step-description">
-                        האתר מוכן לפרסום מיידי עם כל התכונות המתקדמות - רספונסיבי, מהיר ומאובטח
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <a href="https://wa.me/972500000000" class="whatsapp-float" target="_blank" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>מוכן להתחיל?</h2>
-                <p>
-                    הצטרף לעסקים שכבר בחרו ב-WebMaster Pro<br>
-                    ויצרו נוכחות דיגיטלית מקצועית ומרשימה
-                </p>
-                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="#portfolio" class="btn btn-white">
-                        <i class="fas fa-eye"></i>
-                        צפה בגלריה
-                    </a>
-                    <a href="#editor" class="btn btn-gold">
-                        <i class="fas fa-rocket"></i>
-                        התחל עכשיו
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 WebMaster Pro. כל הזכויות שמורות.</p>
+            <div class="footer-logo">
+                <img src="https://i.imgur.com/04x9Rfw.jpg" alt="Multi Brawn" class="footer-logo-image">
+            </div>
+            
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>תחומי העסק</h4>
+                    <a href="#" onclick="openDomain('multistay')">MultiStay - וילות וצימרים</a>
+                    <a href="#" onclick="openDomain('multievents')">MultiEvents - אירועים פרטיים</a>
+                    <a href="#" onclick="openDomain('multimedia')">MultiMedia - הפקות וידאו</a>
+                    <a href="#" onclick="openDomain('multicommunity')">MultiCommunity - ניהול קהילות</a>
+                    <a href="#" onclick="openDomain('multiestate')">MultiEstate - נדל״ן וקרקעות</a>
+                    <a href="#" onclick="openDomain('multimarketing')">MultiMarketing - שיווק דיגיטלי</a>
+                </div>
+                <div class="footer-section">
+                    <h4>שירותים</h4>
+                    <a href="#">השכרת נופש יוקרתי</a>
+                    <a href="#">תכנון אירועים פרטיים</a>
+                    <a href="#">הפקת סרטונים מקצועית</a>
+                    <a href="#">ניהול קהילות דיגיטליות</a>
+                    <a href="#">השקעות נדל״ן וקרקעות</a>
+                    <a href="#">בניית אתרים ושיווק</a>
+                </div>
+                <div class="footer-section">
+                    <h4>קשר</h4>
+                    <a href="tel:0500000000">050-0000000</a>
+                    <a href="mailto:erdit@multibrawn.co.il">erdit@multibrawn.co.il</a>
+                    <a href="https://wa.me/972500000000" target="_blank">WhatsApp</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 מולטיבראון בע"מ | כל הזכויות שמורות | בניהולה של ערדית בראון</p>
+            </div>
         </div>
     </footer>
 
-    <!-- ===== SUPABASE + JAVASCRIPT מתוקן ===== -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
-    
     <script>
-        // ===== גלובלים =====
-        console.log('🚀 WebMaster Pro מתחיל לטעון...');
-        
-        // הגדרות Supabase - הפרטים שלך!
-        const SUPABASE_CONFIG = {
-            url: 'https://pooeneoileludqtdecig.supabase.co',
-            key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VuZW9pbGVsdWRxdGRlY2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4NjU0MDAsImV4cCI6MjA2ODQ0MTQwMH0.Rs579QAksLWTBuDiMo6laa8j4qThKHzlkggrHZagliI'
-        };
-
-        let supabaseClient = null;
-        let isConnected = false;
-
-        // נתוני גיבוי למקרה של בעיות חיבור
-        const BACKUP_TEMPLATES = [
-            {
-                id: 1,
-                name: 'ד"ר מיכל רוזן',
-                slug: 'dr-michal-rosen',
-                description: 'אתר מקצועי לרפואה אסתטית עם מחשבונים מתקדמים',
-                preview_image_url: 'https://i.imghippo.com/files/sWlf1880WKM.png',
-                category: 'רפואה אסתטית',
-                price: 280000,
-                is_premium: true,
-                features: ['הזמנות אונליין', 'גלריית טיפולים', 'לפני ואחרי', 'ייעוץ מקוון']
-            },
-            {
-                id: 2,
-                name: 'דני פיט - מאמן כושר',
-                slug: 'fitness-co',
-                description: 'אתר מאמן כושר עם מחשבוני BMI ותוכניות אימון',
-                preview_image_url: 'https://i.imghippo.com/files/WiRp8302YJs.png',
-                category: 'כושר וספורט',
-                price: 220000,
-                is_premium: false,
-                features: ['מחשבון BMI', 'תוכניות אימון', 'הצלחות לקוחות', 'הזמנת אימונים']
-            },
-            {
-                id: 3,
-                name: 'סטודיו אוהם - יוגה',
-                slug: 'yoga-studio',
-                description: 'אתר יוגא עם לוח זמנים אינטראקטיבי והזמנות',
-                preview_image_url: 'https://i.imghippo.com/files/eJk7179MXo.png',
-                category: 'יוגה ומדיטציה',
-                price: 190000,
-                is_premium: false,
-                features: ['לוח שיעורים', 'הרשמה אונליין', 'וידאוי הדרכה', 'מדיטציה מודרכת']
-            },
-            {
-                id: 4,
-                name: 'ד"ר שרה כהן - תזונאית',
-                slug: 'nutritionist',
-                description: 'אתר תזונאית עם מחשבון קלוריות ותפריטים אישיים',
-                preview_image_url: 'https://i.imghippo.com/files/rhNp2418oyE.png',
-                category: 'תזונה ובריאות',
-                price: 240000,
-                is_premium: false,
-                features: ['מחשבון קלוריות', 'תפריטים אישיים', 'יעוץ תזונתי', 'מעקב התקדמות']
-            },
-            {
-                id: 5,
-                name: 'משרד ברקוביץ - עו"ד',
-                slug: 'law-firm',
-                description: 'אתר משרד עורכי דין עם תחומי מומחיות וייעוץ מקוון',
-                preview_image_url: 'https://i.imghippo.com/files/hVyV3858OQ.png',
-                category: 'משפטים',
-                price: 250000,
-                is_premium: false,
-                features: ['תחומי מומחיות', 'צוות עורכי דין', 'ייעוץ מקוון', 'קביעת פגישות']
-            },
-            {
-                id: 6,
-                name: 'רינה לוי - חשבת שכר',
-                slug: 'accountant',
-                description: 'אתר חשבת שכר עם מחשבון שכר ודיווחים ממשלתיים',
-                preview_image_url: 'https://i.imghippo.com/files/tGN5433dAU.png',
-                category: 'חשבונאות',
-                price: 200000,
-                is_premium: false,
-                features: ['מחשבון שכר', 'דיווחים ממשלתיים', 'ייעוץ מקוון', 'ניהול ספרים']
-            },
-            {
-                id: 7,
-                name: 'מספרה BELLA',
-                slug: 'beauty-salon',
-                description: 'אתר סלון יופי עם הזמנת תורים וגלריית עבודות',
-                preview_image_url: 'https://i.imghippo.com/files/xnK4816Hc.png',
-                category: 'יופי ועיצוב',
-                price: 170000,
-                is_premium: false,
-                features: ['הזמנת תורים', 'גלריית עבודות', 'מחירון שירותים', 'ייעוץ אופנה']
-            },
-            {
-                id: 8,
-                name: 'ד"ר רונית לוי - מורה פרטית',
-                slug: 'tutor',
-                description: 'אתר מורה פרטית עם חומרי לימוד ומעקב התקדמות',
-                preview_image_url: 'https://i.imghippo.com/files/Ceu2132Q.png',
-                category: 'חינוך והוראה',
-                price: 210000,
-                is_premium: false,
-                features: ['שיעורים פרטיים', 'חומרי לימוד', 'מעקב התקדמות', 'יעוץ חינוכי']
-            },
-            {
-                id: 9,
-                name: 'נדל"ן פרמיום',
-                slug: 'real-estate',
-                description: 'אתר תיווך נדל"ן עם גלריית נכסים ומחשבון משכנתאות',
-                preview_image_url: 'https://i.imghippo.com/files/htWG9491QkE.png',
-                category: 'נדל"ן',
-                price: 270000,
-                is_premium: true,
-                features: ['גלריית נכסים', 'חיפוש מתקדם', 'מחשבון משכנתאות', 'השוואת נכסים']
-            },
-            {
-                id: 10,
-                name: 'מולטיבראון - נופש ואירועים',
-                slug: 'multibrawn',
-                description: 'אתר נופש ואירועים עם הזמנות ותכנון מותאם',
-                preview_image_url: 'https://i.imghippo.com/files/pL5530Z.png',
-                category: 'נופש ואירועים',
-                price: 230000,
-                is_premium: false,
-                features: ['תכנון נופשים', 'ארגון אירועים', 'הזמנות אונליין', 'ייעוץ אישי']
-            },
-            {
-                id: 11,
-                name: 'קליניקת יופי פרמיום',
-                slug: 'aesthetic-clinic',
-                description: 'אתר קליניקה לאסתטיקת פנים עם טיפולים מתקדמים',
-                preview_image_url: 'https://i.imghippo.com/files/Ayyb2287TOc.png',
-                category: 'אסתטיקה פנים',
-                price: 320000,
-                is_premium: true,
-                features: ['טיפולי פנים', 'הזמנות מתקדמות', 'ייעוץ מקצועי', 'גלריית תוצאות']
-            },
-            {
-                id: 12,
-                name: 'סטודיו נויה - עיצוב פנים',
-                slug: 'interior-design-studio',
-                description: 'סטודיו עיצוב פנים יוקרתי עם 21 פרויקטים מרהיבים',
-                preview_image_url: 'https://i.imghippo.com/files/yiP9207qMI.png',
-                category: 'עיצוב פנים',
-                price: 240000,
-                is_premium: false,
-                features: ['21 פרויקטים', 'עיצוב יוקרתי', 'המלצות לקוחות', 'ייעוץ WhatsApp']
-            }
-        ];
-
-        // ===== פונקציות עזר =====
-        function showLoading(text = 'טוען נתונים...') {
-            const overlay = document.getElementById('loadingOverlay');
-            const loadingText = document.getElementById('loadingText');
-            loadingText.textContent = text;
-            overlay.classList.add('show');
-        }
-
-        function hideLoading() {
-            const overlay = document.getElementById('loadingOverlay');
-            overlay.classList.remove('show');
-        }
-
-        function updateConnectionStatus(connected, text) {
-            isConnected = connected;
-            const dot = document.getElementById('statusDot');
-            const statusText = document.getElementById('statusText');
+        // Page Loader Management
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('pageLoader');
             
-            if (connected) {
-                dot.classList.add('connected');
-                statusText.textContent = text || 'מחובר למסד נתונים';
-            } else {
-                dot.classList.remove('connected');
-                statusText.textContent = text || 'לא מחובר למסד נתונים';
-            }
-        }
-
-        function showMessage(message, type = 'info', duration = 4000) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `status-message ${type}`;
-            messageDiv.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
-                ${message}
-            `;
-            
-            document.body.appendChild(messageDiv);
-            
-            setTimeout(() => messageDiv.classList.add('show'), 100);
-            
+            // Hide loader after 3 seconds with smooth animation
             setTimeout(() => {
-                messageDiv.classList.remove('show');
+                loader.classList.add('hidden');
+                
+                // Remove loader from DOM after animation completes
                 setTimeout(() => {
-                    if (document.body.contains(messageDiv)) {
-                        document.body.removeChild(messageDiv);
-                    }
-                }, 300);
-            }, duration);
-        }
+                    loader.style.display = 'none';
+                }, 1000);
+            }, 2500);
+        });
 
-        // ===== אתחול Supabase =====
-        async function initializeSupabase() {
-            showLoading('מתחבר למסד נתונים...');
-            updateConnectionStatus(false, 'מתחבר...');
-            
-            try {
-                // בדוק שהספרייה נטענה
-                if (typeof supabase === 'undefined') {
-                    throw new Error('ספריית Supabase לא נטענה');
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
+            });
+        });
 
-                // יצור לקוח Supabase בדרך הנכונה
-                const { createClient } = supabase;
-                supabaseClient = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
-                
-                console.log('✅ לקוח Supabase נוצר בהצלחה!');
-                
-                // נסה לטעון תבניות ממסד הנתונים
-                await loadTemplatesFromDatabase();
-                
-            } catch (error) {
-                console.error('❌ שגיאה בחיבור ל-Supabase:', error);
-                updateConnectionStatus(false, 'חיבור נכשל');
-                showMessage('בעיה בחיבור למסד הנתונים. טוען נתוני גיבוי...', 'warning', 5000);
-                
-                // טען נתוני גיבוי
-                await loadBackupTemplates();
-            } finally {
-                hideLoading();
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // Header background on scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
-        }
+        });
 
-        // ===== טעינת תבניות ממסד נתונים =====
-        async function loadTemplatesFromDatabase() {
-            try {
-                console.log('🔍 מחפש תבניות במסד נתונים...');
+        // Video Management with Enhanced Debugging
+        const heroVideo = document.querySelector('.hero-video');
+        
+        if (heroVideo) {
+            console.log('🎬 Video element found:', heroVideo);
+            
+            // Enhanced video loading
+            heroVideo.addEventListener('loadstart', () => {
+                console.log('📥 Video loading started...');
+            });
+            
+            heroVideo.addEventListener('loadeddata', () => {
+                console.log('✅ Video data loaded successfully');
+            });
+            
+            heroVideo.addEventListener('canplay', () => {
+                console.log('▶️ Video can start playing');
+                heroVideo.play().catch(e => {
+                    console.log('❌ Video autoplay failed:', e);
+                    // Try to make video more visible if autoplay fails
+                    heroVideo.style.opacity = '0.8';
+                    heroVideo.style.filter = 'brightness(0.7) contrast(1.1)';
+                });
+            });
+            
+            heroVideo.addEventListener('playing', () => {
+                console.log('🎥 Video is now playing!');
+            });
+            
+            // Enhanced error handling
+            heroVideo.addEventListener('error', function(e) {
+                console.log('❌ Video failed to load:', e);
+                console.log('📊 Video error details:', {
+                    error: this.error,
+                    networkState: this.networkState,
+                    readyState: this.readyState,
+                    src: this.src
+                });
                 
-                const { data: templates, error } = await supabaseClient
-                    .from('templates')
-                    .select('id, name, slug, description, preview_image_url, category, price, is_premium')
-                    .order('id', { ascending: true });
+                // Fallback to dark background with better visibility
+                const hero = document.querySelector('.hero');
+                hero.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)';
+                this.style.display = 'none';
+                
+                // Show fallback message
+                console.log('🔄 Switched to fallback background');
+            });
 
-                if (error) {
-                    console.error('🚨 שגיאה בשאילתה:', error);
-                    throw error;
+            // Force video to be more visible
+            setTimeout(() => {
+                if (heroVideo.paused) {
+                    console.log('⚠️ Video is still paused, trying to play...');
+                    heroVideo.play().catch(e => console.log('Manual play failed:', e));
                 }
+                
+                // Make video much more visible
+                heroVideo.style.opacity = '0.95';
+                heroVideo.style.filter = 'brightness(0.9) contrast(1.4) saturate(1.3)';
+            }, 2000);
 
-                console.log(`📦 נמצאו ${templates?.length || 0} תבניות במסד נתונים`);
-
-                if (templates && templates.length > 0) {
-                    updateConnectionStatus(true, `${templates.length} תבניות נטענו`);
-                    displayTemplates(templates);
-                    updateStats(templates.length);
-                    showMessage(`✅ נטענו ${templates.length} תבניות מהמסד`, 'success', 3000);
-                } else {
-                    throw new Error('לא נמצאו תבניות במסד הנתונים');
-                }
-
-            } catch (error) {
-                console.error('❌ כשל בטעינת תבניות מהמסד:', error);
-                throw error; // העבר את השגיאה למעלה
-            }
-        }
-
-        // ===== טעינת נתוני גיבוי =====
-        async function loadBackupTemplates() {
-            console.log('📦 טוען נתוני גיבוי...');
-            updateConnectionStatus(false, 'משתמש בנתוני גיבוי');
-            
-            // הוסף עיכוב קטן כדי לדמות טעינה
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            displayTemplates(BACKUP_TEMPLATES);
-            updateStats(BACKUP_TEMPLATES.length);
-            showMessage('📦 טוען נתוני גיבוי - הכל עובד!', 'info', 4000);
-        }
-
-        // ===== הצגת תבניות =====
-        function displayTemplates(templates) {
-            const portfolioGrid = document.getElementById('portfolioGrid');
-            portfolioGrid.innerHTML = '';
-
-            templates.forEach((template, index) => {
-                const templateCard = createTemplateCard(template);
-                portfolioGrid.appendChild(templateCard);
-
-                // אנימציה מדורגת
-                setTimeout(() => {
-                    templateCard.classList.add('loaded');
-                }, index * 150);
-            });
-
-            console.log(`🎨 הוצגו ${templates.length} תבניות בגלריה`);
-        }
-
-        // ===== יצירת כרטיס תבנית =====
-        function createTemplateCard(template) {
-            const card = document.createElement('div');
-            card.className = 'portfolio-card';
-            card.setAttribute('data-website', template.slug);
-
-            // בחר URL נכון לדמו
-            const demoUrl = getDemoUrl(template.slug);
-            
-            // בחר תכונות (אם יש במסד נתונים או מנתוני הגיבוי)
-            const features = template.features || getDefaultFeatures(template.category);
-
-            card.innerHTML = `
-                <div class="card-image" style="background-image: url('${template.preview_image_url}');">
-                    <div class="card-overlay">
-                        <div class="card-category">${template.category}</div>
-                        <h3 class="card-title-overlay">${template.name}</h3>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">${template.name}</h3>
-                    <p class="card-description">${template.description}</p>
-                    <div class="card-features">
-                        ${features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-                    </div>
-                    <div class="card-price">
-                        <span class="price">₪${(template.price / 100).toLocaleString()}</span>
-                        <a href="${demoUrl}" target="_blank" class="card-btn">צפה בדמו</a>
-                    </div>
-                </div>
-            `;
-
-            // הוסף event listeners
-            addCardEventListeners(card, template);
-
-            return card;
-        }
-
-        // ===== קבלת URL דמו =====
-        function getDemoUrl(slug) {
-            const websiteMap = {
-                'dr-michal-rosen': 'websites/dr-michal-rosen.html',
-                'fitness-co': 'websites/fitness-co.html',
-                'yoga-studio': 'websites/yoga-studio.html',
-                'nutritionist': 'websites/nutritionist.html',
-                'law-firm': 'websites/law-firm.html',
-                'accountant': 'websites/accountant.html',
-                'beauty-salon': 'websites/beauty-salon.html',
-                'tutor': 'websites/tutor.html',
-                'real-estate': 'websites/real-estate.html',
-                'multibrawn': 'websites/multibrawn.html',
-                'aesthetic-clinic': 'websites/aesthetic-clinic.html',
-                'interior-design-studio': 'websites/interior-design-studio.html'
-            };
-
-            return websiteMap[slug] || `websites/${slug}.html`;
-        }
-
-        // ===== תכונות ברירת מחדל =====
-        function getDefaultFeatures(category) {
-            const featureMap = {
-                'רפואה אסתטית': ['הזמנות אונליין', 'גלריית טיפולים', 'לפני ואחרי', 'ייעוץ מקוון'],
-                'כושר וספורט': ['מחשבון BMI', 'תוכניות אימון', 'הצלחות לקוחות', 'הזמנת אימונים'],
-                'יוגה ומדיטציה': ['לוח שיעורים', 'הרשמה אונליין', 'וידאוי הדרכה', 'מדיטציה מודרכת'],
-                'תזונה ובריאות': ['מחשבון קלוריות', 'תפריטים אישיים', 'יעוץ תזונתי', 'מעקב התקדמות'],
-                'משפטים': ['תחומי מומחיות', 'צוות עורכי דין', 'ייעוץ מקוון', 'קביעת פגישות'],
-                'חשבונאות': ['מחשבון שכר', 'דיווחים ממשלתיים', 'ייעוץ מקוון', 'ניהול ספרים'],
-                'יופי ועיצוב': ['הזמנת תורים', 'גלריית עבודות', 'מחירון שירותים', 'ייעוץ אופנה'],
-                'חינוך והוראה': ['שיעורים פרטיים', 'חומרי לימוד', 'מעקב התקדמות', 'יעוץ חינוכי'],
-                'נדל"ן': ['גלריית נכסים', 'חיפוש מתקדם', 'מחשבון משכנתאות', 'השוואת נכסים'],
-                'נופש ואירועים': ['תכנון נופשים', 'ארגון אירועים', 'הזמנות אונליין', 'ייעוץ אישי'],
-                'אסתטיקה פנים': ['טיפולי פנים', 'הזמנות מתקדמות', 'ייעוץ מקצועי', 'גלריית תוצאות'],
-                'עיצוב פנים': ['21 פרויקטים', 'עיצוב יוקרתי', 'המלצות לקוחות', 'ייעוץ WhatsApp']
-            };
-
-            return featureMap[category] || ['רספונסיבי', 'SEO מוכן', 'מהיר', 'מאובטח'];
-        }
-
-        // ===== הוספת event listeners לכרטיס =====
-        function addCardEventListeners(card, template) {
-            // לחיצה על הכרטיס (לא על הכפתור)
-            card.addEventListener('click', function(e) {
-                if (!e.target.classList.contains('card-btn')) {
-                    const demoUrl = getDemoUrl(template.slug);
-                    showMessage(`👁️ פותח תצוגה מקדימה: ${template.name}`, 'info', 2000);
-                    window.open(demoUrl, '_blank');
-                }
-            });
-
-            // אפקטי hover מתקדמים
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-12px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        }
-
-        // ===== עדכון סטטיסטיקות =====
-        function updateStats(templateCount) {
-            const templateCountElements = [
-                document.getElementById('templateCount'),
-                document.getElementById('statTemplates')
-            ];
-
-            templateCountElements.forEach(element => {
-                if (element) {
-                    element.textContent = templateCount;
-                }
-            });
-        }
-
-        // ===== פונקציות ניווט =====
-        function initializeNavigation() {
-            // Smooth scrolling
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const href = this.getAttribute('href');
-                    
-                    if (href === '#' || href.length <= 1) {
-                        return;
-                    }
-                    
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+            // Pause video when not visible (save bandwidth)
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (heroVideo.paused) {
+                            heroVideo.play().catch(e => console.log('Video play failed:', e));
+                        }
+                    } else {
+                        if (!heroVideo.paused) {
+                            heroVideo.pause();
+                        }
                     }
                 });
             });
+            
+            videoObserver.observe(heroVideo);
+        } else {
+            console.log('❌ Video element not found!');
+        }
 
-            // Header scroll effect
-            window.addEventListener('scroll', () => {
-                const header = document.querySelector('.header');
-                if (window.scrollY > 100) {
-                    header.style.background = 'rgba(255, 255, 255, 0.98)';
-                    header.style.backdropFilter = 'blur(20px)';
-                    header.style.boxShadow = 'var(--shadow-xl)';
-                } else {
-                    header.style.background = 'rgba(255, 255, 255, 0.95)';
-                    header.style.backdropFilter = 'blur(20px)';
-                    header.style.boxShadow = 'var(--shadow-md)';
+        // Stats counter animation
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                const suffix = element.textContent.replace(/[\d]/g, '');
+                element.textContent = Math.floor(current) + (suffix || '');
+            }, 20);
+        }
+
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumber = entry.target.querySelector('h3');
+                    const target = parseInt(statNumber.getAttribute('data-target'));
+                    if (target > 0) {
+                        animateCounter(statNumber, target);
+                    }
+                    statsObserver.unobserve(entry.target);
                 }
             });
+        });
 
-            // Scroll animations
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+        document.querySelectorAll('.stat-item').forEach(item => {
+            statsObserver.observe(item);
+        });
+
+        // Business cards entrance animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.business-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(80px) scale(0.95)';
+            card.style.transition = `opacity 0.8s ease ${index * 0.2}s, transform 0.8s ease ${index * 0.2}s`;
+            observer.observe(card);
+        });
+
+        // Domain links function
+        function openDomain(domain) {
+            const domainUrls = {
+                'multistay': 'https://multistay.multibrawn.co.il',
+                'multievents': 'https://multievents.multibrawn.co.il',
+                'multimedia': 'https://multimedia.multibrawn.co.il',
+                'multicommunity': 'https://multicommunity.multibrawn.co.il',
+                'multiestate': 'https://multiestate.multibrawn.co.il',
+                'multimarketing': 'https://multimarketing.multibrawn.co.il'
             };
+            
+            // For now, show alert since individual sites don't exist yet
+            alert(`🚀 בקרוב! ${domain.toUpperCase()} יהיה זמין בכתובת: ${domainUrls[domain] || 'בהכנה'}`);
+            
+            // When sites are ready, use this:
+            // window.open(domainUrls[domain], '_blank');
+        }
 
-            const observer = new IntersectionObserver((entries) => {
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Create WhatsApp message
+            const message = `🌟 בקשה חדשה ממולטיבראון:
+
+👤 שם: ${data.name}
+📞 טלפון: ${data.phone}
+📧 אימייל: ${data.email}
+🎯 תחום מעניין: ${data.domain}
+📝 פרטים נוספים: ${data.message || 'לא צוין'}
+
+נשמח לשמוע מכם ולעזור! 🚀`;
+            
+            const whatsappUrl = `https://wa.me/972500000000?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            alert('🎉 תודה רבה! ההודעה נשלחה בהצלחה. ערדית תחזור אליכם בהקדם!');
+            this.reset();
+        });
+
+        // Testimonials animation
+        document.querySelectorAll('.testimonial-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = `opacity 0.8s ease ${index * 0.3}s, transform 0.8s ease ${index * 0.3}s`;
+            
+            const testimonialsObserver = new IntersectionObserver(function(entries) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
                     }
                 });
             }, observerOptions);
+            
+            testimonialsObserver.observe(card);
+        });
 
-            document.querySelectorAll('.fade-in').forEach(el => {
-                observer.observe(el);
+        // Luxury particles effect
+        function createLuxuryParticle() {
+            const particles = ['✨', '💎', '🌟', '⭐', '💫'];
+            const particle = particles[Math.floor(Math.random() * particles.length)];
+            
+            const element = document.createElement('div');
+            element.textContent = particle;
+            element.style.position = 'fixed';
+            element.style.left = Math.random() * 100 + '%';
+            element.style.top = '100%';
+            element.style.fontSize = Math.random() * 20 + 15 + 'px';
+            element.style.pointerEvents = 'none';
+            element.style.transition = 'all 20s linear';
+            element.style.zIndex = '2';
+            element.style.opacity = '0.6';
+            element.style.filter = 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))';
+            
+            document.body.appendChild(element);
+            
+            setTimeout(() => {
+                element.style.top = '-100px';
+                element.style.transform = 'translateX(' + (Math.random() * 400 - 200) + 'px) rotate(720deg)';
+                element.style.opacity = '0';
+            }, 100);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 20000);
+        }
+
+        // Create luxury particles periodically
+        setInterval(createLuxuryParticle, 4000);
+
+        // Hero content entrance animation on load
+        window.addEventListener('load', function() {
+            const heroElements = document.querySelectorAll('.fade-in-up');
+            
+            heroElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(60px)';
+                element.style.transition = 'all 1s ease';
+                
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200 + 500);
+            });
+        });
+
+        // Add floating animation to domain cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const domainCards = document.querySelectorAll('.domain-card');
+            
+            domainCards.forEach((card, index) => {
+                const floatDelay = index * 0.8;
+                const floatDuration = 4 + (index * 0.4);
+                
+                card.style.animation = `domainFloat ${floatDuration}s ease-in-out ${floatDelay}s infinite`;
+            });
+            
+            // Add the floating keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes domainFloat {
+                    0%, 100% { 
+                        transform: translateY(0px) rotate(0deg);
+                    }
+                    25% { 
+                        transform: translateY(-12px) rotate(1deg);
+                    }
+                    50% { 
+                        transform: translateY(0px) rotate(0deg);
+                    }
+                    75% { 
+                        transform: translateY(-8px) rotate(-1deg);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Premium scroll animations
+        function premiumScrollAnimations() {
+            const sections = document.querySelectorAll('section');
+            const windowHeight = window.innerHeight;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const scrollY = window.pageYOffset;
+                
+                if (scrollY > sectionTop - windowHeight + 200 && scrollY < sectionTop + sectionHeight) {
+                    section.style.transform = 'translateY(0)';
+                    section.style.opacity = '1';
+                }
             });
         }
 
-        // ===== אתחול ראשי =====
-        async function initializeApp() {
-            console.log('🎯 מאתחל WebMaster Pro...');
-            
-            try {
-                // אתחל ניווט
-                initializeNavigation();
-                
-                // אתחל Supabase וטען תבניות
-                await initializeSupabase();
-                
-                console.log('🎉 WebMaster Pro נטען בהצלחה!');
-                
-            } catch (error) {
-                console.error('💥 שגיאה קריטית באתחול:', error);
-                showMessage('שגיאה קריטית. האתר עובד במצב גיבוי.', 'error', 6000);
+        window.addEventListener('scroll', premiumScrollAnimations);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section:not(.hero)');
+            sections.forEach(section => {
+                section.style.transform = 'translateY(30px)';
+                section.style.opacity = '0.8';
+                section.style.transition = 'all 0.8s ease';
+            });
+        });
+
+        // Advanced video effects
+        if (heroVideo) {
+            // Video quality adjustment based on connection
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            if (connection && connection.effectiveType) {
+                if (connection.effectiveType === '4g') {
+                    heroVideo.style.filter = 'brightness(0.3) contrast(1.3) saturate(1.2)';
+                } else {
+                    heroVideo.style.filter = 'brightness(0.4) contrast(1.2) saturate(1.1)';
+                }
             }
+            
+            // Smooth video fade in
+            heroVideo.addEventListener('canplay', function() {
+                this.style.transition = 'opacity 2s ease-in-out';
+                this.style.opacity = '0.4';
+            });
         }
 
-        // ===== הפעלה כשהדף מוכן =====
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeApp);
-        } else {
-            initializeApp();
-        }
+        // Million dollar performance optimizations
+        const performanceOptimizations = {
+            // Lazy load images
+            lazyLoadImages: function() {
+                const images = document.querySelectorAll('img[data-src]');
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                images.forEach(img => imageObserver.observe(img));
+            },
+            
+            // Preload critical resources
+            preloadCriticalResources: function() {
+                const criticalResources = [
+                    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+                ];
+                
+                criticalResources.forEach(url => {
+                    const link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'style';
+                    link.href = url;
+                    document.head.appendChild(link);
+                });
+            },
+            
+            // Optimize animations for 60fps
+            optimizeAnimations: function() {
+                const animatedElements = document.querySelectorAll('.domain-card, .business-card, .testimonial-card');
+                animatedElements.forEach(element => {
+                    element.style.willChange = 'transform, opacity';
+                });
+            }
+        };
 
-        // ===== הודעות קונסול =====
-        console.log('🚀 WebMaster Pro עם חיבור Supabase מתוקן נטען!');
-        console.log('✨ אתרים שבונים עסקים!');
-        console.log('🎯 12 דמואים חיים מחוברים לקישורים אמיתיים!');
-        console.log('🔗 חיבור Supabase מתוקן ויציב!');
-        console.log('📱 רספונסיבי מושלם לכל המכשירים!');
+        // Initialize performance optimizations
+        document.addEventListener('DOMContentLoaded', function() {
+            performanceOptimizations.lazyLoadImages();
+            performanceOptimizations.preloadCriticalResources();
+            performanceOptimizations.optimizeAnimations();
+        });
+
+        // Console styling for developers
+        console.log('%c🎯 MULTIBRAWN WEBSITE', 'color: #FFD700; font-size: 20px; font-weight: bold;');
+        console.log('%c💎 Million Dollar Design by WebMaster Pro', 'color: #00D4FF; font-size: 14px;');
+        console.log('%c🚀 Ready for your video background!', 'color: #8A2BE2; font-size: 12px;');
     </script>
 </body>
 </html>
